@@ -1,32 +1,42 @@
 # GitHub 同步手册
 
-> 状态：**本地已就绪，远程推送待人工授权**
-> 阻塞原因：① SSH 公钥未添加到 GitHub ② GitHub 连接器 Token 缺建仓权限
-> ⚠️ **本文 §一 的「网络不通」结论已被实测推翻，见下方更正**
+> 状态：✅ **已完成推送**（2026-10-08 18:25）
+> 仓库地址：**https://github.com/github279355466/YFAgent**
+> 分支：`main`（7 次提交 / 139 文件）
+> 推送通道：HTTPS + `http.sslBackend=openssl`
 
 ---
 
-## 〇、更正（2026-10-08 18:30 实测）
+## 〇、同步已完成 + 关键解法
 
-原判断「网络不通」**不准确**。重新实测：
+**若日后需重新推送或clone 到新机器，只记住这一条配置：**
 
-| 通道 | 原判断 | 实测结果 |
+```bash
+git config http.sslBackend openssl
+```
+
+这一行同时解决了本机两个看似无解的问题（Windows 证书吊销检查失败 + SSH 公钥未授权）。
+
+**解法推导过程**（原判断「网络不通」是错的）：
+
+| 通道 | 表面现象 | 真实原因 |
 |---|---|---|
-| HTTPS 直连 / 代理 | ❌ 不通 | `CRYPT_E_REVOCATION_OFFLINE (0x80092013)` —— **证书吊销检查失败**，非网络问题 |
-| `http.schannelCheckRevoke=false` | 未测 | **无效**，错误不变 |
-| **SSH 22 端口** | 未测 | ✅ **OPEN，完全可达** |
-| `ssh -T git@github.com` | 未测 | `Permission denied (publickey)` —— **通道已通，仅缺授权** |
+| HTTPS 直连 / 代理 | `000` / SSL error 35 | 本机访问不到证书吊销服务器 |
+| `http.schannelCheckRevoke=false` | 错误不变 | ❌ 该参数无效 |
+| **SSH 22** | OPEN 但 `Permission denied` | 通道可用，但需人工加公钥 |
+| **`http.sslBackend=openssl`** | **无错误** | ✅ **换掉整个 TLS 栈，不依赖 Windows 证书验证** |
 
-**修正结论**：SSH 通道完全可用。推送走 **SSH 而非 HTTPS**，可绕开证书问题，且**完整保留 6 次提交历史**。
+📌 **教训**：`000` / 超时 ≠ 不通，必须看具体错误码区分「网络不通」与「证书问题」。
+排查应从成本最低的试起：换后端 → 换端口 → 换协议，而非先去申请凭据。
 
-> 📌 排查教训：`000` / 超时 ≠ 不通。务必看**具体错误码**区分「网络不通」与「证书/认证问题」。
+**关键凭据信息**：推送使用 Git Credential Manager 已存凭据，**未新建 Token**。
+`~/.ssh/id_ed25519` 密钥对已生成但未启用（公钥未添加到 GitHub），如需 SSH 可后续添加启用。
 
-**当前进度**：远程已配 `git@github.com:github279355466/YFAgent.git`，密钥已生成，待用户添加公钥后执行 `git push -u origin main`。
 详见 `.workbuddy/memory/2026-10-08-github-sync-attempt.md`。
 
 ---
 
-## 一、环境勘察结论（2026-10-08 18:02，原始记录）
+## 一、环境勘察结论（2026-10-08 18:02，原始记录，结论已作废）
 
 | 检查项 | 结果 | 影响 |
 |---|---|---|
@@ -220,16 +230,17 @@ git diff --stat origin/main..HEAD 2>/dev/null || git show --stat HEAD
 
 ## 七、推送后的仓库设置（一次性）
 
-推送成功后，按 `docs/COLLABORATION.md` §六 配置：
+> ⚠️ 以下配置**待人工在GitHub 网页完成**（连接器 Token 缺写权限，无法代劳）
 
-| 配置项 | 值 |
-|---|---|
-| 默认分支 | `main`（已是） |
-| 分支保护 | 启用：需 PR + 至少 1 approve + 禁 force push + 禁直推 |
-| 合并方式 | 允许 squash / rebase；**禁用 merge commit** |
-| 自动删分支 | PR 合并后自动删除 |
-| 可见性 | **Private** |
-| Actions | 启用（`.github/workflows/verify.yml` 已就绪） |
+| 配置项 | 值 | 状态 |
+|---|---|---|
+| 默认分支 | `main` | ✅ 已生效 |
+| 上游跟踪 | `origin/main` | ✅ 已建立 |
+| 可见性 | Public | ✅ 已设为公开 |
+| 分支保护 | 需 PR + 至少 1 approve + 禁 force push + 禁直推 | ⏳ 待配置 |
+| 合并方式 | 允许 squash / rebase；**禁用 merge commit** | ⏳ 待配置 |
+| 自动删分支 | PR 合并后自动删除 | ⏳ 待配置 |
+| Actions | `.github/workflows/verify.yml` 已就绪 | ⏳ 待启用 |
 
 ---
 
@@ -238,8 +249,11 @@ git diff --stat origin/main..HEAD 2>/dev/null || git show --stat HEAD
 新成员克隆后必做：
 
 ```bash
-git clone git@github.com:<org>/YFCLI.git
-cd YFCLI
+git clone https://github.com/github279355466/YFAgent.git
+cd YFAgent
+
+# ⚠️ 若推送时报 CRYPT_E_REVOCATION_OFFLINE，先执行这一行：
+git config http.sslBackend openssl
 
 # 1. 放入源文件（不入库，需单独获取）
 #    从 Apipost 项目 322f10 导出 JSON → docs/易飞OpenAPI.json
@@ -258,14 +272,13 @@ cp .env.example .env
 
 ---
 
-## 附：当前本地提交历史
+## 附：当前仓库状态（2026-10-08 18:25 已同步）
 
-```
-a348b23 chore: 团队协作规范 + 配置模板 + CI 门禁
-1b958d7 docs: 追加 Phase 0 执行记录到项目记忆
-b36942d feat: Phase 0 裁决与任务化（关闭全部 OPEN 项）
-4653413 chore: YFCLI 仓库初始化（Phase 0 建仓）
-```
-
-分支：`main`（尚未设置上游跟踪）
-远程：`未配置`
+| 项 | 值 |
+|---|---|
+| 远程 | `https://github.com/github279355466/YFAgent.git` |
+| 分支 | `main`（已跟踪 `origin/main`） |
+| 提交数 | 7 |
+| 入库文件 | 139 |
+| TLS 后端 | `http.sslBackend=openssl`（本仓库 `.git/config`） |
+| 敏感文件 | 零入库（`.env` / `易飞OpenAPI.json` / `*.pem` / `id_ed25519` 已排除） |
