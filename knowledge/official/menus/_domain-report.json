@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-10-08T09:46:55.815Z",
+  "source": "knowledge/typekey/typekey_map.yaml",
+  "domain_definitions": [
+    {
+      "code": "purchase",
+      "name": "采购管理",
+      "note": "采购单/请购单/核价单/询价单/进货单/到货单/验收/采购发票"
+    },
+    {
+      "code": "outsourcing",
+      "name": "委外管理",
+      "note": "委外进货/退货/价格/核价/到货/验收"
+    },
+    {
+      "code": "sales",
+      "name": "销售管理",
+      "note": "报价/预测/订单/订单变更/出货/销货/销退/发票/客户品号"
+    },
+    {
+      "code": "inventory",
+      "name": "存货管理",
+      "note": "库存交易/调拨/报废/销毁/借出/拣货/批号"
+    },
+    {
+      "code": "production",
+      "name": "生产管理",
+      "note": "工单/工单变更/拆分/投产/领料/报工/入库"
+    },
+    {
+      "code": "engineering",
+      "name": "产品结构与工艺",
+      "note": "BOM/EBOM/ECN/工艺路线/工程品号/取替代料"
+    },
+    {
+      "code": "quality",
+      "name": "质量管理",
+      "note": "品管类别/检验项目/抽查基础/不良原因/各类检验单"
+    },
+    {
+      "code": "base",
+      "name": "基础资料",
+      "note": "工厂/仓库/部门/员工/币种/单位/客户/供应商/品号/项目/假日/公司/金融机构/工作中心"
+    },
+    {
+      "code": "finance",
+      "name": "会计总账",
+      "note": "会计凭证/会计科目/费用发票"
+    },
+    {
+      "code": "ar",
+      "name": "应收管理",
+      "note": "应收退款/预收款/收款单/其他应收/销售发票"
+    },
+    {
+      "code": "ap",
+      "name": "应付管理",
+      "note": "应付退款/付款单/预付款/其他应付/费用发票"
+    }
+  ],
+  "distribution": {
+    "finance": 3,
+    "ap": 3,
+    "purchase": 14,
+    "ar": 5,
+    "quality": 5,
+    "engineering": 7,
+    "inventory": 11,
+    "base": 27,
+    "UNASSIGNED": 2,
+    "production": 10,
+    "outsourcing": 10,
+    "sales": 9
+  },
+  "confidence": {
+    "high": 103,
+    "medium": 1,
+    "none": 2
+  },
+  "need_confirm": [
+    "combination.order",
+    "split.order"
+  ],
+  "medium_confidence": [
+    {
+      "type_key": "operation",
+      "domain": "生产管理",
+      "reason": "子串 `operation` 匹配"
+    }
+  ]
+}

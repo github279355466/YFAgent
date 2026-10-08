@@ -25,15 +25,35 @@
 | 6 | 命名规范 | 包名 `yfcli-*` / Skill `yifei-erp` / MCP 工具 `yfcli_*` / 助手目录 `yfagent/` / 文档 `docs/YFAgent/` | 工具名自带厂商信息，错误信息自带来源 |
 | 7 | 一期范围 | **最小可跑链路**：sdk + mcp + 3 助手 + TypeKey 清单 + Skill 包 + 1 专家包 | 约 1/8 工作量，先验证认证/映射/路由/分发四条链路 |
 
-### 尚未裁决的开放项（需在 Phase 0 期间关闭）
+### 开放项裁决状态
 
-| ID | 开放项 | 阻塞阶段 | 建议裁决人 |
-|----|--------|---------|-----------|
-| OPEN-01 | 易飞助手从 01 编号后，SKILL.md 路由表与 `_routes.yaml` 的编号对齐规则（易助 02~31/99 缺 01） | Phase 1 | 产品 + 架构 |
-| OPEN-02 | 助手 06/17 现用 `yf.ai.PurchaseBusinessWarning` / `yf.ai.SalesbusinessWarning`，需确认这两个端点归属（易飞服务 or 易助服务端兼容易飞） | Phase 0 | 需向服务端确认 |
-| OPEN-03 | `docs/decisions/Skill拆分与容量治理结论-2026-09-24.md`（不拆分）vs `09-28-skill-layered-split-prd`（拆分）冲突未裁决；YFCLI 是否沿用「一专家多 Skill」 | Phase 2 | 项目总监 |
-| OPEN-04 | erp-core 仓的发布方式（npm私有registry / git submodule / monorepo 内相对路径） | Phase 0 | 架构师 |
-| OPEN-05 | YFCLI 的 `.trellis/spec/` 是否补齐（易助侧 11 包仅 4 包有 spec） | Phase 3 | 架构师 |
+>✅ **全部 12 条已于2026-10-08 裁决完毕，OPEN 归零。**
+> 完整裁决理由与落地位置见 `docs/decisions/OPEN-DECISIONS.md`（唯一权威台账，本表仅作索引）。
+
+| 原编号 | 事项 | 裁决结论 | 台账条目 |
+|--------|------|---------|---------|
+| OPEN-01 | 助手编号对齐规则 | ✅ 易飞连续编号 01~NN，问数固定 99，编号发布即冻结 | OPEN-A1 |
+| OPEN-02 | 助手 06/17 的 `yf.ai.*` 端点归属 | ✅ 归属易飞服务端；**易飞同样有 22 个分析助手** | OPEN-A2 |
+| OPEN-03 | Skill 拆分决策冲突（继承易助） | 🔀 拆为 T-15，Phase 2 评估；**在此之前不拆分** | OPEN-B3 |
+| OPEN-04 | `erp-core` 仓发布方式 | 🔀 拆为 T-12/T-13；Phase 1 用本地相对路径依赖 | OPEN-B1 |
+| OPEN-05 | `.trellis/spec/` 是否补齐 | 🔀 拆为 T-14，Phase 1 代码落地后补 | OPEN-B2 |
+| — | `conditions` 方言差异处置 | ✅ **不做兼容层，按产品线彻底分包**（用户裁定） | OPEN-A3 |
+| — | Token 获取方式 | ✅ **无需关心**，配置填值即可 | OPEN-A4 |
+| — | `digi-datakey` 账套传递 | ✅ `token_map` 升级为 `{userId, companyId, token}` | OPEN-A5 |
+| — | 成功判据 | ✅ 统一 `code === "0" || "-0"` | OPEN-A6 |
+| — | TypeKeyList/help 元数据服务是否存在 | ⏸ 延期，**已有静态产物替代**，问询 AI 端点时顺带确认 | OPEN-C1 |
+| — | 三版本（9.0.12/9.1/9.2）接口差异 | ⏸ 延期，**先确认客户版本**再验证 | OPEN-C2 |
+| — | `udf07~udf12` 中文描述跳号 | ❌ 放弃，**不影响实现**（以节点名为准） | OPEN-D1 |
+
+**新增的外部依赖事项**（已转为资料收集任务，见 `yf-materials-tasks.md`）：
+
+| 任务 | 事项 | 责任方 | 阻塞 |
+|---|---|---|---|
+| T-05 | 真机验证环境 | 客户 / 项目组 | Phase 1 |
+| T-06 | 业务域菜单树 | 项目组 / 实施 | Phase 1 |
+| T-07 | 数据库表结构 | 项目组 / DBA | Phase 2 |
+| T-08 | 业务流程与审批规则 | 实施顾问 | Phase 2 |
+| T-09 | 22 个 `yf.ai.*` 端点清单 | 易飞服务端 / AI 团队 | Phase 2 |
 
 ---
 

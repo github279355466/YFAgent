@@ -264,17 +264,28 @@ export function normalizeError(error: unknown): NormalizedError {
 
 ---
 
-## 5. 待确认事项（阻塞项）
+## 5. 待确认事项（Phase 0 已裁决）
 
-| # | 事项 | 阻塞阶段 | 动作 |
+> ✅ **全部关闭或转档**。完整裁决见 `docs/decisions/OPEN-DECISIONS.md`。
+
+| # | 事项 | 状态 | 结论 / 后续 |
 |---|---|---|---|
-| **B1** | ~~易飞 `digi-user-token` 的获取方式~~ | — | ✅ **已关闭（2026-10-08）**：Header 三头与易助逐字一致，`yfcli-sdk` 只需 token 配置项，无需关心获取途径 |
-| **B2** | 易飞 `page_size` 实际性能边界（无 `fastquery`，查询全打 DB） | Phase 1 | 真机压测：`page_size` 10000 时的响应时间与并发承载 |
-| **B3** | 易飞是否有 TypeKeyList / help 类元数据服务（文档未提及，但可能存在未公开） | Phase 0 | 向厂商确认。若存在可省下大量基建 |
-| **B4** | `digi-datakey` 的 `CompanyId` 与 Token 的绑定关系（一个 Token 可跨多公司？） | Phase 1 | 决定 `token_map` 是否需升级为 `{userId, companyId, token}` |
-| **B5** | `udf07~udf12` 中文描述跳号（标13-18）是否为文档笔误 | Phase 2 | 不阻塞，按节点名 `udf07~udf12` 写即可 |
-| **B6** | **22 个 `yf.ai.*` 分析端点的服务名与出入参清单** | Phase 2 | 向易飞服务端/AI 团队索取。其中 06/17 已确证现役，其余 20 个待补|
-| **B7** | 易飞**无 `fastquery`** → OpenAPI 层无法直接通用，须按产品线分包（`yfcli-sdk` 与 `yzcli-sdk` 各自独立） | — | ✅ **已确认为架构决策**（2026-10-08），非阻塞项；对应扩展方案「完全物理隔离 + 独立仓」 |
+| **B1** | 易飞 `digi-user-token` 获取方式 | ✅ **CLOSED** | Header 三头与易助逐字一致，配置填值即可，不关心获取途径 |
+| **B2** | `page_size` 实际性能边界 | 🔀 转 **T-10** | 无 `fastquery` 须实测；Phase 1 内完成，作为 T-10 |
+| **B3** | 是否有 TypeKeyList/help 元数据服务 | ⏸ **DEFERRED** | 已有静态产物替代；问询 AI 端点时顺带确认（OPEN-C1） |
+| **B4** | `digi-datakey` 与 Token 的绑定关系 | ✅ **CLOSED** | `token_map` 升级为 `{userId, companyId, token}`（OPEN-A5） |
+| **B5** | `udf07~udf12` 中文描述跳号 | ❌ **DROPPED** | 不影响实现，以节点名为准（OPEN-D1） |
+| **B6** | 22 个 `yf.ai.*` 端点清单 | 🔀 转 **T-09** | 06/17 已确证现役；其余 20 个待易飞侧提供 |
+| **B7** | 无 `fastquery` 须按产品线分包 | ✅ **CLOSED** | 确认为架构决策，不做兼容层（OPEN-A3） |
+
+**Phase 0 新增识别项**：
+
+| # | 事项 | 状态 | 结论 / 后续 |
+|---|---|---|---|
+| **B8** | 易飞无字段编号体系 | ✅ **CLOSED** | 字段对照表改用「节点名/字段名」双轨，**不套用易助的字段编号概念** |
+| **B9** | `not_null` 全库均为 1，无区分度 | ✅ **CLOSED** | 不可作必填判据；改用「字段是否出现在 create/update 入参」这一客观事实 |
+| **B10** | 5 个对象的入参容器名与对象名无关 | 🔀 转 **T-11** | **官方文档复制粘贴错误**（如 `ap.refund.doc` 的入参写作 `wo_stockin_data`）；已在对照表标注，真机调用前核实 |
+| **B11** | 官方文档 `error[]` 双结构并存 | ✅ **CLOSED** | 解析器兼容 `{message,data}` 与 `{information:[{message,data}]}`，未识别须打 WARN |
 
 ---
 
