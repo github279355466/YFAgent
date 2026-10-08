@@ -111,8 +111,8 @@ for (const [table, applicable] of [
 }
 // GHXA 长4 字符：t[-2:]='XA' 有效，t[3:5]='A' 长度不足 2 故不纳入候选
 check('GHXA 前缀候选仅末2位', prefixCandidates('GHXA'), ['XA']);
-// 3 字符表名（DXL）：两侧都不足 2 位
-check('DXL 前缀候选为空', prefixCandidates('DXL'), []);
+// 3 字符表名（DXL）：末2 位 'XL' 存在，但表名过短故前缀判据整体不适用
+check('DXL 前缀候选=[XL] 但判据不适用', [prefixCandidates('DXL'), prefixApplicable('DXL')], [['XL'], false]);
 
 // ---- 6. 形态分类逐例
 console.log('');
@@ -161,7 +161,9 @@ check(
   ['alpha-only', 'standard', 'table-prefix', 'udf'],
 );
 check('PURTC 中 TCD01 归为 table-prefix', classifyColumn('TCD01', 'PURTC'), 'table-prefix');
-check('PURTC 中 CREATOR 归为 gateway-injected', classifyColumn('CREATOR', 'PURTC'), 'gateway-injected');
+// OPEN-F3 反例：大写 CREATOR 是真实业务字段（PURTC seq=0073），不得判为网关注入
+check('PURTC 中 CREATOR 是业务字段（非 gateway-injected）', classifyColumn('CREATOR', 'PURTC'), 'alpha-only');
+check('小写 creator 才是网关注入（回参侧）', classifyColumn('creator', 'PURTC'), 'gateway-injected');
 check('PURTC 中 UDF01 归为 udf', classifyColumn('UDF01', 'PURTC'), 'udf');
 
 // 按形态过滤应可用

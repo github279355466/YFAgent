@@ -562,28 +562,53 @@ NAME_LOOSE_STD = sum(
     1 for f in _name_biz
     if len(f["column"]) == 5 and re.fullmatch(r"[A-Za-z]{2}\d{3}", f["column"]))
 NAME_BY_CLASS = collections.Counter(_name_class(f) for f in _name_non)
-# 表级口径（严格剔除 UDF 与管理字段）—— 与上面的字段级口径分开，避免混淆
+# 表级口径 —— 与字段级口径分开，每种口径单独标注，避免跨口径减除
 _MGMT_SET = {"COMPANY", "CREATOR", "USR_GROUP", "CREATE_DATE",
              "MODIFIER", "MODI_DATE", "FLAG"}
 
 
-def _biz_fields(tb):
-    return [f for f in fields_by_table.get(tb, [])
-            if not f["is_udf"] and f["column"] not in _MGMT_SET]
+def _is_std_name(f):
+    return _is_standard_name(f)
 
 
-TABLES_FULL_NONSTD = 0   # 全部业务字段均非标准
-TABLES_PART_NONSTD = 0   # 部分业务字段非标准
-for _tb in fields_by_table:
-    _nb = _biz_fields(_tb)
-    if not _nb:
-        continue
-    _n = sum(1 for f in _nb if not _is_standard_name(f))
-    if _n == len(_nb):
-        TABLES_FULL_NONSTD += 1
-    elif _n > 0:
-        TABLES_PART_NONSTD += 1
+def _classify_tables(exclude_udf, exclude_mgmt):
+    """返回 (全非标准, 部分非标准, 全标准) 表数。"""
+    full = part = none = 0
+    for tb in fields_by_table:
+        fl = fields_by_table[tb]
+        if exclude_udf:
+            fl = [f for f in fl if not f["is_udf"]]
+        if exclude_mgmt:
+            fl = [f for f in fl if f["column"] not in _MGMT_SET]
+        if not fl:
+            continue
+        n = sum(1 for f in fl if not _is_std_name(f))
+        if n == len(fl):
+            full += 1
+        elif n > 0:
+            part += 1
+        else:
+            none += 1
+    return full, part, none
+
+
+# 主口径：剔除 UDF、保留管理字段。
+# 说明：管理字段（COMPANY/CREATOR/...）在命名上确属非标准形态，
+# 其中 MOCTX / PURCD / PURTC 三表的 CREATOR 还是独立业务列（中文名各异），
+# 若剔除管理字段会把这 2 张表误判为「全标准」，掩盖真实的命名偏离。
+TABLES_FULL_NONSTD, TABLES_PART_NONSTD, TABLES_ALL_STD = _classify_tables(
+    exclude_udf=True, exclude_mgmt=False)
 TABLES_WITH_NONSTD = TABLES_FULL_NONSTD + TABLES_PART_NONSTD
+# 对照口径：另剔除管理字段
+T2_FULL, T2_PART, T2_NONE = _classify_tables(exclude_udf=True, exclude_mgmt=True)
+# 对照口径：保留 UDF（即含 UDF 字段的表也算「含非标准」）
+T3_FULL, T3_PART, T3_NONE = _classify_tables(exclude_udf=False, exclude_mgmt=False)
+# 对照口径：双来源并集表数（fields + tables 的表名并集，含元数据表）
+_all_tables = set(fields_by_table) | set(table_by_name)
+T4_WITH_NS = sum(
+    1 for tb in _all_tables
+    if any(not _is_standard_name(f) for f in fields_by_table.get(tb, [])))
+
 
 # 两种单侧判据各自的误判量（用于 README 说明为何必须取并集）
 _shape = [f for f in _name_biz
@@ -687,10 +712,17 @@ assert NAME_NONSTD == 711, "非标准字段数变了：%d" % NAME_NONSTD
 assert NAME_LOOSE_STD == 26114, "宽松口径变了：%d" % NAME_LOOSE_STD
 assert NAME_205_MISJUDGE == 50, "*205 误判量变了：%d" % NAME_205_MISJUDGE
 assert NAME_LONGTAIL_MISJUDGE == 11, "长表尾位误判量变了：%d" % NAME_LONGTAIL_MISJUDGE
-# 表级口径（27/92 与 1171 的差异源于是否计入 UDF，必须锁死防混淆）
+# 表级口径（27/94/1076 为主口径；1171 为含 UDF 对照口径，勿跨口径减除）
 assert TABLES_FULL_NONSTD == 27, "全非标准表数变了：%d" % TABLES_FULL_NONSTD
-assert TABLES_WITH_NONSTD == 92, "含非标准字段表数变了：%d" % TABLES_WITH_NONSTD
-assert TABLES_PART_NONSTD == 65, "部分非标准表数变了：%d" % TABLES_PART_NONSTD
+assert TABLES_WITH_NONSTD == 94, "含非标准字段表数变了：%d" % TABLES_WITH_NONSTD
+assert TABLES_PART_NONSTD == 67, "部分非标准表数变了：%d" % TABLES_PART_NONSTD
+assert TABLES_ALL_STD == 1076, "全标准表数变了：%d" % TABLES_ALL_STD
+# 对照口径：含 UDF（几乎全库）、另剔除管理字段、双来源并集
+assert T3_FULL + T3_PART + T3_NONE == 1171, "含UDF 全表数变了"
+assert T3_FULL == 27, "含UDF口径全非标准变了：%d" % T3_FULL
+assert T2_PART == 65, "另剔管理字段后部分非标准变了：%d" % T2_PART
+# 众数基准安全性：任一掩码的组内众数占比不得低于 0.98
+assert _min_mode_ratio() >= 0.98, "掩码众数占比低于 0.98，众数法不再安全"
 
 # 管理字段实测登记次数（用于README「管理字段 vs 物理字段」一节）
 _formate_cnt = sum(1 for f in fields

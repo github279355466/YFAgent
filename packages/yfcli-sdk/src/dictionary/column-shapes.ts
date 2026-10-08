@@ -111,11 +111,15 @@ export function prefixApplicable(table: string): boolean {
 /**
  * 列名形态分类。
  *
+ * 注意：关于 gateway-injected —— 物理表侧**永远不会**命中该形态
+ * （`is_mgmt` 恒为 0，且大写 `CREATOR` 是业务字段）。
+ * 该分支只在传入**小写回参形态**列名时命中，供回参侧识别使用。
+ *
  * @param column 列名（源数据形态，如 `TC001` / `GHXA001` / `UDF01` / `币种`）
- * @param table所属表名，用于前缀判据
+ * @param table 所属表名，用于前缀判据
  */
 export function classifyColumn(column: string, table: string): YfColumnShape {
-  if (GATEWAY_INJECTED_NAMES.has(column)) return 'gateway-injected';
+  if (isGatewayInjectedColumn(column)) return 'gateway-injected';
   if (UDF_COLUMN_PATTERN.test(column)) return 'udf';
 
   const isStd = COLUMN_SHAPE_STANDARD.test(column);
@@ -178,7 +182,18 @@ export const TABLE_ANOMALY_NOTES: Readonly<Record<string, string>> = {
   V_QIXUBING: '含下划线的长表名：2 字段（MV001/MV002）形态标准，但前缀判据不适用',
 };
 
-/** 网关注入的 7 个管理字段（不出现在物理表元数据中，OPEN-F2）。 */
+/**
+ * 网关注入的 7 个管理字段（**不出现在物理表元数据中**，OPEN-F2）。
+ *
+ * 实测：`field-index.csv` 54842 行中 `is_mgmt` 列**恒为 0** ——
+ * 物理表里根本不存在这 7 列，故不会被字典层返回。
+ * 它们只出现在真机 query/read 的**回参**里（由网关注入）。
+ *
+ * 注意：反例（OPEN-F3）—— `PURTC.CREATOR`（seq=0073，排在 UDF 之后）
+ * 是**真实业务字段**，中文名恰为「录入者」。
+ * 因此不可用「列名等于 creator」判定管理字段 ——
+ * 本常量仅用于**回参侧**识别，物理表侧须依赖 `is_mgmt` 标记。
+ */
 const GATEWAY_INJECTED_NAMES: ReadonlySet<string> = new Set([
   'company',
   'creator',
@@ -188,3 +203,25 @@ const GATEWAY_INJECTED_NAMES: ReadonlySet<string> = new Set([
   'modi_date',
   'flag',
 ]);
+
+/** 网关注入字段名（小写形态，回参侧）。 */
+export const GATEWAY_INJECTED_COLUMN_NAMES: readonly string[] = [
+  'company',
+  'creator',
+  'usr_group',
+  'create_date',
+  'modifier',
+  'modi_date',
+  'flag',
+];
+
+/**
+ * 判定某列名是否为网关注入字段。
+ *
+ * **大小写敏感**：物理表侧用大写（`CREATOR` 是业务字段，OPEN-F3），
+ * 回参侧用小写（`creator` 是网关注入）。
+ * 故此函数只在小写输入时命中，不可对物理列名使用。
+ */
+export function isGatewayInjectedColumn(column: string): boolean {
+  return GATEWAY_INJECTED_NAMES.has(column);
+}

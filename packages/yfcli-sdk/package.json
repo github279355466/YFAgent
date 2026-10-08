@@ -16,8 +16,9 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "check:skeleton": "node tools/check-skeleton.mjs",
     "check:offline": "tsx tools/offline-verify.mjs",
+    "check:dict": "tsx tools/verify-f7-criteria.mjs",
     "check:eol": "node tools/normalize-eol.mjs --check",
-    "check": "npm run check:skeleton && npm run typecheck && npm run check:offline && npm run check:eol"
+    "check": "npm run check:skeleton && npm run typecheck && npm run check:offline && npm run check:dict && npm run check:eol"
   },
   "dependencies": {
     "yaml": "^2.5.0"

@@ -40,7 +40,13 @@ export interface FieldInfo {
   readonly formatMask: string;
   /** 是否为用户自定义字段（UDF）。 */
   readonly isUdf: boolean;
-  /** 是否为网关注入的管理字段。 */
+  /**
+   * 是否为网关注入的管理字段。
+   *
+   * 实测恒为 `false` —— 物理表里不存在这 7 列（OPEN-F2），
+   * 且大写 `CREATOR` 是业务字段（OPEN-F3）。故此列保留是为了
+   * 未来产物支持该标记时不改接口。
+   */
   readonly isMgmt: boolean;
   /** 该列名的形态分类（OPEN-F7）。 */
   readonly shape: YfColumnShape;
@@ -101,7 +107,9 @@ export class FieldDictionary {
         precision: (row['precision'] ?? '').trim(),
         formatMask: (row['format_mask'] ?? '').trim(),
         isUdf: (row['is_udf'] ?? '0').trim() === '1' || shape === 'udf',
-        isMgmt: (row['is_mgmt'] ?? '0').trim() === '1' || shape === 'gateway-injected',
+        // 只认产物的 is_mgmt 标记，不靠列名推断 ——
+        // 大写 CREATOR 是业务字段（OPEN-F3），靠名字判定会误判。
+        isMgmt: (row['is_mgmt'] ?? '0').trim() === '1',
         shape,
       };
       const list = acc.get(table);
