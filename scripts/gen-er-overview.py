@@ -280,7 +280,12 @@ def main():
                  % (CSV_LIMIT, len(high) + len(mid) + len(low))) if truncated else 'CSV 为全量，未截断。',
     }
     with open(os.path.join(OUT_DIR, 'ER-relations._report.json'), 'wb') as f:
-        f.write((CR + LF).join(json.dumps(_rep, ensure_ascii=False, indent=2)).encode('utf-8'))
+        # ⚠️ 必须整体 join，不能逐元素 join。
+        #    (CR+LF).join(list_of_chars) 会在每个字符后插换行，产出损坏的 JSON。
+        #    正确做法：先 dumps 成单个字符串，再把其内部的 LF 归一为 CRLF。
+        _txt = json.dumps(_rep, ensure_ascii=False, indent=2)
+        _txt = _txt.replace(CR + LF, LF).replace(LF, CR + LF)
+        f.write(_txt.encode('utf-8'))
 
     print('已产出：')
     print('  knowledge/data-dictionary/ER-OVERVIEW.md')

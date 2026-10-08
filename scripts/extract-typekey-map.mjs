@@ -488,12 +488,18 @@ function buildYaml(objs, report, doc) {
     if (pkOut.length && !o.primary_key.length) {
       push(`  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核`);
     }
-    if (pkOut.length > 1) push(`  composite_key: true`);    if (o.detail_nodes.size) {
+    if (pkOut.length > 1) push(`  composite_key: true`);
+    if (o.detail_nodes.size) {
       push(`  detail_nodes: [${[...o.detail_nodes].sort().map(yScalar).join(', ')}]`);
     }
     if (o.service_conflicts?.length) {
+      // ⚠️ 必须用数组（复数键），逐条push 同名键会产生重复键，
+      //    严格 YAML 解析器（uniqueKeys: true）会直接抛错。
+      //    bom 对象有 2 个冲突（query + read），是最容易触发的案例。
+      //    同类缺陷已发生两次（primary_key / service_conflict），务必走数组范式。
+      push(`  service_conflicts:   # 同操作多服务名（bom 的 query/read 各有2 个）。已记录全部于 services_by_name，勿按操作名拼接`);
       for (const c of o.service_conflicts) {
-        push(`  service_conflict: {op: ${c.op}, kept: ${c.kept}, dropped: ${c.dropped}}   # 同操作多服务名，已记录全部于 services_by_name，勿按操作名拼接`);
+        push(`    - {op: ${c.op}, kept: ${c.kept}, dropped: ${c.dropped}}`);
       }
     }
     // 服务名形态：易飞存在混合形态对象（bom / supplier 等），

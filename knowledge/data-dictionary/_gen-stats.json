@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08 22:40:51",
+  "generated_at": "2026-10-08 22:48:48",
   "modules": {
     "ACM": {
       "path": "knowledge/data-dictionary/modules/ACM.md",
@@ -659,8 +659,10 @@
     "standard_names": 26087,
     "nonstd_name": 421,
     "tables_full_nonstandard": 27,
-    "tables_with_nonstandard": 92,
-    "tables_partially_nonstandard": 65,
+    "tables_with_nonstandard": 94,
+    "tables_partially_nonstandard": 67,
+    "tables_all_standard": 1076,
+    "mask_min_mode_ratio": 0.981,
     "orphan_tables": [
       "INVLK",
       "INVLL",

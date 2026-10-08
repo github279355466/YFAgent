@@ -4,7 +4,7 @@
 # 请勿手工编辑；重新生成请运行：node scripts/extract-typekey-map.mjs
 #
 # source: docs/易飞OpenAPI.json (48.1 MB)
-# generated_at: 2026-10-08T14:26:09.914Z
+# generated_at: 2026-10-08T14:47:26.515Z
 # services_unique: 595
 # business_objects: 106
 
@@ -13,7 +13,7 @@ generated_from:
   - docs/易飞OpenAPI.json
   - apipost_project_id: 322f10
   - apipost_name: 易飞OpenAPI
-generated_at: "2026-10-08T14:26:09.914Z"
+generated_at: "2026-10-08T14:47:26.515Z"
 product_line: yifei
 service_prefix: "yf."
 auth_headers:
@@ -198,8 +198,9 @@ typekeys:
   operations: [approve, create, delete, disapprove, invalid, query, read, update]
   primary_key: [master_item_no]
   detail_nodes: [bom_requirement_detail_data, bom_requirement_header_data, bom_requirement_scrap_ratio_data]
-  service_conflict: {op: query, kept: yf.oapi.bom.query.get, dropped: yf.oapi.bom.data.query.get}   # 同操作多服务名，已记录全部于 services_by_name，勿按操作名拼接
-  service_conflict: {op: read, kept: yf.oapi.bom.read.get, dropped: yf.oapi.bom.data.read.get}   # 同操作多服务名，已记录全部于 services_by_name，勿按操作名拼接
+  service_conflicts:   # 同操作多服务名（bom 的 query/read 各有2 个）。已记录全部于 services_by_name，勿按操作名拼接
+    - {op: query, kept: yf.oapi.bom.query.get, dropped: yf.oapi.bom.data.query.get}
+    - {op: read, kept: yf.oapi.bom.read.get, dropped: yf.oapi.bom.data.read.get}
   service_name_shape: mixed   # 混合形态：6 个带 .data 段 / 16 个不带，**不可拼接服务名**
 - type_key: borrow.doc
   title: 借出单

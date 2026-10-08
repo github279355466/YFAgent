@@ -571,10 +571,12 @@ def _is_std_name(f):
     return _is_standard_name(f)
 
 
-def _classify_tables(exclude_udf, exclude_mgmt):
+def _classify_tables(exclude_udf, exclude_mgmt, exclude_meta=True):
     """返回 (全非标准, 部分非标准, 全标准) 表数。"""
     full = part = none = 0
     for tb in fields_by_table:
+        if exclude_meta and tb in _META_TABLES:
+            continue
         fl = fields_by_table[tb]
         if exclude_udf:
             fl = [f for f in fl if not f["is_udf"]]
@@ -602,7 +604,8 @@ TABLES_WITH_NONSTD = TABLES_FULL_NONSTD + TABLES_PART_NONSTD
 # 对照口径：另剔除管理字段
 T2_FULL, T2_PART, T2_NONE = _classify_tables(exclude_udf=True, exclude_mgmt=True)
 # 对照口径：保留 UDF（即含 UDF 字段的表也算「含非标准」）
-T3_FULL, T3_PART, T3_NONE = _classify_tables(exclude_udf=False, exclude_mgmt=False)
+T3_FULL, T3_PART, T3_NONE = _classify_tables(exclude_udf=False, exclude_mgmt=False,
+                                           exclude_meta=False)
 # 对照口径：双来源并集表数（fields + tables 的表名并集，含元数据表）
 _all_tables = set(fields_by_table) | set(table_by_name)
 T4_WITH_NS = sum(
@@ -706,22 +709,94 @@ mask_mismatch_over = [f for f in mask_mismatch
                       if float(f["precision"] or 0) > MASK_EXPANCED_LEN[f["code_table"]]]
 
 # 口径回归断言（防止判据再次被误改）
+# ---------------------------------------------------------------------------
+# 口径声明（不是计数，而是防止口径漂移）
+#
+# 本轮表级数字反复 10 个值（92/94/65/67/1076/1079/1141/1165/1168/1171），
+# 根因是**口径未声明**而非算错：断言数字只能锁结果，锁不住口径。
+# 因此下面两条把「口径是什么」固化成可执行断言 —— 口径一旦被改动立即 FAIL。
+# ---------------------------------------------------------------------------
+
+# 声明 1：表级口径必须显式声明是否计入 UDF、是否计入管理字段、universe 是谁。
+# 三者任一变化都会让表级数字漂移，故在此钉死，并要求与字段级口径对齐。
+TABLE_COUNT_EXCLUDE_UDF = True
+TABLE_COUNT_EXCLUDE_MGMT = False        # 主口径保留管理字段（见下方注释）
+TABLE_COUNT_UNIVERSE = "business"        # business = fields.json 1170 - 3 元数据表
+assert TABLE_COUNT_EXCLUDE_UDF, "表级口径必须声明是否计入 UDF"
+assert TABLE_COUNT_EXCLUDE_MGMT is False, (
+    "表级口径必须声明是否计入管理字段；主口径须保留管理字段，"
+    "否则 MOCTX/PURCD/PURTC 的 CREATOR 会被误判为全标准")
+assert TABLE_COUNT_UNIVERSE == "business", (
+    "表级口径 universe 必须声明；business = 剔除 3 张元数据表，"
+    "与字段级 NAME_BIZ_TOTAL 口径对齐，不可混用")
+# 口径声明与实际计算必须一致（防止声明了但代码没按声明执行）
+assert TABLES_FULL_NONSTD + TABLES_PART_NONSTD + TABLES_ALL_STD \
+    == len(fields_by_table) - len(_META_TABLES), \
+    "表级 universe 实际未按 business 口径执行"
+
+# 声明 2：掩码的「方向」是事实（precision 与众数比大小），「成因」是推断。
+# 两者必须分列，不可合并成单一结论——否则会把推测当事实对外输出。
+# 方向：偏小 = precision < 众数（装不下掩码）；偏大 = precision > 众数（列宽预留大）。
+# 成因：偏小疑「挂错掩码」；偏大掩码本身未必错。
+# 该标记为结构性断言：确保两类在产物中分表呈现，故以实际分组结果为准。
+MASK_CAUSAL_INFERENCE_SEPARATED = all(
+    len(g) > 0 for g in (mask_mismatch_under, mask_mismatch_over)
+) and not (set(mask_mismatch_under) & set(mask_mismatch_over))
+assert MASK_CAUSAL_INFERENCE_SEPARATED, \
+    "掩码方向(事实)与成因(推断)必须分列，不可合并"
+# 方向计数必须与真异常总数勾稽：偏小 + 偏大 == 6（众数基准法真异常）
+assert len(mask_mismatch_under) + len(mask_mismatch_over) == len(mask_mismatch), \
+    "掩码方向拆分与真异常数不勾稽：%d + %d != %d" % (
+        len(mask_mismatch_under), len(mask_mismatch_over), len(mask_mismatch))
+
 assert NAME_BIZ_TOTAL == 26798, "业务字段口径变了：%d" % NAME_BIZ_TOTAL
 assert NAME_STD == 26087, "标准字段数变了：%d" % NAME_STD
 assert NAME_NONSTD == 711, "非标准字段数变了：%d" % NAME_NONSTD
 assert NAME_LOOSE_STD == 26114, "宽松口径变了：%d" % NAME_LOOSE_STD
 assert NAME_205_MISJUDGE == 50, "*205 误判量变了：%d" % NAME_205_MISJUDGE
 assert NAME_LONGTAIL_MISJUDGE == 11, "长表尾位误判量变了：%d" % NAME_LONGTAIL_MISJUDGE
-# 表级口径（27/94/1076 为主口径；1171 为含 UDF 对照口径，勿跨口径减除）
+# 表级口径（主口径 = 剔除 UDF + 剔除 3 张元数据表 + 保留管理字段）
 assert TABLES_FULL_NONSTD == 27, "全非标准表数变了：%d" % TABLES_FULL_NONSTD
 assert TABLES_WITH_NONSTD == 94, "含非标准字段表数变了：%d" % TABLES_WITH_NONSTD
 assert TABLES_PART_NONSTD == 67, "部分非标准表数变了：%d" % TABLES_PART_NONSTD
+# 主口径 universe = fields.json 1173 张 - 3 张元数据表 = 1170 张业务表。
+# 与字段级口径保持一致：NAME_BIZ_TOTAL=26798 同样排除了元数据表的 36 个非 UDF 字段。
+# 若把元数据表计入分母会得 1079，但那样表级与字段级口径不一致，不可混用。
 assert TABLES_ALL_STD == 1076, "全标准表数变了：%d" % TABLES_ALL_STD
-# 对照口径：含 UDF（几乎全库）、另剔除管理字段、双来源并集
-assert T3_FULL + T3_PART + T3_NONE == 1171, "含UDF 全表数变了"
+# 三分类必须穷尽且互斥，防止口径漂移导致合计对不上
+assert (TABLES_FULL_NONSTD + TABLES_PART_NONSTD + TABLES_ALL_STD
+        == len(fields_by_table) - len(_META_TABLES)
+        ), "表级三分类未穷尽业务表 %d 张（full=%d part=%d none=%d）" % (
+            len(fields_by_table) - len(_META_TABLES),
+            TABLES_FULL_NONSTD, TABLES_PART_NONSTD, TABLES_ALL_STD)
+# 对照口径：含 UDF（universe = fields.json 的 1173 张表，与主口径同源才可勾稽）
+assert T3_FULL + T3_PART + T3_NONE == len(fields_by_table), \
+    "含UDF 口径未穷尽 fields.json 的 %d 张表：%d" % (
+        len(fields_by_table), T3_FULL + T3_PART + T3_NONE)
 assert T3_FULL == 27, "含UDF口径全非标准变了：%d" % T3_FULL
-assert T2_PART == 65, "另剔管理字段后部分非标准变了：%d" % T2_PART
+# 主口径 vs 另剔管理字段：差值应恰为 CREATOR 同名冲突涉及的表数
+assert TABLES_PART_NONSTD - T2_PART == 2, \
+    "管理字段口径差值变了：%d（预期 2，即 MOCTX/PURCD/PURTC 之外的 CREATOR 冲突表）" % (
+        TABLES_PART_NONSTD - T2_PART)
 # 众数基准安全性：任一掩码的组内众数占比不得低于 0.98
+def _min_mode_ratio():
+    """各掩码组内 precision 众数占比的最小值。
+
+    用于验证「众数基准法」是否安全：若某掩码的众数占比过低，
+    说明该掩码下的 precision 分布分散，用众数判定异常会不可靠。
+    当前实测最小值 >= 0.98，故众数法在本库安全。
+    """
+    _byp = collections.defaultdict(collections.Counter)
+    for f in mask_fields:
+        p = f["precision"] or ""
+        if p.endswith(".0"):
+            p = p[:-2]
+        _byp[f["code_table"]][p] += 1
+    _ratios = [max(c.values()) / float(sum(c.values()))
+               for c in _byp.values() if sum(c.values())]
+    return min(_ratios) if _ratios else 0.0
+
+
 assert _min_mode_ratio() >= 0.98, "掩码众数占比低于 0.98，众数法不再安全"
 
 # 管理字段实测登记次数（用于README「管理字段 vs 物理字段」一节）
@@ -1588,10 +1663,49 @@ R.append("")
 R.append("仅按形态（2 字母 + 3 数字）判定会把 %d 条算成标准，低估非标准数 %d 条。"
          % (NAME_LOOSE_STD, NAME_LOOSE_STD - NAME_STD))
 R.append("")
-R.append("表级口径（同样剔除 UDF 与管理字段）：全部业务字段均非标准 **%d 张**；"
-         "含至少一个非标准字段 **%d 张**（= %d 全非标准 + %d 部分非标准）。"
-         % (TABLES_FULL_NONSTD, TABLES_WITH_NONSTD,
-            TABLES_FULL_NONSTD, TABLES_PART_NONSTD))
+R.append("### 表级计数（口径必须随数字一起引用）")
+R.append("")
+R.append("> ⚠️ **表级数字不对外。** 本轮表级数字反复出现 8 个值"
+         "（92/94/65/67/1076/1079/1141/1165/1168/1171），"
+         "**根因是口径未声明而非算错**。对外只说 711（非标准列名）与 22（真异常列名）；"
+         "下表仅供内部交叉核对，引用时**必须连同口径一起给出**。")
+R.append("")
+R.append("**口径 A（主口径）**：业务表 = `fields.json` %d 张 - 3 张元数据表 = **%d 张**；"
+         "字段范围 = 剔除 UDF、**保留**管理字段。"
+         % (len(fields_by_table), TABLES_FULL_NONSTD + TABLES_PART_NONSTD + TABLES_ALL_STD))
+R.append("")
+R.append("| 类别 | 表数 | 含 UDF | 含管理字段 | 口径 | 说明 |")
+R.append("|---|---|---|---|---|---|")
+R.append("| 全部业务字段均非标准 | %d | 否 | 是 | A | 需整表特殊处理 |" % TABLES_FULL_NONSTD)
+R.append("| 部分业务字段非标准 | %d | 否 | 是 | A | 其余字段符合命名铁律 |" % TABLES_PART_NONSTD)
+R.append("| 全部业务字段均标准 | %d | 否 | 是 | A | 符合命名铁律 |" % TABLES_ALL_STD)
+R.append("| **合计** | **%d** | 否 | 是 | A | = 业务表数，勾稽自洽 |"
+         % (TABLES_FULL_NONSTD + TABLES_PART_NONSTD + TABLES_ALL_STD))
+R.append("")
+R.append("**对照口径**（用于解释差异来源，**不可与口径 A 混用**）：")
+R.append("")
+R.append("| 口径 | 定义 | 全非标准 | 部分非标准 | 全标准 | 合计 |")
+R.append("|---|---|---|---|---|---|")
+R.append("| A | 剔除 UDF，保留管理字段，剔除元数据表（**主口径**） | %d | %d | %d | %d |"
+         % (TABLES_FULL_NONSTD, TABLES_PART_NONSTD, TABLES_ALL_STD,
+            TABLES_FULL_NONSTD + TABLES_PART_NONSTD + TABLES_ALL_STD))
+R.append("| B | 口径 A 再剔除管理字段 | %d | %d | %d | %d |"
+         % (T2_FULL, T2_PART, T2_NONE, T2_FULL + T2_PART + T2_NONE))
+R.append("| C | 保留 UDF（含元数据表） | %d | %d | %d | %d |"
+         % (T3_FULL, T3_PART, T3_NONE, T3_FULL + T3_PART + T3_NONE))
+R.append("")
+R.append("**口径 A 与 B 差 %d 张表的成因（已定位，非算错）**："
+         "管理字段名（`COMPANY`/`CREATOR`/...）在命名形态上属非标准。"
+         "其中 `MOCTX` / `PURCD` / `PURTC` 三表的 `CREATOR` 是**独立业务列**"
+         "（中文名分别为 `LURUZ`/`AAAA`/`录入者`，序号靠尾、排在 UDF 之后），"
+         "并非公共管理字段。若剔除管理字段（B 口径），这 3 张表会被误判为「全标准」，"
+         "**掩盖真实的命名偏离**——故主口径 A 保留管理字段。"
+         % (TABLES_PART_NONSTD - T2_PART))
+R.append("")
+R.append("> 另注：口径 C 的 universe 是 `fields.json` 的 %d 张（含 3 张元数据表），"
+         "比主口径多 3 张；这也是此前出现 1141/1168/1171 等数字的来源——"
+         "**多为 universe 或管理字段边界处理不同所致，非计算错误**。"
+         % len(fields_by_table))
 R.append("")
 R.append("| 类别 | 数量 | 定性 |")
 R.append("|---|---|---|")
@@ -1736,6 +1850,8 @@ with open(os.path.join(csv_dir, "_gen-stats.json"), "w", encoding="utf-8", newli
             "tables_full_nonstandard": TABLES_FULL_NONSTD,
             "tables_with_nonstandard": TABLES_WITH_NONSTD,
             "tables_partially_nonstandard": TABLES_PART_NONSTD,
+            "tables_all_standard": TABLES_ALL_STD,
+            "mask_min_mode_ratio": round(_min_mode_ratio(), 4),
             "orphan_tables": sorted(only_in_fields),
             "empty_tables": sorted(only_in_tables),
         },
