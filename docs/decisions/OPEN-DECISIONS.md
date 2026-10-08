@@ -4,7 +4,7 @@
 > **每次 Phase 开始时把未决项复现到工作上下文最前面**，逐条判断能否关闭。
 > 已关闭的项可升格为 ADR（见 `ADR-*.md`）。
 
-**统计**：共 23 条 → RESOLVED 16 ｜ SPLIT 3 ｜ DEFERRED 2 ｜ DROPPED 1 ｜ OPEN **0** ✅
+**统计**：共 24 条 → RESOLVED 17 ｜ SPLIT 3 ｜ DEFERRED 2 ｜ DROPPED 1 ｜ OPEN **0** ✅
 
 > **2026-10-08 真机探测后**：新增 OPEN-E1（枚举传值陷阱）、OPEN-E2（`node_name` 物理表映射），
 > 修正 OPEN-A3 风险等级（静默失效 → 显式报错）。**OPEN 仍为 0**。
@@ -243,7 +243,7 @@
 
 ## 六、真机探测新增（2026-10-08 元数据阶段，RESOLVED）
 
-**本节统计**：共 23 条 → RESOLVED 16 ｜ SPLIT 3 ｜ DEFERRED 2 ｜ DROPPED 1 ｜ OPEN **0** ✅
+**本节统计**：共 24 条 → RESOLVED 17 ｜ SPLIT 3 ｜ DEFERRED 2 ｜ DROPPED 1 ｜ OPEN **0** ✅
 
 ### OPEN-F1 ｜`MD008` 语义：不是代码表关联，是格式掩码 ✅
 
@@ -409,3 +409,30 @@
 **教训**：`字段名 = 表名末 2 位 + 3 位序号` 这条规律**只在 5 字符表名上成立**。对 `ACTTI205` 这类 8 字符表，实体位在 `t[3:5]` 而非 `t[-2:]`。**规律表述需带上适用条件**。
 
 ---
+
+### OPEN-F8 ｜`bom` 同操作存在两个服务名，按`services[op]` 单键记录会丢失 ✅
+
+| 项 | 内容 |
+|---|---|
+| **状态** | ✅ **RESOLVED**（SDK 后端发现，项目总监独立复核） |
+| **现象** | 产物头部声明 `services_unique: 595`，实际 `services`去重后只有 **593** |
+| **根因** | `scripts/extract-typekey-map.mjs` 以 **操作名**为键（`services[op] = svc`），后写覆盖先写 |
+
+| 操作 | 保留的 | 丢失的 | 真机实测 |
+|---|---|---|---|
+| `bom.query` | `yf.oapi.bom.data.query.get` | `yf.oapi.bom.query.get` | 前者 `code=0`；**后者 `code=-1` 不存在** |
+| `bom.read` | `yf.oapi.bom.data.read.get` | `yf.oapi.bom.read.get` | 同上 |
+
+**风险**：「靠文档遍历顺序决定用哪个服务名」是**不可预测行为** —— SDK 不报错，但取到哪个取决于源文档顺序。
+
+**裁决**
+
+| # | 措施 | 责任 |
+|---|---|---|
+| 1 | 产物新增 `services_by_name:`（键=完整服务名，值=操作）—— 服务名本身唯一，无碰撞 | 已落地 |
+| 2 | 产物新增 `service_conflict: {op, kept, dropped}` 标记 | 已落地 |
+| 3 | SDK 的 `TypeKeyEntry.servicesByName` 替代单键 `services`，并加 `hasOperationConflict` | 待落地 |
+| 4 | `resolveServiceName()` 遇冲突时**抛 `YfAmbiguousServiceError` 并列出全部候选**，不得静默取第一个 | 待落地 |
+| 5 | 向厂商问询「`bom.query` 是否有 2 个服务名、是否都有效」 | 待外部 |
+
+**判据修正（同一根因的另一处表现）**：本次是**服务名层**的碰撞，此前 `no_data_segment` 是**形态层**的误标（单布尔标记表达不了混合形态）。两者共同教训：**键必须选对唯一标识**（服务名用它自己，操作名不是）。

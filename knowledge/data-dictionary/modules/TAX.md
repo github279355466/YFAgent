@@ -3,7 +3,7 @@
 > 本文件为机械抽取产物，请勿手工编辑。重新生成：`python scripts/gen_data_dictionary.py`
 >
 > 溯源：源文件：`.workbuddy/tmp/dict/tables.json`（1170 表）、`.workbuddy/tmp/dict/fields.json`（54842 字段）、`knowledge/typekey/typekey_map.yaml`（106 业务对象）
-> 生成时间：2026-10-08 22:38:45
+> 生成时间：2026-10-08 22:40:38
 
 ## 模块概览
 

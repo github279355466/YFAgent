@@ -109,7 +109,10 @@ for (const [table, applicable] of [
 ]) {
   check(`${table} 前缀判据适用=${applicable}`, prefixApplicable(table), applicable);
 }
-check('GHXA 前缀候选为空', prefixCandidates('GHXA').length, 0);
+// GHXA 长4 字符：t[-2:]='XA' 有效，t[3:5]='A' 长度不足 2 故不纳入候选
+check('GHXA 前缀候选仅末2位', prefixCandidates('GHXA'), ['XA']);
+// 3 字符表名（DXL）：两侧都不足 2 位
+check('DXL 前缀候选为空', prefixCandidates('DXL'), []);
 
 // ---- 6. 形态分类逐例
 console.log('');
@@ -150,8 +153,19 @@ check(
   [...new Set(GHXA.map((f) => f.shape))].sort(),
   ['alpha-only', 'table-full', 'udf'],
 );
+// PURTC 同时含 4 种形态 —— 证明 listFields 不能只按 XXnnn 解析
 const PURTC = dict.listFields('PURTC');
-check('PURTC 全部为 standard', [...new Set(PURTC.map((f) => f.shape))], ['standard']);
+check(
+  'PURTC 覆盖 standard + table-prefix + udf + alpha-only 四种形态',
+  [...new Set(PURTC.map((f) => f.shape))].sort(),
+  ['alpha-only', 'standard', 'table-prefix', 'udf'],
+);
+check('PURTC 中 TCD01 归为 table-prefix', classifyColumn('TCD01', 'PURTC'), 'table-prefix');
+check('PURTC 中 CREATOR 归为 gateway-injected', classifyColumn('CREATOR', 'PURTC'), 'gateway-injected');
+check('PURTC 中 UDF01 归为 udf', classifyColumn('UDF01', 'PURTC'), 'udf');
+
+// 按形态过滤应可用
+check('PURTC 仅 udf 形态 = 24 条', dict.listFields('PURTC', { shape: 'udf' }).length, 24);
 
 console.log('');
 console.log('='.repeat(70));

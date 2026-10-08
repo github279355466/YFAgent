@@ -1467,31 +1467,31 @@ if mask_mismatch:
                     f["code_table"], _mode, f["precision"] or "（空）",
                     f.get("column_en") or "（空）"))
     R.append("")
-    _wrongmask = [f for f in mask_mismatch
-                  if f["column_cn"] and ("年月" in f["column_cn"])
-                  and f["code_table"] != "YM"]
-    if _wrongmask:
-        R.append("其中 **%d 条中文名含「年月」却挂了 `YMD`（8位基准），而其同组众数/自身语义指向 6 位"
-                 "（`YM`）** —— 属**挂错掩码**，是全部异常中确定度最高的一类，"
-                 "建议按`YM` 处理："
-                 % len(_wrongmask))
+    if mask_mismatch_under or mask_mismatch_over:
+        R.append("按**偏离方向**分为两类。「方向」是可观测事实，「成因」是推断，二者须分开表述：")
         R.append("")
-        R.append("| 表 | 列 | 中文名 | 建议掩码 | 实为 | 同组众数 |")
-        R.append("|---|---|---|---|---|---|")
-        for f in sorted(_wrongmask, key=lambda x: (x["table"], x["seq"])):
-            _mode = mask_mode[(f["type_raw"], f["code_table"])][0]
-            R.append("| `%s` | `%s` | %s | `YM` | `%s` | `%s` |"
-                     % (f["table"], f["column"], f["column_cn"], f["code_table"], _mode))
+        R.append("| 方向 | 数量 | 表 | 掩码 | 期望位数 | 实际 | 判定 |")
+        R.append("|---|---|---|---|---|---|---|")
+        for _grp, _dir in ((mask_mismatch_under, "偏小"), (mask_mismatch_over, "偏大")):
+            if not _grp:
+                continue
+            _tb = "、".join(sorted({"`%s`" % f["table"] for f in _grp}))
+            _mk = "、".join("`%s`" % f["code_table"] for f in _grp)
+            _exp = "、".join(str(MASK_EXPANCED_LEN[f["code_table"]]) for f in _grp)
+            _act = "、".join(f["precision"] for f in _grp)
+            _vd = ("疑挂错掩码（掩码要求位数 > 列宽，装不下）" if _dir == "偏小"
+                   else "列宽预留过大（掩码本身可能正确）")
+            R.append("| %s | %d | %s | %s | %s | %s | %s |"
+                     % (_dir, len(_grp), _tb, _mk, _exp, _act, _vd))
         R.append("")
-    _other = [f for f in mask_mismatch if f not in _wrongmask]
-    if _other:
-        R.append("其余 %d 条需人工判定（未落入「挂错掩码」这一确定类别）："
-                 % len(_other))
-        for f in sorted(_other, key=lambda x: (x["table"], x["seq"])):
-            _mode = mask_mode[(f["type_raw"], f["code_table"])][0]
-            R.append("- `%s.%s`（%s）：掩码 `%s`，同组众数 `%s`，实际 `%s`"
-                     % (f["table"], f["column"], f["column_cn"] or "（无注释）",
-                        f["code_table"], _mode, f["precision"]))
+        R.append("**长度偏小的 %d 条最可能是挂错掩码**（掩码要求 8 位但列宽只有 6 位，语义上装不下）。"
+                 % len(mask_mismatch_under))
+        R.append("")
+        R.append("**长度偏大的 %d 条成因不同** —— 列宽大于掩码位数，属预留过多，掩码本身未必错，"
+                 "不应与「挂错掩码」混为一谈。" % len(mask_mismatch_over))
+        R.append("")
+        R.append("> 判定依据是**偏离方向**，不使用中文名关键词。")
+        R.append("> `CMSMA.MA169` 中文名含「年月」但挂的是正确的 `YM`，若按关键词归类会被误判为挂错掩码。")
         R.append("")
     if mask_mismatch_orphan:
         R.append("> 其中 %d 条位于孤儿表 `%s`，成因是这两张表的架构本身异常"
@@ -1555,6 +1555,11 @@ R.append("**不可只用单侧**：仅用 `table[-2:]` 会把 `*205` 子表的 %
 R.append("")
 R.append("仅按形态（2 字母 + 3 数字）判定会把 %d 条算成标准，低估非标准数 %d 条。"
          % (NAME_LOOSE_STD, NAME_LOOSE_STD - NAME_STD))
+R.append("")
+R.append("表级口径（同样剔除 UDF 与管理字段）：全部业务字段均非标准 **%d 张**；"
+         "含至少一个非标准字段 **%d 张**（= %d 全非标准 + %d 部分非标准）。"
+         % (TABLES_FULL_NONSTD, TABLES_WITH_NONSTD,
+            TABLES_FULL_NONSTD, TABLES_PART_NONSTD))
 R.append("")
 R.append("| 类别 | 数量 | 定性 |")
 R.append("|---|---|---|")
@@ -1672,7 +1677,7 @@ R.append("")
 
 write_crlf(os.path.join(csv_dir, "README.md"), R)
 
-with open(os.path.join(csv_dir, "_gen-stats.json"), "w", encoding="utf-8", newline="") as fh:
+with open(os.path.join(csv_dir, "_gen-stats.json"), "w", encoding="utf-8", newline="\r\n") as fh:
     json.dump({
         "generated_at": GENERATED_AT,
         "modules": module_file_stats,
