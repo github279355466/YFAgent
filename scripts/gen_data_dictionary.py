@@ -52,10 +52,16 @@ FROZEN_COUNTS = {
     # 表级数字不对外，引用时必须连同口径一起给出
     "tables_full_nonstandard": 27,       # 全部业务字段均非标准
     "tables_partially_nonstandard": 67,  # 部分业务字段非标准
-    "tables_with_nonstandard": 94,       # 含 >=1 个非标准字段
+    "tables_with_nonstandard": 94,       # 含 >=1 个非标准字段（口径 A）
+    # 「含 UDF 表」与「含非标准字段表」是两个不同指标，历史上被混用
+    "tables_with_udf_biz": 1165,        # 剔元数据、含 UDF 的表
+    "tables_with_udf_all": 1168,        # 含元数据、含 UDF 的表
+    "tables_all_standard": 1076,        # 全部业务字段均标准
+    "tables_with_nonstd_all": 1171,     # 含元数据、含非标准字段的表
 }
 # 真异常 = 含中文列名 20 + 纯数字列名 2（来自 nonstandard_by_class）
 FROZEN_TRUE_ANOMALY = {"含中文": 20, "纯数字": 2}
+NAME_TRUE_ANOMALY_TOTAL = sum(FROZEN_TRUE_ANOMALY.values())  # 22
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DICT_DIR = os.path.join(ROOT, ".workbuddy", "tmp", "dict")
@@ -906,6 +912,13 @@ for f in fields:
         mgmt_rows.append(f)
 udf_field_rows = sum(1 for f in fields if f["is_udf"])
 udf_table_count = len({f["table"] for f in fields if f["is_udf"]})
+# 「含 >=1 个 UDF 字段的表」两个口径（与表级命名口径无关，只看 UDF 覆盖）：
+#   biz = 剔 3 张元数据表；all = 含元数据表。
+# 注意：这两个数与「含 >=1 非标准字段表」（1168/1171）**数值巧合但集合不同**，
+# 前者由 UDF 决定，后者由字段名形态决定，引用时必须写清是哪一个。
+_tables_with_udf = {f["table"] for f in fields if f["is_udf"]}
+TABLES_WITH_UDF_BIZ = len(_tables_with_udf - _META_TABLES)
+TABLES_WITH_UDF_ALL = len(_tables_with_udf)
 
 # ---------------------------------------------------------------------------
 # 5. 模块聚合
@@ -1790,6 +1803,26 @@ R.append("| B | 口径 A 再剔除管理字段 | %d | %d | %d | %d |"
 R.append("| C | 保留 UDF（含元数据表） | %d | %d | %d | %d |"
          % (T3_FULL, T3_PART, T3_NONE, T3_FULL + T3_PART + T3_NONE))
 R.append("")
+R.append("**「含 UDF 表」与「含非标准字段表」是两个不同指标，历史上被混用致口径反复**：")
+R.append("")
+R.append("| 口径 | 业务表 | 含 UDF 的表 | 含非标准字段的表 |")
+R.append("|---|---|---|---|")
+R.append("| 剔除元数据表 | %d | %d | %d |"
+         % (TABLES_FULL_NONSTD + TABLES_PART_NONSTD + TABLES_ALL_STD,
+            T5_HAS_UDF, T6_WITH_NS))
+R.append("| 含元数据表 | %d | %d | %d |"
+         % (T3_FULL + T3_PART + T3_NONE, T3_HAS_UDF, T3_WITH_NS))
+R.append("")
+R.append("> 「含非标准字段的表」在两个分母下都是 **%d** —— 3 张元数据表的字段名"
+         "全是标准形态（`MC001` / `MD001` / `MB001`），不影响该指标。" % T6_WITH_NS)
+R.append(">")
+R.append("> `含 UDF 的表`（%d / %d）这组数字与「含非标准字段表」无关，"
+         "此前被误当作后者引用。命名判据口径下应用**后者**。" % (T5_HAS_UDF, T3_HAS_UDF))
+R.append(">")
+R.append("> 另有 `1171` 出现在「双来源并集（fields + tables）」口径下："
+         "4 张孤儿表只在 `fields.json`、`PMSTA` 只在 `tables.json`，"
+         "并集比任一单侧多，属**另一维度**，不可与上述任一口径混用。")
+R.append("")
 R.append("**口径 A 与 B 差 %d 张表的成因（已定位，非算错）**："
          "管理字段名（`COMPANY`/`CREATOR`/...）在命名形态上属非标准。"
          "其中 `MOCTX` / `PURCD` / `PURTC` 三表的 `CREATOR` 是**独立业务列**"
@@ -1808,6 +1841,29 @@ R.append("|---|---|---|")
 for lbl, cnt_, note in NAME_CLASSES:
     R.append("| %s | %d | %s |" % (lbl, cnt_, note))
 R.append("| **非标准合计** | **%d** | — |" % NAME_NONSTD)
+R.append("")
+R.append("#### 对外只需说清「22 条真异常」的构成")
+R.append("")
+R.append("只说「711 个非标准」会让人误以为有 711 个问题。真正需要业务方判断要不要处理的"
+         "只有 **%d 条**，构成如下（已逐条核验）：" % NAME_TRUE_ANOMALY_TOTAL)
+R.append("")
+R.append("| 类别 | 数量 | 分布 | 是否需业务方决策 |")
+R.append("|---|---|---|---|")
+R.append("| 含中文列名 | %d | `YFMXB` %d 条 + `YSMXB` %d 条 | **是** —— 两张孤儿表架构异常 |"
+         % (NAME_BY_CLASS["含中文"],
+            sum(1 for f in _name_non if f["column_cn"] and not f["column"].isascii()
+                and f["table"] == "YFMXB"),
+            sum(1 for f in _name_non if f["column_cn"] and not f["column"].isascii()
+                and f["table"] == "YSMXB")))
+R.append("| 纯数字列名 | %d | `PURTG2.01` / `.02` | **是** —— 字段名退化为数字 |"
+         % NAME_BY_CLASS["纯数字"])
+R.append("| **真异常合计** | **%d** | — | — |" % NAME_TRUE_ANOMALY_TOTAL)
+R.append("| 其余 %d 条 | %d | 7位式/表别名前缀式/纯字母/形态标准但前缀不符 | **否** —— E10 正常设计变体 |"
+         % (NAME_NONSTD - NAME_TRUE_ANOMALY_TOTAL,
+            NAME_NONSTD - NAME_TRUE_ANOMALY_TOTAL))
+R.append("")
+R.append("**纯数字列名 2 条**：`PURTG2.01` / `PURTG2.02` 无中文注释，"
+         "是本库唯一「字段名退化」的情况，业务方需确认是否为历史遗留。")
 R.append("")
 R.append("逐类说明：")
 R.append("")
@@ -1945,9 +2001,15 @@ with open(os.path.join(csv_dir, "_gen-stats.json"), "w", encoding="utf-8", newli
             "nonstd_name": len(nonstd_name),
             "tables_full_nonstandard": TABLES_FULL_NONSTD,
             "tables_with_nonstandard": TABLES_WITH_NONSTD,
+            "tables_with_udf_biz": TABLES_WITH_UDF_BIZ,
+            "tables_with_udf_all": TABLES_WITH_UDF_ALL,
             "tables_partially_nonstandard": TABLES_PART_NONSTD,
             "tables_all_standard": TABLES_ALL_STD,
+            "tables_with_udf_biz": T5_HAS_UDF,
+            "tables_with_udf_all": T3_HAS_UDF,
+            "tables_with_nonstd_all": T3_WITH_NS,
             "mask_min_mode_ratio": round(_min_mode_ratio(), 4),
+            "mask_min_mode_margin": _min_mode_margin(),
             "orphan_tables": sorted(only_in_fields),
             "empty_tables": sorted(only_in_tables),
         },
