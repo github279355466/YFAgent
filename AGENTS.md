@@ -112,6 +112,48 @@ npm run check:fields   # 仅校验字段对照表
 
 ---
 
+## 真机实测硬约束（2026-10-08 验证，优先级最高）
+
+> 以下每条都在真实环境（`172.16.2.86`，账套 50 张凭证）验证过。
+> **违反其中任何一条都会产生错误数据或误判，且多数不会报错。**
+
+### 1. 枚举字段：回参是「编码.中文」，查询只认纯编码 ⚠️
+
+| 传值 | 结果 |
+|---|---|
+| `approve_status = "Y.已审核"`（回参原样） | **0 条** ← 静默查不到 |
+| `approve_status = "Y"`（仅编码） | 50 条 ✅ |
+
+回参形如 `Y.已审核` / `N.未过账` / `1.一般凭证输入`，
+**作为 query 条件时只传编码部分**。**禁止把回参值直接回传为条件。**
+
+### 2. 主键全错返回 `code=0` + 空数组
+
+不能用 `code` 判断「查到了」。主键类 `read` 返回空数组时必须告警。
+
+### 3. `node_name` 用物理表名，不是 `*_data` 逻辑节点名
+
+`node_name: "accounting_voucher_detail_data"` → 报错 `OAPMA.MA012未定義`。
+不带 `node_name` → 报错「找不到資料表」。
+**物理表名需查映射表，不能用 `*_data` 节点名代替**（该映射尚未建，见 T-16）。
+
+### 4. 服务名只能查表，禁止拼接
+
+`supplier` → `yf.oapi.supplier.query.get`（无 .data 段）
+`customer` → `yf.oapi.customer.data.query.get`（有 .data 段）
+
+**一律从 `knowledge/typekey/typekey_map.yaml` 查**。按 `{type_key}.data.{op}.get` 拼接必错。
+
+### 5. 错误 token 返回 HTTP 500 + HTML
+
+不是 JSON。**先判 HTTP 状态码**，非200 走独立分支，不要解析 body。
+
+### 6. 错误 `conditions` 结构是显式报错（非静默全量）
+
+数组形态 / 扁平数组均返回 `code=-1` + `conditions not found.`。
+好消息：**问题会立即暴露**，但仍须确保只生成易飞的对象形态。
+
+---
 ## 已知文档缺陷（官方 Apipost 文档问题，非我方抽取错误）
 
 | 缺陷 | 影响 |

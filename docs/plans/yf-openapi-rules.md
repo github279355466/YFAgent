@@ -438,3 +438,103 @@ yf.oapi.{业务对象}[.data].{操作}[.get]
 | 财务域       | 会计凭证/会计科目/销售发票/收款单/其他应收单/应收退款单/预收款单/采购发票/付款单/应付退款单/预付单/其他应付单/费用发票                 |
 | 质量域       | 抽查基础/品管类别/检验项目/品号检验项目/不良原因/计量抽查基础/进货检验单/委外进货检验单/生产入库检验单/转移检验单/销退检验单/到货检验单/委外到货检验单 |
 | AI 端点     | **文档中未出现任何 `yf.ai.*` 服务**（易助侧有 8 个 `yz.ai.*` + 2 个 `yf.ai.*`）                     |
+
+---
+
+## 11. 真机实测补充（2026-10-08，环境 {内网IP}）
+
+> 完整报告见 `yf-live-probe-report.md`。以下为**实测发现文档未记载、或与文档推断不符**的部分。
+> 环境：易飞 9.0 测试账套，连通性与鉴权均已验证通过（15/15 用例PASS）。
+
+### 11.1 错误 `conditions` 结构是显式报错，不是静默全量
+
+| 写法 | 实测结果 |
+|---|---|
+| `{operator, fields[]}`（易飞对象形态） | `code=0`，过滤生效 |
+| `[{groups:[...]}]`（易助数组形态） | `code=-1`，`conditions not found.` |
+| `[{field,op,value}]`（扁平数组） | `code=-1`，`conditions not found.` |
+
+⚠️ **修正**：本文档 §7此前推断「结构错误会静默返回全量」，**实测证明是显式报错**。
+风险等级由「最高」下调为「中」—— 问题会立即暴露，不会静默产出错误数据。
+
+### 11.2 错误 token 返回 HTTP 500 + HTML（而非 JSON）
+
+```
+HTTP 500 | Content-Type: text/html; charset=gb2312
+<title>500 - 内部服务器错误</title>
+```
+
+**SDK 必须先判 HTTP 状态码**，非 200 时走独立错误分支，**不要尝试解析 body 为 JSON**。
+
+### 11.3 主键全错时返回 `code=0` + 空数组（最易误判）
+
+| 场景 | 实测结果 |
+|---|---|
+| 主键正确 | `code=0`，`success[0].accounting_voucher_data` 有数据 |
+| 缺一个主键字段 | `code=-1`，`缺少[doc_no]的鍵值參數`（`error[0].data` 回显已传字段） |
+| **主键全错** | ⚠️ `code=0`，`accounting_voucher_data=[]` |
+
+**只看 `execution.code` 会把「查无此单」误判为「成功但无数据」。**
+主键类 `read` 请求在返回空数组时应主动 WARN。
+
+### 11.4 枚举值：回参是「编码.中文」，查询只认纯编码 ⚠️ 最危险
+
+实测（该账套共 50 张凭证）：
+
+| conditions 传值 | `total_result` |
+|---|---|
+| 无条件 | 50 |
+| `approve_status = "Y.已审核"`（完整串） | **0** ← 查不到 |
+| `approve_status = "Y"`（仅编码） | 50 ✅ |
+| `approve_status = "Z"`（不存在编码） | 0 |
+| `approve_status = ""`（空串） | 0 |
+
+回参样例：`approve_status="Y.已审核"`、`posting_code="N.未过账"`、`source_code="1.一般凭证输入"`。
+
+**规则**：枚举字段作为 query 条件时**必须只传编码**（`Y` 而非 `Y.已审核`）。
+**禁止把上一步查询的回参值直接回传为条件** —— 这是「防幻觉」第1 类的典型场景，且 `code=0` 不报错。
+
+数字型枚举无此问题（`flag=1` → 50 条，`flag=2` → 12 条，`flag=999` → 0 条）。
+
+### 11.5 `node_name` 用物理表名，不是 `*_data` 逻辑节点名
+
+| 写法 | 实测结果 |
+|---|---|
+| `node_name: "accounting_voucher_detail_data"` | ❌ `OAPMA.MA012未定義` |
+| 不带 `node_name` | ❌ `OAPMB中找不到資料表:[ACTTA]` |
+
+**结论**：`node_name` 机制**必需**（不带即报错），但**取值应为物理表名**（如 `ACTTA`）。
+
+⚠️ **本仓库 175 个 `*_data` 逻辑节点名不能直接用作 `node_name`** ——
+需补一层「逻辑节点名 → 物理表名」映射（Phase 1 必做项）。
+
+### 11.6 空 `digi-service.name` 报「无效身份令牌」（误导性提示）
+
+空服务名返回的是「无效的身份令牌，请联系管理员分配身份令牌！」而非「服务不存在」。
+SDK 应做**语义化包装**，把这类误报翻译成可理解的提示。
+
+### 11.7 `digi-datakey` 缺失的报错文案
+
+| 缺失的头 | 报错文案 |
+|---|---|
+| `digi-datakey` | `digi-datakey is not valid.`（纯英文） |
+| `digi-user-token` | `无效的身份令牌,请检查是否传入身份令牌.` |
+| 错误 CompanyId | `Can not found CompanyId(xxx) in DSCMB` |
+| `digi-service`（空名） | `无效的身份令牌，请联系管理员分配身份令牌！` |
+
+四个头**均为必填**，真机已逐个验证。
+
+### 11.8 成功文案实测恒为繁体「查詢成功」
+
+文档记载的 `执行成功` 未复现；但**仍禁止用字符串匹配判断成功**（文案可能随版本变），
+唯一依据是 `code`。
+
+### 11.9 服务名不可按规律拼接
+
+反例：`supplier` 的服务名是 `yf.oapi.supplier.query.get`（**无 .data 段**），
+而 `customer` 是 `yf.oapi.customer.data.query.get`（**有 .data 段**）。
+
+**服务名只能从 `knowledge/typekey/typekey_map.yaml` 查，禁止按 `{type_key}.data.{op}.get` 拼接。**
+
+已知 6 个无 `.data` 段的对象形态各异：`bom` / `document.type.general` /
+`function.category` / `item.customer.price` / `item.inventory.qty` / `item.supplier.price`。
