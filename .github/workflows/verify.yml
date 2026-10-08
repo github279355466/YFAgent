@@ -1,0 +1,55 @@
+name: verify
+
+# 触发时机：PR 与 main推送
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: windows-latest   # 与本地开发环境一致（行尾策略：CRLF）
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 项目当前零运行时依赖，抽取脚本仅用 Node 内置模块。
+      # 保留 npm ci 以便后续 packages 引入依赖时无需改动流程。
+      - name: 安装依赖
+        run: npm ci
+
+      # ── 门禁 1：敏感信息扫描（最高优先级）──
+      - name: 敏感信息扫描
+        run: npm run scan:secrets
+
+      # ── 门禁 2：知识产物一致性 ──
+      # 校验三类产物（typekey / 字段对照表 / 域归属草案）的���容指纹，
+      # 检出「产物过期 / 被篡改 / 缺失」三类问题。
+      # 注意：CI 环境缺少 46.5 MB 源文件（不入库），故跳过 check，
+      #      仅在 PR 中人工确认产物与脚本变更同步。
+      - name: 校验知识产物
+        run: |
+          if (Test-Path "docs/易飞OpenAPI.json") {
+            npm run check:all
+          } else {
+            Write-Host "::notice::源文件 docs/易飞OpenAPI.json 不在仓库（设计如此），跳过产物指纹校验"
+            Write-Host "::notice::请人工确认 PR 中的 knowledge/ 产物与 scripts/ 变更同步"
+          }
+
+      # ── 行尾与编码一致性 ──
+      - name: 校验行尾与编码
+        shell: bash
+        run: |
+          fail=0
+          while IFS= read -r -d '' f; do
+            if file "$f" | grep -q 'CRLF'; then continue; fi
+            if echo "$f" | grep -qE '\.(png|jpg|zip|pdf|xlsx)$'; then continue; fi
+            echo "::error file=$f::非 CRLF 行尾"
+            fail=1
+          done < <(find . -type f -not -path './.git/*' -not -path './node_modules/*' -print0)
+          exit $fail

@@ -4,7 +4,7 @@
 # 请勿手工编辑；重新生成请运行：node scripts/extract-typekey-map.mjs
 #
 # source: docs/易飞OpenAPI.json (46.5 MB)
-# generated_at: 2026-10-08T07:06:33.582Z
+# generated_at: 2026-10-08T10:04:47.038Z
 # services_unique: 595
 # business_objects: 106
 
@@ -13,7 +13,7 @@ generated_from:
   - docs/易飞OpenAPI.json
   - apipost_project_id: 322f10
   - apipost_name: 易飞OpenAPI
-generated_at: "2026-10-08T07:06:33.582Z"
+generated_at: "2026-10-08T10:04:47.038Z"
 product_line: yifei
 service_prefix: "yf."
 auth_headers:

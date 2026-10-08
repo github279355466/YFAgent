@@ -1,0 +1,21 @@
+# 易飞ERP 连接配置模板
+# 复制为 erp.local.yaml 并填写实际值（*.local.yaml 已被 .gitignore 排除）
+
+erp:
+  # OpenAPI 入口。官方标注「注意大小写」，跨平台部署需确认 IIS 路由
+  base_url: "http://{IP}/YFOAP/openapi.dll/datasnap/rest/TServerMethods1/ATNPost"
+
+  # 公司别（账套）编号 —— 易飞必填，走 digi-datakey 头
+  company_id: "{账套编号}"
+
+  # 用户令牌 —— 通过环境变量注入，勿写明文
+  token_env: "YF_USER_TOKEN"
+
+  # 服务名前缀：易飞固定 yf.（勿硬编码，见 docs/decisions/）
+  service_prefix: "yf."
+
+  # 读取操作名映射：易飞叫 read，易助叫 get（易助为 getMultiple）
+  operation_alias:
+    read: "readGet"
+
+  timeout_seconds: 30

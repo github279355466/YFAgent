@@ -314,9 +314,11 @@ function main() {
 
   console.log('[4/4] 写出产物…');
   fs.mkdirSync(OUT_DIR, { recursive: true });
-  fs.writeFileSync(path.join(OUT_DIR, 'domain-map-draft.md'), md, 'utf-8');
-  fs.writeFileSync(path.join(OUT_DIR, 'domain-map-draft.csv'), csv, 'utf-8');
-  fs.writeFileSync(path.join(OUT_DIR, '_domain-report.json'), reportText, 'utf-8');
+  // 统一 CRLF（项目规范： UTF-8 无 BOM + CRLF，不混用行尾）
+  const CRLF = (t) => String(t).split(/\r\n|\r|\n/).join('\r\n');
+  fs.writeFileSync(path.join(OUT_DIR, 'domain-map-draft.md'), CRLF(md), 'utf-8');
+  fs.writeFileSync(path.join(OUT_DIR, 'domain-map-draft.csv'), CRLF(csv), 'utf-8');
+  fs.writeFileSync(path.join(OUT_DIR, '_domain-report.json'), CRLF(reportText), 'utf-8');
   console.log(`      ${path.relative(ROOT, OUT_DIR)}/domain-map-draft.md`);
   console.log(`      ${path.relative(ROOT, OUT_DIR)}/domain-map-draft.csv`);
   console.log(`      ${path.relative(ROOT, OUT_DIR)}/_domain-report.json`);

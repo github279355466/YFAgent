@@ -92,6 +92,165 @@ npm run check:all
 
 ---
 
+<!-- ENV-AND-COLLAB:BEGIN -->
+
+## 本地环境准备
+
+### 必需
+
+| 项 | 版本 | 说明 |
+|---|---|---|
+| **Node.js** | >= 20 | 抽取脚本零运行时依赖，仅用 Node 内置模块 |
+| **Git** | >= 2.30 | 建议 2.40+（可用 `git switch` 替代 `checkout`） |
+
+### 必需：源文件（不入库）
+
+抽取脚本依赖 `docs/易飞OpenAPI.json`（46.5 MB，**含内网 IP / token 明文 / 账套名，故不入库**）。
+
+获取方式：
+
+1. 从 Apipost 项目 `322f10`（易飞OpenAPI）导出 JSON
+2. 存放到 `docs/易飞OpenAPI.json`
+3. 校验：运行 `node scripts/extract-typekey-map.mjs`，输出 `services_unique` 应为 **595**
+
+### 可选
+
+| 工具 | 用途 |
+|---|---|
+| `gh` CLI | 创建 PR、查看 CI 状态（未安装不影响开发） |
+| SQL Server 客户端 | analysis 层真机验证（Phase 2 起需要） |
+
+### 认证配置
+
+```bash
+# 复制模板（模板入库，实际值不入库）
+cp config/erp.example.yaml config/erp.local.yaml
+cp .env.example .env
+
+# 编辑 config/erp.local.yaml 与 .env 填入实际值
+# .env 与 *.local.yaml 均已被 .gitignore 排除
+```
+
+**红线**：token / 账套名 / 内网地址一律不入库。提交前 `npm run scan:secrets` 门禁拦截。
+
+---
+
+## 依赖安装与启动
+
+```bash
+# 1. 安装（当前无运行时依赖，此步为后续 packages 预留）
+npm install
+
+# 2. 生成全部知识产物
+npm run gen:all
+
+# 3. 校验（提交前必跑）
+npm run verify
+```
+
+| 命令 | 作用 |
+|---|---|
+| `npm run gen:all` | 生成 TypeKey 映射 / 字段对照表 / 域归属草案 |
+| `npm run gen:typekey` | 仅生成 TypeKey 映射（106 对象 / 595 服务名） |
+| `npm run gen:fields` | 仅生成字段对照表（106 份 / 12,893 字段） |
+| `npm run gen:domain` | 仅生成业务域归属草案 |
+| `npm run check:all` | 校验三类产物的内容指纹（CI 门禁） |
+| `npm run scan:secrets` | 敏感信息扫描（7 类） |
+| `npm run verify` | **提交前必跑** = scan + check |
+
+> **无 `start` 命令**：本仓当前只做知识抽取，不含运行服务。Phase 1 起将加入 `packages/yfcli-mcp`。
+
+---
+
+## 团队协作与分支管理
+
+**完整约定见 `[docs/COLLABORATION.md](docs/COLLABORATION.md)`**，此处为速查。
+
+### 分支模型
+
+```
+main                      受保护，只接受 PR 合并
+  ├─ feature/{简述}       功能
+  ├─ fix/{简述}           缺陷
+  ├─ docs/{简述}          文档
+  └─ chore/{简述}         工程杂项
+```
+
+命名：小写字母 + 连字符，3~5 词。关联任务号用 `feature/t09-ai-endpoints`。
+
+### 分支保护（`main`）
+
+| 规则 | 说明 |
+|---|---|
+| 禁止直推 | 须经 PR 合并 |
+| 至少 1 人 approve | — |
+| CI 必过 | `npm run verify` 全绿 |
+| 禁止 force push | 回退用 `git revert` |
+| 线性历史 | squash 或 rebase merge |
+
+### 提交信息（Conventional Commits）
+
+```
+<type>(<scope>): <subject>
+
+<body>            说明「为什么」，不只说做了什么
+```
+
+type：`feat` `fix` `docs` `refactor` `perf` `test` `chore` `build` `ci` `revert`
+
+scope：`sdk` `mcp` `analysis` `typekey` `fields` `skill` `experts` `knowhow` `deps`
+
+示例：
+
+```
+feat(sdk): 新增 servicePrefix 配置化，消除硬编码前缀
+
+易飞前缀 yf. 与易助 yz. 不同，原实现沿用了易助的硬编码方式，
+换产品线时会导致全部调用失败。改为从配置读取，缺省时启动即失败。
+
+关联：docs/decisions/OPEN-DECISIONS.md OPEN-A3
+```
+
+### PR 流程
+
+```bash
+git switch -c feature/xxx
+# ... 开发 ...
+npm run verify                 # 必过才提 PR
+git add -A && git commit -m "feat(sdk): ..."
+git push -u origin feature/xxx
+# 建 PR → 至少 1 人 approve → squash/rebase 合并 → 自动删分支
+```
+
+评审检查项（8 条）见 `docs/COLLABORATION.md` §四。
+
+### 知识产物变更（易错）
+
+产物是**脚本生成**的，改流程：
+
+```bash
+# 改脚本，不改产物
+vim scripts/extract-*.mjs
+npm run gen:all                  # 重新生成
+npm run verify                   # 校验
+git add -A && git commit         # 脚本 + 产物必须在同一个 PR
+```
+
+只改产物不改脚本 → `check:all` 会 FAIL，门禁拦住。
+
+### 敏感信息处置
+
+误提交后：
+
+```bash
+git rm --cached <路径>
+```
+
+⚠️ **凭证一旦 push 即视为泄漏，清理历史无法撤销。处置顺序：先轮换凭证，再清历史。**
+
+---
+
+<!-- ENV-AND-COLLAB:END -->
 ## 关键文档
 
 | 文档 | 内容 |
