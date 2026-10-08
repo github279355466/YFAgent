@@ -1,0 +1,858 @@
+# 易飞(E10) 字段元数据索引
+#
+# 由 scripts/extract-field-metadata.mjs 从 docs/易飞OpenAPI.json 机械抽取生成。
+# 请勿手工编辑。
+#
+# generated_at: 2026-10-08T07:17:54.823Z
+
+generated_at: "2026-10-08T07:17:54.823Z"
+product_line: yifei
+objects: 106
+fields_total: 12893
+fields_with_physical_name: 42
+
+# 注意事项
+# - not_null 在 Apipost 中全库均为 1（含只读与管理字段），不可作为必填判据
+# - 字段名（大写）仅少数接口的 description 中给出，其余以 ~ 占位，_index.json 记录覆盖率
+# - 必填列仅在官方文档明确说明时标注（如新建服务：必须提供业务主键及不可空白字段）
+
+objects_detail:
+  - type_key: account
+    title: 会计科目
+    file: account.md
+    primary_key: [ac_no]
+    header_fields: 40
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: account_data, fields: 40 }
+  - type_key: accounting.voucher
+    title: 会计凭证
+    file: accounting.voucher.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 28
+    writable: true
+    detail: { node: accounting_voucher_data, fields: 28 }
+    detail: { node: accounting_voucher_detail_data, fields: 25 }
+  - type_key: ap.refund.doc
+    title: 应付退款单
+    file: ap.refund.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 115
+    writable: true
+    detail: { node: wo_stockin_data, fields: 36 }
+    detail: { node: wo_stockin_detail_data, fields: 30 }
+    detail: { node: ap_refund_doc_detail_data, fields: 13 }
+    detail: { node: ap_refund_doc_data, fields: 94 }
+  - type_key: approve.price
+    title: 核价单
+    file: approve.price.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 19
+    writable: true
+    detail: { node: header_of_approve_price_data, fields: 19 }
+    detail: { node: detail_of_approve_price_data, fields: 14 }
+  - type_key: ar.refund.doc
+    title: 应收退款单
+    file: ar.refund.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 98
+    writable: true
+    detail: { node: ar_refund_doc_data, fields: 98 }
+    detail: { node: ar_refund_doc_detail_data, fields: 8 }
+  - type_key: bad.cause
+    title: 不良原因
+    file: bad.cause.md
+    primary_key: [bad_cause_no]
+    header_fields: 34
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: bad_cause_data, fields: 34 }
+  - type_key: bom
+    title: 查询BOM信息
+    file: bom.md
+    primary_key: [master_item_no]
+    header_fields: 37
+    writable: true
+    detail: { node: bom_requirement_detail_data, fields: 23 }
+    detail: { node: bom_requirement_header_data, fields: 28 }
+    detail: { node: bom_data, fields: 18 }
+  - type_key: borrow.doc
+    title: 借出
+    file: borrow.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 43
+    writable: true
+    detail: { node: transfer_data, fields: 25 }
+    detail: { node: borrow_doc_detail_data, fields: 21 }
+  - type_key: borrow.return
+    title: 借出
+    file: borrow.return.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 43
+    writable: true
+    detail: { node: transfer_data, fields: 25 }
+    detail: { node: borrow_return_detail_data, fields: 20 }
+  - type_key: calendar
+    title: 假日表
+    file: calendar.md
+    primary_key: [year, industry, shift]
+    header_fields: 4
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: header_of_calendar_data, fields: 5 }
+  - type_key: collection.doc
+    title: 收款单
+    file: collection.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 78
+    writable: true
+    detail: { node: collection_doc_data, fields: 66 }
+    detail: { node: collection_doc_detail_data, fields: 6 }
+  - type_key: combination.order
+    title: 组合单
+    file: combination.order.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 65
+    writable: true
+    detail: { node: combination_order_date, fields: 65 }
+    detail: { node: combination_order_detail_data, fields: 15 }
+  - type_key: company.detail
+    title: 公司
+    file: company.detail.md
+    primary_key: []
+    header_fields: 22
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+  - type_key: computation.sampling.basis
+    title: 计量抽查基础
+    file: computation.sampling.basis.md
+    primary_key: [inspection_level]
+    header_fields: 33
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: computation_sampling_basis_data, fields: 33 }
+  - type_key: currency
+    title: 币种
+    file: currency.md
+    primary_key: [currency]
+    header_fields: 9
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: currency_data, fields: 10 }
+  - type_key: customer
+    title: 客户
+    file: customer.md
+    primary_key: [customer_no]
+    header_fields: 155
+    writable: true
+    detail: { node: customer_address_data, fields: 10 }
+    detail: { node: customer_basic_data_file_data, fields: 156 }
+  - type_key: customer.item
+    title: 客户品号
+    file: customer.item.md
+    primary_key: [customer_no, item_no, customer_item_no]
+    header_fields: 40
+    writable: true
+    detail: { node: customer_item_data, fields: 40 }
+  - type_key: department
+    title: 部门
+    file: department.md
+    primary_key: [department_no]
+    header_fields: 9
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: department_data, fields: 9 }
+  - type_key: destroy.order
+    title: 销毁单
+    file: destroy.order.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 57
+    writable: true
+    detail: { node: destroy_order_data, fields: 57 }
+    detail: { node: destroy_order_detail_data, fields: 22 }
+  - type_key: document.type.general
+    title: 单据性质
+    file: document.type.general.md
+    primary_key: []
+    header_fields: 11
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+  - type_key: ebom
+    title: 查询EBOM
+    file: ebom.md
+    primary_key: [master_item_no]
+    header_fields: 47
+    writable: true
+    detail: { node: ebom_data, fields: 47 }
+    detail: { node: ebom_detail_data, fields: 22 }
+  - type_key: ebom.change
+    title: 变更单
+    file: ebom.change.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 45
+    writable: true
+    detail: { node: ebom_change_data, fields: 45 }
+    detail: { node: ebom_change_detail_data, fields: 30 }
+  - type_key: ecn
+    title: 变更单
+    file: ecn.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 45
+    writable: true
+    detail: { node: ecn_master_data, fields: 13 }
+    detail: { node: ecn_data, fields: 45 }
+  - type_key: employee
+    title: 员工
+    file: employee.md
+    primary_key: []
+    header_fields: 12
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+  - type_key: engineering.item
+    title: 工程品号
+    file: engineering.item.md
+    primary_key: [engineering_item]
+    header_fields: 17
+    writable: true
+    detail: { node: engineering_items_header_data, fields: 17 }
+  - type_key: expense.invoice
+    title: 费用发票
+    file: expense.invoice.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 108
+    writable: true
+    detail: { node: wo_stockin_data, fields: 36 }
+    detail: { node: expense_invoice_subhead_data, fields: 6 }
+    detail: { node: expense_invoice_detail_data, fields: 12 }
+    detail: { node: expense_invoice_data, fields: 88 }
+  - type_key: financial.institution
+    title: 金融机构
+    file: financial.institution.md
+    primary_key: [financing_institution]
+    header_fields: 17
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: financial_institution_header_data, fields: 17 }
+  - type_key: function.category
+    title: 职务类别
+    file: function.category.md
+    primary_key: [function_no]
+    header_fields: 4
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: header_of_function_categoryr_data, fields: 4 }
+  - type_key: inquiry
+    title: 询价单
+    file: inquiry.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 16
+    writable: true
+    detail: { node: inquiry_data, fields: 16 }
+    detail: { node: inquiry_detail_data, fields: 15 }
+  - type_key: inspection
+    title: 检验项目
+    file: inspection.md
+    primary_key: [inspection_no]
+    header_fields: 42
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: inspection_data, fields: 42 }
+  - type_key: inventory.transaction
+    title: 库存交易单
+    file: inventory.transaction.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 27
+    writable: true
+    detail: { node: inventory_transaction_data, fields: 36 }
+    detail: { node: inventory_transaction_detail_data, fields: 25 }
+  - type_key: inventory.transaction.details
+    title: 库存交易明细
+    file: inventory.transaction.details.md
+    primary_key: [doc_type_no, doc_no, seq, in_out_type]
+    header_fields: 31
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: inventory_transaction_details_data, fields: 33 }
+  - type_key: item
+    title: 品号
+    file: item.md
+    primary_key: [item_no]
+    header_fields: 195
+    writable: true
+    detail: { node: item_basic_data, fields: 121 }
+  - type_key: item.classification
+    title: 品号类别
+    file: item.classification.md
+    primary_key: [classification_mode, item_classification_code]
+    header_fields: 50
+    writable: true
+    detail: { node: item_classification_data, fields: 50 }
+  - type_key: item.count
+    title: 盘点
+    file: item.count.md
+    primary_key: [count_manuscript_no]
+    header_fields: 0
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+  - type_key: item.customer.price
+    title: 客户商品价格
+    file: item.customer.price.md
+    primary_key: [customer_no, item_no, effective_date, pricing_unit, curr, first_trade_date]
+    header_fields: 21
+    writable: true
+    detail: { node: customer_products_pricing_header_data, fields: 21 }
+  - type_key: item.inspection
+    title: 品号检验项目
+    file: item.inspection.md
+    primary_key: [quality_control_category_no, item_no, routing_no]
+    header_fields: 41
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: item_inspection_data, fields: 41 }
+  - type_key: item.inventory.qty
+    title: 品号库存
+    file: item.inventory.qty.md
+    primary_key: []
+    header_fields: 0
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+  - type_key: item.lot
+    title: 批号
+    file: item.lot.md
+    primary_key: [item_no, lot_no]
+    header_fields: 21
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: header_of_item_vendor_data, fields: 14 }
+  - type_key: item.supplier.price
+    title: 供应商料件价格
+    file: item.supplier.price.md
+    primary_key: [item_no, supplier_no, currency, pricing_unit, effective_date]
+    header_fields: 20
+    writable: true
+    detail: { node: header_of_item_vendor_data, fields: 19 }
+    detail: { node: detail_note_of_item_factory_data, fields: 8 }
+  - type_key: monthly.item.statistics
+    title: 品号月档
+    file: monthly.item.statistics.md
+    primary_key: [item_no, stock_month]
+    header_fields: 19
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: monthly_item_statistics_data, fields: 20 }
+  - type_key: op.stockin
+    title: 工艺入库单
+    file: op.stockin.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 31
+    writable: true
+    detail: { node: transfer_doc_data, fields: 31 }
+    detail: { node: transfer_doc_detail_data, fields: 61 }
+  - type_key: operation
+    title: 工艺
+    file: operation.md
+    primary_key: []
+    header_fields: 9
+    writable: true
+  - type_key: other.payable.doc
+    title: 预付单
+    file: other.payable.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 102
+    writable: true
+    detail: { node: wo_stockin_data, fields: 36 }
+    detail: { node: other_payable_doc_detail_data, fields: 11 }
+    detail: { node: other_payable_doc_data, fields: 81 }
+  - type_key: other.receivable
+    title: 其他应收单
+    file: other.receivable.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 72
+    writable: true
+    detail: { node: other_receivable_data, fields: 72 }
+    detail: { node: other_receivable_detail_data, fields: 11 }
+  - type_key: outsourcing.approve.price
+    title: 委外核价单
+    file: outsourcing.approve.price.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 47
+    writable: true
+    detail: { node: outsourcing_approve_price_data, fields: 47 }
+    detail: { node: outsourcing_approve_price_detail_data, fields: 16 }
+  - type_key: outsourcing.price
+    title: 委外价格
+    file: outsourcing.price.md
+    primary_key: [item_no, routing_no, outsourcing_supplier_no, pricing_unit, effective_date, currency]
+    header_fields: 50
+    writable: true
+    detail: { node: outsourcing_price_data, fields: 50 }
+    detail: { node: outsourcing_price_detail_data, fields: 9 }
+  - type_key: outsourcing.purchase.acceptance
+    title: 委外进货单验收
+    file: outsourcing.purchase.acceptance.md
+    primary_key: [doc_type_no, doc_no, seq]
+    header_fields: 94
+    writable: true
+    detail: { node: outsourcing_purchase_acceptance_data, fields: 90 }
+  - type_key: outsourcing.purchase.arrival
+    title: 委外到货单
+    file: outsourcing.purchase.arrival.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 52
+    writable: true
+    detail: { node: outsourcing_purchase_arrival_data, fields: 52 }
+    detail: { node: outsourcing_purchase_arrival_detail_data, fields: 13 }
+  - type_key: outsourcing.purchase.arrival.acceptance
+    title: 委外到货单验收
+    file: outsourcing.purchase.arrival.acceptance.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 72
+    writable: true
+    detail: { node: outsourcing_purchase_arrival_acceptance_data, fields: 71 }
+  - type_key: outsourcing.purchase.arrival.inspection
+    title: 委外到货检验单
+    file: outsourcing.purchase.arrival.inspection.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 88
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: outsourcing_purchase_arrival_inspection_data, fields: 88 }
+  - type_key: outsourcing.purchase.inspection
+    title: 委外进货检验单
+    file: outsourcing.purchase.inspection.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 93
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: outsourcing_purchase_inspection_data, fields: 93 }
+  - type_key: outsourcing.purchase.inspection.return
+    title: 退回委外验退件
+    file: outsourcing.purchase.inspection.return.md
+    primary_key: [doc_type_no, doc_no, seq, return_date]
+    header_fields: 49
+    writable: true
+    detail: { node: outsourcing_purchase_inspection_return_data, fields: 49 }
+  - type_key: outsourcing.purchase.receipt
+    title: 委外进货单
+    file: outsourcing.purchase.receipt.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 80
+    writable: true
+    detail: { node: outsourcing_purchase_receipt_data, fields: 79 }
+    detail: { node: outsourcing_purchase_receipt_detail_data, fields: 43 }
+  - type_key: outsourcing.purchase.return
+    title: 委外退货单
+    file: outsourcing.purchase.return.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 92
+    writable: true
+    detail: { node: wo_stockin_data, fields: 36 }
+    detail: { node: outsourcing_purchase_return_detail_data, fields: 27 }
+    detail: { node: outsourcing_purchase_return_data, fields: 75 }
+  - type_key: payable.doc
+    title: 付款单
+    file: payable.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 75
+    writable: true
+    detail: { node: payable_doc_data, fields: 75 }
+    detail: { node: payable_doc_detail_data, fields: 8 }
+  - type_key: picking.receipt
+    title: 领料单
+    file: picking.receipt.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 36
+    writable: true
+    detail: { node: picking_receipt_data, fields: 35 }
+    detail: { node: picking_receipt_detail_data, fields: 24 }
+    detail: { node: picking_receipt_mo_data, fields: 20 }
+  - type_key: picking.return
+    title: 退料单
+    file: picking.return.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 36
+    writable: true
+    detail: { node: picking_return_data, fields: 66 }
+    detail: { node: picking_return_mo_data, fields: 19 }
+    detail: { node: picking_return_detail_data, fields: 24 }
+  - type_key: plant
+    title: 工厂
+    file: plant.md
+    primary_key: [plant_no]
+    header_fields: 10
+    writable: true
+    detail: { node: plant_data, fields: 10 }
+  - type_key: precollection.doc
+    title: 预收款单
+    file: precollection.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 102
+    writable: true
+    detail: { node: precollection_doc_data, fields: 102 }
+  - type_key: prepayment.doc
+    title: 预付单
+    file: prepayment.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 127
+    writable: true
+    detail: { node: wo_stockin_data, fields: 36 }
+    detail: { node: wo_stockin_detail_data, fields: 30 }
+    detail: { node: prepayment_doc_data, fields: 106 }
+  - type_key: product.process
+    title: 产品工艺路线
+    file: product.process.md
+    primary_key: [routing_item_no, process_code]
+    header_fields: 7
+    writable: true
+    detail: { node: product_process_detail_data, fields: 28 }
+    detail: { node: product_process_header_data, fields: 14 }
+  - type_key: project
+    title: 项目
+    file: project.md
+    primary_key: [project_no]
+    header_fields: 3
+    writable: true
+    detail: { node: project_data, fields: 3 }
+  - type_key: purchase.arrival
+    title: 到货单
+    file: purchase.arrival.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 55
+    writable: true
+    detail: { node: purchase_order_detail_data, fields: 8 }
+    detail: { node: purchase_arrival_data, fields: 52 }
+    detail: { node: purchase_arrival_detail_data, fields: 8 }
+  - type_key: purchase.arrival.acceptance
+    title: 到货单验收
+    file: purchase.arrival.acceptance.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 73
+    writable: true
+    detail: { node: purchase_order_detail_data, fields: 8 }
+    detail: { node: purchase_arrival_acceptance_data, fields: 68 }
+  - type_key: purchase.arrival.inspection
+    title: 到货检验单
+    file: purchase.arrival.inspection.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 92
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: purchase_arrival_inspection_data, fields: 92 }
+  - type_key: purchase.change
+    title: 采购变更单
+    file: purchase.change.md
+    primary_key: [doc_type_no, doc_no, version]
+    header_fields: 43
+    writable: true
+    detail: { node: purchase_change_data, fields: 43 }
+    detail: { node: purchase_change_detail_data, fields: 23 }
+  - type_key: purchase.inspection.return
+    title: 退回验退件
+    file: purchase.inspection.return.md
+    primary_key: [source_type_no, source_doc_no, source_seq, return_date]
+    header_fields: 54
+    writable: true
+    detail: { node: purchase_inspection_return_data, fields: 54 }
+  - type_key: purchase.invoice
+    title: 采购发票
+    file: purchase.invoice.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 60
+    writable: true
+    detail: { node: purchase_invoice_data, fields: 60 }
+    detail: { node: purchase_invoice_detail_data, fields: 6 }
+  - type_key: purchase.order
+    title: 采购单
+    file: purchase.order.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 50
+    writable: true
+    detail: { node: purchase_order_detail_data, fields: 32 }
+    detail: { node: purchase_order_data, fields: 52 }
+  - type_key: purchase.receipt
+    title: 进货单
+    file: purchase.receipt.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 52
+    writable: true
+    detail: { node: purchase_receipt_data, fields: 52 }
+    detail: { node: purchase_receipt_detail_data, fields: 62 }
+  - type_key: purchase.receipt.acceptance
+    title: 进货单验收
+    file: purchase.receipt.acceptance.md
+    primary_key: [doc_type_no, doc_no, seq]
+    header_fields: 85
+    writable: true
+    detail: { node: purchase_receipt_acceptance_data, fields: 85 }
+  - type_key: purchase.receipt.inspection
+    title: 进货检验单
+    file: purchase.receipt.inspection.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 97
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: purchase_receipt_inspection_data, fields: 97 }
+  - type_key: purchase.requisitions
+    title: 请购单
+    file: purchase.requisitions.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 25
+    writable: true
+    detail: { node: purchase_requisitions_detail_data, fields: 23 }
+    detail: { node: purchase_requisitions_data, fields: 25 }
+  - type_key: purchase.return
+    title: 退货单
+    file: purchase.return.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 47
+    writable: true
+    detail: { node: purchase_return_data, fields: 47 }
+    detail: { node: purchase_return_detail_data, fields: 39 }
+  - type_key: quality.control.category
+    title: 品管类别
+    file: quality.control.category.md
+    primary_key: [quality_control_category_no]
+    header_fields: 38
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: quality_control_category_data, fields: 38 }
+  - type_key: quotation
+    title: 报价单
+    file: quotation.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 68
+    writable: true
+    detail: { node: quotation_data, fields: 68 }
+    detail: { node: quotation_detail_data, fields: 27 }
+  - type_key: receive.payment.term
+    title: 付款条件
+    file: receive.payment.term.md
+    primary_key: [category, payment_condition_no]
+    header_fields: 19
+    writable: true
+    detail: { node: receive_payment_term_data, fields: 19 }
+  - type_key: replace.substitute.item
+    title: 取替代料
+    file: replace.substitute.item.md
+    primary_key: [component, master_item, rep_sub_item]
+    header_fields: 46
+    writable: true
+    detail: { node: replace_substitute_items_detail_data, fields: 6 }
+    detail: { node: replace_substitute_items_header_data, fields: 45 }
+  - type_key: sales.forecast
+    title: 销售预测
+    file: sales.forecast.md
+    primary_key: [sales_forecast]
+    header_fields: 24
+    writable: true
+    detail: { node: sales_forecast_data, fields: 24 }
+    detail: { node: sales_forecast_detail_data, fields: 15 }
+  - type_key: sales.invoice
+    title: 销售发票
+    file: sales.invoice.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 103
+    writable: true
+    detail: { node: sales_invoice_data, fields: 137 }
+    detail: { node: sales_invoice_detail_data, fields: 8 }
+  - type_key: sales.order
+    title: 销售订单
+    file: sales.order.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 90
+    writable: true
+    detail: { node: sales_order_data, fields: 97 }
+    detail: { node: sales_order_detail_data, fields: 33 }
+  - type_key: sales.order.change
+    title: 订单变更单
+    file: sales.order.change.md
+    primary_key: [doc_type_no, doc_no, change_version]
+    header_fields: 144
+    writable: true
+    detail: { node: sales_order_change, fields: 144 }
+    detail: { node: sales_order_detail_change, fields: 33 }
+    detail: { node: sales_order_chang, fields: 144 }
+  - type_key: sales.return
+    title: 销退单
+    file: sales.return.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 65
+    writable: true
+    detail: { node: sales_return_data, fields: 65 }
+    detail: { node: sales_return_detail_data, fields: 53 }
+  - type_key: sales.return.inspection
+    title: 销退检验单
+    file: sales.return.inspection.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 85
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: sales_return_inspection_data, fields: 85 }
+  - type_key: sampling.basis
+    title: 抽查基础
+    file: sampling.basis.md
+    primary_key: [inspection_level, strictness_degree]
+    header_fields: 34
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: sampling_basis_data, fields: 34 }
+  - type_key: scrap.order
+    title: 报废单
+    file: scrap.order.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 59
+    writable: true
+    detail: { node: scrap_order_data, fields: 59 }
+    detail: { node: scrap_order_detail_data, fields: 23 }
+  - type_key: shipping.notice
+    title: 出货通知单
+    file: shipping.notice.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 44
+    writable: true
+    detail: { node: shipping_notice_data, fields: 44 }
+    detail: { node: shipping_notice_detail_data, fields: 28 }
+  - type_key: shipping.order
+    title: 销货单
+    file: shipping.order.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 96
+    writable: true
+    detail: { node: shipping_order_data, fields: 96 }
+    detail: { node: shipping_order_detail_data, fields: 37 }
+  - type_key: split.order
+    title: 拆解单
+    file: split.order.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 68
+    writable: true
+    detail: { node: split_order_date, fields: 63 }
+    detail: { node: combination_order_detail_data, fields: 15 }
+    detail: { node: split_order_detail_data, fields: 14 }
+  - type_key: supplier
+    title: 供应商
+    file: supplier.md
+    primary_key: [supplier_no]
+    header_fields: 78
+    writable: true
+    detail: { node: supplier_basic_data, fields: 73 }
+  - type_key: team.personnel
+    title: 班组成员
+    file: team.personnel.md
+    primary_key: [team_no]
+    header_fields: 3
+    writable: true
+    detail: { node: header_of_team_personnel_data, fields: 3 }
+    detail: { node: detail_note_of_team_personnel_data, fields: 3 }
+  - type_key: transfer
+    title: 调拨单
+    file: transfer.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 34
+    writable: true
+    detail: { node: transfer_data, fields: 27 }
+    detail: { node: inventory_transaction_detail_data, fields: 27 }
+    detail: { node: transfer_detail_data, fields: 22 }
+  - type_key: transfer.doc
+    title: 转移单
+    file: transfer.doc.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 31
+    writable: true
+    detail: { node: transfer_doc_data, fields: 31 }
+    detail: { node: transfer_doc_detail_data, fields: 61 }
+  - type_key: transfer.doc.inspection
+    title: 转移检验单
+    file: transfer.doc.inspection.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 93
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: transfer_doc_inspection_data, fields: 93 }
+  - type_key: unit
+    title: 单位
+    file: unit.md
+    primary_key: [unit]
+    header_fields: 33
+    writable: true
+    detail: { node: unit_data, fields: 33 }
+  - type_key: warehouse
+    title: 仓库
+    file: warehouse.md
+    primary_key: [warehouse_no]
+    header_fields: 14
+    writable: true
+    detail: { node: warehouse_data, fields: 13 }
+    detail: { node: warehouse_location_data, fields: 4 }
+  - type_key: wo
+    title: 工单
+    file: wo.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 90
+    writable: true
+    detail: { node: wo_data, fields: 91 }
+    detail: { node: wo_detail_data, fields: 24 }
+  - type_key: wo.change
+    title: 工单变更单
+    file: wo.change.md
+    primary_key: [wo_doc_type_no, wo_doc_no, change_version]
+    header_fields: 154
+    writable: true
+    detail: { node: wo_change_data, fields: 154 }
+    detail: { node: wo_change_detail_data, fields: 25 }
+  - type_key: wo.commence
+    title: 投产单
+    file: wo.commence.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 31
+    writable: true
+    detail: { node: transfer_doc_data, fields: 31 }
+    detail: { node: transfer_doc_detail_data, fields: 61 }
+  - type_key: wo.routing
+    title: 工单工艺
+    file: wo.routing.md
+    primary_key: [wo_doc_type_no, wo_doc_no]
+    header_fields: 60
+    writable: true
+    detail: { node: wo_data, fields: 88 }
+    detail: { node: wo_routing_sub_detail_data, fields: 16 }
+  - type_key: wo.split
+    title: 工单拆分
+    file: wo.split.md
+    primary_key: [wo_doc_type_no, wo_doc_no]
+    header_fields: 88
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: wo_split_data, fields: 88 }
+  - type_key: wo.stockin
+    title: 生产入库单
+    file: wo.stockin.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 36
+    writable: true
+    detail: { node: wo_stockin_data, fields: 36 }
+    detail: { node: wo_stockin_detail_data, fields: 30 }
+  - type_key: wo.stockin.inspection
+    title: 生产入库检验单
+    file: wo.stockin.inspection.md
+    primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+    header_fields: 85
+    writable: false
+    readonly_only: true   # 官方文档仅提供只读服务，未开放 create/update
+    detail: { node: wo_stockin_inspection_data, fields: 85 }
+  - type_key: work.report
+    title: 报工单
+    file: work.report.md
+    primary_key: [doc_type_no, doc_no]
+    header_fields: 21
+    writable: true
+    detail: { node: work_report_data, fields: 22 }
+    detail: { node: work_report_detail_data, fields: 33 }
+    detail: { node: work_report_team_data, fields: 6 }
+  - type_key: workstation
+    title: 工作中心
+    file: workstation.md
+    primary_key: [production_line_code]
+    header_fields: 17
+    writable: true
+    detail: { node: workstation_head_data, fields: 17 }

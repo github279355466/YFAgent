@@ -1,0 +1,19 @@
+# 统一行尾：入库文件用 CRLF（Windows 开发环境），二进制不转换
+* text=auto eol=crlf
+
+*.md text eol=crlf
+*.yaml text eol=crlf
+*.yml text eol=crlf
+*.json text eol=crlf
+*.mjs text eol=crlf
+*.js text eol=crlf
+*.ts text eol=crlf
+*.txt text eol=crlf
+
+# 不做行尾转换
+*.png binary
+*.jpg binary
+*.zip binary
+*.pdf binary
+*.xlsx binary
+*.xml binary

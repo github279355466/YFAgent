@@ -1,0 +1,58 @@
+# ---- 依赖与构建产物 ----
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# ---- 运行期产物 ----
+logs/
+*.log
+runs/
+.cache/
+tmp/
+.workbuddy/tmp/
+
+# ---- 敏感数据：绝对不入库 ----
+# 官方 OpenAPI 导出原件含真实内网 IP、digi-user-token 明文、CompanyId（账套名）
+docs/易飞OpenAPI.json
+docs/*.apipost.json
+# 真机环境配置（仅入库 .example 模板）
+config/local.json
+config/*.local.yaml
+# 契约自学习（按租户隔离，含本库字段标识）
+data/
+*.license
+*-token.txt
+tools/*license-key*
+
+# ---- 大体积原件：建议内部仓或对象存储，不入 Git ----
+knowledge/official/_raw/
+knowledge/**/*.xlsx
+knowledge/**/*.xml
+knowledge/**/*.zip
+knowledge/**/*.pdf
+knowledge/**/*.docx
+
+# ---- 编辑器与系统 ----
+.vscode/
+.idea/
+*.swp
+*~
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ---- 归档快照（本地留档，不入库）----
+backups/
+archive/
+.workbuddy/snapshots/
+
+# ---- 计划文件（trellis 约定：任务状态以文件为准，不入 Git）----
+.trellis/tasks/
+
+# 注意：以下目录**有意入库**，勿整体忽略：
+#   .workbuddy/memory/   项目记忆（每日日志 + MEMORY.md 索引）
+#   knowledge/typekey/         机械抽取产物（可复现）
+#   knowledge/typekey-mapping/ 字段对照表（可复现）
+#   docs/plans/           方案文档
+#   scripts/               抽取脚本
