@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08 22:26:03",
+  "generated_at": "2026-10-08 22:28:23",
   "modules": {
     "ACM": {
       "path": "knowledge/data-dictionary/modules/ACM.md",
@@ -643,18 +643,18 @@
     "mask_mode_deviation_orphan": 0,
     "mask_syntax_pending": 4,
     "mask_on_nonchar": 11,
-    "nonstandard_names": 761,
+    "nonstandard_names": 711,
     "nonstandard_by_class": {
       "表别名前缀式": 257,
-      "XXnnn前缀不符": 77,
       "其他": 2,
+      "形态标准但前缀不符": 27,
       "7位完整表名式": 338,
       "纯字母": 65,
       "纯数字": 2,
       "含中文": 20
     },
     "business_field_total": 26798,
-    "standard_names": 26037,
+    "standard_names": 26087,
     "nonstd_name": 421,
     "orphan_tables": [
       "INVLK",

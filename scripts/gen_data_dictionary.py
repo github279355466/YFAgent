@@ -492,6 +492,18 @@ NAME_LOOSE_STD = sum(
     1 for f in _name_biz
     if len(f["column"]) == 5 and re.fullmatch(r"[A-Za-z]{2}\d{3}", f["column"]))
 NAME_BY_CLASS = collections.Counter(_name_class(f) for f in _name_non)
+# 两种单侧判据各自的误判量（用于 README 说明为何必须取并集）
+_shape = [f for f in _name_biz
+          if len(f["column"]) == 5 and f["column"][2:].isdigit()
+          and f["column"][:2].isalpha()]
+NAME_205_MISJUDGE = sum(
+    1 for f in _shape
+    if f["table"].endswith("205") and f["column"][:2] == f["table"][3:5])
+NAME_LONGTAIL_MISJUDGE = sum(
+    1 for f in _shape
+    if len(f["table"]) != 5 and f["column"][:2] == f["table"][-2:]
+    and f["column"][:2] != f["table"][3:5])
+
 NAME_CLASSES = [
     ("7 位完整表名式（`GHXA001`）", NAME_BY_CLASS["7位完整表名式"], "正常，单据性质表惯例"),
     ("表别名前缀式（`TAI01`）", NAME_BY_CLASS["表别名前缀式"], "正常，3 字母+2 位分区编号"),
@@ -1416,9 +1428,23 @@ R.append("")
 R.append("口径：业务字段 %d（剔除 3 张元数据表、剔除 UDF）中，"
          "不符合「`XX001` 式5 字符编码」的数量。" % NAME_BIZ_TOTAL)
 R.append("")
-R.append("**判据必须校验前缀**：`字段名 = 表名末2位 + 3 位序号`。仅按形态（2 字母 + 3 数字）"
-         "判定会把 %d 条算成标准（如下表「`XXnnn` 但前缀不符」），"
-         "导致非标准数被低估。" % NAME_LOOSE_STD)
+R.append("**判据**：形态为 `^[A-Z]{2}\d{3}$`，且前缀命中表名中的**实体位**。"
+         "实体位有两种位置，必须都接受：")
+R.append("")
+R.append("| 表名结构 | 例 | 实体位 | 字段前缀 |")
+R.append("|---|---|---|---|")
+R.append("| 模块3 + 实体2 | `PURTC` | `table[-2:]` = `TC` | `TC001` |")
+R.append("| 模块3 + 实体2 + 版本后缀 | `ACTMS205` | `table[3:5]` = `MS` | `MS001` |")
+R.append("| 模块3 + 长实体名 | `DSCINTMA` | `table[-2:]` = `MA` | `MA001` |")
+R.append("")
+R.append("因此判据取「`table[-2:]` **或** `table[3:5]` 任一命中」，标准 %d 条。" % NAME_STD)
+R.append("")
+R.append("**不可只用单侧**：仅用 `table[-2:]` 会把 `*205` 子表的 %d 个字段误判为非标准；"
+         "仅用 `table[3:5]` 会把 `DSCINTMA` / `WARRANT` 的 %d 个字段误判为非标准。"
+         % (NAME_205_MISJUDGE, NAME_LONGTAIL_MISJUDGE))
+R.append("")
+R.append("仅按形态（2 字母 + 3 数字）判定会把 %d 条算成标准，低估非标准数 %d 条。"
+         % (NAME_LOOSE_STD, NAME_LOOSE_STD - NAME_STD))
 R.append("")
 R.append("| 类别 | 数量 | 定性 |")
 R.append("|---|---|---|")
