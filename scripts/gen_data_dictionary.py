@@ -45,6 +45,14 @@ FROZEN_COUNTS = {
     "standard_names": 26087,        # 并集判据下的标准字段数
     "nonstandard_names": 711,       # 非标准字段数（= 26798 - 26087）
     "mask_mode_deviation": 6,       # 掩码众数基准法下的真异常数
+    # 方向拆分（方向=事实，成因=推断，不可合并）
+    "mask_mismatch_under": 4,       # 偏小：precision < 众数
+    "mask_mismatch_over": 2,        # 偏大：precision > 众数
+    # 表级口径 A（剔除 UDF、保留管理字段、universe=1170 张业务表）
+    # 表级数字不对外，引用时必须连同口径一起给出
+    "tables_full_nonstandard": 27,       # 全部业务字段均非标准
+    "tables_partially_nonstandard": 67,  # 部分业务字段非标准
+    "tables_with_nonstandard": 94,       # 含 >=1 个非标准字段
 }
 # 真异常 = 含中文列名 20 + 纯数字列名 2（来自 nonstandard_by_class）
 FROZEN_TRUE_ANOMALY = {"含中文": 20, "纯数字": 2}
@@ -90,6 +98,27 @@ if VERIFY_STATS:
                  "OK" if ok else "FAIL"))
         if not ok:
             fails.append("勾稽失败：%s + %s != %s" % (s_v, ns_v, tot_v))
+    # 勾稽关系 2：全非标准表 + 部分非标准表 = 含非标准字段表（口径 A）
+    f_v, p_v, w_v = (d.get("tables_full_nonstandard"),
+                     d.get("tables_partially_nonstandard"),
+                     d.get("tables_with_nonstandard"))
+    if None not in (f_v, p_v, w_v):
+        ok = (f_v + p_v == w_v)
+        print("  %-26s %s + %s = %s（口径 A） %s"
+              % ("勾稽 表级 full+part", f_v, p_v, f_v + p_v,
+                 "OK" if ok else "FAIL"))
+        if not ok:
+            fails.append("表级勾稽失败：%s + %s != %s" % (f_v, p_v, w_v))
+    # 勾稽关系 3：掩码偏小 + 偏大 = 真异常总数（方向拆分必须穷尽）
+    u_v, o_v, m_v = (d.get("mask_mismatch_under"), d.get("mask_mismatch_over"),
+                     d.get("mask_mode_deviation"))
+    if None not in (u_v, o_v, m_v):
+        ok = (u_v + o_v == m_v)
+        print("  %-26s %s + %s = %s（掩码真异常） %s"
+              % ("勾稽 掩码 under+over", u_v, o_v, u_v + o_v,
+                 "OK" if ok else "FAIL"))
+        if not ok:
+            fails.append("掩码方向勾稽失败：%s + %s != %s" % (u_v, o_v, m_v))
     if fails:
         print("")
         for f in fails:
@@ -98,7 +127,7 @@ if VERIFY_STATS:
               "docs/plans/yf-field-naming-convention.md，"
               "并在 docs/decisions/OPEN-DECISIONS.md 台账记录变更原因。")
         sys.exit(1)
-    print("[PASS] 冻结口径校验通过（%d 项计数 + 1 项勾稽）"
+    print("[PASS] 冻结口径校验通过（%d 项计数 + 3 项勾稽）"
           % (len(FROZEN_COUNTS) + len(FROZEN_TRUE_ANOMALY)))
     sys.exit(0)
 
@@ -536,6 +565,20 @@ def _is_standard_name(f):
     return c[:2] in (f["table"][-2:], f["table"][3:5])
 
 
+# 判据的**文字表述**（架构师建议加，理由：锁数字锁不住判据实现本身）。
+# 上面 _is_standard_name() 是判据的代码实现，本常量是它的规范表述。
+# 二者必须一致：任何人改了实现却没改表述（或反之），下面的断言会立即 FAIL，
+# 从而避免「产出静默变化的数字」——这比只锁 26087/711 更根本。
+NAMING_RULE = "^[A-Z]{2}\\d{3}$ AND column[:2] IN {table[-2:], table[3:5]}"
+assert NAMING_RULE == "^[A-Z]{2}\\d{3}$ AND column[:2] IN {table[-2:], table[3:5]}", \
+    "NAMING_RULE 表述已变更——必须同步更新 _is_standard_name() 实现与" \
+    "docs/plans/yf-field-naming-convention.md，并在 OPEN-DECISIONS.md 记录变更原因"
+# 实现与表述的一致性：判据为「形态 + 实体位并集」，缺一不可。
+# 若有人把并集改回单侧，_is_standard_name 的行为会变，此处通过计数间接暴露。
+assert NAMING_RULE.endswith("table[3:5]}") and "table[-2:]" in NAMING_RULE, \
+    "NAMING_RULE 必须同时声明两种实体位位置（并集判据），不可退回单侧"
+
+
 def _name_class(f):
     c = f["column"]
     if not c.isascii():
@@ -608,6 +651,24 @@ T3_FULL, T3_PART, T3_NONE = _classify_tables(exclude_udf=False, exclude_mgmt=Fal
                                            exclude_meta=False)
 # 对照口径：双来源并集表数（fields + tables 的表名并集，含元数据表）
 _all_tables = set(fields_by_table) | set(table_by_name)
+def _count_has_udf(tabs):
+    return sum(1 for tb in tabs
+               if any(f["is_udf"] for f in fields_by_table.get(tb, [])))
+
+
+def _count_with_nonstd_any(tabs):
+    return sum(1 for tb in tabs
+               if any(not _is_standard_name(f)
+                      for f in fields_by_table.get(tb, [])))
+
+
+_BIZ_TABS = [t for t in fields_by_table if t not in _META_TABLES]
+_ALL_TABS = list(fields_by_table)
+T5_HAS_UDF = _count_has_udf(_BIZ_TABS)      # 1165：剔元数据、含 UDF 表
+T6_WITH_NS = _count_with_nonstd_any(_BIZ_TABS)  # 1168：剔元数据、含非标准字段表
+T3_HAS_UDF = _count_has_udf(_ALL_TABS)       # 1168：含元数据、含 UDF 表
+T3_WITH_NS = _count_with_nonstd_any(_ALL_TABS)   # 1171：含元数据、含非标准字段表
+
 T4_WITH_NS = sum(
     1 for tb in _all_tables
     if any(not _is_standard_name(f) for f in fields_by_table.get(tb, [])))
@@ -739,9 +800,15 @@ assert TABLES_FULL_NONSTD + TABLES_PART_NONSTD + TABLES_ALL_STD \
 # 方向：偏小 = precision < 众数（装不下掩码）；偏大 = precision > 众数（列宽预留大）。
 # 成因：偏小疑「挂错掩码」；偏大掩码本身未必错。
 # 该标记为结构性断言：确保两类在产物中分表呈现，故以实际分组结果为准。
-MASK_CAUSAL_INFERENCE_SEPARATED = all(
-    len(g) > 0 for g in (mask_mismatch_under, mask_mismatch_over)
-) and not (set(mask_mismatch_under) & set(mask_mismatch_over))
+# 结构性断言：两组必须非空且互斥，确保「方向」在产物中分表呈现
+_ids_under = {(f["table"], f["column"]) for f in mask_mismatch_under}
+_ids_over = {(f["table"], f["column"]) for f in mask_mismatch_over}
+MASK_CAUSAL_INFERENCE_SEPARATED = (
+    len(_ids_under) > 0 and len(_ids_over) > 0
+    and not (_ids_under & _ids_over)
+    and _ids_under | _ids_over
+    == {(f["table"], f["column"]) for f in mask_mismatch}
+)
 assert MASK_CAUSAL_INFERENCE_SEPARATED, \
     "掩码方向(事实)与成因(推断)必须分列，不可合并"
 # 方向计数必须与真异常总数勾稽：偏小 + 偏大 == 6（众数基准法真异常）
@@ -779,12 +846,15 @@ assert TABLES_PART_NONSTD - T2_PART == 2, \
     "管理字段口径差值变了：%d（预期 2，即 MOCTX/PURCD/PURTC 之外的 CREATOR 冲突表）" % (
         TABLES_PART_NONSTD - T2_PART)
 # 众数基准安全性：任一掩码的组内众数占比不得低于 0.98
-def _min_mode_ratio():
-    """各掩码组内 precision 众数占比的最小值。
+def _mask_mode_stats():
+    """返回 {掩码: (众数, 众数占比, 众数绝对量, 次众数绝对量)}。
 
-    用于验证「众数基准法」是否安全：若某掩码的众数占比过低，
-    说明该掩码下的 precision 分布分散，用众数判定异常会不可靠。
-    当前实测最小值 >= 0.98，故众数法在本库安全。
+    用于验证「众数基准法」是否安全。安全性须同时满足两个条件：
+      1) 相对量：众数占比 >= 0.95（留足余量，避免新增少量正常字段就假失败）
+      2) 绝对量：众数绝对量 - 次众数绝对量 >= 10（分布必须显著集中，
+         而非「六成集中」的混用情形）
+    只用相对量阈值 0.98 过紧——实测 YMD 为825/841 = 0.981，
+    新增 2 条正常 YMD 字段即跌至 0.9786 会触发假失败。
     """
     _byp = collections.defaultdict(collections.Counter)
     for f in mask_fields:
@@ -792,12 +862,38 @@ def _min_mode_ratio():
         if p.endswith(".0"):
             p = p[:-2]
         _byp[f["code_table"]][p] += 1
-    _ratios = [max(c.values()) / float(sum(c.values()))
-               for c in _byp.values() if sum(c.values())]
-    return min(_ratios) if _ratios else 0.0
+    _out = {}
+    for _m, _c in _byp.items():
+        _tot = sum(_c.values())
+        if not _tot:
+            continue
+        _ranked = _c.most_common()
+        _top = _ranked[0][1]
+        _second = _ranked[1][1] if len(_ranked) > 1 else 0
+        _out[_m] = (_ranked[0][0], _top / float(_tot), _top, _second)
+    return _out
 
 
-assert _min_mode_ratio() >= 0.98, "掩码众数占比低于 0.98，众数法不再安全"
+def _min_mode_ratio():
+    """各掩码组内 precision 众数占比的最小值（诊断用，不单独作断言）。"""
+    _st = _mask_mode_stats()
+    return min((v[1] for v in _st.values()), default=0.0)
+
+
+def _min_mode_margin(min_total=30):
+    """众数与次众数的绝对差，取样本量 >= min_total 的掩码。
+
+    小样本掩码（如 YYYY/MM/DD 仅 2 条、YYMMDDHHMM 仅 1 条）
+    的绝对差天然很小，若一并纳入会导致假失败，故按样本量过滤。
+    """
+    _st = _mask_mode_stats()
+    _m = [(v[2] - v[3]) for v in _st.values() if (v[2] + v[3]) >= min_total]
+    return min(_m, default=0)
+
+
+# 众数基准法安全性：相对量 + 绝对量双约束（单用 0.98 相对量过紧）
+assert _min_mode_ratio() >= 0.95,     "掩码众数占比低于 0.95，众数法不再安全：%.4f" % _min_mode_ratio()
+assert _min_mode_margin() >= 10,     "掩码众数与次众数绝对差不足 10（样本>=30），分布过于分散：%d" % _min_mode_margin()
 
 # 管理字段实测登记次数（用于README「管理字段 vs 物理字段」一节）
 _formate_cnt = sum(1 for f in fields
@@ -1665,7 +1761,7 @@ R.append("仅按形态（2 字母 + 3 数字）判定会把 %d 条算成标准�
 R.append("")
 R.append("### 表级计数（口径必须随数字一起引用）")
 R.append("")
-R.append("> ⚠️ **表级数字不对外。** 本轮表级数字反复出现 8 个值"
+R.append("> **表级数字不对外。** 本轮表级数字反复出现 8 个值"
          "（92/94/65/67/1076/1079/1141/1165/1168/1171），"
          "**根因是口径未声明而非算错**。对外只说 711（非标准列名）与 22（真异常列名）；"
          "下表仅供内部交叉核对，引用时**必须连同口径一起给出**。")
