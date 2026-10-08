@@ -28,7 +28,7 @@ jobs:
         run: npm run scan:secrets
 
       # ── 门禁 2：知识产物一致性 ──
-      # 校验三类产物（typekey / 字段对照表 / 域归属草案）的���容指纹，
+      # 校验三类产物（typekey / 字段对照表 / 域归属草案）的内容指纹，
       # 检出「产物过期 / 被篡改 / 缺失」三类问题。
       # 注意：CI 环境缺少 46.5 MB 源文件（不入库），故跳过 check，
       #      仅在 PR 中人工确认产物与脚本变更同步。
@@ -40,6 +40,14 @@ jobs:
             Write-Host "::notice::源文件 docs/易飞OpenAPI.json 不在仓库（设计如此），跳过产物指纹校验"
             Write-Host "::notice::请人工确认 PR 中的 knowledge/ 产物与 scripts/ 变更同步"
           }
+
+      # ── 门禁 3：数据字典冻结口径 ──
+      # 字典口径数字（26798 / 26087 / 711 / 6）此前改了 5 轮，根因是判据不统一。
+      # 本门禁只读 knowledge/data-dictionary/_gen-stats.json（已入库）并断言冻结计数，
+      # **不重新生成产物**，因此不受上一步「源文件缺失」的影响，可无条件执行。
+      # 口径若被改动，此处直接 FAIL，而不是静默产出错误数字。
+      - name: 校验数据字典冻结口径
+        run: npm run check:dictionary
 
       # ── 行尾与编码一致性 ──
       - name: 校验行尾与编码

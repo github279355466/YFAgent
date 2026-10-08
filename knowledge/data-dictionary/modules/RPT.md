@@ -3,7 +3,7 @@
 > 本文件为机械抽取产物，请勿手工编辑。重新生成：`python scripts/gen_data_dictionary.py`
 >
 > 溯源：源文件：`.workbuddy/tmp/dict/tables.json`（1170 表）、`.workbuddy/tmp/dict/fields.json`（54842 字段）、`knowledge/typekey/typekey_map.yaml`（106 业务对象）
-> 生成时间：2026-10-08 22:28:23
+> 生成时间：2026-10-08 22:38:45
 
 ## 模块概览
 
@@ -35,7 +35,7 @@
 | `RPTNAME` | 报表名称 | char | 30 |  |  |  | 字段名长度非5；非标准命名 |
 | `EXTNAME` | Gird的Form名称 | char | 30 |  |  |  | 字段名长度非5；Gird的Form名称[ISDEF:Y]；非标准命名 |
 | `FMTNAME` | 格式档名称 | char | 30 |  |  |  | 字段名长度非5；非标准命名 |
-| `FMTNO` | 格式档序号 | char | 3 |  |  |  | 字段名前2位与表名末2位不一致 |
+| `FMTNO` | 格式档序号 | char | 3 |  |  |  | 字段名前2位与表名实体位不一致 |
 | `FMTMEMO` | 格式备注 | varchar | 255 |  |  |  | 字段名长度非5；非标准命名 |
 | `FMTVALUE` | 具体的格式 | UNKNOWN(I) |  |  |  |  | 字段名长度非5；非标准命名 |
 | `ISSAVED` | 是否被保存 | char | 1 |  |  |  | 字段名长度非5；非标准命名 |
@@ -92,7 +92,7 @@
 | `RPTNAME` | 报表名称 | char | 30 |  |  |  | 字段名长度非5；非标准命名 |
 | `EXTNAME` | Gird的Form名称 | char | 30 |  |  |  | 字段名长度非5；Gird的Form名称[ISDEF:Y]；非标准命名 |
 | `FMTNAME` | 格式档名称 | char | 30 |  |  |  | 字段名长度非5；非标准命名 |
-| `FMTNO` | 格式档序号 | char | 3 |  |  |  | 字段名前2位与表名末2位不一致 |
+| `FMTNO` | 格式档序号 | char | 3 |  |  |  | 字段名前2位与表名实体位不一致 |
 | `FMTMEMO` | 格式备注 | varchar | 255 |  |  |  | 字段名长度非5；非标准命名 |
 | `FMTVALUE` | 具体的格式 | UNKNOWN(I) |  |  |  |  | 字段名长度非5；非标准命名 |
 | `ISSAVED` | 是否被保存 | char | 1 |  |  |  | 字段名长度非5；非标准命名 |

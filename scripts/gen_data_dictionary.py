@@ -31,10 +31,76 @@ import collections
 
 sys.stdout.reconfigure(encoding="utf-8")
 
+# --verify-stats：只读模式。仅读取 _gen-stats.json 并断言关键计数，
+# **不重新生成任何产物**，用于 CI 回归保护（避免 CI 覆盖人工修订过的文档）。
+# 数字改了5 轮（4 -> 24 -> 684 -> 761 -> 722 -> 711），根因是判据不统一；
+# 本模式让「口径被改动」立即 FAIL，而非静默产出错误数字。
+VERIFY_STATS = "--verify-stats" in sys.argv
+
+# 冻结口径（team-lead 裁决，2026-10-08）。对外只用「并集形态」这一组数字；
+# 长度(421) 与宽松形态(684) 仅内部参考，不得对外引用。
+# 完整推导见 docs/plans/yf-field-naming-convention.md 第一节。
+FROZEN_COUNTS = {
+    "business_field_total": 26798,   # 业务字段总数（剔除 UDF 与 3 张元数据表）
+    "standard_names": 26087,        # 并集判据下的标准字段数
+    "nonstandard_names": 711,       # 非标准字段数（= 26798 - 26087）
+    "mask_mode_deviation": 6,       # 掩码众数基准法下的真异常数
+}
+# 真异常 = 含中文列名 20 + 纯数字列名 2（来自 nonstandard_by_class）
+FROZEN_TRUE_ANOMALY = {"含中文": 20, "纯数字": 2}
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DICT_DIR = os.path.join(ROOT, ".workbuddy", "tmp", "dict")
 OUT_ROOT = os.path.join(ROOT, "knowledge", "data-dictionary")
 MOD_DIR = os.path.join(OUT_ROOT, "modules")
+
+# ---- --verify-stats 早退：必须在任何生成动作之前读完并退出 ----
+if VERIFY_STATS:
+    sp = os.path.join(OUT_ROOT, "_gen-stats.json")
+    if not os.path.exists(sp):
+        print("[FAIL] 缺少 %s，无法校验冻结口径" % sp)
+        sys.exit(1)
+    with open(sp, encoding="utf-8") as fh:
+        st = json.load(fh)
+    d = st.get("doubts", {})
+    fails = []
+    print("冻结口径校验（只读，不重新生成产物）：")
+    for k, want in FROZEN_COUNTS.items():
+        got = d.get(k)
+        ok = got == want
+        print("  %-26s 期望 %-7s 实际 %-7s %s"
+              % (k, want, got, "OK" if ok else "FAIL"))
+        if not ok:
+            fails.append("%s: 期望 %s，实际 %s" % (k, want, got))
+    byc = d.get("nonstandard_by_class", {})
+    for k, want in FROZEN_TRUE_ANOMALY.items():
+        got = byc.get(k)
+        ok = got == want
+        print("  %-26s 期望 %-7s 实际 %-7s %s"
+              % ("非标准/" + k, want, got, "OK" if ok else "FAIL"))
+        if not ok:
+            fails.append("nonstandard_by_class.%s: 期望 %s，实际 %s" % (k, want, got))
+    # 勾稽关系：标准 + 非标准 = 业务字段总数
+    s_v, ns_v, tot_v = (d.get("standard_names"), d.get("nonstandard_names"),
+                        d.get("business_field_total"))
+    if None not in (s_v, ns_v, tot_v):
+        ok = (s_v + ns_v == tot_v)
+        print("  %-26s %s + %s = %s（期望 %s） %s"
+              % ("勾稽 标准+非标准", s_v, ns_v, s_v + ns_v, tot_v,
+                 "OK" if ok else "FAIL"))
+        if not ok:
+            fails.append("勾稽失败：%s + %s != %s" % (s_v, ns_v, tot_v))
+    if fails:
+        print("")
+        for f in fails:
+            print("[FAIL] %s" % f)
+        print("[FAIL] 冻结口径已被改动 —— 若确属有意变更，请同步更新 FROZEN_COUNTS、"
+              "docs/plans/yf-field-naming-convention.md，"
+              "并在 docs/decisions/OPEN-DECISIONS.md 台账记录变更原因。")
+        sys.exit(1)
+    print("[PASS] 冻结口径校验通过（%d 项计数 + 1 项勾稽）"
+          % (len(FROZEN_COUNTS) + len(FROZEN_TRUE_ANOMALY)))
+    sys.exit(0)
 
 TABLES_JSON = os.path.join(DICT_DIR, "tables.json")
 FIELDS_JSON = os.path.join(DICT_DIR, "fields.json")
@@ -422,11 +488,15 @@ def naming_kind(table, column):
         return "管理字段", "公共字段·管理字段"
     if column in UDF_FIELDS:
         return "自定义字段", "公共字段·自定义字段"
-    if len(column) == 5 and len(table) >= 2 and column[:2] == table[-2:]:
-        return "标准字段", "表名末2位+3位序号"
+    if len(column) == 5 and column[:2].isalpha() and column[2:].isdigit():
+        if len(table) >= 2 and column[:2] == table[-2:]:
+            return "标准字段", "表名实体位+3位序号（实体位=表名末2位）"
+        if len(table) >= 5 and column[:2] == table[3:5]:
+            return "标准字段", "表名实体位+3位序号（实体位=表名第4-5位，如 *205 子表）"
+        return "特殊命名", "形态为XXnnn但前缀未命中表名实体位"
     if len(column) != 5:
         return "特殊命名", "字段名长度非5"
-    return "特殊命名", "字段名前2位与表名末2位不一致"
+    return "特殊命名", "字段名前2位与表名实体位不一致"
 
 
 standard_tables = set()
@@ -492,6 +562,29 @@ NAME_LOOSE_STD = sum(
     1 for f in _name_biz
     if len(f["column"]) == 5 and re.fullmatch(r"[A-Za-z]{2}\d{3}", f["column"]))
 NAME_BY_CLASS = collections.Counter(_name_class(f) for f in _name_non)
+# 表级口径（严格剔除 UDF 与管理字段）—— 与上面的字段级口径分开，避免混淆
+_MGMT_SET = {"COMPANY", "CREATOR", "USR_GROUP", "CREATE_DATE",
+             "MODIFIER", "MODI_DATE", "FLAG"}
+
+
+def _biz_fields(tb):
+    return [f for f in fields_by_table.get(tb, [])
+            if not f["is_udf"] and f["column"] not in _MGMT_SET]
+
+
+TABLES_FULL_NONSTD = 0   # 全部业务字段均非标准
+TABLES_PART_NONSTD = 0   # 部分业务字段非标准
+for _tb in fields_by_table:
+    _nb = _biz_fields(_tb)
+    if not _nb:
+        continue
+    _n = sum(1 for f in _nb if not _is_standard_name(f))
+    if _n == len(_nb):
+        TABLES_FULL_NONSTD += 1
+    elif _n > 0:
+        TABLES_PART_NONSTD += 1
+TABLES_WITH_NONSTD = TABLES_FULL_NONSTD + TABLES_PART_NONSTD
+
 # 两种单侧判据各自的误判量（用于 README 说明为何必须取并集）
 _shape = [f for f in _name_biz
           if len(f["column"]) == 5 and f["column"][2:].isdigit()
@@ -581,6 +674,23 @@ mask_on_nonchar = [f for f in mask_fields if f["type_raw"] in ("D", "N")]
 MASK_SYNTAX_PENDING = {"HHMMSSMMM"}
 mask_syntax_pending = [f for f in mask_fields
                        if f["code_table"] in MASK_SYNTAX_PENDING]
+# 偏离方向拆分：偏小=装不下掩码（疑挂错掩码）；偏大=列宽预留过大（掩码本身可能正确）
+mask_mismatch_under = [f for f in mask_mismatch
+                       if float(f["precision"] or 0) < MASK_EXPANCED_LEN[f["code_table"]]]
+mask_mismatch_over = [f for f in mask_mismatch
+                      if float(f["precision"] or 0) > MASK_EXPANCED_LEN[f["code_table"]]]
+
+# 口径回归断言（防止判据再次被误改）
+assert NAME_BIZ_TOTAL == 26798, "业务字段口径变了：%d" % NAME_BIZ_TOTAL
+assert NAME_STD == 26087, "标准字段数变了：%d" % NAME_STD
+assert NAME_NONSTD == 711, "非标准字段数变了：%d" % NAME_NONSTD
+assert NAME_LOOSE_STD == 26114, "宽松口径变了：%d" % NAME_LOOSE_STD
+assert NAME_205_MISJUDGE == 50, "*205 误判量变了：%d" % NAME_205_MISJUDGE
+assert NAME_LONGTAIL_MISJUDGE == 11, "长表尾位误判量变了：%d" % NAME_LONGTAIL_MISJUDGE
+# 表级口径（27/92 与 1171 的差异源于是否计入 UDF，必须锁死防混淆）
+assert TABLES_FULL_NONSTD == 27, "全非标准表数变了：%d" % TABLES_FULL_NONSTD
+assert TABLES_WITH_NONSTD == 92, "含非标准字段表数变了：%d" % TABLES_WITH_NONSTD
+assert TABLES_PART_NONSTD == 65, "部分非标准表数变了：%d" % TABLES_PART_NONSTD
 
 # 管理字段实测登记次数（用于README「管理字段 vs 物理字段」一节）
 _formate_cnt = sum(1 for f in fields
@@ -686,7 +796,7 @@ for mod in sorted(module_tables):
                  % (len(fl), len(biz), len(udf), len(mgmt),
                     (" + 同名业务字段 %d" % len(collide)) if collide else ""))
         L.append("| 命名规律 | %s |" % (
-            "标准命名（表名末2位+3位序号）" if tb in standard_tables else "含特殊命名字段"))
+            "标准命名（表名实体位+3位序号）" if tb in standard_tables else "含特殊命名字段"))
         exp_flag, exp_svcs, exp_basis = exposure_of(tb)
         if exp_svcs:
             L.append("| 是否 OpenAPI 暴露 | %s（依据：%s） |" % (exp_flag, exp_basis))
@@ -1428,7 +1538,7 @@ R.append("")
 R.append("口径：业务字段 %d（剔除 3 张元数据表、剔除 UDF）中，"
          "不符合「`XX001` 式5 字符编码」的数量。" % NAME_BIZ_TOTAL)
 R.append("")
-R.append("**判据**：形态为 `^[A-Z]{2}\d{3}$`，且前缀命中表名中的**实体位**。"
+R.append(r"**判据**：形态为 `^[A-Z]{2}\d{3}$`，且前缀命中表名中的**实体位**。"
          "实体位有两种位置，必须都接受：")
 R.append("")
 R.append("| 表名结构 | 例 | 实体位 | 字段前缀 |")
@@ -1461,10 +1571,13 @@ R.append("2. **表别名前缀式（%d 条）** —— `TAI01` / `TKI01` / `TCK0
          "形态为 3 字母 + 2 位数字。同样遵循「表前缀 + 序号」规则，"
          "只是列名前缀取的是**表别名**而非表名后 2 位（如 `ACRTA` 表用 `TAI` 前缀），"
          "用于同表内分区编号避免冲突。**非异常**。" % NAME_BY_CLASS["表别名前缀式"])
-R.append("3. **`XXnnn` 但前缀不符（%d 条）** —— 形态标准但前缀与表名后 2 位不一致，"
-         "集中于 `*205` 多层子表（`ACTTI205` 用 `TI001`、`ACTTH205` 用 `TH001`）"
-         "与队列表（`EFJOBQUE`）。命名铁律第四节已列此例外，**非异常**。"
-         % NAME_BY_CLASS["XXnnn前缀不符"])
+R.append("3. **形态标准但前缀不符（%d 条）** —— 形态为 `XXnnn` 但前缀不命中实体位，"
+         "逐条可解释，**无一条属异常**：" % NAME_BY_CLASS["形态标准但前缀不符"])
+R.append("   - `EFJOBQUE`（15 条）：表名本身是 `EF`+`JOBQUE` 混合命名，前缀判据不适用")
+R.append("   - `YFMXB` / `YSMXB`（8 条）：孤儿表，字段抄自 `INVMA`（客户）/ `INVTA`（单据）")
+R.append("   - `V_QIXUBING`（2 条）：`V_` 前缀视图，字段抄自员工表")
+R.append("   - `INTLB.LA007` / `PSMMC.LB012`（2 条）：中文名均为「预留字段」，"
+         "建表时克隆其他表模板留下的痕迹")
 R.append("4. **纯字母列名（%d 条）** —— `ID` / `STATUS` / `ISShowST` 等。"
          "队列表（`IWCTRANSQUEUE` / `TRANSQUEUE`）与报表格式表"
          "（`RPTGRIDFMT`）采用语义化命名，**非异常**。" % NAME_BY_CLASS["纯字母"])
@@ -1576,11 +1689,16 @@ with open(os.path.join(csv_dir, "_gen-stats.json"), "w", encoding="utf-8", newli
             "mask_mode_deviation_orphan": len(mask_mismatch_orphan),
             "mask_syntax_pending": len(mask_syntax_pending),
             "mask_on_nonchar": len(mask_on_nonchar),
+            "mask_mismatch_under": len(mask_mismatch_under),
+            "mask_mismatch_over": len(mask_mismatch_over),
             "nonstandard_names": NAME_NONSTD,
             "nonstandard_by_class": dict(NAME_BY_CLASS),
             "business_field_total": NAME_BIZ_TOTAL,
             "standard_names": NAME_STD,
             "nonstd_name": len(nonstd_name),
+            "tables_full_nonstandard": TABLES_FULL_NONSTD,
+            "tables_with_nonstandard": TABLES_WITH_NONSTD,
+            "tables_partially_nonstandard": TABLES_PART_NONSTD,
             "orphan_tables": sorted(only_in_fields),
             "empty_tables": sorted(only_in_tables),
         },

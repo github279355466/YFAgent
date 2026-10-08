@@ -157,11 +157,14 @@ def main():
     p('## 一、字段命名规律（推断基础）')
     p('')
     p('```')
-    p('字段名 = 表名末 2 位 + 3 位序号')
-    p('例：PURTC -> TC001 / TC002；INVMB -> MB001 / ... / MB287')
+    p('字段名 = 表名实体位+ 3 位序号')
+    p('实体位 ∈ { table[-2:], table[3:5] }    <- 并集，两种位置都可能出现')
+    p('例：PURTC -> TC001（实体位=t[-2:]）；ACTMS205 -> MS001（实体位=t[3:5]）；DSCINTMA -> MA001（实体位=t[-2:]）')
     p('```')
     p('')
-    p('- 实测匹配率 **98.3%**（26330/26794，已排除 UDF 与管理字段）')
+    p('- 实测匹配率 **97.4%**（26087/26798，已排除 UDF 与 3 张元数据表）')
+    p('- 不可只用单侧：仅 `table[-2:]` 会把 5 张 `*205` 子表的 50 个字段误判为非标准；'
+      '仅 `table[3:5]` 会把 `DSCINTMA`/`WARRANT` 的 11 个字段误判为非标准')
     p('- 完整分析见 `docs/plans/yf-field-naming-convention.md`')
     p('')
     p('## 二、单据族单头/单身配对')
@@ -216,7 +219,26 @@ def main():
     p('')
     p('> 这些中文名因出现在过多表中（>%d），两两配对会产生海量无意义组合，故排除。' % MAX_TABLES)
     p('')
-    p('## 六、信息缺失与存疑清单')
+    # 截断声明（必须在文档内显式说明，不能只写到 stdout）
+    p('## 六、关联 CSV 的截断状态')
+    p('')
+    total_all = len(high) + len(mid) + len(low)
+    BT = chr(96)  # 反引号，避免在源码里嵌套引号
+    if total_all >= CSV_LIMIT:
+        p('**本目录的 ' + BT + 'ER-relations.csv' + BT + ' 已截断，不是全量推断结果。**')
+        p('')
+        p('| 项 | 值 |')
+        p('|---|---|')
+        p('| 推断总组数 | %d |' % total_all)
+        p('| 实际写出 | %d |' % CSV_LIMIT)
+        p('| HIGH / MID / LOW | %d / %d / %d |' % (len(high), len(mid), len(low)))
+        p('| 上限常量 | `CSV_LIMIT = %d`（`scripts/gen-er-overview.py`） |' % CSV_LIMIT)
+        p('')
+        p('> LOW 置信组数最多，被优先截断。若需完整 LOW 组，请调高 `CSV_LIMIT` 后重跑。')
+    else:
+        p('`ER-relations.csv` 为全量推断结果，共 %d 组，未截断。' % total_all)
+    p('')
+    p('## 七、信息缺失与存疑清单')
     p('')
     p('| # | 缺失项 | 影响 | 处理建议 |')
     p('|---|---|---|---|')
@@ -246,10 +268,25 @@ def main():
     with open(os.path.join(OUT_DIR, 'ER-relations.csv'), 'wb') as f:
         f.write((CR + LF).join(lines).encode('utf-8'))
 
+    # 截断状态另存JSON，供机器读取（QA B1）
+    truncated = total >= CSV_LIMIT
+    _rep = {
+        'csv_rows_written': total,
+        'csv_rows_total': len(high) + len(mid) + len(low),
+        'csv_truncated': truncated,
+        'csv_limit': CSV_LIMIT,
+        'by_confidence': {'HIGH': len(high), 'MID': len(mid), 'LOW': len(low)},
+        'note': ('已截断至 %d 行（共推断 %d 组）。LOW 优先被截断，需完整数据请调高 CSV_LIMIT。'
+                 % (CSV_LIMIT, len(high) + len(mid) + len(low))) if truncated else 'CSV 为全量，未截断。',
+    }
+    with open(os.path.join(OUT_DIR, 'ER-relations._report.json'), 'wb') as f:
+        f.write((CR + LF).join(json.dumps(_rep, ensure_ascii=False, indent=2)).encode('utf-8'))
+
     print('已产出：')
     print('  knowledge/data-dictionary/ER-OVERVIEW.md')
     print('  knowledge/data-dictionary/ER-relations.csv（%d 行%s）'
-          % (total, '，已达上限截断' if total >= CSV_LIMIT else ''))
+          % (total, '，已达上限截断' if truncated else ''))
+    print('  knowledge/data-dictionary/ER-relations._report.json')
 
 
 if __name__ == '__main__':

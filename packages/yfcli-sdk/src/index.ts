@@ -130,6 +130,25 @@ export type { YfHttpResponse, YfTransport } from './transport/http-transport.js'
 export { NOOP_LOGGER, YfClient } from './client/yf-client.js';
 export type { YfClientOptions, YfLogger } from './client/yf-client.js';
 
+// 字典层（列名形态判据 = OPEN-F7 冻结口径）
+export {
+  COLUMN_SHAPE_STANDARD,
+  UDF_COLUMN_PATTERN,
+  ANOMALY_SHAPES,
+  OPEN_F4_EXCLUDED_TABLES,
+  TABLE_ANOMALY_NOTES,
+  prefixCandidates,
+  prefixMatches,
+  prefixApplicable,
+  classifyColumn,
+  isStandardColumn,
+} from './dictionary/column-shapes.js';
+export type { YfColumnShape } from './dictionary/column-shapes.js';
+export { FieldDictionary } from './dictionary/field-dictionary.js';
+export type { FieldInfo, TableInfo, ListFieldsOptions } from './dictionary/field-dictionary.js';
+export { parseCsv, toRecords } from './dictionary/csv.js';
+export type { CsvRow } from './dictionary/csv.js';
+
 // 日志脱敏
 export { maskToken, redact, redactErrorData } from './logging/redact.js';
 export type { YfRedactOptions } from './logging/redact.js';
