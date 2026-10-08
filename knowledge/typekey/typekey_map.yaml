@@ -4,7 +4,7 @@
 # 请勿手工编辑；重新生成请运行：node scripts/extract-typekey-map.mjs
 #
 # source: docs/易飞OpenAPI.json (46.5 MB)
-# generated_at: 2026-10-08T10:04:47.038Z
+# generated_at: 2026-10-08T11:14:06.966Z
 # services_unique: 595
 # business_objects: 106
 
@@ -13,7 +13,7 @@ generated_from:
   - docs/易飞OpenAPI.json
   - apipost_project_id: 322f10
   - apipost_name: 易飞OpenAPI
-generated_at: "2026-10-08T10:04:47.038Z"
+generated_at: "2026-10-08T11:14:06.966Z"
 product_line: yifei
 service_prefix: "yf."
 auth_headers:
@@ -222,7 +222,8 @@ typekeys:
     query: yf.oapi.company.detail.data.query.get
   operations: [query]
   primary_key: []
-  primary_key_unknown: true   # 文档未给出 datakeys，须真机探测
+  primary_key: [company_no]   # 真机探测反推（无 read 服务，文档无 datakeys）
+  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核
 - type_key: computation.sampling.basis
   title: 计量抽查基础
   aliases: [计量抽查基础, computation.sampling.basis, computation.sampling.basis.data.query.get, computation.sampling.basis.data.read.get]
@@ -296,7 +297,8 @@ typekeys:
   operations: [query]
   primary_key: []
   no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在
-  primary_key_unknown: true   # 文档未给出 datakeys，须真机探测
+  primary_key: [doc_type_no]   # 真机探测反推（无 read 服务，文档无 datakeys）
+  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核
 - type_key: ebom
   title: 查询EBOM
   aliases: [查询EBOM, ebom, ebom.data.query.get, ebom.data.read.get, ebom.data.create, ebom.data.update, ebom.data.delete]
@@ -348,7 +350,8 @@ typekeys:
     query: yf.oapi.employee.data.query.get
   operations: [query]
   primary_key: []
-  primary_key_unknown: true   # 文档未给出 datakeys，须真机探测
+  primary_key: [staff_no]   # 真机探测反推（无 read 服务，文档无 datakeys）
+  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核
 - type_key: engineering.item
   title: 工程品号
   aliases: [工程品号, engineering.item, engineering.item.data.create, engineering.item.data.update, engineering.item.data.query.get, engineering.item.data.read.get, engineering.item.data.delete]
@@ -506,7 +509,8 @@ typekeys:
   operations: [query]
   primary_key: []
   no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在
-  primary_key_unknown: true   # 文档未给出 datakeys，须真机探测
+  primary_key: []
+  primary_key_unknown: true   # 无 read 服务且真机无法探测（服务端异常），须查规格文档
 - type_key: item.lot
   title: 批号
   aliases: [批号, item.lot, item.lot.data.query.get, item.lot.data.read.get]
@@ -566,7 +570,8 @@ typekeys:
   operations: [create, delete, query, update]
   primary_key: []
   detail_nodes: [operation_no_data]
-  primary_key_unknown: true   # 文档未给出 datakeys，须真机探测
+  primary_key: [routing_no]   # 真机探测反推（无 read 服务，文档无 datakeys）
+  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核
 - type_key: other.payable.doc
   title: 其他应付单
   aliases: [其他应付单, other.payable.doc, other.payable.doc.data.query.get, other.payable.doc.data.read.get, other.payable.doc.data.create, other.payable.doc.data.update, other.payable.doc.data.delete, other.payable.doc.data.approve, other.payable.doc.data.disapprove, other.payable.doc.data.invalid]

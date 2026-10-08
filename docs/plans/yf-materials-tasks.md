@@ -97,7 +97,8 @@
 | **交付物** | 待产出 `knowledge/enums/enums.yaml` |
 | **存放路径** | `knowledge/enums/` |
 | **已得线索** | `pricing_order`（1~I 档折扣定价）、`invoice_type: A`、`taxed_code: 1`、`receive_method: 3` |
-| **风险** | ⚠️ 易助 `templates.ts` 注释明确「单据来源代码（权威来源 `match.ini` [Source]）：33=销货单 / 82=领料」—— **易飞若无对应字典，analysis 的 20 个 SQL 模板全错**。这是 T-07 必须做实的原因 |
+| **风险** | ⚠️ 易助 `templates.ts` 注释明确「单据来源代码（权威来源 `match.ini` [Source]）：33=销货单 / 82=领料」—— **易飞若无对应字典，analysis 的 20 个 SQL 模板全错** |
+| **定位澄清** | 🔑 **表结构/枚举字典只在 Phase 2 的 analysis 层需要**（SQL 模板依赖物理表）。Phase 1 的 CRUD + 助手查询**完全不需要** —— 字段名与类型已在 106 份对照表中 |
 
 ---
 
@@ -219,21 +220,45 @@
 
 ---
 
-### T-17 ｜`*_data` 逻辑节点名 → 物理表名映射 🔴 **Phase 1 新增必做**
+### T-17 ｜单身节点名 `node_name` 真机批量验证 ✅ **已完成**（2026-08-08）
 
 | 项 | 内容 |
 |---|---|
-| **来源** | 真机探测（2026-10-08，OPEN-E2） |
-| **负责角色** | 开发 |
-| **优先级** | 🔴 **P0**（阻塞所有单身字段条件查询） |
-| **预计完成** | Phase 1 早期 |
-| **问题** | 文档称 `node_name: "sales_order_detail_data"`，实测**不接受**；真机期望**物理表名**（如 `ACTTA`） |
-| **交付物** | `knowledge/typekey-mapping/node-map.yaml`（逻辑节点名 → 物理表名）+ 校验脚本 |
-| **采集方法** | 故意传错 `node_name`，从错误消息反推期望值 —— 真机错误消息直接给出物理表名（如「找不到資料表:[ACTTA]」） |
-| **规模** | 175 个 `*_data` 节点名（来自各对照表的 `detail_nodes`） |
-| **验收** | 随机抽 10 个单身字段查询，返回行数与不加条件时一致 |
-| **风险** | 无此映射则**所有单身字段条件查询不可用** |
-| **注** | 原 OPEN-E2 的落地载体。**编号 T-17**（T-16 已被「三版本兼容实测」占用） |
+| **原问题** | `node_name` 是否需要「逻辑节点名 → 物理表名」映射？ |
+| **实测结论** | ❌ **不需要**。逻辑节点名（`*_data`）**就是正确用法**，官方文档所举写法实测通过 |
+| **原判依据（已推翻）** | 曾推断「`node_name` 用物理表名」，依据是传 `accounting_voucher_detail_data` 报 `MA012未定義` |
+| **推翻依据** | 批量验证 175 个节点名：**110 个可用**（5 直接通过 + 105 报「找不到資料表」= 节点名已接受，仅字段名猜错），仅 43 个真 MA012 |
+| **交付物** | `scripts/verify-node-names.mjs`（可复现）<br>`runs/node-name-verify.md`（明细，gitignore） |
+| **状态变化** | 🔴 P0 → ✅ **已完成**。真MA012 的 43 个转 **T-18** |
+### T-18 ｜43 个 MA012 未注册节点 + 1 个服务端缺陷（需易飞端处理）
+
+| 项 | 内容 |
+|---|---|
+| **来源** | T-17 批量验证遗留（2026-10-08） |
+| **负责角色** | 开发（发起）+ 产品（对接易飞服务端） |
+| **优先级** | 🟠 P1 |
+| **阻塞** | 仅影响 43 个单身节点的条件查询，不影响整体联调 |
+
+**待易飞服务端确认的两类问题**：
+
+| # | 问题 | 详情 |
+|---|---|---|
+| 1 | **43 个节点未注册** | 报 `OAPMA.MA012未定義或資料庫版本不符合`。清单见 `runs/node-name-verify.md` |
+| 2 | **服务端 DLL 崩溃** | `yf.oapi.item.inventory.qty.query.get` 触发 `OAPComF2.exe Access violation`，该对象完全不可用 |
+
+**43 个 MA012 中的 7 个疑为官方文档错误**（容器名与所属对象无关）：
+
+```
+ap.refund.doc      -> wo_stockin_data
+expense.invoice    -> wo_stockin_data
+other.payable.doc  -> wo_stockin_data
+prepayment.doc     -> wo_stockin_data
+outsourcing.purchase.return -> wo_stockin_data
+wo.commence        -> transfer_doc_data
+purchase.arrival  -> purchase_order_detail_data
+```
+
+**其余 36 个**可能是该账套未启用对应节点，需易飞端确认。
 ### T-16 ｜三版本兼容实测 ⏸
 
 | 项 | 内容 |
@@ -256,7 +281,7 @@
 
 | 项 | 内容 |
 |---|---|
-| **环境** | `http://172.16.2.86/YFOAP/openapi.dll/datasnap/rest/TServerMethods1/ATNPost`（易飞 9.0 测试账套） |
+| **环境** | `http://{内网IP}/YFOAP/openapi.dll/datasnap/rest/TServerMethods1/ATNPost`（易飞 9.0 测试账套） |
 | **账套** | 已获取（CompanyId 走环境变量，不入库） |
 | **令牌** | 已获取（走环境变量，不入库） |
 | **连通性** | ✅ 内网直连可用，ping 30~32ms，**不走代理** |
@@ -264,7 +289,7 @@
 | **探测结论** | ✅ **15/15 用例 PASS**，另做 4 组深度验证 |
 | **交付物** | `scripts/probe-live-env.mjs`（可复现，只读）<br>`docs/plans/yf-live-probe-report.md`（完整报告）<br>`runs/probe-live-env-report.md`（运行产物，gitignore） |
 | **连带完成** | 4 个公共头逐个验证（含易飞独有的 `digi-datakey`）；复合主键 `doc_type_no + doc_no` 确认；`selectedColumns` 确认 |
-| **⚠️ 遗留** | ① 5 个未知主键未探（本账套可能无对应数据）② 写操作未测（仅只读）③ `*_data` → 物理表映射未建（转 T-17） |
+| **⚠️ 遗留** | ① 5 个未知主键：**4 个已反推补录**（见 typekey_map.yaml 的 `primary_key_source: live_probe`），第 5 个 `item.inventory.qty` 服务端崩溃② 写操作未测（仅只读）③ `*_data` `node_name` 已批量验证（T-17 完成），43 个 MA012 转 T-18 |
 ### T-09 ｜22 个 `yf.ai.*` 分析端点清单 🔒
 
 | 项 | 内容 |

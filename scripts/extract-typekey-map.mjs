@@ -32,6 +32,24 @@ const OUT_REPORT = path.join(OUT_DIR, '_report.json');
 
 const CHECK_ONLY = process.argv.includes('--check');
 const PRODUCT_LINE = 'yifei';
+
+/**
+ * 真机探测反推的主键（2026-08-08）。
+ *
+ * 背景：这5 个对象**没有 read.get 服务**，官方文档里没有 `datakeys` 可机械抽取。
+ * 通过 `scripts/probe-unknown-pk.mjs`（query 第一行 + 唯一性过滤）反推得到。
+ *
+ * ⚠️ 这些值是**当前数据下**的唯一性推断，正式主键建议用易飞规格文档复核。
+ *    依据：易飞主键遵循 `xxx_no` 命名约定（company_no / staff_no / routing_no /
+ *    doc_type_no / item_no / supplier_no / warehouse_no / plant_no / customer_no）。
+ */
+const PROBED_PRIMARY_KEYS = {
+  'company.detail': ['company_no'],
+  employee: ['staff_no'], // 易飞用 staff_ 前缀，非 employee_
+  operation: ['routing_no'], // 工艺 = 路线
+  'document.type.general': ['doc_type_no'],
+  // item.inventory.qty：服务端 OAPComF2.exe Access violation 崩溃，无法探测
+};
 const SERVICE_PREFIX = 'yf.';
 
 // ---------------------------------------------------------------- 工具
@@ -416,7 +434,19 @@ function buildYaml(objs, report, doc) {
       push(`  detail_nodes: [${[...o.detail_nodes].sort().map(yScalar).join(', ')}]`);
     }
     if (!o.has_data_segment) push(`  no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在`);
-    if (!o.primary_key.length) push(`  primary_key_unknown: true   # 文档未给出 datakeys，须真机探测`);
+    if (!o.primary_key.length) {
+      // 该对象无 read.get 服务，文档里没有 datakeys 可抄。
+      // 2026-08-08 真机探测反推结果（scripts/probe-unknown-pk.mjs）：
+      // 命名后缀 _no 是易飞主键的强约定，配合唯一性过滤即可确定。
+      const probed = PROBED_PRIMARY_KEYS[o.type_key];
+      if (probed) {
+        push(`  primary_key: [${probed.join(', ')}]   # 真机探测反推（无 read 服务，文档无 datakeys）`);
+        push(`  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核`);
+      } else {
+        push(`  primary_key: []`);
+        push(`  primary_key_unknown: true   # 无 read 服务且真机无法探测（服务端异常），须查规格文档`);
+      }
+    }
   }
 
   push('');

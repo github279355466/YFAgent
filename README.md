@@ -85,7 +85,7 @@ npm run check:all
 
 | 阶段 | 状态 | 说明 |
 |---|---|---|
-| Phase 0 资料准备与基线冻结 | 🔄 进行中 | 见 `docs/decisions/OPEN-DECISIONS.md` |
+| Phase 0 资料准备与基线冻结 | ✅ 完成 | OPEN 归零（14 条全裁决）；真机环境已验证（15/15 PASS）；T-17 单身节点名已批量验证 |
 | Phase 1 最小可跑链路 | ⏸ 未开始 | sdk + mcp + 3 助手 |
 | Phase 2 能力扩展 | ⏸ 未开始 | analysis 层 + 31 助手 |
 | Phase 3 商业化治理 | ⏸ 未开始 | 双产品线 knowhow 分组 |

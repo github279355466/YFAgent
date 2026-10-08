@@ -114,7 +114,7 @@ npm run check:fields   # 仅校验字段对照表
 
 ## 真机实测硬约束（2026-10-08 验证，优先级最高）
 
-> 以下每条都在真实环境（`172.16.2.86`，账套 50 张凭证）验证过。
+> 以下每条都在真实环境（`{内网IP}`，账套 50 张凭证）验证过。
 > **违反其中任何一条都会产生错误数据或误判，且多数不会报错。**
 
 ### 1. 枚举字段：回参是「编码.中文」，查询只认纯编码 ⚠️
@@ -130,13 +130,23 @@ npm run check:fields   # 仅校验字段对照表
 ### 2. 主键全错返回 `code=0` + 空数组
 
 不能用 `code` 判断「查到了」。主键类 `read` 返回空数组时必须告警。
+### 3. `node_name` 用**逻辑节点名**（`*_data`），已实测确认
 
-### 3. `node_name` 用物理表名，不是 `*_data` 逻辑节点名
+`node_name: "purchase_order_detail_data"` → `code=0` ✅
+`node_name: "sales_order_detail_data"` → `code=0` ✅
+`node_name: "inventory_transaction_detail_data"` → `code=0` ✅
+`node_name: "ACTTA"`（物理表名）→ `MA012未定義` ❌
 
-`node_name: "accounting_voucher_detail_data"` → 报错 `OAPMA.MA012未定義`。
-不带 `node_name` → 报错「找不到資料表」。
-**物理表名需查映射表，不能用 `*_data` 节点名代替**（该映射尚未建，见 T-16）。
+**官方文档所举的写法就是标准用法。** 三类报错的含义：
 
+| 报错 | 含义 |
+|---|---|
+| `code=0` | 节点名正确 |
+| `MA012未定義` | 该节点未在 OAPMA 注册表登记（与表结构无关） |
+| `找不到資料表:[XXX]` | **节点名正确**，但字段名不对（XXX 是该节点的物理表名） |
+
+⚠️ 本仓 175 个 `*_data` 节点名已批量验证（`scripts/verify-node-names.mjs`）：
+**110 个可用**（5 直接通过 + 105 因我方字段名猜错但节点名有效），43 个报 MA012 待易飞端处理。
 ### 4. 服务名只能查表，禁止拼接
 
 `supplier` → `yf.oapi.supplier.query.get`（无 .data 段）
