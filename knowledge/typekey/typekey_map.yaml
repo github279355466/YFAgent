@@ -3,8 +3,8 @@
 # 由 scripts/extract-typekey-map.mjs 从 docs/易飞OpenAPI.json 机械抽取生成。
 # 请勿手工编辑；重新生成请运行：node scripts/extract-typekey-map.mjs
 #
-# source: docs/易飞OpenAPI.json (46.5 MB)
-# generated_at: 2026-10-08T11:14:06.966Z
+# source: docs/易飞OpenAPI.json (48.1 MB)
+# generated_at: 2026-10-08T14:26:09.914Z
 # services_unique: 595
 # business_objects: 106
 
@@ -13,7 +13,7 @@ generated_from:
   - docs/易飞OpenAPI.json
   - apipost_project_id: 322f10
   - apipost_name: 易飞OpenAPI
-generated_at: "2026-10-08T11:14:06.966Z"
+generated_at: "2026-10-08T14:26:09.914Z"
 product_line: yifei
 service_prefix: "yf."
 auth_headers:
@@ -49,14 +49,27 @@ typekeys:
 - type_key: account
   title: 会计科目
   aliases: [会计科目, account, account.data.query.get, account.data.read.get]
+  services_by_name:
+    yf.oapi.account.data.query.get: query
+    yf.oapi.account.data.read.get: read
   services:
     query: yf.oapi.account.data.query.get
     read: yf.oapi.account.data.read.get
   operations: [query, read]
   primary_key: [ac_no]
+  service_name_shape: standard   # 全部 4 个服务名均带 .data 段
 - type_key: accounting.voucher
   title: 会计凭证
   aliases: [会计凭证, accounting.voucher, accounting.voucher.data.query.get, accounting.voucher.data.read.get, accounting.voucher.data.create, accounting.voucher.data.delete, accounting.voucher.data.update, accounting.voucher.data.approve, accounting.voucher.data.disapprove, accounting.voucher.data.invalid]
+  services_by_name:
+    yf.oapi.accounting.voucher.data.approve: approve
+    yf.oapi.accounting.voucher.data.create: create
+    yf.oapi.accounting.voucher.data.delete: delete
+    yf.oapi.accounting.voucher.data.disapprove: disapprove
+    yf.oapi.accounting.voucher.data.invalid: invalid
+    yf.oapi.accounting.voucher.data.query.get: query
+    yf.oapi.accounting.voucher.data.read.get: read
+    yf.oapi.accounting.voucher.data.update: update
   services:
     approve: yf.oapi.accounting.voucher.data.approve
     create: yf.oapi.accounting.voucher.data.create
@@ -70,9 +83,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [accounting_voucher_data, accounting_voucher_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: ap.refund.doc
   title: 应付退款单
   aliases: [应付退款单, ap.refund.doc, ap.refund.doc.data.query.get, ap.refund.doc.data.read.get, ap.refund.doc.data.create, ap.refund.doc.data.update, ap.refund.doc.data.delete, ap.refund.doc.data.approve, ap.refund.doc.data.disapprove, ap.refund.doc.data.invalid]
+  services_by_name:
+    yf.oapi.ap.refund.doc.data.approve: approve
+    yf.oapi.ap.refund.doc.data.create: create
+    yf.oapi.ap.refund.doc.data.delete: delete
+    yf.oapi.ap.refund.doc.data.disapprove: disapprove
+    yf.oapi.ap.refund.doc.data.invalid: invalid
+    yf.oapi.ap.refund.doc.data.query.get: query
+    yf.oapi.ap.refund.doc.data.read.get: read
+    yf.oapi.ap.refund.doc.data.update: update
   services:
     approve: yf.oapi.ap.refund.doc.data.approve
     create: yf.oapi.ap.refund.doc.data.create
@@ -86,9 +109,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [ap_refund_doc_data, ap_refund_doc_detail_data, wo_stockin_data, wo_stockin_detail_data]
+  service_name_shape: standard   # 全部 47 个服务名均带 .data 段
 - type_key: approve.price
   title: 核价单
   aliases: [核价单, approve.price, approve.price.data.read.get, approve.price.data.query.get, approve.price.data.create, approve.price.data.delete, approve.price.data.update, approve.price.data.approve, approve.price.data.disapprove, approve.price.data.invalid]
+  services_by_name:
+    yf.oapi.approve.price.data.approve: approve
+    yf.oapi.approve.price.data.create: create
+    yf.oapi.approve.price.data.delete: delete
+    yf.oapi.approve.price.data.disapprove: disapprove
+    yf.oapi.approve.price.data.invalid: invalid
+    yf.oapi.approve.price.data.query.get: query
+    yf.oapi.approve.price.data.read.get: read
+    yf.oapi.approve.price.data.update: update
   services:
     approve: yf.oapi.approve.price.data.approve
     create: yf.oapi.approve.price.data.create
@@ -102,9 +135,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [detail_of_approve_price_data, header_of_approve_price_data, sub_detail_of_approve_price_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: ar.refund.doc
   title: 应收退款单
   aliases: [应收退款单, ar.refund.doc, ar.refund.doc.data.query.get, ar.refund.doc.data.read.get, ar.refund.doc.data.delete, ar.refund.doc.data.approve, ar.refund.doc.data.disapprove, ar.refund.doc.data.invalid, ar.refund.doc.data.create, ar.refund.doc.data.update]
+  services_by_name:
+    yf.oapi.ar.refund.doc.data.approve: approve
+    yf.oapi.ar.refund.doc.data.create: create
+    yf.oapi.ar.refund.doc.data.delete: delete
+    yf.oapi.ar.refund.doc.data.disapprove: disapprove
+    yf.oapi.ar.refund.doc.data.invalid: invalid
+    yf.oapi.ar.refund.doc.data.query.get: query
+    yf.oapi.ar.refund.doc.data.read.get: read
+    yf.oapi.ar.refund.doc.data.update: update
   services:
     approve: yf.oapi.ar.refund.doc.data.approve
     create: yf.oapi.ar.refund.doc.data.create
@@ -118,17 +161,31 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [ar_refund_doc_data, ar_refund_doc_detail_data]
+  service_name_shape: standard   # 全部 28 个服务名均带 .data 段
 - type_key: bad.cause
   title: 不良原因
   aliases: [不良原因, bad.cause, bad.cause.data.query.get, bad.cause.data.read.get]
+  services_by_name:
+    yf.oapi.bad.cause.data.query.get: query
+    yf.oapi.bad.cause.data.read.get: read
   services:
     query: yf.oapi.bad.cause.data.query.get
     read: yf.oapi.bad.cause.data.read.get
   operations: [query, read]
   primary_key: [bad_cause_no]
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: bom
   title: 新增BOM
   aliases: [新增BOM, bom, bom.create, bom.data.query.get, bom.delete, bom.data.read.get, bom.approve, bom.disapprove, bom.update, bom.invalid]
+  services_by_name:
+    yf.oapi.bom.approve: approve
+    yf.oapi.bom.create: create
+    yf.oapi.bom.delete: delete
+    yf.oapi.bom.disapprove: disapprove
+    yf.oapi.bom.invalid: invalid
+    yf.oapi.bom.data.query.get: query
+    yf.oapi.bom.data.read.get: read
+    yf.oapi.bom.update: update
   services:
     approve: yf.oapi.bom.approve
     create: yf.oapi.bom.create
@@ -141,10 +198,21 @@ typekeys:
   operations: [approve, create, delete, disapprove, invalid, query, read, update]
   primary_key: [master_item_no]
   detail_nodes: [bom_requirement_detail_data, bom_requirement_header_data, bom_requirement_scrap_ratio_data]
-  no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在
+  service_conflict: {op: query, kept: yf.oapi.bom.query.get, dropped: yf.oapi.bom.data.query.get}   # 同操作多服务名，已记录全部于 services_by_name，勿按操作名拼接
+  service_conflict: {op: read, kept: yf.oapi.bom.read.get, dropped: yf.oapi.bom.data.read.get}   # 同操作多服务名，已记录全部于 services_by_name，勿按操作名拼接
+  service_name_shape: mixed   # 混合形态：6 个带 .data 段 / 16 个不带，**不可拼接服务名**
 - type_key: borrow.doc
   title: 借出单
   aliases: [借出单, borrow.doc, borrow.doc.data.read.get, borrow.doc.data.query.get, borrow.doc.data.create, borrow.doc.data.delete, borrow.doc.data.update, borrow.doc.data.approve, borrow.doc.data.disapprove, borrow.doc.data.invalid]
+  services_by_name:
+    yf.oapi.borrow.doc.data.approve: approve
+    yf.oapi.borrow.doc.data.create: create
+    yf.oapi.borrow.doc.data.delete: delete
+    yf.oapi.borrow.doc.data.disapprove: disapprove
+    yf.oapi.borrow.doc.data.invalid: invalid
+    yf.oapi.borrow.doc.data.query.get: query
+    yf.oapi.borrow.doc.data.read.get: read
+    yf.oapi.borrow.doc.data.update: update
   services:
     approve: yf.oapi.borrow.doc.data.approve
     create: yf.oapi.borrow.doc.data.create
@@ -158,9 +226,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [borrow_doc_data, borrow_doc_detail_data]
+  service_name_shape: standard   # 全部 25 个服务名均带 .data 段
 - type_key: borrow.return
   title: 借出归还单
   aliases: [借出归还单, borrow.return, borrow.return.data.read.get, borrow.return.data.query.get, borrow.return.data.create, borrow.return.data.delete, borrow.return.data.update, borrow.return.data.approve, borrow.return.data.disapprove, borrow.return.data.invalid]
+  services_by_name:
+    yf.oapi.borrow.return.data.approve: approve
+    yf.oapi.borrow.return.data.create: create
+    yf.oapi.borrow.return.data.delete: delete
+    yf.oapi.borrow.return.data.disapprove: disapprove
+    yf.oapi.borrow.return.data.invalid: invalid
+    yf.oapi.borrow.return.data.query.get: query
+    yf.oapi.borrow.return.data.read.get: read
+    yf.oapi.borrow.return.data.update: update
   services:
     approve: yf.oapi.borrow.return.data.approve
     create: yf.oapi.borrow.return.data.create
@@ -174,18 +252,32 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [borrow_return_data, borrow_return_detail_data]
+  service_name_shape: standard   # 全部 25 个服务名均带 .data 段
 - type_key: calendar
   title: 假日表
   aliases: [假日表, calendar, calendar.data.query.get, calendar.data.read.get]
+  services_by_name:
+    yf.oapi.calendar.data.query.get: query
+    yf.oapi.calendar.data.read.get: read
   services:
     query: yf.oapi.calendar.data.query.get
     read: yf.oapi.calendar.data.read.get
   operations: [query, read]
   primary_key: [year, industry, shift]
   composite_key: true
+  service_name_shape: standard   # 全部 4 个服务名均带 .data 段
 - type_key: collection.doc
   title: 收款单
   aliases: [收款单, collection.doc, collection.doc.data.query.get, collection.doc.data.read.get, collection.doc.data.delete, collection.doc.data.approve, collection.doc.data.disapprove, collection.doc.data.invalid, collection.doc.data.create, collection.doc.data.update]
+  services_by_name:
+    yf.oapi.collection.doc.data.approve: approve
+    yf.oapi.collection.doc.data.create: create
+    yf.oapi.collection.doc.data.delete: delete
+    yf.oapi.collection.doc.data.disapprove: disapprove
+    yf.oapi.collection.doc.data.invalid: invalid
+    yf.oapi.collection.doc.data.query.get: query
+    yf.oapi.collection.doc.data.read.get: read
+    yf.oapi.collection.doc.data.update: update
   services:
     approve: yf.oapi.collection.doc.data.approve
     create: yf.oapi.collection.doc.data.create
@@ -199,9 +291,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [collection_doc_data, collection_doc_detail_data]
+  service_name_shape: standard   # 全部 25 个服务名均带 .data 段
 - type_key: combination.order
   title: 组合单
   aliases: [组合单, combination.order, combination.order.data.query.get, combination.order.data.read.get, combination.order.data.create, combination.order.data.update, combination.order.data.delete, combination.order.data.approve, combination.order.data.disapprove, combination.order.data.invalid]
+  services_by_name:
+    yf.oapi.combination.order.data.approve: approve
+    yf.oapi.combination.order.data.create: create
+    yf.oapi.combination.order.data.delete: delete
+    yf.oapi.combination.order.data.disapprove: disapprove
+    yf.oapi.combination.order.data.invalid: invalid
+    yf.oapi.combination.order.data.query.get: query
+    yf.oapi.combination.order.data.read.get: read
+    yf.oapi.combination.order.data.update: update
   services:
     approve: yf.oapi.combination.order.data.approve
     create: yf.oapi.combination.order.data.create
@@ -215,34 +317,51 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [combination_order_data, combination_order_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: company.detail
   title: 公司
   aliases: [公司, company.detail, company.detail.data.query.get]
+  services_by_name:
+    yf.oapi.company.detail.data.query.get: query
   services:
     query: yf.oapi.company.detail.data.query.get
   operations: [query]
-  primary_key: []
   primary_key: [company_no]   # 真机探测反推（无 read 服务，文档无 datakeys）
   primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核
+  service_name_shape: standard   # 全部 2 个服务名均带 .data 段
 - type_key: computation.sampling.basis
   title: 计量抽查基础
   aliases: [计量抽查基础, computation.sampling.basis, computation.sampling.basis.data.query.get, computation.sampling.basis.data.read.get]
+  services_by_name:
+    yf.oapi.computation.sampling.basis.data.query.get: query
+    yf.oapi.computation.sampling.basis.data.read.get: read
   services:
     query: yf.oapi.computation.sampling.basis.data.query.get
     read: yf.oapi.computation.sampling.basis.data.read.get
   operations: [query, read]
   primary_key: [inspection_level]
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: currency
   title: 币种
   aliases: [币种, currency, currency.data.query.get, currency.data.read.get]
+  services_by_name:
+    yf.oapi.currency.data.query.get: query
+    yf.oapi.currency.data.read.get: read
   services:
     query: yf.oapi.currency.data.query.get
     read: yf.oapi.currency.data.read.get
   operations: [query, read]
   primary_key: [currency]
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: customer
   title: 客户
   aliases: [客户, customer, customer.data.create, customer.data.update, customer.data.delete, customer.data.query.get, customer.data.read.get]
+  services_by_name:
+    yf.oapi.customer.data.create: create
+    yf.oapi.customer.data.delete: delete
+    yf.oapi.customer.data.query.get: query
+    yf.oapi.customer.data.read.get: read
+    yf.oapi.customer.data.update: update
   services:
     create: yf.oapi.customer.data.create
     delete: yf.oapi.customer.data.delete
@@ -252,9 +371,16 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [customer_no]
   detail_nodes: [customer_address_data, customer_basic_data_file_data]
+  service_name_shape: standard   # 全部 10 个服务名均带 .data 段
 - type_key: customer.item
   title: 客户品号
   aliases: [客户品号, customer.item, customer.item.data.query.get, customer.item.data.read.get, customer.item.data.create, customer.item.data.update, customer.item.data.delete]
+  services_by_name:
+    yf.oapi.customer.item.data.create: create
+    yf.oapi.customer.item.data.delete: delete
+    yf.oapi.customer.item.data.query.get: query
+    yf.oapi.customer.item.data.read.get: read
+    yf.oapi.customer.item.data.update: update
   services:
     create: yf.oapi.customer.item.data.create
     delete: yf.oapi.customer.item.data.delete
@@ -265,17 +391,31 @@ typekeys:
   primary_key: [customer_no, item_no, customer_item_no]
   composite_key: true
   detail_nodes: [customer_item_data]
+  service_name_shape: standard   # 全部 15 个服务名均带 .data 段
 - type_key: department
   title: 部门
   aliases: [部门, department, department.data.query.get, department.data.read.get]
+  services_by_name:
+    yf.oapi.department.data.query.get: query
+    yf.oapi.department.data.read.get: read
   services:
     query: yf.oapi.department.data.query.get
     read: yf.oapi.department.data.read.get
   operations: [query, read]
   primary_key: [department_no]
+  service_name_shape: standard   # 全部 4 个服务名均带 .data 段
 - type_key: destroy.order
   title: 销毁单
   aliases: [销毁单, destroy.order, destroy.order.data.query.get, destroy.order.data.read.get, destroy.order.data.create, destroy.order.data.update, destroy.order.data.delete, destroy.order.data.approve, destroy.order.data.disapprove, destroy.order.data.invalid]
+  services_by_name:
+    yf.oapi.destroy.order.data.approve: approve
+    yf.oapi.destroy.order.data.create: create
+    yf.oapi.destroy.order.data.delete: delete
+    yf.oapi.destroy.order.data.disapprove: disapprove
+    yf.oapi.destroy.order.data.invalid: invalid
+    yf.oapi.destroy.order.data.query.get: query
+    yf.oapi.destroy.order.data.read.get: read
+    yf.oapi.destroy.order.data.update: update
   services:
     approve: yf.oapi.destroy.order.data.approve
     create: yf.oapi.destroy.order.data.create
@@ -289,19 +429,27 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [destroy_order_data, destroy_order_detail_data]
+  service_name_shape: standard   # 全部 36 个服务名均带 .data 段
 - type_key: document.type.general
   title: 单据性质
   aliases: [单据性质, document.type.general, document.type.general.query.get]
+  services_by_name:
+    yf.oapi.document.type.general.query.get: query
   services:
     query: yf.oapi.document.type.general.query.get
   operations: [query]
-  primary_key: []
-  no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在
   primary_key: [doc_type_no]   # 真机探测反推（无 read 服务，文档无 datakeys）
   primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核
+  no_data_segment: true   # 全部 3 个服务名均无 .data 段，调用时勿假设其存在
 - type_key: ebom
   title: 查询EBOM
   aliases: [查询EBOM, ebom, ebom.data.query.get, ebom.data.read.get, ebom.data.create, ebom.data.update, ebom.data.delete]
+  services_by_name:
+    yf.oapi.ebom.data.create: create
+    yf.oapi.ebom.data.delete: delete
+    yf.oapi.ebom.data.query.get: query
+    yf.oapi.ebom.data.read.get: read
+    yf.oapi.ebom.data.update: update
   services:
     create: yf.oapi.ebom.data.create
     delete: yf.oapi.ebom.data.delete
@@ -311,9 +459,19 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [master_item_no]
   detail_nodes: [ebom_data, ebom_detail_data]
+  service_name_shape: standard   # 全部 15 个服务名均带 .data 段
 - type_key: ebom.change
   title: 变更单
   aliases: [变更单, ebom.change, ebom.change.data.query.get, ebom.change.data.read.get, ebom.change.data.create, ebom.change.data.delete, ebom.change.data.approve, ebom.change.data.disapprove, ebom.change.data.invalid, ebom.change.data.update]
+  services_by_name:
+    yf.oapi.ebom.change.data.approve: approve
+    yf.oapi.ebom.change.data.create: create
+    yf.oapi.ebom.change.data.delete: delete
+    yf.oapi.ebom.change.data.disapprove: disapprove
+    yf.oapi.ebom.change.data.invalid: invalid
+    yf.oapi.ebom.change.data.query.get: query
+    yf.oapi.ebom.change.data.read.get: read
+    yf.oapi.ebom.change.data.update: update
   services:
     approve: yf.oapi.ebom.change.data.approve
     create: yf.oapi.ebom.change.data.create
@@ -327,9 +485,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [ebom_change_data, ebom_change_detail_data, ebom_change_sub_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: ecn
   title: 变更单
   aliases: [变更单, ecn, ecn.data.create, ecn.data.query.get, ecn.data.delete, ecn.data.read.get, ecn.data.approve, ecn.data.disapprove, ecn.data.invalid, ecn.data.update]
+  services_by_name:
+    yf.oapi.ecn.data.approve: approve
+    yf.oapi.ecn.data.create: create
+    yf.oapi.ecn.data.delete: delete
+    yf.oapi.ecn.data.disapprove: disapprove
+    yf.oapi.ecn.data.invalid: invalid
+    yf.oapi.ecn.data.query.get: query
+    yf.oapi.ecn.data.read.get: read
+    yf.oapi.ecn.data.update: update
   services:
     approve: yf.oapi.ecn.data.approve
     create: yf.oapi.ecn.data.create
@@ -343,18 +511,27 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [ecn_component_data, ecn_data, ecn_master_data]
+  service_name_shape: standard   # 全部 22 个服务名均带 .data 段
 - type_key: employee
   title: 员工
   aliases: [员工, employee, employee.data.query.get]
+  services_by_name:
+    yf.oapi.employee.data.query.get: query
   services:
     query: yf.oapi.employee.data.query.get
   operations: [query]
-  primary_key: []
   primary_key: [staff_no]   # 真机探测反推（无 read 服务，文档无 datakeys）
   primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核
+  service_name_shape: standard   # 全部 3 个服务名均带 .data 段
 - type_key: engineering.item
   title: 工程品号
   aliases: [工程品号, engineering.item, engineering.item.data.create, engineering.item.data.update, engineering.item.data.query.get, engineering.item.data.read.get, engineering.item.data.delete]
+  services_by_name:
+    yf.oapi.engineering.item.data.create: create
+    yf.oapi.engineering.item.data.delete: delete
+    yf.oapi.engineering.item.data.query.get: query
+    yf.oapi.engineering.item.data.read.get: read
+    yf.oapi.engineering.item.data.update: update
   services:
     create: yf.oapi.engineering.item.data.create
     delete: yf.oapi.engineering.item.data.delete
@@ -364,9 +541,19 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [engineering_item]
   detail_nodes: [engineering_items_header_data]
+  service_name_shape: standard   # 全部 9 个服务名均带 .data 段
 - type_key: expense.invoice
   title: 费用发票
   aliases: [费用发票, expense.invoice, expense.invoice.data.query.get, expense.invoice.data.read.get, expense.invoice.data.create, expense.invoice.data.update, expense.invoice.data.delete, expense.invoice.data.approve, expense.invoice.data.disapprove, expense.invoice.data.invalid]
+  services_by_name:
+    yf.oapi.expense.invoice.data.approve: approve
+    yf.oapi.expense.invoice.data.create: create
+    yf.oapi.expense.invoice.data.delete: delete
+    yf.oapi.expense.invoice.data.disapprove: disapprove
+    yf.oapi.expense.invoice.data.invalid: invalid
+    yf.oapi.expense.invoice.data.query.get: query
+    yf.oapi.expense.invoice.data.read.get: read
+    yf.oapi.expense.invoice.data.update: update
   services:
     approve: yf.oapi.expense.invoice.data.approve
     create: yf.oapi.expense.invoice.data.create
@@ -380,26 +567,43 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [expense_invoice_data, expense_invoice_detail_data, expense_invoice_subhead_data]
+  service_name_shape: standard   # 全部 30 个服务名均带 .data 段
 - type_key: financial.institution
   title: 金融机构
   aliases: [金融机构, financial.institution, financial.institution.data.query.get, financial.institution.data.read.get]
+  services_by_name:
+    yf.oapi.financial.institution.data.query.get: query
+    yf.oapi.financial.institution.data.read.get: read
   services:
     query: yf.oapi.financial.institution.data.query.get
     read: yf.oapi.financial.institution.data.read.get
   operations: [query, read]
   primary_key: [financing_institution]
+  service_name_shape: standard   # 全部 5 个服务名均带 .data 段
 - type_key: function.category
   title: 职务类别
   aliases: [职务类别, function.category, function.category.query.get, function.category.read.get]
+  services_by_name:
+    yf.oapi.function.category.query.get: query
+    yf.oapi.function.category.read.get: read
   services:
     query: yf.oapi.function.category.query.get
     read: yf.oapi.function.category.read.get
   operations: [query, read]
   primary_key: [function_no]
-  no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在
+  no_data_segment: true   # 全部 4 个服务名均无 .data 段，调用时勿假设其存在
 - type_key: inquiry
   title: 询价单
   aliases: [询价单, inquiry, inquiry.data.read.get, inquiry.data.query.get, inquiry.data.create, inquiry.data.delete, inquiry.data.update, inquiry.data.approve, inquiry.data.disapprove, inquiry.data.invalid]
+  services_by_name:
+    yf.oapi.inquiry.data.approve: approve
+    yf.oapi.inquiry.data.create: create
+    yf.oapi.inquiry.data.delete: delete
+    yf.oapi.inquiry.data.disapprove: disapprove
+    yf.oapi.inquiry.data.invalid: invalid
+    yf.oapi.inquiry.data.query.get: query
+    yf.oapi.inquiry.data.read.get: read
+    yf.oapi.inquiry.data.update: update
   services:
     approve: yf.oapi.inquiry.data.approve
     create: yf.oapi.inquiry.data.create
@@ -413,17 +617,31 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [inquiry_data, inquiry_detail_data, inquiry_sub_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: inspection
   title: 检验项目
   aliases: [检验项目, inspection, inspection.data.query.get, inspection.data.read.get]
+  services_by_name:
+    yf.oapi.inspection.data.query.get: query
+    yf.oapi.inspection.data.read.get: read
   services:
     query: yf.oapi.inspection.data.query.get
     read: yf.oapi.inspection.data.read.get
   operations: [query, read]
   primary_key: [inspection_no]
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: inventory.transaction
   title: 库存交易单
   aliases: [库存交易单, inventory.transaction, inventory.transaction.data.update, inventory.transaction.data.disapprove, inventory.transaction.data.delete, inventory.transaction.data.invalid, inventory.transaction.data.query.get, inventory.transaction.data.approve, inventory.transaction.data.create, inventory.transaction.data.read.get]
+  services_by_name:
+    yf.oapi.inventory.transaction.data.approve: approve
+    yf.oapi.inventory.transaction.data.create: create
+    yf.oapi.inventory.transaction.data.delete: delete
+    yf.oapi.inventory.transaction.data.disapprove: disapprove
+    yf.oapi.inventory.transaction.data.invalid: invalid
+    yf.oapi.inventory.transaction.data.query.get: query
+    yf.oapi.inventory.transaction.data.read.get: read
+    yf.oapi.inventory.transaction.data.update: update
   services:
     approve: yf.oapi.inventory.transaction.data.approve
     create: yf.oapi.inventory.transaction.data.create
@@ -437,18 +655,29 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [inventory_transaction_data, inventory_transaction_detail_data, inventory_transaction_serial_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: inventory.transaction.details
   title: 库存交易明细
   aliases: [库存交易明细, inventory.transaction.details, inventory.transaction.details.data.read.get, inventory.transaction.details.data.query.get]
+  services_by_name:
+    yf.oapi.inventory.transaction.details.data.query.get: query
+    yf.oapi.inventory.transaction.details.data.read.get: read
   services:
     query: yf.oapi.inventory.transaction.details.data.query.get
     read: yf.oapi.inventory.transaction.details.data.read.get
   operations: [query, read]
   primary_key: [doc_type_no, doc_no, seq, in_out_type]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: item
   title: 品号信息
   aliases: [品号信息, item, item.data.delete, item.data.query.get, item.data.read.get, item.data.create, item.data.update]
+  services_by_name:
+    yf.oapi.item.data.create: create
+    yf.oapi.item.data.delete: delete
+    yf.oapi.item.data.query.get: query
+    yf.oapi.item.data.read.get: read
+    yf.oapi.item.data.update: update
   services:
     create: yf.oapi.item.data.create
     delete: yf.oapi.item.data.delete
@@ -458,9 +687,16 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [item_no]
   detail_nodes: [item_basic_data, item_conversion_unit_data, item_warehouse_data]
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: item.classification
   title: 品号类别
   aliases: [品号类别, item.classification, item.classification.data.create, item.classification.data.delete, item.classification.data.read.get, item.classification.data.query.get, item.classification.data.update]
+  services_by_name:
+    yf.oapi.item.classification.data.create: create
+    yf.oapi.item.classification.data.delete: delete
+    yf.oapi.item.classification.data.query.get: query
+    yf.oapi.item.classification.data.read.get: read
+    yf.oapi.item.classification.data.update: update
   services:
     create: yf.oapi.item.classification.data.create
     delete: yf.oapi.item.classification.data.delete
@@ -471,16 +707,26 @@ typekeys:
   primary_key: [classification_mode, item_classification_code]
   composite_key: true
   detail_nodes: [item_classification_data]
+  service_name_shape: standard   # 全部 9 个服务名均带 .data 段
 - type_key: item.count
   title: 盘点
   aliases: [盘点, item.count, item.count.data.read.get]
+  services_by_name:
+    yf.oapi.item.count.data.read.get: read
   services:
     read: yf.oapi.item.count.data.read.get
   operations: [read]
   primary_key: [count_manuscript_no]
+  service_name_shape: standard   # 全部 1 个服务名均带 .data 段
 - type_key: item.customer.price
   title: 客户商品价格
   aliases: [客户商品价格, item.customer.price, item.customer.price.update, item.customer.price.query.get, item.customer.price.read.get, item.customer.price.create, item.customer.price.delete]
+  services_by_name:
+    yf.oapi.item.customer.price.create: create
+    yf.oapi.item.customer.price.delete: delete
+    yf.oapi.item.customer.price.query.get: query
+    yf.oapi.item.customer.price.read.get: read
+    yf.oapi.item.customer.price.update: update
   services:
     create: yf.oapi.item.customer.price.create
     delete: yf.oapi.item.customer.price.delete
@@ -491,38 +737,53 @@ typekeys:
   primary_key: [customer_no, item_no, effective_date, pricing_unit, curr, first_trade_date]
   composite_key: true
   detail_nodes: [customer_products_pricing_detail_data, customer_products_pricing_header_data]
-  no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在
+  no_data_segment: true   # 全部 9 个服务名均无 .data 段，调用时勿假设其存在
 - type_key: item.inspection
   title: 品号检验项目
   aliases: [品号检验项目, item.inspection, item.inspection.data.query.get, item.inspection.data.read.get]
+  services_by_name:
+    yf.oapi.item.inspection.data.query.get: query
+    yf.oapi.item.inspection.data.read.get: read
   services:
     query: yf.oapi.item.inspection.data.query.get
     read: yf.oapi.item.inspection.data.read.get
   operations: [query, read]
   primary_key: [quality_control_category_no, item_no, routing_no]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: item.inventory.qty
   title: 品号库存
   aliases: [品号库存, item.inventory.qty, item.inventory.qty.query.get]
+  services_by_name:
+    yf.oapi.item.inventory.qty.query.get: query
   services:
     query: yf.oapi.item.inventory.qty.query.get
   operations: [query]
   primary_key: []
-  no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在
-  primary_key: []
+  no_data_segment: true   # 全部 2 个服务名均无 .data 段，调用时勿假设其存在
   primary_key_unknown: true   # 无 read 服务且真机无法探测（服务端异常），须查规格文档
 - type_key: item.lot
   title: 批号
   aliases: [批号, item.lot, item.lot.data.query.get, item.lot.data.read.get]
+  services_by_name:
+    yf.oapi.item.lot.data.query.get: query
+    yf.oapi.item.lot.data.read.get: read
   services:
     query: yf.oapi.item.lot.data.query.get
     read: yf.oapi.item.lot.data.read.get
   operations: [query, read]
   primary_key: [item_no, lot_no]
   composite_key: true
+  service_name_shape: standard   # 全部 4 个服务名均带 .data 段
 - type_key: item.supplier.price
   title: 供应商料件价格
   aliases: [供应商料件价格, item.supplier.price, item.supplier.price.read.get, item.supplier.price.create, item.supplier.price.update, item.supplier.price.query.get, item.supplier.price.delete]
+  services_by_name:
+    yf.oapi.item.supplier.price.create: create
+    yf.oapi.item.supplier.price.delete: delete
+    yf.oapi.item.supplier.price.query.get: query
+    yf.oapi.item.supplier.price.read.get: read
+    yf.oapi.item.supplier.price.update: update
   services:
     create: yf.oapi.item.supplier.price.create
     delete: yf.oapi.item.supplier.price.delete
@@ -533,19 +794,32 @@ typekeys:
   primary_key: [item_no, supplier_no, currency, pricing_unit, effective_date]
   composite_key: true
   detail_nodes: [detail_note_of_item_factory_data, header_of_item_vendor_data]
-  no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在
+  no_data_segment: true   # 全部 9 个服务名均无 .data 段，调用时勿假设其存在
 - type_key: monthly.item.statistics
   title: 品号月档
   aliases: [品号月档, monthly.item.statistics, monthly.item.statistics.data.read.get, monthly.item.statistics.data.query.get]
+  services_by_name:
+    yf.oapi.monthly.item.statistics.data.query.get: query
+    yf.oapi.monthly.item.statistics.data.read.get: read
   services:
     query: yf.oapi.monthly.item.statistics.data.query.get
     read: yf.oapi.monthly.item.statistics.data.read.get
   operations: [query, read]
   primary_key: [item_no, stock_month]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: op.stockin
   title: 工艺入库单
   aliases: [工艺入库单, op.stockin, op.stockin.data.query.get, op.stockin.data.read.get, op.stockin.data.create, op.stockin.data.update, op.stockin.data.approve, op.stockin.data.delete, op.stockin.data.disapprove, op.stockin.data.invalid]
+  services_by_name:
+    yf.oapi.op.stockin.data.approve: approve
+    yf.oapi.op.stockin.data.create: create
+    yf.oapi.op.stockin.data.delete: delete
+    yf.oapi.op.stockin.data.disapprove: disapprove
+    yf.oapi.op.stockin.data.invalid: invalid
+    yf.oapi.op.stockin.data.query.get: query
+    yf.oapi.op.stockin.data.read.get: read
+    yf.oapi.op.stockin.data.update: update
   services:
     approve: yf.oapi.op.stockin.data.approve
     create: yf.oapi.op.stockin.data.create
@@ -559,22 +833,37 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [transfer_doc_data, transfer_doc_detail_data, transfer_doc_sub_detai_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: operation
   title: 工艺
   aliases: [工艺, operation, operation.data.create, operation.data.update, operation.data.query.get, operation.data.delete]
+  services_by_name:
+    yf.oapi.operation.data.create: create
+    yf.oapi.operation.data.delete: delete
+    yf.oapi.operation.data.query.get: query
+    yf.oapi.operation.data.update: update
   services:
     create: yf.oapi.operation.data.create
     delete: yf.oapi.operation.data.delete
     query: yf.oapi.operation.data.query.get
     update: yf.oapi.operation.data.update
   operations: [create, delete, query, update]
-  primary_key: []
-  detail_nodes: [operation_no_data]
   primary_key: [routing_no]   # 真机探测反推（无 read 服务，文档无 datakeys）
   primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核
+  detail_nodes: [operation_no_data]
+  service_name_shape: standard   # 全部 7 个服务名均带 .data 段
 - type_key: other.payable.doc
   title: 其他应付单
   aliases: [其他应付单, other.payable.doc, other.payable.doc.data.query.get, other.payable.doc.data.read.get, other.payable.doc.data.create, other.payable.doc.data.update, other.payable.doc.data.delete, other.payable.doc.data.approve, other.payable.doc.data.disapprove, other.payable.doc.data.invalid]
+  services_by_name:
+    yf.oapi.other.payable.doc.data.approve: approve
+    yf.oapi.other.payable.doc.data.create: create
+    yf.oapi.other.payable.doc.data.delete: delete
+    yf.oapi.other.payable.doc.data.disapprove: disapprove
+    yf.oapi.other.payable.doc.data.invalid: invalid
+    yf.oapi.other.payable.doc.data.query.get: query
+    yf.oapi.other.payable.doc.data.read.get: read
+    yf.oapi.other.payable.doc.data.update: update
   services:
     approve: yf.oapi.other.payable.doc.data.approve
     create: yf.oapi.other.payable.doc.data.create
@@ -588,9 +877,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [other_payable_doc_data, other_payable_doc_detail_data]
+  service_name_shape: standard   # 全部 34 个服务名均带 .data 段
 - type_key: other.receivable
   title: 其他应收单
   aliases: [其他应收单, other.receivable, other.receivable.data.query.get, other.receivable.data.read.get, other.receivable.data.delete, other.receivable.data.approve, other.receivable.data.disapprove, other.receivable.data.invalid, other.receivable.data.create, other.receivable.data.update]
+  services_by_name:
+    yf.oapi.other.receivable.data.approve: approve
+    yf.oapi.other.receivable.data.create: create
+    yf.oapi.other.receivable.data.delete: delete
+    yf.oapi.other.receivable.data.disapprove: disapprove
+    yf.oapi.other.receivable.data.invalid: invalid
+    yf.oapi.other.receivable.data.query.get: query
+    yf.oapi.other.receivable.data.read.get: read
+    yf.oapi.other.receivable.data.update: update
   services:
     approve: yf.oapi.other.receivable.data.approve
     create: yf.oapi.other.receivable.data.create
@@ -604,9 +903,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [other_receivable_data, other_receivable_detail_data]
+  service_name_shape: standard   # 全部 25 个服务名均带 .data 段
 - type_key: outsourcing.approve.price
   title: 委外核价单
   aliases: [委外核价单, outsourcing.approve.price, outsourcing.approve.price.data.query.get, outsourcing.approve.price.data.read.get, outsourcing.approve.price.data.create, outsourcing.approve.price.data.update, outsourcing.approve.price.data.delete, outsourcing.approve.price.data.approve, outsourcing.approve.price.data.disapprove, outsourcing.approve.price.data.invalid]
+  services_by_name:
+    yf.oapi.outsourcing.approve.price.data.approve: approve
+    yf.oapi.outsourcing.approve.price.data.create: create
+    yf.oapi.outsourcing.approve.price.data.delete: delete
+    yf.oapi.outsourcing.approve.price.data.disapprove: disapprove
+    yf.oapi.outsourcing.approve.price.data.invalid: invalid
+    yf.oapi.outsourcing.approve.price.data.query.get: query
+    yf.oapi.outsourcing.approve.price.data.read.get: read
+    yf.oapi.outsourcing.approve.price.data.update: update
   services:
     approve: yf.oapi.outsourcing.approve.price.data.approve
     create: yf.oapi.outsourcing.approve.price.data.create
@@ -620,9 +929,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [outsourcing_approve_price_data, outsourcing_approve_price_detail_data, outsourcing_approve_price_sub_data]
+  service_name_shape: standard   # 全部 32 个服务名均带 .data 段
 - type_key: outsourcing.price
   title: 委外价格
   aliases: [委外价格, outsourcing.price, outsourcing.price.data.query.get, outsourcing.price.data.read.get, outsourcing.price.data.create, outsourcing.price.data.update, outsourcing.price.data.delete]
+  services_by_name:
+    yf.oapi.outsourcing.price.data.create: create
+    yf.oapi.outsourcing.price.data.delete: delete
+    yf.oapi.outsourcing.price.data.query.get: query
+    yf.oapi.outsourcing.price.data.read.get: read
+    yf.oapi.outsourcing.price.data.update: update
   services:
     create: yf.oapi.outsourcing.price.data.create
     delete: yf.oapi.outsourcing.price.data.delete
@@ -633,9 +949,16 @@ typekeys:
   primary_key: [item_no, routing_no, outsourcing_supplier_no, pricing_unit, effective_date, currency]
   composite_key: true
   detail_nodes: [outsourcing_price_data, outsourcing_price_detail_data]
+  service_name_shape: standard   # 全部 20 个服务名均带 .data 段
 - type_key: outsourcing.purchase.acceptance
   title: 委外进货单验收
   aliases: [委外进货单验收, outsourcing.purchase.acceptance, outsourcing.purchase.acceptance.data.query.get, outsourcing.purchase.acceptance.data.read.get, outsourcing.purchase.acceptance.data.update, outsourcing.purchase.acceptance.data.approve, outsourcing.purchase.acceptance.data.disapprove]
+  services_by_name:
+    yf.oapi.outsourcing.purchase.acceptance.data.approve: approve
+    yf.oapi.outsourcing.purchase.acceptance.data.disapprove: disapprove
+    yf.oapi.outsourcing.purchase.acceptance.data.query.get: query
+    yf.oapi.outsourcing.purchase.acceptance.data.read.get: read
+    yf.oapi.outsourcing.purchase.acceptance.data.update: update
   services:
     approve: yf.oapi.outsourcing.purchase.acceptance.data.approve
     disapprove: yf.oapi.outsourcing.purchase.acceptance.data.disapprove
@@ -646,9 +969,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no, seq]
   composite_key: true
   detail_nodes: [outsourcing_purchase_acceptance_data, outsourcing_purchase_arrival_acceptance_data]
+  service_name_shape: standard   # 全部 20 个服务名均带 .data 段
 - type_key: outsourcing.purchase.arrival
   title: 委外到货单
   aliases: [委外到货单, outsourcing.purchase.arrival, outsourcing.purchase.arrival.data.query.get, outsourcing.purchase.arrival.data.read.get, outsourcing.purchase.arrival.data.create, outsourcing.purchase.arrival.data.update, outsourcing.purchase.arrival.data.delete, outsourcing.purchase.arrival.data.approve, outsourcing.purchase.arrival.data.disapprove, outsourcing.purchase.arrival.data.invalid]
+  services_by_name:
+    yf.oapi.outsourcing.purchase.arrival.data.approve: approve
+    yf.oapi.outsourcing.purchase.arrival.data.create: create
+    yf.oapi.outsourcing.purchase.arrival.data.delete: delete
+    yf.oapi.outsourcing.purchase.arrival.data.disapprove: disapprove
+    yf.oapi.outsourcing.purchase.arrival.data.invalid: invalid
+    yf.oapi.outsourcing.purchase.arrival.data.query.get: query
+    yf.oapi.outsourcing.purchase.arrival.data.read.get: read
+    yf.oapi.outsourcing.purchase.arrival.data.update: update
   services:
     approve: yf.oapi.outsourcing.purchase.arrival.data.approve
     create: yf.oapi.outsourcing.purchase.arrival.data.create
@@ -662,9 +995,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [outsourcing_purchase_arrival_data, outsourcing_purchase_arrival_detail_data]
+  service_name_shape: standard   # 全部 32 个服务名均带 .data 段
 - type_key: outsourcing.purchase.arrival.acceptance
   title: 委外到货单验收
   aliases: [委外到货单验收, outsourcing.purchase.arrival.acceptance, outsourcing.purchase.arrival.acceptance.data.query.get, outsourcing.purchase.arrival.acceptance.data.read.get, outsourcing.purchase.arrival.acceptance.data.create, outsourcing.purchase.arrival.acceptance.data.update, outsourcing.purchase.arrival.acceptance.data.delete, outsourcing.purchase.arrival.acceptance.data.approve, outsourcing.purchase.arrival.acceptance.data.disapprove, outsourcing.purchase.arrival.acceptance.data.invalid]
+  services_by_name:
+    yf.oapi.outsourcing.purchase.arrival.acceptance.data.approve: approve
+    yf.oapi.outsourcing.purchase.arrival.acceptance.data.create: create
+    yf.oapi.outsourcing.purchase.arrival.acceptance.data.delete: delete
+    yf.oapi.outsourcing.purchase.arrival.acceptance.data.disapprove: disapprove
+    yf.oapi.outsourcing.purchase.arrival.acceptance.data.invalid: invalid
+    yf.oapi.outsourcing.purchase.arrival.acceptance.data.query.get: query
+    yf.oapi.outsourcing.purchase.arrival.acceptance.data.read.get: read
+    yf.oapi.outsourcing.purchase.arrival.acceptance.data.update: update
   services:
     approve: yf.oapi.outsourcing.purchase.arrival.acceptance.data.approve
     create: yf.oapi.outsourcing.purchase.arrival.acceptance.data.create
@@ -678,27 +1021,42 @@ typekeys:
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
   detail_nodes: [outsourcing_purchase_arrival_acceptance_data]
+  service_name_shape: standard   # 全部 32 个服务名均带 .data 段
 - type_key: outsourcing.purchase.arrival.inspection
   title: 委外到货检验单
   aliases: [委外到货检验单, outsourcing.purchase.arrival.inspection, outsourcing.purchase.arrival.inspection.data.query.get, outsourcing.purchase.arrival.inspection.data.read.get]
+  services_by_name:
+    yf.oapi.outsourcing.purchase.arrival.inspection.data.query.get: query
+    yf.oapi.outsourcing.purchase.arrival.inspection.data.read.get: read
   services:
     query: yf.oapi.outsourcing.purchase.arrival.inspection.data.query.get
     read: yf.oapi.outsourcing.purchase.arrival.inspection.data.read.get
   operations: [query, read]
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: outsourcing.purchase.inspection
   title: 委外进货检验单
   aliases: [委外进货检验单, outsourcing.purchase.inspection, outsourcing.purchase.inspection.data.query.get, outsourcing.purchase.inspection.data.read.get]
+  services_by_name:
+    yf.oapi.outsourcing.purchase.inspection.data.query.get: query
+    yf.oapi.outsourcing.purchase.inspection.data.read.get: read
   services:
     query: yf.oapi.outsourcing.purchase.inspection.data.query.get
     read: yf.oapi.outsourcing.purchase.inspection.data.read.get
   operations: [query, read]
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: outsourcing.purchase.inspection.return
   title: 退回委外验退件
   aliases: [退回委外验退件, outsourcing.purchase.inspection.return, outsourcing.purchase.inspection.return.data.query.get, outsourcing.purchase.inspection.return.data.read.get, outsourcing.purchase.inspection.return.data.create, outsourcing.purchase.inspection.return.data.update, outsourcing.purchase.inspection.return.data.delete]
+  services_by_name:
+    yf.oapi.outsourcing.purchase.inspection.return.data.create: create
+    yf.oapi.outsourcing.purchase.inspection.return.data.delete: delete
+    yf.oapi.outsourcing.purchase.inspection.return.data.query.get: query
+    yf.oapi.outsourcing.purchase.inspection.return.data.read.get: read
+    yf.oapi.outsourcing.purchase.inspection.return.data.update: update
   services:
     create: yf.oapi.outsourcing.purchase.inspection.return.data.create
     delete: yf.oapi.outsourcing.purchase.inspection.return.data.delete
@@ -709,9 +1067,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no, seq, return_date]
   composite_key: true
   detail_nodes: [outsourcing_purchase_inspection_return_data]
+  service_name_shape: standard   # 全部 15 个服务名均带 .data 段
 - type_key: outsourcing.purchase.receipt
   title: 委外进货单
   aliases: [委外进货单, outsourcing.purchase.receipt, outsourcing.purchase.receipt.data.query.get, outsourcing.purchase.receipt.data.read.get, outsourcing.purchase.receipt.data.create, outsourcing.purchase.receipt.data.update, outsourcing.purchase.receipt.data.delete, outsourcing.purchase.receipt.data.approve, outsourcing.purchase.receipt.data.disapprove, outsourcing.purchase.receipt.data.invalid]
+  services_by_name:
+    yf.oapi.outsourcing.purchase.receipt.data.approve: approve
+    yf.oapi.outsourcing.purchase.receipt.data.create: create
+    yf.oapi.outsourcing.purchase.receipt.data.delete: delete
+    yf.oapi.outsourcing.purchase.receipt.data.disapprove: disapprove
+    yf.oapi.outsourcing.purchase.receipt.data.invalid: invalid
+    yf.oapi.outsourcing.purchase.receipt.data.query.get: query
+    yf.oapi.outsourcing.purchase.receipt.data.read.get: read
+    yf.oapi.outsourcing.purchase.receipt.data.update: update
   services:
     approve: yf.oapi.outsourcing.purchase.receipt.data.approve
     create: yf.oapi.outsourcing.purchase.receipt.data.create
@@ -725,9 +1093,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [outsourcing_purchase_receipt_data, outsourcing_purchase_receipt_detail_data]
+  service_name_shape: standard   # 全部 32 个服务名均带 .data 段
 - type_key: outsourcing.purchase.return
   title: 委外退货单
   aliases: [委外退货单, outsourcing.purchase.return, outsourcing.purchase.return.data.query.get, outsourcing.purchase.return.data.read.get, outsourcing.purchase.return.data.create, outsourcing.purchase.return.data.update, outsourcing.purchase.return.data.delete, outsourcing.purchase.return.data.approve, outsourcing.purchase.return.data.disapprove, outsourcing.purchase.return.data.invalid]
+  services_by_name:
+    yf.oapi.outsourcing.purchase.return.data.approve: approve
+    yf.oapi.outsourcing.purchase.return.data.create: create
+    yf.oapi.outsourcing.purchase.return.data.delete: delete
+    yf.oapi.outsourcing.purchase.return.data.disapprove: disapprove
+    yf.oapi.outsourcing.purchase.return.data.invalid: invalid
+    yf.oapi.outsourcing.purchase.return.data.query.get: query
+    yf.oapi.outsourcing.purchase.return.data.read.get: read
+    yf.oapi.outsourcing.purchase.return.data.update: update
   services:
     approve: yf.oapi.outsourcing.purchase.return.data.approve
     create: yf.oapi.outsourcing.purchase.return.data.create
@@ -741,9 +1119,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [outsourcing_purchase_return_data, outsourcing_purchase_return_detail_data]
+  service_name_shape: standard   # 全部 32 个服务名均带 .data 段
 - type_key: payable.doc
   title: 付款单
   aliases: [付款单, payable.doc, payable.doc.data.query.get, payable.doc.data.read.get, payable.doc.data.delete, payable.doc.data.approve, payable.doc.data.disapprove, payable.doc.data.invalid, payable.doc.data.create, payable.doc.data.update]
+  services_by_name:
+    yf.oapi.payable.doc.data.approve: approve
+    yf.oapi.payable.doc.data.create: create
+    yf.oapi.payable.doc.data.delete: delete
+    yf.oapi.payable.doc.data.disapprove: disapprove
+    yf.oapi.payable.doc.data.invalid: invalid
+    yf.oapi.payable.doc.data.query.get: query
+    yf.oapi.payable.doc.data.read.get: read
+    yf.oapi.payable.doc.data.update: update
   services:
     approve: yf.oapi.payable.doc.data.approve
     create: yf.oapi.payable.doc.data.create
@@ -757,9 +1145,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [payable_doc_data, payable_doc_detail_data]
+  service_name_shape: standard   # 全部 25 个服务名均带 .data 段
 - type_key: picking.receipt
   title: 领料单
   aliases: [领料单, picking.receipt, picking.receipt.data.query.get, picking.receipt.data.read.get, picking.receipt.data.create, picking.receipt.data.delete, picking.receipt.data.update, picking.receipt.data.approve, picking.receipt.data.disapprove, picking.receipt.data.invalid]
+  services_by_name:
+    yf.oapi.picking.receipt.data.approve: approve
+    yf.oapi.picking.receipt.data.create: create
+    yf.oapi.picking.receipt.data.delete: delete
+    yf.oapi.picking.receipt.data.disapprove: disapprove
+    yf.oapi.picking.receipt.data.invalid: invalid
+    yf.oapi.picking.receipt.data.query.get: query
+    yf.oapi.picking.receipt.data.read.get: read
+    yf.oapi.picking.receipt.data.update: update
   services:
     approve: yf.oapi.picking.receipt.data.approve
     create: yf.oapi.picking.receipt.data.create
@@ -773,9 +1171,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [picking_receipt_data, picking_receipt_detail_data, picking_receipt_mo_data]
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: picking.return
   title: 退料单
   aliases: [退料单, picking.return, picking.return.data.query.get, picking.return.data.read.get, picking.return.data.create, picking.return.data.delete, picking.return.data.update, picking.return.data.approve, picking.return.data.disapprove, picking.return.data.invalid]
+  services_by_name:
+    yf.oapi.picking.return.data.approve: approve
+    yf.oapi.picking.return.data.create: create
+    yf.oapi.picking.return.data.delete: delete
+    yf.oapi.picking.return.data.disapprove: disapprove
+    yf.oapi.picking.return.data.invalid: invalid
+    yf.oapi.picking.return.data.query.get: query
+    yf.oapi.picking.return.data.read.get: read
+    yf.oapi.picking.return.data.update: update
   services:
     approve: yf.oapi.picking.return.data.approve
     create: yf.oapi.picking.return.data.create
@@ -789,9 +1197,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [picking_return_data, picking_return_detail_data, picking_return_mo_data]
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: plant
   title: 工厂
   aliases: [工厂, plant, plant.data.create, plant.data.update, plant.data.query.get, plant.data.read.get, plant.data.delete]
+  services_by_name:
+    yf.oapi.plant.data.create: create
+    yf.oapi.plant.data.delete: delete
+    yf.oapi.plant.data.query.get: query
+    yf.oapi.plant.data.read.get: read
+    yf.oapi.plant.data.update: update
   services:
     create: yf.oapi.plant.data.create
     delete: yf.oapi.plant.data.delete
@@ -801,9 +1216,19 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [plant_no]
   detail_nodes: [plant_data]
+  service_name_shape: standard   # 全部 9 个服务名均带 .data 段
 - type_key: precollection.doc
   title: 预收款单
   aliases: [预收款单, precollection.doc, precollection.doc.data.query.get, precollection.doc.data.read.get, precollection.doc.data.delete, precollection.doc.data.approve, precollection.doc.data.disapprove, precollection.doc.data.invalid, precollection.doc.data.create, precollection.doc.data.update]
+  services_by_name:
+    yf.oapi.precollection.doc.data.approve: approve
+    yf.oapi.precollection.doc.data.create: create
+    yf.oapi.precollection.doc.data.delete: delete
+    yf.oapi.precollection.doc.data.disapprove: disapprove
+    yf.oapi.precollection.doc.data.invalid: invalid
+    yf.oapi.precollection.doc.data.query.get: query
+    yf.oapi.precollection.doc.data.read.get: read
+    yf.oapi.precollection.doc.data.update: update
   services:
     approve: yf.oapi.precollection.doc.data.approve
     create: yf.oapi.precollection.doc.data.create
@@ -817,9 +1242,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [precollection_doc_data]
+  service_name_shape: standard   # 全部 25 个服务名均带 .data 段
 - type_key: prepayment.doc
   title: 预付单
   aliases: [预付单, prepayment.doc, prepayment.doc.data.query.get, prepayment.doc.data.read.get, prepayment.doc.data.create, prepayment.doc.data.update, prepayment.doc.data.delete, prepayment.doc.data.approve, prepayment.doc.data.disapprove, prepayment.doc.data.invalid]
+  services_by_name:
+    yf.oapi.prepayment.doc.data.approve: approve
+    yf.oapi.prepayment.doc.data.create: create
+    yf.oapi.prepayment.doc.data.delete: delete
+    yf.oapi.prepayment.doc.data.disapprove: disapprove
+    yf.oapi.prepayment.doc.data.invalid: invalid
+    yf.oapi.prepayment.doc.data.query.get: query
+    yf.oapi.prepayment.doc.data.read.get: read
+    yf.oapi.prepayment.doc.data.update: update
   services:
     approve: yf.oapi.prepayment.doc.data.approve
     create: yf.oapi.prepayment.doc.data.create
@@ -833,9 +1268,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [prepayment_doc_data, wo_stockin_data, wo_stockin_detail_data]
+  service_name_shape: standard   # 全部 32 个服务名均带 .data 段
 - type_key: product.process
   title: 产品工艺路线
   aliases: [产品工艺路线, product.process, product.process.data.create, product.process.data.update, product.process.data.query.get, product.process.data.read.get, product.process.data.delete]
+  services_by_name:
+    yf.oapi.product.process.data.create: create
+    yf.oapi.product.process.data.delete: delete
+    yf.oapi.product.process.data.query.get: query
+    yf.oapi.product.process.data.read.get: read
+    yf.oapi.product.process.data.update: update
   services:
     create: yf.oapi.product.process.data.create
     delete: yf.oapi.product.process.data.delete
@@ -846,9 +1288,16 @@ typekeys:
   primary_key: [routing_item_no, process_code]
   composite_key: true
   detail_nodes: [product_process_detail_data, product_process_header_data, standard_operation_procedure_data]
+  service_name_shape: standard   # 全部 12 个服务名均带 .data 段
 - type_key: project
   title: 项目
   aliases: [项目, project, project.data.read.get, project.data.query.get, project.data.update, project.data.create, project.data.delete]
+  services_by_name:
+    yf.oapi.project.data.create: create
+    yf.oapi.project.data.delete: delete
+    yf.oapi.project.data.query.get: query
+    yf.oapi.project.data.read.get: read
+    yf.oapi.project.data.update: update
   services:
     create: yf.oapi.project.data.create
     delete: yf.oapi.project.data.delete
@@ -858,9 +1307,19 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [project_no]
   detail_nodes: [project_data]
+  service_name_shape: standard   # 全部 14 个服务名均带 .data 段
 - type_key: purchase.arrival
   title: 到货单
   aliases: [到货单, purchase.arrival, purchase.arrival.data.read.get, purchase.arrival.data.query.get, purchase.arrival.data.create, purchase.arrival.data.delete, purchase.arrival.data.update, purchase.arrival.data.approve, purchase.arrival.data.disapprove, purchase.arrival.data.invalid]
+  services_by_name:
+    yf.oapi.purchase.arrival.data.approve: approve
+    yf.oapi.purchase.arrival.data.create: create
+    yf.oapi.purchase.arrival.data.delete: delete
+    yf.oapi.purchase.arrival.data.disapprove: disapprove
+    yf.oapi.purchase.arrival.data.invalid: invalid
+    yf.oapi.purchase.arrival.data.query.get: query
+    yf.oapi.purchase.arrival.data.read.get: read
+    yf.oapi.purchase.arrival.data.update: update
   services:
     approve: yf.oapi.purchase.arrival.data.approve
     create: yf.oapi.purchase.arrival.data.create
@@ -874,9 +1333,18 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [purchase_arrival_data, purchase_arrival_detail_data, purchase_order_data, purchase_order_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: purchase.arrival.acceptance
   title: 到货单验收
   aliases: [到货单验收, purchase.arrival.acceptance, purchase.arrival.acceptance.data.read.get, purchase.arrival.acceptance.data.query.get, purchase.arrival.acceptance.data.create, purchase.arrival.acceptance.data.delete, purchase.arrival.acceptance.data.update, purchase.arrival.acceptance.data.approve, purchase.arrival.acceptance.data.disapprove]
+  services_by_name:
+    yf.oapi.purchase.arrival.acceptance.data.approve: approve
+    yf.oapi.purchase.arrival.acceptance.data.create: create
+    yf.oapi.purchase.arrival.acceptance.data.delete: delete
+    yf.oapi.purchase.arrival.acceptance.data.disapprove: disapprove
+    yf.oapi.purchase.arrival.acceptance.data.query.get: query
+    yf.oapi.purchase.arrival.acceptance.data.read.get: read
+    yf.oapi.purchase.arrival.acceptance.data.update: update
   services:
     approve: yf.oapi.purchase.arrival.acceptance.data.approve
     create: yf.oapi.purchase.arrival.acceptance.data.create
@@ -889,18 +1357,32 @@ typekeys:
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
   detail_nodes: [purchase_arrival_acceptance_data, purchase_order_data, purchase_order_detail_data]
+  service_name_shape: standard   # 全部 21 个服务名均带 .data 段
 - type_key: purchase.arrival.inspection
   title: 到货检验单
   aliases: [到货检验单, purchase.arrival.inspection, purchase.arrival.inspection.data.query.get, purchase.arrival.inspection.data.read.get]
+  services_by_name:
+    yf.oapi.purchase.arrival.inspection.data.query.get: query
+    yf.oapi.purchase.arrival.inspection.data.read.get: read
   services:
     query: yf.oapi.purchase.arrival.inspection.data.query.get
     read: yf.oapi.purchase.arrival.inspection.data.read.get
   operations: [query, read]
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: purchase.change
   title: 采购变更单
   aliases: [采购变更单, purchase.change, purchase.change.data.read.get, purchase.change.data.create, purchase.change.data.delete, purchase.change.data.update, purchase.change.data.approve, purchase.change.data.disapprove, purchase.change.data.invalid, purchase.change.data.query.get]
+  services_by_name:
+    yf.oapi.purchase.change.data.approve: approve
+    yf.oapi.purchase.change.data.create: create
+    yf.oapi.purchase.change.data.delete: delete
+    yf.oapi.purchase.change.data.disapprove: disapprove
+    yf.oapi.purchase.change.data.invalid: invalid
+    yf.oapi.purchase.change.data.query.get: query
+    yf.oapi.purchase.change.data.read.get: read
+    yf.oapi.purchase.change.data.update: update
   services:
     approve: yf.oapi.purchase.change.data.approve
     create: yf.oapi.purchase.change.data.create
@@ -914,9 +1396,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no, version]
   composite_key: true
   detail_nodes: [purchase_change_data, purchase_change_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: purchase.inspection.return
   title: 退回验退件
   aliases: [退回验退件, purchase.inspection.return, purchase.inspection.return.data.delete, purchase.inspection.return.data.query.get, purchase.inspection.return.data.read.get, purchase.inspection.return.data.create, purchase.inspection.return.data.update]
+  services_by_name:
+    yf.oapi.purchase.inspection.return.data.create: create
+    yf.oapi.purchase.inspection.return.data.delete: delete
+    yf.oapi.purchase.inspection.return.data.query.get: query
+    yf.oapi.purchase.inspection.return.data.read.get: read
+    yf.oapi.purchase.inspection.return.data.update: update
   services:
     create: yf.oapi.purchase.inspection.return.data.create
     delete: yf.oapi.purchase.inspection.return.data.delete
@@ -927,9 +1416,19 @@ typekeys:
   primary_key: [source_type_no, source_doc_no, source_seq, return_date]
   composite_key: true
   detail_nodes: [purchase_inspection_return_data]
+  service_name_shape: standard   # 全部 15 个服务名均带 .data 段
 - type_key: purchase.invoice
   title: 采购发票
   aliases: [采购发票, purchase.invoice, purchase.invoice.data.query.get, purchase.invoice.data.read.get, purchase.invoice.data.delete, purchase.invoice.data.approve, purchase.invoice.data.disapprove, purchase.invoice.data.invalid, purchase.invoice.data.create, purchase.invoice.data.update]
+  services_by_name:
+    yf.oapi.purchase.invoice.data.approve: approve
+    yf.oapi.purchase.invoice.data.create: create
+    yf.oapi.purchase.invoice.data.delete: delete
+    yf.oapi.purchase.invoice.data.disapprove: disapprove
+    yf.oapi.purchase.invoice.data.invalid: invalid
+    yf.oapi.purchase.invoice.data.query.get: query
+    yf.oapi.purchase.invoice.data.read.get: read
+    yf.oapi.purchase.invoice.data.update: update
   services:
     approve: yf.oapi.purchase.invoice.data.approve
     create: yf.oapi.purchase.invoice.data.create
@@ -943,9 +1442,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [purchase_invoice_data, purchase_invoice_detail_data]
+  service_name_shape: standard   # 全部 29 个服务名均带 .data 段
 - type_key: purchase.order
   title: 采购单
   aliases: [采购单, purchase.order, purchase.order.data.update, purchase.order.data.approve, purchase.order.data.disapprove, purchase.order.data.delete, purchase.order.data.invalid, purchase.order.data.read.get, purchase.order.data.create, purchase.order.data.query.get]
+  services_by_name:
+    yf.oapi.purchase.order.data.approve: approve
+    yf.oapi.purchase.order.data.create: create
+    yf.oapi.purchase.order.data.delete: delete
+    yf.oapi.purchase.order.data.disapprove: disapprove
+    yf.oapi.purchase.order.data.invalid: invalid
+    yf.oapi.purchase.order.data.query.get: query
+    yf.oapi.purchase.order.data.read.get: read
+    yf.oapi.purchase.order.data.update: update
   services:
     approve: yf.oapi.purchase.order.data.approve
     create: yf.oapi.purchase.order.data.create
@@ -959,9 +1468,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [purchase_order_data, purchase_order_detail_data]
+  service_name_shape: standard   # 全部 26 个服务名均带 .data 段
 - type_key: purchase.receipt
   title: 进货单
   aliases: [进货单, purchase.receipt, purchase.receipt.data.read.get, purchase.receipt.data.create, purchase.receipt.data.delete, purchase.receipt.data.update, purchase.receipt.data.approve, purchase.receipt.data.disapprove, purchase.receipt.data.invalid, purchase.receipt.data.query.get]
+  services_by_name:
+    yf.oapi.purchase.receipt.data.approve: approve
+    yf.oapi.purchase.receipt.data.create: create
+    yf.oapi.purchase.receipt.data.delete: delete
+    yf.oapi.purchase.receipt.data.disapprove: disapprove
+    yf.oapi.purchase.receipt.data.invalid: invalid
+    yf.oapi.purchase.receipt.data.query.get: query
+    yf.oapi.purchase.receipt.data.read.get: read
+    yf.oapi.purchase.receipt.data.update: update
   services:
     approve: yf.oapi.purchase.receipt.data.approve
     create: yf.oapi.purchase.receipt.data.create
@@ -975,9 +1494,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [purchase_receipt_data, purchase_receipt_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: purchase.receipt.acceptance
   title: 修改进货单验收
   aliases: [修改进货单验收, purchase.receipt.acceptance, purchase.receipt.acceptance.data.read.get, purchase.receipt.acceptance.data.query.get, purchase.receipt.acceptance.data.update, purchase.receipt.acceptance.data.approve, purchase.receipt.acceptance.data.disapprove]
+  services_by_name:
+    yf.oapi.purchase.receipt.acceptance.data.approve: approve
+    yf.oapi.purchase.receipt.acceptance.data.disapprove: disapprove
+    yf.oapi.purchase.receipt.acceptance.data.query.get: query
+    yf.oapi.purchase.receipt.acceptance.data.read.get: read
+    yf.oapi.purchase.receipt.acceptance.data.update: update
   services:
     approve: yf.oapi.purchase.receipt.acceptance.data.approve
     disapprove: yf.oapi.purchase.receipt.acceptance.data.disapprove
@@ -988,18 +1514,32 @@ typekeys:
   primary_key: [doc_type_no, doc_no, seq]
   composite_key: true
   detail_nodes: [purchase_receipt_acceptance_data]
+  service_name_shape: standard   # 全部 15 个服务名均带 .data 段
 - type_key: purchase.receipt.inspection
   title: 进货检验单
   aliases: [进货检验单, purchase.receipt.inspection, purchase.receipt.inspection.data.query.get, purchase.receipt.inspection.data.read.get]
+  services_by_name:
+    yf.oapi.purchase.receipt.inspection.data.query.get: query
+    yf.oapi.purchase.receipt.inspection.data.read.get: read
   services:
     query: yf.oapi.purchase.receipt.inspection.data.query.get
     read: yf.oapi.purchase.receipt.inspection.data.read.get
   operations: [query, read]
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: purchase.requisitions
   title: 请购单
   aliases: [请购单, purchase.requisitions, purchase.requisitions.data.read.get, purchase.requisitions.data.query.get, purchase.requisitions.data.create, purchase.requisitions.data.delete, purchase.requisitions.data.update, purchase.requisitions.data.approve, purchase.requisitions.data.disapprove, purchase.requisitions.data.invalid]
+  services_by_name:
+    yf.oapi.purchase.requisitions.data.approve: approve
+    yf.oapi.purchase.requisitions.data.create: create
+    yf.oapi.purchase.requisitions.data.delete: delete
+    yf.oapi.purchase.requisitions.data.disapprove: disapprove
+    yf.oapi.purchase.requisitions.data.invalid: invalid
+    yf.oapi.purchase.requisitions.data.query.get: query
+    yf.oapi.purchase.requisitions.data.read.get: read
+    yf.oapi.purchase.requisitions.data.update: update
   services:
     approve: yf.oapi.purchase.requisitions.data.approve
     create: yf.oapi.purchase.requisitions.data.create
@@ -1013,9 +1553,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [purchase_requisitions_data, purchase_requisitions_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: purchase.return
   title: 退货单
   aliases: [退货单, purchase.return, purchase.return.data.query.get, purchase.return.data.read.get, purchase.return.data.create, purchase.return.data.delete, purchase.return.data.update, purchase.return.data.approve, purchase.return.data.disapprove, purchase.return.data.invalid]
+  services_by_name:
+    yf.oapi.purchase.return.data.approve: approve
+    yf.oapi.purchase.return.data.create: create
+    yf.oapi.purchase.return.data.delete: delete
+    yf.oapi.purchase.return.data.disapprove: disapprove
+    yf.oapi.purchase.return.data.invalid: invalid
+    yf.oapi.purchase.return.data.query.get: query
+    yf.oapi.purchase.return.data.read.get: read
+    yf.oapi.purchase.return.data.update: update
   services:
     approve: yf.oapi.purchase.return.data.approve
     create: yf.oapi.purchase.return.data.create
@@ -1029,17 +1579,31 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [purchase_return_data, purchase_return_detail_data, purchase_return_serial_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: quality.control.category
   title: 品管类别
   aliases: [品管类别, quality.control.category, quality.control.category.data.query.get, quality.control.category.data.read.get]
+  services_by_name:
+    yf.oapi.quality.control.category.data.query.get: query
+    yf.oapi.quality.control.category.data.read.get: read
   services:
     query: yf.oapi.quality.control.category.data.query.get
     read: yf.oapi.quality.control.category.data.read.get
   operations: [query, read]
   primary_key: [quality_control_category_no]
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: quotation
   title: 报价单
   aliases: [报价单, quotation, quotation.data.query.get, quotation.data.read.get, quotation.data.create, quotation.data.update, quotation.data.delete, quotation.data.approve, quotation.data.disapprove, quotation.data.invalid]
+  services_by_name:
+    yf.oapi.quotation.data.approve: approve
+    yf.oapi.quotation.data.create: create
+    yf.oapi.quotation.data.delete: delete
+    yf.oapi.quotation.data.disapprove: disapprove
+    yf.oapi.quotation.data.invalid: invalid
+    yf.oapi.quotation.data.query.get: query
+    yf.oapi.quotation.data.read.get: read
+    yf.oapi.quotation.data.update: update
   services:
     approve: yf.oapi.quotation.data.approve
     create: yf.oapi.quotation.data.create
@@ -1053,9 +1617,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [quotation_data, quotation_detail_data, quotation_sub_detai_data]
+  service_name_shape: standard   # 全部 35 个服务名均带 .data 段
 - type_key: receive.payment.term
   title: 付款条件
   aliases: [付款条件, receive.payment.term, receive.payment.term.data.query.get, receive.payment.term.data.read.get, receive.payment.term.data.create, receive.payment.term.data.update, receive.payment.term.data.delete]
+  services_by_name:
+    yf.oapi.receive.payment.term.data.create: create
+    yf.oapi.receive.payment.term.data.delete: delete
+    yf.oapi.receive.payment.term.data.query.get: query
+    yf.oapi.receive.payment.term.data.read.get: read
+    yf.oapi.receive.payment.term.data.update: update
   services:
     create: yf.oapi.receive.payment.term.data.create
     delete: yf.oapi.receive.payment.term.data.delete
@@ -1066,9 +1637,16 @@ typekeys:
   primary_key: [category, payment_condition_no]
   composite_key: true
   detail_nodes: [receive_payment_term_data]
+  service_name_shape: standard   # 全部 9 个服务名均带 .data 段
 - type_key: replace.substitute.item
   title: 取替代料
   aliases: [取替代料, replace.substitute.item, replace.substitute.item.data.create, replace.substitute.item.data.query.get, replace.substitute.item.data.read.get, replace.substitute.item.data.delete, replace.substitute.item.data.update]
+  services_by_name:
+    yf.oapi.replace.substitute.item.data.create: create
+    yf.oapi.replace.substitute.item.data.delete: delete
+    yf.oapi.replace.substitute.item.data.query.get: query
+    yf.oapi.replace.substitute.item.data.read.get: read
+    yf.oapi.replace.substitute.item.data.update: update
   services:
     create: yf.oapi.replace.substitute.item.data.create
     delete: yf.oapi.replace.substitute.item.data.delete
@@ -1079,9 +1657,16 @@ typekeys:
   primary_key: [component, master_item, rep_sub_item]
   composite_key: true
   detail_nodes: [replace_substitute_items_detail_data, replace_substitute_items_header_data]
+  service_name_shape: standard   # 全部 10 个服务名均带 .data 段
 - type_key: sales.forecast
   title: 销售预测
   aliases: [销售预测, sales.forecast, sales.forecast.data.read.get, sales.forecast.data.update, sales.forecast.data.query.get, sales.forecast.data.delete, sales.forecast.data.create]
+  services_by_name:
+    yf.oapi.sales.forecast.data.create: create
+    yf.oapi.sales.forecast.data.delete: delete
+    yf.oapi.sales.forecast.data.query.get: query
+    yf.oapi.sales.forecast.data.read.get: read
+    yf.oapi.sales.forecast.data.update: update
   services:
     create: yf.oapi.sales.forecast.data.create
     delete: yf.oapi.sales.forecast.data.delete
@@ -1091,9 +1676,19 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [sales_forecast]
   detail_nodes: [sales_forecast_data, sales_forecast_detail_data]
+  service_name_shape: standard   # 全部 10 个服务名均带 .data 段
 - type_key: sales.invoice
   title: 销售发票
   aliases: [销售发票, sales.invoice, sales.invoice.data.query.get, sales.invoice.data.read.get, sales.invoice.data.delete, sales.invoice.data.approve, sales.invoice.data.disapprove, sales.invoice.data.invalid, sales.invoice.data.create, sales.invoice.data.update]
+  services_by_name:
+    yf.oapi.sales.invoice.data.approve: approve
+    yf.oapi.sales.invoice.data.create: create
+    yf.oapi.sales.invoice.data.delete: delete
+    yf.oapi.sales.invoice.data.disapprove: disapprove
+    yf.oapi.sales.invoice.data.invalid: invalid
+    yf.oapi.sales.invoice.data.query.get: query
+    yf.oapi.sales.invoice.data.read.get: read
+    yf.oapi.sales.invoice.data.update: update
   services:
     approve: yf.oapi.sales.invoice.data.approve
     create: yf.oapi.sales.invoice.data.create
@@ -1107,9 +1702,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [sales_invoice_data, sales_invoice_detail_data]
+  service_name_shape: standard   # 全部 30 个服务名均带 .data 段
 - type_key: sales.order
   title: 数据重新加载刷新
   aliases: [数据重新加载刷新, sales.order, sales.order.data.query.get, sales.order.data.read.get, sales.order.data.delete, sales.order.data.update, sales.order.data.approve, sales.order.data.disapprove, sales.order.data.invalid, sales.order.data.create]
+  services_by_name:
+    yf.oapi.sales.order.data.approve: approve
+    yf.oapi.sales.order.data.create: create
+    yf.oapi.sales.order.data.delete: delete
+    yf.oapi.sales.order.data.disapprove: disapprove
+    yf.oapi.sales.order.data.invalid: invalid
+    yf.oapi.sales.order.data.query.get: query
+    yf.oapi.sales.order.data.read.get: read
+    yf.oapi.sales.order.data.update: update
   services:
     approve: yf.oapi.sales.order.data.approve
     create: yf.oapi.sales.order.data.create
@@ -1123,9 +1728,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [sales_order_data, sales_order_detail_data]
+  service_name_shape: standard   # 全部 23 个服务名均带 .data 段
 - type_key: sales.order.change
   title: 修改订单变更单
   aliases: [修改订单变更单, sales.order.change, sales.order.change.data.query.get, sales.order.change.data.read.get, sales.order.change.data.delete, sales.order.change.data.approve, sales.order.change.data.disapprove, sales.order.change.data.invalid, sales.order.change.data.create, sales.order.change.data.update]
+  services_by_name:
+    yf.oapi.sales.order.change.data.approve: approve
+    yf.oapi.sales.order.change.data.create: create
+    yf.oapi.sales.order.change.data.delete: delete
+    yf.oapi.sales.order.change.data.disapprove: disapprove
+    yf.oapi.sales.order.change.data.invalid: invalid
+    yf.oapi.sales.order.change.data.query.get: query
+    yf.oapi.sales.order.change.data.read.get: read
+    yf.oapi.sales.order.change.data.update: update
   services:
     approve: yf.oapi.sales.order.change.data.approve
     create: yf.oapi.sales.order.change.data.create
@@ -1138,9 +1753,19 @@ typekeys:
   operations: [approve, create, delete, disapprove, invalid, query, read, update]
   primary_key: [doc_type_no, doc_no, change_version]
   composite_key: true
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: sales.return
   title: 销退单
   aliases: [销退单, sales.return, sales.return.data.query.get, sales.return.data.read.get, sales.return.data.create, sales.return.data.delete, sales.return.data.update, sales.return.data.approve, sales.return.data.disapprove, sales.return.data.invalid]
+  services_by_name:
+    yf.oapi.sales.return.data.approve: approve
+    yf.oapi.sales.return.data.create: create
+    yf.oapi.sales.return.data.delete: delete
+    yf.oapi.sales.return.data.disapprove: disapprove
+    yf.oapi.sales.return.data.invalid: invalid
+    yf.oapi.sales.return.data.query.get: query
+    yf.oapi.sales.return.data.read.get: read
+    yf.oapi.sales.return.data.update: update
   services:
     approve: yf.oapi.sales.return.data.approve
     create: yf.oapi.sales.return.data.create
@@ -1154,27 +1779,45 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [sales_return_data, sales_return_detail_data]
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: sales.return.inspection
   title: 销退检验单
   aliases: [销退检验单, sales.return.inspection, sales.return.inspection.data.query.get, sales.return.inspection.data.read.get]
+  services_by_name:
+    yf.oapi.sales.return.inspection.data.query.get: query
+    yf.oapi.sales.return.inspection.data.read.get: read
   services:
     query: yf.oapi.sales.return.inspection.data.query.get
     read: yf.oapi.sales.return.inspection.data.read.get
   operations: [query, read]
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: sampling.basis
   title: 抽查基础
   aliases: [抽查基础, sampling.basis, sampling.basis.data.query.get, sampling.basis.data.read.get]
+  services_by_name:
+    yf.oapi.sampling.basis.data.query.get: query
+    yf.oapi.sampling.basis.data.read.get: read
   services:
     query: yf.oapi.sampling.basis.data.query.get
     read: yf.oapi.sampling.basis.data.read.get
   operations: [query, read]
   primary_key: [inspection_level, strictness_degree]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: scrap.order
   title: 报废单
   aliases: [报废单, scrap.order, scrap.order.data.query.get, scrap.order.data.read.get, scrap.order.data.create, scrap.order.data.update, scrap.order.data.delete, scrap.order.data.approve, scrap.order.data.disapprove, scrap.order.data.invalid]
+  services_by_name:
+    yf.oapi.scrap.order.data.approve: approve
+    yf.oapi.scrap.order.data.create: create
+    yf.oapi.scrap.order.data.delete: delete
+    yf.oapi.scrap.order.data.disapprove: disapprove
+    yf.oapi.scrap.order.data.invalid: invalid
+    yf.oapi.scrap.order.data.query.get: query
+    yf.oapi.scrap.order.data.read.get: read
+    yf.oapi.scrap.order.data.update: update
   services:
     approve: yf.oapi.scrap.order.data.approve
     create: yf.oapi.scrap.order.data.create
@@ -1188,9 +1831,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [scrap_order_data, scrap_order_detail_data]
+  service_name_shape: standard   # 全部 33 个服务名均带 .data 段
 - type_key: shipping.notice
   title: 出货通知单
   aliases: [出货通知单, shipping.notice, shipping.notice.data.query.get, shipping.notice.data.read.get, shipping.notice.data.delete, shipping.notice.data.update, shipping.notice.data.approve, shipping.notice.data.disapprove, shipping.notice.data.invalid, shipping.notice.data.create]
+  services_by_name:
+    yf.oapi.shipping.notice.data.approve: approve
+    yf.oapi.shipping.notice.data.create: create
+    yf.oapi.shipping.notice.data.delete: delete
+    yf.oapi.shipping.notice.data.disapprove: disapprove
+    yf.oapi.shipping.notice.data.invalid: invalid
+    yf.oapi.shipping.notice.data.query.get: query
+    yf.oapi.shipping.notice.data.read.get: read
+    yf.oapi.shipping.notice.data.update: update
   services:
     approve: yf.oapi.shipping.notice.data.approve
     create: yf.oapi.shipping.notice.data.create
@@ -1204,9 +1857,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [shipping_notice_data, shipping_notice_detail_data]
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: shipping.order
   title: 销货单
   aliases: [销货单, shipping.order, shipping.order.data.query.get, shipping.order.data.read.get, shipping.order.data.delete, shipping.order.data.update, shipping.order.data.approve, shipping.order.data.disapprove, shipping.order.data.invalid, shipping.order.data.create]
+  services_by_name:
+    yf.oapi.shipping.order.data.approve: approve
+    yf.oapi.shipping.order.data.create: create
+    yf.oapi.shipping.order.data.delete: delete
+    yf.oapi.shipping.order.data.disapprove: disapprove
+    yf.oapi.shipping.order.data.invalid: invalid
+    yf.oapi.shipping.order.data.query.get: query
+    yf.oapi.shipping.order.data.read.get: read
+    yf.oapi.shipping.order.data.update: update
   services:
     approve: yf.oapi.shipping.order.data.approve
     create: yf.oapi.shipping.order.data.create
@@ -1220,9 +1883,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [shipping_order_data, shipping_order_detail_data]
+  service_name_shape: standard   # 全部 17 个服务名均带 .data 段
 - type_key: split.order
   title: 拆解单
   aliases: [拆解单, split.order, split.order.data.query.get, split.order.data.read.get, split.order.data.create, split.order.data.update, split.order.data.delete, split.order.data.approve, split.order.data.disapprove, split.order.data.invalid]
+  services_by_name:
+    yf.oapi.split.order.data.approve: approve
+    yf.oapi.split.order.data.create: create
+    yf.oapi.split.order.data.delete: delete
+    yf.oapi.split.order.data.disapprove: disapprove
+    yf.oapi.split.order.data.invalid: invalid
+    yf.oapi.split.order.data.query.get: query
+    yf.oapi.split.order.data.read.get: read
+    yf.oapi.split.order.data.update: update
   services:
     approve: yf.oapi.split.order.data.approve
     create: yf.oapi.split.order.data.create
@@ -1236,9 +1909,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [combination_order_data, combination_order_detail_data, split_order_data, split_order_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: supplier
   title: 供应商
   aliases: [供应商, supplier, supplier.data.create, supplier.data.update, supplier.query.get, supplier.read.get, supplier.delete]
+  services_by_name:
+    yf.oapi.supplier.data.create: create
+    yf.oapi.supplier.delete: delete
+    yf.oapi.supplier.query.get: query
+    yf.oapi.supplier.read.get: read
+    yf.oapi.supplier.data.update: update
   services:
     create: yf.oapi.supplier.data.create
     delete: yf.oapi.supplier.delete
@@ -1248,9 +1928,16 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [supplier_no]
   detail_nodes: [supplier_basic_data]
+  service_name_shape: mixed   # 混合形态：6 个带 .data 段 / 8 个不带，**不可拼接服务名**
 - type_key: team.personnel
   title: 班组成员
   aliases: [班组成员, team.personnel, team.personnel.data.read.get, team.personnel.data.create, team.personnel.data.update, team.personnel.data.query.get, team.personnel.data.delete]
+  services_by_name:
+    yf.oapi.team.personnel.data.create: create
+    yf.oapi.team.personnel.data.delete: delete
+    yf.oapi.team.personnel.data.query.get: query
+    yf.oapi.team.personnel.data.read.get: read
+    yf.oapi.team.personnel.data.update: update
   services:
     create: yf.oapi.team.personnel.data.create
     delete: yf.oapi.team.personnel.data.delete
@@ -1260,9 +1947,19 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [team_no]
   detail_nodes: [detail_note_of_team_personnel_data, header_of_team_personnel_data]
+  service_name_shape: standard   # 全部 9 个服务名均带 .data 段
 - type_key: transfer
   title: 调拨单
   aliases: [调拨单, transfer, transfer.data.disapprove, transfer.data.approve, transfer.data.update, transfer.data.create, transfer.data.query.get, transfer.data.read.get, transfer.data.delete, transfer.data.invalid]
+  services_by_name:
+    yf.oapi.transfer.data.approve: approve
+    yf.oapi.transfer.data.create: create
+    yf.oapi.transfer.data.delete: delete
+    yf.oapi.transfer.data.disapprove: disapprove
+    yf.oapi.transfer.data.invalid: invalid
+    yf.oapi.transfer.data.query.get: query
+    yf.oapi.transfer.data.read.get: read
+    yf.oapi.transfer.data.update: update
   services:
     approve: yf.oapi.transfer.data.approve
     create: yf.oapi.transfer.data.create
@@ -1276,9 +1973,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [inventory_transaction_data, inventory_transaction_detail_data, inventory_transaction_serial_data, transfer_data, transfer_detail_data]
+  service_name_shape: standard   # 全部 24 个服务名均带 .data 段
 - type_key: transfer.doc
   title: 转移单
   aliases: [转移单, transfer.doc, transfer.doc.data.query.get, transfer.doc.data.read.get, transfer.doc.data.delete, transfer.doc.data.update, transfer.doc.data.approve, transfer.doc.data.disapprove, transfer.doc.data.invalid, transfer.doc.data.create]
+  services_by_name:
+    yf.oapi.transfer.doc.data.approve: approve
+    yf.oapi.transfer.doc.data.create: create
+    yf.oapi.transfer.doc.data.delete: delete
+    yf.oapi.transfer.doc.data.disapprove: disapprove
+    yf.oapi.transfer.doc.data.invalid: invalid
+    yf.oapi.transfer.doc.data.query.get: query
+    yf.oapi.transfer.doc.data.read.get: read
+    yf.oapi.transfer.doc.data.update: update
   services:
     approve: yf.oapi.transfer.doc.data.approve
     create: yf.oapi.transfer.doc.data.create
@@ -1292,18 +1999,27 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [transfer_doc_data, transfer_doc_detail_data, transfer_doc_sub_detai_data]
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: transfer.doc.inspection
   title: 转移检验单
   aliases: [转移检验单, transfer.doc.inspection, transfer.doc.inspection.data.query.get, transfer.doc.inspection.data.read.get]
+  services_by_name:
+    yf.oapi.transfer.doc.inspection.data.query.get: query
+    yf.oapi.transfer.doc.inspection.data.read.get: read
   services:
     query: yf.oapi.transfer.doc.inspection.data.query.get
     read: yf.oapi.transfer.doc.inspection.data.read.get
   operations: [query, read]
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: unit
   title: 单位
   aliases: [单位, unit, unit.data.query.get, unit.data.read.get, unit.data.create]
+  services_by_name:
+    yf.oapi.unit.data.create: create
+    yf.oapi.unit.data.query.get: query
+    yf.oapi.unit.data.read.get: read
   services:
     create: yf.oapi.unit.data.create
     query: yf.oapi.unit.data.query.get
@@ -1311,9 +2027,16 @@ typekeys:
   operations: [create, query, read]
   primary_key: [unit]
   detail_nodes: [unit_data]
+  service_name_shape: standard   # 全部 9 个服务名均带 .data 段
 - type_key: warehouse
   title: 仓库
   aliases: [仓库, warehouse, warehouse.data.create, warehouse.data.read.get, warehouse.data.query.get, warehouse.data.update, warehouse.data.delete]
+  services_by_name:
+    yf.oapi.warehouse.data.create: create
+    yf.oapi.warehouse.data.delete: delete
+    yf.oapi.warehouse.data.query.get: query
+    yf.oapi.warehouse.data.read.get: read
+    yf.oapi.warehouse.data.update: update
   services:
     create: yf.oapi.warehouse.data.create
     delete: yf.oapi.warehouse.data.delete
@@ -1323,9 +2046,19 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [warehouse_no]
   detail_nodes: [warehouse_data, warehouse_location_data]
+  service_name_shape: standard   # 全部 14 个服务名均带 .data 段
 - type_key: wo
   title: 工单
   aliases: [工单, wo, wo.data.query.get, wo.data.read.get, wo.data.delete, wo.data.update, wo.data.approve, wo.data.disapprove, wo.data.invalid, wo.data.create]
+  services_by_name:
+    yf.oapi.wo.data.approve: approve
+    yf.oapi.wo.data.create: create
+    yf.oapi.wo.data.delete: delete
+    yf.oapi.wo.data.disapprove: disapprove
+    yf.oapi.wo.data.invalid: invalid
+    yf.oapi.wo.data.query.get: query
+    yf.oapi.wo.data.read.get: read
+    yf.oapi.wo.data.update: update
   services:
     approve: yf.oapi.wo.data.approve
     create: yf.oapi.wo.data.create
@@ -1339,9 +2072,19 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [wo_data, wo_detail_data]
+  service_name_shape: standard   # 全部 17 个服务名均带 .data 段
 - type_key: wo.change
   title: 工单变更单
   aliases: [工单变更单, wo.change, wo.change.data.read.get, wo.change.data.delete, wo.change.data.update, wo.change.data.approve, wo.change.data.disapprove, wo.change.data.invalid, wo.change.data.create, wo.change.data.query.get]
+  services_by_name:
+    yf.oapi.wo.change.data.approve: approve
+    yf.oapi.wo.change.data.create: create
+    yf.oapi.wo.change.data.delete: delete
+    yf.oapi.wo.change.data.disapprove: disapprove
+    yf.oapi.wo.change.data.invalid: invalid
+    yf.oapi.wo.change.data.query.get: query
+    yf.oapi.wo.change.data.read.get: read
+    yf.oapi.wo.change.data.update: update
   services:
     approve: yf.oapi.wo.change.data.approve
     create: yf.oapi.wo.change.data.create
@@ -1355,9 +2098,19 @@ typekeys:
   primary_key: [wo_doc_type_no, wo_doc_no, change_version]
   composite_key: true
   detail_nodes: [wo_change_data, wo_change_detail_data]
+  service_name_shape: standard   # 全部 18 个服务名均带 .data 段
 - type_key: wo.commence
   title: 投产单
   aliases: [投产单, wo.commence, wo.commence.data.query.get, wo.commence.data.read.get, wo.commence.data.create, wo.commence.data.update, wo.commence.data.approve, wo.commence.data.delete, wo.commence.data.disapprove, wo.commence.data.invalid]
+  services_by_name:
+    yf.oapi.wo.commence.data.approve: approve
+    yf.oapi.wo.commence.data.create: create
+    yf.oapi.wo.commence.data.delete: delete
+    yf.oapi.wo.commence.data.disapprove: disapprove
+    yf.oapi.wo.commence.data.invalid: invalid
+    yf.oapi.wo.commence.data.query.get: query
+    yf.oapi.wo.commence.data.read.get: read
+    yf.oapi.wo.commence.data.update: update
   services:
     approve: yf.oapi.wo.commence.data.approve
     create: yf.oapi.wo.commence.data.create
@@ -1371,9 +2124,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [transfer_doc_data, transfer_doc_detail_data, transfer_doc_sub_detai_data]
+  service_name_shape: standard   # 全部 25 个服务名均带 .data 段
 - type_key: wo.routing
   title: 工单工艺
   aliases: [工单工艺, wo.routing, wo.routing.data.query.get, wo.routing.data.read.get, wo.routing.data.delete, wo.routing.data.update, wo.routing.data.create]
+  services_by_name:
+    yf.oapi.wo.routing.data.create: create
+    yf.oapi.wo.routing.data.delete: delete
+    yf.oapi.wo.routing.data.query.get: query
+    yf.oapi.wo.routing.data.read.get: read
+    yf.oapi.wo.routing.data.update: update
   services:
     create: yf.oapi.wo.routing.data.create
     delete: yf.oapi.wo.routing.data.delete
@@ -1384,18 +2144,32 @@ typekeys:
   primary_key: [wo_doc_type_no, wo_doc_no]
   composite_key: true
   detail_nodes: [wo_routing_detail_data, wo_routing_sub_detail_data]
+  service_name_shape: standard   # 全部 11 个服务名均带 .data 段
 - type_key: wo.split
   title: 工单拆分
   aliases: [工单拆分, wo.split, wo.split.data.query.get, wo.split.data.read.get]
+  services_by_name:
+    yf.oapi.wo.split.data.query.get: query
+    yf.oapi.wo.split.data.read.get: read
   services:
     query: yf.oapi.wo.split.data.query.get
     read: yf.oapi.wo.split.data.read.get
   operations: [query, read]
   primary_key: [wo_doc_type_no, wo_doc_no]
   composite_key: true
+  service_name_shape: standard   # 全部 4 个服务名均带 .data 段
 - type_key: wo.stockin
   title: 生产入库单
   aliases: [生产入库单, wo.stockin, wo.stockin.data.query.get, wo.stockin.data.read.get, wo.stockin.data.create, wo.stockin.data.delete, wo.stockin.data.update, wo.stockin.data.approve, wo.stockin.data.disapprove, wo.stockin.data.invalid]
+  services_by_name:
+    yf.oapi.wo.stockin.data.approve: approve
+    yf.oapi.wo.stockin.data.create: create
+    yf.oapi.wo.stockin.data.delete: delete
+    yf.oapi.wo.stockin.data.disapprove: disapprove
+    yf.oapi.wo.stockin.data.invalid: invalid
+    yf.oapi.wo.stockin.data.query.get: query
+    yf.oapi.wo.stockin.data.read.get: read
+    yf.oapi.wo.stockin.data.update: update
   services:
     approve: yf.oapi.wo.stockin.data.approve
     create: yf.oapi.wo.stockin.data.create
@@ -1409,18 +2183,32 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [wo_stockin_data, wo_stockin_detail_data]
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: wo.stockin.inspection
   title: 生产入库检验单
   aliases: [生产入库检验单, wo.stockin.inspection, wo.stockin.inspection.data.query.get, wo.stockin.inspection.data.read.get]
+  services_by_name:
+    yf.oapi.wo.stockin.inspection.data.query.get: query
+    yf.oapi.wo.stockin.inspection.data.read.get: read
   services:
     query: yf.oapi.wo.stockin.inspection.data.query.get
     read: yf.oapi.wo.stockin.inspection.data.read.get
   operations: [query, read]
   primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
   composite_key: true
+  service_name_shape: standard   # 全部 6 个服务名均带 .data 段
 - type_key: work.report
   title: 报工单
   aliases: [报工单, work.report, work.report.data.query.get, work.report.data.read.get, work.report.data.create, work.report.data.delete, work.report.data.update, work.report.data.approve, work.report.data.disapprove, work.report.data.invalid]
+  services_by_name:
+    yf.oapi.work.report.data.approve: approve
+    yf.oapi.work.report.data.create: create
+    yf.oapi.work.report.data.delete: delete
+    yf.oapi.work.report.data.disapprove: disapprove
+    yf.oapi.work.report.data.invalid: invalid
+    yf.oapi.work.report.data.query.get: query
+    yf.oapi.work.report.data.read.get: read
+    yf.oapi.work.report.data.update: update
   services:
     approve: yf.oapi.work.report.data.approve
     create: yf.oapi.work.report.data.create
@@ -1434,9 +2222,16 @@ typekeys:
   primary_key: [doc_type_no, doc_no]
   composite_key: true
   detail_nodes: [work_report_data, work_report_detail_data, work_report_sub_detai_data, work_report_team_data]
+  service_name_shape: standard   # 全部 16 个服务名均带 .data 段
 - type_key: workstation
   title: 工作中心
   aliases: [工作中心, workstation, workstation.data.query.get, workstation.data.read.get, workstation.data.create, workstation.data.update, workstation.data.delete]
+  services_by_name:
+    yf.oapi.workstation.data.create: create
+    yf.oapi.workstation.data.delete: delete
+    yf.oapi.workstation.data.query.get: query
+    yf.oapi.workstation.data.read.get: read
+    yf.oapi.workstation.data.update: update
   services:
     create: yf.oapi.workstation.data.create
     delete: yf.oapi.workstation.data.delete
@@ -1446,3 +2241,4 @@ typekeys:
   operations: [create, delete, query, read, update]
   primary_key: [production_line_code]
   detail_nodes: [workstation_head_data]
+  service_name_shape: standard   # 全部 9 个服务名均带 .data 段

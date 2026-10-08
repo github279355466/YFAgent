@@ -237,12 +237,49 @@ function main() {
         detail_nodes: new Set(),
         sample_service: svc,
         has_data_segment: svc.includes('.data.'),
+        // 服务名形态统计（2026-10-08新增）：易飞存在**混合形态**对象
+        // （同一 type_key 下部分服务名带 .data 段、部分不带），
+        // 单个布尔标记无法表达，故记录 with/without 计数。
+        svc_with_data: 0,
+        svc_without_data: 0,
+        // 同 type_key+op 下的多服务名冲突（键为 op，值为冲突详情）
+        service_conflicts: null,
       });
     }
     const rec = byObj.get(obj);
     rec.operations.add(op);
+
+    // 同操作多服务名碰撞检测（2026-10-08）：
+    // Apipost 中 bom 目录下同时存在 bom.data.query.get（真机 code=0 有效）
+    // 与 bom.query.get（真机 code=-1 无效），二者同为 query 操作。
+    // 若按 services[op] 单键记录，后者会静默覆盖前者 —— 丢失服务名。
+    // ⚠️ 必须在 `rec.services[op] = svc` **之前**读取旧值，否则读到的是刚赋的值。
+    const prevSvc = rec.services[op];
+    if (prevSvc && prevSvc !== svc) {
+      if (!rec.service_conflicts) rec.service_conflicts = [];
+      if (!rec.service_conflicts.some((c) => c.op === op)) {
+        rec.service_conflicts.push({ op, kept: prevSvc, dropped: svc });
+      }
+    }
+
     rec.services[op] = svc;
     if (!suffix && op === 'read') rec.services[op] = svc;
+
+    // 服务名形态统计（区分纯无段/ 纯有段 / 混合形态）
+    if (svc.includes('.data.')) rec.svc_with_data += 1;
+    else rec.svc_without_data += 1;
+
+    // 同操作多服务名碰撞检测（2026-10-08）：
+    // Apipost 中 bom 目录下同时存在 bom.data.query.get（真机 code=0 有效）
+    // 与 bom.query.get（真机 code=-1 无效），二者同为 query 操作。
+    // 若按 services[op] = svc 单键记录，后者会静默覆盖前者 —— 丢失服务名。
+    const prev = rec.services[op];
+    if (prev && prev !== svc) {
+      if (!rec.service_conflicts) rec.service_conflicts = [];
+      if (!rec.service_conflicts.some((c) => c.op === op)) {
+        rec.service_conflicts.push({ op, kept: svc, dropped: prev });
+      }
+    }
 
     // 主键：read.get 的 datakeys
     if (op === 'read') {
@@ -423,29 +460,53 @@ function buildYaml(objs, report, doc) {
     push(`- type_key: ${yScalar(o.type_key)}`);
     push(`  title: ${yScalar(o.title)}`);
     push(`  aliases: [${[...alias].map(yScalar).join(', ')}]`);
+    // 全量服务名索引：无碰撞的权威映射（键为完整服务名，值为操作）
+    const byName = {};
+    for (const op of ops) byName[o.services[op]] = op;
+    push(`  services_by_name:`);
+    for (const [name, op] of Object.entries(byName)) {
+      push(`    ${yScalar(name)}: ${op}`);
+    }
     push(`  services:`);
     for (const op of ops) {
       push(`    ${op}: ${yScalar(o.services[op])}`);
     }
     push(`  operations: [${ops.join(', ')}]`);
-    push(`  primary_key: [${o.primary_key.map(yScalar).join(', ')}]`);
-    if (o.primary_key.length > 1) push(`  composite_key: true`);
-    if (o.detail_nodes.size) {
+    // 主键：优先用实测反推值（无 read 服务时文档无 datakeys 可抄）
+    const probed = PROBED_PRIMARY_KEYS[o.type_key];
+    const pkOut = o.primary_key.length ? o.primary_key : (probed ?? []);
+    const pkSource = o.primary_key.length ? '' : (probed ? '   # 真机探测反推（无 read 服务，文档无 datakeys）' : '');
+    push(`  primary_key: [${pkOut.map(yScalar).join(', ')}]${pkSource}`);
+    if (o.primary_key.length && probed && o.type_key in PROBED_PRIMARY_KEYS) {
+      // 实测值与文档值冲突时保留两套并标注，供人工裁决
+      const a = o.primary_key.join('+');
+      const b = probed.join('+');
+      if (a !== b) {
+        push(`  primary_key_conflict: doc=[${a}] probe=[${b}]   # 两来源不一致，待规格文档裁决`);
+      }
+    }
+    if (pkOut.length && !o.primary_key.length) {
+      push(`  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核`);
+    }
+    if (pkOut.length > 1) push(`  composite_key: true`);    if (o.detail_nodes.size) {
       push(`  detail_nodes: [${[...o.detail_nodes].sort().map(yScalar).join(', ')}]`);
     }
-    if (!o.has_data_segment) push(`  no_data_segment: true   # 服务名无 .data 段，调用时勿假设其存在`);
-    if (!o.primary_key.length) {
-      // 该对象无 read.get 服务，文档里没有 datakeys 可抄。
-      // 2026-08-08 真机探测反推结果（scripts/probe-unknown-pk.mjs）：
-      // 命名后缀 _no 是易飞主键的强约定，配合唯一性过滤即可确定。
-      const probed = PROBED_PRIMARY_KEYS[o.type_key];
-      if (probed) {
-        push(`  primary_key: [${probed.join(', ')}]   # 真机探测反推（无 read 服务，文档无 datakeys）`);
-        push(`  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核`);
-      } else {
-        push(`  primary_key: []`);
-        push(`  primary_key_unknown: true   # 无 read 服务且真机无法探测（服务端异常），须查规格文档`);
+    if (o.service_conflicts?.length) {
+      for (const c of o.service_conflicts) {
+        push(`  service_conflict: {op: ${c.op}, kept: ${c.kept}, dropped: ${c.dropped}}   # 同操作多服务名，已记录全部于 services_by_name，勿按操作名拼接`);
       }
+    }
+    // 服务名形态：易飞存在混合形态对象（bom / supplier 等），
+    // 单个布尔标记会误标，故按计数分类输出。
+    if (o.svc_without_data > 0 && o.svc_with_data > 0) {
+      push(`  service_name_shape: mixed   # 混合形态：${o.svc_with_data} 个带 .data 段 / ${o.svc_without_data} 个不带，**不可拼接服务名**`);
+    } else if (o.svc_without_data > 0) {
+      push(`  no_data_segment: true   # 全部 ${o.svc_without_data} 个服务名均无 .data 段，调用时勿假设其存在`);
+    } else {
+      push(`  service_name_shape: standard   # 全部 ${o.svc_with_data} 个服务名均带 .data 段`);
+    }
+    if (!pkOut.length) {
+      push(`  primary_key_unknown: true   # 无 read 服务且真机无法探测（服务端异常），须查规格文档`);
     }
   }
 
