@@ -117,7 +117,7 @@
 
 ```json
 {
-  "server": "172.16.2.86", "port": 1433, "database": "SDDEMO93",
+  "server": "172.16.2.86", "port": 1433, "database": "{CompanyId}",
   "user_env": "YF_SQL_USER", "password_env": "YF_SQL_PASSWORD",
   "options": { "trustServerCertificate": true, "readOnlyIntent": true }
 }
@@ -248,5 +248,5 @@ CREATE INDEX idx_licenses_line ON licenses(product_line);
 | 文档                                         | 关系                     |
 | ------------------------------------------ | ---------------------- |
 | `docs/plans/yf-db-direct-connect-probe.md` | 架构对比与数据库直连实测（B1 的证据来源） |
-| `docs/TODO-PLAN.md` T-13/T-14              | analysis 层与视图 DDL 开发任务 |
+| `docs/TODO-PLAN.md` D-13/D-14              | analysis 层与视图 DDL 开发任务 |
 | YZCLI `docs/`（易助侧）                         | 待补：共享包拆分后的迁移说明         |

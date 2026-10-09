@@ -5,6 +5,13 @@
 > 权威依据：`AGENTS.md`（真机实测硬约束）/ `docs/plans/yf-openapi-rules.md` / `docs/plans/yf-live-probe-report.md` / `docs/plans/probe-pk-and-node-name-answers.md` / `knowledge/typekey/typekey_map.yaml`
 > 产出位置：`packages/yfcli-sdk/`（工程骨架）+ 本文件（计划）
 > 约束：本计划不改动 `knowledge/` 下任何既有产物
+>
+> ⚠️ **编号体系（2026-10-09 补注）**：本文为 2026-10-08 的历史快照，其中的 `T-xx` 是
+> 当时的旧编号，**与现行两套体系均不一致**，勿按`D-xx` 解读：
+> - 开发任务现行编号为 `D-xx`，见 `docs/TODO-PLAN.md`（本文「后续（T-14）写操作实测」
+>   一项在TODO-PLAN 中**尚无对应任务**，未纳入 `D-xx`）
+> - 资料收集任务用 `T-xx`，见 `docs/plans/yf-materials-tasks.md`
+> 本文 `T-07`（枚举采集）/ `T-13`（analysis 层）主题与两套体系语义相近，但不保证同号同义。
 
 ---
 
@@ -436,7 +443,7 @@ packages/yfcli-sdk/
 > **现状态**：用户裁定采用与 YZCLI 相同的双通道架构 —— CRUD 走 OpenAPI，分析聚合走数据库直连。
 > 完整实测记录见 `docs/plans/yf-db-direct-connect-probe.md`。
 
-**已验证前提**（实测 `172.16.2.86 / SDDEMO93`）：
+**已验证前提**（实测 `172.16.2.86 / {CompanyId}`）：
 
 - 连通可达：SQL Server 2014 (SP2)，1211 张表，仅 `dbo` 单 schema
 - **库表名与数据字典 100% 一致**（52 组 3 位前缀交叉比对全部一致），无需映射层
