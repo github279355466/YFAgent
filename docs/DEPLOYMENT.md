@@ -1,196 +1,154 @@
 # YFCLI 部署指南
 
 > 适用环境：Windows Server + PowerShell  
-> 最后更新：2026-10-09
+> 最后更新：2026-10-09  
+> **部署模型：预构建包部署**——知识产物、视图 DDL、SQL 模板均在开发环境预生成，  
+> 每家客户的数据库结构和 OpenAPI 接口一致，部署时直接复制即可。
+
+---
+
+## 部署包内容
+
+开发环境执行 `scripts/pack-deploy.ps1` 生成部署包，包含：
+
+```
+yfcli-deploy-v{version}/
+├── packages/                    # 6 个包的源码（Node.js >= 20 直接运行）
+│   ├── yfcli-sdk/               # CRUD SDK（122 tests）
+│   ├── yfcli-auth/              # 授权模块（64 tests）
+│   ├── yfcli-mcp/               # MCP Server（41 tests）
+│   ├── yfcli-analysis/          # 分析层 + 20 个 SQL 模板（49 tests）
+│   │   └── sql/views/           # 9 个 vw_ai_* 视图 DDL（预生成）
+│   ├── yfcli-experts/           # 专家模块（18 tests）
+│   └── yfcli-skill-openapi/     # Skill 包 + 31 个助手文档
+├── knowledge/                   # 知识产物（预生成，不需重新生成）
+│   ├── typekey/typekey_map.yaml # 106 对象 / 595 服务名
+│   ├── typekey-mapping/         # 106 份字段对照表
+│   └── official/ai-assistants/  # 31 个助手 _workflow + _spec
+├── config/
+│   └── erp.example.yaml         # 配置模板
+├── .env.example                 # 环境变量模板
+├── scripts/
+│   └── init-views.sql           # 9 个视图合并为单文件（可选）
+└── DEPLOYMENT.md                # 本文档
+```
+
+**不需要在客户现场执行的步骤**：
+- ❌ `npm run gen:all`（知识产物已预生成）
+- ❌ `npm run check:all`（已在开发环境验证）
+- ❌ `npm test`（294 tests 已在开发环境通过）
+- ❌ 编写或调整 SQL 模板（20 个模板已预生成）
 
 ---
 
 ## 前置条件
 
-| 项 | 要求 | 说明 |
-|----|------|------|
-| Node.js | >= 20 | `node -v` 验证 |
-| 易飞 ERP OpenAPI | 内网可达 | `Invoke-RestMethod $env:YF_BASE_URL` 返回 HTTP 200 |
-| SQL Server | 2014+ | 分析层直连（只读权限即可） |
-| vw_ai_* 视图 | 9 个已创建 | 见下方「视图 DDL 执行」 |
-| Git | 2.x | 克隆仓库 |
+| 项 | 要求 | 验证命令 |
+|----|------|----------|
+| Node.js | >= 20 | `node -v` |
+| 易飞 ERP OpenAPI | 内网可达 | 见下方连通性测试 |
+| SQL Server | 2014+（只读权限） | 分析层直连需要 |
+| 网络 | 客户内网 | MCP Server 仅监听 localhost |
 
 ---
 
-## 环境变量
+## 部署步骤
 
-复制 `.env.example` 为 `.env`，按实际环境填写：
+### 第 1 步：复制部署包
 
 ```powershell
-Copy-Item .env.example .env
+# 将部署包复制到客户服务器
+Copy-Item -Path "\\dev-server\share\yfcli-deploy-v0.1.0" -Destination "D:\YFCLI" -Recurse
+cd D:\YFCLI
 ```
 
-| 变量 | 必填 | 默认值 | 说明 |
-|------|------|--------|------|
-| `YF_BASE_URL` | 是 | — | 易飞 OpenAPI 入口 URL（含 `/YFOAP/openapi.dll/datasnap/rest/TServerMethods1/ATNPost`） |
-| `YF_COMPANY_ID` | 是 | — | 账套编号 |
-| `YF_USER_TOKEN` | 是 | — | 身份令牌（通过 TPASC19 接口获取） |
-| `YF_SQL_SERVER` | 分析层需要 | — | SQL Server 地址 |
-| `YF_SQL_PORT` | 否 | `1433` | SQL Server 端口 |
-| `YF_SQL_DATABASE` | 分析层需要 | — | 数据库名 |
-| `YF_SQL_USER_ENV` | 分析层需要 | — | 用户名所在的环境变量名（间接引用，防泄漏） |
-| `YF_SQL_PASSWORD_ENV` | 分析层需要 | — | 密码所在的环境变量名（间接引用，防泄漏） |
-| `YF_MCP_PORT` | 否 | `3100` | MCP Server 监听端口 |
-| `YF_TIMEOUT_MS` | 否 | `30000` | OpenAPI 调用超时（毫秒） |
-| `LICENSE_AES_KEY` | 商业化需要 | — | 64 位 hex AES 密钥（Phase 3） |
-
-> ⚠️ **安全红线**：`.env` 和 `config/*.local.yaml` 已被 `.gitignore` 排除。**永远不要提交凭证**。
-
----
-
-## 安装与启动
-
-### 1. 克隆与安装
+### 第 2 步：安装依赖
 
 ```powershell
-git clone https://github.com/github279355466/YFAgent.git
-cd YFAgent
 npm install
 ```
 
-### 2. 生成知识产物
+> 如果客户服务器无法访问外网，在开发环境执行 `npm install` 后将 `node_modules/` 一并打包。
+
+### 第 3 步：配置环境变量
 
 ```powershell
-# 生成全部（TypeKey / 字段对照 / 域归属 / 数据字典 / 枚举）
-npm run gen:all
-
-# 校验产物是否为最新
-npm run check:all
-```
-
-### 3. 准备配置
-
-```powershell
-# 复制环境变量模板
 Copy-Item .env.example .env
-
-# 编辑 .env 填入实际值
 notepad .env
-
-# 提交前扫描敏感信息
-npm run scan:secrets
 ```
 
-### 4. 运行测试
-
-```powershell
-# 各包独立测试
-cd packages\yfcli-sdk;     npx vitest run    # 122 tests
-cd ..\yfcli-auth;          npx vitest run    #  64 tests
-cd ..\yfcli-analysis;      npx vitest run    #  49 tests
-cd ..\yfcli-mcp;           npx vitest run    #  41 tests
-cd ..\yfcli-experts;       npx vitest run    #  18 tests
-# 合计：294 tests [5 包]
-```
-
----
-
-## MCP Server 启动
-
-### 编程式启动
-
-```powershell
-npx tsx -e "import { startServer } from 'yfcli-mcp'; await startServer({ port: 3100 });"
-```
-
-### 端点信息
-
-| 端点 | 方法 | 说明 |
+| 变量 | 必填 | 说明 |
 |------|------|------|
-| `http://localhost:3100/mcp` | POST | MCP Streamable HTTP 传输 |
-| `http://localhost:3100/mcp` | GET | SSE 连接（需 `Accept: text/event-stream`） |
-| `http://localhost:3100/health` | GET | 健康检查 |
+| `YF_BASE_URL` | ✅ | 易飞 OpenAPI 入口（含完整路径） |
+| `YF_COMPANY_ID` | ✅ | 账套编号 |
+| `YF_USER_TOKEN` | ✅ | 身份令牌（TPASC19 获取） |
+| `YF_SQL_SERVER` | 分析层 | SQL Server 地址 |
+| `YF_SQL_PORT` | 否 | 默认 1433 |
+| `YF_SQL_DATABASE` | 分析层 | 数据库名 |
+| `YF_SQL_USER_ENV` | 分析层 | 用户名环境变量名 |
+| `YF_SQL_PASSWORD_ENV` | 分析层 | 密码环境变量名 |
+| `YF_MCP_PORT` | 否 | 默认 3100 |
 
-### 客户端连接示例
+然后设置数据库凭据的环境变量：
 
 ```powershell
-# 健康检查
-Invoke-RestMethod -Uri "http://localhost:3100/health" -Method Get
-
-# MCP initialize（需 Accept 头）
-$body = '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"test","version":"1.0"}}}'
-Invoke-RestMethod -Uri "http://localhost:3100/mcp" `
-    -Method Post `
-    -ContentType "application/json" `
-    -Headers @{ Accept = "application/json, text/event-stream" } `
-    -Body $body
+[Environment]::SetEnvironmentVariable("YF_DB_USER", "sa", "Machine")
+[Environment]::SetEnvironmentVariable("YF_DB_PASS", "实际密码", "Machine")
 ```
 
-> ⚠️ **必须携带** `Accept: application/json, text/event-stream` 头，否则服务器返回 `406 Not Acceptable`。
-
----
-
-## 视图 DDL 执行
-
-分析层依赖 9 个 `vw_ai_*` 视图，需 DBA 在目标数据库执行：
-
-```powershell
-# 视图 DDL 文件位置
-Get-ChildItem packages\yfcli-analysis\sql\views\*.sql | Select-Object Name
+`.env` 中填写：
+```
+YF_SQL_USER_ENV=YF_DB_USER
+YF_SQL_PASSWORD_ENV=YF_DB_PASS
 ```
 
-| # | 文件 | 用途 |
-|---|------|------|
-| 1 | `vw_ai_sales_margin.sql` | 销售毛利分析 |
-| 2 | `vw_ai_purchase_summary.sql` | 采购汇总 |
-| 3 | `vw_ai_inventory_cost.sql` | 库存成本 |
-| 4 | `vw_ai_ar_balance.sql` | 应收余额 |
-| 5 | `vw_ai_ap_balance.sql` | 应付余额 |
-| 6 | `vw_ai_production_cost.sql` | 生产成本 |
-| 7 | `vw_ai_gl_balance.sql` | 总账余额 |
-| 8 | `vw_ai_collection.sql` | 收款统计 |
-| 9 | `vw_ai_payment.sql` | 付款统计 |
+### 第 4 步：执行视图 DDL（首次部署）
 
-### 执行方式
+9 个 `vw_ai_*` 视图是分析层的数据源，**首次部署时由 DBA 执行一次**，之后不需要重复：
 
 ```powershell
-# 使用 sqlcmd 逐个执行（替换实际连接参数）
-$server = "YOUR_SQL_SERVER"
-$database = "YOUR_DATABASE"
-
+# 方式一：逐个执行
 Get-ChildItem packages\yfcli-analysis\sql\views\*.sql | ForEach-Object {
     Write-Host "Executing $($_.Name)..."
-    sqlcmd -S $server -d $database -i $_.FullName -b
-    if ($LASTEXITCODE -ne 0) { Write-Error "Failed: $($_.Name)"; exit 1 }
+    sqlcmd -S $env:YF_SQL_SERVER -d $env:YF_SQL_DATABASE -i $_.FullName -b
 }
 
-Write-Host "All 9 views created successfully."
+# 方式二：合并脚本（如果有 init-views.sql）
+if (Test-Path scripts\init-views.sql) {
+    sqlcmd -S $env:YF_SQL_SERVER -d $env:YF_SQL_DATABASE -i scripts\init-views.sql -b
+}
 ```
 
-> ⚠️ 视图依赖易飞底层表（如 `ACMMO`、`CMSME` 等），请确认目标数据库已包含完整业务数据。
+> 视图使用 `CREATE OR ALTER VIEW`，可重复执行不会报错。  
+> 每家客户的底层表结构相同（ACMMO/CMSME/COPTG 等），视图 DDL 无需修改。
+
+### 第 5 步：启动 MCP Server
+
+```powershell
+npx tsx -e "import { startServer } from 'yfcli-mcp'; await startServer({ port: parseInt(process.env.YF_MCP_PORT || '3100') });"
+```
+
+或使用 PM2 守护进程：
+
+```powershell
+npm install -g pm2
+pm2 start "npx tsx packages/yfcli-mcp/src/index.ts" --name yfcli-mcp
+pm2 save
+```
 
 ---
 
 ## 验证清单
 
-部署完成后逐项检查：
-
 ```powershell
 # ✅ 1. Node.js 版本
 node -v   # 应 >= v20.0.0
 
-# ✅ 2. 知识产物完整性
-npm run check:all   # 应输出 "All checks passed!"
-
-# ✅ 3. 敏感信息扫描
-npm run scan:secrets   # 应无告警
-
-# ✅ 4. 单元测试
-cd packages\yfcli-sdk; npx vitest run   # 122 passed
-cd ..\yfcli-auth; npx vitest run        # 64 passed
-cd ..\yfcli-analysis; npx vitest run    # 49 passed
-cd ..\yfcli-mcp; npx vitest run         # 41 passed
-cd ..\yfcli-experts; npx vitest run     # 18 passed
-
-# ✅ 5. MCP Server 健康检查
+# ✅ 2. MCP Server 健康检查
 Invoke-RestMethod -Uri "http://localhost:3100/health"
+# 期望: { status: "ok", auth: "configured", erp: "reachable" }
 
-# ✅ 6. OpenAPI 连通性
+# ✅ 3. OpenAPI 连通性
 $headers = @{
     "digi-service"    = "yf.oapi.supplier.query.get"
     "digi-user-token" = $env:YF_USER_TOKEN
@@ -199,65 +157,71 @@ $headers = @{
 }
 $body = '{"std_data":{"parameter":{"page_no":1,"page_size":1}}}'
 Invoke-RestMethod -Uri $env:YF_BASE_URL -Method Post -Headers $headers -Body $body
+# 期望: code = "0"
+
+# ✅ 4. 视图可查询（分析层）
+sqlcmd -S $env:YF_SQL_SERVER -d $env:YF_SQL_DATABASE -Q "SELECT TOP 1 * FROM dbo.vw_ai_sales_margin"
+# 期望: 返回数据行（空表也可以，不报错即可）
+
+# ✅ 5. MCP 工具调用
+$mcpBody = '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"yf_manifest","arguments":{}}}'
+Invoke-RestMethod -Uri "http://localhost:3100/mcp" -Method Post `
+    -ContentType "application/json" `
+    -Headers @{ Accept = "application/json, text/event-stream" } `
+    -Body $mcpBody
+# 期望: 返回 106 个业务对象清单
 ```
 
 ---
 
 ## 故障排查
 
-### MCP Server 返回 406 Not Acceptable
+| 现象 | 原因 | 解决 |
+|------|------|------|
+| MCP 返回 406 | 缺少 Accept 头 | 添加 `Accept: application/json, text/event-stream` |
+| OpenAPI 返回 500+HTML | Token 无效/过期 | TPASC19 重新获取，更新 `.env` |
+| 查询返回空数组 code=0 | 主键全错不报错 | 检查 datakeys 是否含全部主键字段 |
+| 枚举条件查不到数据 | 传了 `Y.已审核` 而非 `Y` | 只传编码部分 |
+| conditions not found | 用了易助数组形态 | 改用易飞对象嵌套格式 |
+| npm install 失败 | erp-experts/erp-license 路径不存在 | 确保三个仓库同级目录，或将 node_modules 一并打包 |
+| SQL Server 连接失败 | TCP/IP 未启用/防火墙 | 启用 TCP/IP + 放行 1433 端口 |
+| 视图执行报列名无效 | 客户数据库版本差异 | 极少见，联系开发团队核实字段名 |
 
-**原因**：请求缺少 `Accept` 头。  
-**解决**：添加 `Accept: application/json, text/event-stream`。
+---
 
-### OpenAPI 返回 HTTP 500 + HTML
-
-**原因**：Token 无效或过期。  
-**解决**：重新通过 TPASC19 接口获取 Token，更新 `.env` 中的 `YF_USER_TOKEN`。
-
-### 查询返回空数组但 code=0
-
-**原因**：主键全错时易飞返回 `code=0` + 空数组（不报错）。  
-**解决**：检查 `datakeys` 是否包含全部主键字段；参考 `knowledge/typekey/{type_key}.md`。
-
-### 枚举条件查不到数据
-
-**原因**：回参形如 `Y.已审核`，但查询只认纯编码 `Y`。  
-**解决**：作为 query 条件时只传编码部分，**禁止把回参值直接回传为条件**。
-
-### conditions not found
-
-**原因**：使用了易助的数组形态 conditions。  
-**解决**：改用易飞的对象嵌套格式：
-
-```json
-{
-  "conditions": {
-    "operator": "AND",
-    "fields": [
-      { "field_name": "item_no", "operator": "=", "value": "001" }
-    ]
-  }
-}
-```
-
-### npm install 失败（erp-experts / erp-license）
-
-**原因**：`file:../../../erp-experts` 路径不存在。  
-**解决**：确保 `erp-experts` 和 `erp-core` 仓与本仓同级目录：
+## 升级流程
 
 ```powershell
-# 期望的目录结构
-# D:\AIProject\claude\
-#   ├── YFAgent/        ← 本仓
-#   ├── erp-experts/    ← git clone https://github.com/github279355466/erp-experts.git
-#   └── erp-core/       ← git clone https://github.com/github279355466/erp-core.git
+# 1. 备份当前版本
+Rename-Item D:\YFCLI D:\YFCLI-backup-$(Get-Date -Format 'yyyyMMdd')
+
+# 2. 部署新版本
+Copy-Item -Path "\\dev-server\share\yfcli-deploy-v{new-version}" -Destination "D:\YFCLI" -Recurse
+cd D:\YFCLI
+npm install
+
+# 3. 如果视图有变更，重新执行 DDL（CREATE OR ALTER 幂等）
+Get-ChildItem packages\yfcli-analysis\sql\views\*.sql | ForEach-Object {
+    sqlcmd -S $env:YF_SQL_SERVER -d $env:YF_SQL_DATABASE -i $_.FullName -b
+}
+
+# 4. 重启 MCP Server
+pm2 restart yfcli-mcp
+
+# 5. 验证
+Invoke-RestMethod -Uri "http://localhost:3100/health"
 ```
 
-### SQL Server 连接失败
+---
 
-**原因**：TCP/IP 未启用或防火墙拦截。  
-**解决**：
-1. SQL Server Configuration Manager → 启用 TCP/IP
-2. Windows 防火墙放行 1433 端口
-3. 确认 `YF_SQL_USER_ENV` / `YF_SQL_PASSWORD_ENV` 指向的环境变量已设置
+## 开发环境打包命令
+
+以下命令仅在**开发环境**执行，生成部署包：
+
+```powershell
+# 打包 Skill
+.\scripts\pack-skill.ps1
+
+# 打包完整部署包（待实现 scripts/pack-deploy.ps1）
+# .\scripts\pack-deploy.ps1 -Version "0.1.0" -OutputDir "dist"
+```
