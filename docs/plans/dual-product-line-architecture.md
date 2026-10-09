@@ -1,7 +1,9 @@
 # 双产品线架构设计（2026-10-09 裁决）
 
-> 目的：确定易助（YZCLI）与易飞（YFAgent）两条产品线的代码归属、共享边界与移植策略。
+> 目的：确定易助（YZCLI）与易飞（YFAgent）两条产品线的代码归属、共享边界与移植策略。>   
 > 状态：**B1/B2 已裁决**，B3/B4/B5 待推进。
+
+
 
 ---
 
@@ -29,6 +31,7 @@
 **裁决 B1 = 选项 2**：授权体系抽为独立包共用；其余全量复制，各自独立演进。
 
 **理由**：
+
 1. 授权是唯一确定共用项（实测 `license-server/src/` 对其他 yzcli 包 **0 引用**）
 2. analysis 模板将来必然分化（易助表 `JSKLOA` vs 易飞表 `ACMMO`），抽成公共反添乱
 3. 不动已上线的 YZCLI 现有包，只新增共享包 —— **零回归风险**
@@ -37,15 +40,16 @@
 
 ## 二、代码规模与依赖现状（实测）
 
-| 包 | 文件 | 行数 | 对内依赖 |
-|---|---|---|---|
-| `yzcli-license-server` | — | 1884 | **无**（`yzcli-sdk` 是残留空依赖，可删） |
-| `yzcli-gateway` | 60 | 6536 | `yzcli-sdk` |
-| `yzcli-mcp` | 46 | 5068 | `yzcli-sdk` `yzcli-analysis` `yzcli-experts` |
-| `yzcli-analysis` | 80 | 12749 | **无**（真正的独立内核） |
-| `yzcli-sdk` | 13 | 1046 | 无 |
+| 包                      | 文件 | 行数    | 对内依赖                                         |
+| ---------------------- | -- | ----- | -------------------------------------------- |
+| `yzcli-license-server` | —  | 1884  | **无**（`yzcli-sdk` 是残留空依赖，可删）                 |
+| `yzcli-gateway`        | 60 | 6536  | `yzcli-sdk`                                  |
+| `yzcli-mcp`            | 46 | 5068  | `yzcli-sdk` `yzcli-analysis` `yzcli-experts` |
+| `yzcli-analysis`       | 80 | 12749 | **无**（真正的独立内核）                               |
+| `yzcli-sdk`            | 13 | 1046  | 无                                            |
 
 **关键发现**：
+
 - `yzcli-analysis` **零内部依赖**，已设计为可独立复用的内核
 - `yzcli-license-server` 同样零内部依赖，但 `package.json` 里残留 `"yzcli-sdk": "*"`，`src/` 内无任何引用 —— **删除该依赖即可完全解耦**
 
@@ -61,17 +65,17 @@
 
 ### 3.2 硬编码清单分类（实测 `auth/rbac.ts` + `license/tier-mapper.ts`）
 
-| 清单 | 位置 | 内容 |可否按类别识别 |
-|---|---|---|---|
-| `PUBLIC_TOOLS` | rbac.ts:70 | manifest/help/validate/route/assemble | ✅ 纯工具名，改名即可 |
-| `TIER_GATED_TOOLS` | rbac.ts:81 | 6 个 analysis + 8 个 expert | ✅ **按类别识别** |
-| `TIER_TOOLS` | tier-mapper.ts:22 | 24 个工具名 → tier 映射 | ✅ **按类别识别** |
-| `TIER_RANK` | tier-mapper.ts:11 | 4 个 tier 排名 | ✅ 纯阈值，共用 |
-| `TIER_MAX_RISK` | tier-mapper.ts:48 | trial 30 / basic 50 / pro 80 / ent 200 | ✅ 纯阈值，共用 |
-| `TIER_WRITE_OPS` | tier-mapper.ts:55 | create/update/delete/approve/disapprove | ✅ 纯操作名，共用 |
-| `ROLE_PERMISSIONS` | rbac.ts:4 | 角色 → 权限列表 | ⚠️ **数据**，各线注入 |
-| `TYPE_KEY_DOMAIN_MAP` | rbac.ts:40 | `accounting.voucher` → finance | ❌ **业务耦合**，各线注入 |
-| `SERVICE_DOMAIN_MAP` | rbac.ts:49 | `yz.ai.*` → 域 | ❌ **业务耦合**，各线注入 |
+| 清单                    | 位置                | 内容                                      | 可否按类别识别         |
+| --------------------- | ----------------- | --------------------------------------- | --------------- |
+| `PUBLIC_TOOLS`        | rbac.ts:70        | manifest/help/validate/route/assemble   | ✅ 纯工具名，改名即可     |
+| `TIER_GATED_TOOLS`    | rbac.ts:81        | 6 个 analysis + 8 个 expert               | ✅ **按类别识别**     |
+| `TIER_TOOLS`          | tier-mapper.ts:22 | 24 个工具名 → tier 映射                       | ✅ **按类别识别**     |
+| `TIER_RANK`           | tier-mapper.ts:11 | 4 个 tier 排名                             | ✅ 纯阈值，共用        |
+| `TIER_MAX_RISK`       | tier-mapper.ts:48 | trial 30 / basic 50 / pro 80 / ent 200  | ✅ 纯阈值，共用        |
+| `TIER_WRITE_OPS`      | tier-mapper.ts:55 | create/update/delete/approve/disapprove | ✅ 纯操作名，共用       |
+| `ROLE_PERMISSIONS`    | rbac.ts:4         | 角色 → 权限列表                               | ⚠️ **数据**，各线注入  |
+| `TYPE_KEY_DOMAIN_MAP` | rbac.ts:40        | `accounting.voucher` → finance          | ❌ **业务耦合**，各线注入 |
+| `SERVICE_DOMAIN_MAP`  | rbac.ts:49        | `yz.ai.*` → 域                           | ❌ **业务耦合**，各线注入 |
 
 > **`SERVICE_DOMAIN_MAP` 现状**：已混入两个易飞端点（`yf.ai.PurchaseBusinessWarning` / `yf.ai.SalesbusinessWarning`）—— 易飞服务被硬塞进易助 RBAC 表，是「按名称识别」的反面实证，印证按类别/按域识别的正确性。
 
@@ -103,10 +107,11 @@
 照 `config/analysis-sql.example.json` 模板，**交付客户时填客户库信息**。
 
 已验证原则（`config.ts` 3 条红线）：
+
 1. 密码**只允许从环境变量取**（配置里写 `password_env` 变量名，出现明文 `password` 一律拒绝）
 2. `limits` 必填（max_rows / timeout_ms兜底）
-3. `allowed_templates` 白名单不得为空（防全开）
-4.配置文件不入代码库，仓库只提供 `.example.json` 模板
+3. `allowed_templates` 白名单不得为空（防全开）     
+   4.配置文件不入代码库，仓库只提供 `.example.json` 模板
 
 当前实测配置（测试环境，**非交付配置**）：
 
@@ -162,15 +167,15 @@ D:\AIProject\claude\
 
 实测YZCLI 现状：**从未走过发布流程**。
 
-| 项 | 实测值 |
-|---|---|
+| 项              | 实测值                                                                         |
+| -------------- | --------------------------------------------------------------------------- |
 | 根 package.json | `"name": "yzcli-monorepo"` / `private: true` / `workspaces: ["packages/*"]` |
-| `.npmrc` | **不存在**（未配 registry） |
-| publish 脚本 | **无** |
-| 子包 private 字段 | 11 个包**全部无** `private` 字段，靠父级兜住 |
-| 包间依赖写法 | `"yzcli-sdk": "*"` + workspaces 软链（lock 中 `"link": true`） |
+| `.npmrc`       | **不存在**（未配 registry）                                                        |
+| publish 脚本     | **无**                                                                       |
+| 子包 private 字段  | 11 个包**全部无** `private` 字段，靠父级兜住                                             |
+| 包间依赖写法         | `"yzcli-sdk": "*"` + workspaces 软链（lock 中 `"link": true`）                   |
 
-若直接上 GitHub Packages，需新增 3 类故障点：registry 认证、版本号管理、CI 密钥配置。
+若直接上 GitHub Packages，需新增 3 类故障点：registry 认证、版本号管理、CI 密钥配置。  
 当前单人项目，收益不足以抵消复杂度。**待真正需要给客户部署时再引入 registry。**
 
 ### 4.3 引用写法（沿用现有约定）
@@ -189,17 +194,17 @@ D:\AIProject\claude\
 
 npm 会把 `file:` 依赖做成软链（lock 中同样呈现 `"link": true`），与现有行为一致。
 
-> **`file:` 的坑**：相对路径**相对于引用方根目录**。CI 环境若无 `../erp-license` 会直接失败——
+> **`file:` 的坑**：相对路径**相对于引用方根目录**。CI 环境若无 `../erp-license` 会直接失败——>   
 > CI 需额外 clone 共享仓，或后续改用 registry。
 
 ### 4.4 拆分前的必做改动
 
-| # | 改动 | 位置 | 原因 |
-|---|---|---|---|
-| 1 | 删除 `"yzcli-sdk": "*"` 残留依赖 | `yzcli-license-server/package.json:dependencies` | 实测 `src/` 内 **0 引用**，是拆包前的最后一道耦合 |
-| 2 | `licenses` 表加 `product_line` 字段 | `license-server/src/db/migrate.ts:48` | **阻塞项**：两条线共用同一 lib 时签发记录会互相覆盖 |
-| 3 | `devices` / `heartbeat_logs` 评估是否需加产品线维度 | `migrate.ts:63,75` | 待评估 |
-| 4 | tier 工具清单改注册表 | `gateway/src/license/tier-mapper.ts` / `auth/rbac.ts` | 消除 24 个硬编码工具名（见 3.2） |
+| # | 改动                                       | 位置                                                    | 原因                               |
+| - | ---------------------------------------- | ----------------------------------------------------- | -------------------------------- |
+| 1 | 删除 `"yzcli-sdk": "*"` 残留依赖               | `yzcli-license-server/package.json:dependencies`      | 实测 `src/` 内 **0 引用**，是拆包前的最后一道耦合 |
+| 2 | `licenses` 表加 `product_line` 字段          | `license-server/src/db/migrate.ts:48`                 | **阻塞项**：两条线共用同一 lib 时签发记录会互相覆盖   |
+| 3 | `devices` / `heartbeat_logs` 评估是否需加产品线维度 | `migrate.ts:63,75`                                    | 待评估                              |
+| 4 | tier 工具清单改注册表                            | `gateway/src/license/tier-mapper.ts` / `auth/rbac.ts` | 消除 24 个硬编码工具名（见 3.2）             |
 
 ### 4.5 licenses 表迁移示意
 
@@ -218,32 +223,30 @@ CREATE TABLE licenses (
 CREATE INDEX idx_licenses_line ON licenses(product_line);
 ```
 
-**迁移注意**：现有 `licenses` 表已有数据（易助真实客户 license），加 `NOT NULL` 字段需先
+**迁移注意**：现有 `licenses` 表已有数据（易助真实客户 license），加 `NOT NULL` 字段需先  
 回填默认值（如 `product_line = 'yzcli'`）再改约束，否则迁移失败。
 
 ---
 
 ### 4.6 B3 的实测依据（licenses 表现状）
 
-`licenses` 表结构（`db/migrate.ts:48`）无 `product_line` / `product_code` 字段。
+`licenses` 表结构（`db/migrate.ts:48`）无 `product_line` / `product_code` 字段。  
 若两条产品线共用同一授权服务且同一 `lib` 数据库，签发记录会互相覆盖。
-
 
 ## 五、剩余待决事项
 
-| # | 事项 | 状态 |
-|---|---|---|
-| B3.2 | 心跳表 `heartbeat_logs` / `devices` 是否同样需加产品线维度 | 待评估 |
-| — | analysis 层安全边界：直连绕过 OpenAPI 权限模型，需向易飞厂商报备 | 待确认 |
-| — | analysis 层数据一致性：OpenAPI 枚举回传 `编码.中文`，SQL 得原始值，口径不同 | 需标注 |
-
+| #    | 事项                                                 | 状态  |
+| ---- | -------------------------------------------------- | --- |
+| B3.2 | 心跳表 `heartbeat_logs` / `devices` 是否同样需加产品线维度       | 待评估 |
+| —    | analysis 层安全边界：直连绕过 OpenAPI 权限模型，需向易飞厂商报备          | 待确认 |
+| —    | analysis 层数据一致性：OpenAPI 枚举回传 `编码.中文`，SQL 得原始值，口径不同 | 需标注 |
 
 ---
 
 ## 六、与既有文档的关系
 
-| 文档 | 关系 |
-|---|---|
+| 文档                                         | 关系                     |
+| ------------------------------------------ | ---------------------- |
 | `docs/plans/yf-db-direct-connect-probe.md` | 架构对比与数据库直连实测（B1 的证据来源） |
-| `docs/TODO-PLAN.md` T-13/T-14 | analysis 层与视图 DDL 开发任务 |
-| YZCLI `docs/`（易助侧） | 待补：共享包拆分后的迁移说明 |
+| `docs/TODO-PLAN.md` T-13/T-14              | analysis 层与视图 DDL 开发任务 |
+| YZCLI `docs/`（易助侧）                         | 待补：共享包拆分后的迁移说明         |
