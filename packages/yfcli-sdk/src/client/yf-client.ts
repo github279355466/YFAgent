@@ -3,11 +3,15 @@
  *
  * 本文件只做编排，不含协议细节（细节在 conditions / response / transport 层）
  * 也不含业务规则（业务规则在上层调用方）。
+ *
+ * CRUD 五操作：query / read / create / update / delete。
+ * approve / disapprove / invalid 走通用 action 方法。
  */
 
 import type { ResolvedRuntimeConfig } from '../types/config.js';
 import type {
   YfActionResult,
+  YfEnumFieldSpec,
   YfOperation,
   YfQueryResult,
   YfServiceNameResolver,
@@ -15,7 +19,12 @@ import type {
 import type { YfErrorContext } from '../types/errors.js';
 import { YfError, emptyResultError } from '../types/errors.js';
 import type { YfRequestEnvelope } from '../types/protocol.js';
-import type { YfQueryParameter, YfDataKeysParameter, YfEntityParameter } from '../types/conditions.js';
+import type {
+  YfConditionField,
+  YfDataKeysParameter,
+  YfEntityParameter,
+  YfQueryParameter,
+} from '../types/conditions.js';
 import type { YfTransport } from '../transport/http-transport.js';
 import { FetchTransport, assertHttpOk } from '../transport/http-transport.js';
 import {
@@ -26,6 +35,8 @@ import {
   parseEnvelope,
   parseQueryResult,
 } from '../response/parser.js';
+import { extractCode, looksLikeCodeText } from '../conditions/enum-guard.js';
+import { redact } from '../logging/redact.js';
 
 /** 可注入的日志出口，便于 CLI / MCP / 测试分别接管。 */
 export interface YfLogger {
@@ -48,6 +59,8 @@ export interface YfClientOptions {
   readonly transport?: YfTransport;
   /** 可选：注入日志出口。默认 NOOP_LOGGER。 */
   readonly logger?: YfLogger;
+  /** 可选：枚举字段规格表，用于 query 时自动清洗「编码.中文」形态。 */
+  readonly enumSpecs?: Readonly<Record<string, YfEnumFieldSpec>>;
 }
 
 /**
@@ -61,26 +74,52 @@ export class YfClient {
   private readonly catalog: YfServiceNameResolver;
   private readonly transport: YfTransport;
   private readonly logger: YfLogger;
+  private readonly enumSpecs: Readonly<Record<string, YfEnumFieldSpec>>;
 
   public constructor(options: YfClientOptions) {
     this.config = options.config;
     this.catalog = options.catalog;
     this.transport = options.transport ?? new FetchTransport();
     this.logger = options.logger ?? NOOP_LOGGER;
+    this.enumSpecs = options.enumSpecs ?? {};
   }
 
   /**
-   * 查询（query 类服务）。
+   * 动态替换当前 token。
+   *
+   * 用于 MCP 场景：每个请求从 Bearer header 提取不同 token，
+   * 通过此方法注入到 client 实例中，避免为每个请求重建 client。
+   */
+  public setAuthToken(token: string): void {
+    // ResolvedRuntimeConfig 是 readonly，但 token 字段需要运行时更新
+    (this.config as { token: string }).token = token;
+  }
+
+  // ================================================================ CRUD 五操作
+
+  /**
+   * 查询（query.get）——批量单头列表，不含明细/单身。
+   *
+   * ⚠️ 本方法不支持 node_name 参数查单身字段。
+   * 需要查单身/明细数据请用 read() 方法（read.get）。
+   * 用 query.get 传 node_name 会报 MA012未定義（2026-10-09 实测确认）。
    *
    * 数据通道：`parameter.result.rows` + `total_result` / `has_next` / `cnt`。
    * 注意易飞无 fastquery，每次调用重查数据库，页码大时代价线性增长。
+   *
+   * 枚举清洗：若 conditions.fields 中含已登记的 codedText 字段且值为「编码.中文」
+   * 形态，自动修正为纯编码并输出 WARN。
    */
   public async query(
     typeKey: string,
     parameter: YfQueryParameter,
   ): Promise<YfQueryResult> {
     const serviceName = this.catalog.resolveServiceName(typeKey, 'query');
-    const envelope = wrap(parameter);
+
+    // 枚举清洗：扫描 conditions.fields 中的 codedText 字段
+    const cleanedParameter = this.cleanEnumConditions(parameter);
+
+    const envelope = wrap(cleanedParameter);
     const context = this.contextFor(serviceName, typeKey, 'query');
     const raw = await this.send(serviceName, envelope, context);
 
@@ -108,6 +147,107 @@ export class YfClient {
     }
     return result;
   }
+
+  /**
+   * 主键读取（read）。
+   *
+   * 数据通道：`parameter.result.success[]`。
+   * 复合主键极普遍，datakeys 必须含全部主键字段。
+   * 主键全错时返回 code=0 + 空数组，触发空结果告警。
+   */
+  public async read(
+    typeKey: string,
+    parameter: YfDataKeysParameter,
+  ): Promise<YfActionResult> {
+    return this.action(typeKey, 'read', parameter);
+  }
+
+  /**
+   * 创建实体（create）。
+   *
+   * 必须提供业务主键 + 不可空白字段。
+   * 支持单别自动审核（由服务端控制，SDK 不做额外处理）。
+   * 入参容器名即逻辑节点名，与对象名并非总是相关。
+   */
+  public async create(
+    typeKey: string,
+    parameter: YfEntityParameter,
+  ): Promise<YfActionResult> {
+    const serviceName = this.catalog.resolveServiceName(typeKey, 'create');
+    const envelope = wrap(parameter);
+    const context = this.contextFor(serviceName, typeKey, 'create');
+
+    this.logger.debug('create 发起', {
+      serviceName,
+      typeKey,
+      parameterPreview: redact(parameter),
+    });
+
+    const raw = await this.send(serviceName, envelope, context);
+    const envelopeParsed = parseEnvelope(decodeBody(raw.bodyText));
+    this.assertBusinessOk(envelopeParsed, context);
+
+    const result = parseActionResult(envelopeParsed.std_data.parameter, serviceName, context);
+    this.logger.info('create 完成', {
+      serviceName,
+      typeKey,
+      itemCount: result.items.length,
+      elapsedMs: raw.elapsedMs,
+    });
+    return result;
+  }
+
+  /**
+   * 更新实体（update）。
+   *
+   * 约束（AGENTS.md §6）：
+   * - 按主键定位（datakeys 须含全部主键字段）
+   * - 单身须含所有输入字段
+   * - 单身「存在则更新、不存在则新增」
+   * - 不支持删除单身
+   * - 单头与单身 key 必须一致
+   */
+  public async update(
+    typeKey: string,
+    parameter: YfEntityParameter,
+  ): Promise<YfActionResult> {
+    const serviceName = this.catalog.resolveServiceName(typeKey, 'update');
+    const envelope = wrap(parameter);
+    const context = this.contextFor(serviceName, typeKey, 'update');
+
+    this.logger.debug('update 发起', {
+      serviceName,
+      typeKey,
+      parameterPreview: redact(parameter),
+    });
+
+    const raw = await this.send(serviceName, envelope, context);
+    const envelopeParsed = parseEnvelope(decodeBody(raw.bodyText));
+    this.assertBusinessOk(envelopeParsed, context);
+
+    const result = parseActionResult(envelopeParsed.std_data.parameter, serviceName, context);
+    this.logger.info('update 完成', {
+      serviceName,
+      typeKey,
+      itemCount: result.items.length,
+      elapsedMs: raw.elapsedMs,
+    });
+    return result;
+  }
+
+  /**
+   * 删除实体（delete）。
+   *
+   * 按主键定位，datakeys 须含全部主键字段。
+   */
+  public async delete(
+    typeKey: string,
+    parameter: YfDataKeysParameter,
+  ): Promise<YfActionResult> {
+    return this.action(typeKey, 'delete', parameter);
+  }
+
+  // ================================================================ 通用主键操作
 
   /**
    * 主键类操作（read / delete / approve / disapprove / invalid）。
@@ -141,32 +281,6 @@ export class YfClient {
       );
     }
     return result;
-  }
-
-  /**
-   * 写入类操作（create / update）。
-   *
-   * 未在本骨架中实现的原因：写操作真机未验证
-   * （易飞侧缺陷 #12：本次探测仅做只读操作），
-   * 且 update 有五条额外约束（单身须含所有输入字段、不支持删除单身、单头单身 key 必须一致等）。
-   * 待真机验证后再开放，避免未验证的写路径被误用。
-   */
-  public async write(
-    typeKey: string,
-    operation: 'create' | 'update',
-    parameter: YfEntityParameter,
-  ): Promise<YfActionResult> {
-    void typeKey;
-    void operation;
-    void parameter;
-    throw new YfError({
-      layer: 'business',
-      kind: 'service_not_registered',
-      message:
-        '写操作（create / update）尚未开放。真机探测仅覆盖只读操作，' +
-        '易飞 update 另有一条额外约束（单身须含所有输入字段、不支持删除单身、单头与单身 key 必须一致），' +
-        '在完成真机验证前开放写路径风险过高。后续任务：T-14 真机验证写操作后开放。',
-    });
   }
 
   // ------------------------------------------------------------ 内部
@@ -228,6 +342,44 @@ export class YfClient {
     });
   }
 
+  /**
+   * 清洗 query conditions 中的枚举字段值。
+   *
+   * 遍历 conditions.fields，对已登记为 codedText 的字段检测「编码.中文」形态，
+   * 自动修正为纯编码并输出 WARN。未登记字段不做处理。
+   *
+   * 返回新的 parameter 对象（不可变），原对象不被修改。
+   */
+  private cleanEnumConditions(parameter: YfQueryParameter): YfQueryParameter {
+    if (Object.keys(this.enumSpecs).length === 0) return parameter;
+
+    const fields = parameter.conditions?.fields;
+    if (!Array.isArray(fields) || fields.length === 0) return parameter;
+
+    let hasCorrection = false;
+    const cleanedFields = fields.map((f) => {
+      if (!isConditionField(f)) return f;
+      const spec = this.enumSpecs[f.field_name];
+      if (spec === undefined || !spec.codedText) return f;
+      if (!looksLikeCodeText(f.value)) return f;
+
+      const corrected = extractCode(f.value);
+      this.logger.warn(
+        `枚举清洗：${f.field_name} 的值 "${f.value}" 含中文后缀，已自动修正为 "${corrected}"。` +
+        '易飞文本型枚举作为查询条件只认纯编码，传完整串会返回 code=0 + 0 条。',
+        { fieldName: f.field_name, originalValue: f.value, correctedValue: corrected },
+      );
+      hasCorrection = true;
+      return { ...f, value: corrected };
+    });
+
+    if (!hasCorrection) return parameter;
+    return {
+      ...parameter,
+      conditions: { ...parameter.conditions, fields: cleanedFields },
+    };
+  }
+
   private contextFor(
     serviceName: string,
     typeKey: string,
@@ -263,4 +415,11 @@ function decodeBody(bodyText: string): unknown {
       rawData: bodyText.slice(0, 200),
     });
   }
+}
+
+/** 类型守卫：区分 YfConditionField 与嵌套 YfConditionGroup。 */
+function isConditionField(
+  item: YfConditionField | import('../types/conditions.js').YfConditionGroup,
+): item is YfConditionField {
+  return 'field_name' in item && 'operator' in item && 'value' in item;
 }

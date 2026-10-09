@@ -1,0 +1,11 @@
+{
+  "title": "5个容器名真机探测（待token恢复）",
+  "depends_on": [],
+  "notes": "延迟处理。当前token已失效(无效的身份令牌)。待token恢复后对ap.refund.doc/op.stockin/prepayment.doc/transfer/wo.commence各发空create请求，分别用文档标注容器名和规则推测容器名，看哪种报缺字段(=容器名对了)。脚本已就绪:.workbuddy/tmp/probe-container-names.mjs",
+  "createdAt": "2026-10-09",
+  "owner": "backend",
+  "status": "blocked",
+  "completedAt": "",
+  "slug": "post-mvp-container-probe",
+  "priority": "P2"
+}

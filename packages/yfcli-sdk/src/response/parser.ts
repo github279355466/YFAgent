@@ -121,20 +121,20 @@ function classifyBusinessError(message: string): YfError['kind'] {
     return 'token_invalid';
   }
   if (normalized.includes('digi-datakey')) return 'datakey_invalid';
-  if (normalized.includes('Can not found CompanyId')) return 'company_not_found';
+  if (normalized.includes('CannotfoundCompanyId')) return 'company_not_found';
   if (normalized.includes('MA012')) return 'node_not_registered';
   if (normalized.includes('找不到資料表') || normalized.includes('找不到资料表')) {
     return 'field_not_found';
   }
-  if (normalized.includes('conditions not found')) return 'conditions_invalid';
-  if (normalized.includes('datakeys is not valid')) return 'datakeys_invalid';
+  if (normalized.includes('conditionsnotfound')) return 'conditions_invalid';
+  if (normalized.includes('datakeysisnotvalid')) return 'datakeys_invalid';
   if (normalized.includes('的鍵值參數') || normalized.includes('的键值参数')) {
     return 'primary_key_missing';
   }
   if (normalized.includes('没有权限') || normalized.includes('沒有權限')) {
     return 'permission_denied';
   }
-  if (normalized.includes('ExecSQL Error') || normalized.includes('PRIMARY KEY')) {
+  if (normalized.includes('ExecSQLError') || normalized.includes('PRIMARYKEY')) {
     return 'exec_sql_error';
   }
   return 'service_not_registered';

@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "datasources": [
+    {
+      "id": "yf-prod",
+      "label": "易飞生产库（只读副本）",
+      "server": "YOUR_SERVER",
+      "port": 1433,
+      "database": "YOUR_DATABASE",
+      "user_env": "YFCLI_DB_USER",
+      "password_env": "YFCLI_DB_PASSWORD",
+      "options": {
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "readOnlyIntent": true,
+        "connectTimeout": 15000
+      },
+      "limits": {
+        "max_rows": 10000,
+        "timeout_ms": 30000
+      },
+      "allowed_templates": [
+        "sales_margin_by_order",
+        "inventory_cost_by_item",
+        "purchase_summary_by_supplier",
+        "ar_balance_by_customer",
+        "ap_balance_by_supplier",
+        "production_cost_by_workorder",
+        "gl_balance_by_period",
+        "collection_by_customer",
+        "payment_by_supplier",
+        "sales_margin_by_product",
+        "inventory_asof_by_warehouse",
+        "period_end_cost_by_item",
+        "period_end_cost_by_warehouse",
+        "period_end_cost_by_batch",
+        "period_avg_unit_cost_by_item",
+        "sales_cost_by_customer",
+        "material_usage_by_workorder",
+        "workorder_cost_detail",
+        "purchase_receipt_by_supplier",
+        "purchase_order_by_supplier_item"
+      ]
+    }
+  ]
+}

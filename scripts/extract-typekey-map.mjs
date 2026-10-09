@@ -369,9 +369,69 @@ function main() {
   console.log(`复合主键对象：${compositePk.length} 个`);
   console.log(`操作分布：`, opCounter);
 
-  const yaml = buildYaml(objs, report, doc);
+  let yaml = buildYaml(objs, report, doc);
   const yamlPath = CHECK_ONLY ? null : OUT_YAML;
 
+  // === OAPMA 补充：从服务端注册表补充 Apipost 文档中缺失的服务 ===
+  {
+    const oapmaPath = path.join(ROOT, 'docs', 'sources', 'OAPMA-openapi服务清单.xml');
+    if (fs.existsSync(oapmaPath)) {
+      const OP_CODE = { '01':'create','02':'update','03':'delete','04':'read','05':'query','06':'approve','07':'disapprove','08':'invalid' };
+      const oapmaXml = fs.readFileSync(oapmaPath, 'utf-8');
+      const knownSvcs = new Set();
+      for (const o of objs) { for (const s of Object.values(o.services)) knownSvcs.add(s); }
+      const rowRe = /<z:row\s+([^>]+?)\/>/g;
+      let rm, oapmaPatched = 0;
+      while ((rm = rowRe.exec(oapmaXml)) !== null) {
+        const aRe = /(\w+)='([^']*)'/g;
+        const at = {};
+        let am;
+        while ((am = aRe.exec(rm[1])) !== null) at[am[1]] = am[2].trim();
+        const svc = at.MA001;
+        if (!svc || knownSvcs.has(svc)) continue;
+        if (svc.startsWith('yf.ai.') || svc.includes('.222.') || svc.includes('.data.all.')) continue;
+        const op = OP_CODE[at.MA003];
+        if (!op) continue;
+        let tk = null;
+        let mm = svc.match(/^yf\.oapi\.(.+?)\.data\.\w+\.get$/);
+        if (mm) tk = mm[1];
+        if (!tk) { mm = svc.match(/^yf\.oapi\.(.+?)\.\w+\.get$/); if (mm) tk = mm[1]; }
+        if (!tk) { mm = svc.match(/^yf\.oapi\.(.+?)\.data\.\w+$/); if (mm) tk = mm[1]; }
+        if (!tk) { mm = svc.match(/^yf\.oapi\.(.+?)\.\w+$/); if (mm) tk = mm[1]; }
+        if (!tk) continue;
+        const obj = objs.find(o => o.type_key === tk);
+        if (!obj) {
+          // 创建新对象（OAPMA 有但 Apipost 无）
+          const newObj = {
+            type_key: tk, title: at.MA008 || tk, titles: new Set([at.MA008 || tk]),
+            operations: new Set([op]), services: { [op]: svc },
+            primary_key: [], detail_nodes: new Set(),
+            sample_service: svc, has_data_segment: svc.includes('.data.'),
+            svc_with_data: svc.includes('.data.') ? 1 : 0,
+            svc_without_data: svc.includes('.data.') ? 0 : 1,
+            service_conflicts: {},
+            aliases: new Set([tk, svc]),
+            oapma_supplemented: true,
+            oapma_node_code: at.MA005 || '',
+          };
+          objs.push(newObj);
+          objs.sort((a, b) => a.type_key.localeCompare(b.type_key));
+          knownSvcs.add(svc);
+          oapmaPatched++;
+          continue;
+        }
+        if (!svc.includes('.data.') && obj.services[op] && obj.services[op].includes('.data.')) continue;
+        obj.services[op] = svc;
+        obj.operations.add(op);
+        knownSvcs.add(svc);
+        oapmaPatched++;
+      }
+      if (oapmaPatched > 0) {
+        console.log('      OAPMA 补充: ' + oapmaPatched + ' 个服务');
+        yaml = buildYaml(objs, report, doc);
+      }
+    }
+  }
   if (CHECK_ONLY) {
     console.log('[5/6] --check 模式：不写盘');
     if (!fs.existsSync(OUT_YAML)) {

@@ -149,3 +149,10 @@ archive/
 #   scripts/                      抽取与校验脚本
 #   config/*.example.yaml         配置模板
 # ============================================================================
+
+# docs/sources/ — 一次性数据源（构建期输入，不入库）
+docs/sources/*.xml
+docs/sources/*.xlsx
+docs/sources/*.xls
+docs/sources/*.csv
+docs/sources/表结构信息/

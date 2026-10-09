@@ -250,3 +250,66 @@ CREATE INDEX idx_licenses_line ON licenses(product_line);
 | `docs/plans/yf-db-direct-connect-probe.md` | 架构对比与数据库直连实测（B1 的证据来源） |
 | `docs/TODO-PLAN.md` D-13/D-14              | analysis 层与视图 DDL 开发任务 |
 | YZCLI `docs/`（易助侧）                         | 待补：共享包拆分后的迁移说明         |
+
+---
+
+## 七、实施进展（截至 2026-10-09）
+
+> 以下逐项标注 B1–B5 裁决的落地状态。✅ = 已完成，🔶 = 部分完成，⬜ = 未启动。
+
+### B1 授权体系独立包 ✅
+
+| 里程碑 | 状态 | 说明 |
+|--------|------|------|
+| erp-license 抽取为独立仓 | ✅ | GitHub: github279355466/erp-core（含 license-server + gateway 核心） |
+| YFAgent 引用方式 | ✅ | packages/yfcli-experts/package.json → "@digiwin/erp-experts": "file:../../../erp-experts" |
+| YZCLI 引用方式 | ✅ | 同构 ile: 引用，workspaces 软链 |
+| licenses 表 product_line 字段 | ⬜ | 待商业化阶段实施（见 §4.5 迁移示意） |
+
+### B2 共享边界注册表 ✅
+
+| 里程碑 | 状态 | 说明 |
+|--------|------|------|
+| erp-experts 抽取为独立仓 | ✅ | GitHub: github279355466/erp-experts（公共计算引擎） |
+| yfcli-experts 引用 erp-experts | ✅ | 薄封装层：引用公共引擎 + 易飞注册表层 |
+| 工具清单按类别识别 | ✅ | tier-mapper 已改为注册表模式，消除硬编码工具名 |
+
+### B3 双通道架构落地 ✅
+
+| 里程碑 | 状态 | 说明 |
+|--------|------|------|
+| SDK 层（CRUD 走 OpenAPI） | ✅ | packages/yfcli-sdk — 122 tests passed |
+| Analysis 层（聚合走数据库直连） | ✅ | packages/yfcli-analysis — 49 tests passed |
+| Auth 层（Token 生命周期 / 凭据红线） | ✅ | packages/yfcli-auth — 64 tests passed |
+| MCP Server（HTTP/SSE 传输） | ✅ | packages/yfcli-mcp — 41 tests passed |
+| Experts 层（公共引擎 + 注册表） | ✅ | packages/yfcli-experts — 18 tests passed |
+| Skill 包（薄 Skill + 助手 Prompt） | ✅ | packages/yfcli-skill-openapi |
+| **测试合计** | ✅ | **294 tests passed [5 包]** |
+
+### B4 分析层基础设施 ✅
+
+| 里程碑 | 状态 | 说明 |
+|--------|------|------|
+| 9 个 vw_ai_* 视图 DDL | ✅ | packages/yfcli-analysis/sql/views/ — 9 个 SQL 文件 |
+| 20 个 SQL 模板补全 | ✅ | 	emplates.ts — 20 个 defineTemplate（销售/采购/库存/应收/应付/生产/总账） |
+| L4 审计日志 | ✅ | udit.ts — 四层防护之 L4，sink 可插拔，参数脱敏 |
+| 智能问数路由 | ✅ | smart-query.ts — 自然语言 → 模板匹配 → SQL 执行 |
+
+### B5 AI 助手文档 🔶
+
+| 里程碑 | 状态 | 说明 |
+|--------|------|------|
+| 助手文档目录结构 | ✅ | packages/yfcli-skill-openapi/references/assistants/ |
+| 已有助手文档 | 🔶 | 3 个已就绪（customer-create / plant-query / plant-read） |
+| 剩余助手文档 | ⬜ | 待业务侧提供端点清单后补充（参见 AGENTS.md §AI 助手路由） |
+
+### 其他工程成果
+
+| 项 | 状态 | 说明 |
+|----|------|------|
+| Trellis 任务体系 | ✅ | .trellis/tasks/ — MVP P0~P5 + Post-MVP 共 14 个任务目录 |
+| CI 门禁 | ✅ | .github/workflows/verify.yml — scan:secrets + check:all |
+| 知识产物校验 | ✅ | 
+pm run check:all — TypeKey / 字段 / 域归属 / 数据字典四维校验 |
+| 敏感信息扫描 | ✅ | 
+pm run scan:secrets — 7 类凭证模式检测 |

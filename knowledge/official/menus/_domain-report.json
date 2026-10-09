@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T14:16:34.110Z",
+  "generated_at": "2026-10-09T09:07:01.124Z",
   "source": "knowledge/typekey/typekey_map.yaml",
   "domain_definitions": [
     {
@@ -67,7 +67,7 @@
     "engineering": 7,
     "inventory": 11,
     "base": 27,
-    "UNASSIGNED": 2,
+    "UNASSIGNED": 3,
     "production": 10,
     "outsourcing": 10,
     "sales": 9
@@ -75,11 +75,12 @@
   "confidence": {
     "high": 103,
     "medium": 1,
-    "none": 2
+    "none": 3
   },
   "need_confirm": [
     "combination.order",
-    "split.order"
+    "split.order",
+    "subscription"
   ],
   "medium_confidence": [
     {

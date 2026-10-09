@@ -1,0 +1,5495 @@
+# 易飞 OpenAPI 枚举字典
+# 数据源：OAPMB.MB012（内存外显字段）
+# 统计：673 个枚举字段 / 2626 个枚举值 / 79 个节点
+# 生成时间：2026-10-09
+# 用途：SDK enum-guard 校验 + MCP help 工具展示 + Agent 枚举值查询
+# 格式：type_key → field_alias → { code: label, ... }
+
+account:
+  ac_category:
+    cn_name: 科目类别
+    field_code: MA008
+    node_code: ACTI03
+    values:
+      "1": 统驭账户
+      "2": 末级科目
+      "3": 末级科目
+      "4": 分类
+  ac_property:
+    cn_name: 科目性质
+    field_code: MA005
+    node_code: ACTI03
+    values:
+      "1": 账户
+      "2": 结转
+  account_page_format:
+    cn_name: 账页格式
+    field_code: MA030
+    node_code: ACTI03
+    values:
+      "1": 金额式
+      "2": 外币金额式
+  annual_settlement_method:
+    cn_name: 年结方式
+    field_code: MA044
+    node_code: ACTI03
+    values:
+      "0": 余额结转
+      "1": 发生额结转
+  asset_profit_loss:
+    cn_name: 资产损益类
+    field_code: MA006
+    node_code: ACTI03
+    values:
+      "1": 资产负债
+      "2": 损益
+  budget:
+    cn_name: 预算
+    field_code: MA042
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  cash_ac:
+    cn_name: 现金类科目
+    field_code: MA023
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  cash_bank_deposit_account:
+    cn_name: 现金银行存款科目
+    field_code: MA038
+    node_code: ACTI03
+    values:
+      "0": 其他
+      "1": 现金
+      "2": 银行存款
+  contra_method:
+    cn_name: 数量控制
+    field_code: MA020
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  customer_management:
+    cn_name: 客户
+    field_code: MA039
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  dearptment_management:
+    cn_name: 部门管理
+    field_code: MA009
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  debit_credit_balance:
+    cn_name: 余额借贷类
+    field_code: MA019
+    node_code: ACTI03
+    values:
+      "-1": 贷方
+      "1": 借方
+  effective_ac:
+    cn_name: 科目有效
+    field_code: MA016
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  foreign_currency_accounting:
+    cn_name: 外币核算
+    field_code: MA031
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  monetary_account:
+    cn_name: 货币性科目
+    field_code: MA010
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  participate_in_foreign_exchange_adjustment:
+    cn_name: 参与调汇
+    field_code: MA027
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  participate_in_transfer:
+    cn_name: 参与结转
+    field_code: MA028
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  project_management:
+    cn_name: 项目号
+    field_code: MA045
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  report_debit_credit_cate:
+    cn_name: 报表借贷类
+    field_code: MA007
+    node_code: ACTI03
+    values:
+      "-1": 贷方
+      "1": 借方
+  reverse_debit_and_credit_in_red_letters:
+    cn_name: 金额红字借贷反向
+    field_code: MA043
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  staff:
+    cn_name: 人员
+    field_code: MA041
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+  supplier_management:
+    cn_name: 供应商
+    field_code: MA040
+    node_code: ACTI03
+    values:
+      "N": 否
+      "Y": 是
+
+accounting.voucher:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA016
+    node_code: ACTI10
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB016
+    node_code: ACTI10
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  carryover_code:
+    cn_name: 结转码
+    field_code: TA032
+    node_code: ACTI10
+    values:
+      "1": 一般
+      "2": 结转
+  cashier_code:
+    cn_name: 出纳码
+    field_code: TA021
+    node_code: ACTI10
+    values:
+      "N": 未签字
+      "R": 无需出纳签字
+      "Y": 已签字
+  posting_code:
+    cn_name: 过账码
+    field_code: TA011
+    node_code: ACTI10
+    values:
+      "N": 未过账
+      "Y": 已过账
+  source_code:
+    cn_name: 来源码
+    field_code: TA006
+    node_code: ACTI10
+    values:
+      "1": 一般凭证输入
+      "2": 预提凭证输入
+      "3": 预提回转
+      "4": 常用凭证复制
+      "5": 比率分摊
+      "6": 回转凭证
+      "7": 红字冲销凭证
+      "8": 其他转入
+      "A": 票据系统生成
+      "B": 固定资产生成
+      "C": 应收系统生成
+      "D": 应付系统生成
+      "E": 库存系统生成
+      "F": 订单系统生成
+      "G": 采购系统生成
+      "H": 工单系统生成
+      "I": 人事薪资生成
+      "K": 成本计算系统
+      "L": 汇兑损益结转
+      "M": 自动转账生成
+      "N": 药品生产生成
+      "O": HR集成
+      "P": 费控集成
+
+ap.refund.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TK024
+    node_code: ACPI09
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TL027
+    node_code: ACPI09
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  approved_check:
+    cn_name: 审核检查
+    field_code: TK081
+    node_code: ACPI09
+    values:
+      "N": 否
+      "Y": 是
+  city_type:
+    cn_name: 城市类型
+    field_code: TK064
+    node_code: ACPI09
+    values:
+      "1": 同城
+      "2": 异城
+  doc_source:
+    cn_name: 单据来源
+    field_code: TK083
+    node_code: ACPI09
+    values:
+      "1": 手动输入
+      "2": 实际交易生成
+      "3": 批次生成
+  handle_fee_burden_mode:
+    cn_name: 手续费类型
+    field_code: TK070
+    node_code: ACPI09
+    values:
+      "1": 付款方支付
+      "2": 收款方支付
+  handle_mode:
+    cn_name: 处理方式
+    field_code: TK065
+    node_code: ACPI09
+    values:
+      "1": 直接支付(企业账户进行支付)
+      "2": 代理支付(财务公司的账户进行支付)
+      "3": 中心取票(财务公司使用支票支付)
+  is_group_payment:
+    cn_name: 是否集团支付
+    field_code: TK063
+    node_code: ACPI09
+    values:
+      "N": 否
+      "Y": 是
+  is_urgency:
+    cn_name: 加急
+    field_code: TK077
+    node_code: ACPI09
+    values:
+      "0": 否
+      "1": 是
+  pay_type:
+    cn_name: 结算方式
+    field_code: TK061
+    node_code: ACPI09
+    values:
+      "1": 转账
+      "2": 电汇
+  payment_category:
+    cn_name: 款项类别
+    field_code: TL004
+    node_code: ACPI09
+    values:
+      "1": 发票
+      "2": 其他应付
+      "4": 预付款
+  refund_object:
+    cn_name: 退款对象
+    field_code: TK043
+    node_code: ACPI09
+    values:
+      "1": 供应商
+      "2": 人员
+      "9": 其它
+  trade_status:
+    cn_name: 交易状态
+    field_code: TK079
+    node_code: ACPI09
+    values:
+      "0": 未提交
+      "1": 已提交
+      "2": 待授权
+      "3": 已支付
+      "4": 已授权待支付
+      "9": 交易失败
+      "E": 联通性失败
+  transaction_type:
+    cn_name: 交易类型
+    field_code: TK062
+    node_code: ACPI09
+    values:
+      "0": 本行对公内部转账
+      "1": 本行对公
+      "2": 本行对私
+      "3": 跨行对公
+      "4": 跨行对私
+  verification_status:
+    cn_name: 核销状态
+    field_code: TK028
+    node_code: ACPI09
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+approve.price:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TL012
+    node_code: PURI03
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  pricing_by_qty:
+    cn_name: 分量计价
+    field_code: TM008
+    node_code: PURI03
+    values:
+      "N": 否
+      "Y": 是
+  source_code:
+    cn_name: 来源码
+    field_code: TL022
+    node_code: PURI03
+    values:
+      "0": ERP
+      "1": EBC
+  tax_included:
+    cn_name: 含税
+    field_code: TL008
+    node_code: PURI03
+    values:
+      "N": 否
+      "Y": 是
+
+ar.refund.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TK024
+    node_code: ACRI15
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TL027
+    node_code: ACRI15
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  approved_check:
+    cn_name: 审核检查
+    field_code: TK081
+    node_code: ACRI15
+    values:
+      "N": 否
+      "Y": 是
+  city_type:
+    cn_name: 城市类型
+    field_code: TK064
+    node_code: ACRI15
+    values:
+      "1": 同城
+      "2": 异城
+  doc_source:
+    cn_name: 单据来源
+    field_code: TK083
+    node_code: ACRI15
+    values:
+      "1": 手动输入
+      "2": 实际交易生成
+      "3": 批次生成
+  generate_entry_code:
+    cn_name: 生成分录
+    field_code: TK021
+    node_code: ACRI15
+    values:
+      "N": 未生成
+      "V": 不生成
+      "Y": 已生成
+  handle_mode:
+    cn_name: 处理方式
+    field_code: TK065
+    node_code: ACRI15
+    values:
+      "1": 直接支付
+      "2": 代理支付
+      "3": 中心取票
+  instalment_source_type:
+    cn_name: 分期收款来源类型
+    field_code: TKI01
+    node_code: ACRI15
+    values:
+      "1": 合同
+      "2": 订单
+  is_group_payment:
+    cn_name: 是否集团支付
+    field_code: TK063
+    node_code: ACRI15
+    values:
+      "N": 否
+      "Y": 是
+  is_urgency:
+    cn_name: 加急
+    field_code: TK077
+    node_code: ACRI15
+    values:
+      "0": 否
+      "1": 是
+  pay_type:
+    cn_name: 结算方式
+    field_code: TK061
+    node_code: ACRI15
+    values:
+      "1": 转账
+      "2": 电汇
+  payment_category:
+    cn_name: 款项类别
+    field_code: TL004
+    node_code: ACRI15
+    values:
+      "1": 销售发票
+      "2": 其他应收
+      "3": 退款
+      "4": 冲减预收款
+      "5": "收款6.采购发票,7.其他应付,8.冲减预付款,9.其他费用"
+  trade_status:
+    cn_name: 交易状态
+    field_code: TK079
+    node_code: ACRI15
+    values:
+      "0": 未提交
+      "1": 已提交
+      "2": 待授权
+      "3": 已支付
+      "4": 已授权待支付
+      "9": 交易失败
+      "E": 联通性失败
+  transaction_type:
+    cn_name: 交易类型
+    field_code: TK062
+    node_code: ACRI15
+    values:
+      "0": 本行对公内部转账
+      "1": 本行对公
+      "2": 本行对私
+      "3": 跨行对公
+      "4": 跨行对私
+  verification_status:
+    cn_name: 核销状态
+    field_code: TK030
+    node_code: ACRI15
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+bom:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: CA020
+    node_code: BOMI17
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 取消确认中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不执行电子签核
+  approve_status:
+    cn_name: 审核码
+    field_code: CB022
+    node_code: BOMI17
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  calculation_of_standard_cost:
+    cn_name: 标准成本计算
+    field_code: CB016
+    node_code: BOMI17
+    values:
+      "N": 否
+      "Y": 是
+  consider_parent_fix_lead_days:
+    cn_name: 考虑上阶固定前置天数
+    field_code: CB023
+    node_code: BOMI17
+    values:
+      "N": 否
+      "Y": 是
+  consider_replaced:
+    cn_name: 取替代料
+    field_code: MD010
+    node_code: BOMI02
+    values:
+      "1": 无
+      "2": 有替换件
+      "3": 有替代件
+  cross_schedule:
+    cn_name: 交叉排程
+    field_code: CB032
+    node_code: BOMI17
+    values:
+      "0": 不交叉
+      "1": 按生产批量交叉
+  default_accessory:
+    cn_name: 默认选择
+    field_code: CB015
+    node_code: BOMI17
+    values:
+      "N": 否
+      "Y": 是
+  is_constrain:
+    cn_name: 约束存在
+    field_code: CA014
+    node_code: BOMI17
+    values:
+      "N": 否
+      "Y": 是
+  is_loss_qty:
+    cn_name: 分量损耗
+    field_code: CB031
+    node_code: BOMI17
+    values:
+      "N": 否
+      "Y": 是
+  material_type:
+    cn_name: 材料型态
+    field_code: CB019
+    node_code: BOMI17
+    values:
+      "1": 直接材料
+      "2": 间接材料
+      "3": 供应商供料
+      "4": 不发料
+      "5": 客户供料
+  rep_sub_item:
+    cn_name: 取替代件
+    field_code: CB012
+    node_code: BOMI17
+    values:
+      "1": 无
+      "2": 有替换件
+      "3": 有替代件
+  sub_item_relation:
+    cn_name: 子件关系
+    field_code: CA013
+    node_code: BOMI17
+    values:
+      "1": 必选，唯一
+      "2": 必选，至少一个
+      "3": 可选，唯一
+      "4": 任意选
+  substitution_method:
+    cn_name: 组合替代
+    field_code: CB029
+    node_code: BOMI17
+    values:
+      "0": 无组合替代
+      "1": 可组合替代
+  valid_status:
+    cn_name: 核准状况
+    field_code: CA015
+    node_code: BOMI17
+    values:
+      "N": 不准交易
+      "Y": 已核准
+      "y": 尚待核准
+
+borrow.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TF029
+    node_code: INVI11
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  object_type:
+    cn_name: 交易对象
+    field_code: TF004
+    node_code: INVI11
+    values:
+      "1": 客户
+      "2": 供应商
+      "3": 人员
+      "9": 其他
+  tax_type:
+    cn_name: 税种
+    field_code: TF010
+    node_code: INVI11
+    values:
+      "1": 内含
+      "2": 外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+
+borrow.return:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TH028
+    node_code: INVI12
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+  tax_type:
+    cn_name: 税种
+    field_code: TH010
+    node_code: INVI12
+    values:
+      "1": 内含
+      "2": 外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+
+calendar:
+  industry:
+    cn_name: 行业别
+    field_code: MP001
+    node_code: CMSI08
+    values:
+      "1": 工厂
+      "2": 银行
+  leave_type:
+    cn_name: 休假方式
+    field_code: MP005
+    node_code: CMSI08
+    values:
+      "1": 全天/休息日
+      "2": 半天
+      "3": 节日
+
+collection.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TK024
+    node_code: ACRI03
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TL027
+    node_code: ACRI03
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  approved_check:
+    cn_name: 审核检查
+    field_code: TK081
+    node_code: ACRI03
+    values:
+      "N": 否
+      "Y": 是
+  city_type:
+    cn_name: 城市类型
+    field_code: TK064
+    node_code: ACRI03
+    values:
+      "1": 同城
+      "2": 异城
+  doc_source:
+    cn_name: 单据来源
+    field_code: TK083
+    node_code: ACRI03
+    values:
+      "1": 手动输入
+      "2": 实际交易生成
+      "3": 批次生成
+  generate_entry_code:
+    cn_name: 生成分录
+    field_code: TK021
+    node_code: ACRI03
+    values:
+      "N": 未生成
+      "V": 不生成
+      "Y": 已生成
+  handle_mode:
+    cn_name: 处理方式
+    field_code: TK065
+    node_code: ACRI03
+    values:
+      "1": 直接支付
+      "2": 代理支付
+      "3": 中心取票
+  instalment_source_type:
+    cn_name: 分期收款来源类型
+    field_code: TKI01
+    node_code: ACRI03
+    values:
+      "1": 合同
+      "2": 订单
+  is_group_payment:
+    cn_name: 是否集团支付
+    field_code: TK063
+    node_code: ACRI03
+    values:
+      "N": 否
+      "Y": 是
+  is_urgency:
+    cn_name: 加急
+    field_code: TK077
+    node_code: ACRI03
+    values:
+      "0": 否
+      "1": 是
+  payment_category:
+    cn_name: 款项类别
+    field_code: TL004
+    node_code: ACRI03
+    values:
+      "1": 销售发票
+      "2": 其他应收
+      "3": 退款
+      "4": 冲减预收款
+      "5": "收款6.采购发票,7.其他应付,8.冲减预付款,9.其他费用"
+  refund_source:
+    cn_name: 退款来源
+    field_code: TK040
+    node_code: ACRI03
+    values:
+      "1": 应收单据
+      "2": 收款单
+  trade_status:
+    cn_name: 交易状态
+    field_code: TK079
+    node_code: ACRI03
+    values:
+      "0": 未提交
+      "1": 已提交
+      "2": 待授权
+      "3": 已支付
+      "4": 已授权待支付
+      "9": 交易失败
+      "E": 联通性失败
+  transaction_type:
+    cn_name: 交易类型
+    field_code: TK062
+    node_code: ACRI03
+    values:
+      "0": 本行对公内部转账
+      "1": 本行对公
+      "2": 本行对私
+      "3": 跨行对公
+      "4": 跨行对私
+  update_code:
+    cn_name: 更新码
+    field_code: TK028
+    node_code: ACRI03
+    values:
+      "N": 否
+      "Y": 是
+  verification_status:
+    cn_name: 核销状态
+    field_code: TK030
+    node_code: ACRI03
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+currency:
+  rounding_of_amt:
+    cn_name: 金额取位
+    field_code: MF004
+    node_code: CMSI06
+    values:
+      "0": 整数
+      "1": 小数一位
+      "2": 小数二位
+  rounding_of_cost:
+    cn_name: 成本金额取位
+    field_code: MF006
+    node_code: CMSI06
+    values:
+      "0": 整数
+      "1": 小数一位
+      "2": 小数二位
+  rounding_of_unit_cost:
+    cn_name: 单位成本取位
+    field_code: MF005
+    node_code: CMSI06
+    values:
+      "0": 整数
+      "1": 小数一位
+      "2": 小数二位
+      "3": 小数三位
+      "4": 小数四位
+      "5": 小数五位
+      "6": 小数六位
+      "7": 小数七位
+      "8": 小数八位
+  rounding_of_up:
+    cn_name: 单价取位
+    field_code: MF003
+    node_code: CMSI06
+    values:
+      "0": 整数
+      "1": 小数一位
+      "2": 小数二位
+      "3": 小数三位
+      "4": 小数四位
+      "5": 小数五位
+      "6": 小数六位
+      "7": 小数七位
+      "8": 小数八位
+
+customer:
+  bill_to_headquarter:
+    cn_name: 总公司请款
+    field_code: MA066
+    node_code: COPI01
+    values:
+      "N": 否
+      "Y": 是
+  consignment_customers:
+    cn_name: 寄售客户
+    field_code: MAB01
+    node_code: COPI01
+    values:
+      "N": 否
+      "Y": 是
+  credit_limit_1:
+    cn_name: 信用额度管制
+    field_code: MA032
+    node_code: COPI01
+    values:
+      "N": 信用额度不管制
+      "Y": 依公司参数管制
+      "y": 依客户资料管制
+  credit_limit_is_controlled_by_headquarter:
+    cn_name: 信用额度依总公司控管
+    field_code: MA082
+    node_code: COPI01
+    values:
+      "N": 否
+      "Y": 是
+  doc_delivery_method:
+    cn_name: 单据发送方式
+    field_code: MA039
+    node_code: COPI01
+    values:
+      "1": 邮寄
+      "2": FAX
+      "3": EDI
+      "4": "E-MAIL"
+  ebc:
+    cn_name: 汇至EBC
+    field_code: MA106
+    node_code: COPI01
+    values:
+      "N": 否
+      "Y": 是
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: MA113
+    node_code: COPI01
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  export_to_ebc:
+    cn_name: 出货通知信用检查方式
+    field_code: MA103
+    node_code: COPI01
+    values:
+      "N": 否
+      "Y": 是
+  invoice_no_controlled_by_headquarter:
+    cn_name: 发票号码依总公司控管
+    field_code: MA084
+    node_code: COPI01
+    values:
+      "N": 否
+      "Y": 是
+  main_account:
+    cn_name: 主账号
+    field_code: NE018
+    node_code: COPI01
+    values:
+      "N": 否
+      "Y": 是
+  note_delivery_method:
+    cn_name: 票据寄领
+    field_code: MA042
+    node_code: COPI01
+    values:
+      "1": 邮寄
+      "2": 自领
+      "3": 其它
+  order_credit_auditing:
+    cn_name: 订单信用查核方式
+    field_code: MA088
+    node_code: COPI01
+    values:
+      "1": 不检查
+      "2": 警告
+      "3": 拒绝
+  pricing_method:
+    cn_name: 计价方式
+    field_code: MA035
+    node_code: COPI01
+    values:
+      "1": 利润率
+      "2": 折扣率
+  receive_method:
+    cn_name: 结算方式
+    field_code: MA041
+    node_code: COPI01
+    values:
+      "1": 现金
+      "2": 电汇
+      "3": 支票
+      "4": 其他
+  sales_credit_auditing:
+    cn_name: 销货信用查核方式
+    field_code: MA089
+    node_code: COPI01
+    values:
+      "1": 不检查
+      "2": 警告
+      "3": 拒绝
+  settlement_method:
+    cn_name: 开票方法
+    field_code: MA096
+    node_code: COPI01
+    values:
+      "1": 自动结帐
+      "2": 单品结帐
+  taxed_code:
+    cn_name: 税种
+    field_code: MA038
+    node_code: COPI01
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  transport_mode_no:
+    cn_name: 运输方式
+    field_code: MA048
+    node_code: COPI01
+    values:
+      "1": 空运
+      "2": 海运
+      "3": 海空联运
+      "4": 邮寄
+      "5": 陆运
+      "6": 自取
+      "7": 自送
+      "8": 快递
+  valid_status:
+    cn_name: 核准状况
+    field_code: MA097
+    node_code: COPI01
+    values:
+      "1": 已核准
+      "2": 尚待核准
+      "3": 不准交易
+
+department:
+  is_production_department:
+    cn_name: 生产部门
+    field_code: ME015
+    node_code: CMSI05
+    values:
+      "N": 否
+      "Y": 是
+  is_valid:
+    cn_name: 有效码
+    field_code: ME008
+    node_code: CMSI05
+    values:
+      "N": 否
+      "Y": 是
+
+destroy.order:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TN015
+    node_code: INVI24
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TO023
+    node_code: INVI24
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  destroy_source:
+    cn_name: 销毁来源
+    field_code: TN004
+    node_code: INVI24
+    values:
+      "1": 报废单
+      "2": 留样单
+      "9": 其他
+
+document.type.general:
+  auto_confirm:
+    cn_name: 自动审核
+    field_code: MQ015
+    node_code: CMSMQ_001
+    values:
+      "N": 否
+      "Y": 是
+  coding_method:
+    cn_name: 编码方式
+    field_code: MQ004
+    node_code: CMSMQ_001
+    values:
+      "1": 日编
+      "2": 月编
+      "3": 流水号
+      "4": 手动编号
+  transaction_type:
+    cn_name: 交易类别
+    field_code: MQ008
+    node_code: CMSMQ_001
+    values:
+      "1": 入库
+      "2": 销货
+      "3": 领用
+      "4": 调拨
+      "5": 调整
+
+ecn:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA011
+    node_code: BOMI04
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB012
+    node_code: BOMI04
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  change_type:
+    cn_name: 变更类型
+    field_code: TC041
+    node_code: BOMI04
+    values:
+      "1": 新增
+      "2": 修改
+      "3": 删除
+  consider_replaced:
+    cn_name: 取替代料
+    field_code: TC012
+    node_code: BOMI04
+    values:
+      "1": 无
+      "2": 有替换件
+      "3": 有替代件
+  cross_schedule:
+    cn_name: 交叉排程
+    field_code: TC034
+    node_code: BOMI04
+    values:
+      "0": 不交叉
+      "1": 按生产批量交叉
+  is_constrain:
+    cn_name: 约束存在
+    field_code: TB020
+    node_code: BOMI04
+    values:
+      "N": 否
+      "Y": 是
+  material_type:
+    cn_name: 材料类型
+    field_code: TC019
+    node_code: BOMI04
+    values:
+      "1": 直接材料
+      "2": 间接材料
+      "3": 供应商供料
+      "4": 不发料
+      "5": 客户供料
+  original_consider_replaced:
+    cn_name: 原取替代料
+    field_code: TC112
+    node_code: BOMI04
+    values:
+      "1": 无
+      "2": 有替换件
+      "3": 有替代件
+  original_cross_schedule:
+    cn_name: 原交叉排程
+    field_code: TC134
+    node_code: BOMI04
+    values:
+      "0": 不交叉
+      "1": 按生产批量交叉
+  original_material_type:
+    cn_name: 原材料类型
+    field_code: TC119
+    node_code: BOMI04
+    values:
+      "1": 直接材料
+      "2": 间接材料
+      "3": 供应商供料
+      "4": 不发料
+      "5": 客户供料
+  original_sub_item_relation:
+    cn_name: 原子件关系
+    field_code: TB119
+    node_code: BOMI04
+    values:
+      "1": 必选，唯一
+      "2": 必选，至少一个
+      "3": 可选，唯一
+      "4": 任意选
+  original_valid_status:
+    cn_name: 原核准状况
+    field_code: TB113
+    node_code: BOMI04
+    values:
+      "N": 不准交易
+      "Y": 已核准
+      "y": 尚待核准
+  sub_item_relation:
+    cn_name: 子件关系
+    field_code: TB019
+    node_code: BOMI04
+    values:
+      "1": 必选
+      "2": 必选
+      "3": 可选
+      "4": 任意选
+  substitution_method:
+    cn_name: 新组合替代
+    field_code: TCC03
+    node_code: BOMI04
+    values:
+      "0": 无组合替代
+      "1": 可组合替代
+  valid_status:
+    cn_name: 核准状况
+    field_code: TB013
+    node_code: BOMI04
+    values:
+      "N": 不准交易
+      "Y": 已核准
+      "y": 尚待核准
+
+engineering.item:
+  bonded_goods:
+    cn_name: 保税品
+    field_code: MI011
+    node_code: BOMI10
+    values:
+      "N": 否
+      "Y": 是
+  item_attribute:
+    cn_name: 品号属性
+    field_code: MI009
+    node_code: BOMI10
+    values:
+      "C": 配置件
+      "M": 自制件
+      "P": 采购件
+      "S": 委外加工件
+      "Y": 虚设品号
+  optional_mode:
+    cn_name: 选配模式
+    field_code: MI019
+    node_code: BOMI10
+    values:
+      "0": 无
+      "1": 单阶选配
+      "2": 多阶选配
+  verification_mode:
+    cn_name: 检验方式
+    field_code: MIC02
+    node_code: BOMI10
+    values:
+      "0": 免检
+      "1": 抽检(减量)
+      "2": 抽检(正常)
+      "3": 抽检(加严)
+      "4": 全检
+
+expense.invoice:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA044
+    node_code: ACPI06
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB012
+    node_code: ACPI06
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  data_type:
+    cn_name: 单据类型
+    field_code: TA079
+    node_code: ACPI06
+    values:
+      "1": 蓝字
+      "2": 红字
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: TA073
+    node_code: ACPI06
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TA010
+    node_code: ACPI06
+    values:
+      "S": 可抵扣专用发票
+      "T": 运输发票
+      "Z": 其他
+  tax_type:
+    cn_name: 税种
+    field_code: TA011
+    node_code: ACPI06
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  verification_status:
+    cn_name: 核销状态
+    field_code: TB047
+    node_code: ACPI06
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+financial.institution:
+  account_partner:
+    cn_name: 账号对象
+    field_code: NE003
+    node_code: CMSI16
+    values:
+      "1": 公司
+      "2": 供应商
+      "3": 人员
+      "4": 客户
+      "9": 其它
+  financing institution_type:
+    cn_name: 金融机构种类
+    field_code: MO002
+    node_code: CMSI16
+    values:
+      "1": 本国银行
+      "2": 外国银行
+      "3": 信托投资
+      "4": 票券金融
+      "5": 信用合作社
+      "6": 产物保险
+      "7": 渔会信用
+      "8": 农会信用
+      "9": 邮局
+
+function.category:
+  function_category:
+    cn_name: 职务分类
+    field_code: MJ002
+    node_code: CMSI09
+    values:
+      "1": 物管
+      "2": 生管
+      "3": 业务
+      "4": 采购
+      "5": 会计
+      "6": 出纳
+      "7": 仓管
+      "8": 研发
+      "9": 制造
+      "A": 品管
+      "B": 管理
+      "C": 工程
+      "D": 生技
+      "E": 船务
+      "F": 厂务
+      "G": 贸易
+      "H": 总务
+      "I": 人事
+      "J": 保税
+      "K": 稽核
+      "L": 企划
+      "M": 文管
+      "N": 产品
+      "O": 行政
+      "P": 外点(专柜前抬)
+      "Z": 其它
+
+inquiry:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TO012
+    node_code: PURI14
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TP011
+    node_code: PURI14
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  pricing_by_qty:
+    cn_name: 分量计价
+    field_code: TP009
+    node_code: PURI14
+    values:
+      "N": 否
+      "Y": 是
+  selected:
+    cn_name: 选定码
+    field_code: TP015
+    node_code: PURI14
+    values:
+      "N": 否
+      "Y": 是
+  tax_included:
+    cn_name: 含税
+    field_code: TP007
+    node_code: PURI14
+    values:
+      "N": 否
+      "Y": 是
+
+inventory.transaction:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA017
+    node_code: INVI05
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB018
+    node_code: INVI05
+    values:
+      "N": 未确认
+      "U": 确认失败
+      "V": 作废
+      "Y": 已确认
+  doc_type:
+    cn_name: 单据性质码
+    field_code: TA009
+    node_code: INVI05
+    values:
+      "11": 一般单据
+      "12": 调拨单
+  generate_entry_code:
+    cn_name: 生成分录
+    field_code: TA013
+    node_code: INVI05
+    values:
+      "N": 否
+      "Y": 是
+  identifier:
+    cn_name: 标识位
+    field_code: MB006
+    node_code: INVI05
+    values:
+      "A": 正常
+      "B": 报废
+      "C": 破坏
+  transaction_type:
+    cn_name: 交易类型
+    field_code: MB005
+    node_code: INVI05
+    values:
+      "1": 出货通知单
+      "A": 采购进货
+      "B": 采购退货
+      "C": 销售出货
+      "D": 销售退货
+      "E": 生产领料
+      "F": 生产退料
+      "G": 生产入库
+      "H": 委外进货
+      "I": 委外退货
+      "J": 借出
+      "K": 借入
+      "L": 借出归还
+      "M": 借入归还
+      "N": 一般交易入
+      "O": 一般交易销
+      "P": 一般交易领
+      "Q": 一般交易调拨
+      "R": 一般交易调整
+      "S": 成本开帐调整
+      "T": 序号开帐
+      "U": 调拨
+      "V": 报废
+      "W": 销毁
+      "X": 组合单
+      "Y": 拆解单
+      "Z": 新增序号
+
+inventory.transaction.details:
+  cost_code:
+    cn_name: 成本码
+    field_code: LA015
+    node_code: INVI09
+    values:
+      "N": 赋值计算结果
+      "R": 返工入
+      "Y": 成本计算来源
+      "r": 返工领
+      "y": 成本调整
+  transaction_type:
+    cn_name: 交易别
+    field_code: LA014
+    node_code: INVI09
+    values:
+      "1": 入库
+      "2": 销货
+      "3": 领用
+      "4": 调拨
+      "5": 调整
+  warehouse_type:
+    cn_name: 仓库性质
+    field_code: LA009C2
+    node_code: INVI09
+    values:
+      "1": 存货仓
+      "2": 非存货仓
+
+item:
+  allowed_delivery_overrun:
+    cn_name: 允许超出发货清单发货
+    field_code: MBD02
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  barcode_manage:
+    cn_name: 条码管理
+    field_code: MBH01
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  batch_sync_production:
+    cn_name: 整批同步生产
+    field_code: MB455
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  bonded_goods:
+    cn_name: 保税品
+    field_code: MB020
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  chinese_herbal_medicine:
+    cn_name: 中药饮片
+    field_code: MB120
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  chinese_traditional_medicine:
+    cn_name: 中药材
+    field_code: MB119
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  configuration_mode:
+    cn_name: 选配模式
+    field_code: MB443
+    node_code: INVI02
+    values:
+      "0": 无
+      "1": 单阶选配
+      "2": 多阶选配
+  costing_mode:
+    cn_name: 成本计价方式
+    field_code: MB442
+    node_code: INVI02
+    values:
+      "1": 标准成本
+      "2": 月加权平均
+      "3": 先进先出
+      "4": "分批认定-批内先进先出"
+      "5": "分批认定-批内月加权"
+  drinking_or_external:
+    cn_name: 内服外用
+    field_code: MB118
+    node_code: INVI02
+    values:
+      "1": 内服
+      "2": 外用
+  effective_date_calculate_mode:
+    cn_name: 有效日期推算方式
+    field_code: MB435
+    node_code: INVI02
+    values:
+      "1": 按天推算
+      "2": 按月按算
+  fix_weight:
+    cn_name: 存货双单位推算方式
+    field_code: MB091
+    node_code: INVI02
+    values:
+      "N": 不推算
+      "Y": 自动推算，以交易数量为主
+      "y": 自动推算，以包装数量为主
+  gmp_certification:
+    cn_name: GMP认证
+    field_code: MB136
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  imporant_item:
+    cn_name: 重点品种
+    field_code: MB115
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  imported_medicine:
+    cn_name: 进口药
+    field_code: MB114
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  install_that_acceptance:
+    cn_name: 安装即验收
+    field_code: MB479
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  inventory_check_by:
+    cn_name: 库存量检查对象
+    field_code: MB436
+    node_code: INVI02
+    values:
+      "1": 库存数量
+      "2": 库存包装数量
+      "3": 库存数量和库存包装数量
+  inventory_control:
+    cn_name: 库存管理
+    field_code: MB019
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  is_valid:
+    cn_name: 有效码
+    field_code: MD007
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  item_admit_code:
+    cn_name: 认样检查
+    field_code: MB144
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  item_attribute:
+    cn_name: 品号属性
+    field_code: MB025
+    node_code: INVI02
+    values:
+      "C": 配置件
+      "M": 自制件
+      "P": 采购件
+      "S": 委外件
+      "Y": 虚设件
+  latest_purchase_price_is_price_tax_included_trans_local:
+    cn_name: 最近进价-单价含税(原/本币)
+    field_code: MB102
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  liquid_acus_medicament:
+    cn_name: 水针剂
+    field_code: MB113
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  lot_control:
+    cn_name: 批号管理
+    field_code: MB022
+    node_code: INVI02
+    values:
+      "N": 不需要
+      "T": 需要且检查库存量
+      "W": 仅需警告
+      "Y": 需要不检查库存量
+  maintenance medicine:
+    cn_name: 养护药品
+    field_code: MB137
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  medicine_first_business:
+    cn_name: 首营品种
+    field_code: MB140
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  modify_item_name_spec:
+    cn_name: 修改品名/规格
+    field_code: MB066
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  mps_item:
+    cn_name: MPS件
+    field_code: MB033
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  need_check:
+    cn_name: 需核销
+    field_code: MBL02
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  need_install:
+    cn_name: 需安装
+    field_code: MB477
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  otc:
+    cn_name: OTC
+    field_code: MB117
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  over_delivery_manage:
+    cn_name: 超交管理
+    field_code: MB087
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  over_receipt_manage:
+    cn_name: 超收管理
+    field_code: MB044
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  picking_code:
+    cn_name: 领料码
+    field_code: MB042
+    node_code: INVI02
+    values:
+      "1": 逐批领料
+      "2": 自动扣料
+      "3": 单独领料
+      "5": 依包装发料
+  product_serial_no_manage:
+    cn_name: 产品序号管理
+    field_code: MB092
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  purchase_plan_getting_minimum_price:
+    cn_name: 采购计划取最低核价
+    field_code: MBD01
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  purchase_price_control:
+    cn_name: 进价管制
+    field_code: MB083
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  quality_inspection_mode:
+    cn_name: 检验方式
+    field_code: MB043
+    node_code: INVI02
+    values:
+      "0": 免检
+      "1": 抽检(减量)
+      "2": 抽检(正常)
+      "3": 抽检(加严)
+      "4": 全检
+  repair_main_item:
+    cn_name: 维修主件
+    field_code: MBL03
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  repair_parts_item:
+    cn_name: 维修配件
+    field_code: MBL04
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  replenish_period:
+    cn_name: 补货周期
+    field_code: MB035
+    node_code: INVI02
+    values:
+      "1": 每日
+      "2": 每周
+      "3": 每旬
+      "4": 半月
+      "5": 每月
+      "6": 每季
+  replenishment_policy:
+    cn_name: 补货政策
+    field_code: MB034
+    node_code: INVI02
+    values:
+      "H": 依历史销售
+      "L": 依LRP需求
+      "M": 依MRP需求
+      "N": 不需
+      "R": 依补货点
+  required_acceptance:
+    cn_name: 需验收
+    field_code: MB478
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  reserved_sample_medicine:
+    cn_name: 留样药品
+    field_code: MB145
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  retail_price_tax_included:
+    cn_name: 零售价含税
+    field_code: MB052
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  sales_list_price1_tax_included:
+    cn_name: 售价定价一含税
+    field_code: MB103
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  sales_list_price2_tax_included:
+    cn_name: 售价定价二含税
+    field_code: MB104
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  sales_list_price3_tax_included:
+    cn_name: 售价定价三含税
+    field_code: MB105
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  sales_list_price4_tax_included:
+    cn_name: 售价定价四含税
+    field_code: MB106
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  sales_list_price5_tax_included:
+    cn_name: 售价定价五含税
+    field_code: MB107
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  sales_list_price6_tax_included:
+    cn_name: 售价定价六含税
+    field_code: MB108
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  sales_price_control:
+    cn_name: 售价管制
+    field_code: MB085
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  selling_limit_control:
+    cn_name: 限销管理
+    field_code: MB126
+    node_code: INVI02
+    values:
+      "1": 限销
+      "2": 限入
+      "3": 限销限入
+      "4": 无限制
+  serial_no_manage:
+    cn_name: 序号管理
+    field_code: MB454
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  shelf_life_control:
+    cn_name: 保质期管理
+    field_code: MB127
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  special_medicine:
+    cn_name: 特殊药品
+    field_code: MB116
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  standard_outsourcing_price_tax_included:
+    cn_name: 标准委外单价含税
+    field_code: MB405
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  standard_purchase_price_tax_included:
+    cn_name: 标准进价含税
+    field_code: MB100
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  standard_sales_price_tax_included:
+    cn_name: 标准售价含税
+    field_code: MB101
+    node_code: INVI02
+    values:
+      "N": 否
+      "Y": 是
+  transfer_code:
+    cn_name: 传送码
+    field_code: MB141
+    node_code: INVI02
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  valid_status:
+    cn_name: 核准状况
+    field_code: MB109
+    node_code: INVI02
+    values:
+      "N": 不准交易
+      "Y": 已核准
+      "y": 尚待核准
+  weight_unit:
+    cn_name: 重量单位
+    field_code: MB015
+    node_code: INVI02
+    values:
+      "Kg": Kg
+      "g": g
+
+item.classification:
+  direct_sales_expense_rate:
+    cn_name: 传送码
+    field_code: MA009
+    node_code: INVI01
+    values:
+      "N": 否
+      "Y": 是
+  is_valid:
+    cn_name: 有效码
+    field_code: MA011
+    node_code: INVI01
+    values:
+      "N": 否
+      "Y": 是
+
+item.customer.price:
+  pricing_by_qty:
+    cn_name: 分量计价
+    field_code: MB007
+    node_code: COPI02
+    values:
+      "N": 否
+      "Y": 是
+  tax_included:
+    cn_name: 含税
+    field_code: MB013
+    node_code: COPI02
+    values:
+      "N": 否
+      "Y": 是
+
+item.supplier.price:
+  pricing_by_qty:
+    cn_name: 分量计价
+    field_code: MB010
+    node_code: PURI02
+    values:
+      "N": 否
+      "Y": 是
+  tax_included:
+    cn_name: 含税
+    field_code: MB013
+    node_code: PURI02
+    values:
+      "N": 否
+      "Y": 是
+
+monthly.item.statistics:
+  warehouse_type:
+    cn_name: 仓库性质
+    field_code: LC003C2
+    node_code: INVI10
+    values:
+      "1": 存货仓
+      "2": 非存货仓
+
+op.stockin:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TB017
+    node_code: SFCI07
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB013
+    node_code: SFCI07
+    values:
+      "N": 未确认
+      "U": 确认失败
+      "V": 作废
+      "Y": 已确认
+  qc_status:
+    cn_name: 检验状态
+    field_code: TC039
+    node_code: SFCI07
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+      "4": 特采
+  tax_type:
+    cn_name: 税种
+    field_code: TB019
+    node_code: SFCI07
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  trs_in_category:
+    cn_name: 移入类别
+    field_code: TB007
+    node_code: SFCI07
+    values:
+      "1": 工作中心
+      "2": 委外供应商
+      "3": 仓库
+  trs_out_category:
+    cn_name: 移出类别
+    field_code: TB004
+    node_code: SFCI07
+    values:
+      "1": 工作中心
+      "2": 委外供应商
+      "3": 仓库
+  type:
+    cn_name: 类型
+    field_code: TC013
+    node_code: SFCI07
+    values:
+      "1": 正常完成
+      "2": 返工完成
+      "3": 退回返工
+      "4": 拨转
+      "5": 盘盈盘亏
+
+operation:
+  property:
+    cn_name: 性质
+    field_code: MW004
+    node_code: CMSI19
+    values:
+      "1": 厂内工艺
+      "2": 委外工艺
+
+other.payable.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TI025
+    node_code: ACPI08
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TJ016
+    node_code: ACPI08
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  cost_bear_type:
+    cn_name: 费用承担中心类型
+    field_code: TI046
+    node_code: ACPI08
+    values:
+      "1": 部门
+      "2": 员工
+      "3": 核算项目
+  data_type:
+    cn_name: 单据类型
+    field_code: TI031
+    node_code: ACPI08
+    values:
+      "1": 蓝字
+      "2": 红字
+  payable_object:
+    cn_name: 应付对象
+    field_code: TI035
+    node_code: ACPI08
+    values:
+      "1": 供应商
+      "2": 人员
+      "9": 其它
+  verification_status:
+    cn_name: 核销状态
+    field_code: TJ017
+    node_code: ACPI08
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+other.receivable:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TI025
+    node_code: ACRI09
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TJ016
+    node_code: ACRI09
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  data_type:
+    cn_name: 单据类型
+    field_code: TI031
+    node_code: ACRI09
+    values:
+      "1": 蓝字
+      "2": 红字
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: TI033
+    node_code: ACRI09
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  generate_entry_code:
+    cn_name: 生成分录
+    field_code: TI009
+    node_code: ACRI09
+    values:
+      "N": 未生成
+      "V": 无需生成
+      "Y": 已生成
+  verification_status:
+    cn_name: 核销状态
+    field_code: TJ017
+    node_code: ACRI09
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+outsourcing.approve.price:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TM012
+    node_code: MOCI10
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TN014
+    node_code: MOCI10
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  pricing_by_qty:
+    cn_name: 分量计价
+    field_code: TN015
+    node_code: MOCI10
+    values:
+      "N": 否
+      "Y": 是
+  tax_included:
+    cn_name: 含税
+    field_code: TM006
+    node_code: MOCI10
+    values:
+      "N": 否
+      "Y": 是
+
+outsourcing.price:
+  pricing_by_qty:
+    cn_name: 分量计价
+    field_code: MA015
+    node_code: MOCI09
+    values:
+      "N": 否
+      "Y": 是
+  tax_included:
+    cn_name: 含税
+    field_code: MA011
+    node_code: MOCI09
+    values:
+      "N": 否
+      "Y": 是
+
+outsourcing.purchase.acceptance:
+  qc_status:
+    cn_name: 检验状态
+    field_code: TI035
+    node_code: MOCI11
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+      "4": 特采
+  type:
+    cn_name: 类型
+    field_code: TIC01
+    node_code: MOCI11
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+outsourcing.purchase.arrival:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: CC023
+    node_code: MOCI17
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: CC009
+    node_code: MOCI17
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  print_format:
+    cn_name: 打印格式
+    field_code: CC008
+    node_code: MOCI17
+    values:
+      "1": 中文
+      "2": 英文
+
+outsourcing.purchase.arrival.acceptance:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TD021
+    node_code: MOCI18
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  quality_inspection_mode:
+    cn_name: 检验方式
+    field_code: TD012
+    node_code: MOCI18
+    values:
+      "0": 免检
+      "1": 减量
+      "2": 正常
+      "3": 加严
+      "4": 全检
+
+outsourcing.purchase.inspection.return:
+  source:
+    cn_name: 来源
+    field_code: TJ009
+    node_code: MOCI08
+    values:
+      "1": 委外进货单
+      "2": 委外到货单
+
+outsourcing.purchase.receipt:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TH036
+    node_code: MOCI06
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TI037
+    node_code: MOCI06
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TH012
+    node_code: MOCI06
+    values:
+      "A": 农产品收购凭证
+      "B": 普通发票
+      "G": 海关代征完税凭证
+      "N": 不可抵扣专用发票
+      "S": 可抵扣专用发票
+      "T": 运输发票
+      "W": 废旧物资收购凭证
+      "Z": 其他
+  qc_status:
+    cn_name: 检验状态
+    field_code: TI035
+    node_code: MOCI06
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+      "4": 特采
+  sqmes_inspection_status:
+    cn_name: sQMS检验码
+    field_code: TIS01
+    node_code: MOCI06
+    values:
+      "0": 待送检
+      "N": 不需送检
+      "Q": 检验完成
+      "U": 送检还原失败
+      "X": 送检失败
+      "Y": 送检成功
+      "Z": 检验状态更新失败
+  tax_type:
+    cn_name: 税种
+    field_code: TH015
+    node_code: MOCI06
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TIC01
+    node_code: MOCI06
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+outsourcing.purchase.return:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TK035
+    node_code: MOCI07
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TL024
+    node_code: MOCI07
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TK011
+    node_code: MOCI07
+    values:
+      "A": 农产品收购凭证
+      "B": 普通发票
+      "G": 海关代征完税凭证
+      "N": 不可抵扣专用发票
+      "S": 可抵扣专用发票
+      "T": 运输发票
+      "W": 废旧物资收购凭证
+      "Z": 其他
+  tax_type:
+    cn_name: 税种
+    field_code: TK014
+    node_code: MOCI07
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TLC01
+    node_code: MOCI07
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+payable.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TK024
+    node_code: ACPI03
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TL027
+    node_code: ACPI03
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  approved_check:
+    cn_name: 审核检查
+    field_code: TK081
+    node_code: ACPI03
+    values:
+      "N": 否
+      "Y": 是
+  city_type:
+    cn_name: 城市类型
+    field_code: TK064
+    node_code: ACPI03
+    values:
+      "1": 同城
+      "2": 异城
+  doc_source:
+    cn_name: 单据来源
+    field_code: TK083
+    node_code: ACPI03
+    values:
+      "1": 手动输入
+      "2": 实际交易生成
+      "3": 批次生成
+  handle_fee_burden_mode:
+    cn_name: 手续费类型
+    field_code: TK070
+    node_code: ACPI03
+    values:
+      "1": 付款方支付
+      "2": 收款方支付
+  handle_mode:
+    cn_name: 处理方式
+    field_code: TK065
+    node_code: ACPI03
+    values:
+      "1": 直接支付
+      "2": 代理支付
+      "3": 中心取票
+  is_group_payment:
+    cn_name: 是否集团支付
+    field_code: TK063
+    node_code: ACPI03
+    values:
+      "N": 否
+      "Y": 是
+  is_urgency:
+    cn_name: 加急
+    field_code: TK077
+    node_code: ACPI03
+    values:
+      "0": 否
+      "1": 是
+  pay_type:
+    cn_name: 结算方式
+    field_code: TK061
+    node_code: ACPI03
+    values:
+      "1": 转账
+      "2": 电汇
+  payment_category:
+    cn_name: 款项类别
+    field_code: TL004
+    node_code: ACPI03
+    values:
+      "1": 采购发票
+      "2": 其他应付
+      "4": 冲减预付款
+      "9": 其他收入
+      "A": 费用报销
+  refund_source:
+    cn_name: 票据来源
+    field_code: TK038
+    node_code: ACPI03
+    values:
+      "1": 应付单据
+      "2": 付款单
+  trade_status:
+    cn_name: 交易状态
+    field_code: TK079
+    node_code: ACPI03
+    values:
+      "0": 未提交
+      "1": 已提交
+      "2": 待授权
+      "3": 已支付
+      "4": 已授权待支付
+      "9": 交易失败
+      "E": 联通性失败
+  transaction_type:
+    cn_name: 交易类型
+    field_code: TK062
+    node_code: ACPI03
+    values:
+      "0": 本行对公内部转账
+      "1": 本行对公
+      "2": 本行对私
+      "3": 跨行对公
+      "4": 跨行对私
+  verification_status:
+    cn_name: 核销状态
+    field_code: TK028
+    node_code: ACPI03
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+picking.receipt:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TC016
+    node_code: MOCI03
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TE019
+    node_code: MOCI03
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  doc_property:
+    cn_name: 单据性质
+    field_code: TC008
+    node_code: MOCI03
+    values:
+      "54": 厂内领料
+      "55": 委外领料
+  get_quantity_method:
+    cn_name: 取数方式
+    field_code: TC013
+    node_code: MOCI03
+    values:
+      "N": 与库存量比较
+      "Y": 需领用量
+  issue_mode:
+    cn_name: 领料方式
+    field_code: TD005
+    node_code: MOCI03
+    values:
+      "1": 成套领料
+      "2": 补足已领套数
+      "3": 补足需领用量
+  material_type:
+    cn_name: 材料类型
+    field_code: TE016
+    node_code: MOCI03
+    values:
+      "1": 直接材料
+      "2": 间接材料
+      "3": 供应商供料
+      "5": 客户供料
+  picking_code:
+    cn_name: 领料码
+    field_code: TD008
+    node_code: MOCI03
+    values:
+      "1": 逐批领料
+      "2": 自动扣料
+      "3": 单独领料
+      "5": 依包装发料
+  sort_by:
+    cn_name: 生成按序
+    field_code: TC012
+    node_code: MOCI03
+    values:
+      "1": 按工单单号
+      "2": 按材料品号
+  source_type:
+    cn_name: 来源别
+    field_code: TC018
+    node_code: MOCI03
+    values:
+      "0": 自行输入
+      "1": 工单
+      "2": 生产入库自动扣料
+      "3": 委外进自动扣料
+      "4": 委外退自动扣料
+      "5": 开工单
+      "6": 委外进厂供料自动扣料
+      "7": 委外退厂供料自动扣料
+      "8": 批次发料自动退料
+  type:
+    cn_name: 类型
+    field_code: TEC01
+    node_code: MOCI03
+    values:
+      "1": 工程品号
+      "2": 正式品号
+  warehouse_type:
+    cn_name: 仓库类型
+    field_code: TD017
+    node_code: MOCI03
+    values:
+      "1": 筛选条件
+      "2": 指定仓库
+      "3": 主要仓库
+
+picking.return:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TC016
+    node_code: MOCI04
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TE019
+    node_code: MOCI04
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  doc_property:
+    cn_name: 单据性质
+    field_code: TC008
+    node_code: MOCI04
+    values:
+      "56": 厂内退料
+      "57": 委外退料
+  get_quantity_method:
+    cn_name: 取数方式
+    field_code: TC013
+    node_code: MOCI04
+    values:
+      "N": 与库存量比较
+      "Y": 需领用量
+  issue_mode:
+    cn_name: 领料方式
+    field_code: TD005
+    node_code: MOCI04
+    values:
+      "1": 成套领料
+      "2": 补足已领套数
+      "3": 补足需领用量
+  material_type:
+    cn_name: 材料类型
+    field_code: TE016
+    node_code: MOCI04
+    values:
+      "1": 直接材料
+      "2": 间接材料
+      "3": 供应商供料
+      "5": 客户供料
+  picking_code:
+    cn_name: 领料码
+    field_code: TD008
+    node_code: MOCI04
+    values:
+      "1": 逐批领料
+      "2": 自动扣料
+      "3": 单独领料
+      "5": 依包装发料
+  sort_by:
+    cn_name: 生成按序
+    field_code: TC012
+    node_code: MOCI04
+    values:
+      "1": 按工单单号
+      "2": 按材料品号
+  source_type:
+    cn_name: 来源别
+    field_code: TC018
+    node_code: MOCI04
+    values:
+      "0": 自行输入
+      "1": 工单
+      "2": 生产入库自动扣料
+      "3": 委外进自动扣料
+      "4": 委外退自动扣料
+      "5": 开工单
+      "6": 委外进厂供料自动扣料
+      "7": 委外退厂供料自动扣料
+      "8": 批次发料自动退料
+  type:
+    cn_name: 类型
+    field_code: TEC01
+    node_code: MOCI04
+    values:
+      "1": 工程品号
+      "2": 正式品号
+  warehouse_type:
+    cn_name: 仓库类型
+    field_code: TD017
+    node_code: MOCI04
+    values:
+      "1": 筛选条件
+      "2": 指定仓库
+      "3": 主要仓库
+
+precollection.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TK024
+    node_code: ACRI18
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TK020
+    node_code: ACRI18
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  city_type:
+    cn_name: 城市类型
+    field_code: TK064
+    node_code: ACRI18
+    values:
+      "1": 同城
+      "2": 异城
+  generate_entry_code:
+    cn_name: 生成分录
+    field_code: TK021
+    node_code: ACRI18
+    values:
+      "N": 未生成
+      "V": 不生成
+      "Y": 已生成
+  handle_mode:
+    cn_name: 处理方式
+    field_code: TK065
+    node_code: ACRI18
+    values:
+      "1": 直接支付
+      "2": 代理支付
+      "3": 中心取票
+  is_group_payment:
+    cn_name: 是否集团支付
+    field_code: TK063
+    node_code: ACRI18
+    values:
+      "N": 否
+      "Y": 是
+  is_urgency:
+    cn_name: 加急
+    field_code: TK077
+    node_code: ACRI18
+    values:
+      "0": 否
+      "1": 是
+  trade_status:
+    cn_name: 交易状态
+    field_code: TK079
+    node_code: ACRI18
+    values:
+      "0": 未提交
+      "1": 已提交
+      "2": 待授权
+      "3": 已支付
+      "4": 已授权待支付
+      "9": 交易失败
+      "E": 联通性失败
+  transaction_type:
+    cn_name: 交易类型
+    field_code: TK062
+    node_code: ACRI18
+    values:
+      "0": 本行对公内部转账
+      "1": 本行对公
+      "2": 本行对私
+      "3": 跨行对公
+      "4": 跨行对私
+  verification_status:
+    cn_name: 核销状态
+    field_code: TK030
+    node_code: ACRI18
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+prepayment.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TK024
+    node_code: ACPI13
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TK020
+    node_code: ACPI13
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  approved_check:
+    cn_name: 审核检查
+    field_code: TK081
+    node_code: ACPI13
+    values:
+      "N": 否
+      "Y": 是
+  city_type:
+    cn_name: 城市类型
+    field_code: TK064
+    node_code: ACPI13
+    values:
+      "1": 同城
+      "2": 异城
+  doc_source:
+    cn_name: 单据来源
+    field_code: TK083
+    node_code: ACPI13
+    values:
+      "1": 手动输入
+      "2": 实际交易生成
+      "3": 批次生成
+  handle_fee_burden_mode:
+    cn_name: 手续费类型
+    field_code: TK070
+    node_code: ACPI13
+    values:
+      "1": 付款方支付
+      "2": 收款方支付
+  handle_mode:
+    cn_name: 处理方式
+    field_code: TK065
+    node_code: ACPI13
+    values:
+      "1": 直接支付(企业账户进行支付)
+      "2": 代理支付(财务公司的账户进行支付)
+      "3": 中心取票(财务公司使用支票支付)
+  is_group_payment:
+    cn_name: 是否集团支付
+    field_code: TK063
+    node_code: ACPI13
+    values:
+      "N": 否
+      "Y": 是
+  is_urgency:
+    cn_name: 加急
+    field_code: TK077
+    node_code: ACPI13
+    values:
+      "0": 否
+      "1": 是
+  pay_type:
+    cn_name: 结算方式
+    field_code: TK061
+    node_code: ACPI13
+    values:
+      "1": 转账
+      "2": 电汇
+  payable_object:
+    cn_name: 应付对象
+    field_code: TK043
+    node_code: ACPI13
+    values:
+      "1": 供应商
+      "2": 人员
+      "9": 其它
+  trade_status:
+    cn_name: 交易状态
+    field_code: TK079
+    node_code: ACPI13
+    values:
+      "0": 未提交
+      "1": 已提交
+      "2": 待授权
+      "3": 已支付
+      "4": 已授权待支付
+      "9": 交易失败
+      "E": 联通性失败
+  transaction_type:
+    cn_name: 交易类型
+    field_code: TK062
+    node_code: ACPI13
+    values:
+      "0": 本行对公内部转账
+      "1": 本行对公
+      "2": 本行对私
+      "3": 跨行对公
+      "4": 跨行对私
+  verification_status:
+    cn_name: 核销状态
+    field_code: TK028
+    node_code: ACPI13
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+product.process:
+  complete_base:
+    cn_name: 完工判断依据
+    field_code: MF027
+    node_code: BOMI07
+    values:
+      "1": 数量
+      "2": 包装数量
+  property:
+    cn_name: 性质
+    field_code: MF005
+    node_code: BOMI07
+    values:
+      "1": 厂内工艺
+      "2": 委外工艺
+  tax_included:
+    cn_name: 含税
+    field_code: MF028
+    node_code: BOMI07
+    values:
+      "N": 否
+      "Y": 是
+
+purchase.arrival:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: CC027
+    node_code: PURI20
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: CD034
+    node_code: PURI20
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+
+purchase.arrival.acceptance:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA021
+    node_code: PURI21
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  quality_inspection_mode:
+    cn_name: 检验方式
+    field_code: TA012
+    node_code: PURI21
+    values:
+      "0": 免检
+      "1": 减量
+      "2": 正常
+      "3": 加严
+      "4": 全检
+
+purchase.change:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TE025
+    node_code: PURI08
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TF016
+    node_code: PURI08
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  change_type:
+    cn_name: 变更类型
+    field_code: TF040
+    node_code: PURI08
+    values:
+      "1": 新增
+      "2": 修改
+      "3": 指定结束
+  close_order:
+    cn_name: 整张结束
+    field_code: TE012
+    node_code: PURI08
+    values:
+      "N": 否
+      "Y": 是
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: TE028
+    node_code: PURI08
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  emergency:
+    cn_name: 急料
+    field_code: TF021
+    node_code: PURI08
+    values:
+      "N": 否
+      "Y": 是
+  new_tax_type:
+    cn_name: 新税种
+    field_code: TE018
+    node_code: PURI08
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  original_tax_type:
+    cn_name: 原税种
+    field_code: TE118
+    node_code: PURI08
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  original_type:
+    cn_name: 原类型
+    field_code: TFC05
+    node_code: PURI08
+    values:
+      "1": 工程品号
+      "2": 正式品号
+  post_status:
+    cn_name: 抛转状态
+    field_code: TE027
+    node_code: PURI08
+    values:
+      "N": 未抛转
+      "U": 抛转失败
+      "Y": 抛转成功(来源厂商)
+      "u": 还原失败
+      "y": 抛转成功(下游厂商)
+  source_code:
+    cn_name: 来源码
+    field_code: TE124
+    node_code: PURI08
+    values:
+      "0": ERP
+      "1": EBC
+  type:
+    cn_name: 类型
+    field_code: TFC04
+    node_code: PURI08
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+purchase.inspection.return:
+  source:
+    cn_name: 来源
+    field_code: TK017
+    node_code: PURI10
+    values:
+      "1": 进货单
+      "2": 到货单
+
+purchase.invoice:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA044
+    node_code: ACPI02
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB012
+    node_code: ACPI02
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  data_type:
+    cn_name: 单据类型
+    field_code: TA079
+    node_code: ACPI02
+    values:
+      "1": 蓝字
+      "2": 红字
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: TA073
+    node_code: ACPI02
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  generate_entry_code:
+    cn_name: 生成分录
+    field_code: TA031
+    node_code: ACPI02
+    values:
+      "N": 未生成
+      "V": 无需生成
+      "Y": 已生成
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TA010
+    node_code: ACPI02
+    values:
+      "A": 农产品收购凭证
+      "B": 普通发票
+      "G": 海关代征完税凭证
+      "N": 不可抵扣专用发票
+      "S": 可抵扣专用发票
+      "T": 运输发票
+      "W": 废旧物资收购凭证
+      "Z": 其他
+  reverse:
+    cn_name: 红冲
+    field_code: TA080
+    node_code: ACPI02
+    values:
+      "N": 否
+      "Y": 是
+  source:
+    cn_name: 来源
+    field_code: TB004
+    node_code: ACPI02
+    values:
+      "1": 进货
+      "2": 退货
+      "3": 委外进货
+      "4": 委外退货
+      "5": 报关/赎单费用
+      "6": 出口费用
+      "7": 取得资产
+      "8": 资产改良
+      "9": 其他
+      "A": 冲减预开发票
+      "B": 采购单
+      "C": 维修
+      "E": 资产进货
+      "F": 资产采购
+      "G": CRM维修
+  tax_type:
+    cn_name: 税种
+    field_code: TA011
+    node_code: ACPI02
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  verification_status:
+    cn_name: 核销状态
+    field_code: TB047
+    node_code: ACPI02
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+purchase.order:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TC030
+    node_code: PURI07
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TD018
+    node_code: PURI07
+    values:
+      "N": 未确认
+      "U": 确认失败
+      "V": 作废
+      "Y": 已确认
+  is_end:
+    cn_name: 结束
+    field_code: TD016
+    node_code: PURI07
+    values:
+      "N": 未结束
+      "Y": 自动结束
+      "y": 指定结束
+  post_status:
+    cn_name: 抛转状态
+    field_code: TC033
+    node_code: PURI07
+    values:
+      "N": 未抛转
+      "U": 抛转失败
+      "Y": 抛转成功(来源厂商)
+      "u": 还原失败
+      "y": 抛转成功(下游厂商)
+  source_code:
+    cn_name: 来源码
+    field_code: TC043
+    node_code: PURI07
+    values:
+      "0": ERP
+      "1": EBC
+  tax_type:
+    cn_name: 税种
+    field_code: TC018
+    node_code: PURI07
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TDC03
+    node_code: PURI07
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+purchase.receipt:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TG042
+    node_code: PURI09
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TH030
+    node_code: PURI09
+    values:
+      "N": 未确认
+      "U": 确认失败
+      "V": 作废
+      "Y": 已确认
+  identifier:
+    cn_name: 标识位
+    field_code: MB006
+    node_code: PURI09
+    values:
+      "A": 正常
+      "B": 报废
+      "C": 破坏
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TG009
+    node_code: PURI09
+    values:
+      "A": 农产品收购凭证
+      "B": 普通发票
+      "G": 海关代征完税凭证
+      "N": 不可抵扣专用发票
+      "S": 可抵扣专用发票
+      "T": 运输发票
+      "W": 废旧物资收购凭证
+      "Z": 其他
+  qc_status:
+    cn_name: 检验状态
+    field_code: TH028
+    node_code: PURI09
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+      "4": 特采
+  qms_status:
+    cn_name: sQMS检验码
+    field_code: THS01
+    node_code: PURI09
+    values:
+      "0": 待送检
+      "N": 不需送检
+      "Q": 检验完成
+      "U": 送检还原失败
+      "X": 送检失败
+      "Y": 送检成功
+      "Z": 检验状态更新失败
+  source_code:
+    cn_name: 来源码
+    field_code: TG058
+    node_code: PURI09
+    values:
+      "0": ERP
+      "1": EBC
+  tax_type:
+    cn_name: 税种
+    field_code: TG010
+    node_code: PURI09
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  transaction type:
+    cn_name: 交易类型
+    field_code: MB005
+    node_code: PURI09
+    values:
+      "1": 出货通知单
+      "A": 采购进货
+      "B": 采购退货
+      "C": 销售出货
+      "D": 销售退货
+      "E": 生产领料
+      "F": 生产退料
+      "G": 生产入库
+      "H": 委外进货
+      "I": 委外退货
+      "J": 借出
+      "K": 借入
+      "L": 借出归还
+      "M": 借入归还
+      "N": 一般交易入
+      "O": 一般交易销
+      "P": 一般交易领
+      "Q": 一般交易调拨
+      "R": 一般交易调整
+      "S": 成本开帐调整
+      "T": 序号开帐
+      "U": 调拨
+      "V": 报废
+      "W": 销毁
+      "X": 组合单
+      "Y": 拆解单
+      "Z": 新增序号
+  type:
+    cn_name: 类型
+    field_code: THC02
+    node_code: PURI09
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+purchase.receipt.acceptance:
+  qc_status:
+    cn_name: 检验状态
+    field_code: TH028
+    node_code: PURI13
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+      "4": 特采
+
+purchase.requisitions:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA016
+    node_code: PURI05
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不执行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB025
+    node_code: PURI05
+    values:
+      "N": 未确认
+      "U": 确认失败
+      "V": 作废
+      "Y": 已确认
+  close_code:
+    cn_name: 结案码
+    field_code: TB039
+    node_code: PURI05
+    values:
+      "N": 未结案
+      "Y": 自动结案
+      "y": 指定结案
+  emergency:
+    cn_name: 急料
+    field_code: TB032
+    node_code: PURI05
+    values:
+      "N": 否
+      "Y": 是
+  lock_code:
+    cn_name: 锁定码
+    field_code: TB020
+    node_code: PURI05
+    values:
+      "N": 否
+      "Y": 是
+  source_type:
+    cn_name: 来源别
+    field_code: TA009
+    node_code: PURI05
+    values:
+      "1": MRP
+      "2": LRP
+      "3": 再补货建议表
+      "4": BOM自动请购
+      "5": 订单转请购
+      "9": 其它
+  tax_type:
+    cn_name: 税种
+    field_code: TR012
+    node_code: PURI05
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TBC01
+    node_code: PURI05
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+purchase.return:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TI032
+    node_code: PURI11
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TJ020
+    node_code: PURI11
+    values:
+      "N": 未确认
+      "U": 确认失败
+      "V": 作废
+      "Y": 已确认
+  identifier:
+    cn_name: 标识位
+    field_code: MB006
+    node_code: PURI11
+    values:
+      "A": 正常
+      "B": 报废
+      "C": 破坏
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TI008
+    node_code: PURI11
+    values:
+      "A": 农产品收购凭证
+      "B": 普通发票
+      "G": 海关代征完税凭证
+      "N": 不可抵扣专用发票
+      "S": 可抵扣专用发票
+      "T": 运输发票
+      "W": 废旧物资收购凭证
+      "Z": 其他
+  post_status:
+    cn_name: 抛转状态
+    field_code: TI036
+    node_code: PURI11
+    values:
+      "N": 未抛转
+      "U": 抛转失败
+      "Y": 抛转成功(来源厂商)
+      "u": 还原失败
+      "y": 抛转成功(下游厂商)
+  return_type:
+    cn_name: 类型
+    field_code: TJ035
+    node_code: PURI11
+    values:
+      "1": 退货
+      "2": 折让
+  tax_type:
+    cn_name: 税种
+    field_code: TI009
+    node_code: PURI11
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  transaction_type:
+    cn_name: 交易类型
+    field_code: MB005
+    node_code: PURI11
+    values:
+      "1": 出货通知单
+      "A": 采购进货
+      "B": 采购退货
+      "C": 销售出货
+      "D": 销售退货
+      "E": 生产领料
+      "F": 生产退料
+      "G": 生产入库
+      "H": 委外进货
+      "I": 委外退货
+      "J": 借出
+      "K": 借入
+      "L": 借出归还
+      "M": 借入归还
+      "N": 一般交易入
+      "O": 一般交易销
+      "P": 一般交易领
+      "Q": 一般交易调拨
+      "R": 一般交易调整
+      "S": 成本开帐调整
+      "T": 序号开帐
+      "U": 调拨
+      "V": 报废
+      "W": 销毁
+      "X": 组合单
+      "Y": 拆解单
+      "Z": 新增序号
+  type:
+    cn_name: 类型
+    field_code: TJC01
+    node_code: PURI11
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+quotation:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA029
+    node_code: COPI05
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB011
+    node_code: COPI05
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  customer_property:
+    cn_name: 客户性质
+    field_code: TA032
+    node_code: COPI05
+    values:
+      "1": 正式
+      "2": 潜在
+  pricing_method:
+    cn_name: 计价方式
+    field_code: TA012
+    node_code: COPI05
+    values:
+      "1": 利润率
+      "2": 折扣率
+  print_format:
+    cn_name: 打印格式
+    field_code: TA017
+    node_code: COPI05
+    values:
+      "1": 中式
+      "2": 英式
+  source_code:
+    cn_name: 来源码
+    field_code: TA042
+    node_code: COPI05
+    values:
+      "0": ERP
+      "1": EBC
+  tax_type:
+    cn_name: 税种
+    field_code: TA022
+    node_code: COPI05
+    values:
+      "1": 内含
+      "2": 外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+
+receive.payment.term:
+  acquire_discount:
+    cn_name: 取得折扣
+    field_code: NA012
+    node_code: CMSI21
+    values:
+      "N": 否
+      "Y": 是
+  acquire_discount_mode:
+    cn_name: 取得折扣方式
+    field_code: NA013
+    node_code: CMSI21
+    values:
+      "1": 付款提前
+      "2": 票期缩短
+  capital_realization_method_category:
+    cn_name: 资金实现方式别
+    field_code: NA008
+    node_code: CMSI21
+    values:
+      "1": 付款后__天
+      "2": 付款后__个月逢__日
+  category:
+    cn_name: 类别
+    field_code: NA001
+    node_code: CMSI21
+    values:
+      "1": 采购 / 委外
+      "2": 销售
+  collect_from:
+    cn_name: 收款日起算日
+    field_code: NA018
+    node_code: CMSI21
+    values:
+      "1": 结帐日
+      "2": 次月初
+  collectpay_method:
+    cn_name: 收(付)款方式别
+    field_code: NA004
+    node_code: CMSI21
+    values:
+      "1": 开票后__天
+      "2": 开票后__个月逢_日
+  realization_date_from:
+    cn_name: 实现日起算日
+    field_code: NA019
+    node_code: CMSI21
+    values:
+      "1": 付款日
+      "2": 次月初
+
+replace.substitute.item:
+  rep_sub_item:
+    cn_name: 取替代件
+    field_code: MB003
+    node_code: BOMI01
+    values:
+      "2": 取代料件
+      "3": 替代料件
+
+sales.invoice:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA048
+    node_code: ACRI02
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 作废码
+    field_code: TQ005
+    node_code: ACRI02
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  cash_settlement:
+    cn_name: 现结
+    field_code: TA088
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  data_type:
+    cn_name: 单据类型
+    field_code: TA079
+    node_code: ACRI02
+    values:
+      "1": 蓝字
+      "2": 红字
+  e_invoice:
+    cn_name: 电子发票
+    field_code: TA105
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: TA073
+    node_code: ACRI02
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  generate_entry_code_cost:
+    cn_name: 生成分录(成本)
+    field_code: TA014
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  generate_entry_code_income:
+    cn_name: 生成分录(收入)
+    field_code: TA013
+    node_code: ACRI02
+    values:
+      "N": 未生成
+      "V": 无需生成
+      "Y": 已生成
+  golden_tax_code:
+    cn_name: 金税开票码
+    field_code: TA101
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  invoice_printing:
+    cn_name: 发票打印
+    field_code: TA107
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TA011
+    node_code: ACRI02
+    values:
+      "A": 专用发票
+      "B": 普通发票
+      "C": 其他
+      "D": 服务性发票
+  is_print_list:
+    cn_name: 是否需打印清单
+    field_code: TA109
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  post_status:
+    cn_name: 抛转状态
+    field_code: TA053
+    node_code: ACRI02
+    values:
+      "N": 未抛转
+      "U": 抛转失败
+      "Y": 抛转成功(来源供应商)
+      "u": 还原失败
+      "y": 抛转成功(下游供应商)
+  print_invoice_list:
+    cn_name: 发票清单打印
+    field_code: TA108
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  reverse:
+    cn_name: 红冲
+    field_code: TA083
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  reverse_reason:
+    cn_name: 红冲原因
+    field_code: TA118
+    node_code: ACRI02
+    values:
+      "1": 销货退回
+      "2": 开票有误
+      "3": 服务中止
+      "4": 销售折让
+  source:
+    cn_name: 来源
+    field_code: TB004
+    node_code: ACRI02
+    values:
+      "1": 销货
+      "2": 销退
+      "4": 资产出售
+      "5": 冲减预开发票
+      "6": 订单
+      "7": 维修
+      "9": 其他
+      "A": CRM维修合约
+      "B": CRM维修
+      "C": CRM保养
+      "D": CRM服务
+      "E": 维护合同零配件
+      "F": 巡检保养零配件
+      "G": 售后维修零配件
+      "H": 维护合同费用
+      "I": 巡检保养费用
+      "J": 售后维修费用
+  tax_type:
+    cn_name: 税种
+    field_code: TA012
+    node_code: ACRI02
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  update_code:
+    cn_name: 更新码
+    field_code: TA026
+    node_code: ACRI02
+    values:
+      "N": 否
+      "Y": 是
+  verification_status:
+    cn_name: 核销状态
+    field_code: TB049
+    node_code: ACRI02
+    values:
+      "1": 未核销
+      "2": 部分核销
+      "3": 已核销
+
+sales.order:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TC048
+    node_code: COPI06
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TD021
+    node_code: COPI06
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  contract_type:
+    cn_name: 合同类型
+    field_code: TD060
+    node_code: COPI06
+    values:
+      "0": 无
+      "1": 数量合同
+      "2": 价值合同
+      "3": 标准合同
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: TC059
+    node_code: COPI06
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  post_status:
+    cn_name: 抛转状态
+    field_code: TC050
+    node_code: COPI06
+    values:
+      "N": 未抛转
+      "U": 抛转失败
+      "Y": 抛转成功(来源供应商)
+      "n": 订单变更
+      "u": 还原失败
+      "y": 抛转成功(下游供应商)
+  source_code:
+    cn_name: 来源码
+    field_code: TC067
+    node_code: COPI06
+    values:
+      "0": ERP
+      "1": EBC
+      "2": CRM
+  tax_type:
+    cn_name: 税种
+    field_code: TC016
+    node_code: COPI06
+    values:
+      "1": 内含
+      "2": 外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  transport_mode_no:
+    cn_name: 运输方式
+    field_code: TC019
+    node_code: COPI06
+    values:
+      "1": 空运
+      "2": 海运
+      "3": 海空联运
+      "4": 邮寄
+      "5": 陆运
+      "6": 自取
+      "7": 自送
+      "8": 快递
+
+sales.order.change:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TE044
+    node_code: COPI07
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  change_type:
+    cn_name: 变更类型
+    field_code: TF054
+    node_code: COPI07
+    values:
+      "1": 新增
+      "2": 修改
+      "3": 指定结束
+  contract_type:
+    cn_name: 合同类型
+    field_code: TD060C
+    node_code: COPI07
+    values:
+      "0": 无
+      "1": 数量合同
+      "2": 价值合同
+      "3": 标准合同
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: TE046
+    node_code: COPI07
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  original_source_code:
+    cn_name: 原来源码
+    field_code: TE146
+    node_code: COPI07
+    values:
+      "0": ERP
+      "1": EBC
+      "2": CRM
+  original_tax_type:
+    cn_name: 原税种
+    field_code: TE118
+    node_code: COPI07
+    values:
+      "1": 内含
+      "2": 外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  original_transport_mode:
+    cn_name: 原运输方式
+    field_code: TE121
+    node_code: COPI07
+    values:
+      "1": 空运
+      "2": 海运
+      "3": 海空联运
+      "4": 邮寄
+      "5": 陆运
+      "6": 自取
+      "7": 自送
+      "8": 快递
+  post_status:
+    cn_name: 抛转状态
+    field_code: TE045
+    node_code: COPI07
+    values:
+      "N": 未抛转
+      "U": 抛转失败
+      "Y": 抛转成功(来源供应商)
+      "n": 订单变更
+      "u": 还原失败
+      "y": 抛转成功(下游供应商)
+  tax_type:
+    cn_name: 税种
+    field_code: TE018
+    node_code: COPI07
+    values:
+      "1": 内含
+      "2": 外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  transport_mode:
+    cn_name: 运输方式
+    field_code: TE021
+    node_code: COPI07
+    values:
+      "1": 空运
+      "2": 海运
+      "3": 海空联运
+      "4": 邮寄
+      "5": 陆运
+      "6": 自取
+      "7": 自送
+      "8": 快递
+
+sales.return:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TI041
+    node_code: COPI09
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TJ021
+    node_code: COPI09
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  gift_prepare_item_type:
+    cn_name: 赠备品类型
+    field_code: TJ067
+    node_code: COPI09
+    values:
+      "1": 赠品量
+      "2": 备品量
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TI012
+    node_code: COPI09
+    values:
+      "A": 专用发票
+      "B": 普通发票
+      "C": 其他
+  post_status:
+    cn_name: 抛转状态
+    field_code: TI043
+    node_code: COPI09
+    values:
+      "N": 未抛转
+      "U": 抛转失败
+      "Y": 抛转成功(来源供应商)
+      "n": 订单变更
+      "u": 还原失败
+      "y": 抛转成功(下游供应商)
+  qc_status:
+    cn_name: 检验状态
+    field_code: TJ041
+    node_code: COPI09
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+      "4": 特采
+  source_code:
+    cn_name: 来源码
+    field_code: TI057
+    node_code: COPI09
+    values:
+      "0": ERP
+      "1": EBC
+  tax_type:
+    cn_name: 税种
+    field_code: TI013
+    node_code: COPI09
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TJ030
+    node_code: COPI09
+    values:
+      "1": 销退
+      "2": 折让
+
+scrap.order:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TL017
+    node_code: INVI23
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TM021
+    node_code: INVI23
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  data_source:
+    cn_name: 数据来源
+    field_code: TL004
+    node_code: INVI23
+    values:
+      "1": 批次生成
+      "2": 手动输入
+  scrap_source:
+    cn_name: 报废来源
+    field_code: TL005
+    node_code: INVI23
+    values:
+      "0": 仓库
+      "1": 进货单
+      "2": 生产入库单
+      "3": 委外进货单
+      "5": 移转单
+      "6": 移转入库单
+      "Z": 其它
+
+shipping.notice:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TN024
+    node_code: COPI13
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TO023
+    node_code: COPI13
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  close_code:
+    cn_name: 结束码
+    field_code: TO047
+    node_code: COPI13
+    values:
+      "N": 未结束
+      "Y": 自动结束
+      "y": 指定结束
+  tax_type:
+    cn_name: 税种
+    field_code: TN011
+    node_code: COPI13
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TO018
+    node_code: COPI13
+    values:
+      "1": 赠品量
+      "2": 备品量
+
+shipping.order:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TG055
+    node_code: COPI08
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TH020
+    node_code: COPI08
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  invoice_type:
+    cn_name: 发票种类
+    field_code: TG016
+    node_code: COPI08
+    values:
+      "A": 专用发票
+      "B": 普通发票
+      "C": 其他
+      "D": 服务性发票
+  post_status:
+    cn_name: 抛转状态
+    field_code: TG059
+    node_code: COPI08
+    values:
+      "N": 未抛转
+      "U": 抛转失败
+      "Y": 抛转成功(来源供应商)
+      "n": 订单变更
+      "u": 还原失败
+      "y": 抛转成功(下游供应商)
+  sqmes_inspection_status:
+    cn_name: sQMS检验码
+    field_code: THS01
+    node_code: COPI08
+    values:
+      "0": 待送检
+      "N": 不需送检
+      "Q": 检验完成
+      "U": 送检还原失败
+      "X": 送检失败
+      "Y": 送检成功
+      "Z": 检验状态更新失败
+  tax_type:
+    cn_name: 税种
+    field_code: TG017
+    node_code: COPI08
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TH031
+    node_code: COPI08
+    values:
+      "1": 赠品量
+      "2": 备品量
+
+supplier:
+  account_partner:
+    cn_name: 账号对象
+    field_code: NE003
+    node_code: PURI01
+    values:
+      "1": 公司
+      "2": 供应商
+      "3": 人员
+      "4": 客户
+      "9": 其它
+  allow_batch_delivery:
+    cn_name: 允许分批交货
+    field_code: MA045
+    node_code: PURI01
+    values:
+      "N": 否
+      "Y": 是
+  corporation_type:
+    cn_name: 企业类型
+    field_code: MA060
+    node_code: PURI01
+    values:
+      "1": 药品生产企业
+      "2": 药品经营企业
+  doc_printing_format:
+    cn_name: 凭证打印格式
+    field_code: MA057
+    node_code: PURI01
+    values:
+      "1": 中文
+      "2": 英文
+  ebc_export_code:
+    cn_name: EBC汇出码
+    field_code: MA076
+    node_code: PURI01
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  invoice_type:
+    cn_name: 发票种类
+    field_code: MA030
+    node_code: PURI01
+    values:
+      "A": 农产品收购凭证
+      "B": 普通发票
+      "G": 海关代征完税凭证
+      "N": 不可抵扣专用发票
+      "S": 可抵扣专用发票
+      "T": 运输发票
+      "W": 废旧物资收购凭证
+      "Z": 其他
+  note_delivery_method:
+    cn_name: 票据寄领
+    field_code: MA029
+    node_code: PURI01
+    values:
+      "1": 邮寄
+      "2": 自领
+      "3": 其他
+  po_delivery_method:
+    cn_name: 采购单发送方式
+    field_code: MA020
+    node_code: PURI01
+    values:
+      "1": 邮寄
+      "2": FAX
+      "3": EDI
+      "4": "E-MAIL"
+  tax_mode:
+    cn_name: 税额计算方式
+    field_code: MA053
+    node_code: PURI01
+    values:
+      "1": 整张单据计算
+      "2": 按行项目计算
+  tax_type:
+    cn_name: 税种
+    field_code: MA044
+    node_code: PURI01
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  valid_status:
+    cn_name: 核准状况
+    field_code: MA016
+    node_code: PURI01
+    values:
+      "1": 已核准
+      "2": 尚待核准
+      "3": 不准交易
+
+transfer:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA017
+    node_code: INVI08
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB018
+    node_code: INVI08
+    values:
+      "N": 未确认
+      "U": 确认失败
+      "V": 作废
+      "Y": 已确认
+  doc_type:
+    cn_name: 单据性质码
+    field_code: TA009
+    node_code: INVI08
+    values:
+      "11": 一般单据
+      "12": 调拨单
+  identifier:
+    cn_name: 标识位
+    field_code: MB006
+    node_code: INVI08
+    values:
+      "A": 正常
+      "B": 报废
+      "C": 破坏
+  transaction type:
+    cn_name: 交易类型
+    field_code: MB005
+    node_code: INVI08
+    values:
+      "1": 出货通知单
+      "A": 采购进货
+      "B": 采购退货
+      "C": 销售出货
+      "D": 销售退货
+      "E": 生产领料
+      "F": 生产退料
+      "G": 生产入库
+      "H": 委外进货
+      "I": 委外退货
+      "J": 借出
+      "K": 借入
+      "L": 借出归还
+      "M": 借入归还
+      "N": 一般交易入
+      "O": 一般交易销
+      "P": 一般交易领
+      "Q": 一般交易调拨
+      "R": 一般交易调整
+      "S": 成本开帐调整
+      "T": 序号开帐
+      "U": 调拨
+      "V": 报废
+      "W": 销毁
+      "X": 组合单
+      "Y": 拆解单
+      "Z": 新增序号
+
+transfer.doc:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TB017
+    node_code: SFCI05
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TC022
+    node_code: SFCI05
+    values:
+      "N": 未确认
+      "V": 作废
+      "Y": 已确认
+  qc_status:
+    cn_name: 检验状态
+    field_code: TC039
+    node_code: SFCI05
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+      "4": 特采
+  tax_type:
+    cn_name: 税种
+    field_code: TC066
+    node_code: SFCI05
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  trs_in_category:
+    cn_name: 移入类别
+    field_code: TB007
+    node_code: SFCI05
+    values:
+      "1": 工作中心
+      "2": 委外供应商
+  trs_out_category:
+    cn_name: 移出类别
+    field_code: TB004
+    node_code: SFCI05
+    values:
+      "1": 工作中心
+      "2": 委外供应商
+
+warehouse:
+  allow_negative_inventory:
+    cn_name: 库存量不足准许出库
+    field_code: MC006
+    node_code: CMSI03
+    values:
+      "N": 否
+      "Y": 是
+  export_code:
+    cn_name: 汇出码
+    field_code: MC016
+    node_code: CMSI03
+    values:
+      "M": 已修改
+      "N": 未汇出
+      "Y": 已汇出
+  included_available_qty:
+    cn_name: 纳入可用量计算
+    field_code: MC005
+    node_code: CMSI03
+    values:
+      "N": 否
+      "Y": 是
+  is_valid:
+    cn_name: 有效码
+    field_code: NL004
+    node_code: CMSI03
+    values:
+      "N": 否
+      "Y": 是
+  storage_spaces_control:
+    cn_name: 库位管理
+    field_code: MC001C
+    node_code: CMSI03
+    values:
+      "N": 否
+      "Y": 是
+  warehouse_type:
+    cn_name: 仓库性质
+    field_code: MC004
+    node_code: CMSI03
+    values:
+      "1": 存货仓
+      "2": 非存货仓
+
+wo:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA049
+    node_code: MOCI02
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB018
+    node_code: MOCI02
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  material_type:
+    cn_name: 材料类型
+    field_code: TB011
+    node_code: MOCI02
+    values:
+      "1": 直接材料
+      "2": 间接材料
+      "3": 供应商供料
+      "4": 不发料
+      "5": 客户供料
+  property:
+    cn_name: 性质
+    field_code: TA030
+    node_code: MOCI02
+    values:
+      "1": 厂内工单
+      "2": 委外工单
+  status:
+    cn_name: 状态码
+    field_code: TA011
+    node_code: MOCI02
+    values:
+      "1": 未生产
+      "2": 已发料
+      "3": 生产中
+      "Y": 已完工
+      "y": 指定完工
+  tax_type:
+    cn_name: 税种
+    field_code: TA055
+    node_code: MOCI02
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TBC03
+    node_code: MOCI02
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+wo.change:
+  actual_complete_type:
+    cn_name: 实际完工类型
+    field_code: TO040
+    node_code: MOCI12
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  actual_start_type:
+    cn_name: 实际开工类型
+    field_code: TO039
+    node_code: MOCI12
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TO052
+    node_code: MOCI12
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TP019
+    node_code: MOCI12
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  change_type:
+    cn_name: 变更类型
+    field_code: TP034
+    node_code: MOCI12
+    values:
+      "1": 新增
+      "2": 修改
+      "3": 删除
+  material_type:
+    cn_name: 材料类型
+    field_code: TP012
+    node_code: MOCI12
+    values:
+      "1": 直接材料
+      "2": 间接材料
+      "3": 供应商供料
+      "4": 不发料
+      "5": 客户供料
+  new_tax_type:
+    cn_name: 新税种
+    field_code: TO054
+    node_code: MOCI12
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  new_type:
+    cn_name: 新类型
+    field_code: TPC01
+    node_code: MOCI12
+    values:
+      "1": 工程品号
+      "2": 正式品号
+  original_actual_complete_type:
+    cn_name: 原实际完工类型
+    field_code: TO140
+    node_code: MOCI12
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  original_actual_start_type:
+    cn_name: 原实际开工类型
+    field_code: TO139
+    node_code: MOCI12
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  original_material_type:
+    cn_name: 原材料类型
+    field_code: TP112
+    node_code: MOCI12
+    values:
+      "1": 直接材料
+      "2": 间接材料
+      "3": 供应商供料
+      "4": 不发料
+      "5": 客户供料
+  original_plan_complete_type:
+    cn_name: 原预计完工类型
+    field_code: TO138
+    node_code: MOCI12
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  original_plan_start_type:
+    cn_name: 原预计开工类型
+    field_code: TO137
+    node_code: MOCI12
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  original_property:
+    cn_name: 原性质
+    field_code: TO132
+    node_code: MOCI12
+    values:
+      "1": 厂内工单
+      "2": 委外工单
+  original_status:
+    cn_name: 原状态码
+    field_code: TO114
+    node_code: MOCI12
+    values:
+      "1": 未生产
+      "2": 已发料
+      "3": 生产中
+      "Y": 已完工
+      "y": 指定完工
+  original_tax_type:
+    cn_name: 原税种
+    field_code: TO154
+    node_code: MOCI12
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  original_type:
+    cn_name: 原类型
+    field_code: TPC02
+    node_code: MOCI12
+    values:
+      "1": 工程品号
+      "2": 正式品号
+  plan_complete_type:
+    cn_name: 预计完工类型
+    field_code: TO038
+    node_code: MOCI12
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  plan_start_type:
+    cn_name: 预计开工类型
+    field_code: TO037
+    node_code: MOCI12
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  property:
+    cn_name: 性质
+    field_code: TO032
+    node_code: MOCI12
+    values:
+      "1": 厂内工单
+      "2": 委外工单
+  status:
+    cn_name: 状态码
+    field_code: TO014
+    node_code: MOCI12
+    values:
+      "1": 未生产
+      "2": 已发料
+      "3": 生产中
+      "Y": 已完工
+      "y": 指定完工
+
+wo.commence:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TB017
+    node_code: SFCI06
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TB013
+    node_code: SFCI06
+    values:
+      "N": 未确认
+      "U": 确认失败
+      "V": 作废
+      "Y": 已确认
+  qc_status:
+    cn_name: 检验状态
+    field_code: TC039
+    node_code: SFCI06
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+      "4": 特采
+  tax_type:
+    cn_name: 税种
+    field_code: TB019
+    node_code: SFCI06
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  trs_in_category:
+    cn_name: 移入类别
+    field_code: TB007
+    node_code: SFCI06
+    values:
+      "1": 工作中心
+      "2": 委外供应商
+  trs_out_category:
+    cn_name: 移出类别
+    field_code: TB004
+    node_code: SFCI06
+    values:
+      "1": 工作中心
+      "2": 委外供应商
+      "3": 仓库
+
+wo.routing:
+  actual_complete_date:
+    cn_name: 实际完工
+    field_code: TA039
+    node_code: SFCI04
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  actual_machine_hours_seconds:
+    cn_name: 实际机时(秒)
+    field_code: TA036
+    node_code: SFCI04
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  actual_start_date:
+    cn_name: 实际开工
+    field_code: TA038
+    node_code: SFCI04
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TA049
+    node_code: SFCI04
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TA013
+    node_code: SFCI04
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  bom_version:
+    cn_name: BOM版本
+    field_code: TA005
+    node_code: SFCI04
+    values:
+      "1": 厂内工艺
+      "2": 委外工艺
+  complete_base:
+    cn_name: 完工判断依据
+    field_code: TA046
+    node_code: SFCI04
+    values:
+      "1": 数量
+      "2": 包装数量
+  complete_package_qty:
+    cn_name: 完成包装数量
+    field_code: TA039
+    node_code: SFCI04
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  input_package_qty:
+    cn_name: 投入包装数量
+    field_code: TA038
+    node_code: SFCI04
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  inspection_days:
+    cn_name: 检验天数
+    field_code: TA037
+    node_code: SFCI04
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  op_property:
+    cn_name: 工艺性质
+    field_code: TA005
+    node_code: SFCI04
+    values:
+      "1": 厂内
+      "2": 委外
+  plan_complete_date:
+    cn_name: 预计完工
+    field_code: TA037
+    node_code: SFCI04
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  plan_start_date:
+    cn_name: 预计开工
+    field_code: TA036
+    node_code: SFCI04
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  property:
+    cn_name: 性质
+    field_code: TA030
+    node_code: SFCI04
+    values:
+      "1": 厂内工单
+      "2": 委外工单
+  status:
+    cn_name: 状态码
+    field_code: TA011
+    node_code: SFCI04
+    values:
+      "1": 未生产
+      "2": 已发料
+      "3": 生产中
+      "Y": 已完工
+      "y": 指定完工
+  tax_type:
+    cn_name: 税种
+    field_code: TA055
+    node_code: SFCI04
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TAC01
+    node_code: SFCI04
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+wo.split:
+  actual_complete_date:
+    cn_name: 实际完工
+    field_code: TV039
+    node_code: MOCI16
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  actual_start_date:
+    cn_name: 实际开工
+    field_code: TV038
+    node_code: MOCI16
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TV049
+    node_code: MOCI16
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TV013
+    node_code: MOCI16
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  plan_complete_date:
+    cn_name: 预计完工
+    field_code: TV037
+    node_code: MOCI16
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  plan_start_date:
+    cn_name: 预计开工
+    field_code: TV036
+    node_code: MOCI16
+    values:
+      "0": 不休假
+      "1": 全天
+      "2": 半天
+  property:
+    cn_name: 性质
+    field_code: TV030
+    node_code: MOCI16
+    values:
+      "1": 厂内工单
+      "2": 委外工单
+  remainder_approach:
+    cn_name: 余数处理方式
+    field_code: TU074
+    node_code: MOCI16
+    values:
+      "1": 增加工单
+      "2": 累加至最后一张工单
+  split_basis:
+    cn_name: 拆分依据
+    field_code: TU072
+    node_code: MOCI16
+    values:
+      "1": 按批量
+      "2": 按指定数量
+  status:
+    cn_name: 状态码
+    field_code: TV011
+    node_code: MOCI16
+    values:
+      "1": 未生产
+      "2": 已发料
+      "3": 生产中
+      "Y": 已完工
+      "y": 指定完工
+  tax_type:
+    cn_name: 税种
+    field_code: TV055
+    node_code: MOCI16
+    values:
+      "1": 应税内含
+      "2": 应税外加
+      "3": 零税率
+      "4": 免税
+      "9": 不计税
+  type:
+    cn_name: 类型
+    field_code: TU002C
+    node_code: MOCI16
+    values:
+      "1": 工程品号
+      "2": 正式品号
+  wo_approval_status_code:
+    cn_name: 工单签核状态码
+    field_code: TU079
+    node_code: MOCI16
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  wo_approve_status:
+    cn_name: 工单审核码
+    field_code: TU013
+    node_code: MOCI16
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  wo_status:
+    cn_name: 工单状态码
+    field_code: TU011
+    node_code: MOCI16
+    values:
+      "1": 未生产
+      "2": 已发料
+      "3": 生产中
+      "Y": 已完工
+      "y": 指定完工
+
+wo.stockin:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TF014
+    node_code: MOCI05
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TG022
+    node_code: MOCI05
+    values:
+      "N": 未审核
+      "U": 审核失败
+      "V": 作废
+      "Y": 已审核
+  qc_status:
+    cn_name: 检验状态
+    field_code: TG016
+    node_code: MOCI05
+    values:
+      "0": 免检
+      "1": 待验
+      "2": 合格
+      "3": 不良
+  sqmes_inspection_status:
+    cn_name: sQMS检验码
+    field_code: TGS01
+    node_code: MOCI05
+    values:
+      "0": 待送检
+      "N": 不需送检
+      "Q": 检验完成
+      "U": 送检还原失败
+      "X": 送检失败
+      "Y": 送检成功
+      "Z": 检验状态更新失败
+  type:
+    cn_name: 类型
+    field_code: TGC01
+    node_code: MOCI05
+    values:
+      "1": 工程品号
+      "2": 正式品号
+
+work.report:
+  approval_status_code:
+    cn_name: 签核状态码
+    field_code: TD010
+    node_code: SFCI03
+    values:
+      "0": 待处理
+      "1": 签核中
+      "2": 退件
+      "3": 已核准
+      "4": 撤销审核中
+      "5": 作废中
+      "6": 取消作废中
+      "N": 不运行电子签核
+      "S": 传送中
+  approve_status:
+    cn_name: 审核码
+    field_code: TE014
+    node_code: SFCI03
+    values:
+      "N": 未审核
+      "V": 作废
+      "Y": 已审核
+  piece_type:
+    cn_name: 计件类型
+    field_code: TE030
+    node_code: SFCI03
+    values:
+      "1": 计件
+      "2": 计时
+  transfer_type:
+    cn_name: 转移类型
+    field_code: TE010
+    node_code: SFCI03
+    values:
+      "4": 破坏
+
+workstation:
+  overhead_allocation_base:
+    cn_name: 制费分摊依据
+    field_code: MD008
+    node_code: CMSI04
+    values:
+      "1": 人时
+      "2": 机时
+      "3": 人工

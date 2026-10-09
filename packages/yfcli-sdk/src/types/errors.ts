@@ -157,6 +157,28 @@ export function isYfError(value: unknown): value is YfError {
   return value instanceof YfError;
 }
 
+
+/** 服务名歧义错误：同一操作对应多个服务名，无法自动选择。 */
+export class YfAmbiguousServiceError extends YfError {
+  public readonly typeKey: string;
+  public readonly operation: string;
+  public readonly candidates: readonly string[];
+
+  public constructor(typeKey: string, operation: string, candidates: readonly string[]) {
+    super({
+      layer: 'business',
+      kind: 'service_not_registered',
+      message:
+        `type_key "${typeKey}" 的 ${operation} 操作存在 ${candidates.length} 个服务名冲突：` +
+        `${candidates.join(', ')}。请查阅 knowledge/typekey/typekey_map.yaml 的 service_conflicts 字段确认应使用哪个。`,
+    });
+    this.name = 'YfAmbiguousServiceError';
+    this.typeKey = typeKey;
+    this.operation = operation;
+    this.candidates = candidates;
+  }
+}
+
 /** 类型守卫：是否为未识别的 error[] 项。 */
 export function isYfErrorDataCarrier(value: unknown): value is YfErrorDataCarrier {
   if (typeof value !== 'object' || value === null) return false;

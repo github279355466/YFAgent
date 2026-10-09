@@ -12,7 +12,7 @@
 | 维度 | 说明 |
 |---|---|
 | **产品线** | 易飞 YF（E10），非 E10 Cloud，非雅典娜 |
-| **上游依据** | `易飞OpenAPI.json`（Apipost 导出，2120 接口节点 / 595 服务名 / 106 业务对象）+ 三份元数据 XML（1170 表 / 54842 字段） |
+| **上游依据** | `易飞OpenAPI.json`（Apipost 导出，2120 接口节点 / 601 服务名 / 107 业务对象（含 OAPMA 补充））+ 三份元数据 XML（1170 表 / 54842 字段） |
 | **对标产品线** | 易助（YZCLI，`digiwin.com` 体系，110 TypeKey） |
 | **架构决策** | 三仓隔离：本仓（易飞业务知识与产物）/ `erp-core`（共享引擎与商业化）/ `YZCLI`（易助，不动） |
 
@@ -35,276 +35,150 @@
 ## 目录结构
 
 ```
-YFCLI/
-├── docs/
-│   ├── 易飞OpenAPI.json          ← 不入库（含内网 IP / token 明文 / 账套名）
-│   ├── plans/                    方案与规划文档（OpenAPI 规则、差异比对、SDK 计划）
-│   ├── decisions/                决策台账（OPEN-DECISIONS + STATISTICS-SPEC）
-│   ├── COLLABORATION.md          团队协作约定（分支 / 提交 / PR）
-│   └── GITHUB-SETUP.md           远程仓库同步手册
-├── knowledge/                    知识资产
-│   ├── ADMMB/MC/MD-*.xml         官方元数据原件（3 份，不入库）
-│   ├── typekey/                  TypeKey 映射表（脚本生成，106 对象 / 595 服务名）
-│   ├── typekey-mapping/          字段对照表（脚本生成，106 份）
-│   ├── data-dictionary/          结构化数据字典（78 模块 + 7 CSV）
-│   └── official/                 官方文档原件（_raw/ 不入库）
-├── scripts/                      生成与校验脚本（11 个）
+YFAgent/
 ├── packages/
-│   └── yfcli-sdk/                SDK 骨架（单包 · 9 个源码子目录 · 20 个 TS 文件）
-├── config/                       配置模板（仅 .example 入库）
-├── .github/workflows/verify.yml  CI 门禁
-└── runs/                         真机探测产物（gitignored）
+│   ├── yfcli-sdk/              OpenAPI SDK（配置、封包、conditions、响应解析）
+│   ├── yfcli-auth/             独立授权模块（Token 生命周期 / 凭据红线 / 健康检查）
+│   ├── yfcli-analysis/         分析层（SQL 模板注册制 + 执行器防护 + 智能问数路由）
+│   │   └── sql/views/          9 个 vw_ai_* 视图 DDL
+│   ├── yfcli-mcp/              MCP Server（集中式工具注册表 + HTTP/SSE 传输）
+│   ├── yfcli-experts/          专家模块（引用 @digiwin/erp-experts + 易飞注册表层）
+│   └── yfcli-skill-openapi/    AI 助手 Skill（薄 Skill + 助手 Prompt）
+│       └── references/assistants/  助手文档（每助手一个 .md）
+├── knowledge/                  知识资产（脚本生成，禁止手工编辑）
+│   ├── typekey/                TypeKey 映射表（107 对象 / 601 服务名）
+│   ├── typekey-mapping/        字段对照表（106 份 / 12,893 字段）
+│   ├── data-dictionary/        结构化数据字典（78 模块 + 7 CSV）
+│   ├── enums/                  枚举值映射
+│   └── official/               官方文档原件
+├── docs/
+│   ├── plans/                  方案与规划文档
+│   ├── decisions/              决策台账
+│   ├── DEPLOYMENT.md           部署指南
+│   ├── COLLABORATION.md        团队协作约定
+│   └── GITHUB-SETUP.md         远程仓库同步手册
+├── scripts/                    生成与校验脚本（11 个）
+├── config/                     配置模板（仅 .example 入库）
+├── .trellis/                   Trellis 任务体系（MVP P0~P5 + Post-MVP）
+├── .github/workflows/          CI 门禁（verify.yml）
+└── runs/                       真机探测产物（gitignored）
 ```
 
 ---
 
 ## 快速开始
 
-```bash
-# 依赖（Node 20+；SDK 需另装 tsx）
-npm install
-
-# 生成全部知识产物
-npm run gen:all          # = gen:typekey + gen:fields + gen:domain + gen:dictionary
-
-# 校验产物是否为最新（CI 门禁）
-npm run check:all# = 4 类产物的指纹 / 计数 / 勾稽校验
-npm run verify           # = scan:secrets + check:all（提交前必跑）
-```
-
-### 前置：准备源文件
-
-抽取脚本都依赖 `docs/易飞OpenAPI.json`（50,401,916 字节，约 48 MiB，**不入库**）。需单独获取：
-
-- 来源：Apipost 项目 `322f10`（易飞OpenAPI）导出
-- 存放：`docs/易飞OpenAPI.json`
-- 校验：`node scripts/extract-typekey-map.mjs` 输出的 `services_unique` 应为 **595**
-
-### SDK 校验
-
-```bash
-cd packages/yfcli-sdk
-npm install
-npm run check            # 骨架门禁 + tsc + 离线用例 60 项 + 冻结判据 50 项 + 行尾
-```
-
----
-
-
-## 脚本清单
-
-| 脚本 | 输入 | 输出 | 关键能力 | npm script |
-|---|---|---|---|---|
-| `scripts/extract-typekey-map.mjs` | 50,401,916 字节 JSON | `knowledge/typekey/typekey_map.yaml`（106 对象 / 595 服务名） | 复合主键、`services_by_name` 无碰撞索引、`service_conflicts` 碰撞检测 | ✅ `gen:typekey` / `check:typekey` |
-| `scripts/extract-field-metadata.mjs` | 同上 | `knowledge/typekey-mapping/*.md`（106 份 / 12,893 字段） | 单头/单身分层、必填三态、文档异常标注 | ✅ `gen:fields` / `check:fields` |
-| `scripts/gen_data_dictionary.py` | 同上 | `knowledge/data-dictionary/`（78 模块 + 7 CSV） | 7 种列名形态（并集判据）、孤儿表剔除 | ✅ `gen:dictionary` / `check:dictionary` |
-| `scripts/gen-domain-map.mjs` | `typekey_map.yaml` | `knowledge/official/menus/domain-map-draft.{md,csv}` | 域归属三档置信度判定，待确认项显式标出 | ✅ `gen:domain` / `check:domain` |
-| `scripts/extract-sdd-metadata.mjs` | `knowledge/表结构信息/*.SDD`（GBK） | `sdd-table-meta.csv` / `sdd-index.csv` | 主键（`+` 分隔复合）、INDEX01~99、文档类型分类 | ❌ **无 npm script 入口** |
-| `scripts/gen-er-overview.py` | 同上 | `knowledge/data-dictionary/ER-OVERVIEW.md` + `ER-relations.csv` | 关联推断（明示为推断非声明），分 HIGH/MID/LOW | ❌ **无 npm script 入口** |
-| `scripts/probe-live-env.mjs` | 真机环境 | `runs/probe-live-env-report.md` | 15 项只读探测 | ❌ 手动 |
-| `scripts/probe-unknown-pk.mjs` | 真机环境 | 主键候选报告 | `primary_key` 为空对象：用「query 首行 + 唯一性过滤」反推 | ❌ 手动 |
-| `scripts/build-node-table-map.mjs` | 真机环境 + 字段字典 | `node-table-map.csv` | 逻辑节点名 → 物理表反推（v2 从字典取探测字段） | ❌ 手动 |
-| `scripts/verify-node-names.mjs` | 真机环境 | `runs/verify-node-names-report.md` | 175 个单身节点名批量验证，分 ACCEPT/OTHER/MA012 三类 | ❌ 手动 |
-| `scripts/scan-secrets.mjs` | 全仓 | — | 7 类敏感信息门禁 | ✅ `scan:secrets` / `scan:secrets:staged` |
-
-> 部分脚本依赖源文件 `docs/易飞OpenAPI.json`（50,401,916 字节，约 48 MiB，**不入库**），需单独获取。
->
-> **已知缺口**：`gen-er-overview.py` 与 `extract-sdd-metadata.mjs` 产出真实产物，但目前**无 `npm run` 入口、也无 `--check` 守护** —— 产物被改动不会被 CI 拦住。待补入口与指纹校验。
-
----
-
-## SDK 现状
-
-`packages/yfcli-sdk/` —— **单一 npm 包**（`package.json` 的 `name: "yfcli-sdk"`）· 9 个源码子目录 · 20 个 TS 文件：
-
-| 模块 | 职责 |
-|---|---|
-| `types/` | 配置 / 协议 / 条件 / 领域 / 错误模型（零 `any`，`unknown` + 类型守卫） |
-| `config/` | fail-fast 配置校验、四头构造 |
-| `conditions/` | 易飞形态条件构造器 + 枚举编码守卫 |
-| `response/` | 封包解析、`error[]` 双结构兼容、空结果告警 |
-| `transport/` | 唯一网络出口，先判 HTTP 状态码（错误 token 返回 500 HTML） |
-| `catalog/` | 服务名查表，**禁止拼接** |
-| `dictionary/` | 7 种列名形态 + 并集前缀判据 + 管理字段冲突白名单<br>**（数据字典接入时新增，非原定 CRUD 模块划分）** |
-| `logging/` | 阻断 `error[].data` 回显泄漏 |
-| `client/` | 编排层 |
-
-> 上表「模块」指 `src/` 下的**源码子目录**，不是模块级构建 / 发布单元 —— 全仓只有一个可发布单元 `yfcli-sdk`。
-
----
-
-## 当前进度
-
-| 阶段 | 状态 | 说明 |
-|---|---|---|
-| Phase 0 资料准备与基线冻结 | ✅ 完成 | OPEN 台账 22 条全裁决；真机环境 15/15 PASS；统计口径规范已建立 |
-| Phase 1 最小可跑链路 | 🔄 进行中 | SDK 骨架已交付（`tsc` 零错误 / 离线 60 项 / 判据 50 项）；**待补：产物↔自报数勾稽** |
-| Phase 2 能力扩展 | ⏸ 未开始 | analysis 层 + 助手 |
-| Phase 3 商业化治理 | ⏸ 未开始 | 双产品线 knowhow 分组 |
-
-**Phase 1 剩余事项**见 `docs/plans/phase1-sdk-plan.md` 与 `docs/TODO-PLAN.md`。
-
----
-
-<!-- ENV-AND-COLLAB:BEGIN -->
-
-## 本地环境准备
-
-### 必需
-
-| 项 | 版本 | 说明 |
-|---|---|---|
-| **Node.js** | >= 20 | 抽取脚本零运行时依赖，仅用 Node 内置模块 |
-| **Git** | >= 2.30 | 建议 2.40+（可用 `git switch` 替代 `checkout`） |
-
-### 必需：源文件（不入库）
-
-抽取脚本依赖 `docs/易飞OpenAPI.json`（50,401,916 字节，约 48 MiB，**含内网 IP / token 明文 / 账套名，故不入库**）。
-
-获取方式：
-
-1. 从 Apipost 项目 `322f10`（易飞OpenAPI）导出 JSON
-2. 存放到 `docs/易飞OpenAPI.json`
-3. 校验：运行 `node scripts/extract-typekey-map.mjs`，输出 `services_unique` 应为 **595**
-
-### 可选
-
-| 工具 | 用途 |
-|---|---|
-| `gh` CLI | 创建 PR、查看 CI 状态（未安装不影响开发） |
-| SQL Server 客户端 | analysis 层真机验证（Phase 2 起需要） |
-
-### 认证配置
-
-```bash
-# 复制模板（模板入库，实际值不入库）
-cp config/erp.example.yaml config/erp.local.yaml
-cp .env.example .env
-
-# 编辑 config/erp.local.yaml 与 .env 填入实际值
-# .env 与 *.local.yaml 均已被 .gitignore 排除
-```
-
-**红线**：token / 账套名 / 内网地址一律不入库。提交前 `npm run scan:secrets` 门禁拦截。
-
----
-
-## 依赖安装与启动
-
-```bash
-# 1. 安装（当前无运行时依赖，此步为后续 packages 预留）
+```powershell
+# 1. 安装依赖（Node 20+）
 npm install
 
 # 2. 生成全部知识产物
 npm run gen:all
 
-# 3. 校验（提交前必跑）
-npm run verify
+# 3. 校验产物是否为最新（CI 门禁）
+npm run check:all
+
+# 4. 提交前必跑
+npm run verify           # = scan:secrets + check:all
 ```
 
-| 命令 | 作用 |
-|---|---|
-| `npm run gen:all` | 生成 TypeKey 映射 / 字段对照表 / 域归属草案 |
-| `npm run gen:typekey` | 仅生成 TypeKey 映射（106 对象 / 595 服务名） |
-| `npm run gen:fields` | 仅生成字段对照表（106 份 / 12,893 字段） |
-| `npm run gen:domain` | 仅生成业务域归属草案 |
-| `npm run check:all` | 校验三类产物的内容指纹（CI 门禁） |
-| `npm run scan:secrets` | 敏感信息扫描（7 类） |
-| `npm run verify` | **提交前必跑** = scan + check |
+### 前置：准备源文件
 
-> **无 `start` 命令**：本仓当前只做知识抽取，不含运行服务。Phase 1 起将加入 `packages/yfcli-mcp`。
+抽取脚本依赖 `docs/易飞OpenAPI.json`（约 48 MiB，**不入库**）。需单独获取：
+
+- 来源：Apipost 项目 `322f10`（易飞OpenAPI）导出
+- 存放：`docs/易飞OpenAPI.json`
+- 校验：`node scripts/extract-typekey-map.mjs` 输出的 `services_unique` 应为 **601**（含 OAPMA 补充）
+
+### 启动 MCP Server
+
+```powershell
+npx tsx -e "import { startServer } from 'yfcli-mcp'; await startServer({ port: 3100 });"
+```
+
+详见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 
 ---
 
-## 团队协作与分支管理
+## 包说明
 
-**完整约定见 `[docs/COLLABORATION.md](docs/COLLABORATION.md)`**，此处为速查。
-
-### 分支模型
-
-```
-main                      受保护，只接受 PR 合并
-  ├─ feature/{简述}       功能
-  ├─ fix/{简述}           缺陷
-  ├─ docs/{简述}          文档
-  └─ chore/{简述}         工程杂项
-```
-
-命名：小写字母 + 连字符，3~5 词。关联任务号用 `feature/t09-ai-endpoints`。
-
-### 分支保护（`main`）
-
-| 规则 | 说明 |
-|---|---|
-| 禁止直推 | 须经 PR 合并 |
-| 至少 1 人 approve | — |
-| CI 必过 | `npm run verify` 全绿 |
-| 禁止 force push | 回退用 `git revert` |
-| 线性历史 | squash 或 rebase merge |
-
-### 提交信息（Conventional Commits）
-
-```
-<type>(<scope>): <subject>
-
-<body>            说明「为什么」，不只说做了什么
-```
-
-type：`feat` `fix` `docs` `refactor` `perf` `test` `chore` `build` `ci` `revert`
-
-scope：`sdk` `mcp` `analysis` `typekey` `fields` `skill` `experts` `knowhow` `deps`
-
-示例：
-
-```
-feat(sdk): 新增 servicePrefix 配置化，消除硬编码前缀
-
-易飞前缀 yf. 与易助 yz. 不同，原实现沿用了易助的硬编码方式，
-换产品线时会导致全部调用失败。改为从配置读取，缺省时启动即失败。
-
-关联：docs/decisions/OPEN-DECISIONS.md OPEN-A3
-```
-
-### PR 流程
-
-```bash
-git switch -c feature/xxx
-# ... 开发 ...
-npm run verify                 # 必过才提 PR
-git add -A && git commit -m "feat(sdk): ..."
-git push -u origin feature/xxx
-# 建 PR → 至少 1 人 approve → squash/rebase 合并 → 自动删分支
-```
-
-评审检查项（8 条）见 `docs/COLLABORATION.md` §四。
-
-### 知识产物变更（易错）
-
-产物是**脚本生成**的，改流程：
-
-```bash
-# 改脚本，不改产物
-vim scripts/extract-*.mjs
-npm run gen:all                  # 重新生成
-npm run verify                   # 校验
-git add -A && git commit         # 脚本 + 产物必须在同一个 PR
-```
-
-只改产物不改脚本 → `check:all` 会 FAIL，门禁拦住。
-
-### 敏感信息处置
-
-误提交后：
-
-```bash
-git rm --cached <路径>
-```
-
-⚠️ **凭证一旦 push 即视为泄漏，清理历史无法撤销。处置顺序：先轮换凭证，再清历史。**
+| 包 | 职责 | 测试数 |
+|----|------|--------|
+| `yfcli-sdk` | OpenAPI SDK：配置、封包、conditions 构造、响应解析、错误模型、枚举守卫 | 122 |
+| `yfcli-auth` | 独立授权：Token 生命周期管理、凭据红线检查、健康检查、错误分类 | 64 |
+| `yfcli-analysis` | 分析层：SQL 模板注册制、执行器防护、L4 审计日志、智能问数路由 | 49 |
+| `yfcli-mcp` | MCP Server：集中式工具注册表、HTTP/SSE 传输、Auth 全链路集成 | 41 |
+| `yfcli-experts` | 专家模块：引用 `@digiwin/erp-experts` 公共引擎 + 易飞注册表层 | 18 |
+| `yfcli-skill-openapi` | AI 助手 Skill：角色定义 + 助手 Prompt（无运行时测试） | — |
+| **合计** | | **294 [5 包]** |
 
 ---
 
-<!-- ENV-AND-COLLAB:END -->
+## 公共包依赖
+
+本仓通过 `file:` 引用两个独立仓库的公共包：
+
+| 公共包 | GitHub 仓库 | 引用方 | 说明 |
+|--------|-------------|--------|------|
+| `@digiwin/erp-experts` | [erp-experts](https://github.com/github279355466/erp-experts) | `yfcli-experts` | 公共计算引擎（成本归因、库存分析等） |
+| `erp-license` | [erp-core](https://github.com/github279355466/erp-core) | （Phase 3） | 授权服务 + 网关核心 |
+
+```jsonc
+// packages/yfcli-experts/package.json
+{ "dependencies": { "@digiwin/erp-experts": "file:../../../erp-experts" } }
+```
+
+> ⚠️ `file:` 路径相对于引用方根目录。CI 环境需额外 clone 共享仓，或后续改用 registry。
+
+---
+
+## AI 助手
+
+助手文档位于 `packages/yfcli-skill-openapi/references/assistants/`，每个助手一个 `.md` 文件。
+
+| 助手 | 文件 | 说明 |
+|------|------|------|
+| customer-create | `customer-create.md` | 客户创建 |
+| plant-query | `plant-query.md` | 工厂查询 |
+| plant-read | `plant-read.md` | 工厂读取 |
+
+> 更多助手文档待业务侧提供端点清单后补充。格式规范参见 SKILL.md。
+
+---
+
+## 测试
+
+```powershell
+# 各包独立运行
+cd packages\yfcli-sdk;     npx vitest run    # 122 passed
+cd ..\yfcli-auth;          npx vitest run    #  64 passed
+cd ..\yfcli-analysis;      npx vitest run    #  49 passed
+cd ..\yfcli-mcp;           npx vitest run    #  41 passed
+cd ..\yfcli-experts;       npx vitest run    #  18 passed
+```
+
+测试框架：Vitest 5.x。所有测试均为离线单元测试，不依赖外部服务。
+
+---
+
+## Trellis 任务体系
+
+`.trellis/tasks/` 下按阶段组织开发任务：
+
+| 阶段 | 任务 | 状态 |
+|------|------|------|
+| MVP P0 | prerequisites（前置条件） | ✅ |
+| MVP P1 | auth-module（授权模块） | ✅ |
+| MVP P2 | crud-skill-openapi（CRUD Skill） | ✅ |
+| MVP P3 | auth-integration（授权集成） | ✅ |
+| MVP P4 | analysis-qa（分析层 + 智能问数） | ✅ |
+| MVP P5 | expert-module（专家模块） | ✅ |
+| Post-MVP | view-ddl-execution（视图 DDL 执行） | ✅ |
+| Post-MVP | sql-template-completion（SQL 模板补全） | ✅ |
+| Post-MVP | l4-audit-log（L4 审计日志） | ✅ |
+| Post-MVP | container-probe / inquiry / integration-test / yzcli-migration | 🔶 |
+
+---
 ## 关键文档
 
 | 文档 | 内容 |

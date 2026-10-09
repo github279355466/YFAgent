@@ -1,0 +1,1886 @@
+# OAPMA 增强版 TypeKey 映射
+# 自动生成 —— 合并 OAPMA 服务清单 + OAPMB 字段映射 + typekey_map.yaml
+# OAPMA 服务: 570 | OAPMB 节点: 93 | OAPMB 字段: 6544
+# TypeKey 对象: 106 | 匹配服务: 538 | 映射字段: 39117
+# 生成时间: 2026-10-09
+
+- type_key: account
+  title: 会计科目
+  # query: yf.oapi.account.data.query.get  [OAPMA: ACTI03, 41 fields]
+  # read: yf.oapi.account.data.read.get  [OAPMA: ACTI03, 41 fields]
+  services:
+    query: yf.oapi.account.data.query.get
+    read: yf.oapi.account.data.read.get
+  primary_key: [ac_no]
+  oapma_field_aliases: [ac_no, ac_rank, acct_title, ac_alias, ac_property, asset_profit_loss, report_debit_credit_cate, ac_category, dearptment_management, monetary_account, financial_ratio_analysis_category, contra_a_c1_source, contra_a_c1_control_method, contra_a_c2_source, contra_a_c2_control_method, effective_ac, remarks, default_currency, debit_credit_balance, contra_method...]
+
+- type_key: accounting.voucher
+  title: 会计凭证
+  # approve: yf.oapi.accounting.voucher.data.approve  [OAPMA: ACTI10, 64 fields]
+  # create: yf.oapi.accounting.voucher.data.create  [OAPMA: ACTI10, 64 fields]
+  # delete: yf.oapi.accounting.voucher.data.delete  [OAPMA: ACTI10, 64 fields]
+  # disapprove: yf.oapi.accounting.voucher.data.disapprove  [OAPMA: ACTI10, 64 fields]
+  # invalid: yf.oapi.accounting.voucher.data.invalid  [OAPMA: ACTI10, 64 fields]
+  # query: yf.oapi.accounting.voucher.data.query.get  [OAPMA: ACTI10, 64 fields]
+  # read: yf.oapi.accounting.voucher.data.read.get  [OAPMA: ACTI10, 64 fields]
+  # update: yf.oapi.accounting.voucher.data.update  [OAPMA: ACTI10, 64 fields]
+  services:
+    approve: yf.oapi.accounting.voucher.data.approve
+    create: yf.oapi.accounting.voucher.data.create
+    delete: yf.oapi.accounting.voucher.data.delete
+    disapprove: yf.oapi.accounting.voucher.data.disapprove
+    invalid: yf.oapi.accounting.voucher.data.invalid
+    query: yf.oapi.accounting.voucher.data.query.get
+    read: yf.oapi.accounting.voucher.data.read.get
+    update: yf.oapi.accounting.voucher.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [accounting_voucher_data, accounting_voucher_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, doc_date, general_no, source_code, total_debit_local_curr, total_credit_local_curr, remarks, approve_status, posting_code, print_times, copy_classification, approve_date, approver_no, approver_name, approval_status_code, attachments, check_cash_flow, posting_date...]
+
+- type_key: ap.refund.doc
+  title: 应付退款单
+  # approve: yf.oapi.ap.refund.doc.data.approve  [OAPMA: ACPI09, 93 fields]
+  # create: yf.oapi.ap.refund.doc.data.create  [OAPMA: ACPI09, 93 fields]
+  # delete: yf.oapi.ap.refund.doc.data.delete  [OAPMA: ACPI09, 93 fields]
+  # disapprove: yf.oapi.ap.refund.doc.data.disapprove  [OAPMA: ACPI09, 93 fields]
+  # invalid: yf.oapi.ap.refund.doc.data.invalid  [OAPMA: ACPI09, 93 fields]
+  # query: yf.oapi.ap.refund.doc.data.query.get  [OAPMA: ACPI09, 93 fields]
+  # read: yf.oapi.ap.refund.doc.data.read.get  [OAPMA: ACPI09, 93 fields]
+  # update: yf.oapi.ap.refund.doc.data.update  [OAPMA: ACPI09, 93 fields]
+  services:
+    approve: yf.oapi.ap.refund.doc.data.approve
+    create: yf.oapi.ap.refund.doc.data.create
+    delete: yf.oapi.ap.refund.doc.data.delete
+    disapprove: yf.oapi.ap.refund.doc.data.disapprove
+    invalid: yf.oapi.ap.refund.doc.data.invalid
+    query: yf.oapi.ap.refund.doc.data.query.get
+    read: yf.oapi.ap.refund.doc.data.read.get
+    update: yf.oapi.ap.refund.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [ap_refund_doc_data, ap_refund_doc_detail_data, wo_stockin_data, wo_stockin_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, refund_date, refund_object_no, staff, staff_name, department, department_name, currency, exchange_rate, remarks, settlement_method_no, settlement_method_name, refund_bank_no, refund_bank_name, refund_bank_account, settlement_acct, settlement_acct_name, settlement_no...]
+
+- type_key: approve.price
+  title: 核价单
+  # approve: yf.oapi.approve.price.data.approve  [OAPMA: PURI03, 42 fields]
+  # create: yf.oapi.approve.price.data.create  [OAPMA: PURI03, 42 fields]
+  # delete: yf.oapi.approve.price.data.delete  [OAPMA: PURI03, 42 fields]
+  # disapprove: yf.oapi.approve.price.data.disapprove  [OAPMA: PURI03, 42 fields]
+  # invalid: yf.oapi.approve.price.data.invalid  [OAPMA: PURI03, 42 fields]
+  # query: yf.oapi.approve.price.data.query.get  [OAPMA: PURI03, 42 fields]
+  # read: yf.oapi.approve.price.data.read.get  [OAPMA: PURI03, 42 fields]
+  # update: yf.oapi.approve.price.data.update  [OAPMA: PURI03, 42 fields]
+  services:
+    approve: yf.oapi.approve.price.data.approve
+    create: yf.oapi.approve.price.data.create
+    delete: yf.oapi.approve.price.data.delete
+    disapprove: yf.oapi.approve.price.data.disapprove
+    invalid: yf.oapi.approve.price.data.invalid
+    query: yf.oapi.approve.price.data.query.get
+    read: yf.oapi.approve.price.data.read.get
+    update: yf.oapi.approve.price.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [detail_of_approve_price_data, header_of_approve_price_data, sub_detail_of_approve_price_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, approve_price_date, supplier_no, supplier_name, currency, currency_name, approve_status, remarks, tax_included, print_times, doc_date, approver_no, approver_name, approval_status_code, transfer_times, ebc_export_code, source_code, seq...]
+
+- type_key: ar.refund.doc
+  title: 应收退款单
+  # approve: yf.oapi.ar.refund.doc.data.approve  [OAPMA: ACRI15, 98 fields]
+  # create: yf.oapi.ar.refund.doc.data.create  [OAPMA: ACRI15, 98 fields]
+  # delete: yf.oapi.ar.refund.doc.data.delete  [OAPMA: ACRI15, 98 fields]
+  # disapprove: yf.oapi.ar.refund.doc.data.disapprove  [OAPMA: ACRI15, 98 fields]
+  # invalid: yf.oapi.ar.refund.doc.data.invalid  [OAPMA: ACRI15, 98 fields]
+  # query: yf.oapi.ar.refund.doc.data.query.get  [OAPMA: ACRI15, 98 fields]
+  # read: yf.oapi.ar.refund.doc.data.read.get  [OAPMA: ACRI15, 98 fields]
+  # update: yf.oapi.ar.refund.doc.data.update  [OAPMA: ACRI15, 98 fields]
+  services:
+    approve: yf.oapi.ar.refund.doc.data.approve
+    create: yf.oapi.ar.refund.doc.data.create
+    delete: yf.oapi.ar.refund.doc.data.delete
+    disapprove: yf.oapi.ar.refund.doc.data.disapprove
+    invalid: yf.oapi.ar.refund.doc.data.invalid
+    query: yf.oapi.ar.refund.doc.data.query.get
+    read: yf.oapi.ar.refund.doc.data.read.get
+    update: yf.oapi.ar.refund.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [ar_refund_doc_data, ar_refund_doc_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, collection_date, customer_no, customer_name, sales_no, sales_name, department, department_name, currency, exchange_rate, remarks, settlement_method_no, settlement_method_name, refund_bank_no, refund_bank_name, refund_bank_account, settlement_acct, settlement_acct_name...]
+
+- type_key: bad.cause
+  title: 不良原因
+  # query: yf.oapi.bad.cause.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.bad.cause.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.bad.cause.data.query.get
+    read: yf.oapi.bad.cause.data.read.get
+  primary_key: [bad_cause_no]
+
+- type_key: bom
+  title: 新增BOM
+  # approve: yf.oapi.bom.approve  [OAPMA: BOMI17, 67 fields]
+  # create: yf.oapi.bom.create  [OAPMA: BOMI17, 67 fields]
+  # delete: yf.oapi.bom.delete  [OAPMA: BOMI17, 67 fields]
+  # disapprove: yf.oapi.bom.disapprove  [OAPMA: BOMI17, 67 fields]
+  # invalid: yf.oapi.bom.invalid  [OAPMA: BOMI17, 67 fields]
+  # query: yf.oapi.bom.data.query.get  [OAPMA: BOMI02, 52 fields]
+  # read: yf.oapi.bom.data.read.get  [OAPMA: BOMI02, 52 fields]
+  # update: yf.oapi.bom.update  [OAPMA: BOMI17, 67 fields]
+  services:
+    approve: yf.oapi.bom.approve
+    create: yf.oapi.bom.create
+    delete: yf.oapi.bom.delete
+    disapprove: yf.oapi.bom.disapprove
+    invalid: yf.oapi.bom.invalid
+    query: yf.oapi.bom.data.query.get
+    read: yf.oapi.bom.data.read.get
+    update: yf.oapi.bom.update
+  primary_key: [master_item_no]
+  detail_nodes: [bom_requirement_detail_data, bom_requirement_header_data, bom_requirement_scrap_ratio_data]
+  oapma_field_aliases: [master_item_no, item_name, item_spec, property, unit, small_unit, standard_lot_size, wo_doc_type_no, wo_doc_type_name, change_type_no, change_type_name, change_no, change_sn, version, remarks, sub_item_relation, is_constrain, valid_status, seq, component_no...]
+
+- type_key: borrow.doc
+  title: 借出单
+  # approve: yf.oapi.borrow.doc.data.approve  [OAPMA: INVI11, 82 fields]
+  # create: yf.oapi.borrow.doc.data.create  [OAPMA: INVI11, 82 fields]
+  # delete: yf.oapi.borrow.doc.data.delete  [OAPMA: INVI11, 82 fields]
+  # disapprove: yf.oapi.borrow.doc.data.disapprove  [OAPMA: INVI11, 82 fields]
+  # invalid: yf.oapi.borrow.doc.data.invalid  [OAPMA: INVI11, 82 fields]
+  # query: yf.oapi.borrow.doc.data.query.get  [OAPMA: INVI11, 82 fields]
+  # read: yf.oapi.borrow.doc.data.read.get  [OAPMA: INVI11, 82 fields]
+  # update: yf.oapi.borrow.doc.data.update  [OAPMA: INVI11, 82 fields]
+  services:
+    approve: yf.oapi.borrow.doc.data.approve
+    create: yf.oapi.borrow.doc.data.create
+    delete: yf.oapi.borrow.doc.data.delete
+    disapprove: yf.oapi.borrow.doc.data.disapprove
+    invalid: yf.oapi.borrow.doc.data.invalid
+    query: yf.oapi.borrow.doc.data.query.get
+    read: yf.oapi.borrow.doc.data.read.get
+    update: yf.oapi.borrow.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [borrow_doc_data, borrow_doc_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, trade_date, object_type, object_no, object_name, department, department_name, staff_no, staff_name, plant_no, plant_name, tax_type, currency, exchange_rate, pieces, remarks, object_full_name, addrss_1...]
+
+- type_key: borrow.return
+  title: 借出归还单
+  # approve: yf.oapi.borrow.return.data.approve  [OAPMA: INVI12, 72 fields]
+  # create: yf.oapi.borrow.return.data.create  [OAPMA: INVI12, 72 fields]
+  # delete: yf.oapi.borrow.return.data.delete  [OAPMA: INVI12, 72 fields]
+  # disapprove: yf.oapi.borrow.return.data.disapprove  [OAPMA: INVI12, 72 fields]
+  # invalid: yf.oapi.borrow.return.data.invalid  [OAPMA: INVI12, 72 fields]
+  # query: yf.oapi.borrow.return.data.query.get  [OAPMA: INVI12, 72 fields]
+  # read: yf.oapi.borrow.return.data.read.get  [OAPMA: INVI12, 72 fields]
+  # update: yf.oapi.borrow.return.data.update  [OAPMA: INVI12, 72 fields]
+  services:
+    approve: yf.oapi.borrow.return.data.approve
+    create: yf.oapi.borrow.return.data.create
+    delete: yf.oapi.borrow.return.data.delete
+    disapprove: yf.oapi.borrow.return.data.disapprove
+    invalid: yf.oapi.borrow.return.data.invalid
+    query: yf.oapi.borrow.return.data.query.get
+    read: yf.oapi.borrow.return.data.read.get
+    update: yf.oapi.borrow.return.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [borrow_return_data, borrow_return_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, trade_date, object_type, object_no, object_name, department, department_name, staff_no, staff_name, plant_no, plant_name, tax_type, currency, exchange_rate, pieces, remarks, object_full_name, adrss_1...]
+
+- type_key: calendar
+  title: 假日表
+  # query: yf.oapi.calendar.data.query.get  [OAPMA: CMSI08, 12 fields]
+  # read: yf.oapi.calendar.data.read.get  [OAPMA: CMSI08, 12 fields]
+  services:
+    query: yf.oapi.calendar.data.query.get
+    read: yf.oapi.calendar.data.read.get
+  primary_key: [year, industry, shift]
+  oapma_field_aliases: [industry, year, shift, shift_name, remarks, date, leave_type, leave_days]
+
+- type_key: collection.doc
+  title: 收款单
+  # approve: yf.oapi.collection.doc.data.approve  [OAPMA: ACRI03, 111 fields]
+  # create: yf.oapi.collection.doc.data.create  [OAPMA: ACRI03, 111 fields]
+  # delete: yf.oapi.collection.doc.data.delete  [OAPMA: ACRI03, 111 fields]
+  # disapprove: yf.oapi.collection.doc.data.disapprove  [OAPMA: ACRI03, 111 fields]
+  # invalid: yf.oapi.collection.doc.data.invalid  [OAPMA: ACRI03, 111 fields]
+  # query: yf.oapi.collection.doc.data.query.get  [OAPMA: ACRI03, 111 fields]
+  # read: yf.oapi.collection.doc.data.read.get  [OAPMA: ACRI03, 111 fields]
+  # update: yf.oapi.collection.doc.data.update  [OAPMA: ACRI03, 111 fields]
+  services:
+    approve: yf.oapi.collection.doc.data.approve
+    create: yf.oapi.collection.doc.data.create
+    delete: yf.oapi.collection.doc.data.delete
+    disapprove: yf.oapi.collection.doc.data.disapprove
+    invalid: yf.oapi.collection.doc.data.invalid
+    query: yf.oapi.collection.doc.data.query.get
+    read: yf.oapi.collection.doc.data.read.get
+    update: yf.oapi.collection.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [collection_doc_data, collection_doc_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, collection_date, customer_no, customer_name, sales_no, sales_name, department, department_name, currency, exchange_rate, remarks, settlement_method_no, settlement_method_name, receive_bank, receive_bank_name, receive_bank_account, settlement_acct, settlement_acct_name...]
+
+- type_key: combination.order
+  title: 组合单
+  # approve: yf.oapi.combination.order.data.approve  [OAPMA: NOT FOUND]
+  # create: yf.oapi.combination.order.data.create  [OAPMA: NOT FOUND]
+  # delete: yf.oapi.combination.order.data.delete  [OAPMA: NOT FOUND]
+  # disapprove: yf.oapi.combination.order.data.disapprove  [OAPMA: NOT FOUND]
+  # invalid: yf.oapi.combination.order.data.invalid  [OAPMA: NOT FOUND]
+  # query: yf.oapi.combination.order.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.combination.order.data.read.get  [OAPMA: NOT FOUND]
+  # update: yf.oapi.combination.order.data.update  [OAPMA: NOT FOUND]
+  services:
+    approve: yf.oapi.combination.order.data.approve
+    create: yf.oapi.combination.order.data.create
+    delete: yf.oapi.combination.order.data.delete
+    disapprove: yf.oapi.combination.order.data.disapprove
+    invalid: yf.oapi.combination.order.data.invalid
+    query: yf.oapi.combination.order.data.query.get
+    read: yf.oapi.combination.order.data.read.get
+    update: yf.oapi.combination.order.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [combination_order_data, combination_order_detail_data]
+
+- type_key: company.detail
+  title: 公司
+  # query: yf.oapi.company.detail.data.query.get  [OAPMA: CMSI11, 22 fields]
+  services:
+    query: yf.oapi.company.detail.data.query.get
+  primary_key: []
+  oapma_field_aliases: [company_no, company_shortname, company_full_name, storage_path, telephone, fax_no, tax_register_no, tax_code, company_owner, e_mail, remarks, register_addr_1, register_addr_2, company_name_eng, company_address_1_eng, company_address_2_eng, analyze_olap_database_name, business_decision_cube_name, financial_ratio_analysis_cube_name, bank...]
+
+- type_key: computation.sampling.basis
+  title: 计量抽查基础
+  # query: yf.oapi.computation.sampling.basis.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.computation.sampling.basis.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.computation.sampling.basis.data.query.get
+    read: yf.oapi.computation.sampling.basis.data.read.get
+  primary_key: [inspection_level]
+
+- type_key: currency
+  title: 币种
+  # query: yf.oapi.currency.data.query.get  [OAPMA: CMSI06, 17 fields]
+  # read: yf.oapi.currency.data.read.get  [OAPMA: CMSI06, 17 fields]
+  services:
+    query: yf.oapi.currency.data.query.get
+    read: yf.oapi.currency.data.read.get
+  primary_key: [currency]
+  oapma_field_aliases: [currency, currency_name, rounding_of_up, rounding_of_amt, rounding_of_unit_cost, rounding_of_cost, remarks, currency_symbol, currency_unit, effective_date, bank_buying_exchange_rate, bank_selling_exchange_rate, customs_buying_exchange_rate, customs_selling_exchange_rate, adjust_exchange_rate, budget_exchange_rate]
+
+- type_key: customer
+  title: 客户
+  # create: yf.oapi.customer.data.create  [OAPMA: COPI01, 147 fields]
+  # delete: yf.oapi.customer.data.delete  [OAPMA: COPI01, 147 fields]
+  # query: yf.oapi.customer.data.query.get  [OAPMA: COPI01, 147 fields]
+  # read: yf.oapi.customer.data.read.get  [OAPMA: COPI01, 147 fields]
+  # update: yf.oapi.customer.data.update  [OAPMA: COPI01, 147 fields]
+  services:
+    create: yf.oapi.customer.data.create
+    delete: yf.oapi.customer.data.delete
+    query: yf.oapi.customer.data.query.get
+    read: yf.oapi.customer.data.read.get
+    update: yf.oapi.customer.data.update
+  primary_key: [customer_no]
+  detail_nodes: [customer_address_data, customer_basic_data_file_data]
+  oapma_field_aliases: [bank_code, bank_name, account_no, id_code, account_name, contact, main_account, customer_no, customer_shortname, customer_name, company_owner, tel_no1, tel_no2, fax_no, e_mail, tax_no, capital_amount, annual_atm, headcount, trans_currency...]
+
+- type_key: customer.item
+  title: 客户品号
+  # create: yf.oapi.customer.item.data.create  [OAPMA: COPI10, 9 fields]
+  # delete: yf.oapi.customer.item.data.delete  [OAPMA: COPI10, 9 fields]
+  # query: yf.oapi.customer.item.data.query.get  [OAPMA: COPI10, 9 fields]
+  # read: yf.oapi.customer.item.data.read.get  [OAPMA: COPI10, 9 fields]
+  # update: yf.oapi.customer.item.data.update  [OAPMA: COPI10, 9 fields]
+  services:
+    create: yf.oapi.customer.item.data.create
+    delete: yf.oapi.customer.item.data.delete
+    query: yf.oapi.customer.item.data.query.get
+    read: yf.oapi.customer.item.data.read.get
+    update: yf.oapi.customer.item.data.update
+  primary_key: [customer_no, item_no, customer_item_no]
+  detail_nodes: [customer_item_data]
+  oapma_field_aliases: [customer_no, customer_name, item_no, item_name, item_spec, customer_item_no, customer_item_desc, customer_item_name, customer_item_spec]
+
+- type_key: department
+  title: 部门
+  # query: yf.oapi.department.data.query.get  [OAPMA: CMSI05, 9 fields]
+  # read: yf.oapi.department.data.read.get  [OAPMA: CMSI05, 9 fields]
+  services:
+    query: yf.oapi.department.data.query.get
+    read: yf.oapi.department.data.read.get
+  primary_key: [department_no]
+  oapma_field_aliases: [department_no, department_name, remarks, depreciation_account, acct_title, export_code, export_date, is_valid, is_production_department]
+
+- type_key: destroy.order
+  title: 销毁单
+  # approve: yf.oapi.destroy.order.data.approve  [OAPMA: INVI24, 53 fields]
+  # create: yf.oapi.destroy.order.data.create  [OAPMA: INVI24, 53 fields]
+  # delete: yf.oapi.destroy.order.data.delete  [OAPMA: INVI24, 53 fields]
+  # disapprove: yf.oapi.destroy.order.data.disapprove  [OAPMA: INVI24, 53 fields]
+  # invalid: yf.oapi.destroy.order.data.invalid  [OAPMA: INVI24, 53 fields]
+  # query: yf.oapi.destroy.order.data.query.get  [OAPMA: INVI24, 53 fields]
+  # read: yf.oapi.destroy.order.data.read.get  [OAPMA: INVI24, 53 fields]
+  # update: yf.oapi.destroy.order.data.update  [OAPMA: INVI24, 53 fields]
+  services:
+    approve: yf.oapi.destroy.order.data.approve
+    create: yf.oapi.destroy.order.data.create
+    delete: yf.oapi.destroy.order.data.delete
+    disapprove: yf.oapi.destroy.order.data.disapprove
+    invalid: yf.oapi.destroy.order.data.invalid
+    query: yf.oapi.destroy.order.data.query.get
+    read: yf.oapi.destroy.order.data.read.get
+    update: yf.oapi.destroy.order.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [destroy_order_data, destroy_order_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, doc_date, destroy_source, destroy_reason, destroy_staff, destroy_staff_name, destroy_department, destroy_department_name, plant_no, plant_name, destroy_method, destroy_place, approver_no, approver_name, approve_status, destroy_date, print_times, approval_status_code...]
+
+- type_key: document.type.general
+  title: 单据性质
+  # query: yf.oapi.document.type.general.query.get  [OAPMA: CMSMQ_001, 12 fields]
+  services:
+    query: yf.oapi.document.type.general.query.get
+  primary_key: []
+  oapma_field_aliases: [doc_type_no, doc_name, doc_property, coding_method, length_of_year, length_of_serial_no, transaction_type, stock_action, cost_action, auto_confirm, remarks, doc_full_name]
+
+- type_key: ebom
+  title: 查询EBOM
+  # create: yf.oapi.ebom.data.create  [OAPMA: NOT FOUND]
+  # delete: yf.oapi.ebom.data.delete  [OAPMA: NOT FOUND]
+  # query: yf.oapi.ebom.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.ebom.data.read.get  [OAPMA: NOT FOUND]
+  # update: yf.oapi.ebom.data.update  [OAPMA: NOT FOUND]
+  services:
+    create: yf.oapi.ebom.data.create
+    delete: yf.oapi.ebom.data.delete
+    query: yf.oapi.ebom.data.query.get
+    read: yf.oapi.ebom.data.read.get
+    update: yf.oapi.ebom.data.update
+  primary_key: [master_item_no]
+  detail_nodes: [ebom_data, ebom_detail_data]
+
+- type_key: ebom.change
+  title: 变更单
+  # approve: yf.oapi.ebom.change.data.approve  [OAPMA: NOT FOUND]
+  # create: yf.oapi.ebom.change.data.create  [OAPMA: NOT FOUND]
+  # delete: yf.oapi.ebom.change.data.delete  [OAPMA: NOT FOUND]
+  # disapprove: yf.oapi.ebom.change.data.disapprove  [OAPMA: NOT FOUND]
+  # invalid: yf.oapi.ebom.change.data.invalid  [OAPMA: NOT FOUND]
+  # query: yf.oapi.ebom.change.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.ebom.change.data.read.get  [OAPMA: NOT FOUND]
+  # update: yf.oapi.ebom.change.data.update  [OAPMA: NOT FOUND]
+  services:
+    approve: yf.oapi.ebom.change.data.approve
+    create: yf.oapi.ebom.change.data.create
+    delete: yf.oapi.ebom.change.data.delete
+    disapprove: yf.oapi.ebom.change.data.disapprove
+    invalid: yf.oapi.ebom.change.data.invalid
+    query: yf.oapi.ebom.change.data.query.get
+    read: yf.oapi.ebom.change.data.read.get
+    update: yf.oapi.ebom.change.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [ebom_change_data, ebom_change_detail_data, ebom_change_sub_data]
+
+- type_key: ecn
+  title: 变更单
+  # approve: yf.oapi.ecn.data.approve  [OAPMA: BOMI04, 119 fields]
+  # create: yf.oapi.ecn.data.create  [OAPMA: BOMI04, 119 fields]
+  # delete: yf.oapi.ecn.data.delete  [OAPMA: BOMI04, 119 fields]
+  # disapprove: yf.oapi.ecn.data.disapprove  [OAPMA: BOMI04, 119 fields]
+  # invalid: yf.oapi.ecn.data.invalid  [OAPMA: BOMI04, 119 fields]
+  # query: yf.oapi.ecn.data.query.get  [OAPMA: BOMI04, 119 fields]
+  # read: yf.oapi.ecn.data.read.get  [OAPMA: BOMI04, 119 fields]
+  # update: yf.oapi.ecn.data.update  [OAPMA: BOMI04, 119 fields]
+  services:
+    approve: yf.oapi.ecn.data.approve
+    create: yf.oapi.ecn.data.create
+    delete: yf.oapi.ecn.data.delete
+    disapprove: yf.oapi.ecn.data.disapprove
+    invalid: yf.oapi.ecn.data.invalid
+    query: yf.oapi.ecn.data.query.get
+    read: yf.oapi.ecn.data.read.get
+    update: yf.oapi.ecn.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [ecn_component_data, ecn_data, ecn_master_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, change_date, urgent_code, change_reason, remarks, approve_status, print_times, doc_date, approver_no, approver_name, approval_status_code, transfer_times, seq, master_item_no, item_name, item_spec, property, unit...]
+
+- type_key: employee
+  title: 员工
+  # query: yf.oapi.employee.data.query.get  [OAPMA: CMSI10, 12 fields]
+  services:
+    query: yf.oapi.employee.data.query.get
+  primary_key: []
+  oapma_field_aliases: [staff_no, staff_name, department, department_name, telephone, e_mail, resigned_on, full_name_eng, login_user_code, login_user_name, direct_supervisor_no, direct_supervisor_name]
+
+- type_key: engineering.item
+  title: 工程品号
+  # create: yf.oapi.engineering.item.data.create  [OAPMA: BOMI10, 17 fields]
+  # delete: yf.oapi.engineering.item.data.delete  [OAPMA: BOMI10, 17 fields]
+  # query: yf.oapi.engineering.item.data.query.get  [OAPMA: BOMI10, 17 fields]
+  # read: yf.oapi.engineering.item.data.read.get  [OAPMA: BOMI10, 17 fields]
+  # update: yf.oapi.engineering.item.data.update  [OAPMA: BOMI10, 17 fields]
+  services:
+    create: yf.oapi.engineering.item.data.create
+    delete: yf.oapi.engineering.item.data.delete
+    query: yf.oapi.engineering.item.data.query.get
+    read: yf.oapi.engineering.item.data.read.get
+    update: yf.oapi.engineering.item.data.update
+  primary_key: [engineering_item]
+  detail_nodes: [engineering_items_header_data]
+  oapma_field_aliases: [engineering_item, engineering_item_name, engineering_item_spec, unit, item_classification_1, item_classification_name_1, item, product_process_item, product_process_code, product_process_name, item_attribute, standard_price, bonded_goods, remarks, optional_mode, last_price, verification_mode]
+
+- type_key: expense.invoice
+  title: 费用发票
+  # approve: yf.oapi.expense.invoice.data.approve  [OAPMA: ACPI06, 90 fields]
+  # create: yf.oapi.expense.invoice.data.create  [OAPMA: ACPI06, 90 fields]
+  # delete: yf.oapi.expense.invoice.data.delete  [OAPMA: ACPI06, 90 fields]
+  # disapprove: yf.oapi.expense.invoice.data.disapprove  [OAPMA: ACPI06, 90 fields]
+  # invalid: yf.oapi.expense.invoice.data.invalid  [OAPMA: ACPI06, 90 fields]
+  # query: yf.oapi.expense.invoice.data.query.get  [OAPMA: ACPI06, 90 fields]
+  # read: yf.oapi.expense.invoice.data.read.get  [OAPMA: ACPI06, 90 fields]
+  # update: yf.oapi.expense.invoice.data.update  [OAPMA: ACPI06, 90 fields]
+  services:
+    approve: yf.oapi.expense.invoice.data.approve
+    create: yf.oapi.expense.invoice.data.create
+    delete: yf.oapi.expense.invoice.data.delete
+    disapprove: yf.oapi.expense.invoice.data.disapprove
+    invalid: yf.oapi.expense.invoice.data.invalid
+    query: yf.oapi.expense.invoice.data.query.get
+    read: yf.oapi.expense.invoice.data.read.get
+    update: yf.oapi.expense.invoice.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [expense_invoice_data, expense_invoice_detail_data, expense_invoice_subhead_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, approve_date, supplier_no, supplier_name, tax_identification_no, currency, exchange_rate, invoice_type, tax_type, invoice_no, invoice_date, exp_payment_date, exp_cashing_date, remarks, approve_status, update_code, print_times, trans_curr_not_deductible_amount...]
+
+- type_key: financial.institution
+  title: 金融机构
+  # query: yf.oapi.financial.institution.data.query.get  [OAPMA: CMSI16, 27 fields]
+  # read: yf.oapi.financial.institution.data.read.get  [OAPMA: CMSI16, 27 fields]
+  services:
+    query: yf.oapi.financial.institution.data.query.get
+    read: yf.oapi.financial.institution.data.read.get
+  primary_key: [financing_institution]
+  oapma_field_aliases: [financing_institution, financing institution_type, financing institution_head, financing institution_area, financing institution_branch, financing institution_name, bank_eng, branch_bank_no, branch_bank_name, branch_bank_adrr, country_code, national_cht_abbr, national_eng_abbr, city_code, city_cht_abbr, city_eng_abbr, province_abbr, bank_code, bank_name, bank_account...]
+
+- type_key: function.category
+  title: 职务类别
+  # query: yf.oapi.function.category.query.get  [OAPMA: CMSI09, 8 fields]
+  # read: yf.oapi.function.category.read.get  [OAPMA: CMSI09, 8 fields]
+  services:
+    query: yf.oapi.function.category.query.get
+    read: yf.oapi.function.category.read.get
+  primary_key: [function_no]
+  oapma_field_aliases: [function_no, function_category, function_name, remarks, staff_no, staff_name]
+
+- type_key: inquiry
+  title: 询价单
+  # approve: yf.oapi.inquiry.data.approve  [OAPMA: PURI14, 39 fields]
+  # create: yf.oapi.inquiry.data.create  [OAPMA: PURI14, 39 fields]
+  # delete: yf.oapi.inquiry.data.delete  [OAPMA: PURI14, 39 fields]
+  # disapprove: yf.oapi.inquiry.data.disapprove  [OAPMA: PURI14, 39 fields]
+  # invalid: yf.oapi.inquiry.data.invalid  [OAPMA: PURI14, 39 fields]
+  # query: yf.oapi.inquiry.data.query.get  [OAPMA: PURI14, 39 fields]
+  # read: yf.oapi.inquiry.data.read.get  [OAPMA: PURI14, 39 fields]
+  # update: yf.oapi.inquiry.data.update  [OAPMA: PURI14, 39 fields]
+  services:
+    approve: yf.oapi.inquiry.data.approve
+    create: yf.oapi.inquiry.data.create
+    delete: yf.oapi.inquiry.data.delete
+    disapprove: yf.oapi.inquiry.data.disapprove
+    invalid: yf.oapi.inquiry.data.invalid
+    query: yf.oapi.inquiry.data.query.get
+    read: yf.oapi.inquiry.data.read.get
+    update: yf.oapi.inquiry.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [inquiry_data, inquiry_detail_data, inquiry_sub_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, inquiry_date, item_no, lowest_add_qty, item_name, item_spec, approve_status, remarks, print_times, doc_date, approver_no, approver_name, approval_status_code, transfer_times, seq, supplier_no, supplier_name, currency...]
+
+- type_key: inspection
+  title: 检验项目
+  # query: yf.oapi.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.inspection.data.query.get
+    read: yf.oapi.inspection.data.read.get
+  primary_key: [inspection_no]
+
+- type_key: inventory.transaction
+  title: 库存交易单
+  # approve: yf.oapi.inventory.transaction.data.approve  [OAPMA: INVI05, 60 fields]
+  # create: yf.oapi.inventory.transaction.data.create  [OAPMA: INVI05, 60 fields]
+  # delete: yf.oapi.inventory.transaction.data.delete  [OAPMA: INVI05, 60 fields]
+  # disapprove: yf.oapi.inventory.transaction.data.disapprove  [OAPMA: INVI05, 60 fields]
+  # invalid: yf.oapi.inventory.transaction.data.invalid  [OAPMA: INVI05, 60 fields]
+  # query: yf.oapi.inventory.transaction.data.query.get  [OAPMA: INVI05, 60 fields]
+  # read: yf.oapi.inventory.transaction.data.read.get  [OAPMA: INVI05, 60 fields]
+  # update: yf.oapi.inventory.transaction.data.update  [OAPMA: INVI05, 60 fields]
+  services:
+    approve: yf.oapi.inventory.transaction.data.approve
+    create: yf.oapi.inventory.transaction.data.create
+    delete: yf.oapi.inventory.transaction.data.delete
+    disapprove: yf.oapi.inventory.transaction.data.disapprove
+    invalid: yf.oapi.inventory.transaction.data.invalid
+    query: yf.oapi.inventory.transaction.data.query.get
+    read: yf.oapi.inventory.transaction.data.read.get
+    update: yf.oapi.inventory.transaction.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [inventory_transaction_data, inventory_transaction_detail_data, inventory_transaction_serial_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, transaction_date, department, department_name, remarks, approve_status, print_times, plant_no, plant_name, doc_type, pieces, total_qty, total_amt, generate_entry_code, doc_date, approver_no, approver_name, total_package_qty...]
+
+- type_key: inventory.transaction.details
+  title: 库存交易明细
+  # query: yf.oapi.inventory.transaction.details.data.query.get  [OAPMA: INVI09, 53 fields]
+  # read: yf.oapi.inventory.transaction.details.data.read.get  [OAPMA: INVI09, 53 fields]
+  services:
+    query: yf.oapi.inventory.transaction.details.data.query.get
+    read: yf.oapi.inventory.transaction.details.data.read.get
+  primary_key: [doc_type_no, doc_no, seq, in_out_type]
+  oapma_field_aliases: [item_no, item_name, item_spec, unit, package_unit, small_unit, date, in_out_type, doc_type_no, doc_type_name, doc_no, seq, warehouse_no, warehouse_name, warehouse_type, remarks, transaction_qty, unit_cost, amount, transaction_type...]
+
+- type_key: item
+  title: 品号信息
+  # create: yf.oapi.item.data.create  [OAPMA: INVI02, 253 fields]
+  # delete: yf.oapi.item.data.delete  [OAPMA: INVI02, 253 fields]
+  # query: yf.oapi.item.data.query.get  [OAPMA: INVI02, 253 fields]
+  # read: yf.oapi.item.data.read.get  [OAPMA: INVI02, 253 fields]
+  # update: yf.oapi.item.data.update  [OAPMA: INVI02, 253 fields]
+  services:
+    create: yf.oapi.item.data.create
+    delete: yf.oapi.item.data.delete
+    query: yf.oapi.item.data.query.get
+    read: yf.oapi.item.data.read.get
+    update: yf.oapi.item.data.update
+  primary_key: [item_no]
+  detail_nodes: [item_basic_data, item_conversion_unit_data, item_warehouse_data]
+  oapma_field_aliases: [item_no, item_name, item_spec, inventory_unit, item_classification_1, name_of_item_category_1, item_classification_2, name_of_item_category_2, item_classification_3, name_of_item_category_3, item_classification_4, name_of_item_category_4, item_desc, standard_product_process_route, standard_process_route, process_route_name, document_no, barcode_no, unit_net_weight, weight_unit...]
+
+- type_key: item.classification
+  title: 品号类别
+  # create: yf.oapi.item.classification.data.create  [OAPMA: INVI01, 20 fields]
+  # delete: yf.oapi.item.classification.data.delete  [OAPMA: INVI01, 20 fields]
+  # query: yf.oapi.item.classification.data.query.get  [OAPMA: INVI01, 20 fields]
+  # read: yf.oapi.item.classification.data.read.get  [OAPMA: INVI01, 20 fields]
+  # update: yf.oapi.item.classification.data.update  [OAPMA: INVI01, 20 fields]
+  services:
+    create: yf.oapi.item.classification.data.create
+    delete: yf.oapi.item.classification.data.delete
+    query: yf.oapi.item.classification.data.query.get
+    read: yf.oapi.item.classification.data.read.get
+    update: yf.oapi.item.classification.data.update
+  primary_key: [classification_mode, item_classification_code]
+  detail_nodes: [item_classification_data]
+  oapma_field_aliases: [classification_mode, classification_mode_name, item_classification_code, item_type_name, inventory_account_code, inventory_accounting_ac_name, sales_revenues_ac, sales_revenue_ac_title, sales_return_ac, sales_return_ac_title, sales_revenues_cost_ac, sales_revenues_cost_ac_title, sales_return_cost_ac, sales_return_cost_ac_title, direct_sales_expense_rate, trans_date, is_valid, goods_sales_ac, goods_sales_ac_title]
+
+- type_key: item.count
+  title: 盘点
+  # read: yf.oapi.item.count.data.read.get  [OAPMA: INVI06, 28 fields]
+  services:
+    read: yf.oapi.item.count.data.read.get
+  primary_key: [count_manuscript_no]
+
+- type_key: item.customer.price
+  title: 客户商品价格
+  # create: yf.oapi.item.customer.price.create  [OAPMA: COPI02, 30 fields]
+  # delete: yf.oapi.item.customer.price.delete  [OAPMA: COPI02, 30 fields]
+  # query: yf.oapi.item.customer.price.query.get  [OAPMA: COPI02, 30 fields]
+  # read: yf.oapi.item.customer.price.read.get  [OAPMA: COPI02, 30 fields]
+  # update: yf.oapi.item.customer.price.update  [OAPMA: COPI02, 30 fields]
+  services:
+    create: yf.oapi.item.customer.price.create
+    delete: yf.oapi.item.customer.price.delete
+    query: yf.oapi.item.customer.price.query.get
+    read: yf.oapi.item.customer.price.read.get
+    update: yf.oapi.item.customer.price.update
+  primary_key: [customer_no, item_no, effective_date, pricing_unit, curr, first_trade_date]
+  detail_nodes: [customer_products_pricing_detail_data, customer_products_pricing_header_data]
+  oapma_field_aliases: [customer_no, customer_name, item_no, item_name, item_spec, pricing_unit, curr, currency_name, small_unit, pricing_by_qty, price, price_approval_date, last_sales_day, remarks, tax_included, first_trade_date, commission_unit_price, commission_percentage, effective_date, expired_date...]
+
+- type_key: item.inspection
+  title: 品号检验项目
+  # query: yf.oapi.item.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.item.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.item.inspection.data.query.get
+    read: yf.oapi.item.inspection.data.read.get
+  primary_key: [quality_control_category_no, item_no, routing_no]
+
+- type_key: item.inventory.qty
+  title: 品号库存
+  # query: yf.oapi.item.inventory.qty.query.get  [OAPMA: INVI02, 253 fields]
+  services:
+    query: yf.oapi.item.inventory.qty.query.get
+  primary_key: []
+  oapma_field_aliases: [item_no, item_name, item_spec, inventory_unit, item_classification_1, name_of_item_category_1, item_classification_2, name_of_item_category_2, item_classification_3, name_of_item_category_3, item_classification_4, name_of_item_category_4, item_desc, standard_product_process_route, standard_process_route, process_route_name, document_no, barcode_no, unit_net_weight, weight_unit...]
+
+- type_key: item.lot
+  title: 批号
+  # query: yf.oapi.item.lot.data.query.get  [OAPMA: INVI03, 25 fields]
+  # read: yf.oapi.item.lot.data.read.get  [OAPMA: INVI03, 25 fields]
+  services:
+    query: yf.oapi.item.lot.data.query.get
+    read: yf.oapi.item.lot.data.read.get
+  primary_key: [item_no, lot_no]
+  oapma_field_aliases: [item_no, item_name, item_spec, lot_no, first_storage_date, last_counting_date, reference_doc_type, reference_doc_no, is_end, remarks, expiry_date, reinspection_date, production_date, lot_description, warehouse_no, warehouse_name, location_no, inventory_qty, inventory_package_qty, last_stock_in_date...]
+
+- type_key: item.supplier.price
+  title: 供应商料件价格
+  # create: yf.oapi.item.supplier.price.create  [OAPMA: PURI02, 27 fields]
+  # delete: yf.oapi.item.supplier.price.delete  [OAPMA: PURI02, 27 fields]
+  # query: yf.oapi.item.supplier.price.query.get  [OAPMA: PURI02, 27 fields]
+  # read: yf.oapi.item.supplier.price.read.get  [OAPMA: PURI02, 27 fields]
+  # update: yf.oapi.item.supplier.price.update  [OAPMA: PURI02, 27 fields]
+  services:
+    create: yf.oapi.item.supplier.price.create
+    delete: yf.oapi.item.supplier.price.delete
+    query: yf.oapi.item.supplier.price.query.get
+    read: yf.oapi.item.supplier.price.read.get
+    update: yf.oapi.item.supplier.price.update
+  primary_key: [item_no, supplier_no, currency, pricing_unit, effective_date]
+  detail_nodes: [detail_note_of_item_factory_data, header_of_item_vendor_data]
+  oapma_field_aliases: [item_no, item_name, item_spec, supplier_no, supplier_name, currency, currency_name, pricing_unit, first_trade_date, supplier_item_no, price_approval_date, last_incoming_date, pricing_by_qty, purchase_price, remarks, tax_included, effective_date, expired_date, small_unit, units_above]
+
+- type_key: monthly.item.statistics
+  title: 品号月档
+  # query: yf.oapi.monthly.item.statistics.data.query.get  [OAPMA: INVI10, 93 fields]
+  # read: yf.oapi.monthly.item.statistics.data.read.get  [OAPMA: INVI10, 93 fields]
+  services:
+    query: yf.oapi.monthly.item.statistics.data.query.get
+    read: yf.oapi.monthly.item.statistics.data.read.get
+  primary_key: [item_no, stock_month]
+  oapma_field_aliases: [item_no, item_name, item_spec, unit, package_unit, stock_month, total_beginning_qty, total_beginning_cost, remarks, beginning_cost_material, beginning_cost_labor, beginning_cost_overhead, beginning_cost_process, unit_cost, unit_cost_material, unit_cost_labor, unit_cost_overhead, unit_cost_process, total_beg_packing_qty, warehouse_no...]
+
+- type_key: op.stockin
+  title: 工艺入库单
+  # approve: yf.oapi.op.stockin.data.approve  [OAPMA: SFCI07, 131 fields]
+  # create: yf.oapi.op.stockin.data.create  [OAPMA: SFCI07, 131 fields]
+  # delete: yf.oapi.op.stockin.data.delete  [OAPMA: SFCI07, 131 fields]
+  # disapprove: yf.oapi.op.stockin.data.disapprove  [OAPMA: SFCI07, 131 fields]
+  # invalid: yf.oapi.op.stockin.data.invalid  [OAPMA: SFCI07, 131 fields]
+  # query: yf.oapi.op.stockin.data.query.get  [OAPMA: SFCI07, 131 fields]
+  # read: yf.oapi.op.stockin.data.read.get  [OAPMA: SFCI07, 131 fields]
+  # update: yf.oapi.op.stockin.data.update  [OAPMA: SFCI07, 131 fields]
+  services:
+    approve: yf.oapi.op.stockin.data.approve
+    create: yf.oapi.op.stockin.data.create
+    delete: yf.oapi.op.stockin.data.delete
+    disapprove: yf.oapi.op.stockin.data.disapprove
+    invalid: yf.oapi.op.stockin.data.invalid
+    query: yf.oapi.op.stockin.data.query.get
+    read: yf.oapi.op.stockin.data.read.get
+    update: yf.oapi.op.stockin.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [transfer_doc_data, transfer_doc_detail_data, transfer_doc_sub_detai_data]
+  oapma_field_aliases: [doc_type_no, doc_no, seq, item_serial_no, transaction_type, identifier, supplier_order_no, sub_seq, routing_no, routing_name, process_step, work_hours_batch_qty, std_labor_hours_seconds, actual_labor_hour_seconds, std_machine_hours_seconds, actual_machine_hours_seconds, work_hours_wages_rate, piece_price, pricing_unit, complete_qty...]
+
+- type_key: operation
+  title: 工艺
+  # create: yf.oapi.operation.data.create  [OAPMA: CMSI19, 9 fields]
+  # delete: yf.oapi.operation.data.delete  [OAPMA: CMSI19, 9 fields]
+  # query: yf.oapi.operation.data.query.get  [OAPMA: CMSI19, 9 fields]
+  # update: yf.oapi.operation.data.update  [OAPMA: CMSI19, 9 fields]
+  services:
+    create: yf.oapi.operation.data.create
+    delete: yf.oapi.operation.data.delete
+    query: yf.oapi.operation.data.query.get
+    update: yf.oapi.operation.data.update
+  primary_key: []
+  detail_nodes: [operation_no_data]
+  oapma_field_aliases: [routing_no, routing_name, routing_desc, property, line_vendor_code, production_line_vendor_name, issue_employee, staff_name, remarks]
+
+- type_key: other.payable.doc
+  title: 其他应付单
+  # approve: yf.oapi.other.payable.doc.data.approve  [OAPMA: ACPI08, 76 fields]
+  # create: yf.oapi.other.payable.doc.data.create  [OAPMA: ACPI08, 76 fields]
+  # delete: yf.oapi.other.payable.doc.data.delete  [OAPMA: ACPI08, 76 fields]
+  # disapprove: yf.oapi.other.payable.doc.data.disapprove  [OAPMA: ACPI08, 76 fields]
+  # invalid: yf.oapi.other.payable.doc.data.invalid  [OAPMA: ACPI08, 76 fields]
+  # query: yf.oapi.other.payable.doc.data.query.get  [OAPMA: ACPI08, 76 fields]
+  # read: yf.oapi.other.payable.doc.data.read.get  [OAPMA: ACPI08, 76 fields]
+  # update: yf.oapi.other.payable.doc.data.update  [OAPMA: ACPI08, 76 fields]
+  services:
+    approve: yf.oapi.other.payable.doc.data.approve
+    create: yf.oapi.other.payable.doc.data.create
+    delete: yf.oapi.other.payable.doc.data.delete
+    disapprove: yf.oapi.other.payable.doc.data.disapprove
+    invalid: yf.oapi.other.payable.doc.data.invalid
+    query: yf.oapi.other.payable.doc.data.query.get
+    read: yf.oapi.other.payable.doc.data.read.get
+    update: yf.oapi.other.payable.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [other_payable_doc_data, other_payable_doc_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, approve_date, payable_object_no, staff, staff_name, department, department_name, currency, exchange_rate, generate_entry_code, exp_payment_date, exp_cashing_date, remarks, approve_status, print_times, trans_curr_payable_amount, local_curr_payable_amount, trans_curr_cancelled_amount...]
+
+- type_key: other.receivable
+  title: 其他应收单
+  # approve: yf.oapi.other.receivable.data.approve  [OAPMA: ACRI09, 62 fields]
+  # create: yf.oapi.other.receivable.data.create  [OAPMA: ACRI09, 62 fields]
+  # delete: yf.oapi.other.receivable.data.delete  [OAPMA: ACRI09, 62 fields]
+  # disapprove: yf.oapi.other.receivable.data.disapprove  [OAPMA: ACRI09, 62 fields]
+  # invalid: yf.oapi.other.receivable.data.invalid  [OAPMA: ACRI09, 62 fields]
+  # query: yf.oapi.other.receivable.data.query.get  [OAPMA: ACRI09, 62 fields]
+  # read: yf.oapi.other.receivable.data.read.get  [OAPMA: ACRI09, 62 fields]
+  # update: yf.oapi.other.receivable.data.update  [OAPMA: ACRI09, 62 fields]
+  services:
+    approve: yf.oapi.other.receivable.data.approve
+    create: yf.oapi.other.receivable.data.create
+    delete: yf.oapi.other.receivable.data.delete
+    disapprove: yf.oapi.other.receivable.data.disapprove
+    invalid: yf.oapi.other.receivable.data.invalid
+    query: yf.oapi.other.receivable.data.query.get
+    read: yf.oapi.other.receivable.data.read.get
+    update: yf.oapi.other.receivable.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [other_receivable_data, other_receivable_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, approve_date, customer_no, customer_name, sales_no, sales_name, department, department_name, currency, exchange_rate, generate_entry_code, plan_receive_date, exp_cashing_date, remarks, approve_status, print_times, trans_curr_receivable_amount, local_curr_receivable_amount...]
+
+- type_key: outsourcing.approve.price
+  title: 委外核价单
+  # approve: yf.oapi.outsourcing.approve.price.data.approve  [OAPMA: MOCI10, 40 fields]
+  # create: yf.oapi.outsourcing.approve.price.data.create  [OAPMA: MOCI10, 40 fields]
+  # delete: yf.oapi.outsourcing.approve.price.data.delete  [OAPMA: MOCI10, 40 fields]
+  # disapprove: yf.oapi.outsourcing.approve.price.data.disapprove  [OAPMA: MOCI10, 40 fields]
+  # invalid: yf.oapi.outsourcing.approve.price.data.invalid  [OAPMA: MOCI10, 40 fields]
+  # query: yf.oapi.outsourcing.approve.price.data.query.get  [OAPMA: MOCI10, 40 fields]
+  # read: yf.oapi.outsourcing.approve.price.data.read.get  [OAPMA: MOCI10, 40 fields]
+  # update: yf.oapi.outsourcing.approve.price.data.update  [OAPMA: MOCI10, 40 fields]
+  services:
+    approve: yf.oapi.outsourcing.approve.price.data.approve
+    create: yf.oapi.outsourcing.approve.price.data.create
+    delete: yf.oapi.outsourcing.approve.price.data.delete
+    disapprove: yf.oapi.outsourcing.approve.price.data.disapprove
+    invalid: yf.oapi.outsourcing.approve.price.data.invalid
+    query: yf.oapi.outsourcing.approve.price.data.query.get
+    read: yf.oapi.outsourcing.approve.price.data.read.get
+    update: yf.oapi.outsourcing.approve.price.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [outsourcing_approve_price_data, outsourcing_approve_price_detail_data, outsourcing_approve_price_sub_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, approve_price_date, outsourcing_supplier_no, outsourcing_supplier_name, currency, tax_included, remarks, print_times, approve_status, doc_date, approver_no, approver_name, approval_status_code, transfer_times, seq, item_no, item_name, item_spec...]
+
+- type_key: outsourcing.price
+  title: 委外价格
+  # create: yf.oapi.outsourcing.price.data.create  [OAPMA: MOCI09, 28 fields]
+  # delete: yf.oapi.outsourcing.price.data.delete  [OAPMA: MOCI09, 28 fields]
+  # query: yf.oapi.outsourcing.price.data.query.get  [OAPMA: MOCI09, 28 fields]
+  # read: yf.oapi.outsourcing.price.data.read.get  [OAPMA: MOCI09, 28 fields]
+  # update: yf.oapi.outsourcing.price.data.update  [OAPMA: MOCI09, 28 fields]
+  services:
+    create: yf.oapi.outsourcing.price.data.create
+    delete: yf.oapi.outsourcing.price.data.delete
+    query: yf.oapi.outsourcing.price.data.query.get
+    read: yf.oapi.outsourcing.price.data.read.get
+    update: yf.oapi.outsourcing.price.data.update
+  primary_key: [item_no, routing_no, outsourcing_supplier_no, pricing_unit, effective_date, currency]
+  detail_nodes: [outsourcing_price_data, outsourcing_price_detail_data]
+  oapma_field_aliases: [item_no, item_name, item_spec, routing_no, routing_name, outsourcing_supplier_no, outsourcing_supplier_name, pricing_unit, outsourcing_price, damage_deduction, price_approval_date, first_process_date, last_process_date, currency, tax_included, effective_date, expired_date, remarks, pricing_by_qty, units_above...]
+
+- type_key: outsourcing.purchase.acceptance
+  title: 委外进货单验收
+  # approve: yf.oapi.outsourcing.purchase.acceptance.data.approve  [OAPMA: MOCI11, 61 fields]
+  # disapprove: yf.oapi.outsourcing.purchase.acceptance.data.disapprove  [OAPMA: MOCI11, 61 fields]
+  # query: yf.oapi.outsourcing.purchase.acceptance.data.query.get  [OAPMA: MOCI11, 61 fields]
+  # read: yf.oapi.outsourcing.purchase.acceptance.data.read.get  [OAPMA: MOCI11, 61 fields]
+  # update: yf.oapi.outsourcing.purchase.acceptance.data.update  [OAPMA: MOCI11, 61 fields]
+  services:
+    approve: yf.oapi.outsourcing.purchase.acceptance.data.approve
+    disapprove: yf.oapi.outsourcing.purchase.acceptance.data.disapprove
+    query: yf.oapi.outsourcing.purchase.acceptance.data.query.get
+    read: yf.oapi.outsourcing.purchase.acceptance.data.read.get
+    update: yf.oapi.outsourcing.purchase.acceptance.data.update
+  primary_key: [doc_type_no, doc_no, seq]
+  detail_nodes: [outsourcing_purchase_acceptance_data, outsourcing_purchase_arrival_acceptance_data]
+  oapma_field_aliases: [plant_no, plant_name, outsourcing_supplier_no, outsourcing_supplier_name, supplier_order_no, currency, exchange_rate, remarks, tax_type, doc_date, tax_rate, doc_type_no, doc_no, seq, item_no, item_name, item_spec, arrival_qty, unit, warehouse_no...]
+
+- type_key: outsourcing.purchase.arrival
+  title: 委外到货单
+  # approve: yf.oapi.outsourcing.purchase.arrival.data.approve  [OAPMA: MOCI17, 55 fields]
+  # create: yf.oapi.outsourcing.purchase.arrival.data.create  [OAPMA: MOCI17, 55 fields]
+  # delete: yf.oapi.outsourcing.purchase.arrival.data.delete  [OAPMA: MOCI17, 55 fields]
+  # disapprove: yf.oapi.outsourcing.purchase.arrival.data.disapprove  [OAPMA: MOCI17, 55 fields]
+  # invalid: yf.oapi.outsourcing.purchase.arrival.data.invalid  [OAPMA: MOCI17, 55 fields]
+  # query: yf.oapi.outsourcing.purchase.arrival.data.query.get  [OAPMA: MOCI17, 55 fields]
+  # read: yf.oapi.outsourcing.purchase.arrival.data.read.get  [OAPMA: MOCI17, 55 fields]
+  # update: yf.oapi.outsourcing.purchase.arrival.data.update  [OAPMA: MOCI17, 55 fields]
+  services:
+    approve: yf.oapi.outsourcing.purchase.arrival.data.approve
+    create: yf.oapi.outsourcing.purchase.arrival.data.create
+    delete: yf.oapi.outsourcing.purchase.arrival.data.delete
+    disapprove: yf.oapi.outsourcing.purchase.arrival.data.disapprove
+    invalid: yf.oapi.outsourcing.purchase.arrival.data.invalid
+    query: yf.oapi.outsourcing.purchase.arrival.data.query.get
+    read: yf.oapi.outsourcing.purchase.arrival.data.read.get
+    update: yf.oapi.outsourcing.purchase.arrival.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [outsourcing_purchase_arrival_data, outsourcing_purchase_arrival_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, arrived_date, plant_no, plant_name, supplier_no, supplier_name, supplier_order_no, print_times, print_format, approve_status, doc_date, remarks, arrived_total_qty, arrived_total_package_qty, approver_no, approver_name, project_no, project_name...]
+
+- type_key: outsourcing.purchase.arrival.acceptance
+  title: 委外到货单验收
+  # approve: yf.oapi.outsourcing.purchase.arrival.acceptance.data.approve  [OAPMA: MOCI18, 59 fields]
+  # create: yf.oapi.outsourcing.purchase.arrival.acceptance.data.create  [OAPMA: MOCI18, 59 fields]
+  # delete: yf.oapi.outsourcing.purchase.arrival.acceptance.data.delete  [OAPMA: MOCI18, 59 fields]
+  # disapprove: yf.oapi.outsourcing.purchase.arrival.acceptance.data.disapprove  [OAPMA: MOCI18, 59 fields]
+  # invalid: yf.oapi.outsourcing.purchase.arrival.acceptance.data.invalid  [OAPMA: MOCI18, 59 fields]
+  # query: yf.oapi.outsourcing.purchase.arrival.acceptance.data.query.get  [OAPMA: MOCI18, 59 fields]
+  # read: yf.oapi.outsourcing.purchase.arrival.acceptance.data.read.get  [OAPMA: MOCI18, 59 fields]
+  # update: yf.oapi.outsourcing.purchase.arrival.acceptance.data.update  [OAPMA: MOCI18, 59 fields]
+  services:
+    approve: yf.oapi.outsourcing.purchase.arrival.acceptance.data.approve
+    create: yf.oapi.outsourcing.purchase.arrival.acceptance.data.create
+    delete: yf.oapi.outsourcing.purchase.arrival.acceptance.data.delete
+    disapprove: yf.oapi.outsourcing.purchase.arrival.acceptance.data.disapprove
+    invalid: yf.oapi.outsourcing.purchase.arrival.acceptance.data.invalid
+    query: yf.oapi.outsourcing.purchase.arrival.acceptance.data.query.get
+    read: yf.oapi.outsourcing.purchase.arrival.acceptance.data.read.get
+    update: yf.oapi.outsourcing.purchase.arrival.acceptance.data.update
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+  detail_nodes: [outsourcing_purchase_arrival_acceptance_data]
+  oapma_field_aliases: [arrived_date, plant_no, plant_name, supplier_no, supplier_name, supplier_order_no, item_no, item_name, item_spec, unit, arrived_qty, wo_doc_type_no, wo_doc_no, arrived_warehouse, arrived_warehouse_name, arrived_package_qty, package_unit, doc_type_no, doc_type_name, doc_no...]
+
+- type_key: outsourcing.purchase.arrival.inspection
+  title: 委外到货检验单
+  # query: yf.oapi.outsourcing.purchase.arrival.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.outsourcing.purchase.arrival.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.outsourcing.purchase.arrival.inspection.data.query.get
+    read: yf.oapi.outsourcing.purchase.arrival.inspection.data.read.get
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+
+- type_key: outsourcing.purchase.inspection
+  title: 委外进货检验单
+  # query: yf.oapi.outsourcing.purchase.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.outsourcing.purchase.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.outsourcing.purchase.inspection.data.query.get
+    read: yf.oapi.outsourcing.purchase.inspection.data.read.get
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+
+- type_key: outsourcing.purchase.inspection.return
+  title: 退回委外验退件
+  # create: yf.oapi.outsourcing.purchase.inspection.return.data.create  [OAPMA: MOCI08, 18 fields]
+  # delete: yf.oapi.outsourcing.purchase.inspection.return.data.delete  [OAPMA: MOCI08, 18 fields]
+  # query: yf.oapi.outsourcing.purchase.inspection.return.data.query.get  [OAPMA: MOCI08, 18 fields]
+  # read: yf.oapi.outsourcing.purchase.inspection.return.data.read.get  [OAPMA: MOCI08, 18 fields]
+  # update: yf.oapi.outsourcing.purchase.inspection.return.data.update  [OAPMA: MOCI08, 18 fields]
+  services:
+    create: yf.oapi.outsourcing.purchase.inspection.return.data.create
+    delete: yf.oapi.outsourcing.purchase.inspection.return.data.delete
+    query: yf.oapi.outsourcing.purchase.inspection.return.data.query.get
+    read: yf.oapi.outsourcing.purchase.inspection.return.data.read.get
+    update: yf.oapi.outsourcing.purchase.inspection.return.data.update
+  primary_key: [doc_type_no, doc_no, seq, return_date]
+  detail_nodes: [outsourcing_purchase_inspection_return_data]
+  oapma_field_aliases: [outsourcing_supplier_no, outsourcing_supplier_name, doc_type_no, doc_no, seq, return_date, return_qty, remarks, return_package_qty, source, lot_no, item_no, item_name, item_spec, original_receipt_date, unit, original_arrival_package_qty, package_unit]
+
+- type_key: outsourcing.purchase.receipt
+  title: 委外进货单
+  # approve: yf.oapi.outsourcing.purchase.receipt.data.approve  [OAPMA: MOCI06, 122 fields]
+  # create: yf.oapi.outsourcing.purchase.receipt.data.create  [OAPMA: MOCI06, 122 fields]
+  # delete: yf.oapi.outsourcing.purchase.receipt.data.delete  [OAPMA: MOCI06, 122 fields]
+  # disapprove: yf.oapi.outsourcing.purchase.receipt.data.disapprove  [OAPMA: MOCI06, 122 fields]
+  # invalid: yf.oapi.outsourcing.purchase.receipt.data.invalid  [OAPMA: MOCI06, 122 fields]
+  # query: yf.oapi.outsourcing.purchase.receipt.data.query.get  [OAPMA: MOCI06, 122 fields]
+  # read: yf.oapi.outsourcing.purchase.receipt.data.read.get  [OAPMA: MOCI06, 122 fields]
+  # update: yf.oapi.outsourcing.purchase.receipt.data.update  [OAPMA: MOCI06, 122 fields]
+  services:
+    approve: yf.oapi.outsourcing.purchase.receipt.data.approve
+    create: yf.oapi.outsourcing.purchase.receipt.data.create
+    delete: yf.oapi.outsourcing.purchase.receipt.data.delete
+    disapprove: yf.oapi.outsourcing.purchase.receipt.data.disapprove
+    invalid: yf.oapi.outsourcing.purchase.receipt.data.invalid
+    query: yf.oapi.outsourcing.purchase.receipt.data.query.get
+    read: yf.oapi.outsourcing.purchase.receipt.data.read.get
+    update: yf.oapi.outsourcing.purchase.receipt.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [outsourcing_purchase_receipt_data, outsourcing_purchase_receipt_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, receipt_date, plant_no, plant_name, outsourcing_supplier_no, outsourcing_supplier_name, supplier_order_no, currency, exchange_rate, pieces, remarks, tax_identification_no, invoice_type, invoice_date, invoice_no, tax_type, process_amount, deduction_amount...]
+
+- type_key: outsourcing.purchase.return
+  title: 委外退货单
+  # approve: yf.oapi.outsourcing.purchase.return.data.approve  [OAPMA: MOCI07, 92 fields]
+  # create: yf.oapi.outsourcing.purchase.return.data.create  [OAPMA: MOCI07, 92 fields]
+  # delete: yf.oapi.outsourcing.purchase.return.data.delete  [OAPMA: MOCI07, 92 fields]
+  # disapprove: yf.oapi.outsourcing.purchase.return.data.disapprove  [OAPMA: MOCI07, 92 fields]
+  # invalid: yf.oapi.outsourcing.purchase.return.data.invalid  [OAPMA: MOCI07, 92 fields]
+  # query: yf.oapi.outsourcing.purchase.return.data.query.get  [OAPMA: MOCI07, 92 fields]
+  # read: yf.oapi.outsourcing.purchase.return.data.read.get  [OAPMA: MOCI07, 92 fields]
+  # update: yf.oapi.outsourcing.purchase.return.data.update  [OAPMA: MOCI07, 92 fields]
+  services:
+    approve: yf.oapi.outsourcing.purchase.return.data.approve
+    create: yf.oapi.outsourcing.purchase.return.data.create
+    delete: yf.oapi.outsourcing.purchase.return.data.delete
+    disapprove: yf.oapi.outsourcing.purchase.return.data.disapprove
+    invalid: yf.oapi.outsourcing.purchase.return.data.invalid
+    query: yf.oapi.outsourcing.purchase.return.data.query.get
+    read: yf.oapi.outsourcing.purchase.return.data.read.get
+    update: yf.oapi.outsourcing.purchase.return.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [outsourcing_purchase_return_data, outsourcing_purchase_return_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, return_date, outsourcing_supplier_no, outsourcing_supplier_name, plant_no, plant_name, currency, exchange_rate, pieces, remarks, tax_identification_no, invoice_type, invoice_date, invoice_no, tax_type, trans_curr_not_tax_amount, print_times, trans_curr_tax...]
+
+- type_key: payable.doc
+  title: 付款单
+  # approve: yf.oapi.payable.doc.data.approve  [OAPMA: ACPI03, 109 fields]
+  # create: yf.oapi.payable.doc.data.create  [OAPMA: ACPI03, 109 fields]
+  # delete: yf.oapi.payable.doc.data.delete  [OAPMA: ACPI03, 109 fields]
+  # disapprove: yf.oapi.payable.doc.data.disapprove  [OAPMA: ACPI03, 109 fields]
+  # invalid: yf.oapi.payable.doc.data.invalid  [OAPMA: ACPI03, 109 fields]
+  # query: yf.oapi.payable.doc.data.query.get  [OAPMA: ACPI03, 109 fields]
+  # read: yf.oapi.payable.doc.data.read.get  [OAPMA: ACPI03, 109 fields]
+  # update: yf.oapi.payable.doc.data.update  [OAPMA: ACPI03, 109 fields]
+  services:
+    approve: yf.oapi.payable.doc.data.approve
+    create: yf.oapi.payable.doc.data.create
+    delete: yf.oapi.payable.doc.data.delete
+    disapprove: yf.oapi.payable.doc.data.disapprove
+    invalid: yf.oapi.payable.doc.data.invalid
+    query: yf.oapi.payable.doc.data.query.get
+    read: yf.oapi.payable.doc.data.read.get
+    update: yf.oapi.payable.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [payable_doc_data, payable_doc_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, payment_date, object_no, staff_no, staff_name, department, department_name, currency, exchange_rate, remarks, settlement_method_no, settlement_method_name, payment_bank_code, payment_bank_name, payment_bank_account, settlement_acct, settlement_acct_name, settlement_no...]
+
+- type_key: picking.receipt
+  title: 领料单
+  # approve: yf.oapi.picking.receipt.data.approve  [OAPMA: MOCI03, 98 fields]
+  # create: yf.oapi.picking.receipt.data.create  [OAPMA: MOCI03, 98 fields]
+  # delete: yf.oapi.picking.receipt.data.delete  [OAPMA: MOCI03, 98 fields]
+  # disapprove: yf.oapi.picking.receipt.data.disapprove  [OAPMA: MOCI03, 98 fields]
+  # invalid: yf.oapi.picking.receipt.data.invalid  [OAPMA: MOCI03, 98 fields]
+  # query: yf.oapi.picking.receipt.data.query.get  [OAPMA: MOCI03, 98 fields]
+  # read: yf.oapi.picking.receipt.data.read.get  [OAPMA: MOCI03, 98 fields]
+  # update: yf.oapi.picking.receipt.data.update  [OAPMA: MOCI03, 98 fields]
+  services:
+    approve: yf.oapi.picking.receipt.data.approve
+    create: yf.oapi.picking.receipt.data.create
+    delete: yf.oapi.picking.receipt.data.delete
+    disapprove: yf.oapi.picking.receipt.data.disapprove
+    invalid: yf.oapi.picking.receipt.data.invalid
+    query: yf.oapi.picking.receipt.data.query.get
+    read: yf.oapi.picking.receipt.data.read.get
+    update: yf.oapi.picking.receipt.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [picking_receipt_data, picking_receipt_detail_data, picking_receipt_mo_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, issue_receipt_date, plant_no, plant_name, workstation_no, workstation_name, outsourcing_supplier_no, outsourcing_supplier_name, remarks, doc_property, approve_status, print_times, generate_entry_code_cost, sort_by, get_quantity_method, doc_date, approver_no, approver_name...]
+
+- type_key: picking.return
+  title: 退料单
+  # approve: yf.oapi.picking.return.data.approve  [OAPMA: MOCI04, 98 fields]
+  # create: yf.oapi.picking.return.data.create  [OAPMA: MOCI04, 98 fields]
+  # delete: yf.oapi.picking.return.data.delete  [OAPMA: MOCI04, 98 fields]
+  # disapprove: yf.oapi.picking.return.data.disapprove  [OAPMA: MOCI04, 98 fields]
+  # invalid: yf.oapi.picking.return.data.invalid  [OAPMA: MOCI04, 98 fields]
+  # query: yf.oapi.picking.return.data.query.get  [OAPMA: MOCI04, 98 fields]
+  # read: yf.oapi.picking.return.data.read.get  [OAPMA: MOCI04, 98 fields]
+  # update: yf.oapi.picking.return.data.update  [OAPMA: MOCI04, 98 fields]
+  services:
+    approve: yf.oapi.picking.return.data.approve
+    create: yf.oapi.picking.return.data.create
+    delete: yf.oapi.picking.return.data.delete
+    disapprove: yf.oapi.picking.return.data.disapprove
+    invalid: yf.oapi.picking.return.data.invalid
+    query: yf.oapi.picking.return.data.query.get
+    read: yf.oapi.picking.return.data.read.get
+    update: yf.oapi.picking.return.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [picking_return_data, picking_return_detail_data, picking_return_mo_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, issue_receipt_date, plant_no, plant_name, workstation_no, workstation_name, outsourcing_supplier_no, outsourcing_supplier_name, remarks, doc_property, approve_status, print_times, generate_entry_code_cost, sort_by, get_quantity_method, doc_date, approver_no, approver_name...]
+
+- type_key: plant
+  title: 工厂
+  # create: yf.oapi.plant.data.create  [OAPMA: CMSI02, 10 fields]
+  # delete: yf.oapi.plant.data.delete  [OAPMA: CMSI02, 10 fields]
+  # query: yf.oapi.plant.data.query.get  [OAPMA: CMSI02, 10 fields]
+  # read: yf.oapi.plant.data.read.get  [OAPMA: CMSI02, 10 fields]
+  # update: yf.oapi.plant.data.update  [OAPMA: CMSI02, 10 fields]
+  services:
+    create: yf.oapi.plant.data.create
+    delete: yf.oapi.plant.data.delete
+    query: yf.oapi.plant.data.query.get
+    read: yf.oapi.plant.data.read.get
+    update: yf.oapi.plant.data.update
+  primary_key: [plant_no]
+  detail_nodes: [plant_data]
+  oapma_field_aliases: [plant_no, plant_name, telephone, fax_no, adrss_1, adrss_2, remarks, e_mail, address_1_eng, address_2_eng]
+
+- type_key: precollection.doc
+  title: 预收款单
+  # approve: yf.oapi.precollection.doc.data.approve  [OAPMA: ACRI18, 72 fields]
+  # create: yf.oapi.precollection.doc.data.create  [OAPMA: ACRI18, 72 fields]
+  # delete: yf.oapi.precollection.doc.data.delete  [OAPMA: ACRI18, 72 fields]
+  # disapprove: yf.oapi.precollection.doc.data.disapprove  [OAPMA: ACRI18, 72 fields]
+  # invalid: yf.oapi.precollection.doc.data.invalid  [OAPMA: ACRI18, 72 fields]
+  # query: yf.oapi.precollection.doc.data.query.get  [OAPMA: ACRI18, 72 fields]
+  # read: yf.oapi.precollection.doc.data.read.get  [OAPMA: ACRI18, 72 fields]
+  # update: yf.oapi.precollection.doc.data.update  [OAPMA: ACRI18, 72 fields]
+  services:
+    approve: yf.oapi.precollection.doc.data.approve
+    create: yf.oapi.precollection.doc.data.create
+    delete: yf.oapi.precollection.doc.data.delete
+    disapprove: yf.oapi.precollection.doc.data.disapprove
+    invalid: yf.oapi.precollection.doc.data.invalid
+    query: yf.oapi.precollection.doc.data.query.get
+    read: yf.oapi.precollection.doc.data.read.get
+    update: yf.oapi.precollection.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [precollection_doc_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, collection_date, customer_no, customer_name, sales_no, sales_name, department, department_name, currency, exchange_rate, remarks, settlement_method_no, settlement_method_name, receive_bank, receive_bank_name, receive_bank_account, settlement_acct, settlement_acct_name...]
+
+- type_key: prepayment.doc
+  title: 预付单
+  # approve: yf.oapi.prepayment.doc.data.approve  [OAPMA: ACPI13, 76 fields]
+  # create: yf.oapi.prepayment.doc.data.create  [OAPMA: ACPI13, 76 fields]
+  # delete: yf.oapi.prepayment.doc.data.delete  [OAPMA: ACPI13, 76 fields]
+  # disapprove: yf.oapi.prepayment.doc.data.disapprove  [OAPMA: ACPI13, 76 fields]
+  # invalid: yf.oapi.prepayment.doc.data.invalid  [OAPMA: ACPI13, 76 fields]
+  # query: yf.oapi.prepayment.doc.data.query.get  [OAPMA: ACPI13, 76 fields]
+  # read: yf.oapi.prepayment.doc.data.read.get  [OAPMA: ACPI13, 76 fields]
+  # update: yf.oapi.prepayment.doc.data.update  [OAPMA: ACPI13, 76 fields]
+  services:
+    approve: yf.oapi.prepayment.doc.data.approve
+    create: yf.oapi.prepayment.doc.data.create
+    delete: yf.oapi.prepayment.doc.data.delete
+    disapprove: yf.oapi.prepayment.doc.data.disapprove
+    invalid: yf.oapi.prepayment.doc.data.invalid
+    query: yf.oapi.prepayment.doc.data.query.get
+    read: yf.oapi.prepayment.doc.data.read.get
+    update: yf.oapi.prepayment.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [prepayment_doc_data, wo_stockin_data, wo_stockin_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, payment_date, payable_object_no, staff, staff_name, department, department_name, currency, exchange_rate, remarks, settlement_method_no, settlement_method_name, payment_bank_code, payment_bank_name, payment_bank_account, settlement_acct, settlement_acct_name, settlement_no...]
+
+- type_key: product.process
+  title: 产品工艺路线
+  # create: yf.oapi.product.process.data.create  [OAPMA: BOMI07, 52 fields]
+  # delete: yf.oapi.product.process.data.delete  [OAPMA: BOMI07, 52 fields]
+  # query: yf.oapi.product.process.data.query.get  [OAPMA: BOMI07, 52 fields]
+  # read: yf.oapi.product.process.data.read.get  [OAPMA: BOMI07, 52 fields]
+  # update: yf.oapi.product.process.data.update  [OAPMA: BOMI07, 52 fields]
+  services:
+    create: yf.oapi.product.process.data.create
+    delete: yf.oapi.product.process.data.delete
+    query: yf.oapi.product.process.data.query.get
+    read: yf.oapi.product.process.data.read.get
+    update: yf.oapi.product.process.data.update
+  primary_key: [routing_item_no, process_code]
+  detail_nodes: [product_process_detail_data, product_process_header_data, standard_operation_procedure_data]
+  oapma_field_aliases: [routing_item_no, item_name, item_spec, unit, process_code, routing_name, remarks, processing_sequence, routing_no, property, line_vendor_code, production_line_vendor_name, routing_desc, fixed_labor_hours_sec, variable_labor_hour_sec, transfer_batch_qty, fixed_days, variable_days, lag_days, currency...]
+
+- type_key: project
+  title: 项目
+  # create: yf.oapi.project.data.create  [OAPMA: CMSI37, 3 fields]
+  # delete: yf.oapi.project.data.delete  [OAPMA: CMSI37, 3 fields]
+  # query: yf.oapi.project.data.query.get  [OAPMA: CMSI37, 3 fields]
+  # read: yf.oapi.project.data.read.get  [OAPMA: CMSI37, 3 fields]
+  # update: yf.oapi.project.data.update  [OAPMA: CMSI37, 3 fields]
+  services:
+    create: yf.oapi.project.data.create
+    delete: yf.oapi.project.data.delete
+    query: yf.oapi.project.data.query.get
+    read: yf.oapi.project.data.read.get
+    update: yf.oapi.project.data.update
+  primary_key: [project_no]
+  detail_nodes: [project_data]
+  oapma_field_aliases: [project_no, project_name, project_description]
+
+- type_key: purchase.arrival
+  title: 到货单
+  # approve: yf.oapi.purchase.arrival.data.approve  [OAPMA: PURI20, 58 fields]
+  # create: yf.oapi.purchase.arrival.data.create  [OAPMA: PURI20, 58 fields]
+  # delete: yf.oapi.purchase.arrival.data.delete  [OAPMA: PURI20, 58 fields]
+  # disapprove: yf.oapi.purchase.arrival.data.disapprove  [OAPMA: PURI20, 58 fields]
+  # invalid: yf.oapi.purchase.arrival.data.invalid  [OAPMA: PURI20, 58 fields]
+  # query: yf.oapi.purchase.arrival.data.query.get  [OAPMA: PURI20, 58 fields]
+  # read: yf.oapi.purchase.arrival.data.read.get  [OAPMA: PURI20, 58 fields]
+  # update: yf.oapi.purchase.arrival.data.update  [OAPMA: PURI20, 58 fields]
+  services:
+    approve: yf.oapi.purchase.arrival.data.approve
+    create: yf.oapi.purchase.arrival.data.create
+    delete: yf.oapi.purchase.arrival.data.delete
+    disapprove: yf.oapi.purchase.arrival.data.disapprove
+    invalid: yf.oapi.purchase.arrival.data.invalid
+    query: yf.oapi.purchase.arrival.data.query.get
+    read: yf.oapi.purchase.arrival.data.read.get
+    update: yf.oapi.purchase.arrival.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [purchase_arrival_data, purchase_arrival_detail_data, purchase_order_data, purchase_order_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, arrived_date, plant_no, plant_name, supplier_no, supplier_name, supplier_order_no, print_times, print_format, approve_status, doc_date, remarks, supplier_full_name, arrived_total_qty, arrived_total_package_qty, approver_no, approver_name, project_no...]
+
+- type_key: purchase.arrival.acceptance
+  title: 到货单验收
+  # approve: yf.oapi.purchase.arrival.acceptance.data.approve  [OAPMA: PURI21, 57 fields]
+  # create: yf.oapi.purchase.arrival.acceptance.data.create  [OAPMA: PURI21, 57 fields]
+  # delete: yf.oapi.purchase.arrival.acceptance.data.delete  [OAPMA: PURI21, 57 fields]
+  # disapprove: yf.oapi.purchase.arrival.acceptance.data.disapprove  [OAPMA: PURI21, 57 fields]
+  # query: yf.oapi.purchase.arrival.acceptance.data.query.get  [OAPMA: PURI21, 57 fields]
+  # read: yf.oapi.purchase.arrival.acceptance.data.read.get  [OAPMA: PURI21, 57 fields]
+  # update: yf.oapi.purchase.arrival.acceptance.data.update  [OAPMA: PURI21, 57 fields]
+  services:
+    approve: yf.oapi.purchase.arrival.acceptance.data.approve
+    create: yf.oapi.purchase.arrival.acceptance.data.create
+    delete: yf.oapi.purchase.arrival.acceptance.data.delete
+    disapprove: yf.oapi.purchase.arrival.acceptance.data.disapprove
+    query: yf.oapi.purchase.arrival.acceptance.data.query.get
+    read: yf.oapi.purchase.arrival.acceptance.data.read.get
+    update: yf.oapi.purchase.arrival.acceptance.data.update
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+  detail_nodes: [purchase_arrival_acceptance_data, purchase_order_data, purchase_order_detail_data]
+  oapma_field_aliases: [arrived_date, plant_no, plant_name, supplier_no, supplier_name, supplier_order_no, item_no, item_name, item_spec, unit, arrived_qty, purchase_no, arrived_warehouse, warehouse_name, package_unit, doc_type_no, doc_type_name, doc_no, seq, inspection_date...]
+
+- type_key: purchase.arrival.inspection
+  title: 到货检验单
+  # query: yf.oapi.purchase.arrival.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.purchase.arrival.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.purchase.arrival.inspection.data.query.get
+    read: yf.oapi.purchase.arrival.inspection.data.read.get
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+
+- type_key: purchase.change
+  title: 采购变更单
+  # approve: yf.oapi.purchase.change.data.approve  [OAPMA: PURI08, 134 fields]
+  # create: yf.oapi.purchase.change.data.create  [OAPMA: PURI08, 134 fields]
+  # delete: yf.oapi.purchase.change.data.delete  [OAPMA: PURI08, 134 fields]
+  # disapprove: yf.oapi.purchase.change.data.disapprove  [OAPMA: PURI08, 134 fields]
+  # invalid: yf.oapi.purchase.change.data.invalid  [OAPMA: PURI08, 134 fields]
+  # query: yf.oapi.purchase.change.data.query.get  [OAPMA: PURI08, 134 fields]
+  # read: yf.oapi.purchase.change.data.read.get  [OAPMA: PURI08, 134 fields]
+  # update: yf.oapi.purchase.change.data.update  [OAPMA: PURI08, 134 fields]
+  services:
+    approve: yf.oapi.purchase.change.data.approve
+    create: yf.oapi.purchase.change.data.create
+    delete: yf.oapi.purchase.change.data.delete
+    disapprove: yf.oapi.purchase.change.data.disapprove
+    invalid: yf.oapi.purchase.change.data.invalid
+    query: yf.oapi.purchase.change.data.query.get
+    read: yf.oapi.purchase.change.data.read.get
+    update: yf.oapi.purchase.change.data.update
+  primary_key: [doc_type_no, doc_no, version]
+  detail_nodes: [purchase_change_data, purchase_change_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, version, change_date, supplier_no, supplier_name, change_reason, trans_currency, exchange_rate, price_condition, payment_condition_name, doc_date, close_order, new_proforma_invoice_date, new_proforma_invoice_no, new_transport_mode, print_times, approve_status, new_tax_type...]
+
+- type_key: purchase.inspection.return
+  title: 退回验退件
+  # create: yf.oapi.purchase.inspection.return.data.create  [OAPMA: PURI10, 23 fields]
+  # delete: yf.oapi.purchase.inspection.return.data.delete  [OAPMA: PURI10, 23 fields]
+  # query: yf.oapi.purchase.inspection.return.data.query.get  [OAPMA: PURI10, 23 fields]
+  # read: yf.oapi.purchase.inspection.return.data.read.get  [OAPMA: PURI10, 23 fields]
+  # update: yf.oapi.purchase.inspection.return.data.update  [OAPMA: PURI10, 23 fields]
+  services:
+    create: yf.oapi.purchase.inspection.return.data.create
+    delete: yf.oapi.purchase.inspection.return.data.delete
+    query: yf.oapi.purchase.inspection.return.data.query.get
+    read: yf.oapi.purchase.inspection.return.data.read.get
+    update: yf.oapi.purchase.inspection.return.data.update
+  primary_key: [source_type_no, source_doc_no, source_seq, return_date]
+  detail_nodes: [purchase_inspection_return_data]
+  oapma_field_aliases: [supplier_no, supplier_name, source_type_no, source_doc_no, source_seq, return_date, return_qty, remarks, return_package_qty, pieces_per, pieces, ebc_export_code, source, item_no, item_name, item_spec, inspection_date, inspection_qty, unit, small_unit...]
+
+- type_key: purchase.invoice
+  title: 采购发票
+  # approve: yf.oapi.purchase.invoice.data.approve  [OAPMA: ACPI02, 112 fields]
+  # create: yf.oapi.purchase.invoice.data.create  [OAPMA: ACPI02, 112 fields]
+  # delete: yf.oapi.purchase.invoice.data.delete  [OAPMA: ACPI02, 112 fields]
+  # disapprove: yf.oapi.purchase.invoice.data.disapprove  [OAPMA: ACPI02, 112 fields]
+  # invalid: yf.oapi.purchase.invoice.data.invalid  [OAPMA: ACPI02, 112 fields]
+  # query: yf.oapi.purchase.invoice.data.query.get  [OAPMA: ACPI02, 112 fields]
+  # read: yf.oapi.purchase.invoice.data.read.get  [OAPMA: ACPI02, 112 fields]
+  # update: yf.oapi.purchase.invoice.data.update  [OAPMA: ACPI02, 112 fields]
+  services:
+    approve: yf.oapi.purchase.invoice.data.approve
+    create: yf.oapi.purchase.invoice.data.create
+    delete: yf.oapi.purchase.invoice.data.delete
+    disapprove: yf.oapi.purchase.invoice.data.disapprove
+    invalid: yf.oapi.purchase.invoice.data.invalid
+    query: yf.oapi.purchase.invoice.data.query.get
+    read: yf.oapi.purchase.invoice.data.read.get
+    update: yf.oapi.purchase.invoice.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [purchase_invoice_data, purchase_invoice_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, approve_date, supplier_no, supplier_name, tax_identification_no, currency, exchange_rate, invoice_type, tax_type, invoice_no, invoice_date, exp_payment_date, exp_cashing_date, remarks, approve_status, update_code, print_times, trans_curr_not_tax_amount...]
+
+- type_key: purchase.order
+  title: 采购单
+  # approve: yf.oapi.purchase.order.data.approve  [OAPMA: PURI07, 108 fields]
+  # create: yf.oapi.purchase.order.data.create  [OAPMA: PURI07, 108 fields]
+  # delete: yf.oapi.purchase.order.data.delete  [OAPMA: PURI07, 108 fields]
+  # disapprove: yf.oapi.purchase.order.data.disapprove  [OAPMA: PURI07, 108 fields]
+  # invalid: yf.oapi.purchase.order.data.invalid  [OAPMA: PURI07, 108 fields]
+  # query: yf.oapi.purchase.order.data.query.get  [OAPMA: PURI07, 108 fields]
+  # read: yf.oapi.purchase.order.data.read.get  [OAPMA: PURI07, 108 fields]
+  # update: yf.oapi.purchase.order.data.update  [OAPMA: PURI07, 108 fields]
+  services:
+    approve: yf.oapi.purchase.order.data.approve
+    create: yf.oapi.purchase.order.data.create
+    delete: yf.oapi.purchase.order.data.delete
+    disapprove: yf.oapi.purchase.order.data.disapprove
+    invalid: yf.oapi.purchase.order.data.invalid
+    query: yf.oapi.purchase.order.data.query.get
+    read: yf.oapi.purchase.order.data.read.get
+    update: yf.oapi.purchase.order.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [purchase_order_data, purchase_order_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, purchase_date, supplier_no, supplier_name, supplier_full_name, trans_currency, exchange_rate, price_condition, payment_condition_name, remarks, plant_no, plant_name, purchaser, purchaser_name, print_format, print_times, approve_status, proforma_invoice_date...]
+
+- type_key: purchase.receipt
+  title: 进货单
+  # approve: yf.oapi.purchase.receipt.data.approve  [OAPMA: PURI09, 140 fields]
+  # create: yf.oapi.purchase.receipt.data.create  [OAPMA: PURI09, 140 fields]
+  # delete: yf.oapi.purchase.receipt.data.delete  [OAPMA: PURI09, 140 fields]
+  # disapprove: yf.oapi.purchase.receipt.data.disapprove  [OAPMA: PURI09, 140 fields]
+  # invalid: yf.oapi.purchase.receipt.data.invalid  [OAPMA: PURI09, 140 fields]
+  # query: yf.oapi.purchase.receipt.data.query.get  [OAPMA: PURI09, 140 fields]
+  # read: yf.oapi.purchase.receipt.data.read.get  [OAPMA: PURI09, 140 fields]
+  # update: yf.oapi.purchase.receipt.data.update  [OAPMA: PURI09, 140 fields]
+  services:
+    approve: yf.oapi.purchase.receipt.data.approve
+    create: yf.oapi.purchase.receipt.data.create
+    delete: yf.oapi.purchase.receipt.data.delete
+    disapprove: yf.oapi.purchase.receipt.data.disapprove
+    invalid: yf.oapi.purchase.receipt.data.invalid
+    query: yf.oapi.purchase.receipt.data.query.get
+    read: yf.oapi.purchase.receipt.data.read.get
+    update: yf.oapi.purchase.receipt.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [purchase_receipt_data, purchase_receipt_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_no, seq, item_serial_no, transaction type, identifier, supplier_order_no, doc_type_name, receipt_date, plant_no, plant_name, supplier_no, supplier_name, currency, exchange_rate, invoice_type, tax_type, invoice_no, print_times, approve_status...]
+
+- type_key: purchase.receipt.acceptance
+  title: 修改进货单验收
+  # approve: yf.oapi.purchase.receipt.acceptance.data.approve  [OAPMA: PURI13, 66 fields]
+  # disapprove: yf.oapi.purchase.receipt.acceptance.data.disapprove  [OAPMA: PURI13, 66 fields]
+  # query: yf.oapi.purchase.receipt.acceptance.data.query.get  [OAPMA: PURI13, 66 fields]
+  # read: yf.oapi.purchase.receipt.acceptance.data.read.get  [OAPMA: PURI13, 66 fields]
+  # update: yf.oapi.purchase.receipt.acceptance.data.update  [OAPMA: PURI13, 66 fields]
+  services:
+    approve: yf.oapi.purchase.receipt.acceptance.data.approve
+    disapprove: yf.oapi.purchase.receipt.acceptance.data.disapprove
+    query: yf.oapi.purchase.receipt.acceptance.data.query.get
+    read: yf.oapi.purchase.receipt.acceptance.data.read.get
+    update: yf.oapi.purchase.receipt.acceptance.data.update
+  primary_key: [doc_type_no, doc_no, seq]
+  detail_nodes: [purchase_receipt_acceptance_data]
+  oapma_field_aliases: [emergency, receipt_date, plant_no, plant_name, supplier_no, supplier_name, supplier_order_no, currency, exchange_rate, invoice_type, tax_type, doc_date, remarks, tax_rate, doc_type_no, doc_no, seq, item_no, item_name, item_spec...]
+
+- type_key: purchase.receipt.inspection
+  title: 进货检验单
+  # query: yf.oapi.purchase.receipt.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.purchase.receipt.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.purchase.receipt.inspection.data.query.get
+    read: yf.oapi.purchase.receipt.inspection.data.read.get
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+
+- type_key: purchase.requisitions
+  title: 请购单
+  # approve: yf.oapi.purchase.requisitions.data.approve  [OAPMA: PURI05, 116 fields]
+  # create: yf.oapi.purchase.requisitions.data.create  [OAPMA: PURI05, 116 fields]
+  # delete: yf.oapi.purchase.requisitions.data.delete  [OAPMA: PURI05, 116 fields]
+  # disapprove: yf.oapi.purchase.requisitions.data.disapprove  [OAPMA: PURI05, 116 fields]
+  # invalid: yf.oapi.purchase.requisitions.data.invalid  [OAPMA: PURI05, 116 fields]
+  # query: yf.oapi.purchase.requisitions.data.query.get  [OAPMA: PURI05, 116 fields]
+  # read: yf.oapi.purchase.requisitions.data.read.get  [OAPMA: PURI05, 116 fields]
+  # update: yf.oapi.purchase.requisitions.data.update  [OAPMA: PURI05, 116 fields]
+  services:
+    approve: yf.oapi.purchase.requisitions.data.approve
+    create: yf.oapi.purchase.requisitions.data.create
+    delete: yf.oapi.purchase.requisitions.data.delete
+    disapprove: yf.oapi.purchase.requisitions.data.disapprove
+    invalid: yf.oapi.purchase.requisitions.data.invalid
+    query: yf.oapi.purchase.requisitions.data.query.get
+    read: yf.oapi.purchase.requisitions.data.read.get
+    update: yf.oapi.purchase.requisitions.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [purchase_requisitions_data, purchase_requisitions_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, requisitions_date, department, department_name, source_doc_no, remarks, approve_status, print_times, source_type, plant_no, plant_name, total_qty, requisitioner_no, requisitioner_name, doc_date, approver_no, approver_name, total_package_qty...]
+
+- type_key: purchase.return
+  title: 退货单
+  # approve: yf.oapi.purchase.return.data.approve  [OAPMA: PURI11, 102 fields]
+  # create: yf.oapi.purchase.return.data.create  [OAPMA: PURI11, 102 fields]
+  # delete: yf.oapi.purchase.return.data.delete  [OAPMA: PURI11, 102 fields]
+  # disapprove: yf.oapi.purchase.return.data.disapprove  [OAPMA: PURI11, 102 fields]
+  # invalid: yf.oapi.purchase.return.data.invalid  [OAPMA: PURI11, 102 fields]
+  # query: yf.oapi.purchase.return.data.query.get  [OAPMA: PURI11, 102 fields]
+  # read: yf.oapi.purchase.return.data.read.get  [OAPMA: PURI11, 102 fields]
+  # update: yf.oapi.purchase.return.data.update  [OAPMA: PURI11, 102 fields]
+  services:
+    approve: yf.oapi.purchase.return.data.approve
+    create: yf.oapi.purchase.return.data.create
+    delete: yf.oapi.purchase.return.data.delete
+    disapprove: yf.oapi.purchase.return.data.disapprove
+    invalid: yf.oapi.purchase.return.data.invalid
+    query: yf.oapi.purchase.return.data.query.get
+    read: yf.oapi.purchase.return.data.read.get
+    update: yf.oapi.purchase.return.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [purchase_return_data, purchase_return_detail_data, purchase_return_serial_data]
+  oapma_field_aliases: [doc_type_no, doc_no, seq, item_serial_no, transaction_type, identifier, doc_type_name, return_date, supplier_no, supplier_name, plant_no, plant_name, currency, currency_name, exchange_rate, invoice_type, tax_type, print_times, return_trans_curr_amount, remarks...]
+
+- type_key: quality.control.category
+  title: 品管类别
+  # query: yf.oapi.quality.control.category.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.quality.control.category.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.quality.control.category.data.query.get
+    read: yf.oapi.quality.control.category.data.read.get
+  primary_key: [quality_control_category_no]
+
+- type_key: quotation
+  title: 报价单
+  # approve: yf.oapi.quotation.data.approve  [OAPMA: COPI05, 76 fields]
+  # create: yf.oapi.quotation.data.create  [OAPMA: COPI05, 76 fields]
+  # delete: yf.oapi.quotation.data.delete  [OAPMA: COPI05, 76 fields]
+  # disapprove: yf.oapi.quotation.data.disapprove  [OAPMA: COPI05, 76 fields]
+  # invalid: yf.oapi.quotation.data.invalid  [OAPMA: COPI05, 76 fields]
+  # query: yf.oapi.quotation.data.query.get  [OAPMA: COPI05, 76 fields]
+  # read: yf.oapi.quotation.data.read.get  [OAPMA: COPI05, 76 fields]
+  # update: yf.oapi.quotation.data.update  [OAPMA: COPI05, 76 fields]
+  services:
+    approve: yf.oapi.quotation.data.approve
+    create: yf.oapi.quotation.data.create
+    delete: yf.oapi.quotation.data.delete
+    disapprove: yf.oapi.quotation.data.disapprove
+    invalid: yf.oapi.quotation.data.invalid
+    query: yf.oapi.quotation.data.query.get
+    read: yf.oapi.quotation.data.read.get
+    update: yf.oapi.quotation.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [quotation_data, quotation_detail_data, quotation_sub_detai_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, quotation_date, customer_no, customer_name, salesman_no, sales_name, customer_full_name, currency, exchange_rate, quotation_amount, price_condition, payment_condition_name, pricing_method, doc_date, delivery_date, approver_no, approver_name, customer_approve_status...]
+
+- type_key: receive.payment.term
+  title: 付款条件
+  # create: yf.oapi.receive.payment.term.data.create  [OAPMA: CMSI21, 19 fields]
+  # delete: yf.oapi.receive.payment.term.data.delete  [OAPMA: CMSI21, 19 fields]
+  # query: yf.oapi.receive.payment.term.data.query.get  [OAPMA: CMSI21, 19 fields]
+  # read: yf.oapi.receive.payment.term.data.read.get  [OAPMA: CMSI21, 19 fields]
+  # update: yf.oapi.receive.payment.term.data.update  [OAPMA: CMSI21, 19 fields]
+  services:
+    create: yf.oapi.receive.payment.term.data.create
+    delete: yf.oapi.receive.payment.term.data.delete
+    query: yf.oapi.receive.payment.term.data.query.get
+    read: yf.oapi.receive.payment.term.data.read.get
+    update: yf.oapi.receive.payment.term.data.update
+  primary_key: [category, payment_condition_no]
+  detail_nodes: [receive_payment_term_data]
+  oapma_field_aliases: [category, payment_condition_no, name, collectpay_method, days_after_settlement, months_after_settlement, settling_date, capital_realization_method_category, days_after_payment, months_after_payment, payment_date, acquire_discount, acquire_discount_mode, advance_pay_days, early_usance_days, discount, remarks, collect_from, realization_date_from]
+
+- type_key: replace.substitute.item
+  title: 取替代料
+  # create: yf.oapi.replace.substitute.item.data.create  [OAPMA: BOMI01, 28 fields]
+  # delete: yf.oapi.replace.substitute.item.data.delete  [OAPMA: BOMI01, 28 fields]
+  # query: yf.oapi.replace.substitute.item.data.query.get  [OAPMA: BOMI01, 28 fields]
+  # read: yf.oapi.replace.substitute.item.data.read.get  [OAPMA: BOMI01, 28 fields]
+  # update: yf.oapi.replace.substitute.item.data.update  [OAPMA: BOMI01, 28 fields]
+  services:
+    create: yf.oapi.replace.substitute.item.data.create
+    delete: yf.oapi.replace.substitute.item.data.delete
+    query: yf.oapi.replace.substitute.item.data.query.get
+    read: yf.oapi.replace.substitute.item.data.read.get
+    update: yf.oapi.replace.substitute.item.data.update
+  primary_key: [component, master_item, rep_sub_item]
+  detail_nodes: [replace_substitute_items_detail_data, replace_substitute_items_header_data]
+  oapma_field_aliases: [component, item_name_1, item_spec_1, unit_1, small_unit_1, item_attribute_1, master_item, item_name_2, item_spec_2, unit_2, small_unit_2, item_attribute_2, rep_sub_item, remarks, item_no, qty, effective_date, expiration_date, rep_sub_sequence]
+
+- type_key: sales.forecast
+  title: 销售预测
+  # create: yf.oapi.sales.forecast.data.create  [OAPMA: COPI04, 42 fields]
+  # delete: yf.oapi.sales.forecast.data.delete  [OAPMA: COPI04, 42 fields]
+  # query: yf.oapi.sales.forecast.data.query.get  [OAPMA: COPI04, 42 fields]
+  # read: yf.oapi.sales.forecast.data.read.get  [OAPMA: COPI04, 42 fields]
+  # update: yf.oapi.sales.forecast.data.update  [OAPMA: COPI04, 42 fields]
+  services:
+    create: yf.oapi.sales.forecast.data.create
+    delete: yf.oapi.sales.forecast.data.delete
+    query: yf.oapi.sales.forecast.data.query.get
+    read: yf.oapi.sales.forecast.data.read.get
+    update: yf.oapi.sales.forecast.data.update
+  primary_key: [sales_forecast]
+  detail_nodes: [sales_forecast_data, sales_forecast_detail_data]
+  oapma_field_aliases: [sales_forecast, customer_no, customer_shortname, channel, channel_name, region, region_name, country, country_name, department, department_name, sales_no, sales_name, in_plan, remarks, type, type_name, route, route_name, other_type...]
+
+- type_key: sales.invoice
+  title: 销售发票
+  # approve: yf.oapi.sales.invoice.data.approve  [OAPMA: ACRI02, 148 fields]
+  # create: yf.oapi.sales.invoice.data.create  [OAPMA: ACRI02, 148 fields]
+  # delete: yf.oapi.sales.invoice.data.delete  [OAPMA: ACRI02, 148 fields]
+  # disapprove: yf.oapi.sales.invoice.data.disapprove  [OAPMA: ACRI02, 148 fields]
+  # invalid: yf.oapi.sales.invoice.data.invalid  [OAPMA: ACRI02, 148 fields]
+  # query: yf.oapi.sales.invoice.data.query.get  [OAPMA: ACRI02, 148 fields]
+  # read: yf.oapi.sales.invoice.data.read.get  [OAPMA: ACRI02, 148 fields]
+  # update: yf.oapi.sales.invoice.data.update  [OAPMA: ACRI02, 148 fields]
+  services:
+    approve: yf.oapi.sales.invoice.data.approve
+    create: yf.oapi.sales.invoice.data.create
+    delete: yf.oapi.sales.invoice.data.delete
+    disapprove: yf.oapi.sales.invoice.data.disapprove
+    invalid: yf.oapi.sales.invoice.data.invalid
+    query: yf.oapi.sales.invoice.data.query.get
+    read: yf.oapi.sales.invoice.data.read.get
+    update: yf.oapi.sales.invoice.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [sales_invoice_data, sales_invoice_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, approve_date, customer_no, customer_name, sales_no, sales_name, tax_identification_no, customer_full_name, currency, exchange_rate, invoice_type, tax_type, generate_entry_code_income, generate_entry_code_cost, invoice_no, invoice_date, plan_receive_date, exp_cashing_date...]
+
+- type_key: sales.order
+  title: 数据重新加载刷新
+  # approve: yf.oapi.sales.order.data.approve  [OAPMA: COPI06, 163 fields]
+  # create: yf.oapi.sales.order.data.create  [OAPMA: COPI06, 163 fields]
+  # delete: yf.oapi.sales.order.data.delete  [OAPMA: COPI06, 163 fields]
+  # disapprove: yf.oapi.sales.order.data.disapprove  [OAPMA: COPI06, 163 fields]
+  # invalid: yf.oapi.sales.order.data.invalid  [OAPMA: COPI06, 163 fields]
+  # query: yf.oapi.sales.order.data.query.get  [OAPMA: COPI06, 163 fields]
+  # read: yf.oapi.sales.order.data.read.get  [OAPMA: COPI06, 163 fields]
+  # update: yf.oapi.sales.order.data.update  [OAPMA: COPI06, 163 fields]
+  services:
+    approve: yf.oapi.sales.order.data.approve
+    create: yf.oapi.sales.order.data.create
+    delete: yf.oapi.sales.order.data.delete
+    disapprove: yf.oapi.sales.order.data.disapprove
+    invalid: yf.oapi.sales.order.data.invalid
+    query: yf.oapi.sales.order.data.query.get
+    read: yf.oapi.sales.order.data.read.get
+    update: yf.oapi.sales.order.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [sales_order_data, sales_order_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, order_date, customer_no, customer_name, customer_full_name, department, department_name, salesman_no, sales_name, plant_no, plant_name, trans_currency, exchange_rate, delivery_address1, delivery_address, delivery_address2, customer_doc_no, price_condition...]
+
+- type_key: sales.order.change
+  title: 修改订单变更单
+  # approve: yf.oapi.sales.order.change.data.approve  [OAPMA: COPI07, 258 fields]
+  # create: yf.oapi.sales.order.change.data.create  [OAPMA: COPI07, 258 fields]
+  # delete: yf.oapi.sales.order.change.data.delete  [OAPMA: COPI07, 258 fields]
+  # disapprove: yf.oapi.sales.order.change.data.disapprove  [OAPMA: COPI07, 258 fields]
+  # invalid: yf.oapi.sales.order.change.data.invalid  [OAPMA: COPI07, 258 fields]
+  # query: yf.oapi.sales.order.change.data.query.get  [OAPMA: COPI07, 258 fields]
+  # read: yf.oapi.sales.order.change.data.read.get  [OAPMA: COPI07, 258 fields]
+  # update: yf.oapi.sales.order.change.data.update  [OAPMA: COPI07, 258 fields]
+  services:
+    approve: yf.oapi.sales.order.change.data.approve
+    create: yf.oapi.sales.order.change.data.create
+    delete: yf.oapi.sales.order.change.data.delete
+    disapprove: yf.oapi.sales.order.change.data.disapprove
+    invalid: yf.oapi.sales.order.change.data.invalid
+    query: yf.oapi.sales.order.change.data.query.get
+    read: yf.oapi.sales.order.change.data.read.get
+    update: yf.oapi.sales.order.change.data.update
+  primary_key: [doc_type_no, doc_no, change_version]
+  oapma_field_aliases: [process_name, downstream_supplier_name, doc_type_no, doc_type_name, doc_no, change_version, change_date, close_order, change_reason, customer_no, customer_shortname, order_date, department, department_name, salesman_no, sales_name, plant_no, plant_name, trans_currency, trans_currency_name...]
+
+- type_key: sales.return
+  title: 销退单
+  # approve: yf.oapi.sales.return.data.approve  [OAPMA: COPI09, 139 fields]
+  # create: yf.oapi.sales.return.data.create  [OAPMA: COPI09, 139 fields]
+  # delete: yf.oapi.sales.return.data.delete  [OAPMA: COPI09, 139 fields]
+  # disapprove: yf.oapi.sales.return.data.disapprove  [OAPMA: COPI09, 139 fields]
+  # invalid: yf.oapi.sales.return.data.invalid  [OAPMA: COPI09, 139 fields]
+  # query: yf.oapi.sales.return.data.query.get  [OAPMA: COPI09, 139 fields]
+  # read: yf.oapi.sales.return.data.read.get  [OAPMA: COPI09, 139 fields]
+  # update: yf.oapi.sales.return.data.update  [OAPMA: COPI09, 139 fields]
+  services:
+    approve: yf.oapi.sales.return.data.approve
+    create: yf.oapi.sales.return.data.create
+    delete: yf.oapi.sales.return.data.delete
+    disapprove: yf.oapi.sales.return.data.disapprove
+    invalid: yf.oapi.sales.return.data.invalid
+    query: yf.oapi.sales.return.data.query.get
+    read: yf.oapi.sales.return.data.read.get
+    update: yf.oapi.sales.return.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [sales_return_data, sales_return_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, sales_return_date, customer_no, customer_name, department, department_name, sales_no, sales_name, plant_no, plant_name, currency, exchange_rate, trans_curr_not_tax_amount, trans_curr_tax, invoice_type, tax_type, print_times, update_code...]
+
+- type_key: sales.return.inspection
+  title: 销退检验单
+  # query: yf.oapi.sales.return.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.sales.return.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.sales.return.inspection.data.query.get
+    read: yf.oapi.sales.return.inspection.data.read.get
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+
+- type_key: sampling.basis
+  title: 抽查基础
+  # query: yf.oapi.sampling.basis.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.sampling.basis.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.sampling.basis.data.query.get
+    read: yf.oapi.sampling.basis.data.read.get
+  primary_key: [inspection_level, strictness_degree]
+
+- type_key: scrap.order
+  title: 报废单
+  # approve: yf.oapi.scrap.order.data.approve  [OAPMA: INVI23, 62 fields]
+  # create: yf.oapi.scrap.order.data.create  [OAPMA: INVI23, 62 fields]
+  # delete: yf.oapi.scrap.order.data.delete  [OAPMA: INVI23, 62 fields]
+  # disapprove: yf.oapi.scrap.order.data.disapprove  [OAPMA: INVI23, 62 fields]
+  # invalid: yf.oapi.scrap.order.data.invalid  [OAPMA: INVI23, 62 fields]
+  # query: yf.oapi.scrap.order.data.query.get  [OAPMA: INVI23, 62 fields]
+  # read: yf.oapi.scrap.order.data.read.get  [OAPMA: INVI23, 62 fields]
+  # update: yf.oapi.scrap.order.data.update  [OAPMA: INVI23, 62 fields]
+  services:
+    approve: yf.oapi.scrap.order.data.approve
+    create: yf.oapi.scrap.order.data.create
+    delete: yf.oapi.scrap.order.data.delete
+    disapprove: yf.oapi.scrap.order.data.disapprove
+    invalid: yf.oapi.scrap.order.data.invalid
+    query: yf.oapi.scrap.order.data.query.get
+    read: yf.oapi.scrap.order.data.read.get
+    update: yf.oapi.scrap.order.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [scrap_order_data, scrap_order_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, doc_date, data_source, scrap_source, department, department_name, plant_no, plant_name, scrap_reason, remarks, generate_entry_code, register_book_no, opinion, approver_no, approver_name, approve_status, scrap_date, print_times...]
+
+- type_key: shipping.notice
+  title: 出货通知单
+  # approve: yf.oapi.shipping.notice.data.approve  [OAPMA: COPI13, 92 fields]
+  # create: yf.oapi.shipping.notice.data.create  [OAPMA: COPI13, 92 fields]
+  # delete: yf.oapi.shipping.notice.data.delete  [OAPMA: COPI13, 92 fields]
+  # disapprove: yf.oapi.shipping.notice.data.disapprove  [OAPMA: COPI13, 92 fields]
+  # invalid: yf.oapi.shipping.notice.data.invalid  [OAPMA: COPI13, 92 fields]
+  # query: yf.oapi.shipping.notice.data.query.get  [OAPMA: COPI13, 92 fields]
+  # read: yf.oapi.shipping.notice.data.read.get  [OAPMA: COPI13, 92 fields]
+  # update: yf.oapi.shipping.notice.data.update  [OAPMA: COPI13, 92 fields]
+  services:
+    approve: yf.oapi.shipping.notice.data.approve
+    create: yf.oapi.shipping.notice.data.create
+    delete: yf.oapi.shipping.notice.data.delete
+    disapprove: yf.oapi.shipping.notice.data.disapprove
+    invalid: yf.oapi.shipping.notice.data.invalid
+    query: yf.oapi.shipping.notice.data.query.get
+    read: yf.oapi.shipping.notice.data.read.get
+    update: yf.oapi.shipping.notice.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [shipping_notice_data, shipping_notice_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, notice_date, customer_no, customer_shortname, checker, checker_name, department, department_name, salesman_no, sales_name, delivery_customer_no, delivery_customer_name, delivery_address1, delivery_address2, tax_type, remarks, currency, currency_name...]
+
+- type_key: shipping.order
+  title: 销货单
+  # approve: yf.oapi.shipping.order.data.approve  [OAPMA: COPI08, 132 fields]
+  # create: yf.oapi.shipping.order.data.create  [OAPMA: COPI08, 132 fields]
+  # delete: yf.oapi.shipping.order.data.delete  [OAPMA: COPI08, 132 fields]
+  # disapprove: yf.oapi.shipping.order.data.disapprove  [OAPMA: COPI08, 132 fields]
+  # invalid: yf.oapi.shipping.order.data.invalid  [OAPMA: COPI08, 132 fields]
+  # query: yf.oapi.shipping.order.data.query.get  [OAPMA: COPI08, 132 fields]
+  # read: yf.oapi.shipping.order.data.read.get  [OAPMA: COPI08, 132 fields]
+  # update: yf.oapi.shipping.order.data.update  [OAPMA: COPI08, 132 fields]
+  services:
+    approve: yf.oapi.shipping.order.data.approve
+    create: yf.oapi.shipping.order.data.create
+    delete: yf.oapi.shipping.order.data.delete
+    disapprove: yf.oapi.shipping.order.data.disapprove
+    invalid: yf.oapi.shipping.order.data.invalid
+    query: yf.oapi.shipping.order.data.query.get
+    read: yf.oapi.shipping.order.data.read.get
+    update: yf.oapi.shipping.order.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [shipping_order_data, shipping_order_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, sales_delivery_date, customer_no, customer_shortname, department, department_name, sales_no, sales_name, delivery_address1, delivery_address2, plant_no, plant_name, currency, currency_name, exchange_rate, trans_curr_not_tax_amount, invoice_type, tax_type...]
+
+- type_key: split.order
+  title: 拆解单
+  # approve: yf.oapi.split.order.data.approve  [OAPMA: NOT FOUND]
+  # create: yf.oapi.split.order.data.create  [OAPMA: NOT FOUND]
+  # delete: yf.oapi.split.order.data.delete  [OAPMA: NOT FOUND]
+  # disapprove: yf.oapi.split.order.data.disapprove  [OAPMA: NOT FOUND]
+  # invalid: yf.oapi.split.order.data.invalid  [OAPMA: NOT FOUND]
+  # query: yf.oapi.split.order.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.split.order.data.read.get  [OAPMA: NOT FOUND]
+  # update: yf.oapi.split.order.data.update  [OAPMA: NOT FOUND]
+  services:
+    approve: yf.oapi.split.order.data.approve
+    create: yf.oapi.split.order.data.create
+    delete: yf.oapi.split.order.data.delete
+    disapprove: yf.oapi.split.order.data.disapprove
+    invalid: yf.oapi.split.order.data.invalid
+    query: yf.oapi.split.order.data.query.get
+    read: yf.oapi.split.order.data.read.get
+    update: yf.oapi.split.order.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [combination_order_data, combination_order_detail_data, split_order_data, split_order_detail_data]
+
+- type_key: supplier
+  title: 供应商
+  # create: yf.oapi.supplier.data.create  [OAPMA: PURI01, 97 fields]
+  # delete: yf.oapi.supplier.delete  [OAPMA: PURI01, 97 fields]
+  # query: yf.oapi.supplier.query.get  [OAPMA: PURI01, 97 fields]
+  # read: yf.oapi.supplier.read.get  [OAPMA: PURI01, 97 fields]
+  # update: yf.oapi.supplier.data.update  [OAPMA: PURI01, 97 fields]
+  services:
+    create: yf.oapi.supplier.data.create
+    delete: yf.oapi.supplier.delete
+    query: yf.oapi.supplier.query.get
+    read: yf.oapi.supplier.read.get
+    update: yf.oapi.supplier.data.update
+  primary_key: [supplier_no]
+  detail_nodes: [supplier_basic_data]
+  oapma_field_aliases: [document_no, corporation_type, operation_licenses, license, gmp_gsp_certification, bank_code, bank_name, bank_account, account_partner, supplier_no, supplier_name, id_code, account_name, contact, main_account, supplier_fullname, supplier_classification, supplier_classification_name, tax_identification_no, country...]
+
+- type_key: team.personnel
+  title: 班组成员
+  # create: yf.oapi.team.personnel.data.create  [OAPMA: SFCI11, 8 fields]
+  # delete: yf.oapi.team.personnel.data.delete  [OAPMA: SFCI11, 8 fields]
+  # query: yf.oapi.team.personnel.data.query.get  [OAPMA: SFCI11, 8 fields]
+  # read: yf.oapi.team.personnel.data.read.get  [OAPMA: SFCI11, 8 fields]
+  # update: yf.oapi.team.personnel.data.update  [OAPMA: SFCI11, 8 fields]
+  services:
+    create: yf.oapi.team.personnel.data.create
+    delete: yf.oapi.team.personnel.data.delete
+    query: yf.oapi.team.personnel.data.query.get
+    read: yf.oapi.team.personnel.data.read.get
+    update: yf.oapi.team.personnel.data.update
+  primary_key: [team_no]
+  detail_nodes: [detail_note_of_team_personnel_data, header_of_team_personnel_data]
+  oapma_field_aliases: [team_no, team_name, remarks, staff_no, staff_name, apportion_weight]
+
+- type_key: transfer
+  title: 调拨单
+  # approve: yf.oapi.transfer.data.approve  [OAPMA: INVI08, 62 fields]
+  # create: yf.oapi.transfer.data.create  [OAPMA: INVI08, 62 fields]
+  # delete: yf.oapi.transfer.data.delete  [OAPMA: INVI08, 62 fields]
+  # disapprove: yf.oapi.transfer.data.disapprove  [OAPMA: INVI08, 62 fields]
+  # invalid: yf.oapi.transfer.data.invalid  [OAPMA: INVI08, 62 fields]
+  # query: yf.oapi.transfer.data.query.get  [OAPMA: INVI08, 62 fields]
+  # read: yf.oapi.transfer.data.read.get  [OAPMA: INVI08, 62 fields]
+  # update: yf.oapi.transfer.data.update  [OAPMA: INVI08, 62 fields]
+  services:
+    approve: yf.oapi.transfer.data.approve
+    create: yf.oapi.transfer.data.create
+    delete: yf.oapi.transfer.data.delete
+    disapprove: yf.oapi.transfer.data.disapprove
+    invalid: yf.oapi.transfer.data.invalid
+    query: yf.oapi.transfer.data.query.get
+    read: yf.oapi.transfer.data.read.get
+    update: yf.oapi.transfer.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [inventory_transaction_data, inventory_transaction_detail_data, inventory_transaction_serial_data, transfer_data, transfer_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, transaction_date, department, department_name, remarks, approve_status, print_times, plant_no, plant_name, doc_type, pieces, total_qty, total_amt, generate_entry_code, doc_date, approver_no, approver_name, total_package_qty...]
+
+- type_key: transfer.doc
+  title: 转移单
+  # approve: yf.oapi.transfer.doc.data.approve  [OAPMA: SFCI05, 125 fields]
+  # create: yf.oapi.transfer.doc.data.create  [OAPMA: SFCI05, 125 fields]
+  # delete: yf.oapi.transfer.doc.data.delete  [OAPMA: SFCI05, 125 fields]
+  # disapprove: yf.oapi.transfer.doc.data.disapprove  [OAPMA: SFCI05, 125 fields]
+  # invalid: yf.oapi.transfer.doc.data.invalid  [OAPMA: SFCI05, 125 fields]
+  # query: yf.oapi.transfer.doc.data.query.get  [OAPMA: SFCI05, 125 fields]
+  # read: yf.oapi.transfer.doc.data.read.get  [OAPMA: SFCI05, 125 fields]
+  # update: yf.oapi.transfer.doc.data.update  [OAPMA: SFCI05, 125 fields]
+  services:
+    approve: yf.oapi.transfer.doc.data.approve
+    create: yf.oapi.transfer.doc.data.create
+    delete: yf.oapi.transfer.doc.data.delete
+    disapprove: yf.oapi.transfer.doc.data.disapprove
+    invalid: yf.oapi.transfer.doc.data.invalid
+    query: yf.oapi.transfer.doc.data.query.get
+    read: yf.oapi.transfer.doc.data.read.get
+    update: yf.oapi.transfer.doc.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [transfer_doc_data, transfer_doc_detail_data, transfer_doc_sub_detai_data]
+  oapma_field_aliases: [doc_type_no, doc_no, seq, sub_seq, routing_no, routing_name, process_step, work_hours_batch_qty, std_labor_hours_seconds, actual_labor_hour_seconds, std_machine_hours_seconds, actual_machine_hours_seconds, work_hours_wages_rate, piece_price, pricing_unit, complete_qty, scrap_qty, destroyed_qty, standard_operating_procedure_desc, staff_no...]
+
+- type_key: transfer.doc.inspection
+  title: 转移检验单
+  # query: yf.oapi.transfer.doc.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.transfer.doc.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.transfer.doc.inspection.data.query.get
+    read: yf.oapi.transfer.doc.inspection.data.read.get
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+
+- type_key: unit
+  title: 单位
+  # create: yf.oapi.unit.data.create  [OAPMA: INVI28, 2 fields]
+  # query: yf.oapi.unit.data.query.get  [OAPMA: INVI28, 2 fields]
+  # read: yf.oapi.unit.data.read.get  [OAPMA: INVI28, 2 fields]
+  services:
+    create: yf.oapi.unit.data.create
+    query: yf.oapi.unit.data.query.get
+    read: yf.oapi.unit.data.read.get
+  primary_key: [unit]
+  detail_nodes: [unit_data]
+  oapma_field_aliases: [unit, remarks]
+
+- type_key: warehouse
+  title: 仓库
+  # create: yf.oapi.warehouse.data.create  [OAPMA: CMSI03, 24 fields]
+  # delete: yf.oapi.warehouse.data.delete  [OAPMA: CMSI03, 24 fields]
+  # query: yf.oapi.warehouse.data.query.get  [OAPMA: CMSI03, 24 fields]
+  # read: yf.oapi.warehouse.data.read.get  [OAPMA: CMSI03, 24 fields]
+  # update: yf.oapi.warehouse.data.update  [OAPMA: CMSI03, 24 fields]
+  services:
+    create: yf.oapi.warehouse.data.create
+    delete: yf.oapi.warehouse.data.delete
+    query: yf.oapi.warehouse.data.query.get
+    read: yf.oapi.warehouse.data.read.get
+    update: yf.oapi.warehouse.data.update
+  primary_key: [warehouse_no]
+  detail_nodes: [warehouse_data, warehouse_location_data]
+  oapma_field_aliases: [warehouse_no, storage_spaces_control, warehouse_name, plant_no, plant_name, warehouse_type, included_available_qty, allow_negative_inventory, remarks, address, telephone, fax_no, export_code, is_valid, location_no, location_desc, checkpoint_no, checkpoint_desc]
+
+- type_key: wo
+  title: 工单
+  # approve: yf.oapi.wo.data.approve  [OAPMA: MOCI02, 133 fields]
+  # create: yf.oapi.wo.data.create  [OAPMA: MOCI02, 133 fields]
+  # delete: yf.oapi.wo.data.delete  [OAPMA: MOCI02, 133 fields]
+  # disapprove: yf.oapi.wo.data.disapprove  [OAPMA: MOCI02, 133 fields]
+  # invalid: yf.oapi.wo.data.invalid  [OAPMA: MOCI02, 133 fields]
+  # query: yf.oapi.wo.data.query.get  [OAPMA: MOCI02, 133 fields]
+  # read: yf.oapi.wo.data.read.get  [OAPMA: MOCI02, 133 fields]
+  # update: yf.oapi.wo.data.update  [OAPMA: MOCI02, 133 fields]
+  services:
+    approve: yf.oapi.wo.data.approve
+    create: yf.oapi.wo.data.create
+    delete: yf.oapi.wo.data.delete
+    disapprove: yf.oapi.wo.data.disapprove
+    invalid: yf.oapi.wo.data.invalid
+    query: yf.oapi.wo.data.query.get
+    read: yf.oapi.wo.data.read.get
+    update: yf.oapi.wo.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [wo_data, wo_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, order_issue_date, bom_date, bom_version, wo_item_no, unit, small_unit, plan_start_date, plan_complete_date, status, actual_start_date, approve_status, actual_complete_date, plan_qty, issued_sets, produced_qty, scrap_qty, plant_no...]
+
+- type_key: wo.change
+  title: 工单变更单
+  # approve: yf.oapi.wo.change.data.approve  [OAPMA: MOCI12, 223 fields]
+  # create: yf.oapi.wo.change.data.create  [OAPMA: MOCI12, 223 fields]
+  # delete: yf.oapi.wo.change.data.delete  [OAPMA: MOCI12, 223 fields]
+  # disapprove: yf.oapi.wo.change.data.disapprove  [OAPMA: MOCI12, 223 fields]
+  # invalid: yf.oapi.wo.change.data.invalid  [OAPMA: MOCI12, 223 fields]
+  # query: yf.oapi.wo.change.data.query.get  [OAPMA: MOCI12, 223 fields]
+  # read: yf.oapi.wo.change.data.read.get  [OAPMA: MOCI12, 223 fields]
+  # update: yf.oapi.wo.change.data.update  [OAPMA: MOCI12, 223 fields]
+  services:
+    approve: yf.oapi.wo.change.data.approve
+    create: yf.oapi.wo.change.data.create
+    delete: yf.oapi.wo.change.data.delete
+    disapprove: yf.oapi.wo.change.data.disapprove
+    invalid: yf.oapi.wo.change.data.invalid
+    query: yf.oapi.wo.change.data.query.get
+    read: yf.oapi.wo.change.data.read.get
+    update: yf.oapi.wo.change.data.update
+  primary_key: [wo_doc_type_no, wo_doc_no, change_version]
+  detail_nodes: [wo_change_data, wo_change_detail_data]
+  oapma_field_aliases: [customer_shortname, customer_no, customer_doc_no, customer_item_no, wo_doc_type_no, wo_doc_type_name, wo_doc_no, change_version, change_date, change_reason, order_issue_date, bom_date, bom_version, wo_item_no, unit, plan_start_date, plan_complete_date, status, actual_start_date, actual_complete_date...]
+
+- type_key: wo.commence
+  title: 投产单
+  # approve: yf.oapi.wo.commence.data.approve  [OAPMA: SFCI06, 59 fields]
+  # create: yf.oapi.wo.commence.data.create  [OAPMA: SFCI06, 59 fields]
+  # delete: yf.oapi.wo.commence.data.delete  [OAPMA: SFCI06, 59 fields]
+  # disapprove: yf.oapi.wo.commence.data.disapprove  [OAPMA: SFCI06, 59 fields]
+  # invalid: yf.oapi.wo.commence.data.invalid  [OAPMA: SFCI06, 59 fields]
+  # query: yf.oapi.wo.commence.data.query.get  [OAPMA: SFCI06, 59 fields]
+  # read: yf.oapi.wo.commence.data.read.get  [OAPMA: SFCI06, 59 fields]
+  # update: yf.oapi.wo.commence.data.update  [OAPMA: SFCI06, 59 fields]
+  services:
+    approve: yf.oapi.wo.commence.data.approve
+    create: yf.oapi.wo.commence.data.create
+    delete: yf.oapi.wo.commence.data.delete
+    disapprove: yf.oapi.wo.commence.data.disapprove
+    invalid: yf.oapi.wo.commence.data.invalid
+    query: yf.oapi.wo.commence.data.query.get
+    read: yf.oapi.wo.commence.data.read.get
+    update: yf.oapi.wo.commence.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [transfer_doc_data, transfer_doc_detail_data, transfer_doc_sub_detai_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, transfer_date, trs_out_category, warehouse_no, warehouse_name, trs_in_category, transfer_in_address_no, transfer_in_address_name, plant_no, plant_name, print_times, update_code, approve_status, remarks, doc_date, approver_no, approver_name, approval_status_code...]
+
+- type_key: wo.routing
+  title: 工单工艺
+  # create: yf.oapi.wo.routing.data.create  [OAPMA: SFCI04, 173 fields]
+  # delete: yf.oapi.wo.routing.data.delete  [OAPMA: SFCI04, 173 fields]
+  # query: yf.oapi.wo.routing.data.query.get  [OAPMA: SFCI04, 173 fields]
+  # read: yf.oapi.wo.routing.data.read.get  [OAPMA: SFCI04, 173 fields]
+  # update: yf.oapi.wo.routing.data.update  [OAPMA: SFCI04, 173 fields]
+  services:
+    create: yf.oapi.wo.routing.data.create
+    delete: yf.oapi.wo.routing.data.delete
+    query: yf.oapi.wo.routing.data.query.get
+    read: yf.oapi.wo.routing.data.read.get
+    update: yf.oapi.wo.routing.data.update
+  primary_key: [wo_doc_type_no, wo_doc_no]
+  detail_nodes: [wo_routing_detail_data, wo_routing_sub_detail_data]
+  oapma_field_aliases: [customer_shortname, wo_doc_type_no, wo_doc_type_name, wo_doc_no, order_issue_date, bom_date, bom_version, wo_item_no, unit, plan_start_date, plan_complete_date, status, actual_start_date, approve_status, actual_complete_date, plan_qty, issued_sets, produced_qty, scrap_qty, plant_no...]
+
+- type_key: wo.split
+  title: 工单拆分
+  # query: yf.oapi.wo.split.data.query.get  [OAPMA: MOCI16, 167 fields]
+  # read: yf.oapi.wo.split.data.read.get  [OAPMA: MOCI16, 167 fields]
+  services:
+    query: yf.oapi.wo.split.data.query.get
+    read: yf.oapi.wo.split.data.read.get
+  primary_key: [wo_doc_type_no, wo_doc_no]
+  oapma_field_aliases: [customer_shortname, project_no, project_name, customer_no, customer_doc_no, customer_item_no, wo_doc_type_no, wo_doc_type_name, wo_doc_no, type, order_issue_date, bom_date, bom_version, wo_item_no, unit, plan_start_date, plan_complete_date, wo_status, actual_start_date, wo_approve_status...]
+
+- type_key: wo.stockin
+  title: 生产入库单
+  # approve: yf.oapi.wo.stockin.data.approve  [OAPMA: MOCI05, 81 fields]
+  # create: yf.oapi.wo.stockin.data.create  [OAPMA: MOCI05, 81 fields]
+  # delete: yf.oapi.wo.stockin.data.delete  [OAPMA: MOCI05, 81 fields]
+  # disapprove: yf.oapi.wo.stockin.data.disapprove  [OAPMA: MOCI05, 81 fields]
+  # invalid: yf.oapi.wo.stockin.data.invalid  [OAPMA: MOCI05, 81 fields]
+  # query: yf.oapi.wo.stockin.data.query.get  [OAPMA: MOCI05, 81 fields]
+  # read: yf.oapi.wo.stockin.data.read.get  [OAPMA: MOCI05, 81 fields]
+  # update: yf.oapi.wo.stockin.data.update  [OAPMA: MOCI05, 81 fields]
+  services:
+    approve: yf.oapi.wo.stockin.data.approve
+    create: yf.oapi.wo.stockin.data.create
+    delete: yf.oapi.wo.stockin.data.delete
+    disapprove: yf.oapi.wo.stockin.data.disapprove
+    invalid: yf.oapi.wo.stockin.data.invalid
+    query: yf.oapi.wo.stockin.data.query.get
+    read: yf.oapi.wo.stockin.data.read.get
+    update: yf.oapi.wo.stockin.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [wo_stockin_data, wo_stockin_detail_data]
+  oapma_field_aliases: [doc_type_no, doc_type_name, doc_no, receipt_date, plant_no, plant_name, remarks, approve_status, prod_record_update_code, print_times, auto_buckle_material_update_code, generate_entry_code_cost, workstation_no, workstation_name, doc_date, approver_no, approver_name, approval_status_code, transfer_times, department...]
+
+- type_key: wo.stockin.inspection
+  title: 生产入库检验单
+  # query: yf.oapi.wo.stockin.inspection.data.query.get  [OAPMA: NOT FOUND]
+  # read: yf.oapi.wo.stockin.inspection.data.read.get  [OAPMA: NOT FOUND]
+  services:
+    query: yf.oapi.wo.stockin.inspection.data.query.get
+    read: yf.oapi.wo.stockin.inspection.data.read.get
+  primary_key: [doc_type_no, doc_no, seq, inspection_batch, times]
+
+- type_key: work.report
+  title: 报工单
+  # approve: yf.oapi.work.report.data.approve  [OAPMA: SFCI03, 88 fields]
+  # create: yf.oapi.work.report.data.create  [OAPMA: SFCI03, 88 fields]
+  # delete: yf.oapi.work.report.data.delete  [OAPMA: SFCI03, 88 fields]
+  # disapprove: yf.oapi.work.report.data.disapprove  [OAPMA: SFCI03, 88 fields]
+  # invalid: yf.oapi.work.report.data.invalid  [OAPMA: SFCI03, 88 fields]
+  # query: yf.oapi.work.report.data.query.get  [OAPMA: SFCI03, 88 fields]
+  # read: yf.oapi.work.report.data.read.get  [OAPMA: SFCI03, 88 fields]
+  # update: yf.oapi.work.report.data.update  [OAPMA: SFCI03, 88 fields]
+  services:
+    approve: yf.oapi.work.report.data.approve
+    create: yf.oapi.work.report.data.create
+    delete: yf.oapi.work.report.data.delete
+    disapprove: yf.oapi.work.report.data.disapprove
+    invalid: yf.oapi.work.report.data.invalid
+    query: yf.oapi.work.report.data.query.get
+    read: yf.oapi.work.report.data.read.get
+    update: yf.oapi.work.report.data.update
+  primary_key: [doc_type_no, doc_no]
+  detail_nodes: [work_report_data, work_report_detail_data, work_report_sub_detai_data, work_report_team_data]
+  oapma_field_aliases: [doc_type_no, doc_no, seq, sub_seq, routing_no, routing_name, process_step, work_hours_batch_qty, std_labor_hours_seconds, actual_labor_hour_seconds, std_machine_hours_seconds, actual_machine_hours_seconds, work_hours_wages_rate, piece_price, pricing_unit, complete_qty, scrap_qty, destroyed_qty, standard_operating_procedure_desc, staff_no...]
+
+- type_key: workstation
+  title: 工作中心
+  # create: yf.oapi.workstation.data.create  [OAPMA: CMSI04, 24 fields]
+  # delete: yf.oapi.workstation.data.delete  [OAPMA: CMSI04, 24 fields]
+  # query: yf.oapi.workstation.data.query.get  [OAPMA: CMSI04, 24 fields]
+  # read: yf.oapi.workstation.data.read.get  [OAPMA: CMSI04, 24 fields]
+  # update: yf.oapi.workstation.data.update  [OAPMA: CMSI04, 24 fields]
+  services:
+    create: yf.oapi.workstation.data.create
+    delete: yf.oapi.workstation.data.delete
+    query: yf.oapi.workstation.data.query.get
+    read: yf.oapi.workstation.data.read.get
+    update: yf.oapi.workstation.data.update
+  primary_key: [production_line_code]
+  detail_nodes: [workstation_head_data]
+  oapma_field_aliases: [production_line_code, production_line_name, plant_no, plant_name, daily_labor_productivity, daily_machine_productivity, standard_labor_efficiency, standard_machine_loading, overhead_allocation_base, standard_labor_rate, standard_overhead_rate, remarks, standard_fixed_overhead_rate, line_clearance_certificate_day, department_no, department_name, auto_warehouse_no, warehouse_name, machine_code, machine_name...]

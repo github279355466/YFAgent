@@ -1,13 +1,13 @@
 {
   "slug": "mvp-p1-auth-module",
   "title": "MVP P1 · 独立授权模块（packages/yfcli-auth/）",
-  "status": "pending",
+  "status": "completed",
   "priority": "P0",
   "owner": "backend",
   "depends_on": [
     "mvp-p0-prerequisites"
   ],
-  "notes": "依赖 mvp-p0-prerequisites（架构裁决台账须先确认 auth 包边界与依赖方向：auth 不依赖 sdk，避免循环依赖）。架构依据是 YZCLI 的反面基准——YZCLI 没有独立 auth 包，认证散在 4 处（SDK config.ts 67 行且 loadConfig() 从不读 token / MCP erp-client.ts 21 行 / Gateway auth/token-map.ts 40 + auth/jwt.ts 67 / Python core/config.py 173 行且与 TS 侧 base_url 不一致），缺失 OAuth/refresh/token 缓存/重试/健康检查，ERP token 是人工从 TPASC19 作业取的静态串。只沿用『token 必须由调用方显式注入』这一条约束，其余全部自行设计。做：token 生命周期（获取/缓存/过期检测/刷新）、ERP 连通性健康检查、凭据红线（密码只从环境变量取 + FORBIDDEN_KEYS 拒明文含 user + limits 必填 + allowed_templates 为空即抛错）、错误 token 返 HTTP 500+HTML 的独立分支、日志脱敏。验收 7 条：配置无明文凭据 / limits 缺失即抛错 / token_expired 与 token_invalid 区分 / 500+HTML 不解析 body / 健康检查独立可执行 / scan:secrets PASS / 单测覆盖含反向用例。不做：OAuth 授权码流、多租户RBAC、License 签发（YZCLI 侧 4126 行）、Gateway 层（3906 行）、Token 自动刷新对接厂商接口（文档未说明刷新语义，转 OPEN-DECISIONS.md 不编造）。工作量 L（3~5 天）。",
-  "completedAt": "",
+  "notes": "依赖 mvp-p0-prerequisites（架构裁决台账须先确认 auth 包边界与依赖方向：auth 不依赖 sdk，避免循环依赖）。架构依据是 YZCLI 的反面基准——YZCLI 没有独立 auth 包，认证散在 4 处（SDK config.ts 67 行且 loadConfig() 从不读 token / MCP erp-client.ts 21 行 / Gateway auth/token-map.ts 40 + auth/jwt.ts 67 / Python core/config.py 173 行且与 TS 侧 base_url 不一致），缺失 OAuth/refresh/token 缓存/重试/健康检查，ERP token 是人工从 TPASC19 作业取的静态串。只沿用『token 必须由调用方显式注入』这一条约束，其余全部自行设计。做：token 生命周期（获取/缓存/过期检测/刷新）、ERP 连通性健康检查、凭据红线（密码只从环境变量取 + FORBIDDEN_KEYS 拒明文含 user + limits 必填 + allowed_templates 为空即抛错）、错误 token 返 HTTP 500+HTML 的独立分支、日志脱敏。验收 7 条：配置无明文凭据 / limits 缺失即抛错 / token_expired 与 token_invalid 区分 / 500+HTML 不解析 body / 健康检查独立可执行 / scan:secrets PASS / 单测覆盖含反向用例。不做：OAuth 授权码流、多租户RBAC、License 签发（YZCLI 侧 4126 行）、Gateway 层（3906 行）、Token 自动刷新对接厂商接口（文档未说明刷新语义，转 OPEN-DECISIONS.md 不编造）。工作量 L（3~5 天）。\n--- P1 产出物（2026-10-09 完成）---\npackages/yfcli-auth/ 已创建：6 个源文件 + 4 个测试文件 / 64 用例全部通过\n依赖 @digiwin/erp-license (file:协议)\ntsc --noEmit 零错误",
+  "completedAt": "2026-10-09",
   "createdAt": "2026-10-09"
 }

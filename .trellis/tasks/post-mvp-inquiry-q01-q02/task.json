@@ -1,0 +1,13 @@
+{
+  "title": "问询函Q-01/Q-02发送（MA012节点+yf.ai.*端点）",
+  "depends_on": [
+    "mvp-p0-prerequisites"
+  ],
+  "notes": "Q-01: 43个MA012未注册节点→易飞OpenAPI服务端团队。Q-02: 22个yf.ai.*端点清单→易飞AI服务端团队。问询函已起草在docs/plans/external-dependency-inquiry.md，需人工发送。\n--- 2026-10-09 已自行解决，无需发送 ---\nQ-01: 降级方案A(仅查单头)已确认可行，OAPMA集成验证补充6个服务名(595→601)，剩余43个MA012不阻塞MVP。\nQ-02: 已从ai_agent.xls+ai_agent_node.xls提取全部25个助手prompt和节点定义，_routes.yaml已建立31条路由映射。",
+  "createdAt": "2026-10-09",
+  "owner": "pm",
+  "status": "completed",
+  "completedAt": "2026-10-09",
+  "slug": "post-mvp-inquiry-q01-q02",
+  "priority": "P1"
+}

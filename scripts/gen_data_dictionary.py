@@ -399,7 +399,7 @@ oapi_unmatched_tk = len(typekeys) - len(_matched_tk)
 NODE_TABLE_MAP = os.path.join(OUT_ROOT, "node-table-map.csv")
 
 # ---------------------------------------------------------------------------
-# SDD 元数据加载（从 knowledge/表结构信息/*.SDD 抽取，提供主键、文档类型、索引）
+# SDD 元数据加载（从 docs/sources/表结构信息/*.SDD 抽取，提供主键、文档类型、索引）
 # ---------------------------------------------------------------------------
 SDD_META_CSV = os.path.join(OUT_ROOT, "sdd-table-meta.csv")
 SDD_INDEX_CSV = os.path.join(OUT_ROOT, "sdd-index.csv")
@@ -1324,9 +1324,9 @@ R.append("")
 R.append("## 二、数据来源与抽取链")
 R.append("")
 R.append("```")
-R.append("knowledge/ADMMC-表名信息.xml   (1170 行)  ->  .workbuddy/tmp/dict/tables.json")
-R.append("knowledge/ADMMD-字段信息.xml   (54842 行)  ->  .workbuddy/tmp/dict/fields.json")
-R.append("knowledge/ADMMB-程序信息.xml   (2298 行)   ->  .workbuddy/tmp/dict/programs.json")
+R.append("docs/sources/ADMMC-表名信息.xml   (1170 行)  ->  .workbuddy/tmp/dict/tables.json")
+R.append("docs/sources/ADMMD-字段信息.xml   (54842 行)  ->  .workbuddy/tmp/dict/fields.json")
+R.append("docs/sources/ADMMB-程序信息.xml   (2298 行)   ->  .workbuddy/tmp/dict/programs.json")
 R.append("knowledge/typekey/typekey_map.yaml (106 业务对象)  ->  OpenAPI 暴露推断")
 R.append("                                   ->  scripts/gen_data_dictionary.py")
 R.append("                                   ->  knowledge/data-dictionary/**")

@@ -2,7 +2,7 @@
 /**
  * extract-sdd-metadata.mjs
  * 
- * 从 knowledge/表结构信息/*.SDD 文件中抽取增量元数据：
+ * 从 docs/sources/表结构信息/*.SDD 文件中抽取增量元数据：
  *   - PRIMARY KEY（复合主键用 + 分隔）
  *   - INDEX01~INDEX99（索引字段）
  *   - 文档类型分类（1~8）
@@ -20,7 +20,7 @@
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 
-const SDD_DIR = join(import.meta.dirname, '..', 'knowledge', '表结构信息');
+const SDD_DIR = join(import.meta.dirname, '..', 'docs', 'sources', '表结构信息');
 const OUT_DIR = join(import.meta.dirname, '..', 'knowledge', 'data-dictionary');
 
 // 文档类型映射

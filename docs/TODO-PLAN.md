@@ -12,7 +12,7 @@
 
 | 项 | 状态 |
 |---|---|
-| 知识产物 | 4 类全部生成并通过校验：TypeKey 映射（106 对象）/ 字段对照表（106 份）/ 业务域草案 / 数据字典（78 模块） |
+| 知识产物 | 4 类全部生成并通过校验：TypeKey 映射（107 对象）/ 字段对照表（106 份）/ 业务域草案 / 数据字典（78 模块） |
 | SDK 骨架 | 单包 · 9 个源码子目录 · 20 个 TS 文件，`tsc` 零错误，离线用例 60 项，冻结判据 50 项 |
 | 真机验证 | 15/15 PASS（连通性 / 四头/ conditions / 复合主键 / 枚举 / 错误结构） |
 | 门禁 | `scan:secrets` 263 文件 PASS；`check:all` 4/4 PASS |
@@ -157,7 +157,7 @@
 | **涉及文件** | 新建 `packages/yfcli-mcp/` |
 | **依赖** | D-04、D-05 |
 | **工作量** | **L**（约 3~4 天） |
-| **验收** | ① `manifest` 工具返回 106 对象（读 `typekey_map.yaml`）<br>② `query` / `read` 工具透传 SDK<br>③ 错误信息不泄露 token（复用 `logging/redact.ts`） |
+| **验收** | ① `manifest` 工具返回 107 对象（读 `typekey_map.yaml`）<br>② `query` / `read` 工具透传 SDK<br>③ 错误信息不泄露 token（复用 `logging/redact.ts`） |
 
 ---
 

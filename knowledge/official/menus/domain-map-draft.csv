@@ -25,7 +25,7 @@ ecn,"变更单",engineering,"产品结构与工艺",high,8,Y,0
 employee,"员工",base,"基础资料",high,1,N,0
 engineering.item,"工程品号",engineering,"产品结构与工艺",high,5,Y,0
 expense.invoice,"费用发票",finance,"会计总账",high,8,Y,0
-financial.institution,"金融机构",base,"基础资料",high,2,Y,0
+financial.institution,"金融机构",base,"基础资料",high,5,Y,0
 function.category,"职务类别",base,"基础资料",high,2,Y,0
 inquiry,"询价单",purchase,"采购管理",high,8,Y,0
 inspection,"检验项目",quality,"质量管理",high,2,Y,0
@@ -33,7 +33,7 @@ inventory.transaction,"库存交易单",inventory,"存货管理",high,8,Y,0
 inventory.transaction.details,"库存交易明细",inventory,"存货管理",high,2,Y,0
 item,"品号信息",base,"基础资料",high,5,Y,0
 item.classification,"品号类别",base,"基础资料",high,5,Y,0
-item.count,"盘点",base,"基础资料",high,1,Y,0
+item.count,"盘点",base,"基础资料",high,4,Y,0
 item.customer.price,"客户商品价格",base,"基础资料",high,5,Y,0
 item.inspection,"品号检验项目",base,"基础资料",high,2,Y,0
 item.inventory.qty,"品号库存",base,"基础资料",high,1,N,0
@@ -89,6 +89,7 @@ scrap.order,"报废单",inventory,"存货管理",high,8,Y,0
 shipping.notice,"出货通知单",sales,"销售管理",high,8,Y,0
 shipping.order,"销货单",sales,"销售管理",high,8,Y,0
 split.order,"拆解单",UNASSIGNED,"待人工确认",none,8,Y,0
+subscription,"查询订阅中心资料",UNASSIGNED,"待人工确认",none,2,N,0
 supplier,"供应商",base,"基础资料",high,5,Y,0
 team.personnel,"班组成员",base,"基础资料",high,5,Y,0
 transfer,"调拨单",inventory,"存货管理",high,8,Y,0

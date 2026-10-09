@@ -1,7 +1,7 @@
 # AGENTS.md — YFCLI 智能体指引（平台无关）
 
 > 本文件为**通用 Agent 指引**，不绑定特定平台。
-> 硬性红线见 `CLAUDE.md`（若存在）；两文件共享「项目概览 / 常用命令 / 产物校验」段，修改时须同步。
+> 本文件同时承担硬性红线职责（原 `CLAUDE.md` 已合并入此文件）。
 
 ---
 
@@ -13,7 +13,7 @@
 |---|---|
 | 产品线 | 易飞 YF（E10） |
 | 归属 | 鼎捷（Digiwin）产品体系 |
-| 服务前缀 | `yf.oapi.`（共 595 个服务名 / 106 个业务对象） |
+| 服务前缀 | `yf.oapi.`（共 601 个服务名 / 107 个业务对象（含 OAPMA 补充）） |
 | 入口 | `http://{IP}/YFOAP/openapi.dll/datasnap/rest/TServerMethods1/ATNPost`（**大小写敏感**） |
 | 公共头 | `digi-service` / `digi-user-token` / `digi-datakey` / `Content-Type`（四者全必填） |
 | 封包 | `std_data` → `parameter` |
@@ -36,8 +36,8 @@ npm run check:fields   # 仅校验字段对照表
 | 改动类型 | 必跑命令 |
 |---|---|
 | 修改抽取脚本 | `npm run gen:all && npm run check:all` |
-| 替换源文件 `docs/易飞OpenAPI.json` | `npm run gen:all`，并核对 `services_unique: 595` |
-| 手工编辑了 `knowledge/**` | **禁止** —— 跑 `npm run gen:all` 覆盖 |
+| 替换源文件 `docs/易飞OpenAPI.json` | `npm run gen:all`，并核对 `services_unique: 601（含 OAPMA 补充 6 个 + 新对象 subscription）` |
+| 手工编辑了 `knowledge/**` | **禁止** —— 跑 `npm run gen:all` 覆盖（含 enums.yaml） |
 
 `--check` 会检出三类问题：产物过期、单个文件被篡改、产物缺失。
 
@@ -207,3 +207,4 @@ npm run check:fields   # 仅校验字段对照表
 调用频率限制 / HTTP 状态码完整语义 / Token 有效期与刷新 / 超时时间 / 版本兼容正式策略 / 单笔批量上限 / `sql_code` 取值含义 / 三版本（9.0.12·9.1·9.2）接口差异。
 
 遇到这些，**说「文档未说明」并转入 `docs/decisions/OPEN-DECISIONS.md`**，不要编造。
+

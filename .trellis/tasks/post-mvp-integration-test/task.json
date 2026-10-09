@@ -1,0 +1,14 @@
+{
+  "title": "全量真机集成测试（token恢复后）",
+  "depends_on": [
+    "post-mvp-view-ddl-execution",
+    "post-mvp-container-probe"
+  ],
+  "notes": "token恢复后执行：1.SDK query/read真机验证 2.MCP端到端(Agent→MCP→SDK→ERP) 3.分析层模板真机执行(至少3个) 4.智能问数端到端LLM→路由→取数→计算→输出",
+  "createdAt": "2026-10-09",
+  "owner": "qa",
+  "status": "blocked",
+  "completedAt": "",
+  "slug": "post-mvp-integration-test",
+  "priority": "P1"
+}

@@ -20,7 +20,7 @@ import type {
   YfTypeKeyEntry,
 } from '../types/domain.js';
 import { YF_OPERATIONS } from '../types/domain.js';
-import { YfError } from '../types/errors.js';
+import { YfAmbiguousServiceError, YfError } from '../types/errors.js';
 
 /** YAML 文件的最小结构（与 extract-typekey-map.mjs 的输出一致）。 */
 interface RawTypeKeyFile {
@@ -70,6 +70,16 @@ export class TypeKeyCatalog implements YfServiceNameResolver {
           `type_key "${typeKey}" 已标记为不可用：${entry.unavailableReason ?? '未记录原因'}。` +
           '该状态下禁止发起调用。',
       });
+    }
+
+    // Check for service name conflicts (OPEN-F8)
+    const conflictForOp = entry.conflictCandidates?.find((candidate) => candidate.op === operation);
+    if (conflictForOp !== undefined) {
+      throw new YfAmbiguousServiceError(
+        typeKey,
+        operation,
+        [conflictForOp.kept, conflictForOp.dropped],
+      );
     }
 
     const serviceName = entry.services[operation];
@@ -150,6 +160,7 @@ function readEntry(rawItem: unknown): YfTypeKeyEntry {
   const unavailableRaw = item['unavailable'];
   const unavailable = unavailableRaw === true;
   const reasonRaw = item['unavailable_reason'];
+  const conflictCandidates = readConflictCandidates(item['service_conflicts']);
   const base = {
     typeKey,
     title: readString(item['title']) ?? typeKey,
@@ -157,6 +168,7 @@ function readEntry(rawItem: unknown): YfTypeKeyEntry {
     primaryKey: readStringArray(item['primary_key']),
     detailNodes: readStringArray(item['detail_nodes']),
     unavailable,
+    conflictCandidates: conflictCandidates.length > 0 ? conflictCandidates : undefined,
   };
   return unavailable && typeof reasonRaw === 'string'
     ? { ...base, unavailableReason: reasonRaw }
@@ -173,6 +185,29 @@ function readServices(raw: unknown): Partial<Record<YfOperation, string>> {
     out[key as YfOperation] = value;
   }
   return out;
+}
+
+/** Read service_conflicts array from YAML. */
+interface ConflictCandidate {
+  readonly op: string;
+  readonly kept: string;
+  readonly dropped: string;
+}
+
+function readConflictCandidates(raw: unknown): readonly ConflictCandidate[] {
+  if (!Array.isArray(raw)) return [];
+  const result: ConflictCandidate[] = [];
+  for (const item of raw) {
+    if (typeof item !== 'object' || item === null) continue;
+    const rec = item as Record<string, unknown>;
+    const op = rec['op'];
+    const kept = rec['kept'];
+    const dropped = rec['dropped'];
+    if (typeof op === 'string' && typeof kept === 'string' && typeof dropped === 'string') {
+      result.push({ op, kept, dropped });
+    }
+  }
+  return result;
 }
 
 function readStringArray(raw: unknown): readonly string[] {

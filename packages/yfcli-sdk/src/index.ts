@@ -67,7 +67,7 @@ export {
   findUnassignableFields,
   parseYfTimestamp,
 } from './types/index.js';
-export { YfConfigError, YfError, isYfError } from './types/index.js';
+export { YfConfigError, YfError, YfAmbiguousServiceError, isYfError } from './types/index.js';
 
 // 配置层
 export {

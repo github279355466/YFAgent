@@ -1,0 +1,11 @@
+{
+  "title": "YZCLI迁移到公共包引用（暂缓）",
+  "depends_on": [],
+  "notes": "用户明确说YZCLI先不动。待YFAgent MVP稳定后：1.yzcli-experts改为file:引用erp-experts 2.yzcli-license-server/gateway/mcp改为file:引用erp-license 3.删除重复代码 4.licenses表加product_line字段",
+  "createdAt": "2026-10-09",
+  "owner": "backend",
+  "status": "deferred",
+  "completedAt": "",
+  "slug": "post-mvp-yzcli-migration",
+  "priority": "P2"
+}

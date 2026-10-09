@@ -83,4 +83,4 @@ export type {
   YfErrorContext,
   YfErrorInit,
 } from './errors.js';
-export { YfError, httpError, emptyResultError, isYfError, isYfErrorDataCarrier } from './errors.js';
+export { YfError, YfAmbiguousServiceError, httpError, emptyResultError, isYfError, isYfErrorDataCarrier } from './errors.js';

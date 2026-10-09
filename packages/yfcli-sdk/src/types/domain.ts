@@ -53,6 +53,18 @@ export interface YfTypeKeyEntry {
   readonly unavailable: boolean;
   /** 不可用原因；`unavailable` 为 false 时为 undefined。 */
   readonly unavailableReason?: string;
+  /** 同操作多服务名冲突记录（OPEN-F8）。来自 YAML service_conflicts 字段。 */
+  readonly conflictCandidates?: readonly YfServiceConflictCandidate[];
+}
+
+/** 服务名冲突候选（同一操作对应多个服务名时的记录）。 */
+export interface YfServiceConflictCandidate {
+  /** 冲突的操作名，如 query / read。 */
+  readonly op: string;
+  /** 保留使用的服务名。 */
+  readonly kept: string;
+  /** 被弃用的服务名。 */
+  readonly dropped: string;
 }
 
 /**

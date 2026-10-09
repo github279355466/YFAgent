@@ -25,7 +25,7 @@
 | `finance` | 会计总账 | 3 | 高 |
 | `ar` | 应收管理 | 5 | 高 |
 | `ap` | 应付管理 | 3 | 高 |
-| `UNASSIGNED` | ⚠️ 待人工确认 | 2 | 无 |
+| `UNASSIGNED` | ⚠️ 待人工确认 | 3 | 无 |
 
 **域说明**：
 
@@ -156,11 +156,11 @@
 | `department` | 部门 | 2 | 是 | 0 | 高 |
 | `document.type.general` | 单据性质 | 1 | — | 0 | 高 |
 | `employee` | 员工 | 1 | — | 0 | 高 |
-| `financial.institution` | 金融机构 | 2 | 是 | 0 | 高 |
+| `financial.institution` | 金融机构 | 5 | 是 | 0 | 高 |
 | `function.category` | 职务类别 | 2 | 是 | 0 | 高 |
 | `item` | 品号信息 | 5 | 是 | 0 | 高 |
 | `item.classification` | 品号类别 | 5 | 是 | 0 | 高 |
-| `item.count` | 盘点 | 1 | 是 | 0 | 高 |
+| `item.count` | 盘点 | 4 | 是 | 0 | 高 |
 | `item.customer.price` | 客户商品价格 | 5 | 是 | 0 | 高 |
 | `item.inspection` | 品号检验项目 | 2 | 是 | 0 | 高 |
 | `item.inventory.qty` | 品号库存 | 1 | — | 0 | 高 |
@@ -208,6 +208,7 @@
 |---|---|---|---|
 | `combination.order` | 组合单 | 8 | 实施顾问 |
 | `split.order` | 拆解单 | 8 | 实施顾问 |
+| `subscription` | 查询订阅中心资料 | 2 | 实施顾问 |
 
 ## 四、⚠️ 中置信对象（建议复核域归属）
 

@@ -1,0 +1,11 @@
+{
+  "name": "yfcli-skill-openapi",
+  "version": "0.1.0",
+  "description": "易飞 ERP AI 助手 Skill — 薄 Skill 模式，角色定义 + 助手 Prompt",
+  "private": true,
+  "keywords": ["yifei", "erp", "skill", "mcp", "agent"],
+  "files": [
+    "SKILL.md",
+    "references/"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "P4后15个SQL模板补全（根据视图实际字段）",
+  "depends_on": [
+    "post-mvp-view-ddl-execution"
+  ],
+  "notes": "前5个模板(sales_margin/inventory_cost/purchase_summary/ar_balance/ap_balance)已有完整SQL。后15个目前是骨架(TODO注释)，需视图DDL执行确认后根据实际字段补充完整SQL。\n--- 2026-10-09 完成: 20个模板全部有完整SQL，字段名与视图DDL对齐，tsc零错误，31/31测试通过(含白名单门禁)",
+  "createdAt": "2026-10-09",
+  "owner": "backend",
+  "status": "completed",
+  "completedAt": "2026-10-09",
+  "slug": "post-mvp-sql-template-completion",
+  "priority": "P0"
+}

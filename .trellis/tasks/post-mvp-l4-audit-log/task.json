@@ -1,0 +1,13 @@
+{
+  "title": "L4审计日志（executor执行记录）",
+  "depends_on": [
+    "mvp-p4-analysis-qa"
+  ],
+  "notes": "在yfcli-analysis executor.ts的execute方法前后添加审计日志：用户ID/时间戳/模板ID/参数摘要/返回行数/耗时ms。写入本地JSON文件或console.log。约20行代码。\n--- 2026-10-09 完成: audit.ts(3种sink+脱敏) + executor改造 + config扩展 + 18个测试。总计49/49 tests passed。已建YZCLI反向移植任务(port-l4-audit-from-yfagent)。",
+  "createdAt": "2026-10-09",
+  "owner": "backend",
+  "status": "completed",
+  "completedAt": "2026-10-09",
+  "slug": "post-mvp-l4-audit-log",
+  "priority": "P1"
+}
