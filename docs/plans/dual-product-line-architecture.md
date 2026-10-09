@@ -142,34 +142,105 @@ SELECT TOP (:max_rows) k.KEA001 AS doc ... FROM JSKKEA k OUTER APPLY (...)
 
 ---
 
-## 四、待决事项（B3 及后续）
+## 四、B3 落地形态（已裁决）
+
+### 4.1 决策
+
+**独立 private git 仓库 + `file:` 引用，暂不发布 registry。**
+
+```text
+D:\AIProject\claude\
+├── erp-license/          ← 新建，独立 private git 仓（共享包源码唯一来源）
+│   ├── packages/
+│   │   └── core/         @erp-license/core：密码学 + 协议 + 阈值 + 判定逻辑 + 注册表接口
+│   └── package.json      private: true，无 publish 脚本
+├── YZCLI/                易助线，根 package.json 加 "erp-license": "file:../erp-license"
+└── YFAgent/易飞线，同上
+```
+
+### 4.2 为什么暂不上 registry
+
+实测YZCLI 现状：**从未走过发布流程**。
+
+| 项 | 实测值 |
+|---|---|
+| 根 package.json | `"name": "yzcli-monorepo"` / `private: true` / `workspaces: ["packages/*"]` |
+| `.npmrc` | **不存在**（未配 registry） |
+| publish 脚本 | **无** |
+| 子包 private 字段 | 11 个包**全部无** `private` 字段，靠父级兜住 |
+| 包间依赖写法 | `"yzcli-sdk": "*"` + workspaces 软链（lock 中 `"link": true`） |
+
+若直接上 GitHub Packages，需新增 3 类故障点：registry 认证、版本号管理、CI 密钥配置。
+当前单人项目，收益不足以抵消复杂度。**待真正需要给客户部署时再引入 registry。**
+
+### 4.3 引用写法（沿用现有约定）
+
+现有包间依赖是 `"*"` + workspaces 软链。跨仓引用改用 `file:`：
+
+```jsonc
+// YZCLI / YFAgent 的根 package.json
+{
+  "workspaces": ["packages/*"],
+  "dependencies": {
+    "erp-license": "file:../erp-license"
+  }
+}
+```
+
+npm 会把 `file:` 依赖做成软链（lock 中同样呈现 `"link": true`），与现有行为一致。
+
+> **`file:` 的坑**：相对路径**相对于引用方根目录**。CI 环境若无 `../erp-license` 会直接失败——
+> CI 需额外 clone 共享仓，或后续改用 registry。
+
+### 4.4 拆分前的必做改动
+
+| # | 改动 | 位置 | 原因 |
+|---|---|---|---|
+| 1 | 删除 `"yzcli-sdk": "*"` 残留依赖 | `yzcli-license-server/package.json:dependencies` | 实测 `src/` 内 **0 引用**，是拆包前的最后一道耦合 |
+| 2 | `licenses` 表加 `product_line` 字段 | `license-server/src/db/migrate.ts:48` | **阻塞项**：两条线共用同一 lib 时签发记录会互相覆盖 |
+| 3 | `devices` / `heartbeat_logs` 评估是否需加产品线维度 | `migrate.ts:63,75` | 待评估 |
+| 4 | tier 工具清单改注册表 | `gateway/src/license/tier-mapper.ts` / `auth/rbac.ts` | 消除 24 个硬编码工具名（见 3.2） |
+
+### 4.5 licenses 表迁移示意
+
+```sql
+-- 现状：无产品线维度
+CREATE TABLE licenses (id TEXT PRIMARY KEY, customer_id TEXT NOT NULL, tier TEXT NOT NULL, ...);
+
+-- 需改为
+CREATE TABLE licenses (
+    id TEXT PRIMARY KEY,
+    product_line TEXT NOT NULL,          -- 新增：yzcli / yfcli
+    customer_id TEXT NOT NULL,
+    tier TEXT NOT NULL,
+    ...
+);
+CREATE INDEX idx_licenses_line ON licenses(product_line);
+```
+
+**迁移注意**：现有 `licenses` 表已有数据（易助真实客户 license），加 `NOT NULL` 字段需先
+回填默认值（如 `product_line = 'yzcli'`）再改约束，否则迁移失败。
+
+---
+
+### 4.6 B3 的实测依据（licenses 表现状）
+
+`licenses` 表结构（`db/migrate.ts:48`）无 `product_line` / `product_code` 字段。
+若两条产品线共用同一授权服务且同一 `lib` 数据库，签发记录会互相覆盖。
+
+
+## 五、剩余待决事项
 
 | # | 事项 | 状态 |
 |---|---|---|
-| B3 | 授权共享包的**仓库形态**：独立 git 仓库 vs monorepo 内独立包 | **待决** |
-| B3.1 | `licenses` 表**缺 `product_line` 字段** —— 一码通用前必须先加，否则两条线 license 互相覆盖 | **待决** |
 | B3.2 | 心跳表 `heartbeat_logs` / `devices` 是否同样需加产品线维度 | 待评估 |
 | — | analysis 层安全边界：直连绕过 OpenAPI 权限模型，需向易飞厂商报备 | 待确认 |
 | — | analysis 层数据一致性：OpenAPI 枚举回传 `编码.中文`，SQL 得原始值，口径不同 | 需标注 |
 
-### 4.1 B3 的实测依据
-
-`licenses` 表结构（`db/migrate.ts:48`）：
-
-```sql
-CREATE TABLE IF NOT EXISTS licenses (
-    id TEXT PRIMARY KEY,          -- LICS-YYYYMMDD-XXX
-    customer_id TEXT NOT NULL,
-    tier TEXT NOT NULL,           -- free/basic/professional/enterprise
-    ...
-);
-```
-
-**无 `product_line` / `product_code` 字段**。若两条产品线共用同一授权服务且同一 `lib` 数据库，签发记录会互相覆盖 —— 必须先加字段区分。
 
 ---
 
-## 五、与既有文档的关系
+## 六、与既有文档的关系
 
 | 文档 | 关系 |
 |---|---|
