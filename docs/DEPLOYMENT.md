@@ -122,19 +122,57 @@ if (Test-Path scripts\init-views.sql) {
 > 视图使用 `CREATE OR ALTER VIEW`，可重复执行不会报错。  
 > 每家客户的底层表结构相同（ACMMO/CMSME/COPTG 等），视图 DDL 无需修改。
 
-### 第 5 步：启动 MCP Server
+### 第 5 步：注册 Servy 服务（推荐）
+
+使用 Servy 将 MCP Server 注册为 Windows 原生服务，支持开机自启、健康监控、故障自动重启。
+
+**方式一：脚本注册（推荐）**
 
 ```powershell
-npx tsx -e "import { startServer } from 'yfcli-mcp'; await startServer({ port: parseInt(process.env.YF_MCP_PORT || '3100') });"
+# 以管理员身份运行
+.\scripts\setup-servy-services.ps1 -ProjectRoot "D:\YFCLI" -Port 4001
 ```
 
-或使用 PM2 守护进程：
+脚本会自动完成：清理旧服务 → 释放端口 → 注册服务 → 启动 → 健康检查验证。
+
+**方式二：Servy GUI 导入**
+
+1. 打开 Servy 管理界面
+2. 导入 `docs\yfcli-mcp.json` 模板文件
+3. 修改 `StartupDirectory` 和 `StdoutPath`/`StderrPath` 为实际路径
+4. 点击启动
+
+**方式三：手动命令行**
 
 ```powershell
-npm install -g pm2
-pm2 start "npx tsx packages/yfcli-mcp/src/index.ts" --name yfcli-mcp
-pm2 save
+# 以管理员身份运行
+& 'C:\Program Files\Servy\servy-cli.exe' install `
+    --name="yfcli-mcp" `
+    --displayName="YFCLI MCP Server" `
+    --path="D:\Program Files\nodejs\node.exe" `
+    --startupDir="D:\YFCLI\packages\yfcli-mcp" `
+    --params="dist/index.js --http --port 4001" `
+    --startupType=Automatic `
+    --envVars="NODE_ENV=production" `
+    --stdout="D:\YFCLI\logs\mcp.out.log" `
+    --stderr="D:\YFCLI\logs\mcp.err.log" `
+    --enableHealth --heartbeatInterval=30 --maxFailedChecks=3 `
+    --recoveryAction=RestartProcess --maxRestartAttempts=5
+
+& 'C:\Program Files\Servy\servy-cli.exe' start --name yfcli-mcp
 ```
+
+**服务管理命令**：
+
+```powershell
+servy-cli status yfcli-mcp     # 查看状态
+servy-cli stop yfcli-mcp       # 停止
+servy-cli start yfcli-mcp      # 启动
+servy-cli restart yfcli-mcp    # 重启
+services.msc                   # GUI 管理
+```
+
+> 日志位置：`{ProjectRoot}\logs\mcp.out.log` / `mcp.err.log`（自动轮转，保留 5 份）
 
 ---
 
@@ -225,3 +263,4 @@ Invoke-RestMethod -Uri "http://localhost:3100/health"
 # 打包完整部署包（待实现 scripts/pack-deploy.ps1）
 # .\scripts\pack-deploy.ps1 -Version "0.1.0" -OutputDir "dist"
 ```
+
