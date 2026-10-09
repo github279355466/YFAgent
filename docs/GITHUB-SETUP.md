@@ -47,7 +47,7 @@ git config http.sslBackend openssl
 **关键凭据信息**：推送使用 Git Credential Manager 已存凭据，**未新建 Token**。
 `~/.ssh/id_ed25519` 密钥对已生成但未启用（公钥未添加到 GitHub），如需 SSH 可后续添加启用。
 
-详见 `.workbuddy/memory/2026-10-08-github-sync-attempt.md`。
+完整的 2026-10-08 执行记录（139 文件入库核对、5 项确认逐条核对）已整理进本文档 §〇/§四/§六/§七/附录，不再单独保留记忆文件；提交历史见 `git log`。
 
 ---
 
