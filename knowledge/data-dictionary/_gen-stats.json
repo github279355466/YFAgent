@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08 23:02:03",
+  "generated_at": "2026-10-08 23:02:28",
   "modules": {
     "ACM": {
       "path": "knowledge/data-dictionary/modules/ACM.md",
@@ -660,10 +660,10 @@
     "nonstd_name": 421,
     "tables_full_nonstandard": 27,
     "tables_with_nonstandard": 94,
-    "tables_partially_nonstandard": 67,
-    "tables_all_standard": 1076,
     "tables_with_udf_biz": 1165,
     "tables_with_udf_all": 1168,
+    "tables_partially_nonstandard": 67,
+    "tables_all_standard": 1076,
     "tables_with_nonstd_all": 1171,
     "mask_min_mode_ratio": 0.981,
     "mask_min_mode_margin": 80,

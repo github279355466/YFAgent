@@ -3,7 +3,7 @@
 > 本文件为机械抽取产物，请勿手工编辑。重新生成：`python scripts/gen_data_dictionary.py`
 >
 > 溯源：源文件：`.workbuddy/tmp/dict/tables.json`（1170 表）、`.workbuddy/tmp/dict/fields.json`（54842 字段）、`knowledge/typekey/typekey_map.yaml`（106 业务对象）
-> 生成时间：2026-10-08 23:02:03
+> 生成时间：2026-10-08 23:02:28
 
 ## 一、本目录内容
 
@@ -598,7 +598,7 @@ UDF 字段行的类型分布为 **V 14004 / N 14004**（各半）：`UDF01~UDF12
 | 项 | 值 |
 |---|---|
 | 生成命令 | `python scripts/gen_data_dictionary.py` |
-| 生成时间 | 2026-10-08 23:02:03 |
+| 生成时间 | 2026-10-08 23:02:28 |
 | 编码 | UTF-8 无BOM|
 | 换行 | CRLF |
 | 模块文件数 | 78 |

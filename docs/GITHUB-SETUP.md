@@ -1,9 +1,24 @@
 # GitHub 同步手册
 
-> 状态：✅ **已完成推送**（2026-10-08 18:25）
+> 状态：✅ **已完成推送**（首次2026-10-08 18:25，Phase 0 收尾 2026-10-09 更新）
 > 仓库地址：**https://github.com/github279355466/YFAgent**
-> 分支：`main`（7 次提交 / 139 文件）
+> 分支：`main`（已设上游跟踪 `origin/main`）
 > 推送通道：HTTPS + `http.sslBackend=openssl`
+> 可见性：**Public**（用户决策；注意含产品线知识资产，见下方风险提示）
+
+### ⚠️ 可见性风险提示
+
+仓库当前为 **Public**，且包含：
+
+- 易飞业务模块地图与产品线知识资产
+- 易飞 vs 易助 31维度技术差异分析
+- 上游 `docs/plans/` 下的方案文档
+
+**这些内容属鼎捷内部技术信息。** 若团队尚未确认公开范围，建议改为 Private：
+
+```bash
+# GitHub 网页：Settings → General → Danger Zone → Change visibility → Private
+```
 
 ---
 

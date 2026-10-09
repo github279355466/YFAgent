@@ -1,7 +1,9 @@
 # YFCLI — 易飞（YF / E10）产品线 AI 助手
 
-> 对标 [YZCLI](https://github.com/)（易助 ERP 产品线）的独立仓库。
+> 对标 YZCLI（易助ERP 产品线）的独立仓库。
 > **易飞与易助同属鼎捷（Digiwin）产品体系**，但 OpenAPI 方言差异较大，故采用完全隔离架构。
+>
+> 仓库：<https://github.com/github279355466/YFAgent> ｜ 分支 `main` ｜ 推送通道 HTTPS
 
 ---
 
@@ -10,7 +12,7 @@
 | 维度 | 说明 |
 |---|---|
 | **产品线** | 易飞 YF（E10），非 E10 Cloud，非雅典娜 |
-| **上游依据** | `易飞OpenAPI.json`（Apipost 导出，2120 接口节点 / 595 服务名 / 106 业务对象） |
+| **上游依据** | `易飞OpenAPI.json`（Apipost 导出，2120 接口节点 / 595 服务名 / 106 业务对象）+ 三份元数据 XML（1170 表 / 54842 字段） |
 | **对标产品线** | 易助（YZCLI，`digiwin.com` 体系，110 TypeKey） |
 | **架构决策** | 三仓隔离：本仓（易飞业务知识与产物）/ `erp-core`（共享引擎与商业化）/ `YZCLI`（易助，不动） |
 
@@ -18,9 +20,13 @@
 
 易飞与易助的 OpenAPI 存在**无法靠配置消解**的方言差异：
 
-1. `conditions` 结构完全不同 —— 易飞是对象嵌套 `group`，易助是数组嵌套 `groups`；**结构不匹配时服务端静默返回全量、不报错**
-2. 易飞**无 `fastquery`**（仅 `query.get`，每次重查数据库），易助的性能优化经验不可复用
-3. 服务前缀 `yf.` / `yz.`、读取操作名 `read` / `get`、账套传递方式均不同
+| # | 差异 | 实测结论 |
+|---|---|---|
+| 1 | `conditions` 结构 | 易飞是对象嵌套 `group`，易助是数组嵌套 `groups`；**易飞对错误结构显式报错**（`conditions not found.`），不会静默返回全量 |
+| 2 | 查询子服务 | 易飞**无 `fastquery`**（仅 `query.get`，每次重查数据库），易助的性能优化经验不可复用 |
+| 3 | 字段命名 | 易飞是 `XX001` 编码制（无语义），易助是 `doc_no` 式语义化—— 易飞必须内置字典层 |
+| 4 | 枚举传值 | 易飞回参是「编码.中文」，**查询只认纯编码**；混用返回空集且 `code=0` |
+| 5 | 其他 | 服务前缀 `yf.`/`yz.`、读取操作名 `read`/`get`、账套传递方式均不同 |
 
 详见 `docs/plans/yf-vs-yizhu-openapi-diff.md`（31 维度差异对照）。
 
@@ -31,18 +37,23 @@
 ```
 YFCLI/
 ├── docs/
-│   ├── 易飞OpenAPI.json          ← ⚠️ 不入库（含内网 IP / token 明文 / 账套名）
-│   ├── plans/                    方案与规划文档
-│   └── decisions/                决策记录（ADR + OPEN-DECISIONS）
-├── knowledge/                    知识资产（构建期输入 = 源）
-│   ├── typekey/                  TypeKey 映射表（脚本生成）
-│   ├── typekey-mapping/          字段对照表（脚本生成，106 个对象）
-│   └── official/                 官方文档原件（待收集，_raw/ 不入库）
-├── scripts/                      抽取与校验脚本
-├── packages/                     代码包（Phase 1 起）
-├── skills/yifei-erp/             Skill 包（Phase 1 起）
-├── experts/                      职能专家包（Phase 2 起）
-└── config/                       配置模板（仅 .example 入库）
+│   ├── 易飞OpenAPI.json          ← 不入库（含内网 IP / token 明文 / 账套名）
+│   ├── plans/                    方案与规划文档（OpenAPI 规则、差异比对、SDK 计划）
+│   ├── decisions/                决策台账（OPEN-DECISIONS + STATISTICS-SPEC）
+│   ├── COLLABORATION.md          团队协作约定（分支 / 提交 / PR）
+│   └── GITHUB-SETUP.md           远程仓库同步手册
+├── knowledge/                    知识资产
+│   ├── ADMMB/MC/MD-*.xml         官方元数据原件（3 份，不入库）
+│   ├── typekey/                  TypeKey 映射表（脚本生成，106 对象 / 595 服务名）
+│   ├── typekey-mapping/          字段对照表（脚本生成，106 份）
+│   ├── data-dictionary/          结构化数据字典（78 模块 + 4 CSV）
+│   └── official/                 官方文档原件（_raw/ 不入库）
+├── scripts/                      生成与校验脚本（9 个）
+├── packages/
+│   └── yfcli-sdk/                SDK 骨架（20 个 TS 文件 / 9 模块）
+├── config/                       配置模板（仅 .example 入库）
+├── .github/workflows/verify.yml  CI 门禁
+└── runs/                         真机探测产物（gitignored）
 ```
 
 ---
@@ -50,14 +61,15 @@ YFCLI/
 ## 快速开始
 
 ```bash
-# 依赖（当前无运行时依赖，仅需 Node 20+）
+# 依赖（Node 20+；SDK 需另装 tsx）
 npm install
 
 # 生成全部知识产物
-npm run gen:all
+npm run gen:all          # = gen:typekey + gen:fields + gen:domain + gen:dictionary
 
 # 校验产物是否为最新（CI 门禁）
-npm run check:all
+npm run check:all# = 4 类产物的指纹 / 计数 / 勾稽校验
+npm run verify           # = scan:secrets + check:all（提交前必跑）
 ```
 
 ### 前置：准备源文件
@@ -68,16 +80,48 @@ npm run check:all
 - 存放：`docs/易飞OpenAPI.json`
 - 校验：`node scripts/extract-typekey-map.mjs` 输出的 `services_unique` 应为 **595**
 
+### SDK 校验
+
+```bash
+cd packages/yfcli-sdk
+npm install
+npm run check            # 骨架门禁 + tsc + 离线用例 60 项 + 冻结判据 50 项 + 行尾
+```
+
 ---
 
-## 两条抽取脚本
+
+## 脚本清单
 
 | 脚本 | 输入 | 输出 | 关键能力 |
 |---|---|---|---|
-| `scripts/extract-typekey-map.mjs` | 48 MB JSON | `knowledge/typekey/typekey_map.yaml`（106 对象 / 595 服务名 / 101 主键） | 复合主键识别、`no_data_segment` 标记 |
-| `scripts/extract-field-metadata.mjs` | 同上 | `knowledge/typekey-mapping/*.md`（106 对照表 / 12,893 字段） | 单头/单身分层、必填三态判定、文档异常标注 |
+| `scripts/extract-typekey-map.mjs` | 46.5 MB JSON | `knowledge/typekey/typekey_map.yaml`（106 对象 / 595 服务名） | 复合主键、`services_by_name` 无碰撞索引、`service_conflicts` 碰撞检测 |
+| `scripts/extract-field-metadata.mjs` | 同上 | `knowledge/typekey-mapping/*.md`（106 份 / 12,893 字段） | 单头/单身分层、必填三态、文档异常标注 |
+| `scripts/gen_data_dictionary.py` | 同上 | `knowledge/data-dictionary/`（78 模块 + 4 CSV） | 7 种列名形态（并集判据）、孤儿表剔除 |
+| `scripts/gen-er-overview.py` | 同上 | `knowledge/data-dictionary/ER-OVERVIEW.md` | 关联推断（明示为推断非声明） |
+| `scripts/probe-live-env.mjs` | 真机环境 | `runs/probe-live-env-report.md` | 15 项只读探测 |
+| `scripts/build-node-table-map.mjs` | 真机环境 | `node-table-map.csv` | 逻辑节点名 → 物理表反推 |
+| `scripts/scan-secrets.mjs` | 全仓 | — | 7 类敏感信息门禁 |
 
-两者均支持 `--check` 作 CI 门禁（内容指纹比对，篡改/缺失/过期均能检出）。
+> 部分脚本依赖源文件 `docs/易飞OpenAPI.json`（46.5 MB，**不入库**），需单独获取。
+
+---
+
+## SDK 现状
+
+`packages/yfcli-sdk/` —— 9 个模块 / 20 个 TS 文件：
+
+| 模块 | 职责 |
+|---|---|
+| `types/` | 配置 / 协议 / 条件 / 领域 / 错误模型（零 `any`，`unknown` + 类型守卫） |
+| `config/` | fail-fast 配置校验、四头构造 |
+| `conditions/` | 易飞形态条件构造器 + 枚举编码守卫 |
+| `response/` | 封包解析、`error[]` 双结构兼容、空结果告警 |
+| `transport/` | 唯一网络出口，先判 HTTP 状态码（错误 token 返回 500 HTML） |
+| `catalog/` | 服务名查表，**禁止拼接** |
+| `dictionary/` | 7 种列名形态 + 并集前缀判据 + 管理字段冲突白名单 |
+| `logging/` | 阻断 `error[].data` 回显泄漏 |
+| `client/` | 编排层 |
 
 ---
 
@@ -85,10 +129,12 @@ npm run check:all
 
 | 阶段 | 状态 | 说明 |
 |---|---|---|
-| Phase 0 资料准备与基线冻结 | ✅ 完成 | OPEN 归零（14 条全裁决）；真机环境已验证（15/15 PASS）；T-17 单身节点名已批量验证 |
-| Phase 1 最小可跑链路 | ⏸ 未开始 | sdk + mcp + 3 助手 |
-| Phase 2 能力扩展 | ⏸ 未开始 | analysis 层 + 31 助手 |
+| Phase 0 资料准备与基线冻结 | ✅ 完成 | OPEN 台账 27 条全裁决；真机环境 15/15 PASS；统计口径规范已建立 |
+| Phase 1 最小可跑链路 | 🔄 进行中 | SDK 骨架已交付（`tsc` 零错误 / 离线 60 项 / 判据 50 项）；**待补：产物↔自报数勾稽** |
+| Phase 2 能力扩展 | ⏸ 未开始 | analysis 层 + 助手 |
 | Phase 3 商业化治理 | ⏸ 未开始 | 双产品线 knowhow 分组 |
+
+**Phase 1 剩余事项**见 `docs/plans/phase1-sdk-plan.md` 与 `docs/TODO-PLAN.md`。
 
 ---
 

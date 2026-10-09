@@ -177,9 +177,23 @@ npm run check:fields   # 仅校验字段对照表
 
 ---
 
+## 工程纪律（违反即返工，本项目已踩坑 5 次）
+
+| # | 规则 | 事故 |
+|---|---|---|
+| 1 | **含反引号的中文文本必须落文件再执行**，禁止 `python -c` / `bash -c` 内联 | bash 把反引号当命令替换，46 MB 的 `易飞OpenAPI.json` 被当脚本逐行跑；孤儿进程报错 57 分钟 |
+| 2 | 写文件**禁止 `(CR+LF).join(str)`逐字符拼接**；先在内存拼好再一次性写 | 换行插到每个字符间，产出损坏 JSON |
+| 3 | 统计数字**必须带口径标签**（如 `711 [严格][字段级]`），禁止裸数字与跨口径相减 | 曾产生 9 个版本的「部分非标准表数」 |
+| 4 | 破坏性验证（篡改/转换/批量替换）**只在副本上做**，改完校验 sha1 还原 | 曾截断 `field-index.csv` |
+
+细节与正确写法见 `docs/decisions/STATISTICS-SPEC.md` 与各脚本头部注释。
+临时脚本放`.workbuddy/tmp/`，**不要用 `.cache/` 或 `.tmp/`**（`.gitignore` 的 `.cache/` 规则会误伤）。
+
+---
+
 ## AI 助手路由（22 个分析助手）
 
-走 `yzcli_run` 的 `service` 模式直调易飞侧 AI 端点（`yf.ai.*`），与易助架构同构。
+走 `service` 模式直调易飞侧 AI 端点（`yf.ai.*`），与易助架构同构。
 
 **当前状态**：易助侧已现役 2 个（`yf.ai.PurchaseBusinessWarning` / `yf.ai.SalesbusinessWarning`），其余 20 个端点清单待易飞侧提供。
 详见 `docs/plans/yf-materials-tasks.md` 任务 T-09。
