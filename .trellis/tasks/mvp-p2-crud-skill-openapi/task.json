@@ -1,0 +1,14 @@
+{
+  "slug": "mvp-p2-crud-skill-openapi",
+  "title": "MVP P2 · CRUD 五操作 + MCP 工具层 + skill-openapi 打包（最小可运行）",
+  "status": "pending",
+  "priority": "P0",
+  "owner": "backend",
+  "depends_on": [
+    "mvp-p0-prerequisites",
+    "mvp-p1-auth-module"
+  ],
+  "notes": "依赖 mvp-p0-prerequisites（服务名路由表须先确认只查表不拼接的边界）与 mvp-p1-auth-module（token 注入须已有单一入口，否则每个工具各写一遍鉴权——这正是 YZCLI 的教训）。这是用户指定的第2 项『先实现 CRUD 等操作，打包完成 skill-openapi 的调用』，即 MVP 最小可运行的落点。做：106 对象×8 操作服务名路由表（只能查表禁止拼接）；query/read/create/update/delete 五操作；复合主键 datakeys 含全部主键字段；conditions构造器 7 类写法（单条件/多条件/条件组/嵌套组/组合字段+/BETWEEN 区间/枚举编码）；error[]双结构兼容 + 未识别打 WARN；MCP 工具层（manifest/query/read/help）用集中式注册表；skill-openapi 包 + 薄 Skill（只留角色定义+助手 Prompt，能力进二进制，沿用 YZCLI SKILL.md v4.3.0 分工）；3 个冒烟助手（工厂查询/工厂读取/客户新增）。验收 10 条，重点是反向用例：传数组形态 conditions 必须显式报错不得静默降级为全量；枚举传 Y.已审核 返 0 条须告警；主键全错 code=0+空数组须触发空结果告警；错误 token 不泄露；集中式注册表漏挂即门禁失败。不做：22 个助手全量、22 个 yf.ai.* 端点直调（清单未拿到 T-09 阻塞）、审批工作流 _workflow.md（T-08 未完成）、enums.yaml 完整枚举字典（981 掩码字段需大数据量账套）、License/多租户/Gateway、写操作并发与事务补偿。外部阻塞：43 个 MA012 未注册节点（仅用 110 个已验证节点）、5 个入参容器名文档缺陷、5 个未知主键（item.inventory.qty 服务端 DLL 崩溃）。工作量 XL（5~8 天）。",
+  "completedAt": "",
+  "createdAt": "2026-10-09"
+}

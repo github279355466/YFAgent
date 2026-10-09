@@ -1,0 +1,13 @@
+{
+  "slug": "mvp-p4-analysis-qa",
+  "title": "MVP P4 · 分析层 + 智能问数（9 视图 + 20 模板 + 生产 mssql driver）",
+  "status": "pending",
+  "priority": "P0",
+  "owner": "backend",
+  "depends_on": [
+    "mvp-p3-auth-integration"
+  ],
+  "notes": "依赖 mvp-p3-auth-integration（智能问数端到端需要 P3 的鉴权与健康检查）。对应 docs/TODO-PLAN.md 的 D-13（建 analysis 层）+ D-14（视图建库脚本）。★ 本工程最大架构风险所在：YZCLI 的 20 个模板全部直查物理表不查 vw_ai_*，视图仅在语义层被引用为字符串（semantic/model.ts:161-243 的 data_binding.type=computed_view、rules/metric-registry.ts:274-317）——「视图建了但没人查」。本工程必须一开始就打通，硬门禁：模板中出现物理表名即 check 失败。可移植资产（约300~500 行）：runtime/sql/template.ts 150 + executor.ts 156（沿用 mssql 则SQL 方言不改）+ config.ts 129 凭据红线+ scripts/create-ai-views.sql 155 视图交付范式（9 视图 + DROP/CREATE 幂等 + 由 DBA 执行 + GRANT SELECT + 独立验证脚本；交付形态可照搬内容必须重写）。必须新写（约 90% 行数）：20 个 SQL 模板（templates.ts 591 行依赖 16 表/ 85 字段，易飞同名命中 0 张）+ 9 个 vw_ai_* 视图 + 元数据（erp-metadata.json 245455 行 / agent_typekey_map.yaml 2545 行 110 TypeKey / analysis-view.json 15445 行，全部绑定易助后台表结构不可抄）+ 生产 mssql driver（★ YZCLI 的 SqlDriver 只是接口 executor.ts:24-37，唯一真实 driver 在 scripts/verify-ai-views.mjs:33 验证脚本里不是生产代码；集成测试用 fakeDriver() 见 __tests__/sql-executor.test.ts:40——本工程生产 driver 与真实库集成测试是必做项）。★ 审核码口径：不筛污染 12 倍[口径：同一单据集合含税金额合计，未按审核码过滤 vs 过滤后对比；已审核 24 单 5817 万 vs 未审核 13 单 7.28 亿，易助侧真机实测]；本工程筛 approve_status='Y'（易助是 'T' 勿沿用），易飞实测 Y/N/V 三值V=作废（用户 2026-10-09 裁决），统计只筛 Y。视图设计裁决（同日）：视图不带 COMPANY 过滤（COMPANY 为预留管理字段无业务含义，易飞为独立公司账套）；库表名与字典 100% 一致（52 组 3 位前缀交叉全部一致 0 组不同）→ 无需映射层。验收 10 条：参数化绑定 + 模板注册制 + 白名单；白名单数量与模板库一致（YZCLI 白名单只列 15 个而模板库 20 个，不一致即门禁失败）；凭据从环境变量取；生产 driver 落地且集成测试不用 fakeDriver；9 视图 DDL 幂等可重复执行 + 附字段映射说明；20 模板全部只查 vw_ai_* 零直查物理表；至少 3 模板真机实测通过；金额数量结果全带口径标签且审核码只筛 Y；审核码污染回归测试差异可解释；★ 智能问数端到端 LLM→模板路由→参数抽取→执行→带口径输出全链路真跑通（不接受单测全绿代替）；L3/L4 防护明确标注为「设计登记，未实现」不得在文档宣称已落地（YZCLI 实为设计四层代码两层，项目内 docs/erp_analysis/11-B方案-SQL补充数据源设计.md:23 误标待落地勿沿用）。外部硬阻塞：客户侧 DBA 执行视图 DDL（易飞库无 vw_ai_*，实测仅 4 个 MoJu/VCMSMQZ/VCOPTH/VMOCTE）——无降级方案，视图是P4 地基；易飞全量表结构缺失（Apipost 不含表结构，85 字段覆盖不了）；22 个 yf.ai.* 端点清单待易飞提供。不做：Gateway 多租户 3906 行、License 体系 4126 行、语义层全面建设（只做问数必需的最小语义映射）、L3/L4 完整实现、三版本兼容层（单版本优先）。工作量 XL（8~12 天）。",
+  "completedAt": "",
+  "createdAt": "2026-10-09"
+}

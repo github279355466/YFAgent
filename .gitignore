@@ -128,8 +128,10 @@ archive/
 *.orig
 *.rej
 
-# ---- Trellis 任务状态（约定：任务状态以文件为准，不入 Git）----
-.trellis/tasks/
+# ---- Trellis 任务体系（2026-10-09 改为入库）----
+# 变更理由：MVP 开发计划交由 codex 实现，codex 从远端拉仓库必须能看到任务文件。
+# 若任务不入库，接手方拿不到 slug / depends_on / 验收判据，等于计划失效。
+# 仅排除运行时与模板缓存（机器生成、与任务定义无关）。
 .trellis/.runtime/
 .trellis/.template-hashes.json
 
@@ -137,6 +139,8 @@ archive/
 # 以下目录**有意入库**，勿整体忽略：
 #
 #   .workbuddy/memory/            项目记忆（每日日志 + MEMORY.md 索引）—— 团队共享上下文
+#   .trellis/tasks/               Trellis 任务定义（task.json + map-navigation.md）—— 交由 codex 开发，须可从远端拉取
+#   .trellis/workspace/           Trellis 会话日志
 #   knowledge/typekey/            TypeKey 映射表（脚本可复现）
 #   knowledge/typekey-mapping/    字段对照表（脚本可复现）
 #   knowledge/official/menus/     域归属草案（脚本可复现，不含 _raw/）
