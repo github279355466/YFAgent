@@ -1,250 +1,250 @@
 {
-  "generated_at": "2026-10-08 23:02:28",
+  "generated_at": "2026-10-09 12:02:34",
   "modules": {
     "ACM": {
       "path": "knowledge/data-dictionary/modules/ACM.md",
-      "lines": 1373,
-      "bytes": 125637,
+      "lines": 1423,
+      "bytes": 127732,
       "tables": 23,
       "fields": 918,
       "cn": "成本管理"
     },
     "ACP": {
       "path": "knowledge/data-dictionary/modules/ACP.md",
-      "lines": 1546,
-      "bytes": 155428,
+      "lines": 1595,
+      "bytes": 157662,
       "tables": 20,
       "fields": 1148,
       "cn": "应付管理"
     },
     "ACR": {
       "path": "knowledge/data-dictionary/modules/ACR.md",
-      "lines": 1926,
-      "bytes": 190114,
+      "lines": 1990,
+      "bytes": 193478,
       "tables": 26,
       "fields": 1414,
       "cn": "应收管理"
     },
     "ACT": {
       "path": "knowledge/data-dictionary/modules/ACT.md",
-      "lines": 2783,
-      "bytes": 260700,
+      "lines": 2879,
+      "bytes": 263990,
       "tables": 46,
       "fields": 1891,
       "cn": "会计"
     },
     "ADM": {
       "path": "knowledge/data-dictionary/modules/ADM.md",
-      "lines": 2393,
-      "bytes": 213193,
+      "lines": 2470,
+      "bytes": 215682,
       "tables": 43,
       "fields": 1550,
       "cn": "系统管理"
     },
     "AJS": {
       "path": "knowledge/data-dictionary/modules/AJS.md",
-      "lines": 545,
-      "bytes": 51143,
+      "lines": 565,
+      "bytes": 51996,
       "tables": 8,
       "fields": 375,
       "cn": "自动分录"
     },
     "AMS": {
       "path": "knowledge/data-dictionary/modules/AMS.md",
-      "lines": 459,
-      "bytes": 44393,
+      "lines": 470,
+      "bytes": 44769,
       "tables": 6,
       "fields": 327,
       "cn": "考勤管理"
     },
     "AQS": {
       "path": "knowledge/data-dictionary/modules/AQS.md",
-      "lines": 130,
-      "bytes": 10788,
+      "lines": 134,
+      "bytes": 10926,
       "tables": 2,
       "fields": 74,
       "cn": "报价权限"
     },
     "ASM": {
       "path": "knowledge/data-dictionary/modules/ASM.md",
-      "lines": 3448,
-      "bytes": 327519,
+      "lines": 3543,
+      "bytes": 330711,
       "tables": 48,
       "fields": 2518,
       "cn": "售后服务"
     },
     "AST": {
       "path": "knowledge/data-dictionary/modules/AST.md",
-      "lines": 1902,
-      "bytes": 182375,
+      "lines": 1964,
+      "bytes": 184802,
       "tables": 28,
       "fields": 1352,
       "cn": "资产管理"
     },
     "BMS": {
       "path": "knowledge/data-dictionary/modules/BMS.md",
-      "lines": 783,
-      "bytes": 79376,
+      "lines": 806,
+      "bytes": 80235,
       "tables": 10,
       "fields": 575,
       "cn": "条码管理"
     },
     "BOM": {
       "path": "knowledge/data-dictionary/modules/BOM.md",
-      "lines": 2375,
-      "bytes": 228606,
+      "lines": 2452,
+      "bytes": 231471,
       "tables": 35,
       "fields": 1692,
       "cn": "物料清单"
     },
     "CMS": {
       "path": "knowledge/data-dictionary/modules/CMS.md",
-      "lines": 3335,
-      "bytes": 313708,
+      "lines": 3417,
+      "bytes": 316389,
       "tables": 55,
       "fields": 2272,
       "cn": "共用信息设置"
     },
     "COP": {
       "path": "knowledge/data-dictionary/modules/COP.md",
-      "lines": 5579,
-      "bytes": 544400,
+      "lines": 5755,
+      "bytes": 551666,
       "tables": 74,
       "fields": 4155,
       "cn": "合同管理"
     },
     "CST": {
       "path": "knowledge/data-dictionary/modules/CST.md",
-      "lines": 1017,
-      "bytes": 99693,
+      "lines": 1046,
+      "bytes": 100721,
       "tables": 15,
       "fields": 714,
       "cn": "标准成本"
     },
     "CUS": {
       "path": "knowledge/data-dictionary/modules/CUS.md",
-      "lines": 1889,
-      "bytes": 173342,
+      "lines": 1961,
+      "bytes": 175730,
       "tables": 30,
       "fields": 1301,
       "cn": "合约管理"
     },
     "DHQ": {
       "path": "knowledge/data-dictionary/modules/DHQ.md",
-      "lines": 69,
-      "bytes": 5249,
+      "lines": 71,
+      "bytes": 5306,
       "tables": 1,
       "fields": 32,
       "cn": "电子发票队列"
     },
     "DSC": {
       "path": "knowledge/data-dictionary/modules/DSC.md",
-      "lines": 564,
-      "bytes": 48447,
+      "lines": 584,
+      "bytes": 49032,
       "tables": 10,
       "fields": 337,
       "cn": "系统安全"
     },
     "EFJ": {
       "path": "knowledge/data-dictionary/modules/EFJ.md",
-      "lines": 81,
-      "bytes": 6111,
+      "lines": 83,
+      "bytes": 6181,
       "tables": 1,
       "fields": 39,
       "cn": "电子凭证队列"
     },
     "EFS": {
       "path": "knowledge/data-dictionary/modules/EFS.md",
-      "lines": 188,
-      "bytes": 16308,
+      "lines": 192,
+      "bytes": 16452,
       "tables": 3,
       "fields": 113,
       "cn": "电子签核"
     },
     "EIS": {
       "path": "knowledge/data-dictionary/modules/EIS.md",
-      "lines": 752,
-      "bytes": 72374,
+      "lines": 772,
+      "bytes": 73288,
       "tables": 10,
       "fields": 544,
       "cn": "决策分析"
     },
     "EPS": {
       "path": "knowledge/data-dictionary/modules/EPS.md",
-      "lines": 958,
-      "bytes": 92980,
+      "lines": 989,
+      "bytes": 94053,
       "tables": 13,
       "fields": 693,
       "cn": "出口贸易"
     },
     "EQT": {
       "path": "knowledge/data-dictionary/modules/EQT.md",
-      "lines": 2511,
-      "bytes": 231431,
+      "lines": 2592,
+      "bytes": 234110,
       "tables": 39,
       "fields": 1752,
       "cn": "设备管理"
     },
     "FAC": {
       "path": "knowledge/data-dictionary/modules/FAC.md",
-      "lines": 570,
-      "bytes": 53826,
+      "lines": 588,
+      "bytes": 54516,
       "tables": 9,
       "fields": 381,
       "cn": "财务银行"
     },
     "FCS": {
       "path": "knowledge/data-dictionary/modules/FCS.md",
-      "lines": 860,
-      "bytes": 77066,
+      "lines": 889,
+      "bytes": 78105,
       "tables": 15,
       "fields": 557,
       "cn": "合并报表"
     },
     "FTS": {
       "path": "knowledge/data-dictionary/modules/FTS.md",
-      "lines": 194,
-      "bytes": 17108,
+      "lines": 200,
+      "bytes": 17281,
       "tables": 3,
       "fields": 119,
       "cn": "文件传输"
     },
     "GFC": {
       "path": "knowledge/data-dictionary/modules/GFC.md",
-      "lines": 1620,
-      "bytes": 152760,
+      "lines": 1664,
+      "bytes": 154624,
       "tables": 25,
       "fields": 1127,
       "cn": "集团财务"
     },
     "GHX": {
       "path": "knowledge/data-dictionary/modules/GHX.md",
-      "lines": 88,
-      "bytes": 6811,
+      "lines": 90,
+      "bytes": 6875,
       "tables": 1,
       "fields": 51,
       "cn": "借出入归还中间表"
     },
     "GMP": {
       "path": "knowledge/data-dictionary/modules/GMP.md",
-      "lines": 1507,
-      "bytes": 151198,
+      "lines": 1556,
+      "bytes": 153007,
       "tables": 21,
       "fields": 1090,
       "cn": "GMP质量管理"
     },
     "GSP": {
       "path": "knowledge/data-dictionary/modules/GSP.md",
-      "lines": 1690,
-      "bytes": 160331,
+      "lines": 1741,
+      "bytes": 161989,
       "tables": 26,
       "fields": 1178,
       "cn": "医药GSP"
     },
     "HRS": {
       "path": "knowledge/data-dictionary/modules/HRS.md",
-      "lines": 2767,
-      "bytes": 263345,
+      "lines": 2854,
+      "bytes": 266316,
       "tables": 43,
       "fields": 1932,
       "cn": "人力资源"
@@ -259,160 +259,160 @@
     },
     "INV": {
       "path": "knowledge/data-dictionary/modules/INV.md",
-      "lines": 3554,
-      "bytes": 346202,
+      "lines": 3666,
+      "bytes": 350501,
       "tables": 50,
       "fields": 2621,
       "cn": "库存管理"
     },
     "IPS": {
       "path": "knowledge/data-dictionary/modules/IPS.md",
-      "lines": 740,
-      "bytes": 73909,
+      "lines": 765,
+      "bytes": 74805,
       "tables": 10,
       "fields": 532,
       "cn": "预付采购"
     },
     "ITM": {
       "path": "knowledge/data-dictionary/modules/ITM.md",
-      "lines": 782,
-      "bytes": 69989,
+      "lines": 817,
+      "bytes": 71212,
       "tables": 13,
       "fields": 517,
       "cn": "指标管理"
     },
     "IWC": {
       "path": "knowledge/data-dictionary/modules/IWC.md",
-      "lines": 129,
-      "bytes": 10597,
+      "lines": 133,
+      "bytes": 10704,
       "tables": 2,
       "fields": 73,
       "cn": "集成工作中心"
     },
     "JCX": {
       "path": "knowledge/data-dictionary/modules/JCX.md",
-      "lines": 88,
-      "bytes": 6688,
+      "lines": 90,
+      "bytes": 6752,
       "tables": 1,
       "fields": 51,
       "cn": "借出入中间表"
     },
     "JHX": {
       "path": "knowledge/data-dictionary/modules/JHX.md",
-      "lines": 82,
-      "bytes": 6206,
+      "lines": 84,
+      "bytes": 6270,
       "tables": 1,
       "fields": 45,
       "cn": "采购进货中间表"
     },
     "KBS": {
       "path": "knowledge/data-dictionary/modules/KBS.md",
-      "lines": 1583,
-      "bytes": 146458,
+      "lines": 1634,
+      "bytes": 148137,
       "tables": 26,
       "fields": 1071,
       "cn": "看板管理"
     },
     "LLJ": {
       "path": "knowledge/data-dictionary/modules/LLJ.md",
-      "lines": 71,
-      "bytes": 5190,
+      "lines": 73,
+      "bytes": 5254,
       "tables": 1,
       "fields": 34,
       "cn": "销货检核中间表"
     },
     "LLX": {
       "path": "knowledge/data-dictionary/modules/LLX.md",
-      "lines": 84,
-      "bytes": 6370,
+      "lines": 86,
+      "bytes": 6434,
       "tables": 1,
       "fields": 47,
       "cn": "领料中间表"
     },
     "LRP": {
       "path": "knowledge/data-dictionary/modules/LRP.md",
-      "lines": 655,
-      "bytes": 63220,
+      "lines": 676,
+      "bytes": 64237,
       "tables": 9,
       "fields": 466,
       "cn": "产销计划"
     },
     "MES": {
       "path": "knowledge/data-dictionary/modules/MES.md",
-      "lines": 74,
-      "bytes": 5753,
+      "lines": 76,
+      "bytes": 5807,
       "tables": 1,
       "fields": 37,
       "cn": "MES集成"
     },
     "MOC": {
       "path": "knowledge/data-dictionary/modules/MOC.md",
-      "lines": 2928,
-      "bytes": 300288,
+      "lines": 3015,
+      "bytes": 304365,
       "tables": 35,
       "fields": 2241,
       "cn": "制造管理"
     },
     "MPS": {
       "path": "knowledge/data-dictionary/modules/MPS.md",
-      "lines": 590,
-      "bytes": 55340,
+      "lines": 611,
+      "bytes": 56187,
       "tables": 9,
       "fields": 401,
       "cn": "主生产计划"
     },
     "MRP": {
       "path": "knowledge/data-dictionary/modules/MRP.md",
-      "lines": 562,
-      "bytes": 52248,
+      "lines": 581,
+      "bytes": 52995,
       "tables": 9,
       "fields": 373,
       "cn": "物料需求计划"
     },
     "MTF": {
       "path": "knowledge/data-dictionary/modules/MTF.md",
-      "lines": 68,
-      "bytes": 5011,
+      "lines": 70,
+      "bytes": 5081,
       "tables": 1,
       "fields": 31,
       "cn": "建档格式"
     },
     "MTP": {
       "path": "knowledge/data-dictionary/modules/MTP.md",
-      "lines": 535,
-      "bytes": 49352,
+      "lines": 553,
+      "bytes": 50065,
       "tables": 9,
       "fields": 346,
       "cn": "多角贸易"
     },
     "NOT": {
       "path": "knowledge/data-dictionary/modules/NOT.md",
-      "lines": 2045,
-      "bytes": 193729,
+      "lines": 2119,
+      "bytes": 196351,
       "tables": 32,
       "fields": 1419,
       "cn": "银行票据"
     },
     "OMS": {
       "path": "knowledge/data-dictionary/modules/OMS.md",
-      "lines": 1953,
-      "bytes": 184643,
+      "lines": 2015,
+      "bytes": 186916,
       "tables": 30,
       "fields": 1365,
       "cn": "费用预算"
     },
     "PAL": {
       "path": "knowledge/data-dictionary/modules/PAL.md",
-      "lines": 4305,
-      "bytes": 411247,
+      "lines": 4440,
+      "bytes": 415756,
       "tables": 69,
       "fields": 2976,
       "cn": "薪资福利"
     },
     "PDX": {
       "path": "knowledge/data-dictionary/modules/PDX.md",
-      "lines": 79,
-      "bytes": 5952,
+      "lines": 81,
+      "bytes": 6016,
       "tables": 1,
       "fields": 42,
       "cn": "盘点中间表"
@@ -427,200 +427,200 @@
     },
     "PSM": {
       "path": "knowledge/data-dictionary/modules/PSM.md",
-      "lines": 1256,
-      "bytes": 114405,
+      "lines": 1307,
+      "bytes": 116349,
       "tables": 21,
       "fields": 839,
       "cn": "生产序列管理"
     },
     "PUR": {
       "path": "knowledge/data-dictionary/modules/PUR.md",
-      "lines": 2524,
-      "bytes": 250998,
+      "lines": 2600,
+      "bytes": 254448,
       "tables": 33,
       "fields": 1866,
       "cn": "采购管理"
     },
     "QMS": {
       "path": "knowledge/data-dictionary/modules/QMS.md",
-      "lines": 1898,
-      "bytes": 185423,
+      "lines": 1958,
+      "bytes": 188504,
       "tables": 28,
       "fields": 1348,
       "cn": "质量管理"
     },
     "RGR": {
       "path": "knowledge/data-dictionary/modules/RGR.md",
-      "lines": 315,
-      "bytes": 26168,
+      "lines": 327,
+      "bytes": 26528,
       "tables": 6,
       "fields": 179,
       "cn": "报表工具"
     },
     "RMA": {
       "path": "knowledge/data-dictionary/modules/RMA.md",
-      "lines": 1410,
-      "bytes": 132514,
+      "lines": 1454,
+      "bytes": 134016,
       "tables": 22,
       "fields": 974,
       "cn": "维修服务"
     },
     "RPT": {
       "path": "knowledge/data-dictionary/modules/RPT.md",
-      "lines": 132,
-      "bytes": 9918,
+      "lines": 136,
+      "bytes": 10092,
       "tables": 2,
       "fields": 68,
       "cn": "报表格式"
     },
     "SAS": {
       "path": "knowledge/data-dictionary/modules/SAS.md",
-      "lines": 179,
-      "bytes": 16370,
+      "lines": 182,
+      "bytes": 16518,
       "tables": 2,
       "fields": 123,
       "cn": "销售分析"
     },
     "SCX": {
       "path": "knowledge/data-dictionary/modules/SCX.md",
-      "lines": 81,
-      "bytes": 6137,
+      "lines": 83,
+      "bytes": 6201,
       "tables": 1,
       "fields": 44,
       "cn": "生产入库中间表"
     },
     "SFC": {
       "path": "knowledge/data-dictionary/modules/SFC.md",
-      "lines": 877,
-      "bytes": 88524,
+      "lines": 903,
+      "bytes": 89871,
       "tables": 11,
       "fields": 650,
       "cn": "车间作业"
     },
     "TAX": {
       "path": "knowledge/data-dictionary/modules/TAX.md",
-      "lines": 84,
-      "bytes": 6832,
+      "lines": 86,
+      "bytes": 6889,
       "tables": 1,
       "fields": 47,
       "cn": "税务申报"
     },
     "TBX": {
       "path": "knowledge/data-dictionary/modules/TBX.md",
-      "lines": 83,
-      "bytes": 6295,
+      "lines": 85,
+      "bytes": 6359,
       "tables": 1,
       "fields": 46,
       "cn": "调拨中间表"
     },
     "THX": {
       "path": "knowledge/data-dictionary/modules/THX.md",
-      "lines": 86,
-      "bytes": 6582,
+      "lines": 88,
+      "bytes": 6646,
       "tables": 1,
       "fields": 49,
       "cn": "采购退货中间表"
     },
     "TIS": {
       "path": "knowledge/data-dictionary/modules/TIS.md",
-      "lines": 436,
-      "bytes": 41924,
+      "lines": 447,
+      "bytes": 42290,
       "tables": 6,
       "fields": 304,
       "cn": "税务发票"
     },
     "TLX": {
       "path": "knowledge/data-dictionary/modules/TLX.md",
-      "lines": 83,
-      "bytes": 6273,
+      "lines": 85,
+      "bytes": 6337,
       "tables": 1,
       "fields": 46,
       "cn": "退料中间表"
     },
     "TMC": {
       "path": "knowledge/data-dictionary/modules/TMC.md",
-      "lines": 567,
-      "bytes": 49933,
+      "lines": 587,
+      "bytes": 50623,
       "tables": 10,
       "fields": 359,
       "cn": "流程管理"
     },
     "TRA": {
       "path": "knowledge/data-dictionary/modules/TRA.md",
-      "lines": 73,
-      "bytes": 5571,
+      "lines": 75,
+      "bytes": 5625,
       "tables": 1,
       "fields": 36,
       "cn": "传输队列"
     },
     "UPD": {
       "path": "knowledge/data-dictionary/modules/UPD.md",
-      "lines": 117,
-      "bytes": 9321,
+      "lines": 121,
+      "bytes": 9459,
       "tables": 2,
       "fields": 61,
       "cn": "数据库升级"
     },
     "WAR": {
       "path": "knowledge/data-dictionary/modules/WAR.md",
-      "lines": 67,
-      "bytes": 4948,
+      "lines": 69,
+      "bytes": 5010,
       "tables": 1,
       "fields": 30,
       "cn": "凭证格式"
     },
     "WTX": {
       "path": "knowledge/data-dictionary/modules/WTX.md",
-      "lines": 86,
-      "bytes": 6600,
+      "lines": 88,
+      "bytes": 6664,
       "tables": 1,
       "fields": 49,
       "cn": "委外退货中间表"
     },
     "WWX": {
       "path": "knowledge/data-dictionary/modules/WWX.md",
-      "lines": 81,
-      "bytes": 6146,
+      "lines": 83,
+      "bytes": 6210,
       "tables": 1,
       "fields": 44,
       "cn": "委外进货中间表"
     },
     "XHJ": {
       "path": "knowledge/data-dictionary/modules/XHJ.md",
-      "lines": 71,
-      "bytes": 5190,
+      "lines": 73,
+      "bytes": 5254,
       "tables": 1,
       "fields": 34,
       "cn": "销货检核中间表"
     },
     "XHX": {
       "path": "knowledge/data-dictionary/modules/XHX.md",
-      "lines": 86,
-      "bytes": 6561,
+      "lines": 88,
+      "bytes": 6625,
       "tables": 1,
       "fields": 49,
       "cn": "销货中间表"
     },
     "XTX": {
       "path": "knowledge/data-dictionary/modules/XTX.md",
-      "lines": 86,
-      "bytes": 6573,
+      "lines": 88,
+      "bytes": 6637,
       "tables": 1,
       "fields": 49,
       "cn": "销退中间表"
     },
     "YBX": {
       "path": "knowledge/data-dictionary/modules/YBX.md",
-      "lines": 80,
-      "bytes": 6040,
+      "lines": 82,
+      "bytes": 6104,
       "tables": 1,
       "fields": 43,
       "cn": "一般交易中间表"
     },
     "ZXX": {
       "path": "knowledge/data-dictionary/modules/ZXX.md",
-      "lines": 77,
-      "bytes": 5762,
+      "lines": 79,
+      "bytes": 5826,
       "tables": 1,
       "fields": 40,
       "cn": "装箱中间表"

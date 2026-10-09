@@ -1,0 +1,790 @@
+文档代码:GSPMA
+文件名:GSP系统参数档【GSP系统参数档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MA001    C      01  批发价来源【Wholesale Price Source】                         1.售价定价一、2.售价定价二、3.售价定价三、4.售价定价四、5.售价定价五、6.售价定价六
+0002 MA002    C      01  限销品号分类方式【Sales Limited Item Category】              限销品号分类方式
+0003 MA003    C      04  报损单别【Damage Order Type】                                报损单别
+0004 MA004    C      10  报损仓库【Damage Warehouse】                                 报损仓库
+0005 MA005    C      01  自动生成报损单【Auto-generating Damage Orders】              Y/N[DEF:"N"] //20030711 ADD BY 29618 销退单检验不合格自动生成报损单
+0006 MA006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MA007    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MA008    C      10  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MA009    C      10  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MA010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 MA011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPMB
+文件名:药检所信息【药检所信息】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MB001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MB001    C      10  药检所编号【Drug Control Organ】                             药检所全称
+0002 MB002    C      10  药检所简称【Description】                                    药检所简称
+0003 MB003    C      72  药检所全称【Full Description】                               药检所全称
+0004 MB004    C      10  邮编【Post Code】                                            邮编 //20061207 6.5 P12-06060051 MODI BY 29618 C 06=>C 10
+0005 MB005    C      72  地址【Address】                                              地址
+0006 MB006    C      20  电话【Telephone】                                            电话
+0007 MB007    C      20  传真【Fax】                                                  传真
+0008 MB008    C      10  负责人【Principal】                                          负责人
+0009 MB009    V     255  E-MAIL【E-MAIL】                                             E-MAIL//20110906 MODI BY 37179 FOR Z01-11090600001:长度加长到255码
+0010 MB010    V     255  备注【Remark】                                               备注
+0011 MB011    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0012 MB012    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0013 MB013    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0014 MB014    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0015 MB015    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0016 MB016    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPMC
+文件名:仪器设备信息档【仪器设备信息档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:Y
+PRIMARY :MC001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MC001    C      10  设备编号【Machine No.】                                      设备编号
+0002 MC002    C      30  设备名称【Machine Description】                              设备名称
+0003 MC003    C      30  设备型号【Machine Type】                                     设备型号
+0004 MC004    C      72  生产厂家【Manufacturer】                                     生产厂家
+0005 MC005    C       8  出厂日期【Ex-factory Date】                                  出厂日期[FORMATE:YMD]
+0006 MC006    C       4  单位【Unit】                                                 单位
+0007 MC007    N       5  数量【Quantity】                                             数量
+0008 MC008    C       8  取得日期【Acquisition Date】                                 取得日期[FORMATE:YMD]
+0009 MC009    N    16.2  取得成本【Acquisition Costs】                                取得成本   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 MC010    C      20  放置地点【Location】                                         放置地点
+0011 MC011    C      10  负责人【Principal】                                          负责人
+0012 MC012    V     255  备注【Remark】                                               备注
+0013 MC013    C      04  检验周期编号【Inspection Cycle No.】                         检验周期编号//20031223 5.1 P00-03120013 ADD BY 32001↓
+0014 MC014    C      08  下次检验日【Next Inspection Date】                           下次检验日
+0015 MC015    C      08  最近检验日期【Last Inspection Date】                         最近检验日期
+0016 MC016    C      04  最近检验次数【Last Inspection No.】                          最近检验序号//20031223 5.1 P00-03120013 ADD BY 32001 ↑
+0017 MC017    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0018 MC018    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0019 MC019    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0020 MC020    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0021 MC021    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0022 MC022    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPMD
+文件名:审批材料单头档【审批材料单头档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :MD001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MD001    C      10  审批材料编号【Approved Document No.】                        审批材料编号
+0002 MD002    C      01  类别【Category】                                             1.首营企业审批;2.首营品种审批;3.其它
+0003 MD003    V     255  备注【Remark】                                               备注
+0004 MD004    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0005 MD005    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0006 MD006    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MD007    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0008 MD008    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0009 MD009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+
+文档代码:GSPME
+文件名:审批材料单身档【审批材料单身档】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :ME001+ME002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 ME001    C      10  审批材料编号【Approved Document No.】                        审批材料编号
+0002 ME002    C      04  序号【Sequence Number】                                      序号
+0003 ME003    C      20  材料名称【Material Description】                             材料名称
+0004 ME004    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0005 ME005    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0006 ME006    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 ME007    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0008 ME008    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0009 ME009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTA
+文件名:首营企业审批档【首营企业审批档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TA001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TA001    C      10  供应商编号【Supplier】                                       供应商编号
+0002 TA002    C      20  档案号【Document NO.】                                       档案号
+0003 TA003    C      10  销售员【Sales】                                              销售员
+0004 TA004    C      18  身份证号【ID】                                               身份证号
+0005 TA005    V     255  质量信誉【Quality Credit Standing】                          质量信誉
+0006 TA006    V     255  许可范围【Permissive Range】                                 许可范围
+0007 TA007    C      10  审批材料编号【Approved Document No.】                        审批材料编号
+0008 TA008    V     255  审批意见【Approval Remark】                                  审批意见
+0009 TA009    C      01  审批状况【Status of the Examination and Approval】           1.核准,2.拒绝
+0010 TA010    V     255  申请原因【Request Reason】                                   申请原因
+0011 TA011    C      08  申请日期【Apply Date】                                       申请日期[FORMATE:YMD]
+0012 TA012    C      10  申请者【Requester】                                          申请者
+0013 TA013    C       6  部门编号【Department】                                       部门编号
+0014 TA014    C      10  审批者【Approver】                                           审批者
+0015 TA015    C      08  审批日期【Approval Date】                                    审批日期[FORMATE:YMD]
+0016 TA016    C      01  审核码【Approval Indicator】                                 Y、N、V
+0017 TA017    N      01  打印次数【Print Times】                                      打印次数
+0018 TA018    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0019 TA019    V     255  备注【Remark】                                               备注
+0020 TA020    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0021 TA021    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0022 TA022    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0023 TA023    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0024 TA024    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0025 TA025    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0026 TA026    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTB
+文件名:首营品种审批档【首营品种审批档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TB001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TB001    C      20  品号【Item】                                                 品号
+0002 TB002    C      20  档案号【Document NO.】                                       档案号
+0003 TB003    V     255  申请原因【Request Reason】                                   申请原因
+0004 TB004    C      10  审批材料编号【Approved Document No.】                        审批材料编号
+0005 TB005    V     255  审批意见【Approval Remark】                                  审批意见
+0006 TB006    C      01  审批状况【Status of the Examination and Approval】           1.核准,2.拒绝
+0007 TB007    V     255  质量信誉【Quality Credit Standing】                          质量信誉
+0008 TB008    V     255  包装说明【Packing Description】                              包装说明
+0009 TB009    V     255  检验方法【Inspection Method】                                检验方法
+0010 TB010    C      08  申请日期【Apply Date】                                       申请日期[FORMATE:YMD]
+0011 TB011    C      10  申请者【Requester】                                          申请者
+0012 TB012    C       6  申请部门【Department】                                       申请部门
+0013 TB013    C      10  审批者【Approver】                                           审批者
+0014 TB014    C      08  审批日期【Approval Date】                                    审批日期[FORMATE:YMD]
+0015 TB015    C      01  审核码【Approval Indicator】                                 Y、N、V
+0016 TB016    N      01  打印次数【Print Times】                                      打印次数
+0017 TB017    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0018 TB018    V     255  备注【Remark】                                               备注
+0019 TB019    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0020 TB020    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0021 TB021    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0022 TB022    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0023 TB023    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0024 TB024    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0025 TB025    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTC
+文件名:进货检验信息档【进货检验信息档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TC001+TC002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TC001    C      04  检验单别【Inspection Order Type】                            检验单别
+0002 TC002    C      11  检验单号【Inspection Order No.】                             检验单号
+0003 TC003    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0004 TC004    C      01  来源【Source】                                               1.进货单 2.销退单
+0005 TC005    C      04  来源单别【Source Order Type】                                来源单别
+0006 TC006    C      11  来源单号【Source Order No.】                                 来源单号
+0007 TC007    C      04  序号【Sequence Number】                                      序号
+0008 TC008    C      08  检验日期【Inspection Date】                                  检验日期[FORMATE:YMD]
+0009 TC009    C      10  检验人员【Inspector】                                        检验人员
+0010 TC010    C      10  复核者【Approver】                                           复核者
+0011 TC011    C      01  审核码【Approval Indicator】                                 Y、N、V
+0012 TC012    C      04  抽送检单别【Sampling/Sending Inspection Order Type】         抽送检单别
+0013 TC013    C      11  抽送检单号【Sampling/Sending Inspection Order No.】          抽送检单号
+0014 TC014    N      01  打印次数【Print Times】                                      打印次数
+0015 TC015    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0016 TC016    C      01  验收结论【Inspection Result】                                1.待处理 2.允收 3.拒收
+0017 TC017    N    16.6  验退数量【Inspection Return Quantity】                       验退数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0018 TC018    V     255  外观性状检查【Appearance Inspection】                        外观性状检查
+0019 TC019    V     255  包装标识检查【Packing and Identifier Inspection】            包装标识检查
+0020 TC020    C      01  验收结论【Inspection Result】                                1.待处理 2.允收 3.拒收
+0021 TC021    V     255  备注【Remark】                                               备注
+0022 TC022    N    16.6  检验数量【Inspection Quantity】                              检验数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0023 TC023    N    16.6  合格数量【Acceptable Quantity】                              合格数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0024 TC024    N    16.6  不合格数量【Unqualified Quantity】                           不合格数量    //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0025 TC025    C      20  玻屑【Glass Scrap】                                          玻屑
+0026 TC026    C      20  白块【White Block】                                          白块
+0027 TC027    C      20  纤维【Fibre】                                                纤维
+0028 TC028    C      20  白点【White Dot】                                            白点
+0029 TC029    C      20  其它【Others】                                               其它
+0030 TC030    C      01  验收结论【Inspection Result】                                1.待处理 2.允收 3.拒收
+0031 TC031    V     255  备注【Remark】                                               备注
+0032 TC032    N    16.6  抽检数量【Sampling Quantity】                                抽检数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0033 TC033    N    16.6  合格数量【Acceptable Quantity】                              合格数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0034 TC034    N    16.6  不合格数量【Unqualified Quantity】                           不合格数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0035 TC035    C      01  检验报告书【Inspection Report】                              Y/N
+0036 TC036    C      01  合格证书【Acceptabl Certificate】                            Y/N
+0037 TC037    C      01  进口药品注册证及检验报告书【Imported Medicine License And Inpsection】 Y/N
+0038 TC038    C      01  标识和警示【Identifier And Warning】                         Y/N
+0039 TC039    C      01  抽送检结果【Sampling/Sending Inspection Result】             1.合格 2.不合格
+0040 TC040    C      20  品号【Item】                                                 品号
+0041 TC041    C      10  仓库【Warehouse】                                            仓库
+0042 TC042    C      20  批号【Lot】                                                  批号
+0043 TC043    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0044 TC044    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0045 TC045    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0046 TC046    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0047 TC047    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0048 TC048    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0049 TC049    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTD
+文件名: 抽送检单信息档【抽送检单信息档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TD001+TD002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TD001    C      04  抽送检单别【Sampling/Sending Inspection Order Type】         抽送检单别
+0002 TD002    C      11  抽送检单号【Sampling/Sending Inspection Order No.】          抽送检单号
+0003 TD003    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0004 TD004    C      01  来源【Source】                                               1.检验单 2.养护记录单
+0005 TD005    C      04  来源单别【Source Order Type】                                来源单别
+0006 TD006    C      11  来源单号【Source Order No.】                                 来源单号
+0007 TD007    C      04  来源序号【Source Order Sequence Number】                     来源序号
+0008 TD008    C      01  类型【Type】                                                 1.抽检 2.送检
+0009 TD009    V     255  检验原因【Inspection Reason】                                检验原因
+0010 TD010    C      20  品号【Item】                                                 品号
+0011 TD011    N    16.6  数量【Quantity】                                             数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0012 TD012    C      20  批号【Lot】                                                  批号
+0013 TD013    C      30  检验单位【Inspection Unit】                                  检验单位
+0014 TD014    N    16.6  抽送检数量【Sampling/Sending Inspection Quantity】           抽送检数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0015 TD015    C      06  抽送检部门【Department】                                     抽送检部门
+0016 TD016    C      10  抽送检人【Sampling/Sending Staff】                           抽送检人
+0017 TD017    C      10  审核者【Approver】                                           审核者
+0018 TD018    C      01  审核码【Approval Indicator】                                 Y、N、V
+0019 TD019    C      08  抽送检日期【Sampling/Sending Date】                          抽送检日期[FORMATE:YMD]
+0020 TD020    N      01  打印次数【Print Times】                                      打印次数
+0021 TD021    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0022 TD022    V     255  质量状况【Quality Status】                                   质量状况
+0023 TD023    C      01  检验结果【Inspection Result】                                1.合格 2.不合格
+0024 TD024    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0025 TD025    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0026 TD026    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0027 TD027    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0028 TD028    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0029 TD029    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0030 TD030    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+
+文档代码:GSPTE
+文件名: 质量复检通知单信息档【质量复检通知单信息档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TE001+TE002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TE001    C      04  复检单别【Reinspection Order Type】                          复检单别
+0002 TE002    C      11  复检单号【Reinspection Order No.】                           复检单号
+0003 TE003    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0004 TE004    C      04  来源单别【Source Order Type】                                来源单别
+0005 TE005    C      11  来源单号【Source Order No.】                                 来源单号
+0006 TE006    C      04  来源序号【Source Order Sequence Number】                     来源序号
+0007 TE007    V     255  复检原因【Reinspection Reason】                              复检原因
+0008 TE008    C      10  养护人【Maintainer】                                         养护人
+0009 TE009    C      10  审核者【Approver】                                           审核者
+0010 TE010    C      01  审核码【Approval Indicator】                                 Y、N、V
+0011 TE011    C      08  复检日期【Reinsepction Date】                                复检日期[FORMATE:YMD]
+0012 TE012    N      01  打印次数【Print Times】                                      打印次数
+0013 TE013    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0014 TE014    V     255  质量状况【Quality Status】                                   质量状况
+0015 TE015    C      01  复检结果【Reinspection Result】                              1.合格 2.不合格
+0016 TE016    C      20  品号【Item】                                                 品号
+0017 TE017    C      10  仓库【Warehouse】                                            仓库
+0018 TE018    C      20  批号【Lot】                                                  批号
+0019 TE019    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0020 TE020    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0021 TE021    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0022 TE022    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0023 TE023    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0024 TE024    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0025 TE025    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTF
+文件名:药品停售通知单单头信息档【药品停售通知单单头信息档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TF001+TF002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TF001    C      04  停售单别【Stop Selling Order Type】                          停售单别
+0002 TF002    C      11  停售单号【Stop Selling Order No.】                           停售单号
+0003 TF003    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0004 TF004    C      01  停售对象【Stop Selling Partner】                             1.按品号 2.按批号
+0005 TF005    C      01  停售类别【Stop Selling Type】                                1.限销,2.限入,3.限销限入
+0006 TF006    C      10  停售人【Stop Selling Person】                                停售人
+0007 TF007    V     255  停售原因【Stop Selling Reason】                              停售原因
+0008 TF008    C      08  停售日期【Stop Selling Date】                                停售日期[FORMATE:YMD]
+0009 TF009    N      01  打印次数【Print Times】                                      打印次数
+0010 TF010    C      10  审核者【Approver】                                           审核者
+0011 TF011    C      01  审核码【Approval Indicator】                                 Y、N、V
+0012 TF012    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0013 TF013    C      06  申请部门【Department】                                       申请部门
+0014 TF014    C      10  撤消人【Cancel Man】                                         撤消人
+0015 TF015    V     255  撤消原因【Cancel Reason】                                    撤消原因
+0016 TF016    C      08  撤消日期【Cancel Date】                                      撤消日期[FORMATE:YMD]
+0017 TF017    C      01  撤消码【Cancel Indicator】                                   Y/N
+0018 TF018    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0019 TF019    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0020 TF020    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0021 TF021    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0022 TF022    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0023 TF023    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0024 TF024    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTG
+文件名: 药品停售通知单单身信息档【药品停售通知单单身信息档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TG001+TG002+TG003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TG001    C      04  停售单别【Stop Selling Order Type】                          停售单别
+0002 TG002    C      11  停售单号【Stop Selling Order No.】                           停售单号
+0003 TG003    C      04  序号【Sequence Number】                                      序号
+0004 TG004    C      20  品号【Item】                                                 品号
+0005 TG005    C      20  批号【Lot】                                                  批号
+0006 TG006    V     255  备注【Remark】                                               备注
+0007 TG007    C      01  审核码【Approval Indicator】                                 Y、N、V
+0008 TG008    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 TG009    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 TG010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 TG011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 TG012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 TG013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTH
+文件名: 客户限销商品单头信息档【客户限销商品单头信息档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TH001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TH001    C      10  客户编号【Customer】                                         客户编号
+0002 TH002    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0003 TH003    C      01  客户限销类别【Selling Limit Category by Customer】           1.商品分类 2.品号
+0004 TH004    V     255  限销原因【Selling LimitReason】                              限销原因
+0005 TH005    C      08  限销日期【Selling Limit Date】                               限销日期[FORMATE:YMD]
+0006 TH006    N       1  打印次数【Print Times】                                      打印次数
+0007 TH007    C      10  审核者【Approver】                                           审核者
+0008 TH008    C       1  审核码【Approval Indicator】                                 Y、N、V
+0009 TH009    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0010 TH010    C      06  申请部门【Department】                                       申请部门
+0011 TH011    C      10  申请者【Requester】                                          申请者
+0012 TH012    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0013 TH013    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0014 TH014    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0015 TH015    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0016 TH016    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0017 TH017    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 TH018    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTI
+文件名:客户限销商品单身信息档【客户限销商品单身信息档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TI001+TI002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TI001    C      10  客户编号【Customer】                                         客户编号
+0002 TI002    C      04  序号【Sequence Number】                                      序号
+0003 TI003    C      06  品号类别编号【Inventory Category】                           品号类别编号
+0004 TI004    C      20  品号【Item】                                                 品号
+0005 TI005    C       1  审核码【Approval Indicator】                                 Y、N、V
+0006 TI006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 TI007    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 TI008    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 TI009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 TI010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 TI011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTJ
+文件名:员工限销商品单头信息档【员工限销商品单头信息档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TJ001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TJ001    C      10  员工编号【Staff】                                            员工编号
+0002 TJ002    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0003 TJ003    C      01  员工限销类别【Selling Limit Category by Sales】              1.商品分类 2.品号
+0004 TJ004    V     255  限销原因【Selling LimitReason】                              限销原因
+0005 TJ005    C      08  限销日期【Selling Limit Date】                               限销日期[FORMATE:YMD]
+0006 TJ006    N       1  打印次数【Print Times】                                      打印次数
+0007 TJ007    C      10  审核者【Approver】                                           审核者
+0008 TJ008    C       1  审核码【Approval Indicator】                                 Y、N、V
+0009 TJ009    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0010 TJ010    C      06  申请部门【Department】                                       申请部门
+0011 TJ011    C      10  申请者【Requester】                                          申请者
+0012 TJ012    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0013 TJ013    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0014 TJ014    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0015 TJ015    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0016 TJ016    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0017 TJ017    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 TJ018    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTK
+文件名:员工限销商品单身信息档【员工限销商品单身信息档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TK001+TK002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TK001    C      10  员工编号【Staff】                                            员工编号
+0002 TK002    C      04  序号【Sequence Number】                                      序号
+0003 TK003    C      06  品号类别编号【Inventory Category】                           品号类别编号
+0004 TK004    C      20  品号【Item】                                                 品号
+0005 TK005    C      01  审核码【Approval Indicator】                                 Y、N、V
+0006 TK006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 TK007    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 TK008    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 TK009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 TK010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 TK011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTL
+文件名:药品养护记录单头档【药品养护记录单头档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TL001+TL002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TL001    C      04  养护单别【Maintenance Order Type】                           养护单别
+0002 TL002    C      11  养护单号【Maintenance Order No.】                            养护单号
+0003 TL003    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0004 TL004    C      06  养护部门【Maintenance Department】                           养护部门
+0005 TL005    C      10  养护人员【Maintainer】                                       养护人
+0006 TL006    C      10  审核者【Approver】                                           审核者
+0007 TL007    C      01  审核码【Approval Indicator】                                 Y、N、V
+0008 TL008    C      08  养护日期【Maintenance Date】                                 养护日期[FORMATE:YMD]
+0009 TL009    N      01  打印次数【Print Times】                                      打印次数
+0010 TL010    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0011 TL011    V     255  备注【Remark】                                               备注
+0012 TL012    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0013 TL013    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0014 TL014    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0015 TL015    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0016 TL016    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0017 TL017    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 TL018    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTM
+文件名:药品养护记录单身档【药品养护记录单身档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TM001+TM002+TM003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TM001    C      04  养护单别【Maintenance Order Type】                           养护单别
+0002 TM002    C      11  养护单号【Maintenance Order No.】                            养护单号
+0003 TM003    C      04  序号【Sequence Number】                                      序号
+0004 TM004    C      20  品号【Item】                                                 品号
+0005 TM005    C      10  仓库【Warehouse】                                            仓库
+0006 TM006    C      10  存放地点【Depositary】                                       存放地点 //20040603 P00-04040011 库位->存放地点
+0007 TM007    C      04  单位【Unit】                                                 单位
+0008 TM008    N    16.6  数量【Quantity】                                             数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0009 TM009    C      20  批号【Lot】                                                  批号
+0010 TM010    C      20  玻屑【Glass Scrap】                                          玻屑
+0011 TM011    C      20  白块【White Block】                                          白块
+0012 TM012    C      20  纤维【Fibre】                                                纤维
+0013 TM013    C      20  白点【White Dot】                                            白点
+0014 TM014    C      20  其它【Others】                                               其它
+0015 TM015    V     255  质量状况【Quality Status】                                   质量状况
+0016 TM016    C      01  处理意见【Handling Opinion】                                 1.合格 2.不合格 3.待处理
+0017 TM017    C      04  复检单别【Reinspection Order Type】                          复检单别
+0018 TM018    C      11  复检单号【Reinspection Order No.】                           复检单号
+0019 TM019    C      04  抽送检单别【Sampling/Sending Inspection Order Type】         抽送检单别
+0020 TM020    C      11  抽送检单号【Sampling/Sending Inspection Order No.】          抽送检单号
+0021 TM021    C      01  抽送检结果【Sampling/Sending Inspection Result】             1.合格 2.不合格
+0022 TM022    C      01  复检结果【Reinspection Result】                              1.合格 2.不合格
+0023 TM023    N    16.6  件装【Pieces Per】                                           件装   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0024 TM024    N    16.6  件数【Pieces】                                               件数   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0025 TM025    C      01  审核码【Approval Indicator】                                 Y、N、V
+0026 TM026    C      10  养护周期编号【Maintenance Circle No.】                       养护周期编号 //20040915 ADD BY 30119 FOR P00-03120014 ↓
+0027 TM027    C      08  最近养护日期【Last Maintenance Date】                        最近养护日期
+0028 TM028    C      04  最近养护次数【Last Maintenance Times】                       最近养护次数
+0029 TM029    C      08  预计养护日期【plan Maintenance Date】                        预计养护日期
+0030 TM030    V      80  批号说明【Lot Description】                                  批号说明 //20040915 ADD BY 30119 FOR P00-03120014 ↑
+0031 TM031    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0032 TM032    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0033 TM033    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0034 TM034    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0035 TM035    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0036 TM036    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTN
+文件名:仓库温湿度记录档【仓库温湿度记录档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TN001+TN002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TN001    C      10  仓库编号【Warehouse】                                        仓库编号
+0002 TN002    C      08  纪录日期【Record Date】                                      纪录日期[FORMATE:YMD]
+0003 TN003    C      10  纪录人【Recorder】                                           纪录人
+0004 TN004    C      01  状态码【Status】                                             1.正常 2.异常
+0005 TN005    V     255  备注【Remark】                                               仓库养护备注
+0006 TN006    N      04  库内上午温度【Inside Warehouse Temperature in a.m.】         库内上午温度
+0007 TN007    N      04  库内上午湿度【Inside Warehouse Humidity in a.m.】            库内上午湿度
+0008 TN008    V     255  备注【Remark】                                               库内上午养护备注
+0009 TN009    N      04  库内下午温度【Inside Warehouse Temperature in p.m.】         库内下午温度
+0010 TN010    N      04  库内下午湿度【Inside Warehouse Humidity in p.m.】            库内下午湿度
+0011 TN011    V     255  备注【Remark】                                               库内下午养护备注
+0012 TN012    N      04  库外上午温度【Outside Warehouse Temperature in a.m.】        库外上午温度
+0013 TN013    N      04  库外上午湿度【Humidity in a.m. Outside Warehouse】           库外上午湿度
+0014 TN014    V     255  备注【Remark】                                               库外上午养护备注
+0015 TN015    N      04  库外下午温度【Outside Warehouse Temperature in p.m.】        库外下午温度
+0016 TN016    N      04  库外下午湿度【Humidity in p.m. Outside Warehouse】           库外下午湿度
+0017 TN017    V     255  备注【Remark】                                               库外下午养护备注
+0018 TN018    N      04  库内处理后上午温度【Inside Warehouse Disposaled Temperature in a.m.】 库内处理后上午温度 //20050412 ADD BY 29618 FOR P02-04120015↓
+0019 TN019    N      04  库内处理后上午湿度【Inside Warehouse Disposaled Humidity in a.m.】 库内处理后上午湿度
+0020 TN020    V     255  备注【Remark】                                               库内处理后上午养护备注
+0021 TN021    N      04  库内处理后下午温度【Inside Warehouse Disposaled Temperature in p.m.】 库内处理后下午温度
+0022 TN022    N      04  库内处理后下午湿度【Inside Warehouse Disposaled Humidity in p.m.】 库内处理后下午湿度
+0023 TN023    V     255  备注【Remark】                                               库内处理后下午养护备注 //20050412 ADD BY 29618 FOR P02-04120015↑
+0024 TN024    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0025 TN025    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0026 TN026    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0027 TN027    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0028 TN028    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0029 TN029    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTO
+文件名:设备养护使用记录单头档【设备养护使用记录单头档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TO001+TO002+TO003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TO001    C      10  预留字段【Reserved Field】                                   以前是设备编号字段 //20031230 MODI BY 32001 P00-03120014
+0002 TO002    C      01  类型【Type】                                                 1.使用 2.维修保养
+0003 TO003    C      08  使用/养护日期【Use/Maintenance Date】                        使用/养护日期[FORMATE:YMD]
+0004 TO004    V     255  备注【Remark】                                               备注
+0005 TO005    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0006 TO006    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 TO007    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 TO008    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0009 TO009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 TO010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTP
+文件名:设备养护使用记录单身档【设备养护使用记录单身档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TP001+TP002+TP003+TP004
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TP001    C      10  设备编号【Machine No.】                                      设备编号
+0002 TP002    C      01  类型【Type】                                                 1.使用 2.维修保养
+0003 TP003    C      08  使用/养护日期【Use/Maintenance Date】                        使用日期[FORMATE:YMD]//20031224 5.1 P00-03120014 MARK BY 32001 使用/养护日期->使用日期
+0004 TP004    C      04  序号【Sequence Number】                                      序号
+0005 TP005    C      20  品号【Item】                                                 品号
+0006 TP006    C      10  使用人/保养人【User/Maintenancer】                           使用人/保养人
+0007 TP007    N       8  使用时间/养护时间【Use Time/Maintenance Time】               使用时间/养护时间(时:分:秒)
+0008 TP008    V     255  使用目的【Purpose】                                          使用目的/维护保养原因
+0009 TP009    V     255  维修保养后情况【Status After Maintenance】                   维修保养后情况
+0010 TP010    V     255  备注【Remark】                                               备注
+0011 TP011    V     255  设备名称【Machine Description】                              设备名称
+0012 TP012    C      08  保养起始日期【Maintenance Starting Date】                    保养起始日期[FORMATE:YMD]
+0013 TP013    C      08  保养截止日期【Maintenance Ending Date】                      保养截至日期[FORMATE:YMD]
+0014 TP014    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0015 TP015    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0016 TP016    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0017 TP017    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 TP018    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0019 TP019    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+
+文档代码:GSPTQ
+文件名:报损药品销毁单单头档【报损药品销毁单单头档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TQ001+TQ002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TQ001    C      04  销毁单别【Destroy Order Type】                               销毁单别
+0002 TQ002    C      11  销毁单号【Destroy Order No.】                                销毁单号
+0003 TQ003    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0004 TQ004    V     255  销毁原因【Destroy Reason】                                   销毁原因
+0005 TQ005    C      10  销毁人员【Destroyer】                                        销毁人员
+0006 TQ006    C      06  销毁部门【Destroy Department】                               销毁部门
+0007 TQ007    V     255  销毁方法【Destroy Method】                                   销毁方法
+0008 TQ008    V     255  销毁地点【Destroy Place】                                    销毁地点
+0009 TQ009    C      10  审核者【Approver】                                           审核者
+0010 TQ010    C      01  审核码【Approval Indicator】                                 Y、N、V
+0011 TQ011    C      08  销毁日期【Destroy Date】                                     销毁日期[FORMATE:YMD]
+0012 TQ012    N      01  打印次数【Print Times】                                      打印次数
+0013 TQ013    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0014 TQ014    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0015 TQ015    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0016 TQ016    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0017 TQ017    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0018 TQ018    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0019 TQ019    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0020 TQ020    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTR
+文件名:报损药品销毁单单身档【报损药品销毁单单身档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TR001+TR002+TR003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TR001    C      04  销毁单别【Destroy Order Type】                               销毁单别
+0002 TR002    C      11  销毁单号【Destroy Order No.】                                销毁单号
+0003 TR003    C      04  序号【Sequence Number】                                      序号
+0004 TR004    C      20  品号【Item】                                                 品号
+0005 TR005    C      10  仓库【Warehouse】                                            仓库
+0006 TR006    C      20  批号【Lot】                                                  批号
+0007 TR007    C      04  报损单别【Damage Order Type】                                报损单别
+0008 TR008    C      11  报损单号【Damage Order Number】                              报损单号
+0009 TR009    C      04  报损序号【Damage Sequence】                                  报损序号
+0010 TR010    C      04  单位【Unit】                                                 单位
+0011 TR011    C      04  包装单位【Packing Unit】                                     包装单位
+0012 TR012    N    16.6  数量【Quantity】                                             数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0013 TR013    N    16.6  包装数量【Packing Quantity】                                 包装数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0014 TR014    V     255  备注【Remark】                                               备注
+0015 TR015    C      01  审核码【Approval Indicator】                                 Y、N、V
+0016 TR016    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0017 TR017    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0018 TR018    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0019 TR019    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0020 TR020    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0021 TR021    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTS
+文件名:商品质量查询反馈档【商品质量查询反馈档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TS001+TS002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TS001    C      04  质量事故单别【Quality Accident Orders Type】                 质量事故单别
+0002 TS002    C      11  质量事故单号【Quality Accident Orders No.】                  质量事故单号
+0003 TS003    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0004 TS004    V     255  质量事故原因【Quality Accident Reason】                      质量事故原因
+0005 TS005    C      10  质量查询单位【Unit】                                         质量查询单位
+0006 TS006    C      30  联系人【Contact】                                            联系人
+0007 TS007    C      20  品号【Item】                                                 品号
+0008 TS008    C      20  批号【Lot】                                                  批号
+0009 TS009    N    16.6  数量【Quantity】                                             数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0010 TS010    N    16.2  损失金额【Expense】                                          损失金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0011 TS011    V     255  质量事故状况【Quality Accident Status】                      质量事故状况
+0012 TS012    C      01  类型【Type】                                                 1.质量查询 2.质量反馈 3.质量事故 4.不良反应
+0013 TS013    C      10  处理者【Handler】                                            处理者
+0014 TS014    V     255  处理情况【Handling Circs】                                   处理情况
+0015 TS015    V     255  处理意见【Handling Opinion】                                 处理意见
+0016 TS016    C      10  审核者【Approver】                                           审核者
+0017 TS017    C      01  审核码【Approval Indicator】                                 Y、N、V
+0018 TS018    C      08  质量事故日期【Quality Accident Date】                        质量事故日期[FORMATE:YMD]
+0019 TS019    N      01  打印次数【Print Times】                                      打印次数
+0020 TS020    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0021 TS021    N    16.6  件装【Pieces Per】                                           件装   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0022 TS022    N    16.6  件数【Pieces】                                               件数   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0023 TS023    V     255  备注【Remark】                                               备注
+0024 TS024    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0025 TS025    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0026 TS026    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0027 TS027    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0028 TS028    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0029 TS029    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0030 TS030    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTT
+文件名:用户质量查询/投诉档【用户质量查询/投诉档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TT001+TT002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TT001    C      04  单别【Order Type】                                           质量查询/投诉单别
+0002 TT002    C      11  单号【Order No.】                                            质量查询/投诉单号
+0003 TT003    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD]
+0004 TT004    C      01  类型【Type】                                                 1.查询 2.投诉
+0005 TT005    C      10  客户编号【Customer】                                         客户编号
+0006 TT006    C      30  用户【User】                                                 用户
+0007 TT007    C      01  性别【Gender】                                               1.男 2.女
+0008 TT008    C      20  联系电话【Telephone】                                        联系电话
+0009 TT009    C      10  邮编【Post Code】                                            邮编 //20061207 6.5 P12-06060051 MODI BY 29618 C 06=>C 10
+0010 TT010    C      72  单位地址【Unit Address】                                     单位地址
+0011 TT011    C      72  方式【Means】                                                方式
+0012 TT012    C      04  时间(时:分)【Time(Hour:Minute)】                             时间(时:分)
+0013 TT013    C      10  接待者【Receiver】                                           接待者
+0014 TT014    V     255  内容【Content】                                              内容
+0015 TT015    V     255  答复内容【Content of Reply】                                 答复内容
+0016 TT016    C      10  答复者【Replier】                                            答复者
+0017 TT017    V     255  答复意见【Opinion of Reply】                                 答复意见
+0018 TT018    C      10  审核者【Approver】                                           审核者
+0019 TT019    C      01  审核码【Approval Indicator】                                 Y、N、V
+0020 TT020    C      08  审核日期【Approved Date】                                    审核日期[FORMATE:YMD]
+0021 TT021    N      01  打印次数【Print Times】                                      打印次数
+0022 TT022    C      01  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核//20080320 modi by 35334  签核状态增加'S.传送中'[DEF:"N"]
+0023 TT023    C      20  品号【Item】                                                 品号
+0024 TT024    C      20  批号【Lot】                                                  批号
+0025 TT025    N    16.6  数量【Quantity】                                             数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0026 TT026    V     255  备注【Remark】                                               备注
+0027 TT027    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0028 TT028    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0029 TT029    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0030 TT030    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0031 TT031    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0032 TT032    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0033 TT033    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:GSPTU
+文件名:仓库温湿度记录单身档【仓库温湿度记录单身档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月檔/统计 7.系统文件 8.其它)
+转档完成:N
+PRIMARY :TU001+TU002+TU003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TU001    C      10  仓库编号【Warehouse】                                        仓库编号 //20050707 add by 29618 for P00-05070003
+0002 TU002    C      08  纪录日期【Record Date】                                      纪录日期[FORMATE:YMD]
+0003 TU003    C      10  检验点编号【Inpection Place】                                检验点编号
+0004 TU004    N      04  上午温度【Temperature in a.m.】                              上午温度
+0005 TU005    N      04  上午湿度【Humidity in a.m.】                                 上午湿度
+0006 TU006    N      04  下午温度【Temperature in p.m.】                              下午温度
+0007 TU007    N      04  下午湿度【Humidity in p.m.】                                 下午湿度
+0008 TU008    N      04  处理后上午温度【Disposaled Temperature in a.m.】             处理后上午温度
+0009 TU009    N      04  处理后上午湿度【Disposaled Humidity in a.m.】                处理后上午湿度
+0010 TU010    N      04  处理后下午温度【Disposaled Temperature in p.m.】             处理后下午温度
+0011 TU011    N      04  处理后下午湿度【Disposaled Humidity in p.m.】                处理后下午湿度
+0012 TU012    V     255  备注【Remark】                                               上午备注
+0013 TU013    V     255  备注【Remark】                                               下午备注
+0014 TU014    V     255  备注【Remark】                                               处理后上午备注
+0015 TU015    V     255  备注【Remark】                                               处理后下午备注
+0016 TU016    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0017 TU017    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0018 TU018    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0019 TU019    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0020 TU020    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0021 TU021    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6

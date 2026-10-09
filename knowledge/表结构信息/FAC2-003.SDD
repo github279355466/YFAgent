@@ -1,0 +1,245 @@
+文档代码:FACMA
+文件名:银行对账单引入格式单头档【银行对账单引入格式单头档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MA001+MA021
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MA001    C      10  银行编号【Bank】                                             银行编号 
+0002 MA002    V      60  文档名称【Document Name】                                    银行电子对账单文档名称
+0003 MA003    N       2  结算日期起始位置【Starting Position of Settlement Date】     结算日期起始位置
+0004 MA004    N       2  结算日期截止位置【Ending Position of Settlement Date】       结算日期截止位置
+0005 MA005    N       2  结算方式起始位置【Starting Position of Settlement Mode】     结算方式起始位置
+0006 MA006    N       2  结算方式截止位置【Ending Position of Settlement Mode】       结算方式截止位置
+0007 MA007    N       2  借方金额起始位置【Starting Position of Debit Amount】        借方金额起始位置
+0008 MA008    N       2  借方金额截止位置【Ending Position of Debit Amount】          借方金额截止位置
+0009 MA009    N       2  借方金额正负位置【Positive&Negative Location of Debit Amount】 借方金额正负位置
+0010 MA010    N       2  贷方金额起始位置【Starting Position of Credit Amount】       贷方金额起始位置
+0011 MA011    N       2  贷方金额截止位置【Ending Position of Credit Amount】         贷方金额截止位置
+0012 MA012    N       2  贷方金额正负位置【Positive&Negative Location of Credit Amount】 贷方金额正负位置
+0013 MA013    N       2  结算单号起始位置【Starting Position of Settlement Order No.】 结算单号起始位置
+0014 MA014    N       2  结算单号截止位置【Ending Position of Settlement Order No.】  结算单号截止位置
+0015 MA015    C      01  保留字段【Reserved Field】                                   保留字段 
+0016 MA016    C      08  保留字段【Reserved Field】                                   保留字段 
+0017 MA017    V      30  保留字段【Reserved Field】                                   保留字段 
+0018 MA018    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0019 MA019    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0020 MA020    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0021 MA021    C       4  币种【Currency】                                             币种
+
+文档代码:FACMB
+文件名:银行对账单引入格式单身档【银行对账单引入格式单身档】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MB001+MB012+MB002+MB003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MB001    C      10  银行编号【Bank】                                             银行编号 
+0002 MB002    C       1  字段名称【Field Description】                                1.结算日期 2.结算方式 3.金额 4.借贷类型[DEF:1]
+0003 MB003    V      10  原值【Original Value】                                       原值
+0004 MB004    V      10  转换值【Conversion Value】                                   转换值
+0005 MB005    V       6  字段编号【Field No.】                                        字段编号
+0006 MB006    C      01  保留字段【Reserved Field】                                   保留字段
+0007 MB007    C      08  保留字段【Reserved Field】                                   保留字段
+0008 MB008    V      30  保留字段【Reserved Field】                                   保留字段
+0009 MB009    N    16.6  保留字段【Reserved Field】                                   保留字段
+0010 MB010    N    16.6  保留字段【Reserved Field】                                   保留字段
+0011 MB011    N    16.6  保留字段【Reserved Field】                                   保留字段
+0012 MB012    C       4  币种【Currency】                                             币种     //20090203 ADD BY 32817 FOR Z30-09011500001
+
+文档代码:FACTA
+文件名:银行对账单单头档【银行对账单单头档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TA001+TA002+TA003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TA001    C      10  银行编号【Bank】                                             银行编号 
+0002 TA002    C       6  存款年月【Deposit Year/Month】                               存款年月[FORMATE:YM]
+0003 TA003    C       4  币种【Currency】                                             币种
+0004 TA004    N    16.2  月初原币余额【Beginning Balance of Original Currency】       月初原币余额  
+0005 TA005    N    16.2  月底原币余额【Ending Balance of Original Currency】          月底原币余额  
+0006 TA006    V     255  备注【Remark】                                               备注
+0007 TA007    C      01  保留字段【Reserved Field】                                   保留字段
+0008 TA008    C      08  保留字段【Reserved Field】                                   保留字段
+0009 TA009    V      30  保留字段【Reserved Field】                                   保留字段
+0010 TA010    N    16.6  保留字段【Reserved Field】                                   保留字段
+0011 TA011    N    16.6  保留字段【Reserved Field】                                   保留字段
+0012 TA012    N    16.6  保留字段【Reserved Field】                                   保留字段
+
+文档代码:FACTB
+文件名:银行对账单单身档【银行对账单单身档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TB001+TB002+TB003+TB004
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                     备注
+===============================================================================================
+0001 TB001    C       10  银行编号【Bank】                                             银行编号 
+0002 TB002    C        6  存款年月【Deposit Year/Month】                               存款年月[FORMATE:YM]
+0003 TB003    C        4  币种【Currency】                                             币种
+0004 TB004    C        4  序号【Sequence Number】                                      序号
+0005 TB005    C        8  结算日期【Settlement Date】                                  凭证日期[FORMATE:YMD]
+0006 TB006    C        4  结算方式【Payment Term】                                     结算方式编号
+0007 TB007    C       50  结算号【Settlement No.】                                     票据号码、电汇单号 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0008 TB008    N     16.2  金额【Amount】                                               原币金额  
+0009 TB009    N        1  借贷类型【Debit/Credit】                                     1.借 -1.贷[DEF:1]
+0010 TB010    C        1  数据来源【Data Source】                                      1.初始数据结转 2.从文件引入 3.手工录入[DEF:3]
+0011 TB011    C        1  对账码【Reconciliation Indicator】                           Y.自动对账 y.手工对账 x.内部冲销 N.未对账[DEF:N]
+0012 TB012    C       14  日记账ID【Bank Deposit Journal ID】                          对账后回写银行存款日记账单身档对账年月+币种+序号
+0013 TB013    V      255  摘要【Abstract】                                             摘要
+0014 TB014    C       01  保留字段【Reserved Field】                                   保留字段 
+0015 TB015    C       08  保留字段【Reserved Field】                                   保留字段 
+0016 TB016    V       30  保留字段【Reserved Field】                                   保留字段 
+0017 TB017    N     16.6  保留字段【Reserved Field】                                   保留字段 
+0018 TB018    N     16.6  保留字段【Reserved Field】                                   保留字段 
+0019 TB019    N     16.6  保留字段【Reserved Field】                                   保留字段 
+
+文档代码:FACTC
+文件名:银行存款日记账单头档【银行存款日记账单头档】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TC001+TC002+TC003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TC001    C      10  银行编号【Bank】                                             银行编号
+0002 TC002    C       6  存款年月【Deposit Year/Month】                               存款年月[FORMATE:YM]
+0003 TC003    C       4  币种【Currency】                                             币种
+0004 TC004    N    16.2  月初原币余额【Beginning Balance of Original Currency】       月初原币余额 
+0005 TC005    N    16.2  月底原币余额【Ending Balance of Original Currency】          月底原币余额 
+0006 TC006    V     255  备注【Remark】                                               备注
+0007 TC007    N    16.2  月初本币余额【Beginning Balance of Base Currency】           月初本币余额 
+0008 TC008    N    16.2  月底本币余额【Ending Balance(B/C)】                          月底本币余额 
+0009 TC009    C      01  保留字段【Reserved Field】                                   保留字段 
+0010 TC010    C      08  保留字段【Reserved Field】                                   保留字段 
+0011 TC011    V      30  保留字段【Reserved Field】                                   保留字段 
+0012 TC012    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0013 TC013    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0014 TC014    N    16.6  保留字段【Reserved Field】                                   保留字段 
+
+文档代码:FACTD
+文件名:银行存款日记账单身档【银行存款日记账单身档】
+类    型:5 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TD001+TD002+TD003+TD004
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                     备注
+===============================================================================================
+0001 TD001    C       10  银行编号【Bank】                                             银行编号
+0002 TD002    C        6  存款年月【Deposit Year/Month】                               存款年月[FORMATE:YM]
+0003 TD003    C        4  币种【Currency】                                             币种
+0004 TD004    C        4  序号【Sequence Number】                                      序号
+0005 TD005    C        8  结算日期【Settlement Date】                                  凭证日期[FORMATE:YMD]
+0006 TD006    C        4  结算方式【Payment Term】                                     结算方式编号
+0007 TD007    C       50  结算号【Settlement No.】                                     票据号码、电汇单号 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0008 TD008    N     16.2  原币金额【Amount of Original Currency】                      原币金额  
+0009 TD009    N     12.7  汇率【Exchange Rate】                                        汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0010 TD010    N        1  借贷类型【Debit/Credit】                                     1.借 -1.贷[DEF:1]
+0011 TD011    C        1  数据来源【Data Source】                                      1.初始数据结转 2.从单据汇入[DEF:2]
+0012 TD012    C        1  对账码【Reconciliation Indicator】                           Y.自动对账 y.手工对账 x.内部冲销 N.未对账[DEF:N]
+0013 TD013    C        1  单据来源【Source Order】                                     1.应付票据 2.应收票据 3.银行存款单 4.银行提款单 5.融资借款 6.融资还款 7.抵押借款 8.抵押还款 9.会计凭证
+0014 TD014    C        4  来源单别【Source Order Type】                                来源单别
+0015 TD015    C       11  来源单号【Source Order No.】                                 来源单号
+0016 TD016    V      255  摘要【Abstract】                                             摘要
+0017 TD017    C        1  转账对象【Transfer Target】                                  1.公司 2.供应商 3.人员 4.客户 9.其他
+0018 TD018    C       10  转账对象编号【Target No.】                                   公司/客户编号/供应商编号/员工/其他
+0019 TD019    C       10  部门编号【Department】                                       部门编号
+0020 TD020    C       01  保留字段【Reserved Field】                                   保留字段
+0021 TD021    C       08  保留字段【Reserved Field】                                   保留字段
+0022 TD022    V       30  保留字段【Reserved Field】                                   保留字段
+0023 TD023    N     16.6  保留字段【Reserved Field】                                   保留字段
+0024 TD024    N     16.6  保留字段【Reserved Field】                                   保留字段
+0025 TD025    N     16.6  保留字段【Reserved Field】                                   保留字段
+
+文档代码:FACTE
+文件名:银行存款余额调节单头档【银行存款余额调节单头档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TE001+TE002+TE003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TE001    C      10  银行编号【Bank】                                             银行编号 
+0002 TE002    C       6  存款年月【Deposit Year/Month】                               存款年月[FORMATE:YM]
+0003 TE003    C       4  币种【Currency】                                             币种
+0004 TE004    N    16.2  调整前月底企业原币余额【Enterprise Pre-Adjusted Ending Balance(O/C)】 月底企业原币余额   
+0005 TE005    N    16.2  调整前月底银行原币余额【Bank Pre-Adjusted Ending Balance(O/C)】 月底银行原币余额         
+0006 TE006    N    16.2  调整后月底企业原币余额【Enterprise Adjusted Ending Balance(O/C)】 调整后月底企业原币余额 
+0007 TE007    N    16.2  调整后月底银行原币余额【Bank Adjusted Ending Balance(O/C)】  调整后月底银行原币余额      
+0008 TE008    C       1  对账平衡码【Reconciliation Balance Indicator】               Y.平衡 N.不平衡[DEF:N]
+0009 TE009    C       1  审核码【Approval Indicator】                                 Y/N/V
+0010 TE010    C       8  审核日期【Approved Date】                                    审核日期[FORMATE:YMD]
+0011 TE011    C      10  审核者【Approver】                                           审核者 
+0012 TE012    C      01  保留字段【Reserved Field】                                   保留字段 
+0013 TE013    C      08  保留字段【Reserved Field】                                   保留字段 
+0014 TE014    V      30  保留字段【Reserved Field】                                   保留字段 
+0015 TE015    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0016 TE016    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0017 TE017    N    16.6  保留字段【Reserved Field】                                   保留字段 
+
+文档代码:FACTF
+文件名:银行未达余额调节单身档【银行未达余额调节单身档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TF001+TF002+TF003+TF004
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                     备注
+===============================================================================================
+0001 TF001    C       10  银行编号【Bank】                                             银行编号
+0002 TF002    C        6  存款年月【Deposit Year/Month】                               存款年月[FORMATE:YM]
+0003 TF003    C        4  币种【Currency】                                             币种
+0004 TF004    C        4  序号【Sequence Number】                                      序号
+0005 TF005    C        8  结算日期【Settlement Date】                                  凭证日期[FORMATE:YMD]
+0006 TF006    C        4  结算方式【Payment Term】                                     结算方式编号
+0007 TF007    C       50  结算号【Settlement No.】                                     票据号码、电汇单号 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0008 TF008    N     16.2  金额【Amount】                                               原币金额  
+0009 TF009    N     12.7  汇率【Exchange Rate】                                        汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0010 TF010    N        1  借贷类型【Debit/Credit】                                     1.借 -1.贷[DEF:1]
+0011 TF011    C        1  数据来源【Data Source】                                      1.初始数据结转 2.从文件引入 3.手工录入 4.从单据汇入
+0012 TF012    C        1  单据来源【Source Order】                                     1.应付票据 2.应收票据 3.银行存款单 4.银行提款单 5.融资借款 6.融资还款 7.抵押借款 8.抵押还款 9.会计凭证
+0013 TF013    C        4  来源单别【Source Order Type】                                来源单别
+0014 TF014    C       11  来源单号【Source Order No.】                                 来源单号
+0015 TF015    V      255  摘要【Abstract】                                             摘要
+0016 TF016    C        1  转账对象【Transfer Target】                                  1.公司 2.供应商 3.人员 4.客户 9.其他
+0017 TF017    C       10  转账对象编号【Target No.】                                   公司/客户编号/供应商编号/员工/其他
+0018 TF018    C       10  部门编号【Department】                                       部门编号
+0019 TF019    C        1  审核码【Approval Indicator】                                 Y/N/V 
+0020 TF020    C       01  保留字段【Reserved Field】                                   保留字段 
+0021 TF021    C       08  保留字段【Reserved Field】                                   保留字段 
+0022 TF022    V       30  保留字段【Reserved Field】                                   保留字段 
+0023 TF023    N     16.6  保留字段【Reserved Field】                                   保留字段 
+0024 TF024    N     16.6  保留字段【Reserved Field】                                   保留字段 
+0025 TF025    N     16.6  保留字段【Reserved Field】                                   保留字段 
+
+文档代码:FACTG
+文件名:企业未达余额调节单身档【企业未达余额调节单身档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TG001+TG002+TG003+TG004
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                     备注
+===============================================================================================
+0001 TG001    C       10  银行编号【Bank】                                             银行编号
+0002 TG002    C        6  存款年月【Deposit Year/Month】                               存款年月[FORMATE:YM]
+0003 TG003    C        4  币种【Currency】                                             币种
+0004 TG004    C        4  序号【Sequence Number】                                      序号
+0005 TG005    C        8  结算日期【Settlement Date】                                  凭证日期[FORMATE:YMD]
+0006 TG006    C        4  结算方式【Payment Term】                                     结算方式编号
+0007 TG007    C       50  结算号【Settlement No.】                                     票据号码、电汇单号 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0008 TG008    N     16.2  金额【Amount】                                               原币金额 
+0009 TG009    N        1  借贷类型【Debit/Credit】                                     1.借 -1.贷[DEF:1]
+0010 TG010    C        1  数据来源【Data Source】                                      1.初始数据结转 2.从文件引入 3.手工录入 4.从单据汇入
+0011 TG011    V      255  摘要【Abstract】                                             摘要
+0012 TG012    C        1  转账对象【Transfer Target】                                  1.公司 2.供应商 3.人员 4.客户 9.其他
+0013 TG013    C       10  转账对象编号【Target No.】                                   公司/客户编号/供应商编号/员工/其他
+0014 TG014    C        1  审核码【Approval Indicator】                                 Y/N/V 
+0015 TG015    C       01  保留字段【Reserved Field】                                   保留字段 
+0016 TG016    C       08  保留字段【Reserved Field】                                   保留字段 
+0017 TG017    V       30  保留字段【Reserved Field】                                   保留字段 
+0018 TG018    N     16.6  保留字段【Reserved Field】                                   保留字段 
+0019 TG019    N     16.6  保留字段【Reserved Field】                                   保留字段 
+0020 TG020    N     16.6  保留字段【Reserved Field】                                   保留字段 

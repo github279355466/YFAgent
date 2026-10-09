@@ -1,0 +1,490 @@
+文档代码:CSTMA
+文件名:成本参数设置档【Cost Parameters】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :
+=========================================================================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                                                            备注
+=============================================================================================================================================
+0001 MA001    C       1  成本分类方式【Cost Sort Mode】                                                                      成本分类方式
+0002 MA002    C       1  材料在制约量计算方式【Calculate WIP Material Equivalent Units by】                                  1.按实际投入材料成本计算 2.按投入套数计算 3.无在制约当产量 4.按实际投入工时计算[DEF:"1"]
+0003 MA003    C       1  人工制费在制约量计算【Calculate Labours of WIP Equivalent Units】                                   1.按实际投入材料成本计算 2.按投入套数计算 3.无在制约当产量 4.按实际投入工时计算[DEF:"2"]
+0004 MA004    C       1  工资率及制费分摊率采【Labor Ratio and Factory Overhead Costs Apportionment Rate by】                1.标准 2.实际[DEF:"1"]
+0005 MA005    C       1  半成品投入归材料成本【Semi-product is Inputted Which Attach Material Costs of Upper Level Item】    Y/N[DEF:"N"]
+0006 MA006    C       1  加工费用在制约量计算【Calculate Subcontracts of WIP Equivalent Units】                              1.按实际投入材料成本计算 2.按投入套数计算(领料套数) 3.无在制约当产量 4.按标准加工费用计算[DEF:"4"]//890926 ADD
+0007 MA007    C       1  联产品成本分摊方式【Co/By-Product Costs Apportionment by】                                          1.按数量 2.按数量比率 3.按成本比率[DEF:"1"] //900108 2.1 ADD  //20100604 MODI BY 35594 FOR B00-100604002 修正原2.按比率->2.按数量比率，增加3.按比率
+0008 MA008    C       1  委外工单须分摊人工制费【Subcontact MO should Apportion Labours】                                    Y/N[DEF:"N"] //900703 ADD
+0009 MA009    C      10  分摊工作中心【Work Center】                                                                         分摊工作中心 //900703 ADD
+0010 MA010    C      01  制费分摊依据【Overheads Apportionment Basis】                                                       1.人时、2.机时、3.人工
+0011 MA011    N    09.6  标准工资率【Standard Labor Ratio】                                                                  标准工资率
+0012 MA012    N    09.6  标准变动制费分摊率【Standard Variable Factory Overhead Costs Apportionment Rate】                   按「制费分摊依据」SHOW 单位 //20020807 add "变动"
+0013 MA013    C      04  更新标准成本之成本计算代码【Update Cost Calculation Code of Standard Cost】                         更新标准成本之成本计算代码
+0014 MA014    C       1  抛转方式【Auto-build Options】                                                                      1.抛转自动分录底稿 2.抛转自动分录底稿及会计凭证[DEF:"1"]
+0015 MA015    C       4  凭证单别【Voucher Type】                                                                            凭证单别
+0016 MA016    C      20  标准成本调整科目【Standard Cost Adjustment Account Code】                                           标准成本调整科目
+0017 MA017    C      20  直接材料价格差异科目【Variances A/C of Direct Material(Price)】                                     直接材料价格差异科目
+0018 MA018    C      20  直接材料用量差异科目【Variances A/C of Direct Material(Quantity)】                                  直接材料用量差异科目
+0019 MA019    C      20  工资率差异科目【Variances A/C of Labor Ratio】                                                      工资率差异科目
+0020 MA020    C      20  人工效能差异科目【Variances A/C of Labor Time】                                                     人工效能差异科目
+0021 MA021    C      20  变动制造费用耗用差异科目【Variable Overhead Consumption Variance】                                  变动制造费用耗用差异科目 //20020807 add "变动"
+0022 MA022    C      20  变动制造费用效能差异科目【Variable Overheads Efficiency Variance】                                  变动制造费用效能差异科目 //20020807 add "变动"
+0023 MA023    V     255  借方摘要-1【Debit Abstract-1】                                                                      借方摘要-1 //20040908 6.0 P00-04100022 MODI C40->V255 BY 28975
+0024 MA024    V     255  贷方摘要-1【Credit Abstract-1】                                                                     贷方摘要-1 //20040908 6.0 P00-04100022 MODI C40->V255 BY 28975
+0025 MA025    V     255  借方摘要-2【Debit Abstract-2】                                                                      借方摘要-2 //20040908 6.0 P00-04100022 MODI C40->V255 BY 28975
+0026 MA026    V     255  贷方摘要-2【Credit Abstract-2】                                                                     贷方摘要-2 //20040908 6.0 P00-04100022 MODI C40->V255 BY 28975
+0027 MA027    C      20  对方科目(存货)【Opposite Account Code(Inventory)】                                                  对方科目(存货)
+0028 MA028    C      20  成本差异对方科目_材料【Cost Variances Opposite Account Code_Material】                              成本差异对方科目_材料
+0029 MA029    C       1  同底稿科目汇总【Summarize A/C Group by JNLEM】                                                      Y/N[DEF:"N"] //20020723
+0030 MA030    N    09.6  标准固定制费分摊率【Standard Fixed Overheads Apportionment Rate】                                   按「制费分摊依据」SHOW 单位 //20020807 add
+0031 MA031    C      20  固定制造费用差异科目【Variances A/C of Fixed Overheads】                                            固定制造费用差异科目 //20020807 add
+0032 MA032    C      20  加工费用差异科目【Variances A/C of Subcontracts】                                                   加工费用差异科目 //20020807 add
+0033 MA033    C       1  直接材料价格差异生成凭证【Generate Variances(Quantity) of Direct Materials】                        Y/N[DEF:"N"] //20020809 add
+0034 MA034    C       1  直接材料用量差异生成凭证【Generate Variances(Price) of Direct Materials】                           Y/N[DEF:"N"] //20020809 add
+0035 MA035    C       1  工资率差异生成凭证【Labor Ratio Variances Generate the Vouchers】                                   Y/N[DEF:"N"] //20020809 add
+0036 MA036    C       1  人工效能差异生成凭证【Generate Voucher for Labor Efficiency Variance】                              Y/N[DEF:"N"] //20020809 add
+0037 MA037    C       1  变动制造费用耗用差异生成凭证【Change Factory Overhead Cost Volume Variances】                       Y/N[DEF:"N"] //20020809 add
+0038 MA038    C       1  变动制造费用效能差异生成凭证【Change Factory Overhead Cost Controllable Variances】                 Y/N[DEF:"N"] //20020809 add
+0039 MA039    C       1  加工费用用量差异生成凭证【Generate Variances(Quantity) of Subcontracts】                            Y/N[DEF:"N"] //20020809 add //20040626 modi 固定制造费用差异生成凭证
+0040 MA040    C       1  加工费用价格差异生成凭证【Generate Variances(Price) of Subcontracts】                               Y/N[DEF:"N"] //20020809 add
+0041 MA041    C       1  抛转凭证排列方式【Sort Mode in Building Vouchers】                                                  1.逐张 2.汇总 //保留栏位20020816
+0042 MA042    C       1  同单号科目汇总【Summarize A/C Group by Order No.】                                                  Y/N[DEF:"Y"] //保留栏位20020816
+0043 MA043    C      20  对方科目(存货_人工)【Opposite Account Code(Inventory_Labour)】                                      对方科目(存货_人工) //20040626 6.0 ADD BY 28985 FOR P00-04060016↓
+0044 MA044    C      20  对方科目(存货_制费)【Opposite Account Code(Inventory_Overheads)】                                   对方科目(存货_制费)
+0045 MA045    C      20  对方科目(存货_加工)【Opposite Account Code(Inventory_Subcontract Expense)】                         对方科目(存货_加工)
+0046 MA046    C      20  对方科目(在制_材料)【Opposite Account Code(WIP_Material)】                                          对方科目(在制_材料)
+0047 MA047    C      20  对方科目(在制_人工)【Opposite Account Code(WIP_Labour)】                                            对方科目(在制_人工)
+0048 MA048    C      20  对方科目(在制_制费)【Opposite Account Code(WIP_Overheads)】                                         对方科目(在制_制费)
+0049 MA049    C      20  对方科目(在制_加工)【Opposite Account Code(WIP_Subcontract Expense)】                               对方科目(在制_加工)
+0050 MA050    C      20  加工费用用量差异科目【Variances(Quantity) A/C of Subcontracts】                                     加工费用用量差异科目
+0051 MA051    C       1  保留字段【Reserved Field】                                                                          Y/N[DEF:"N"]
+0052 MA052    C       1  保留字段【Reserved Field】                                                                          Y/N[DEF:"N"]
+0053 MA053    C      20  成本差异对方科目_人工【Opposite A/C of Variance Cost_Labours】                                      成本差异对方科目_人工
+0054 MA054    C      20  成本差异对方科目_制费【Opposite A/C of Variance Cost_Overheads】                                    成本差异对方科目_制费
+0055 MA055    C      20  成本差异对方科目_加工【Cost Variances Opposite Account Code_Add】                                   成本差异对方科目_加工 //20040626 6.0 ADD BY 28985 FOR P00-04060016↑
+0056 MA056    C      01  保留字段【Reserved Field】                                                                          保留字段 //20050606 add by 31380 for 6.0
+0057 MA057    C      01  保留字段【Reserved Field】                                                                          保留字段 //20050606 add by 31380 for 6.0
+0058 MA058    C      10  保留字段【Reserved Field】                                                                          保留字段 //20050606 add by 31380 for 6.0
+0059 MA059    C      10  保留字段【Reserved Field】                                                                          保留字段 //20050606 add by 31380 for 6.0
+0060 MA060    V      30  保留字段【Reserved Field】                                                                          保留字段 //20050606 add by 31380 for 6.0
+0061 MA061    N    16.6  保留字段【Reserved Field】                                                                          保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTMB
+文件名:工单工时档【MO Man/Machine-hours】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MB001+MB002+MB003+MB004
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MB001    C      10  工作中心【Work Center】                                      工作中心
+0002 MB002    C       8  日期【Date】                                                 日期[FORMATE:YMD]
+0003 MB003    C       4  工单单别【MO Type】                                          工单单别
+0004 MB004    C      11  工单单号【MO No.】                                           工单单号
+0005 MB005    N    16.6  使用人时【Man-hour Used】                                    此工作中心对此工单所投入的人时 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2 //20110318 MODI BY 42172 FOR P31-110317001(9.0) 8.2=>16.6
+0006 MB006    N    16.6  使用机时【Machine-hour Used】                                此工作中心对此工单所投入的机时 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2 //20110318 MODI BY 42172 FOR P31-110317001(9.0) 8.2=>16.6
+0007 MB007    C      20  产品品号【Item】                                             产品品号
+0008 MB008    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0009 MB009    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0010 MB010    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0011 MB011    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MB012    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MB013    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTMC
+文件名:工作中心成本档【Work Center Costs】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MC001+MC002
+===========================================================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                                     备注
+============================================================================================================================
+0001 MC001    C      10  工作中心【Work Center】                                                      工作中心
+0002 MC002    C       6  年月【Y/M】                                                                  年月[FORMATE:YM]
+0003 MC003    N    16.2  人工成本【Labor】                                                            此工作中心当月的总人工成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0004 MC004    N    16.2  制造费用【Overheads】                                                        此工作中心当月的总制造费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0005 MC005    N    16.6  人工小时【Labour-hour】                                                      此工作中心当月的总人工小时 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 8.2=>10.2   //20110318 MODI BY 42172 FOR P31-110317001(9.0) 10.2=>16.6   
+0006 MC006    N    16.6  机器小时【Machine-hour】                                                     此工作中心当月的总机器小时//891127 MODI:N7.2->N8.2 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 8.2=>10.2  //20110318 MODI BY 42172 FOR P31-110317001(9.0) 10.2=>16.6
+0007 MC007    N    17.8  标准工资率【Standard Labor Ratio】                                           标准工资率 //901009 S06-9006006 N13.4->N15.6 //20020711 3.1 B00-020711001 OLD:标准单位人工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长  
+0008 MC008    N    17.8  标准制费分摊率【Standard Overheads Apportionment Rate】                      标准制费分摊率 //901009 S06-9006006 N13.4->N15.6 //20020711 3.1 B00-020711001 OLD:标准单位制费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长  
+0009 MC009    N    16.2  实际固定制造费用【Actual Fixed Factory Overhead Costs】                      实际固定制造费用 //20020807 add by 28985  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 MC010    N    17.8  标准固定制费分摊率【Standard Fixed Overheads Apportionment Rate】            标准固定制费分摊率 //20020807 add by 28985 保留栏位  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0011 MC011    C      01  保留字段【Reserved Field】                                                   保留字段 //20050606 add by 31380 for 6.0
+0012 MC012    C      08  保留字段【Reserved Field】                                                   保留字段 //20050606 add by 31380 for 6.0
+0013 MC013    V      30  保留字段【Reserved Field】                                                   保留字段 //20050606 add by 31380 for 6.0
+0014 MC014    N    16.6  保留字段【Reserved Field】                                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0015 MC015    N    16.6  保留字段【Reserved Field】                                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0016 MC016    N    16.6  保留字段【Reserved Field】                                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTME
+文件名:产品成本档【Item Costs】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :ME001+ME002
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                      备注
+===============================================================================================
+0001 ME001    C       20  产品品号【Item】                                              产品的品号
+0002 ME002    C        6  年月【Y/M】                                                   年月[FORMATE:YM]
+0003 ME003    N     16.6  生产入库【MO Receipt】                                        此产品在此月的生产入库量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0004 ME004    N     16.6  委外进货【Subcontract Receipt】                               此产品在此月的委外进货量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0005 ME005    N     16.6  在制约量_材料【WIP Equivalent Units_Material】                此工单在此月底的材料在制约量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0006 ME006    N     16.6  在制约量_人工制费【WIP Equivalent Units_Conversion Costs】    此工单在此月底的人工制费在制约量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0007 ME007    N     16.2  材料成本【Material】                                          此产品此月的总投入材料成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0008 ME008    N     16.2  人工成本【Labor】                                             此产品此月的总投入人工成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0009 ME009    N     16.2  制造费用【Overheads】                                         此产品此月的总投入制造费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 ME010    N     16.2  加工费用【Subcontract Expense】                               此产品此月的总投入加工费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0011 ME011    N     16.2  下阶人工成本【Low-level Labour Costs】                        此产品此月的下阶人工成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0012 ME012    N     16.2  下阶制造费用【Low-level Factory Overhead Costs】              此产品此月的下阶制造费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0013 ME013    N     16.2  下阶加工费用【Low-level Subcontract Expense】                 此产品此月的下阶加工费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0014 ME014    N     16.6  在制约量_加工费用【WIP Equivalent Units_Subcontract Expense】 此工单在此月底的加工费用在制约量 //900507 ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0015 ME015    C       01  保留字段【Reserved Field】                                    保留字段 //20050606 add by 31380 for 6.0
+0016 ME016    C       08  保留字段【Reserved Field】                                    保留字段 //20050606 add by 31380 for 6.0
+0017 ME017    V       30  保留字段【Reserved Field】                                    保留字段 //20050606 add by 31380 for 6.0
+0018 ME018    N     16.6  保留字段【Reserved Field】                                    保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0019 ME019    N     16.6  保留字段【Reserved Field】                                    保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0020 ME020    N     16.6  保留字段【Reserved Field】                                    保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTMF
+文件名:联产品成本分摊比率档【Cost Apportionment Rates Of Co/By-Product】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MF001+MF002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0003 MF001    C      20  产品品号【Item】                                             产品品号
+0004 MF002    C      20  联产品号【Co/By-Product】                                    联产品号
+0005 MF003    N     5.4  成本比率【Cost Rate】                                        成本比率
+0006 MF004    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0007 MF005    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0008 MF006    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0009 MF007    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 MF008    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MF009    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MF010    N     8.2  产出比例                                                     产出比例 //20081204 ADD BY 35502 FOR P00-07070022 ACM
+
+文档代码:CSTTA
+文件名:工单成本档【MO Costs】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TA001+TA002+TA003+TA004
+===========================================================================================================================
+序号 字段编号 TYPE   长度  字段名称                                                                           备注
+==============================================================================================================================
+0001 TA001    C        20  品号【Item】                                                                       产品的品号
+0002 TA002    C         6  年月【Y/M】                                                                        年月[FORMATE:YM]
+0003 TA003    C         4  工单单别【MO Type】                                                                工单单别
+0004 TA004    C        11  工单单号【MO No.】                                                                 工单单号
+0005 TA005    N      16.6  期初在制约量-材料【Beginning WIP Equivalent Units-Material】                       月痴数量-材料  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0006 TA006    N      16.6  期初在制约量-人工制费【Beginning WIP Equivalent Units-Labours】                    月痴数量-人工制费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0007 TA007    N      16.2  期初在制金额【Beginning WIP Amount】                                               月初在制-料,工,费合计  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0008 TA008    N      16.2  期初在制材料成本【Beginning WIP Material Costs】                                   月初在制-材料成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0009 TA009    N      16.2  期初在制人工成本【Beginning WIP Labour Costs】                                     月初在制-人工成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 TA010    N      16.2  期初在制制造费用【Beginning WIP Factory Overhead Costs】                           月初在制-制造费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0011 TA011    N      16.2  期初在制加工费用【Beginning WIP Subcontract Expense】                              月初在制-加工费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0012 TA012    N      16.6  生产入库【MO Receipt】                                                             生产入库数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0013 TA013    N      16.6  委外进货【Subcontract Receipt】                                                    委外进货数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0014 TA014    N      16.2  本期投入金额【Current Period Input Total Amount】                                  本月投入金额-料,工,费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0015 TA015    N      16.2  本期投入材料成本【Current Period Input Material Costs】                            本月投入金额-材料成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0016 TA016    N      16.2  本期投入人工成本【Current Period Input Labour Costs】                              本月投入金额-人工成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0017 TA017    N      16.2  本期投入制造费用【Current Period Input Factory Overhead Costs】                    本月投入金额-制造费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TA018    N      16.2  本期投入加工费用【Current Period Input Subcontract Expense】                       本月投入金额-加工费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0019 TA019    N      16.2  本期投入下阶人工成本【Current Period Input Low-level Labour Costs】                本月下阶投入金额-人工成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0020 TA020    N      16.2  本期投入下阶制造费用【Current Period Input Low-level Factory Overhead Costs】      本月下阶投入金额-制造费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0021 TA021    N      16.2  本期投入下阶加工费用【Current Period Input Low-level Subcontract Expense】         本月下阶投入金额-加工费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0022 TA022    C         1  在制约量锁定【Lock WIP Equivalent Units】                                          在制约量锁定
+0023 TA023    N      16.6  在制约量_材料【WIP Equivalent Units_Material】                                     在制约量_材料  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0024 TA024    N      16.6  在制约量_人工制费【WIP Equivalent Units_Conversion Costs】                         在制约量_人工制费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0025 TA025    N      16.2  在制成本【WIP Costs】                                                              在制成本_料,工,费合计  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0026 TA026    N      16.2  在制材料成本【WIP Material Costs】                                                 在制成本_材料成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0027 TA027    N      16.2  在制人工成本【WIP Labour Costs】                                                   在制成本_人工成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0028 TA028    N      16.2  在制制造费用【WIP Factory Overhead Costs】                                         在制成本_制造费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0029 TA029    N      16.2  在制加工费用【WIP Subcontract Expense】                                            在制成本_加工费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0030 TA030    N      16.6  期初在制约量-加工费用【Beginning WIP Equivalent Units-Subcontracts】               月痴数量_加工费用 //890926 ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0031 TA031    N      16.6  在制约量_加工费用【WIP Equivalent Units_Subcontract Expense】                      在制约量_加工费用 //900507 ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0032 TA032    N      16.6  报废数量【Scrap Quantity】                                                         报废数量 //900702 ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0033 TA033    N      16.2  下阶在制人工成本【Low-level WIP Labour Costs】                                     下阶在制成本_人工成本 //900702 ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0034 TA034    N      16.2  下阶在制制造费用【Low-level WIP Factory Overhead Costs】                           下阶在制成本_制造费用 //900702 ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0035 TA035    N      16.2  下阶在制加工费用【Low-level WIP Subcontract Expense】                              下阶在制成本_加工费用 //900702 ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0036 TA036    N      16.2  差异材料成本【Variances Materials】                                                差异材料成本 //20040923 6.0 ADD BY 28985  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0037 TA037    N      16.2  差异人工成本【Variances Labors】                                                   差异人工成本 //20040923 6.0 ADD BY 28985  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0038 TA038    N      16.2  差异制造费用【Variances Overheads】                                                差异制造费用 //20040923 6.0 ADD BY 28985  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0039 TA039    N      16.2  差异加工费用【Variances Subcontracts】                                             差异加工费用 //20040923 6.0 ADD BY 28985  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0040 TA040    N      16.6  破坏数量【Destroyed Quantity】                                                     破坏数量 //20040707 ADD BY 28985 FOR P00-03120014  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0041 TA041    C        01  保留字段【Reserved Field】                                                         保留字段 //20050606 add by 31380 for 6.0
+0042 TA042    C        08  保留字段【Reserved Field】                                                         保留字段 //20050606 add by 31380 for 6.0
+0043 TA043    V        30  保留字段【Reserved Field】                                                         保留字段 //20050606 add by 31380 for 6.0
+0044 TA044    N      16.6  期初下阶在制加工费用【Reserved Field】                                             期初下阶在制加工费用 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6 //20121213 MODI BY 42172 FOR B32-121130003启用保留字段记录期初下阶在制加工费用 
+0045 TA045    N      16.6  保留字段【Reserved Field】                                                         保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0046 TA046    N      16.6  保留字段【Reserved Field】                                                         保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTMG
+文件名:成本计算条件设定档【Costing-mode Archivess】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MG001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MG001    C      04  成本计算代码【Costing-mode No.】                             成本计算代码
+0002 MG002    C      20  成本计算名称【Costing-mode Description】                     成本计算名称
+0003 MG003    C      01  计算损耗率【Including Scrap Ratio】                          Y/N[DEF:"Y"]
+0004 MG004    C      01  材料成本【Material】                                         1.按本阶标准材料成本 2.按最近进价 [DEF:1]
+0005 MG005    C      01  标准工时【Standard Man-hour】                                1.按品号制定 2.按产品工艺路线制定[DEF:1]
+0006 MG006    C      01  标准工资率【Standard Labor Ratio】                           1.全部统一 2.按工作中心制定 [DEF:2]
+0007 MG007    C      01  标准制费分摊率【Standard Overheads Apportionment Rate】      1.全部统一 2.按工作中心制定 [DEF:2]
+0008 MG008    C      06  最近计算年月【Latest Calculating Year/Month】                最近计算年月[FORMATE:YM]
+0009 MG009    C      01  仅考虑BOM中标准成本计算元件【Conside Only Standard Cost in BOM】 Y/N[DEF:"Y"]
+0010 MG010    C      01  加工费用【Subcontract Expense】                              1.按本阶加工费用 2.按产品工艺路线制定[DEF:1]
+0011 MG011    C      01  人工成本【Labor】                                            1.按本阶标准人工成本 2.按工时＊工资率 [DEF:1] //20030407 ADD BY 28985 FOR P00-03040012 ↓
+0012 MG012    C      01  制造费用【Overheads】                                        1.按本阶标准制造费用 2.按分摊基础数据＊分摊率[DEF:1]
+0013 MG013    C      01  标准机时【Standard Machine-hour】                            1.按品号制定 2.按产品工艺路线制定[DEF:1] //20030407 ADD BY 28985 FOR P00-03040012 ↑
+0014 MG014    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0015 MG015    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0016 MG016    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0017 MG017    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 MG018    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0019 MG019    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTMH
+文件名:本阶标准成本设定单头档【Costing-modes Information】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MH001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MH001    C      04  成本计算代码【Costing-mode No.】                             成本计算代码
+0002 MH002    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0003 MH003    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0004 MH004    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0005 MH005    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0006 MH006    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0007 MH007    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTMI
+文件名:本阶标准成本设定单身档【Current Level Standard Cost Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MI001+MI002
+===============================================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                              备注
+==================================================================================================================
+0001 MI001    C      04  成本计算代码【Costing-mode No.】                                      成本计算代码
+0002 MI002    C      20  品号【Item】                                                          品号
+0003 MI003    V      255  品名【Item Description】                                              品名 //20211209 MODI BY  01228(lijf) for Z30-21120900001 品名长度调整为C 60->V 255
+0004 MI004    V      255  规格【Spec】                                                          规格 //20211209 MODI BY  01228(lijf) for Z30-21120900001 规格长度调整为C 60->V 255
+0005 MI005    C      04  单位【Unit】                                                          单位
+0006 MI006    C      01  品号属性【Item Property】                                             P:采购件、M:自制件、S:委外加工件
+0007 MI007    N    17.8  本阶标准材料成本【Cur-level  Standard Material Costs】                本阶标准材料成本 //20030407 MODI BY 28985 OLD:单位标准材料成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0008 MI008    N       8  标准工时【Standard Man-hour】                                         标准工时
+0009 MI009    N    17.8  本阶标准加工费用【Cur-level  Standard Subcontract Expense】           本阶标准加工费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0010 MI010    N    17.8  本阶标准人工成本【Cur-level  Standard Labour Costs】                  本阶标准人工成本 //20030407 ADD BY 28985 FOR P00-03040012 ↓  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0011 MI011    N    17.8  本阶标准制造费用【Cur-level  Standard Factory Overhead Costs】        本阶标准制造费用  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0012 MI012    N       8  标准机时【Standard Machine-hour】                                     标准机时 //20030407 ADD BY 28985 FOR P00-03040012 ↑
+0013 MI013    C      01  保留字段【Reserved Field】                                            保留字段 //20050606 add by 31380 for 6.0
+0014 MI014    C      08  保留字段【Reserved Field】                                            保留字段 //20050606 add by 31380 for 6.0
+0015 MI015    V      30  保留字段【Reserved Field】                                            保留字段 //20050606 add by 31380 for 6.0
+0016 MI016    N    16.6  保留字段【Reserved Field】                                            保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0017 MI017    N    16.6  保留字段【Reserved Field】                                            保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 MI018    N    16.6  保留字段【Reserved Field】                                            保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTMK
+文件名:工单工作中心成本档【MO Costs by Work Center】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MK001+MK002+MK003+MK004
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MK001    C       4  工单单别【MO Type】                                          工单单别 //20040923 6.0 ADD BY 28985 ↓
+0002 MK002    C      11  工单单号【MO No.】                                           工单单号
+0003 MK003    C      10  工作中心【Work Center】                                      工作中心
+0004 MK004    C       8  日期【Date】                                                 日期[FORMATE:YMD]
+0005 MK005    N    16.2  人工成本【Labor】                                            人工成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0006 MK006    N    16.2  制造费用【Overheads】                                        制造费用 //20040923 6.0 ADD BY 28985 ↑  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0007 MK007    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0008 MK008    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0009 MK009    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0010 MK010    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MK011    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MK012    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTLA
+文件名:标准成本月档【Standard Cost Monthly Archives】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :LA001+LA002+LA003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 LA001    C      04  成本计算代码【Costing-mode No.】                             成本计算代码
+0002 LA002    C      20  品号【Item】                                                 品号
+0003 LA003    C       6  年月【Y/M】                                                  年月[FORMATE:YM]
+0004 LA004    N    17.8  本阶材料成本【Cur-level  Material Costs】                    本阶材料成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0005 LA005    N    17.8  本阶人工【Cur-level  Labor】                                 本阶人工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0006 LA006    N    17.8  本阶制费【Cur-level  Factory Overhead Costs】                本阶制费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0007 LA007    N    17.8  本阶加工【Cur-level  Subcontract】                           本阶加工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0008 LA008    N    17.8  累计材料成本【Cumulative Material Costs】                    本阶材料成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0009 LA009    N    17.8  累计人工【Cumulative Labour Costs】                          本阶人工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0010 LA010    N    17.8  累计制费【Cumulative Factory Overhead Costs】                本阶制费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0011 LA011    N    17.8  累计加工【Cumulative Subcontract Expense】                   本阶加工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0012 LA012    N       8  标准工时【Standard Man-hour】                                标准工时 //20040626 6.0 ADD BY 28985 FOR P00-04060016
+0013 LA013    N       8  标准机时【Standard Machine-hour】                            标准机时 //20040626 6.0 ADD BY 28985 FOR P00-04060016
+0014 LA014    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0015 LA015    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0016 LA016    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0017 LA017    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 LA018    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0019 LA019    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTLB
+文件名:标准成本差异重估维护档【Standard Cost Variances Revaluation】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :LB001+LB002+LB003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 LB001    C       6  年月【Y/M】                                                  年月[FORMATE:YM]
+0002 LB002    C      20  品号【Item】                                                 品号
+0003 LB003    C      10  仓库【Warehouse】                                            仓库
+0004 LB004    N    16.6  月初数量【Beginning Quantity】                               月初数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0005 LB005    N    17.8  旧标准单价【Old Standard Unit Price】                        旧标准单价  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0006 LB006    N    17.8  新标准单价【New Standard Unit Price】                        新标准单价  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0007 LB007    C      01  生成分录【Journalized】                                      Y/N[DEF:"N"]
+0008 LB008    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0009 LB009    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0010 LB010    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0011 LB011    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 LB012    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 LB013    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CSTTB
+文件名:工单成本差异分析档【MO Variance Costs Analysises】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TB001+TB002+TB003+TB004
+======================================================================================================================
+序号 字段编号 TYPE   长度  字段名称                                                                      备注
+=========================================================================================================================
+0001 TB001    C         6  年月【Y/M】                                                                   年月[FORMATE:YM]
+0002 TB002    C         4  工单单别【MO Type】                                                           工单单别
+0003 TB003    C        11  工单单号【MO No.】                                                            工单单号
+0004 TB004    C        20  品号【Item】                                                                  产品的品号
+0005 TB005    C         1  性质【Character】                                                             1.厂内工单、2.委外工单
+0006 TB006    C         1  状态码【Status】                                                              1.未生产、2.已发料、3.生产中、Y.已完工、y.指定完工
+0007 TB007    N      16.2  期初金额【Beginning Amount】                                                  期初金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0008 TB008    N      16.2  期初成本(材料)【Beginning Costs(Material)】                                   期初成本(材料)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0009 TB009    N      16.2  期初成本(人工)【Beginning Costs(Labour)】                                     期初成本(人工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 TB010    N      16.2  期初成本(制费)【Beginning Costs(Overheads)】                                  期初成本(制费)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0011 TB011    N      16.2  期初成本(加工)【Beginning Costs(Subcontract Expense)】                        期初成本(加工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0012 TB012    N      16.2  本期投入金额【Current Period Input Total Amount】                             本期投入金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0013 TB013    N      16.2  本期投入成本(材料)【Current Period Input Costs(Material)】                    本期投入成本(材料)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0014 TB014    N      16.2  本期投入成本(人工)【Current Period Input Costs(Labour)】                      本期投入成本(人工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0015 TB015    N      16.2  本期投入成本(制费)【Current Period Input Costs(Overheads)】                   本期投入成本(制费)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0016 TB016    N      16.2  本期投入成本(加工)【Current Period Input Costs(Subcontract Expense)】         本期投入成本(加工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0017 TB017    N      16.2  本期转出金额【Current Period Transfer Amount】                                本期转出金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TB018    N      16.2  本期转出成本(材料)【Current Period Transfer Costs(Material)】                 本期转出成本(材料)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0019 TB019    N      16.2  本期转出成本(人工)【Current Period Transfer Costs(Labour)】                   本期转出成本(人工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0020 TB020    N      16.2  本期转出成本(制费)【Current Period Transfer Costs(Overheads)】                本期转出成本(制费)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0021 TB021    N      16.2  本期转出成本(加工)【Current Period Transfer Costs(Subcontract Expense)】      本期转出成本(加工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0022 TB022    N      16.2  差异成本(价)(材料)【Variance Costs(Price)(Materials)】                        差异成本(价)(材料)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0023 TB023    N      16.2  差异成本(量)(材料)【Variance Costs(Quantity)(Materials)】                     差异成本(量)(材料)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0024 TB024    N      16.2  差异成本(价)(人工)【Variance Costs(Price)(Labours)】                          差异成本(价)(人工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0025 TB025    N      16.2  差异成本(量)(人工)【Variance Costs(Quantity)(Labours)】                       异成本(量)(人工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0026 TB026    N      16.2  差异成本(固定制费)【Variance Costs(Fixed Factory Overhead Costs)】            差异成本(固定制费)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0027 TB027    N      16.2  差异成本(价)(制费)【Variance Costs(Price)(Overheads)】                        差异成本(价)(制费)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0028 TB028    N      16.2  差异成本(量)(制费)【Variance Costs(Quantity)(Overheads)】                     差异成本(量)(制费)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0029 TB029    N      16.2  保留字段5【Reserved Field5】                                                  保留字段5  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0030 TB030    N      16.2  差异成本(加工)【Variance Costs(Subcontract Expense)】                         差异成本(加工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0031 TB031    N      16.2  期末金额【Ending Amount】                                                     期末金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0032 TB032    N      16.2  期末成本(材料)【Ending Costs(Material)】                                      期末成本(材料)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0033 TB033    N      16.2  期末成本(人工)【Ending Costs(Labour)】                                        期末成本(人工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0034 TB034    N      16.2  期末成本(制费)【Ending Costs(Overheads)】                                     期末成本(制费)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0035 TB035    N      16.2  期末成本(加工)【Ending Costs(Subcontract Expense)】                           期末成本(加工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0036 TB036    C         1  生成分录_调整【Journalized_Adjustment】                                       生成分录_调整[DEF:"N"]
+0037 TB037    N      16.2  本期调整成本_材料【PTD Adjustment Cost_Materials】                            本期调整成本_材料 //20040626 6.0 MODI BY 28985:保留字段11.3->本期调整成本_材料13.2  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0038 TB038    N      16.2  本期调整成本_人工【PTD Adjustment Cost_Labours】                              本期调整成本_人工 //20040626 6.0 MODI BY 28985:保留字段11.3->本期调整成本_人工13.2  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0039 TB039    N      16.2  本期调整成本_制费【PTD Adjustment Cost_Overheads】                            本期调整成本_制费 //20040626 6.0 MODI BY 28985:保留字段->本期调整成本_制费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0040 TB040    N      16.2  本期调整成本_加工【PTD Adjustment Cost_Subcontracts】                         本期调整成本_加工 //20040626 6.0 MODI BY 28985:保留字段->本期调整成本_加工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0041 TB041    N      16.2  期初材料-下阶材料【Beginning Material - Low-level Materials】                 期初材料-下阶材料 //20040626 6.0 ADD BY 28985 ↓   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0042 TB042    N      16.2  期初材料-下阶人工【Beginning Material - Low-level Labours】                   期初材料-下阶人工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0043 TB043    N      16.2  期初材料-下阶制费【Beginning Material - Low-level Overheads】                 期初材料-下阶制费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0044 TB044    N      16.2  期初材料-下阶加工【Beginning Material - Low-level Subcontracts】              期初材料-下阶加工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0045 TB045    N      16.2  本期材料-下阶材料【PTD Material - Low-level Materials】                       本期投入成本(下阶材料)   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0046 TB046    N      16.2  本期材料-下阶人工【PTD Material - Low-level Labours】                         本期投入成本(下阶人工)   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0047 TB047    N      16.2  本期材料-下阶制费【PTD Material - Low-level Factory Overhead Costs】          本期投入成本(下阶制费)   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0048 TB048    N      16.2  本期材料-下阶加工【PTD Material - Low-level Subcontracts】                    本期投入成本(下阶加工)   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0049 TB049    N      16.2  本期材料转出-下阶材料【PTD Material Transfer - Low-level Materials】          本期材料转出-下阶材料  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0050 TB050    N      16.2  本期材料转出-下阶人工【PTD Material Transfer - Low-level Labours】            本期材料转出-下阶人工   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0051 TB051    N      16.2  本期材料转出-下阶制费【PTD Material Transfer - Low-level Overheads】          本期材料转出-下阶制费  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0052 TB052    N      16.2  本期材料转出-下阶加工【PTD Material Transfer - Low-level Subcontracts】       本期材料转出-下阶加工   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0053 TB053    N      16.2  本期材料调整-下阶材料【PTD Material Adjustment - Low-level Materials】        本期材料调整-下阶材料   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0054 TB054    N      16.2  本期材料调整-下阶人工【PTD Material Adjustment - Low-level Labours】          本期材料调整-下阶人工   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0055 TB055    N      16.2  本期材料调整-下阶制费【PTD Material Adjustment - Low-level Overheads】        本期材料调整-下阶制费   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0056 TB056    N      16.2  本期材料调整-下阶加工【PTD Material Adjustment - Low-level Subcontracts】     本期材料调整-下阶加工  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0057 TB057    N      16.2  期末材料-下阶材料【Ending Material - Low-level Materials】                    期末材料-下阶材料  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0058 TB058    N      16.2  期末材料-下阶人工【Ending Material - Low-level Labours】                      期末材料-下阶材料  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0059 TB059    N      16.2  期末材料-下阶制费【Ending Material - Low-level Overheads】                    期末材料-下阶材料  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0060 TB060    N      16.2  期末材料-下阶加工【Ending Material - Low-level Subcontracts】                 期末材料-下阶材料   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0061 TB061    N      16.2  差异成本(量)(下阶材料)【Variance Costs(Quantity)(Low-level Materials)】       差异成本(量)(下阶材料)   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0062 TB062    N      16.2  差异成本(量)(下阶人工)【Variance Costs(Quantity)(Low-level Labours)】         差异成本(量)(下阶人工)   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0063 TB063    N      16.2  差异成本(量)(下阶制费)【Variance Costs(Qutantity)(Low-level Overheads)】      差异成本(量)(下阶制费)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0064 TB064    N      16.2  差异成本(量)(下阶加工)【Variance Costs(Quantity)(Low-level Subcontracts)】    差异成本(量)(下阶加工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0065 TB065    N      16.2  差异成本(价)(下阶材料)【Variance Costs(Price)(Low-level Materials)】          差异成本(价)(下阶材料)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0066 TB066    N      16.2  差异成本(价)(下阶人工)【Variance Costs(Price)(Low-level Labours)】            差异成本(价)(下阶人工)   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0067 TB067    N      16.2  差异成本(价)(下阶制费)【Variance Costs(Price)(Low-level Overheads】           差异成本(价)(下阶制费)   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0068 TB068    N      16.2  差异成本(价)(下阶加工)【Variance Costs(Price)(Low-level Subcontracts)】       差异成本(价)(下阶加工)  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0069 TB069    C         1  生成分录-差异【Journalized-Variances】                                        生成调整分录[DEF:"N"] //20040626 6.0 ADD BY 28985 ↑
+0070 TB070    C        01  保留字段【Reserved Field】                                                    保留字段 //20050606 add by 31380 for 6.0
+0071 TB071    C        08  保留字段【Reserved Field】                                                    保留字段 //20050606 add by 31380 for 6.0
+0072 TB072    V        30  保留字段【Reserved Field】                                                    保留字段 //20050606 add by 31380 for 6.0
+0073 TB073    N      16.6  保留字段【Reserved Field】                                                    保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0074 TB074    N      16.6  保留字段【Reserved Field】                                                    保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0075 TB075    N      16.6  保留字段【Reserved Field】                                                    保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+
+文档代码:CSTTG
+文件名:每月标准单位成本【Std Unit Cost Per Month】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TG001+TG002+TG003+TG004
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TG001    C       6  年月【Y/M】                                                  年月[FORMATE:YM] //20040626 6.0 ADD BY 28985
+0002 TG002    C      10  工作中心/委外供应商【Work Center/Subcontractor】             工作中心/委外供应商
+0003 TG003    C      20  产品品号【Item】                                             产品品号
+0004 TG004    C       4  工艺【Operation】                                            工艺
+0005 TG005    C       4  计价单位【Pricing Unit】                                     计价单位
+0006 TG006    N    17.8  标准委外单价【Standard Subcontract Price】                   标准委外单价  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0007 TG007    N    17.8  标准工资率【Standard Labor Ratio】                           标准工资率  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0008 TG008    N    17.8  标准分摊率【Standard Apportionment Rate】                    标准分摊率  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0009 TG009    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0010 TG010    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0011 TG011    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0012 TG012    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 TG013    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0014 TG014    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+
+文档代码:CSTLC
+文件名:成本年月低阶码档【Costs Y/M Low level Codes】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :LC001+LC002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 LC001    C       6  年月【Y/M】                                                  年月[FORMATE:YM] //20061225 ADD BY 32349 FOR 6.5 P13-06120056
+0002 LC002    C      20  品号【Item】                                                 产品的品号
+0003 LC003    C       2  低阶码【Low level Code】                                     低阶码
+0004 LC004    C       1  状态【Status】                                               工单低阶码异常状况,0.正常，1.BOM循环或超过20阶[DEF:0]
+0005 LC005    V     255  备注【Remark】                                               备注
+0006 LC006    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0007 LC007    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0008 LC008    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0009 LC009    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0010 LC010    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0011 LC011    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段

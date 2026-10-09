@@ -1,0 +1,71 @@
+文档代码:EFSMC
+文件名:电子签核传输栏位设置单头档【Documents configuration For easyflow Header】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MC001+MC002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MC001    C      20  程序编号【Procedure No.】                                    程序编号
+0002 MC002    C       4  单别【Order Type】                                           程序编号
+0003 MC003    C      10  单头来源表【Header Table】                                   单头来源表
+0004 MC004    C      10  单身来源表【lines Table】                                    单身来源表
+0005 MC005    C      60  单头来源表Key【Header Key】                                  单头来源表Key
+0006 MC006    C       1  审核【Approve】                                              审核Y.自动送签 y.手动送签 C.提示送签 N.停止送签
+0007 MC007    C       1  撤销审核【De-approved】                                      撤销审核
+0008 MC008    C       1  作废【Cancel】                                               作废
+0009 MC009    V     255  备注【Remark】                                               备注
+0010 MC010    C       1  传输过了否【Transfer Status】                                传输过了否
+0011 MC011    C      60  单身来源表Key【lines Table Key】                             单身来源表Key
+0012 MC012    C      20  对应凭证代号【ReportID】                                     对应凭证代号
+0013 MC013    C      20  单据签核状态码栏位【E-Approval Status】                      单据签核状态码栏位
+0014 MC014    C      10  子单头来源表【Sub Header Table】                             子单头来源表
+0015 MC015    C      60  子单头来源表Key【Sub Header Table Key】                      子单头来源表Key
+0016 MC016    C      10  子单身来源表【SubB Line Table】                              子单身来源表
+0017 MC017    C      60  子单身来源表Key【Sub Line Table Key】                        子单身来源表Key
+
+
+文档代码:EFSMD
+文件名:电子签核传输栏位设置单身档【Documents configuration For easyflow Line】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MD001+MD002+MD003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MD001    C      20  程序编号【Procedure No.】                                    程序编号
+0002 MD002    C       4  单别【Order Type】                                           程序编号
+0003 MD003    C       4  序号【Sequence】                                             序号
+0004 MD004    C      10  来源表【Table】                                              单头来源表
+0005 MD005    C      15  字段编号【Field No.】                                        字段编号
+0006 MD006    C       5  关联字段来源表【Join Table】                                 关联字段来源表
+0007 MD007    C      15  关联出的字段编号【Display Join Field No.】                   关联出的字段编号
+0008 MD008   C      15   用来关联的字段编号【Join Field No.】                         用来关联的字段编号
+0009 MD009    V    1000  内含外显【Memory Shown Value】                               内含外显
+0010 MD010    C       1  传输数据否【Trans Data】                                     传输数据否
+0011 MD011    C       1  回写标示【Allow Easyflow modification】                      回写标示
+0012 MD012    V    100   来源字段名称【Source Field Name】                            来源字段名称
+0013 MD013    C     1    是否为计算字段【Calculation Field】                          是否为计算字段【Y/N】
+0014 MD014    T     X    SQL脚本【SQL】                                               计算字段取值来源
+0015 MD015    T     X    公式描述【Formula Description】                              公式描述
+
+
+文档代码:EFSME
+文件名:电子签核送签信息记录档【EasyFlow Result Log】
+类    型:8 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :ME001+ME002+ME003+ME004+ME005+ME006
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 ME001    C      20  程序编号【Procedure No.】                                  程序编号
+0002 ME002    C      80  单别【Order Type】                                         单别
+0003 ME003    C      80  单号【Order No.】                                          单号
+0004 ME004    C      80  第三个Key【The third key】                                 第三个Key(预留)
+0005 ME005    C      80  第四个Key【The Fourth key】                                第四个Key(预留)
+0006 ME006    C      500 第五个Key【The fifth key】                                 第五个Key(预留)
+0007 ME007    T      X   开单(CreateForm)结果【CreateForm Result】                  开单(CreateForm)结果
+0008 ME008    T      X   审批(SetStatus)结果【SetStatus】                           审批(SetStatus)结果
+0009 ME009    T      X   各关签核(GetApproveLog)结果【GetApproveLog】               各关签核(GetApproveLog)结果结果
+
+

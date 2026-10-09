@@ -1,0 +1,1201 @@
+//-------------------------------------//
+// 生效日:880812 0.00.00  CMS2-003.SDD //
+//-------------------------------------//
+文档代码:CMSMA
+文件名:共用参数设置档【Common Parameters】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MA001    C      01  日期格式【Date Format】                                      4.民国年 YYMMDD、5.民国年 YYYMMDD、1.公历 YYYYMMDD、2.公历 MMDDYYYY、3.公历 DDMMYYYY
+0002 MA002    C      01  日期间隔符【Date Space Code】                                1.-、2./
+0003 MA003    C      04  记账本位币【REC Base Currency】                              本国使用币种编号
+0004 MA004    N     5.4  税率(%)【Tax Rate(%)】                                       税率(%)//87-09-03del//89-06-07 OLD:07.6 //20030701 5.0 P00-03040007 增值税率=>税率
+0005 MA005    C      01  MRP使用NetChange【MRPUseNetChange】                          Y/N [DEF:"N"] //20040225 MODI BY 29234 MRP使用NetChange->维修管理 //20040526 5.1 MARK BY 32350 字段还原成"MRP使用NetChange"
+0006 MA006    C      01  税额【Tax】                                                  (税额)1.整张单据计算 2.按行项目计算 //移至客户及供应商个别控制
+0007 MA007    C      10  商品分类方式一【Inventory Category 1】                       商品分类方式一
+0008 MA008    C      10  商品分类方式二【Inventory Category 2】                       商品分类方式二
+0009 MA009    C      10  商品分类方式三【Inventory Category 3】                       商品分类方式三
+0010 MA010    C      10  商品分类方式四【Inventory Category 4】                       商品分类方式四
+0011 MA011    C      06  库存现行年月【Inventory Year/Month】                         库存现行年月[FORMATE:YM]
+0012 MA012    C      06  库存关账年月【Inventory Closing Year/Month】                 库存关账年月[FORMATE:YM]
+0013 MA013    C      08  账务冻结日期【Financial Frozen Date】                        账务冻结日期[FORMATE:YMD]
+0014 MA014    C      01  主要成本计价方式【Costing Mode】                             1.标准成本制、2.月加权平均成本制 //890209 MARK 3.移动平均成本制 //20070705 7.0 MODI BY 34959 FOR P00-07060006  成本计价方式->主要成本计价方式
+0015 MA015    C      02  会计现行期间【Accounting Period】                            会计现行期间
+0016 MA016    C      01  期间类型【Period Type】                                      1.12期 2.13期 // modi年度认定方式
+0017 MA017    C      06  更新低阶码【Update Low level Code】                          更新低阶码//88-02-26
+0018 MA018    C      02  会计关账期间【Accounting Closing Period】                    会计关账期间//88-03-01.4码=>2码
+0019 MA019    C      04  会计现行年度【Accounting Year】                              会计现行年度[FORMATE:Y]//88-02-10.6码=>4码
+0020 MA020    C      04  会计关账年度【Accounting Closing Year】                      会计关账年度[FORMATE:Y]//88-03-01.6码=>4码
+0021 MA021    C      06  银行存款现行年月【Bank Account Year/Month】                  银行存款现行年月[FORMATE:YM]
+0022 MA022    C      06  计薪年月【Salary Year/Month】                                计薪年月[FORMATE:YM]//880906 10码=>6码
+0023 MA023    C      01  一品号对应多条码【Multi-barcode Per Item】                   一品号对应多条码//88-12-13 MODI OLD:预留 C10
+0024 MA024    C      01  数量表达方式【Inventory Unit Mode】                          1.单一单位2.双单位3.制造双单位//87-09-03add
+0025 MA025    C      01  审核日依据【Approve Date By】                                1.系统日、2.单据日[DEF:'1']//89-05-25add
+0026 MA026    C      01  功能别【Hided In Mainland Version】                          1.台湾版、2.大陆版[DEF:'1']//89-06-21add by 349
+0027 MA027    C      06  应收现行年月【A/R Year/Month】                               应收现行年月[FORMATE:YM] //900103ADDV2.1
+0028 MA028    C      06  应收关账年月【A/R Closing Year/Month】                       应收关账年月[FORMATE:YM] //900103ADDV2.1
+0029 MA029    C      06  应付现行年月【A/P Year/Month】                               应付现行年月[FORMATE:YM] //900507ADDV2.1
+0030 MA030    C      06  应付关账年月【A/P Closing Year/Month】                       应付关账年月[FORMATE:YM] //900507ADDV2.1
+0031 MA031    C      10  会科设定用户【User Setting by Account Code】                 会科设定用户 //20020920 3.1 add by 28986
+0032 MA032    C      10  部门设定用户【User by Department】                           部门设定用户 //20020920 3.1 add by 28986
+0033 MA033    C      10  编码设定用户【User by Coding】                               编码设定用户 //20020920 3.1 add by 28986
+0034 MA034    C      10  组层级设定用户【User by Group Level】                        组层级设定用户 //20020920 3.1 add by 28986
+0035 MA035    C      01  进口管理【Import Management】                                Y/N [DEF:"N"] //20030314 5.0 P00-03030003 ADD BY 28995↓
+0036 MA036    C      01  出口管理【Export Management】                                Y/N [DEF:"N"]
+0037 MA037    C      01  税控接口【Taxing Interface】                                 Y/N [DEF:"N"]
+0038 MA038    C      01  商业智能【Business Intelligence】                            Y/N [DEF:"N"] //20040526 5.1 MODI BY 32350 销售分析->商业智能
+0039 MA039    C      01  质量管理【Quality Management】                               Y/N [DEF:"N"]
+0040 MA040    C      01  应收/应付管理【A/R/Account Payable】                         Y/N [DEF:"N"] //20040225 MODI BY 29234 应收管理->应收/应付管理
+0041 MA041    C      01  多角贸易【Multi-side Trade】                                 Y/N [DEF:"N"]//20040225 MODI BY 29234 应付管理->多角贸易
+0042 MA042    C      01  FAX/EMAIL【FAX/EMAIL】                                       Y/N [DEF:"N"]//20040225 MODI BY 29234 会计总账->FAX/EMAIL
+0043 MA043    C      01  自动分录【Auto-generating Journal】                          Y/N [DEF:"N"]
+0044 MA044    C      01  票据资金【Bill Fund】                                        Y/N [DEF:"N"]
+0045 MA045    C      01  设备资产管理【Asset Management】                             Y/N [DEF:"N"]//20040225 MODI BY 29234 固定资产->生产管理 //20040526 5.1 MARK BY 32350 字段还原成"设备资产管理"
+0046 MA046    C      01  刷卡管理【Card Reading Control】                             Y/N [DEF:"N"]
+0047 MA047    C      01  海关合同【Customs Contract】                                 Y/N [DEF:"N"]
+0048 MA048    C      01  制药经营管理【GSP】                                          Y/N [DEF:"N"]
+0049 MA049    C      01  分销管理【Distribution Management】                          Y/N [DEF:"N"]　　　//20030314 5.0 P00-03030003 ADD BY 28995↑
+0050 MA050    C      01  出货通知管理【Delivery Notice Management】                   出货通知管理[DEF:"N"] //20030321 5.0 P00-03030003 ADD BY 28985↓
+0051 MA051    C      10  保留字段【Reserved Field】                                   保留字段 //20080415 MODI BY 44116 FOR Z10-08041000002 保留字段->销退单报废单别//20080829 MODI BY 37419 恢复保留字段
+0052 MA052    C      10  备货仓【Stock-up Warehouse】                                 备货仓 //20030321 5.0 P00-03030003 ADD BY 28985↑
+0053 MA053    C      01  品号快捷码【Item Shortcut】                                  1.不启用、2.模糊查询、3.全字匹配[DEF:'1']
+0054 MA054    C      01  客户快捷码【Customer Shortcut】                              1.不启用、2.模糊查询、3.全字匹配[DEF:'1']
+0055 MA055    C      01  供应商快捷码【Supplier Shortcut】                            1.不启用、2.模糊查询、3.全字匹配[DEF:'1']
+0056 MA056    C      01  科目快捷码【Subject Shortcut】                               1.不启用、2.模糊查询、3.全字匹配[DEF:'1']
+0057 MA057    C      01  传送码【Transfer Code】                                      Y/M/N[DEF:"N"] //20030516 5.0 P00-0301001 ADD BY 28985↓
+0058 MA058    C      12  传送日期【Transfer Date】                                    日期时间yyyymmdd hh:mm //20030516 5.0 P00-0301001 ADD BY 28985
+0059 MA059    C      10  门店设定用户【User by Shop】                                 门店设定用户 //20030516 5.0 P00-0301001 ADD BY 28985↑
+0060 MA060    C      01  运行电子表单流程【Run EasyFlow】                             Y/N [DEF:"N"] //20030630 ADD BY 28985 FOR P00-03060005
+0061 MA061    C      01  品号税率与单据税率不同【Item Tax Rate Not Equal To Document Tax Rate】 处理方式:1.警告2.拒绝3.不处理[DEF:"2"] //20030829 ADD BY 28985 FOR P00-03080016 //20040712 ADD BY 29234 3.不处理
+0062 MA062    C      01  进货单报废方式【Receipt Scrap Mode】                         0.不处理 1.批次产生 ,[DEF:"0"] //20040604 ADD BY 30119 FOR P00-03120014 ↓
+0063 MA063    C      01  委外进货单报废方式【Subcontract Receipt Scrap Mode】         0.不处理 1.批次产生 ,[DEF:"0"]
+0064 MA064    C      01  生产入库单报废方式【MO Receipt Scrap Mode】                  0.不处理 1.批次产生 ,[DEF:"0"]
+0065 MA065    C      01  销退单报废方式【Sales Returns Scrap Mode】                   0.不处理 1.批次产生 ,[DEF:"0"]
+0066 MA066    C      01  移转单报废方式【Transfer Order Scrap Mode】                  0.不处理 1.批次产生 ,[DEF:"0"]
+0067 MA067    C      01  移转入库单报废方式【Transfer Receipt Scrap Mode】            0.不处理 1.批次产生 ,[DEF:"0"]
+0068 MA068    C      01  数量取位【Quantity Decimal Place】                           0.整数、1.小数一位、2.小数二位、3.小数三位、4.小数四位、5.小数五位、6.小数六位      //20070524 MODI BY 34231 保留字段->数量取位 FOR P00-07050010
+0069 MA069    C      01  药品生产质量管理【Medicine Inspection】                      Y/N [DEF:"Y"] //20040604 ADD BY 30119 FOR P00-03120014 ↑
+0070 MA070    C      01  计价单位与采购单位不同【Pricing Unit Differ From Purchasing Unit】 Y/N [DEF:"N"] //20040322 ADD BY 28983 FOR P03-03020005
+0071 MA071    C      15  产品版号【System Version】                                   产品版号 //20040513 ADD BY 29234 P00-04050006
+0072 MA072    C      01  认样检查【Sampling Inspection】                              Y/N [DEF:"N"] //20040604 ADD BY 30119 FOR P00-03120014
+0073 MA073    C      01  存货管理【Inventory Management】                             Y/N [DEF:'N'] //20040526 5.1 ADD BY 32350↓ FOR 5.1版系统启用参数修改
+0074 MA074    C      01  销售管理【Sales Management】                                 Y/N [DEF:'N']
+0075 MA075    C      01  采购管理【Purchase Management】                              Y/N [DEF:'N']
+0076 MA076    C      01  维修服务管理【Repair Service Management】                    Y/N [DEF:'N']
+0077 MA077    C      01  产品结构管理【BOM Management】                               Y/N [DEF:'N']
+0078 MA078    C      01  工单/委外管理【Manufacture Order/Subcontract Management】    Y/N [DEF:'N']
+0079 MA079    C      01  工艺管理【Operation Management】                             Y/N [DEF:'N']
+0080 MA080    C      01  物料需求计划【Material Requirement Plan】                    Y/N [DEF:'N']
+0081 MA081    C      01  批次需求计划【Lot Requirement Plan】                         Y/N [DEF:'N']
+0082 MA082    C      01  主生产计划【Master Production Schedule】                     Y/N [DEF:'N']
+0083 MA083    C      01  看板管理【KBS Management】                                   Y/N [DEF:'N']
+0084 MA084    C      01  成本计算管理【Cost Management】                              Y/N [DEF:'N']
+0085 MA085    C      01  人事薪资管理【HR Management】                                Y/N [DEF:'N']
+0086 MA086    C      01  人力资源管理【Human Resource】                               Y/N [DEF:'N']
+0087 MA087    C      01  会计总账管理【Accounting General Ledger Management】         Y/N [DEF:'N']
+0088 MA088    C      01  客户关系管理【Customer Relation Management】                 Y/N [DEF:'N']
+0089 MA089    C      01  EBC集成【EBCIntegration】                                    Y/N [DEF:'N'] //20060610 MODI BY 29618 FOR P00-06060010 系统启用预留二 ==>EBC集成
+0090 MA090    C      01  设备管理【Equipment Management】                             Y/N [DEF:'N']	//20070521 MODI BY 34959 FOR P00-07050002 系统启用预留三 ==>设备管理
+0091 MA091    C      01  HR集成【HR Integration】                                     Y/N [DEF:'N'] //20070831 MODI BY 37419 FOR HR Z30-07090400004 项目集成 系统启用保留四 ==>HR集成 //20080417 MODI BY 37419 FOR B32-080418001 去掉空格                                                                                                  
+0092 MA092    C      01  材积单位【Volume Unit】                                      1.CBM 2.CUFT ,[DEF:"1"] //MODI By 32006 20060214 P00-06020004 系统启用预留五-->材积单位 C 01 Y/N [DEF:'N'] //20040526 5.1 ADD BY 32350↑
+0093 MA093    C      01  库位管理【Bin Control】                                      Y/N [DEF:'N'] //20040603 5.1 ADD BY 28983 FOR P00-04040011
+0094 MA094    V     255  库位批号拆分原则【Split Rule of Bin/Lot】                    库位批号拆分原则 //20040713 6.0 ADD BY 29618 FOR P00-04110002
+0095 MA095    C      01  出库单据录入时必须指定批号【Must Assign Lot No When Issue Document Creating】 Y/N [DEF:"Y"] //20040713 6.0 ADD BY 29618 FOR P00-04110002
+0096 MA096    C      01  出库单据录入时必须指定库位【Issue Document...】              Y/N [DEF:"Y"] //20040713 6.0 ADD BY 29618 FOR P00-04110002
+0097 MA097    C      01  品号限制存放位置【Item Storage Limit】                       1.不限制、2.限制仓库、3.限制仓库库位[DEF:'1'] //20040603 6.0 ADD BY 29618 FOR P00-04040011
+0098 MA098    C      01  存货调拨至备货仓【Inventory Transfer to Standby Warehouse】  Y/N [DEF:'Y'] //20040914 6.0 ADD BY 29618 FOR P00-04090014
+0150 MA150    C      20  功能使用参数【Function Usage Parameters】                    Y/N [DEF:"YYYYYYYYYYYYYYYYYYYY"] //20040614 ADD BY 29234 FOR P00-04060009 第一码表示启用关联字段查询
+0151 MA151    N      11  查询默认返回资料笔数【Default Numbers of Inquiry】           查询默认返回资料笔数[DEF:500] //20040614 ADD BY 29234 FOR P00-04060009
+0152 MA152    C      10  采购单价取价顺序【Ranking of Purchase Price】                采购单价取价顺序 [DEF:"123"] //20040628 ADD BY 32349 FOR P00-04060021
+0153 MA153    C      10  委外单价取价顺序【Subcontract Price Ranking】                委外单价取价顺序 [DEF:"123"] //20040628 ADD BY 32349 FOR P00-04060021
+0154 MA154    C      10  核算项目设定用户【User of Setting Analysis Item】            核算项目设定用户 //20040908 6.0 P00-04090005 ADD BY 28975
+0155 MA155    C      01  存货双单位推算方式【Double Unit Calculate Mode】             N.不推算、Y.自动推算，以交易数量为主、y.自动推算，以包装数量为主 //20050606 add by 31380 for 6.0 //20060101 MODI BY 29618 FOR POO-06010001 预留字段->存货双单位推算方式
+0156 MA156    C      01  库存量检查对象【Inventory Check by】                         1.库存数量、2.库存包装数量、3.库存数量和库存包装数量 //20050606 add by 31380 for 6.0 //20060101 MODI BY 29618 FOR POO-06010001 预留字段->库存量检查对象
+0157 MA157    C      10  实际成本计价方式【Actual Costing Mode】                      2.月加权平均、3.先进先出、4.分批认定 //20050606 add by 31380 for 6.0//20070705 7.0 MODI BY 34959 P00-07060006 预留字段->实际成本计价方式
+0158 MA158    C      10  共用参数【Common Parameters】                                启用第1位表明是否启用PDM集成 Y.启用 N.未启用 //20050606 add by 31380 for 6.0//20080123 MODI BY 37419 FOR Z30-08010300001 PDM 集成启用1bit表是否启用PDM集成
+0159 MA159    V      30  预留字段【Reserved Field】                                   预留字段       //20050606 add by 31380 for 6.0  //20080415 MODI BY 44116 FOR Z10-08041000002 预留字段->报废仓库 //20080829 MODI BY 37419 恢复保留字段
+0160 MA160    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0161 MA161    C       1  EF集成版本【EasyFlow Version】                               EF集成版本 //20080225 add by 31380 for Z30-08022200001 EFsp8集成
+0162 MA162    C      01  高级成本管理【Advanced Approval Status】                     Y/N [DEF:'N'] //20080414 add by 39185 for 8.0
+0163 MA163    C      01  客户核准状况【Customer Approval Status】                     1:已核准、2:尚待核准、3:不准交易[DEF:2]  //20080604 ADD BY 38130 FOR Z10-08060400002
+0164 MA164    C      01  供应商核准状况【Supplier Approval Status】                   1:已核准、2:尚待核准、3:不准交易[DEF:2]  //20080604 ADD BY 38130 FOR Z10-08060400002
+0165 MA165    C      01  品号核准状况【Item Approval Status】                         Y:已核准、y:尚待核准、N:不准交易[DEF:"y"] //20080604 ADD BY 38130 FOR Z10-08060400002
+0166 MA166    C      01  BOM 核准状况【BOM Approval Status】                          Y:已核准、y:尚待核准、N:不准交易[DEF:"y"] //20080604 ADD BY 38130 FOR Z10-08060400002
+0167 MA167    C      01  是否启用易飞上直接签核功能【】                               Y/N [DEF:'N'] //20080718 ADD BY 38130 FOR Z10-08071600001 增加预留字段  //20120330 MODI BY 42441 FOR Z39-20120313002 MODI:预留字段【Reserved Field】 预留字段  -> 是否启用易飞上直接签核功能   Y/N [DEF:'N']
+0168 MA168    C      01  TMC 启用高级消息【Reserved Field】                           Y/N [DEF:'N'] //20080718 ADD BY 38130 FOR Z10-08071600001 增加预留字段 //20131025 MODI BY 38130 FOR Z39-20130816001 MODI:预留字段-->TMC 启用高级消息 
+0169 MA169    C      10  固定资产现行年月【Year/Month】                               固定资产现行年月[FORMATE:YM] //20080718 ADD BY 38130 FOR Z10-08071600001 增加预留字段 //20120514 modi by 35501 for Z11-12051000001 预留字段->固定资产现行年月
+0170 MA170    C      10  防止负库存检查【 】                                          N.不检查 Y.检查 W.警告 [DEF:'N']//20080718 ADD BY 38130 FOR Z10-08071600001 增加预留字段 //20130304 MODI BY 38130 FOR Z10-13030400001 预留字段->防止负库存检查
+0171 MA171    V      30  预留字段【Reserved Field】                                   预留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加预留字段
+0172 MA172    C      01  财务稽核中心【Finance Audit Center】                         Y/N [DEF:'N'] //20090417 ADD BY 38130 FOR Z30-09022300002
+0173 MA173    C      01  预留字段【Reserved Field】                                   是否可修改核准状况Y/N [DEF:'N']   //20090417 ADD BY 38130 FOR Z30-09022300002 
+0174 MA174    C      01  是否启用电子签核数据流方式【Run YF EasyFlow】                Y/N       //20100726 ADD BY 42441 FOR Z39-20100414001
+0175 MA175    C      01  试产管理【E-Bill of Material Management System】             Y/N [DEF:'N'] //20100914 ADD BY 38130 FOR Z30-10090200001
+0176 MAE01    C     01   自动报价【Automated Quotation】                              Y/N [DEF:'N'] //20101125 ADD BY 37419 FOR Z10-10112500001
+0177 MA176    C      01  费用管理【Outlay Management System】                         Y/N [DEF:'N'] //20101220 ADD by 35501 for Z30-10122000001
+0178 MA177    C      10  费用项目设定用户【User By Outlay Item】                      费用项目设定用户      //20110126 ADD BY 39057 FOR Z30-10122000001 
+0179 MA178    C      10  费用预算项目设定用户【User By Budget Item】                  费用预算项目设定用户  //20110126 ADD BY 39057 FOR Z30-10122000001 
+0180 MAH01    C      01  条码管理【Barcode Management System】                        Y/N [DEF:'N'] //20110222 ADD BY 38130 FOR Z30-11022200001
+0182 MA179    C      01  序号管理【Prodoct Serial Management System】                 Y/N [DEF:'N'] //20110222 ADD BY 38130 FOR Z30-11022200001
+0183 MA180    C      01  项目管理【Pproject Management System】                       Y/N [DEF:'N']  //20110324 ADD BY 39057 FOR Z10-11031500001
+0184 MA181    C      01  WEB报表【Web Report】                                        Y/N [DEF:'N']  //20110614 ADD BY 39048 FOR Z39-20110110002
+0185 MA182    C      01  集团费用管理【Group Outlay Management System】               Y/N [DEF:'N']  //20110621 ADD BY 39057 FOR Z30-11052400001
+0186 MA183    C      6   单据查询默认匹配方式【Search Index】                         0:等于、1:大于等于、2:小于等于、3:大于、4:小于、5:不等于、6:起始于、7:终止于、8:包含//2011071//20110714//2011071//20110714 ADD BY 38130 FOR Z30-11052400001//模糊查询 20120724 MODI BY CHENGJIEA FOR 与38130商量暂使用此字段
+0187 MA184    C      6   预留字段【Reserved Field】                                   特征编号2 //20110714 ADD BY 38130 FOR Z30-11052400001
+0188 MA185    C      6   预留字段【Reserved Field】                                   特征编号3 //20110714 ADD BY 38130 FOR Z30-11052400001
+0189 MA186    C      6   预留字段【Reserved Field】                                   特征编号4 //20110714 ADD BY 38130 FOR Z30-11052400001
+0190 MA187    C      6   预留字段【Reserved Field】                                   特征编号5 //20110714 ADD BY 38130 FOR Z30-11052400001
+0191 MA188    C      6   预留字段【Reserved Field】                                   特征编号6 //20110714 ADD BY 38130 FOR Z30-11052400001
+0192 MA189    C      6   预留字段【Reserved Field】                                   特征编号7 //20110714 ADD BY 38130 FOR Z30-11052400001
+0193 MA190    C      6   预留字段【Reserved Field】                                   特征编号8 //20110714 ADD BY 38130 FOR Z30-11052400001
+0194 MA191    C      6   预留字段【Reserved Field】                                   特征编号9 //20110714 ADD BY 38130 FOR Z30-11052400001
+0195 MA192    C      6   预留字段【Reserved Field】                                   特征编号10 //20110714 ADD BY 38130 FOR Z30-11052400001
+0196 MA193    C      6   预留字段【Reserved Field】                                   特征编号11 //20110714 ADD BY 38130 FOR Z30-11052400001
+0197 MA194    C      6   预留字段【Reserved Field】                                   特征编号12 //20110714 ADD BY 38130 FOR Z30-11052400001
+0198 MA195    C      6   预留字段【Reserved Field】                                   特征编号13 //20110714 ADD BY 38130 FOR Z30-11052400001
+0199 MA196    C      6   预留字段【Reserved Field】                                   特征编号14 //20110714 ADD BY 38130 FOR Z30-11052400001
+0200 MA197    C      6   预留字段【Reserved Field】                                   特征编号15 //20110714 ADD BY 38130 FOR Z30-11052400001
+0201 MA198    C      6   预留字段【Reserved Field】                                   特征编号16 //20110714 ADD BY 38130 FOR Z30-11052400001
+0202 MA199    C      6   预留字段【Reserved Field】                                   特征编号17 //20110714 ADD BY 38130 FOR Z30-11052400001
+0203 MA401    C      6   预留字段【Reserved Field】                                   特征编号18 //20110714 ADD BY 38130 FOR Z30-11052400001
+0204 MA402    C      6   预留字段【Reserved Field】                                   特征编号19 //20110714 ADD BY 38130 FOR Z30-11052400001
+0205 MA403    C      6   预留字段【Reserved Field】                                   特征编号20 //20110714 ADD BY 38130 FOR Z30-11052400001 
+0206 MA404    C      01  预留字段【Reserved Field】                                   Y/N [DEF:'N']  //20110714 ADD BY 38130 FOR Z30-11052400001  是否启用特征值特征
+0207 MAL01    C      01  售后服务管理【After Sales Management】                       Y/N [DEF:'N']   //20120418 ADD BY 42441 FOR Z30-12032100001
+0208 MAL02    C      10  故障类型设定用户                                             故障类型设定用户//20120418 ADD BY 42441 FOR Z30-12032100001
+0209 MAL03    C      10  知识库设定用户                                               知识库设定用户//20120418 ADD BY 42441 FOR Z30-12032100001
+0210 MA405    C      01  IWC集成                                                      IWC集成[DEF:'N'] //20160310 ADD BY 600791 FOR Z01-16030900001
+0211 MA407    C      01  sMES集成                                                     sMES集成[DEF:'N']   //^_^ 20170208 ADD BY 02225 FOR Z30-17020800001
+0212 MA408    C      01  指标树                                                       指标树 [DEF:'N']    //20180122 ADD BY 600791 FOR Z01-18012200001
+0213 MA409    C      01  sQMS集成                                                     sQMS集成[DEF:'N']  //20210914 ADD BY 01228 FOR Z39-20210914001
+0214 MA410    N      11  默认一包加载笔数【Default Numbers of Inquiry】               默认一包加载笔数[DEF:40] //20220209 ADD BY 01228 FOR Z30-21112500001
+
+文档代码:CMSMB
+文件名:工厂信息档【Plants】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MB001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MB001    C      06  工厂编号【Plant】                                            工厂编号
+0002 MB002    C      20  工厂名称【Plant Description】                                工厂名称 //20040824 MODI 10->20 BY 28985 P00-04080020
+0003 MB003    C      20  电话【Telephone】                                            电话
+0004 MB004    C      20  传真【Fax】                                                  传真
+0005 MB005    V      255  地址一【Address 1】                                          地址一 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0006 MB006    V      255  地址二【Address 2】                                          地址二 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0007 MB007    V     255  备注【Remark】                                               备注
+0008 MB008    V      255  E-Mail【E-Mail】                                             E-Mail//87-09-03add //20110906 MODI BY 37179 FOR Z01-11090600001:长度加长到255码
+0009 MB009    V      255  英文地址一【English Address 1】                              英文地址一 //88-08-12add //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0010 MB010    V      255  英文地址二【English Address 2】                              英文地址二 //88-08-12add //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0011 MB011    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0012 MB012    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0013 MB013    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0014 MB014    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0015 MB015    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0016 MB016    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMC
+文件名:仓库信息档【Warehouses】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MC001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MC001    C      10  仓库编号【Warehouse】                                        仓库编号
+0002 MC002    C      20  仓库名称【Warehouse Description】                            仓库名称 //20040824 MODI 10->20 BY 28985 P00-04080020
+0003 MC003    C      06  工厂编号【Plant】                                            工厂编号
+0004 MC004    C      01  仓库性质【Warehouse Property】                               1.存货仓、2.非存货仓
+0005 MC005    C      01  纳入可用量计算【Included In Available Quantity】             Y/N //纳入MRP计算->纳入可用量计算 20020610 modi by 28986
+0006 MC006    C      01  库存量不足准许出库【Negative Inventory Allowed】             Y/N
+0007 MC007    V     255  备注【Remark】                                               备注
+0008 MC008    C      01  零库【Zero Inventory】                                       零库[DEF:"N"] //20030312 5.0 P00-03030003 ADD BY 28995↓
+0009 MC009    V      255  地址【Address】                                              地址 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0010 MC010    C      20  电话【Telephone】                                            电话
+0011 MC011    C      20  传真【Fax】                                                  传真
+0012 MC012    N       4  库内标准温度起【Standard Temperature From】                  库内标准温度起
+0013 MC013    N       4  库内标准温度止【Standard Temperature To】                    库内标准温度止
+0014 MC014    N       4  库内标准湿度起【Standard Humidity From】                     库内标准湿度起
+0015 MC015    N       4  库内标准湿度止【Standard Humidity To】                       库内标准湿度止 //20030312 5.0 P00-03030003 ADD BY 28995↑
+0016 MC016    C      01  传送码【Transfer Code】                                      Y/M/N[DEF:"N"] //20030516 5.0 P00-0301001 ADD BY 28985↓
+0017 MC017    C      12  传送日期【Transfer Date】                                    日期时间yyyymmdd hh:mm
+0018 MC018    C      01  有效码【Effective Indicator】                                Y/N[DEF:"Y"] //20030516 5.0 P00-0301001 ADD BY 28985↑
+0019 MC019    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0020 MC020    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0021 MC021    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0022 MC022    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0023 MC023    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0024 MC024    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMD
+文件名:工作中心信息单头档【Work Center Headers】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MD001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MD001    C      10  工作中心编号【Work Center】                                  工作中心编号
+0002 MD002    C      20  工作中心名称【Work Center Description】                      工作中心名称
+0003 MD003    C      06  工厂编号【Plant】                                            工厂编号
+0004 MD004    N    08.2  每日人工产能【Man Capacity Per Day】                         每日人工产能 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0005 MD005    N    08.2  每日机器产能【Machine Capacity Per Day】                     每日机器产能 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0006 MD006    N    05.4  标准人工效率【Standard Labor Efficiency】                    标准人工效率
+0007 MD007    N    05.4  标准机器负荷【Standard Machine Loading】                     标准机器负荷
+0008 MD008    C      01  制费分摊依据【Overheads Apportionment Basis】                预留字段 //20070724 MODI BY 39185 FOR P00-070070022 改为预留字段
+0009 MD009    N    11.6  标准工资率【Standard Labor Ratio】                           预留字段 //890103 MDOI BY 862 OLD:N 8.3 //900828 2.4 S06-9006006 N 9.4->N 9.6 //20020711 3.1 B00-020711001 OLD:标准单位人工成本//20020820 3.0 9.6->11.6 //20070724 MODI BY 39185 FOR P00-070070022 改为预留字段
+0010 MD010    N    11.6  标准制费分摊率【Standard Overheads Apportionment Rate】      预留字段 //890103 MDOI BY 862 OLD:N 8.3 //900828 2.4 S06-9006006 N 9.4->N 9.6 //20020711 3.1 B00-020711001 OLD:标准单位制造费用//20020820 3.0 9.6->11.6 //20070724 MODI BY 39185 FOR P00-070070022 改为预留字段
+0011 MD011    V     255  备注【Remark】                                               备注
+0012 MD012    C      01  预留字段【Reserved Field】                                   预留字段 //881207 ADD BY 551 //890103 MODI BY 862 OLD:排程依据1.人时、2.机时
+0013 MD013    N    11.6  标准固定制费分摊率【Standard Fixed Overheads Apportionment Rate】 预留字段 //20020807 add //20020820 3.0 9.6->11.6 //20070724 MODI BY 39185 FOR P00-070070022 改为预留字段
+0014 MD014    N      04  清场合格证有效天数【Approved Cleanup Order Validity Days】   清场合格证有效天数 //20040604 ADD BY 30119 FOR P00-03120014
+0015 MD015    C      06  部门【Department】                                           部门编号 //20041101 ADD BY 28985 FOR P01-03060015
+0016 MD016    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0017 MD017    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0018 MD018    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0019 MD019    N      04  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0020 MD020    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0021 MD021    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6 
+0022 MD022    C      10  自动领料仓库【Backflushing Warehouse】                       自动领料仓库 //20101228 ADD BY 37419 FOR Z10-10122800001 
+0023 MD023    N    16.6  预留字段【Reserved Field】                                   预留字段  //20110915 ADD BY 600792 FOR Z01-11091400001
+
+文档代码:CMSME
+文件名:部门信息档【Departments Table】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :ME001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 ME001    C      06  部门编号【Department】                                       部门编号
+0002 ME002    C      20  部门名称【Department Description】                           部门名称 //20040824 MODI 10->20 BY 28985 P00-04080020
+0003 ME003    V     255  备注【Remark】                                               备注
+0004 ME004    C      20  折旧科目【Depreciation Account Code】                        折旧科目//880910ADD FOR AST
+0005 ME005    C      01  质量管理部门【Quality Management Department】                Y/N[DEF:"N"] //20030314 5.0 P00-03030003 ADD BY 28995
+0006 ME006    C      01  传送码【Transfer Code】                                      Y/M/N[DEF:"N"] //20030516 5.0 P00-0301001 ADD BY 28985↓
+0007 ME007    C      12  传送日期【Transfer Date】                                    日期时间yyyymmdd hh:mm
+0008 ME008    C      01  有效码【Effective Indicator】                                Y/N[DEF:"Y"] //20030516 5.0 P00-0301001 ADD BY 28985↑
+0009 ME009    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 ME010    C      08  下发功能解析【Distribute Control】                           下发功能解析 //20050606 add by 31380 for 6.0   //20090727 modi by 35501 for Z30-09063000001 下发功能解析->保留字段
+0011 ME011    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0012 ME012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 ME013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0014 ME014    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0015 ME015    C      01  生产部门【Product Department】                               Y/N[DEF:"N"]
+
+文档代码:CMSMF
+文件名:币种汇率档单头【Currency Exchange Rate Headers】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MF001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MF001    C      04  币种【Currency】                                             币种
+0002 MF002    C      10  货币名称【Currency Description】                             货币名称
+0003 MF003    C      01  单价取位【Price Decimal Digit】                              0.整数、1.小数一位、2.小数二位、3.小数三位、4.小数四位、5.小数五位、6.小数六位、7.小数七位、8.小数八位//900828 2.4 S06-9006006 ADD//20070524 MODI BY 34231 FOR P00-07050010 增加7.小数七位、8.小数八位
+0004 MF004    C      01  金额取位【Money Decimal Digit】                              0.整数、1.小数一位、2.小数二位
+0005 MF005    C      01  单位成本取位【Unit Cost Decimal Place】                      0.整数、1.小数一位、2.小数二位、3.小数三位、4.小数四位、5.小数五位、6.小数六位、7.小数七位、8.小数八位//900828 2.4 S06-9006006 ADD//20070524 MODI BY 34231 FOR P00-07050010 增加7.小数七位、8.小数八位
+0006 MF006    C      01  成本金额取位【Cost Decimal Place】                           0.整数、1.小数一位、2.小数二位
+0007 MF007    V     255  备注【Remark】                                               备注
+0008 MF008    C       4  货币符号【Currency Symbol】                                  货币符号 //20040518 5.1 P00-04050009 ADD BY 28975
+0009 MF009    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MF010    C      08  货币单位【Currency Unit】                                    货币单位 //20050606 add by 31380 for 6.0   //20110822 MODI BY 42172 FOR B32-110822002
+0011 MF011    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0012 MF012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MF013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0014 MF014    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0015 MF015    C      08  下发功能解析【Distribute Control】                           下发功能解析  //20110210 ADD BY 39057 FOR Z30-10122000001 
+0016 MF016    C      08  预留字段【Reserved Field】                                   预留字段     //20110915 ADD BY 600792 FOR Z01-11091400001
+
+文档代码:CMSMG
+文件名:币种汇率档单身【Currency Exchange Rate Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MG001+MG002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MG001    C      04  币种【Currency】                                             币种
+0002 MG002    C      08  生效日期【Effective Date】                                   生效日期[FORMATE:YMD]
+0003 MG003    N    12.7  银行买进汇率【Bank Buying Exg.】                             银行买进汇率 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0004 MG004    N    12.7  银行卖出汇率【Bank Sales Exg.】                              银行卖出汇率 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0005 MG005    N    12.7  报关买进汇率【Customs Buying Exg.】                          报关买进汇率 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0006 MG006    N    12.7  报关卖出汇率【Customs Selling Exg.】                         报关卖出汇率 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0007 MG007    N    12.7  调整汇率【Adjust Exchange Rate】                             调整汇率 //V3.1 ADD //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0008 MG008    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MG009    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MG010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 MG011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MG012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MG013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0014 MG014    N    12.7  预算汇率【Customs Selling Exg.】                             预算汇率 //20101229 add by 35501 for Z30-10122000001 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+
+文档代码:CMSMH
+文件名:编码原则信息档【Coding Rules】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MH001+MH002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MH001    C       1  编码类别【Coding Category】                                  1:品号编码、2:客户编码、3:供应商编码、4:固定资产编码 5.产品序号编码 6.批号编码 7.专用发票 8.普通发票//900523 MODI:ADD 5.产品序号编码 //900820 2.4 ADD 6.模具编码 //20040517 模具编码->批号编码 by 29234 //20040803 ADD 7.潜在客户编码 BY 29618 FOR CRM //20061120 6.5 P00-06110004 MODI BY 28975 7.潜在客户编码->7.专用发票 8.普通发票
+0002 MH002    C      30  编码结果【Coding Result】                                    编码结果 //900523 MODI BY 560原C20改成C30
+0003 MH003    C      30  编码编号【Coding No.】                                       编码编号 //880304 MODI BY 862原C08改成C10 //20220622 MODI BY 01228 FOR B31-220617001 10->30 
+0004 MH004    C      60  编码名称【Description】                                      编码名称 //C20->C30 P03-02040001 //C30->C60 B00-040323001 BY 29234
+0005 MH005    C      20  编码阶层代码【Coding Level】                                 编码阶层代码(二码表一阶,最多十阶)
+0006 MH006    C       1  缺省名称【Default Description】                              1:缺省品名、2:缺省规格、3:不缺省
+0007 MH007    C      01  编码方式【Coding by】                                        1.日编、2.月编、3.手动编 [DEF:"3"] //20050606 add by 31380 for 6.0 //20060911 MODI BY 29618 FOR P00-06090002 预留字段->编码方式
+0008 MH008    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MH009    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MH010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MH011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MH012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MH013    N      01  年位数【Year Digit】                                         年位数 //20060911 ADD BY 29618 FOR P00-06090002
+0014 MH014    N      02  流水号位数【Sequence Digit】                                 流水号位数 //20060911 ADD BY 29618 FOR P00-06090002
+0015 MH015    C      01  预留字段【Reserved Field】                                   预留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加预留字段
+
+文档代码:CMSMI
+文件名:假日表单头档【Plant Calendar Headers】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MI001+MI002+MI003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MI001    C      01  行业别【Industry】                                           1.工厂、2.银行
+0002 MI002    C      04  年份【Year】                                                 年份[FORMATE:Y]
+0003 MI003    C      06  班别【Shift】                                                班别 // 原预留字段 880908 BY 462
+0004 MI004    V     255  备注【Remark】                                               备注
+0005 MI005    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0006 MI006    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MI007    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MI008    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0009 MI009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 MI010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMJ
+文件名:职务类别档【Function Categories】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MJ001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MJ001    C      06  职务编号【Function Code】                                    职务编号
+0002 MJ002    C      01  职务分类【Function Category】                                1.物管、2.生管、3.业务、4.采购、5.会计、6.出纳、7.仓管、8.研发、9.制造、A.品管、B.管理、C.工程、D.生技、E.船务、F.厂务、G.贸易、H.总务、I.人事、J.保税、K.稽核、L.企划、M.文管、N.产品、O.行政、P.外点(专柜前抬)、Z.其它
+0003 MJ003    C      20  职务名称【Function Desc.】                                   职务名称 //20040824 MODI 10->20 BY 28985 P00-04080020
+0004 MJ004    V     255  备注【Remark】                                               备注
+0005 MJ005    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0006 MJ006    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MJ007    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MJ008    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0009 MJ009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 MJ010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMK
+文件名:职务人员档【Function Staffs】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MK001+MK002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MK001    C      06  职务编号【Function Code】                                    职务编号
+0002 MK002    C      10  人员编号【Staff No.】                                        人员编号
+0003 MK003    C      01  职务分类【Function Category】                                1.物管 2.生管 3.业务 4.采购 5.会计 6.出纳
+0004 MK004    C      10  预留字段【Reserved Field】                                   预留字段 //88-05-15 Old:人员名称
+0005 MK005    V     255  备注【Remark】                                               备注
+0006 MK006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MK007    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MK008    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MK009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 MK010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MK011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSML
+文件名:公司名称【Company Description】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :ML001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 ML001    C      10  公司编号【Company No.】                                      公司全称
+0002 ML002    C      10  公司简称【Company Short Description】                        公司简称
+0003 ML003    C      72  公司全称【Company Description】                              公司全称 //890505 MODI BY 349 C36-->C72
+0004 ML004    V     255  存放路径【Saving Directory】                                 存放路径
+0005 ML005    C      20  电话【Telephone】                                            电话
+0006 ML006    C      20  传真【Fax】                                                  传真
+0007 ML007    C      30  税号【Tax Register Number】                                  税号 //890623 MODI BY 349 C8->C20   //20160603 MODI BY 600791 FOR Z01-16053100002 MODI 20->30
+0008 ML008    C      09  税籍编号【Tax ID】                                           税籍编号
+0009 ML009    C      10  负责人【Principal】                                          负责人
+0010 ML010    V     255  E-MAIL【E-MAIL】                                             E-MAIL//20110906 MODI BY 37179 FOR Z01-11090600001:长度加长到255码
+0011 ML011    V     255  备注【Remark】                                               备注
+0012 ML012    V      255  注册地址一【Registered Address 1】                           注册地址一 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0013 ML013    V      255  注册地址二【Register Address 2】                             注册地址二 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0014 ML014    C      72  英文公司全称【Company Full Description(English)】            公司全称 //890505 MODI BY 349 C36-->C72
+0015 ML015    V      255  英文公司地址一【Company English Address 1】                  英文公司地址一 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0016 ML016    V      255  英文公司地址二【Company English Address 2】                  英文公司地址二 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0017 ML017    C      10  分析OLAP_DataBase_Name【Analyse OLAP_DataBase_Name】         分析OLAP_DataBase_Name//88-12-06ADD
+0018 ML018    C      10  营业决策Cube_Name【Business Decision-making Cube_Name】      营业决策Cube_Name //20030415 FOR 5.0,MODI BY 28975,OLD: 销售分析Cube_Name
+0019 ML019    C      10  财务比率分析Cube_Name【Financial Ratio AnalysisCube_Nam】    财务比率分析Cube_Name //20030415 FOR 5.0,MODI BY 28975,OLD: 主管信息Cube_Name
+0020 ML020    C      10  开户银行【Account Bank】                                     开户银行 //900919 2.4 S06-9008001 ADD
+0021 ML021    C      30  银行账号【Bank Account】                                     银行账号 //900919 2.4 S06-9008001 ADD
+0022 ML022    C      20  法人【Corporation】                                          法人 //20020605 3.1 P00-02060006 ADD BY 28981
+0023 ML023    C      10  主管海关【Customs in Charge】                                主管海关//20020605 3.1 P00-02060006 ADD BY 28981
+0024 ML024    N    16.2  免税额度【Tax-free Limit】                                   免税额度//20020605 3.1 P00-02060006 ADD BY 28981    //20080718 MODI BY 38130 FOR Z10-08071600001 字段长度10－>16.2
+0025 ML025    C      01  企业类型【Corporation Type】                                 1.药品生产企业,2.药品经营企业 [DEF:"2"] //20030312 5.0 P00-03030003 ADD BY 28995↓
+0026 ML026    C      30  生产/经营许可证【Production/Operation Licenses】             生产/经营许可证 //20160718 MODI BY 600900 FOR B32-160718004 MODI 20->30
+0027 ML027    C      30  营业执照【License】                                          营业执照   //20160603 MODI BY 600791 FOR Z01-16053100002 MODI 20->30
+0028 ML028    C      20  GMP/GSP认证【GMP/GSPCertification】                          GMP/GSP认证 //20030312 5.0 P00-03030003 ADD BY 28995↑
+0029 ML029    C      10  存货分析Cube_Name【Inventory AnalysisCube_Name】             存货分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0030 ML030    C      10  盘盈盘亏分析Cube_Name【Inventory Profit/Loss AnalysisCube_Nam】 盘盈盘亏分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0031 ML031    C      10  采购分析Cube_Name【Purchase AnalysisCube_Name】              采购分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0032 ML032    C      10  厂内生产分析Cube_Name【Inner Plant Productions AnalysisCube_Nam】 厂内生产分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0033 ML033    C      10  委外加工分析Cube_Name【Subcontract AnalysisCube_Nam】        委外加工分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0034 ML034    C      10  应收账款账龄Cube_Name【Account Receivable Aging Cube_Name】  应收账款账龄Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0035 ML035    C      10  工作中心成本分析Cube_Name【Work Center Cost AnalysisCube】   工作中心成本分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0036 ML036    C      10  产品成本分析Cube_Name【Item Cost AnalysisCube_Nam】          产品成本分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0037 ML037    C      10  薪工决策分析分析Cube_Name【Salary Policy Analysis Cube_Name】 薪工决策分析分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0038 ML038    C      10  专柜每日销售分析Cube_Name【Daily Sales Analysises by Vendor Cube_Name】 专柜每日销售分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0039 ML039    C      10  专柜每月销售分析Cube_Name【Monthly Sales Analysises by Vendor Cube_Name】 专柜每月销售分析Cube_Name //20030415 FOR 5.0,ADD BY 28975
+0040 ML040    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0041 ML041    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0042 ML042    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0043 ML043    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0044 ML044    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0045 ML045    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+
+文档代码:CMSMP
+文件名:假日表单身档【Plant Calendar Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MP001+MP002+MP003+MP004
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MP001    C      01  行业别【Industry】                                           1.工厂、2.银行
+0002 MP002    C      04  年份【Year】                                                 年份[FORMATE:Y]
+0003 MP003    C      06  班别【Shift】                                                班别 // 原预留字段 880908 BY 462
+0004 MP004    C      08  日期【Date】                                                 日期[FORMATE:YMD]
+0005 MP005    C      01  休假方式【Vacation Mode】                                    1.全天/休息日、2.半天、3.节日 //900924 2.4 S06-9008022 ADD 1.休息日、3.节日
+0006 MP006    N     5.3  休假天数【Vacation Days】                                    休假天数
+0007 MP007    V     255  备注【Remark】                                               备注说明
+0008 MP008    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MP009    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MP010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 MP011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MP012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MP013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMQ
+文件名:各系统单据设置档【Document Types】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MQ001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MQ001    C      04  单别【Order Type】                                           单别
+0002 MQ002    C      20  单据名称【Order Description】                                单据名称 //20211221 MODI BY 01228 FOR Z30-21122100001 长度加长 C 10=>C 20
+0003 MQ003    C      02  单据性质【Document Category】                                1?:库存、2?:订单、3?:采购、4?:BOM、5?:工单、6?:应收、7?:应付、8?:票据、9?:会计、A?:进口、B?:出口、C?:固定资产、D?:工艺、E?:维修、F?:模具、G?：保税、H?:军福品 K?:费用管理 S?:门店管理 Y?:医药管理 R?:CRM  //20040604 ADD Y?:医药管理 BY 30119 FOR 5.1 GMP //20040803 ADD R?:CRM for 6.0 CRM  //20110112 ADD K?:费用管理 FOR 9.0 OMS   
+0004 MQ004    C      01  编码方式【Coding by】                                        1.日编、2.月编、3.流水号、4.手动编号
+0005 MQ005    N      01  年位数【Year Digit】                                         年位数
+0006 MQ006    N      02  流水号位数【Sequence Digit】                                 流水号位数
+0007 MQ007    N      03  使用顺序码【Use Sequence】                                   使用顺序码 //配合TAX系统
+0008 MQ008    C      01  交易类别【Transaction Type】                                 1.入库、2.销货、3.领用、4.调拨、5.调整
+0009 MQ009    C      20  对方科目编号【Opposite Account Code】                        对方会计科目编号 //88-02-10
+0010 MQ010    N      01  库存影响【Stock Action】                                     1.增、-1.减
+0011 MQ011    C      01  影响成本【Cost Action】                                      Y.成本计算来源、N.赋值计算结果、y.成本调整
+0012 MQ012    C      01  更新入库日【Update Receipt Date】                            Y/N
+0013 MQ013    C      01  更新出库日【Update Issue Date】                              Y/N
+0014 MQ014    C      01  更新盘点日【Update Stocktaking Date】                        Y/N
+0015 MQ015    C      01  自动审核【Auto-approve】                                     Y/N
+0016 MQ016    C      01  自动打印【Auto-print】                                       Y/N
+0017 MQ017    C      01  自动生成发票号码【Auto-generating Invoice Number】           Y/N //配合TAX系统 MOC中表示工单类别 1.厂内、2.委外
+0018 MQ018    C      01  更新核价/金额允许输入负数【Allow Negative Approved Price/Amount】 Y/N //890428 modi by 349 金额允许输入负数 for act
+0019 MQ019    C      01  核对采购/工单/订单/委外【Check Purchase Order/Manufacture Order/Order/】 Y/N/W
+0020 MQ020    C      01  直接开票【Invoice Directly】                                 Y/N //20061120 6.5 P00-06110004 MODI 结账->开票 BY 28975
+0021 MQ021    C      04  发票单别【Invoice Type】                                     发票单别 //20061120 6.5 P00-06110004 MODI 结账->发票 BY 28975
+0022 MQ022    V     255  备注【Remark】                                               备注说明
+0023 MQ023    C      10  公司编号【Company No.】                                      公司编号 //配合TAX系统
+0024 MQ024    C      01  品号输入方式【Item Input Mode】                              1.用品号输入、2.用条码输入
+0025 MQ025    C      06  页脚编号【Footer】                                           页脚编号 //87-10-22ADD
+0026 MQ026    C      01  打印时更改页脚【Modify Footer When Printing】                Y/N //87-10-22ADD
+0027 MQ027    C      06  签核编号【Sign】                                             签核编号 //87-10-22ADD
+0028 MQ028    C      01  打印时更改签核【Modify Sign When Printing】                  Y/N //87-10-22ADD
+0029 MQ029    C      01  单别限定输入用户【Authorized Users】                         Y/N //880206ADD
+0030 MQ030    C      01  每页打印页脚【Print Footer Per Page】                        Y/N[DEF:"N"] //881214 ADD BY 670
+0031 MQ031    C      01  每页打印签核【Print Sign Per Page】                          Y/N[DEF:"N"] //881214 ADD BY 670
+0032 MQ032    C      20  单据格式【Order Format】                                     单据格式 //890107 ADD BY 862   //20080618 MODI BY 44116 FOR Z10-08061800001 单据格式栏位拉长：C 15=>C 20
+0033 MQ033    C      01  打印时选择单据格式【Select Format When Printing】            Y/N[DEF:"N"] //890107 ADD BY 862
+0034 MQ034    C      20  单据全称【Order Full Description】                           单据全称 //890426 ADD BY 862
+0035 MQ035    C      01  每页打印合计【Print Summary Per Page】                       Y/N[DEF:"N"] //890906 ADD
+0036 MQ036    C      01  发票限额/不允许报销超出申请金额【Invoice Limited Amount】    Y/N[DEF:"N"] //900831 2.4 S06-9008001 ADD   //20140626 MODI BY 600791 FOR Z02-14062300002 若单据性质为'K4'报销单，则子字段名称改为‘不允许报销超出申请金额’
+0037 MQ037    N    16.2  发票限定金额【Invoice Limited Amount】                       发票限定金额 //900831 2.4 S06-9008001 ADD   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0038 MQ038    C      04  冲应付账款单别【Order Type of Offset A/P】                   冲应付账款单别 //20020730 3.1 ADD
+0039 MQ039    C      01  核对出货通知单【Check Delivery Notice】                      Y/N[DEF:"N"] //20030924 ADD BY 29618 FOR 销货单
+0040 MQ040    C      01  凭证中列印品号图片【】                                       Y/N[DEF:"N"] //20040604 ADD BY 30119      //20120329 MODI BY 4244 FOR Z303-12032700001 MODI:保留字段【Reserved Field】   保留字段-> 凭证中列印品号图片    Y/N[DEF:"N"]    
+0041 MQ041    C      01  超领【Issue Overrun】                                        Y/N/W[DEF:"N"] //20040422 ADD BY 32349 P03-03080013
+0042 MQ042    C      01  超入【Receipt Overrun】                                      Y/N/W[DEF:"N"] //20040422 ADD BY 32349 P03-03080013
+0043 MQ043    C      01  缺领【Issue Shortage】                                       Y/N/W[DEF:"N"] //20040422 ADD BY 32349 P03-03080013
+0044 MQ044    C      01  抛转性质【Post Property】                                    1.订单 2.采购[DEF:"1"] //20040510 ADD BY 28985 P00-04050006 FOR 区分多角贸易抛转性质
+0045 MQ045    C      01  检验单类型【Inspection Order Type】                          1.留样 2.在库养护 3.工艺用水 4.洁净室,[DEF:"1"] // 20040524 ADD BY 32001 P00-03120014 FOR GMP
+0046 MQ046    C      01  批生产记录审查【Lot Product Record Check】                   Y/N[DEF:"N"] //20040528 ADD BY 32349 FOR 5.1 GMP
+0047 MQ047    C      01  留样管理【Reserved Sample Management】                       Y/N[DEF:"N"] //20040528 ADD BY 32349 FOR 5.1 GMP
+0048 MQ048    C      04  留样单别【Reserved Sample Order Type】                       留样单别 //20040528 ADD BY 32349 FOR 5.1 GMP
+0049 MQ049    C      01  核对保修申请【Check Repair Request】                         Y/N[DEF:"N"]//20040622 ADD BY 29234 FOR P00-03010006  //20111201 MODI BY 42441 FOR Z10-11111700002 如果单据性质为退货单,此字段名改为‘进货的序号是否允许退货’；如果单据性质为委外退货单,此字段名改为‘委外进货的序号是否允许委外退货’；如果单据性质为销退单,此字段名改为‘销货的序号是否允许销退’；如果单据性质为借出归还单,此字段名改为‘借出的序号是否允许归还’；  //20130418 MODI BY 600792 FOR B32-130418005 如果单据性质为'56'.厂内退料、'57'.委外退料,此字段名改为‘未领料的序号是否允许退料’
+0050 MQ050    C      01  核对运行记录【Check Operation Record】                       Y/N[DEF:"N"] //20040622 ADD BY 29234 FOR P00-03010006  
+0051 MQ051    C      01  准产证管制方式【Control Mode for Product License】           0.不需要 1.工单入库单 2.工艺转移单,[DEF:"0"] //20040701 ADD BY 30119 FOR 6.0 GMP
+0052 MQ052    N      02  流水号起始位数【Sequence Number Starting Digit】             流水号起始位数 //20040421 5.1 P00-04070003 ADD BY 28975
+0053 MQ053    N      02  流水号截止位数【Sequence Number Ending Digit】               流水号截止位数 //20040421 5.1 P00-04070003 ADD BY 28975
+0054 MQ054    C      01  控制超转【Transfer Overrun】                                   Y/N/W[DEF:"N"] //20050606 add by 31380 for 6.0 //20090714 MODI BY 38836 FOR B00-090714001 保留字段->控制超转
+0055 MQ055    C      08  收款单必须实时核销【Collections Must Be Written Off Real Time】 Y/N //20050606 add by 31380 for 6.0//20080909 MODI BY 44128
+0056 MQ056    V      30  销退单报废单别【Sales Return Scrap Order Type】              销退单报废单别 //20050606 add by 31380 for 6.0//20080910 MODI BY 37419 FOR 启用保留字段
+0057 MQ057    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0058 MQ058    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0059 MQ059    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0060 MQ060    C      01  纳入计件工资【Included in Piece Wage】                       Y/N[DEF:"N"] //20060612 Add by 35505 for P00-06060013
+0061 MQ061    C      01  计件方式【Piece Mode】                                       1.按个人 2.按班组 [DEF:"1"] //20060612 Add by 35505 for P00-06060013
+0062 MQ062    C      01  先进先出核算类型【The Application type accounting】          1.入库成本 2.核算出库成本 3.指定出库成本 4.不参与核算 [DEF:"4"] >>20070212 7.0 P00-07020005 ADD BY 28985
+0063 MQ063    C      04  退料单别【Return Type】                                      退料单别 //20070426 7.0 P00-04020003 ADD BY 38130
+0064 MQ064    C      01  合同类型【Contract Type】                                    合同类型 1.数量合同、2.价值合同、3.标准合同 FOR 单据性质 = [2S:合同] //20080805 ADD BY 44128 FOR Z30-08080500001
+0065 MQ065    C      01  核对合同【Check Contract】                                   核对合同 Y/N FOR 单据性质 = [22:客户订单]   //20080226 ADD BY 35335 FOR Z10-08030700001
+0066 MQ066    C      01  打印电子签核意见【Print EasyFlow Adjusts】                   打印电子签核意见 Y/N[DEF:"N"] //20080225 add by 31380 for Z30-08022200001 EFsp8集成
+0067 MQ067    C      01  预收款单必须核对订单【Collections Must Be Check Purchase Order】 Y/N[DEF:"N"]     //20080918 ADD BY 35501 FOR 8.0 Z11-08090400003 80新增字段
+0068 MQD01    C      01  抽单结算【Settlement While PO Closed】                       Y/N[DEF:"N"] //20100914 ADD BY 38130 FOR Z30-10090200001
+0069 MQD02    C      01  采购抽单直接开票【Invoice Directly While PO Closed】         Y/N[DEF:"N"] //20100914 ADD BY 38130 FOR Z30-10090200001
+0070 MQD03    C      01  允许超出发货清单发货【Allow to delivery beyond  delivery list quantity】                                         Y/N[DEF:"N"] //20100914 ADD BY 38130 FOR Z30-10090200001
+0071 MQD04    C      01  未完成发货允许生成成品销货单【Allow to generate sales delivery when the delivery is unfinished】                                 Y/N[DEF:"N"] //20100914 ADD BY 38130 FOR Z30-10090200001
+0072 MQD05    C      01  未完成发货允许生成成品组装工单及其领料单、入库单【Allow to generate  item assembly MO,issue and receipt order  when the delivery is unfinished】             Y/N[DEF:"N"] //20100914 ADD BY 38130 FOR Z30-10090200001
+0073 MQD06    C      01  按序转移【Transfer BY Order】                                Y/N[DEF:"N"] //20100914 ADD BY 38130 FOR Z30-10090200001
+0074 MQC01    C      10  仓库编号【Warehouse】                                        仓库编号       //20100914 ADD BY 38130 FOR Z30-10090200001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0075 MQC02    C      01  单据输入工程品号【Input Documents Engineering Item】         Y/N[DEF:"N"]   //20100914 ADD BY 38130 FOR Z30-10090200001
+0076 MQC03    C      01  条码检核【Barcode Check】                                    Y/N [DEF:"N"]    //20100914 ADD BY 38130 FOR Z30-10090200001  //20130702 MODI BY 38130 FOR Z10-13052300002 预留字段--》条码检核                                                                                                                                                          
+0077 MQC04    C      01  核对检验【Input Documents Engineering Item】                 Y/N[DEF:"N"]   //20100914 ADD BY 38130 FOR Z30-10090200001
+0078 MQC05    C      01  依包装发料品号不自动退料【According To The Packing Issue Not Automatic Return】 Y/N[DEF:"N"]  //20100914 ADD BY 38130 FOR Z30-10090200001
+0079 MQ068    C      01  部门分摊【Reserved Field】                                   Y/N[DEF:"N"] //20120530 ADD BY 35501 FOR Z11-12052400001 预留字段->部门分摊        
+0080 MQ069    C      04  入库单别【Receipt Type】                                     入库单别 //20101213 ADD BY 38130 FOR Z10-10121300001
+0081 MQ070    C      01  核对费用申请单【Check Application Order】                    Y/N[DEF:"N"]   //20110112 ADD BY 39057 FOR Z30-10122000001 
+0082 MQ071    C      01  核对借款单【Check Borrowing Order】                          Y/N[DEF:"N"]   //20110112 ADD BY 39057 FOR Z30-10122000001 
+0083 MQ072    C      01  核对费用报销单【Check Reimbursement Order】                  Y/N[DEF:"N"]   //20110112 ADD BY 39057 FOR Z30-10122000001 
+0084 MQ073    C      01  核对还款单【Check Refund Order】                             Y/N[DEF:"N"]   //20110112 ADD BY 39057 FOR Z30-10122000001 
+0085 MQI01    C      01  分期收款【Installment Sale】                                 Y/N[DEF:"N"]   //20110223 9.0 Z30-11022200002 ADD BY 35501 FOR 分期收款功能
+0086 MQI02    C      01  分期起点【Installment Sale From】                            1.合同 2.订单  //20110223 9.0 Z30-11022200002 ADD BY 35501 FOR 分期收款功能  
+0087 MQ074    C      08  下发功能解析【Distribute Control】                           下发功能解析    //20110317 ADD BY 39057 FOR Z30-10122000001
+0088 MQ075    C      08  其他应付单单别【Reserved Field】                             其他应付单单别 //20120530 ADD BY 35501 FOR Z11-12052400001 预留字段->其他应付单单别
+0089 MQ076    V      30  预留字段【Reserved Field】                                   预留字段     //20110915 ADD BY 600792 FOR Z01-11091400001
+0090 MQ077    C      01  派工方式                                                     0.直接派给处理人员、1.站点主管派给处理人员 [DEF:"0"]//20121219 ADD BY 37419 For Z10-12121900001
+0091 MQ078    C      01  启用sMES                                                     Y/N[DEF:"N"]//20170223 ADD BY LIAOYY FOR Z30-17020800001
+0092 MQ079    C      01  启用sMES回抛                                                 Y/N[DEF:"N"]//20170615 ADD BY 38130 FOR Z10-17060700001
+0093 MQS01    C      01  启用sQMS                                                     Y/N[DEF:"N"]//20210914 ADD BY 01228 FOR Z39-20210914001
+0094 MQS02    C      01  新增存档自动抛sQMS检验                                       Y/N[DEF:"N"]//20210914 ADD BY 01228 FOR Z39-20210914001
+0095 MQ080    C      01  审核自动签收                                                 Y/N[DEF:"N"]//20211221 ADD BY 01228 FOR Z30-21122100001
+
+文档代码:CMSMR
+文件名:交易对象分类方式档【Business Partner Categories】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MR001+MR002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MR001    C      01  分类方式【Category By】                                      1:渠道、2:类型、3:地区、4:国家、5:路线、6:其他、7:提成、8:活动、9:供应商分类、A.来源、B.行业、C.市场活动性质、D.业务活动方式、E.问题分类、F.问题处理方式//87-09-03更改名称//20040803 ADD BY 29618 FOR CRM (A~F)
+0002 MR002    C      06  编号【No.】                                                  分类编号
+0003 MR003    C      10  简称【Short Description】                                    分类简称
+0004 MR004    C      50  全称【Full Description】                                     分类全称
+0005 MR005    V     255  备注【Remark】                                               备注
+0006 MR006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MR007    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MR008    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MR009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 MR010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MR011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMS
+文件名:页脚/签核档【Footers/Signs】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MS001+MS002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MS001    C      01  页脚/签核分类【Footer/Sign Category】                        1:页脚、2:签核
+0002 MS002    C      06  编号【No.】                                                  编号
+0003 MS003    C      20  简称【Short Description】                                    简称
+0004 MS004    V     255  页脚/签核一【Footer/Sign 1】                                 页脚/签核一
+0005 MS005    V     255  页脚/签核二【Footer/Sign 2】                                 页脚/签核二
+0006 MS006    V     255  页脚/签核三【Footer/Sign 3】                                 页脚/签核三
+0007 MS007    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MS008    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MS009    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MS010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MS011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MS012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMT
+文件名:程序页脚/签核档【Footers/Signs by Procedure】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MT001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MT001    C      20  程序编号【Procedure No.】                                    编号
+0002 MT002    C      06  页脚编号【Footer】                                           页脚编号
+0003 MT003    C      06  签核编号【Sign】                                             签核编号
+0004 MT004    C      01  打印时更改页脚【Modify Footer When Printing】                Y/N
+0005 MT005    C      01  打印时更改签核【Modify Sign When Printing】                  Y/N
+0006 MT006    C      15  单据格式【Order Format】                                     单据格式 //890107 ADD BY 862
+0007 MT007    C      01  打印时选择单据格式【Select Format When Printing】            Y/N[DEF:"N"] //890107 ADD BY 862
+0008 MT008    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MT009    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MT010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 MT011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MT012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MT013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMU
+文件名:单别限定输入用户信息档【Authorized Users by Document Type】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MU001+MU002+MU003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MU001    C      04  单别【Order Type】                                           单别
+0002 MU002    C      02  单据性质【Document Category】                                按各系统单据性质设置的规格设置/凭证种类
+0003 MU003    C      10  用户编号【User】                                             用户编号
+0004 MU004    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0005 MU005    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0006 MU006    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MU007    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0008 MU008    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0009 MU009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMV
+文件名:员工基本信息档【Staffs】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MV001
+INDEX01 :MV002
+INDEX02 :MV004+MV001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MV001    C      10  员工编号【Staff】                                            员工编号
+0002 MV002    C      10  姓名【Name】                                                 姓名
+0003 MV003    C      10  纳税公司【Taxing Company】                                   纳税公司
+0004 MV004    C      06  部门【Department】                                           部门
+0005 MV005    C      08  职等【Position】                                             职等
+0006 MV006    C      06  职务【Function】                                             职务
+0007 MV007    C      01  性别【Gender】                                               1.男2.女
+0008 MV008    C      08  出生日期【Birthday】                                         出生日期[FORMATE:YMD]
+0009 MV009    C      18  身分证号【ID】                                               身分证号 //900802 2.4 S06-9007004 C10->C18
+0010 MV010    C      01  科目种类【Account Category】                                 1.直接费用2.间接费用3.管理费用4.销售费用5.研发费用
+0011 MV011    C      01  投保身份【Insurance Identification】                         劳健保投保身份(一般或雇主或外籍人士..)
+0012 MV012    C      08  学历【Diploma】                                              学历
+0013 MV013    C      72  专长【Skills】                                               专长
+0014 MV014    C      01  婚姻状况【Marital Status】                                   1.已婚2.未婚
+0015 MV015    C      20  联系电话1【Telephone1】                                      联系电话1
+0016 MV016    C      20  联系电话2【Telephone2】                                      联系电话2
+0017 MV017    V      255  户籍地址【Home Address】                                     户籍地址 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 60调整为V 255码
+0018 MV018    C      10  邮编【Post Code】                                            邮编 //900802 2.4 S06-9007004 C05->C06 //20061207 6.5 P12-06060051 MODI BY 29618 C 06=>C 10
+0019 MV019    V      255  通讯地址【Post Address】                                     通讯地址 //20211215 MODI BY  01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0020 MV020    V     255  E-MAIL【E-MAIL】                                             E-MAIL//881124MODI C72->C36  //20110906 MODI BY 37179 FOR Z01-11090600001:长度加长到255码
+0021 MV021    C      08  到职日【Arrival Date】                                       到职日[FORMATE:YMD]
+0022 MV022    C      08  离职日【Quit Date】                                          离职日[FORMATE:YMD]
+0023 MV023    C      08  退休日【Retire Date】                                        退休日[FORMATE:YMD]
+0024 MV024    C      01  补助等级【Allowance Grade】                                  补助等级(残障补助:轻度或中度或重度..)
+0025 MV025    C      10  劳保卡号【Labor Insurance Number】                           劳保卡号
+0026 MV026    C      01  须刷卡【Card Reading Needed】                                Y/N
+0027 MV027    C      03  主要班别【Main Shift】                                       主要班别
+0028 MV028    C      10  刷卡卡号【Card No.】                                         刷卡卡号
+0029 MV029    C      10  文档编号【Document No.】                                     文档编号 //88-11-05 MODI OLD:照片V100
+0030 MV030    C      10  健保投保号码【Health Insurance Number】                      健保投保号码
+0031 MV031    N    04.2  年资【Seniority】                                            当前累计年资
+0032 MV032    C      01  薪资类型【Salary Type】                                      1.月薪2.日薪
+0033 MV033    N    16.2  基本工资【Base Salary】                                      基本工资   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0034 MV034    C      01  转存方式【Transfer Mode】                                    B.银行P.邮局C.现金
+0035 MV035    C      10  行(局)号【Office No.】                                       行(局)号
+0036 MV036    C      30  账号【Account】                                              账号//88-12-23MODI13改20 //900820 2.4 S06-9007004 C20->C30
+0037 MV037    N      02  扶养人数【Dependants】                                       扶养人数
+0038 MV038    C      01  课税方式【Taxing Mode】                                      0不代扣缴1按法扣缴2按固定金额扣缴3按固定税率扣缴4居住于国内的外籍人士5不居住于国内的外籍人士9不课税且不发扣缴凭单
+0039 MV039    N    16.2  固定税额【Fixed Tax】                                        固定税额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0040 MV040    N    05.4  固定税率【Fixed Tax Rate】                                   固定税率
+0041 MV041    C      01  发薪方式【Pay Mode】                                         1.每月发放一次2.每月发放两次
+0042 MV042    C      01  计全勤【Perfect Attendance】                                 是否计全勤(Y/N)
+0043 MV043    N    16.2  全勤奖金【Attendance Bonus】                                 全勤奖金   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0044 MV044    C      01  计加班【Calculating Overtime】                               Y/N
+0045 MV045    N    16.2  加班费【Overtime Fees】                                      每小时加班费   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0046 MV046    V     255  备注【Remark】                                               备注
+0047 MV047    C      30  英文全称【Full Description(English)】                        英文全称
+0048 MV048    C      08  体检日期【Checkup Date】                                     体检日期[FORMATE:YMD]
+0049 MV049    C      08  入境日期【Arrival Date】                                     入境日期[FORMATE:YMD]
+0050 MV050    C      08  到期日期【Due Day】                                          到期日期[FORMATE:YMD]
+0051 MV051    C      12  核准文号【Approval No.】                                     核准文号
+0052 MV052    C       8  试用期满日【Probation Ending Date】                          试用期满日[FORMATE:YMD]//881117ADD BY462
+0053 MV053    C       8  预计退休日【Plan Retire Date】                               预计退休日[FORMATE:YMD]//881117ADD BY462
+0054 MV054    C       2  身份别【Identity Type】                                      社会福利金的身份(一般或外籍人士..)//900802 2.4 S06-9007004 ADD
+0055 MV055    N    16.2  社保金基数【Base of Social Insurance】                       社保金基数 //900802 2.4 S06-9007004 ADD   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0056 MV056    N    16.2  公积金基数【Accumulation Fund Bases】                        公积金基数 //900802 2.4 S06-9007004 ADD   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0057 MV057    C      12  公积金号码【Accumulation Fund Number】                       公积金号码 //900802 2.4 S06-9007004 ADD
+0058 MV058    C      10  合同编号【Contract No.】                                     合同编号 //900802 2.4 S06-9007004 ADD
+0059 MV059    C       8  签约日期【Sign Date】                                        签约日期[FORMATE:YMD]//900802 2.4 S06-9007004 ADD
+0060 MV060    C       8  到期日期【Due Day】                                          到期日期[FORMATE:YMD]//900802 2.4 S06-9007004 ADD
+0061 MV061    C      01  健康状况【Health】                                           1.优,2.良,3.差[DEF:"1"] //20030313 5.0 P00-03030003 ADD ↓
+0062 MV062    C      20  技术职称【Technique Title】                                  技术职称
+0063 MV063    V     255  资格证书【Title Letter】                                     资格证书 //20030313 5.0 P00-03030003 ADD ↑
+0064 MV064    C      01  传送码【Transfer Code】                                      Y/M/N[DEF:"N"] //20030516 5.0 P00-0301001 ADD BY 28985↓
+0065 MV065    C      12  传送日期【Transfer Date】                                    日期时间yyyymmdd hh:mm
+0066 MV066    C      01  有效码【Effective Indicator】                                Y/N[DEF:"Y"] //20030516 5.0 P00-0301001 ADD BY 28985↑
+0067 MV067    C      10  员工照片【Staff Photo】                                      员工照片 //20030701 ADD BY 28986
+0068 MV068    C      10  门店编号【Shop Numbers】                                     门店编号 //20030905 ADD
+0069 MV069    C       6  来源编号【Source No.】                                       来源编号 //20040115 ADD BY 29234 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0070 MV070    C      10  介绍人【Introducer】                                         介绍人 //20040115 ADD BY 29234
+0071 MV071    C       6  学校编号【School ID】                                        学校编号 //20040115 ADD BY 29234 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0072 MV072    C       6  科系编号【Department Code】                                  科系编号 //20040115 ADD BY 29234 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0073 MV073    C       6  语言能力编号【Language Ability No.】                         语言能力编号 //20040115 ADD BY 29234 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0074 MV074    C      60  证照名称【Certificate Description】                          证照名称 //20040115 ADD BY 29234
+0075 MV075    C      10  民族【Nation】                                               民族 //20040115 ADD BY 29234
+0076 MV076    C      10  政治面貌【Polity Type】                                      政治面貌 //20040115 ADD BY 29234
+0077 MV077    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0078 MV078    C      08  下发功能解析【Distribute Control】                           下发功能解析 //20050606 add by 31380 for 6.0   //20090727 modi by 35501 for Z30-09063000001 下发功能解析->保留字段
+0079 MV079    V      30  登录者编号【Reserved Field】                                 登录者编号  //20111026 ADD BY 35501 FOR Z30-11091600001 预留字段->登录者编号 //20050606 add by 31380 for 6.0
+0080 MV080    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0081 MV081    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0082 MV082    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0083 MV083    C      10  开户银行【Bank No.】                                         开户银行  //20110111 add by 39057 for Z30-10122000001  
+0084 MV084    C      30  账号【Bank Account】                                         账号  //20110111 add by 39057 Z30-10122000001 
+0085 MV085    C      01  职务分类【Function Category】                                1.物管、2.生管、3.业务、4.采购、5.会计、6.出纳、7.仓管、8.研发、9.制造、A.品管、B.管理、C.工程、D.生技、E.船务、F.厂务、G.贸易、H.总务、I.人事、J.保税、K.稽核、L.企划、M.文管、N.产品、O.行政、P.外点(专柜前抬)、Z.其它    //20110111 add by 39057 for Z30-10122000001 
+
+文档代码:CMSMW
+文件名:工艺档【Operations】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MW001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MW001    C       4  工艺【Operation】                                            工艺
+0002 MW002    C      12  工艺名称【Operation Description】                            工艺名称
+0003 MW003    T          工艺说明【Operation Comment】                                工艺的详细说明  //20100925 MODI BY 35501  类型V->T FOR Z30-10090200001 
+0004 MW004    C       1  性质【Character】                                            1.厂内工艺、2.委外工艺
+0005 MW005    C      10  工作中心/供应商编号【Work Center/Supplier No.】              此工艺生产的主要工作中心/主要委外供应商编号 //881117 MODI
+0006 MW006    C      20  工作中心/供应商名称【Work Center/Supplier Description】      此工艺生产的主要工作中心/主要委外供应商名称 //881117 MODI
+0007 MW007    C      10  发包人员【Contract Staff】                                   此工艺的发包负责人
+0008 MW008    V     255  备注【Remark】                                               备注
+0009 MW009    N      04  清场合格证有效天数【Approved Cleanup Order Validity Days】   清场合格证有效天数 //20040604 ADD BY 30119 FOR P00-03120014
+0010 MW010    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 MW011    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0012 MW012    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0013 MW013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0014 MW014    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0015 MW015    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMX
+文件名:机器信息档【Machines】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MX001
+INDEX01 :MX002+MX001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MX001    C      15  机器编号【Machine】                                          机器编号
+0002 MX002    C      10  工作中心编号【Work Center】                                  工作中心编号
+0003 MX003    C      30  机器名称【Machine Description】                              机器名称
+0004 MX004    N    08.2  机器产能【Machine Capacity】                                 机器产能 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0005 MX005    N    05.4  负荷率【Loading Ratio】                                      负荷率
+0006 MX006    V     255  备注【Remark】                                               备注
+0007 MX007    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MX008    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MX009    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MX010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MX011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MX012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMY
+文件名:每日产能单头档【Daily Capacity Headers】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MY001+MY002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MY001    C      10  工作中心编号【Work Center】                                  工作中心编号
+0002 MY002    C       8  生产日期【Production Date】                                  生产日期[FORMATE:YMD]
+0003 MY003    N    08.2  人工产能【Man Capacity】                                     人工产能 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0004 MY004    N    08.2  机器产能【Machine Capacity】                                 机器产能 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0005 MY005    N    08.2  有效人时【Valid Man-hours】                                  有效人时 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0006 MY006    N    08.2  有效机时【Valid Machine-hours】                              有效机时 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0007 MY007    V     255  备注【Remark】                                               备注
+0008 MY008    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MY009    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MY010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 MY011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MY012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MY013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSMZ
+文件名:每日产能单身档【Daily Capacity Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MZ003+MZ002
+INDEX01 :MZ001+MZ002+MZ003
+==============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MZ001    C      10  工作中心编号【Work Center】                                  工作中心编号
+0002 MZ002    C       8  生产日期【Production Date】                                  生产日期[FORMATE:YMD]
+0003 MZ003    C      15  机器编号【Machine】                                          机器编号
+0004 MZ004    N    08.2  机器产能【Machine Capacity】                                 机器产能 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0005 MZ005    N    08.2  有效机时【Valid Machine-hours】                              有效机时 //20070118 MODI BY 29618 FOR P14-07010047(7.0) 7.2=>8.2
+0006 MZ006    V     255  备注【Remark】                                               备注
+0007 MZ007    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MZ008    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MZ009    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MZ010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MZ011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MZ012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSNA
+文件名:付款条件档【Payment Terms】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :NA001+NA002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NA001    C      01  类别【Type】                                                 1.采购 2.销售
+0002 NA002    C      06  付款条件编号【Payment Term No.】                             付款条件编号
+0003 NA003    C      60  名称【Name】                                                 名称      //20080618 MODI BY 44116 FOR Z10-08061800001 名称栏位拉长：C 30=>C 60
+0004 NA004    C      01  收(付)款方式别【Collection(Payment) Mode】                   1.开票后__天 2.开票后__个月逢__日 //20070104 6.5 P00-06110004 MODI 1.结账后__天 2.结账后__个月逢__日 ->1.开票后__天 2.开票后__个月逢__日 BY 38130
+0005 NA005    N      03  开票后__天【Days After Invoiced】                            开票后__天 //20070104 6.5 P00-06110004 MODI 结账后__天－》开票后_天 BY 38130
+0006 NA006    C      01  开票后_月【Months After Invoiced】                           开票后_月 //20070104 6.5 P00-06110004 MODI 结账后__月－》开票后_月 BY 38130
+0007 NA007    C      02  开票逢_日【Invoice by _Date】                                开票逢_日 //20070104 6.5 P00-06110004 MODI 结账逢__日－》开票逢_日 BY 38130
+0008 NA008    C      01  资金实现方式别【Cashing Method】                             1.付款后__天 2.付款后__个月逢__日
+0009 NA009    N      03  付款后__天【After Payment__Day】                             付款后__天
+0010 NA010    C      01  付款后__月【After Payment__Month】                           付款后__月
+0011 NA011    C      02  付款逢__日【Payment Date__Day】                              付款逢__日
+0012 NA012    C      01  取得折扣【Gain Discount】                                    Y/N
+0013 NA013    C      01  取得折扣方式【Discount Acquisition Mode】                    1.付款提前 2.票期缩短
+0014 NA014    N      03  提早付款天数【Days of Advance Payment】                      提早付款天数
+0015 NA015    N      03  票期提前天数【Usance Shorten Days】                          票期提前天数
+0016 NA016    N    05.4  折扣【Discount】                                             折扣(%)
+0017 NA017    V     255  备注【Remark】                                               备注
+0018 NA018    C      01  收款日起算日【Collection Date from】                         1.开票日 2.次月初 [DEF:"1"] //900321 2.1 S02-9003015 //20070104 6.5 P00-06110004 MODI 1.结账日－》1.开票日 BY 38130
+0019 NA019    C      01  实现日起算日【Cashing Date From】                            1.付款日 2.次月初 [DEF:"1"] //900321 2.1 S02-9003015
+0020 NA020    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0021 NA021    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0022 NA022    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0023 NA023    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0024 NA024    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0025 NA025    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSNE
+文件名:账号对象信息档【Banks Inquiry】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :NE001+NE002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NE001    C      10  银行行号【Bank No.】                                         金融机构编号
+0002 NE002    C      30  银行账号【Bank Account】                                     银行账号 //20030805 MODI BY 29618 20->30 FOR B02-030804002
+0003 NE003    C       1  账号对象【Account Partner】                                  1.部门 2.供应商 3.人员 9.其它 [DEF:"1"]
+0004 NE004    C      10  对象编号【Partner】                                          对象编号
+0005 NE005    C      20  对象简称【Partner Short Description】                        对象简称
+0006 NE006    C      30  税号/身份证号【Tax Register Number/ID】                      税号/身份证号 //20040206 MODI BY 28985 C10->C20   //20160603 MODI BY 600791 FOR Z01-16053100002 MODI 20->30
+0007 NE007    C      30  户名【Account】                                              户名
+0008 NE008    C      30  联系人【Contact】                                            联系人
+0009 NE009    C       1  入账通知【Notice Type】                                      1.EDI 2.FAX 3.不通知[DEF:"3"]
+0010 NE010    C      20  FAX_NO【FAX_NO】                                             FAX_NO
+0011 NE011    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0012 NE012    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0013 NE013    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0014 NE014    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0015 NE015    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0016 NE016    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSNF
+文件名:学校名称信息档【School Names】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :NF001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NF001    C      06  学校编号【School ID】                                        学校编号 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0002 NF002    C      30  学校名称【School Name】                                      学校名称
+0003 NF003    V     255  备注【Remark】                                               备注
+0004 NF004    C      01  是否允许修改学校名称【School Name can be Modified】          Y/N[DEF:"N"]
+0005 NF005    C      08  学历编号【Diploma ID】                                       学历编号 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0006 NF006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 NF007    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 NF008    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 NF009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 NF010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 NF011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+
+文档代码:CMSNG
+文件名:科系名称信息档【Department Descriptions】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :NG001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NG001    C      06  科系编号【Department Code】                                  科系编号 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0002 NG002    C      01  科系类别【Department Category】                              1.文2.法3.商4.工5.理6.农7.医8.其他
+0003 NG003    C      30  科系名称【Department Description】                           科系名称
+0004 NG004    V     255  备注【Remark】                                               备注
+0005 NG005    C      01  是否允许修改科系名称【Department Description Can be Modified】 Y/N
+0006 NG006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 NG007    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 NG008    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 NG009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 NG010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 NG011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSNH
+文件名:语言能力信息档【Language Abilities】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :NH001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NH001    C      06  语言编号【Language Code】                                    语言编号 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0002 NH002    C      12  语言名称【Language Description】                             语言名称
+0003 NH003    V     255  备注【Remark】                                               备注
+0004 NH004    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0005 NH005    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0006 NH006    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 NH007    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0008 NH008    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0009 NH009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSTZ
+文件名:双档虚拟信息档【Virtual Data of Double Table】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TZ001+TZ002+TZ003+TZ004
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TZ001    C      04  Field1【Field1】                                             Field1
+0002 TZ002    C      11  Field2【Field2】                                             Field2
+0003 TZ003    C      04  Field3【Field3】                                             Field3
+0004 TZ004    C      04  Field4【Field4】                                             Field4
+0005 TZ005    C      01  Field5【Field5】                                             Field5 //890329
+0006 TZ006    C      01  Field6【Field6】                                             Field6 //890329
+0007 TZ007    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 TZ008    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 TZ009    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 TZ010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 TZ011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 TZ012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSNI
+文件名:仓库库位档【Warehouse Bins】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :NI001+NI002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NI001    C      10  仓库编号【Warehouse】                                        仓库编号 //ADD BY 28983 20040603 FOR P00-04040011 ↓
+0002 NI002    C      10  库位编号【Bin】                                              库位编号
+0003 NI003    V     255  库位说明【Bin Description】                                  库位说明
+0004 NI004    C      01  有效码【Effective Indicator】                                Y/N[DEF:"Y"]
+0005 NI005    V     255  备注【Remark】                                               备注
+0006 NI006    C      01  传送码【Transfer Code】                                      Y/M/N[DEF:"N"]
+0007 NI007    C      12  传送日期【Transfer Date】                                    日期时间yyyymmdd hh:mm //ADD BY 28983 20040603 FOR P00-04040011 ↑
+0008 NI008    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 NI009    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 NI010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 NI011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 NI012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 NI013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSNJ
+文件名:结算方式单头档【Settlement Method Headers】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :NJ001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NJ001    C      04  结算方式编号【Settlement Method No.】                        结算方式编号 //20040921 ADD BY 32350↓ FOR P02-03080034 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0002 NJ002    C      20  结算方式名称【Payment Term Description】                     结算方式名称
+0003 NJ003    C      01  类别【Type】                                                 1.现金 2.电汇 3.票据 4.其他
+0004 NJ004    C      01  科目来源【Subject Source】                                   1.统一科目 2.按币种设置科目 3.按银行账号设置科目
+0005 NJ005    C      20  会计科目【Account Code】                                     会计科目编号
+0006 NJ006    V     255  备注【Remark】                                               备注 //20040921 ADD BY 32350↑
+0007 NJ007    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 NJ008    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 NJ009    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 NJ010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 NJ011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 NJ012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSNK
+文件名:结算方式单身档【Settlement Method Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :NK001+NK002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NK001    C      04  结算方式编号【Settlement Method No.】                        结算方式编号 //20040921 ADD BY 32350↓ FOR P02-03080034 //20050803 MODI BY 29234 代号->编号 P00-05080002
+0002 NK002    C      04  币种【Currency】                                             币种
+0003 NK003    C      20  会计科目【Account Code】                                     会计科目编号 //20040921 ADD BY 32350↑
+0004 NK004    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0005 NK005    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0006 NK006    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 NK007    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0008 NK008    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0009 NK009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:CMSNL
+文件名:仓库检验点档【Warehouse Inspection Points】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :NL001+NL002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NL001    C      10  仓库编号【Warehouse】                                        仓库编号 //20050708 ADD BY 29618 FOR P00-05070003
+0002 NL002    C      10  检验点编号【Inspection Point No.】                           检验点编号
+0003 NL003    V     255  检验点说明【Inspection Place Comment】                       检验点说明
+0004 NL004    C      01  有效码【Effective Indicator】                                Y/N[DEF:"Y"]
+0005 NL005    V     255  备注【Remark】                                               备注
+0006 NL006    C      01  传送码【Transfer Code】                                      Y/M/N[DEF:"N"]
+0007 NL007    C      12  传送日期【Transfer Date】                                    日期时间yyyymmdd hh:mm
+0008 NL008    C      01  预留字段【Reserved Field】                                   预留字段
+0009 NL009    C      08  预留字段【Reserved Field】                                   预留字段
+0010 NL010    V      30  预留字段【Reserved Field】                                   预留字段
+0011 NL011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 NL012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 NL013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+>>20110111 ADD BY 39057 FOR Z30-10122000001
+文档代码:CMSNM  
+文件名:借款信用额度档【Borrowing Credit】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :NM001+NM002+NM003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NM001    C      10  员工编号【Staff】                                            员工编号
+0002 NM002    C      01  借款信用控制内容【Credit Control Content】                   1.未报销借款金额, 2.未报销借款天数, 3.未报销借款笔数  [DEF:"1.未报销借款金额"] 
+0003 NM003    C      04  币种【Currency】                                             币种            
+0004 NM004    N    16.2  信用额度【Credit Amount】                                    信用额度        
+0005 NM005    N    16.2  使用额度【Use Amount】                                       使用额度        
+0006 NM006    N    16.2  剩余额度【Residual Amount】                                  剩余额度        
+0007 NM007    C      01  控制方式【Control Mode】                                     1.严格控制, 2.提示, 3.不控制  [DEF:"3.不控制"]        
+0008 NM008    C      01  使用状态【Status】                                           Y/N[DEF:"N"]  //20111008 MODI BY 35501 FOR Z30-11091600001 预留字段 ->使用状态
+0009 NM009    C      01  预留字段【Reserved Field】                                   预留字段
+0010 NM010    C      01  预留字段【Reserved Field】                                   预留字段
+0011 NM011    C      08  预留字段【Reserved Field】                                   预留字段   //20110915 ADD BY 600792 FOR Z01-11091400001
+0012 NM012    V      30  预留字段【Reserved Field】                                   预留字段     //20110915 ADD BY 600792 FOR Z01-11091400001
+0013 NM013    N    16.6  使用次数【Reserved Field】                                   使用次数    //20111008 MODI BY 35501 FOR Z30-11091600001 预留字段 ->使用次数 //20110915 ADD BY 600792 FOR Z01-11091400001
+0014 NM014    N    16.6  预留字段【Reserved Field】                                   预留字段  //20110915 ADD BY 600792 FOR Z01-11091400001
+0015 NM015    N    16.6  预留字段【Reserved Field】                                   预留字段  //20110915 ADD BY 600792 FOR Z01-11091400001
+
+//20110209  ADD BY CMSNN 37419 FOR Z10-11020900001
+文档代码:CMSNN
+文件名:参数表【Common Parameters】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NN001    C      60  参数【Parameters】                                     　　　参数
+0002 NN002    C     255  参数值【Parameter Values】                               　　参数值
+0003 NN003    C     255  参数说明【Parameter Description】                            参数说明 
+0004 NN004    C      01  预留字段【Reserved Field】                                   预留字段
+0005 NN005    C      08  预留字段【Reserved Field】                                   预留字段
+0008 NN008    V      30  预留字段【Reserved Field】                                   预留字段
+0009 NN009    N    16.6  预留字段【Reserved Field】                                   预留字段
+0010 NN010    N    16.6  预留字段【Reserved Field】                                   预留字段
+0011 NN011    N    16.6  预留字段【Reserved Field】                                   预留字段
+
+文档代码:CMSIA
+文件名:分期收款条件单头档【Installment Sale Condition Headers】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :IA001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                   备注
+===============================================================================================
+0001  IA001   C     06   分期收款条件编号【Installment Sale Condition】             分期收款条件编号  
+0002  IA002   C     60   分期收款条件名称【Installment Sale Condition Description】 分期收款条件名称
+0003  IA003   C     01   有效码【Effective Indicator】                              Y/N [DEF:'N']
+0004  IA004   V    255   备注【Remark】                                             备注  
+0005  IA005   C     01   预留字段【Reserved Field】                                 预留字段 
+0006  IA006   C     08   预留字段【Reserved Field】                                 预留字段 
+0007  IA007   V     30   预留字段【Reserved Field】                                 预留字段 
+0008  IA008   N   16.6   预留字段【Reserved Field】                                 预留字段 
+0009  IA009   N   16.6   预留字段【Reserved Field】                                 预留字段 
+0010  IA010   N   16.6   预留字段【Reserved Field】                                 预留字段 
+
+
+文档代码:CMSIB
+文件名:分期收款条件单身档【Installment Sale Condition Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :IB001+IB002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                   备注
+===============================================================================================
+0001  IB001   C     06   分期收款条件编号【Installment Sale Condition】             分期收款条件编号  
+0002  IB002   C     04   分期收款期别【Installmen Stage】                           分期收款最多支持99期
+0003  IB003   C     20   期名【Stage Description】                                  期名
+0004  IB004   C     02   数据来源【Data Sources】                                   0.自定义 1.标准销售合同 2.销售订单 3.销货单 4.销售发票 5.安装调试单 11. 上期收款日
+0005  IB005   C     01   收款基准日【Collection Base Date】                         0.自定义 1.单据日期 2.审核日期 3.签订日期 4.生效日期 5.交货日期 6.安装调试完成日期 7.开始日期 8.结束日期 9.基准日期 
+0006  IB006   C     01   加/减【Adding/Reducing】                                   1.加 2.减  
+0007  IB007   C     01   天/月/年【D/M/Y】                                          1.天 2.月 3.年
+0008  IB008   N      3   天数/月数/年数【D/M/Y Count】                              天数/月数/年数
+0009  IB009   C     01   收款类型【Collection Type】                                1.按比率 2.自定义
+0010  IB010   N    6.5   收款比率【Collection Rate】                                收款比率(%)
+0011  IB011   C     01   取得折扣【Discount Taken】                                 Y/N [DEF:'N']
+0012  IB012   C     01   折扣方式【Discount Way】                                   1.提前付款 2.缩短票期
+0013  IB013   N      3   提前天数【Ahead Of Schedule】                              提前天数 
+0014  IB014   N    6.5   折扣比率【Discount Rate】                                  折扣比率(%)
+0015  IB015   C     08   预留字段【Reserved Field】                                 预留字段 
+0016  IB016   V     30   预留字段【Reserved Field】                                 预留字段 
+0017  IB017   N   16.6   预留字段【Reserved Field】                                 预留字段 
+0018  IB018   N   16.6   预留字段【Reserved Field】                                 预留字段 
+0019  IB019   N   16.6   预留字段【Reserved Field】                                 预留字段 
+0020  IB020   C     01   系统推算【Reckoning System】                               1.第一笔 2.最近一笔   [DEF:"1.第一笔"] 
+0021  IB021   C     01   预留字段【Reserved Field】                                 预留字段   //20110915 ADD BY 600792 FOR Z01-11091400001
+
+>>20110316 ADD BY 39057 FOR Z10-11031500001
+文档代码:CMSNO
+文件名:项目信息档【Project】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :NO001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 NO001    C      20  项目编号【Project NO.】                                      项目编号
+0002 NO002    C     255  项目名称【Project Name】                                   　项目名称
+0003 NO003    C     255  项目说明【Project Description】                              项目说明 
+0004 NO004    C      01  预留字段【Reserved Field】                                   预留字段
+0005 NO005    C      08  预留字段【Reserved Field】                                   预留字段
+0008 NO006    V      30  预留字段【Reserved Field】                                   预留字段
+0009 NO007    N    16.6  预留字段【Reserved Field】                                   预留字段
+0010 NO008    N    16.6  预留字段【Reserved Field】                                   预留字段
+0011 NO009    N    16.6  预留字段【Reserved Field】                                   预留字段
+

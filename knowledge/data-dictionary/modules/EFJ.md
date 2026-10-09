@@ -3,7 +3,7 @@
 > 本文件为机械抽取产物，请勿手工编辑。重新生成：`python scripts/gen_data_dictionary.py`
 >
 > 溯源：源文件：`.workbuddy/tmp/dict/tables.json`（1170 表）、`.workbuddy/tmp/dict/fields.json`（54842 字段）、`knowledge/typekey/typekey_map.yaml`（106 业务对象）
-> 生成时间：2026-10-08 23:02:28
+> 生成时间：2026-10-09 12:02:34
 
 ## 模块概览
 
@@ -28,13 +28,15 @@
 | 命名规律 | 含特殊命名字段 |
 | 是否 OpenAPI 暴露 | 否（依据：未被任何 type_key 引用（中文名启发式与真机反推均未命中）） |
 | OpenAPI 服务 | 无 |
+| 主键 | `EF001+EF002+EF003` |
+| 文档类型 | 系统档 |
 | 对应业务对象 | 未匹配到type_key（启发式仅供人工参考，不影响上列判定） |
 
 | 字段名 | 中文名 | 类型 | 长度/精度 | 键 | 格式掩码 | 推测数据类型 | 说明 |
 |--------|--------|------|-----------|-----|--------|--------------|------|
-| `EF001` | 公司编号 | char | 10 |  |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISNULL:N][ISDEF:N] |
-| `EF002` | 作业编号 | char | 20 |  |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISDEF:N] |
-| `EF003` | 单别+单号 | char | 255 |  |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISDEF:N] |
+| `EF001` | 公司编号 | char | 10 | PK |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISNULL:N][ISDEF:N] |
+| `EF002` | 作业编号 | char | 20 | PK |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISDEF:N] |
+| `EF003` | 单别+单号 | char | 255 | PK |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISDEF:N] |
 | `EF004` | 用户编号 | char | 10 |  |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISNULL:N][ISDEF:N] |
 | `EF005` | 条件 | UNKNOWN(I) |  |  |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISDEF:N] |
 | `EF006` | 处理状态 | char | 1 |  |  |  | 形态为XXnnn但前缀未命中表名实体位；[ISDEF:N](Y(完成)/N(未处理)/P(处理中)/U(有问题)) |

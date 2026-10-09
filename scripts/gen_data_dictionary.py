@@ -398,6 +398,35 @@ oapi_unmatched_tk = len(typekeys) - len(_matched_tk)
 # ---------------------------------------------------------------------------
 NODE_TABLE_MAP = os.path.join(OUT_ROOT, "node-table-map.csv")
 
+# ---------------------------------------------------------------------------
+# SDD 元数据加载（从 knowledge/表结构信息/*.SDD 抽取，提供主键、文档类型、索引）
+# ---------------------------------------------------------------------------
+SDD_META_CSV = os.path.join(OUT_ROOT, "sdd-table-meta.csv")
+SDD_INDEX_CSV = os.path.join(OUT_ROOT, "sdd-index.csv")
+
+sdd_table_meta = {}  # doc_code -> dict
+if os.path.exists(SDD_META_CSV):
+    with open(SDD_META_CSV, encoding="utf-8-sig") as _f:
+        for _row in csv.DictReader(_f):
+            sdd_table_meta[_row["doc_code"]] = {
+                "primary_keys": _row["primary_keys"],
+                "doc_type_cn": _row["doc_type_cn"],
+                "doc_type_code": _row["doc_type_code"],
+                "index_count": int(_row["index_count"]),
+                "field_count": int(_row["field_count"]),
+                "file_name_cn": _row["file_name_cn"],
+                "file_name_en": _row["file_name_en"],
+            }
+
+sdd_indexes = {}  # doc_code -> [(index_name, fields_str), ...]
+if os.path.exists(SDD_INDEX_CSV):
+    with open(SDD_INDEX_CSV, encoding="utf-8-sig") as _f:
+        for _row in csv.DictReader(_f):
+            sdd_indexes.setdefault(_row["doc_code"], []).append(
+                (_row["index_name"], _row["index_fields"]))
+
+print("SDD 元数据加载完成：%d 表、%d 索引" % (len(sdd_table_meta), sum(len(v) for v in sdd_indexes.values())))
+
 tk_query_service = {}
 for tk in typekeys:
     blk = content.split("- type_key: %s\n" % tk["key"], 1)
@@ -1021,6 +1050,19 @@ for mod in sorted(module_tables):
         else:
             L.append("| 是否 OpenAPI 暴露 | 否（依据：%s） |" % exp_basis)
             L.append("| OpenAPI 服务 | 无 |")
+        # SDD 元数据：主键、文档类型、索引
+        _sdd_card = sdd_table_meta.get(tb, {})
+        if _sdd_card:
+            _pk = _sdd_card.get("primary_keys", "")
+            _dt = _sdd_card.get("doc_type_cn", "")
+            if _pk:
+                L.append("| 主键 | `%s` |" % _pk)
+            if _dt:
+                L.append("| 文档类型 | %s |" % _dt)
+            _idxs = sdd_indexes.get(tb, [])
+            if _idxs:
+                _idx_str = "; ".join("`%s`=%s" % (n, f) for n, f in _idxs)
+                L.append("| 索引 | %s |" % _idx_str)
         if oa:
             L.append("| 对应业务对象（启发式参考） | type_key=`%s`，标题「%s」 |"
                      % (oa["type_key"], oa["title"]))
@@ -1048,7 +1090,15 @@ for mod in sorted(module_tables):
             if prec.endswith(".0"):
                 prec = prec[:-2]
             # 键：ADMMD 仅对元数据表自身登记 keycolumn，业务表主键未登记
-            keymark = "PK(元数据表)" if kind == "管理字段" and tb in ("ADMMC", "ADMMD", "ADMMB") else ""
+            # 主键标记：优先用 SDD PRIMARY KEY，其次元数据表 PK
+            _sdd_pk = sdd_table_meta.get(tb, {}).get("primary_keys", "")
+            _pk_fields = _sdd_pk.split("+") if _sdd_pk else []
+            if col in _pk_fields:
+                keymark = "PK"
+            elif kind == "管理字段" and tb in ("ADMMC", "ADMMD", "ADMMB"):
+                keymark = "PK(元数据表)"
+            else:
+                keymark = ""
             notes = []
             if kind == "自定义字段":
                 notes.append("公共字段·自定义字段")
@@ -1207,6 +1257,7 @@ ti_rows = []
 for t in tables:
     tb = t["table"]
     exp_flag, exp_svcs, exp_basis = exposure_of(tb)
+    _sdd = sdd_table_meta.get(tb, {})
     ti_rows.append([
         tb,
         t["table_cn"],
@@ -1216,16 +1267,24 @@ for t in tables:
         exp_flag,
         exp_svcs,
         exp_basis,
+        _sdd.get("primary_keys", ""),
+        _sdd.get("doc_type_cn", ""),
+        "; ".join("%s(%s)" % (n, f) for n, f in sdd_indexes.get(tb, [])) if tb in sdd_indexes else "",
     ])
 for o in sorted(only_in_fields):
     exp_flag_o, exp_svcs_o, _ = exposure_of(o)
+    _sdd_o = sdd_table_meta.get(o, {})
     ti_rows.append([o, "", "", o[:3], len(fields_by_table.get(o, [])),
                     exp_flag_o, exp_svcs_o,
                     "该表在 tables.json 中缺登记（无中文名/英文名）；%s"
-                    % ("命中真机反推映射" if exp_svcs_o else "未命中真机反推映射")])
+                    % ("命中真机反推映射" if exp_svcs_o else "未命中真机反推映射"),
+                    _sdd_o.get("primary_keys", ""),
+                    _sdd_o.get("doc_type_cn", ""),
+                    "; ".join("%s(%s)" % (n, f) for n, f in sdd_indexes.get(o, [])) if o in sdd_indexes else ""])
 write_csv(os.path.join(csv_dir, "table-index.csv"),
           ["table", "table_cn", "table_en", "module", "field_count",
-           "is_openapi_exposed", "openapi_services", "exposure_basis"],
+           "is_openapi_exposed", "openapi_services", "exposure_basis",
+           "primary_keys", "doc_type", "indexes"],
           ti_rows)
 
 print("CSV 写入完成：field-index=%d, format-mask-map=%d, table-index=%d"

@@ -1,0 +1,503 @@
+文档代码:EPSMA
+文件名:出口费用编号信息档【出口费用编号信息档】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MA001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MA001    C      10  费用编号【Expense Number】                                   费用编号
+0002 MA002    C      20  费用名称【Expense Description】                              费用名称
+0003 MA003    C      20  会计科目【Account Code】                                     会计科目
+0004 MA004    C       1  隐藏字段【Hided Fields】                                     成本归属(Y/N) //881103 MODI BY 551
+0005 MA005    V     255  备注【Remark】                                               备注
+0006 MA006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MA007    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MA008    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MA009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 MA010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MA011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSMB
+文件名:商品包装信息单头【商品包装信息单头】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MB001+MB002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MB001    C      20  商品品号【Item】                                             商品品号
+0002 MB002    C      04  单位【Unit】                                                 单位
+0003 MB003    N    16.6  单位净重【Unit Net Weight】                                  单位净重 //890908 MODI OLD:8.3 //20090505 MODI BY 38130 FOR Z10-09060900001 11.6->16.6
+0004 MB004    C      03  主包装方式【Main Packing Method】                            主要包装方式
+0005 MB005    V     255  备注【Remark】                                               备注
+0006 MB006    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0007 MB007    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0008 MB008    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MB009    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0010 MB010    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MB011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSMC
+文件名:商品包装信息单身【商品包装信息单身】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MC001+MC002+MC003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MC001    C      20  商品品号【Item】                                             商品品号
+0002 MC002    C      04  单位【Unit】                                                 单位
+0003 MC003    C      03  包装方式【Packing Method】                                   包装方式的代码
+0004 MC004    C      30  包装名称【Packing Description】                              包装方式的名称
+0005 MC005    N    16.6  内包装含商品数【Commodities Qty Per Inner Packing】          内包装含商品数   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0006 MC006    N    16.6  外包装含内包装数【Packing Quantity In Outer Package】        外包装含内包装数   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0007 MC007    N    16.6 内包装重量【Inner Packing Weight】                           内包装重量 //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0008 MC008    N    16.6  外包装重量【Outer Packing Weight】                           外包装重量 //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0009 MC009    N    16.6  净重(Kg)【Net Weight(Kg)】                                   净重(Kg)  //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0010 MC010    N    16.6  毛重(Kg)【Gross Weight(Kg)】                                 毛重(Kg)  //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0011 MC011    N    16.6  材积(CUFT)【Volume(CUFT)】                                   外包装容积(CUFT) //20090505 MODI BY 38130 FOR Z10-09060900001 8.3>16.6
+0012 MC012    V     255  备注【Remark】                                               备注
+0013 MC013    N    16.6  长(CM)【Length(CM)】                                         外包装的长度 //900628 2.2 ADD
+0014 MC014    N    16.6  宽(CM)【Width(CM)】                                          外包装的宽度 //900628 2.2 ADD //20090505 MODI BY 38130 FOR Z10-09060900001 6.1->16.6
+0015 MC015    N    16.6  高(CM)【High(CM)】                                           外包装的高度 //900628 2.2 ADD //20090505 MODI BY 38130 FOR Z10-09060900001 6.1->16.6
+0016 MC016    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0017 MC017    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0018 MC018    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0019 MC019    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0020 MC020    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0021 MC021    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSMD
+文件名:客户唛头信息【客户唛头信息】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MD001+MD002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MD001    C      10  客户编号【Customer】                                         客户编号
+0002 MD002    C      04  唛头【Mark】                                                 唛头编号
+0003 MD003    C      01  主要唛头【Main Mark】                                        Y/N
+0004 MD004    V     255  正唛【Mark】                                                 正唛
+0005 MD005    V     255  侧唛【Side Mark】                                            侧唛
+0006 MD006    V     255  备注【Remark】                                               备注
+0007 MD007    C      30  唛头名称【Mark Description】                                 唛头名称 //890831 ADD
+0008 MD008    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 MD009    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 MD010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 MD011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MD012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MD013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSTA
+文件名:出货通知单头【出货通知单头】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TA001+TA002
+INDEX01 :TA003+TA001+TA002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TA001    C      04  通知单别【Notice Type】                                      通知单别
+0002 TA002    C      11  通知单号【Notice No.】                                       通知单号
+0003 TA003    C      08  通知日期【Notice Date】                                      通知日期[FORMATE:YMD]
+0004 TA004    C      10  客户编号【Customer】                                         客户编号
+0005 TA005    C      30  联系人【Contact】                                            联系人
+0006 TA006    C      06  部门编号【Department】                                       部门编号
+0007 TA007    C      10  业务人员【Sales】                                            业务人员
+0008 TA008    C      10  送货客户【Ship-to Customer】                                 送货客户
+0009 TA009    V      255  送货地址(一)【Delivery Address(1)】                          送货地址(一) //20211215 MODI BY 01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0010 TA010    V      255  送货地址(二)【Delivery Address(2)】                          送货地址(二) //20211215 MODI BY 01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0011 TA011    V      255  文件送达地址(一)【Document Post Address(1)】                 文件送达地址(一) //20211215 MODI BY 01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0012 TA012    V      255  文件送达地址(二)【Document Post Address(2)】                 文件送达地址(二) //20211215 MODI BY 01228 for Z30-21121500001 地址字段长度C 72调整为V 255码
+0013 TA013    C      10  预留字段【Invoice Customer】                                 预留字段 //20061120 6.5 P00-06110004 MODI 发票客户->预留字段 BY 28975
+0014 TA014    C      72  预留字段【Invoice Address(1)】                               预留字段 //20061120 6.5 P00-06110004 MODI 发票地址(一) ->预留字段 BY 28975
+0015 TA015    C      72  预留字段【Invoice Address(2)】                               预留字段 //20061120 6.5 P00-06110004 MODI 发票地址(二)->预留字段 BY 28975
+0016 TA016    C      08  预留字段【Invoice Date】                                     预留字段[FORMATE:YMD] //20061120 6.5 P00-06110004 MODI 发票日期->预留字段 BY 28975
+0017 TA017    C      10  预留字段【Invoice Serial Number】                            预留字段 //20061120 6.5 P00-06110004 MODI 发票号码->预留字段 BY 28975 
+0018 TA018    C      20  项目编号【Item No.】                                         项目编号 //890623 MODI BY 551 C8->C20 //20061120 6.5 P00-06110004 MODI 税号->预留字段 BY 28975  //20111212 MODI BY 42172 FOR B00-111209001:预留字段->项目编号
+0019 TA019    C      01  发票种类【Invoice Kind】                                     A.专用发票、B.普通发票、C.其他 //20061120 6.5 P00-06110004 mark 1.二联式、2.三联式、3.二联式收银机发票、4.三联式收银机发票、5.电子计算机发票、6.免用统一发票、 modi 免用发票->其他 A.增值税专用发票－》A.专用发票 BY 28975 //890623 ADD 'A,B,C' BY 551 FOR 大陆用
+0020 TA020    C      01  税种【Tax Type】                                             1.应税内含、2.应税外加、3.零税率、4.免税、9.不计税
+0021 TA021    C      20  L/C_NO【L/C_NO】                                             信用证号
+0022 TA022    C      04  交易币种【Currency】                                         交易币种
+0023 TA023    N    12.7  汇率【Exchange Rate】                                        汇率 //20030324 modi by 29618 7.4->10.7  01228(lijf) for Z30-21121600001 10.7->12.7
+0024 TA024    C      16  价格说明【Price Description】                                价格说明
+0025 TA025    C      60  付款条件【Payment Term】                                     付款条件名称 //20110503 MODI BY 38130 FOR Z10-11050300001 拉长字段从16--》60
+0026 TA026    C      04  销货单别【Delivery Type】                                    销货单别
+0027 TA027    C      11  销货单号【Delivery Number】                                  销货单号
+0028 TA028    C      04  唛头【Mark】                                                 唛头编号
+0029 TA029    N    16.2  销货金额【Delivery Amount】                                  销货金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0030 TA030    N    16.6  包装总数【Total Packings Quantity】                          包装总数   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0031 TA031    C      01  运输方式【Delivery Term】                                    1.空运、2.海运、3.海空联运、4.邮寄、5.陆运、6.自取、7.自送、8.快递 //890111 MODI BY 551 890831 ADD 8.快递
+0032 TA032    C      01  更新码【Update Indicator】                                   Y/N
+0033 TA033    C      01  PACKING审核码【Packing Approval Indicator】                  PACKING审核码
+0034 TA034    C      01  审核码【Approval Indicator】                                 本单已否审核的判断码(Y/N)
+0035 TA035    C      20  输出许可证号【License No.】                                  输出许可证号
+0036 TA036    C      20  大提单单号【Main Bill of Lading Number】                     大提单单号
+0037 TA037    C      20  小提单单号【Small B/L No.】                                  小提单单号
+0038 TA038    C      10  NOTIFY【Notify】                                             NOTIFY(出货通知人) //881022 MODI BY 551
+0039 TA039    C       8  ETA【ETA】                                                   预计到达日[FORMATE:YMD] //20030312 MODI BY 28985 P01-02080029 应为预计到达日
+0040 TA040    C       8  ETD【ETD】                                                   预计送货日[FORMATE:YMD] //20030312 MODI BY 28985 P01-02080029 应为预计送货日
+0041 TA041    C      06  出货工厂【Delivery Plant】                                   出货工厂
+0042 TA042    C      20  INVOICE_NO【Invoice No.】                                    INVOICE_NO
+0043 TA043    C      10  验货公司【Inspection Company】                               验货公司
+0044 TA044    C      10  报关行【Customs】                                            报关行
+0045 TA045    C      10  FORWARDER【Forwarder】                                       运输公司
+0046 TA046    C      20  货柜号码【Container Number】                                 货柜号码
+0047 TA047    N     3.1  货柜尺寸【Container Size】                                   货柜尺寸
+0048 TA048    C      20  货柜场【Container Ground】                                   货柜场
+0049 TA049    C      30  船名【Ship Name】                                            船名
+0050 TA050    C      20  船次【Vessel Number】                                        船次
+0051 TA051    C      20  报单号码【Customs Declaration Number】                       报单号码
+0052 TA052    C      08  结关日【Closing Date】                                       结关日[FORMATE:YMD]
+0053 TA053    C      08  装货日【Loading Date】                                       装货日[FORMATE:YMD]
+0054 TA054    C      08  装船日【Shipping Date】                                      装船日[FORMATE:YMD]
+0055 TA055    C      20  S/I_NO【S/I_No.】                                            SHIPPING-Instruction
+0056 TA056    C      20  起始港口【Loading Port】                                     起始港口
+0057 TA057    C      20  目的港口【Destination Port】                                 目的港口
+0058 TA058    C      20  目的地【Destination】                                        目的地
+0059 TA059    C      20  海关封签【Customs Seal】                                     海关封签
+0060 TA060    C      20  提单内容【B/L Content】                                      提单内容
+0061 TA061    C      10  保留字段【Reserved Field】                                   海运公司
+0062 TA062    C      10  保留字段【Reserved Field】                                   空运公司
+0063 TA063    V     255  正唛【Mark】                                                 正唛
+0064 TA064    V     255  侧唛【Side Mark】                                            侧唛
+0065 TA065    V     255  PACKING备注【Packing Remark】                                PACKING备注
+0066 TA066    V     255  INVOICE备注【INVOICE Remarks】                               INVOICE备注
+0067 TA067    C      20  货盘单位【Pallet Unit】                                      货盘单位
+0068 TA068    N    16.2  销货税额【Delivery Tax Amount】                              销货税额 //ADD BY 551 880812   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0069 TA069    N       1  打印次数【Print Times】                                      打印次数 //880817 add by 551
+0070 TA070    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD] //89-06-02 ADD BY 551
+0071 TA071    C      10  审核者【Approver】                                           审核者 //89-06-02 ADD BY 551
+0072 TA072    C      08  PACKING审核日期【Packing Approve Date】                      PACKING审核日期[FORMATE:YMD] //89-06-02 ADD BY 551
+0073 TA073    C      10  PACKING审核者【Packing Approver】                            PACKING审核者 //89-06-02 ADD BY 551
+0074 TA074    C      06  付款条件编号【Payment Term】                                 付款条件编号 //890904 ADD BY 551
+0075 TA075    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:"N"]//20080320 modi by 35334  签核状态增加'S.传送中' //900110
+0076 TA076    C       1  PACKING签核状态码【Packing Approval Status】                 0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:"N"]//20080320 modi by 35334  签核状态增加'S.传送中' //900110
+0077 TA077    C      15  海关手册【Customs Handbook】                                 海关手册 //20020605 FOR 3.1 P00-02060006 add
+0078 TA078    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0079 TA079    C       2  流程编号【Flow】                                             流程编号(多角贸易) //20040513 ADD BY 29234 P00-04050006
+0080 TA080    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0081 TA081    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0082 TA082    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0083 TA083    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0084 TA084    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0085 TA085    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+
+文档代码:EPSTB
+文件名:出货通知单身【出货通知单身】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TB001+TB002+TB003
+INDEX01 :TB021+TB022+TB023
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TB001    C      04  通知单别【Notice Type】                                      通知单别
+0002 TB002    C      11  通知单号【Notice No.】                                       通知单号
+0003 TB003    C      04  通知序号【Notice Sequence】                                  通知序号
+0004 TB004    C      04  订单单别【Order Type】                                       订单单别
+0005 TB005    C      11  订单单号【Sales Order Number】                               订单单号
+0006 TB006    C      04  订单序号【Order Sequence】                                   订单序号
+0007 TB007    C      20  品号【Item】                                                 品号
+0008 TB008    V     255  商品描述【Goods Description】                                商品描述
+0009 TB009    N    16.6  出货数量【Delivered Quantity】                               出货数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0010 TB010    C      01  类型【Type】                                                 1.赠品量、2.备品量
+0011 TB011    N    16.6  赠备品量【Largess/Standby Quantity】                         赠备品量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0012 TB012    N    17.8  单价-1【Price-1】                                            单价-1   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0013 TB013    N    16.2  金额-1【Amount-1】                                           金额-1   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0014 TB014    N    17.8  单价-2【Price-2】                                            单价-2   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0015 TB015    N    16.2  金额-2【Amount-2】                                           金额-2   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0016 TB016    N    17.8  单价-3【Price-3】                                            单价-3   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0017 TB017    N    16.2  金额-3【Amount-3】                                           金额-3   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TB018    C      10  出货仓库【Delivery Warehouse】                               出货仓库
+0019 TB019    C      20  批号【Lot】                                                  批号
+0020 TB020    V     255  备注【Remark】                                               备注
+0021 TB021    C      04  销货单别【Delivery Type】                                    销货单别
+0022 TB022    C      11  销货单号【Delivery Number】                                  销货单号
+0023 TB023    C      04  销货序号【Delivery Sequence】                                销货序号
+0024 TB024    C      01  更新码【Update Indicator】                                   Y/N
+0025 TB025    C      01  审核码【Approval Indicator】                                 本单已否审核的判断码(Y/N)
+0026 TB026    V      255 品名【Item Description】                                     品名 //20030324 modi by 29618 30->60//20030711 MODI BY 29618 C->V //20211209 MODI BY  01228(lijf) for Z30-21120900001 品名长度调整为60->255
+0027 TB027    V      255 规格【Specification】                                        规格 //20030324 modi by 29618 30->60//20030711 MODI BY 29618 C->V //20211209 MODI BY  01228(lijf) for Z30-21120900001 规格长度调整为60->255
+0028 TB028    C      04  单位【Unit】                                                 单位 
+0029 TB029    N    16.6  预计出货数量【Plan Delivery Quantity】                       预计出货数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0030 TB030    N    16.6  预计赠备品量【Plan Largess and Standby Quantity】            预计赠备品量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0031 TB031    V      60  客户品号【Customer Item】                                    客户品号  //20211215 MODI BY 01228 for Z30-21121500001 客户品号长度调整C 20->V 60
+0032 TB032    N    05.4  折扣率【Discount Rate】                                      折扣率 //890908 ADD
+0033 TB033    C      03  包装方式【Packing Method】                                   包装方式的代码 //890908 ADD
+0034 TB034    N     16.6  毛重(Kg)【Gross Weight(Kg)】                                 毛重(Kg) //890908 ADD //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0035 TB035    N     16.6  材积(CUFT)【Volume(CUFT)】                                   材积(CUFT) //890908 ADD //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0036 TB036    N    16.6  预计出货包装数量【Plan Delivery Packing Quantity】           预计出货包装数量 //900312 2.1 S00-9001001   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0037 TB037    N    16.6  预计赠备品包装量【Plan Largess and Standby Packing Quantity】 预计赠备品包装量 //900312 2.1 S00-9001001   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0038 TB038    N    16.6  出货包装数量【Delivery Packing Quantity】                    出货包装数量 //900312 2.1 S00-9001001   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0039 TB039    N    16.6  赠备品包装量【Largess/Standby Packing Quantity】             赠备品包装量 //900312 2.1 S00-9001001   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0040 TB040    C      04  包装单位【Packing Unit】                                     包装单位 //900312 2.1 S00-9001001
+0041 TB041    C      10  库位【Bin】                                                  库位 //20040603 ADD BY 28983 FOR 5.1 P00-04040011
+0042 TB042    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0043 TB043    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0044 TB044    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0045 TB045    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0046 TB046    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0047 TB047    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0048 TBS01    C      01  sQMS检验码【sQMS Inspection Status】                         N.不需送检 Y.送检成功 0.待送检 X.送检失败 U.送检还原失败 Z.检验状态更新失败 Q.检验完成 //20210928 ADD BY 01228 FOR Z39-20210914001 sQMS检验码
+0049 TBS02    C      20  sQMS检验单号【sQMS No.】                                     sQMS检验单号 //20210928 ADD BY 01228 FOR Z39-20210914001 sQMS检验单号
+
+文档代码:EPSTC
+文件名:包装明细信息档【包装明细信息档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TC001+TC002+TC003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TC001    C      04  包装明细单别【Packing Details Type】                         通知单别
+0002 TC002    C      11  包装明细单号【Packing Details No.】                          通知单号
+0003 TC003    C      04  包装明细序号【Packing List S/N】                             包装明细序号
+0004 TC004    C      04  货盘号【Pallet Number】                                      货盘号
+0005 TC005    N      04  起始箱号【Initial Carton No.】                               起始箱号
+0006 TC006    N      04  截止箱号【Last Box Number】                                  截止箱号
+0007 TC007    N       5  箱数【Carton Quantity】                                      箱数
+0008 TC008    C      20  品号【Item】                                                 品号
+0009 TC009    C      03  包装方式【Packing Method】                                   包装方式
+0010 TC010    V     255  商品描述【Goods Description】                                商品描述
+0011 TC011    N    16.6  出货数量【Delivered Quantity】                               出货数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0012 TC012    N    16.6  赠/备量【Largess/Standby Quantity】                          赠/备量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0013 TC013    C      10  出货仓库【Delivery Warehouse】                               出货仓库
+0014 TC014    C      20  批号【Lot】                                                  批号
+0015 TC015    N     16.6  单箱包装数量【Packing Quantity Per Carton】                  单箱包装数量   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0016 TC016    N     16.6  单箱净重【Net Weight Per Carton】                            单箱净重 //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0017 TC017    N     16.6  单箱毛重【Gross Weight Per Carton】                          单箱毛重 //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0018 TC018    N     16.6  单箱材积【Volume Per Carton】                                单箱材积 //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0019 TC019    C      04  通知单序号【Notice Sequence】                                通知单序号
+0020 TC020    C      04  订单单别【Order Type】                                       订单单别
+0021 TC021    C      11  订单单号【Sales Order Number】                               订单单号
+0022 TC022    C      04  订单序号【Order Sequence】                                   订单序号
+0023 TC023    C      01  PACKING审核码【Packing Approval Indicator】                  PACKING审核码
+0024 TC024    V     255  备注【Remark】                                               备注
+0025 TC025    V     255  品名【Item Description】                                     品名 //20030324 modi by 29618 30->60//20030711 MODI BY 29618 C->V //20211209 MODI BY  01228(lijf) for Z30-21120900001 品名长度调整为60->255
+0026 TC026    V     255  规格【Specification】                                        规格 //20030324 modi by 29618 30->60//20030711 MODI BY 29618 C->V //20211209 MODI BY  01228(lijf) for Z30-21120900001 规格长度调整为60->255
+0027 TC027    C      04  单位【Unit】                                                 单位
+0028 TC028    V      60  客户品号【Customer Item】                                    客户品号  //20211215 MODI BY 01228 for Z30-21121500001 客户品号长度调整C 20->V 60
+0029 TC029    N     16.6  毛重(Kg)【Gross Weight(Kg)】                                 毛重(Kg) //890908 ADD //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0030 TC030    N     16.6  材积(CUFT)【Volume(CUFT)】                                   材积(CUFT) //890908 ADD //20090505 MODI BY 38130 FOR Z10-09060900001 8.3->16.6
+0031 TC031    N    16.6  出货包装数量【Delivery Packing Quantity】                    出货包装数量 //900313 2.1 S00-9001001   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0032 TC032    N    16.6  赠/备包装量【Largess/Standby Packing Quantity】              赠/备包装量 //900313 2.1 S00-9001001   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0033 TC033    C      04  包装单位【Packing Unit】                                     包装单位 //900313 2.1 S00-9001001
+0034 TC034    N    16.6  长(CM)【Length(CM)】                                         外包装的长度 //900628 2.2 ADD  //20090505 MODI BY 38130 FOR Z10-09060900001 6.1->16.6
+0035 TC035    N    16.6  宽(CM)【Width(CM)】                                          外包装的宽度 //900628 2.2 ADD //20090505 MODI BY 38130 FOR Z10-09060900001 6.1->16.6
+0036 TC036    N    16.6  高(CM)【High(CM)】                                           外包装的高度 //900628 2.2 ADD  //20090505 MODI BY 38130 FOR Z10-09060900001 6.1->16.6
+0037 TC037    C      10  库位【Bin】                                                  库位 //20040603 ADD BY 29618 FOR 5.1 P00-04040011
+0038 TC038    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0039 TC039    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0040 TC040    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0041 TC041    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0042 TC042    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0043 TC043    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSTD
+文件名:货运通知单头【货运通知单头】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TD001+TD002
+INDEX01 :TD004+TD001+TD002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TD001    C      04  S/INO单别【S/INO Order Type】                                SHIPPING-Instruction单别
+0002 TD002    C      11  S/INO单号【S/INO Order No.】                                 SHIPPING-Instruction单号
+0003 TD003    C      06  工厂【Plant】                                                工厂
+0004 TD004    C      08  运货日期【Shipping Date】                                    运货日期[FORMATE:YMD]
+0005 TD005    C      10  运输公司【Shipping Company】                                 运输公司
+0006 TD006    C      30  船名【Ship Name】                                            船名
+0007 TD007    C      10  SIZE【SIZE】                                                 SIZE
+0008 TD008    C      20  航次【Voyage】                                               航次
+0009 TD009    C      10  业务人员【Sales】                                            业务人员
+0010 TD010    N    16.6  总重【Total Weight】                                         总重 //20090505 MODI BY 38130 FOR Z10-09060900001 11.3->16.6
+0011 TD011    N    16.6  材积【Volume】                                               材积 //20090505 MODI BY 38130 FOR Z10-09060900001 11.3->16.6
+0012 TD012    N      05  件数【Pieces】                                               件数
+0013 TD013    C      01  审核码【Approval Indicator】                                 本单已否审核的判断码(Y/N)
+0014 TD014    V     255  备注【Remark】                                               备注
+0015 TD015    N       1  打印次数【Print Times】                                      打印次数 //880817 add by 551
+0016 TD016    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD] //89-06-02 ADD BY 551
+0017 TD017    C      10  审核者【Approver】                                           审核者 //89-06-02 ADD BY 551
+0018 TD018    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:"N"]//20080320 modi by 35334  签核状态增加'S.传送中' //900110
+0019 TD019    C      20  货柜场【Container Ground】                                   货柜场 //900611 add by 139
+0020 TD020    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0021 TD021    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0022 TD022    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0023 TD023    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0024 TD024    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0025 TD025    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0026 TD026    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSTE
+文件名:货运通知单身【货运通知单身】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TE001+TE002+TE003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TE001    C      04  S/INO单别【S/INO Order Type】                                SHIPPING-Instruction单别
+0002 TE002    C      11  S/INO单号【S/INO Order No.】                                 SHIPPING-Instruction单号
+0003 TE003    C      04  序号【Sequence Number】                                      序号
+0004 TE004    C      04  出货通知单别【Delivery Notice Type】                         出货通知单别
+0005 TE005    C      11  出货通知单号【Delivery Notice Number】                       出货通知单号
+0006 TE006    C      20  INVOICE_NO【Invoice No.】                                    INVOICE_NO
+0007 TE007    C      50  发票号码【Invoice Serial Number】                            发票号码 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0008 TE008    C      04  销货单别【Delivery Type】                                    销货单别
+0009 TE009    C      11  销货单号【Delivery Number】                                  销货单号
+0010 TE010    C      10  客户编号【Customer】                                         客户编号
+0011 TE011    N    16.6  总重【Total Weight】                                         总重 //20090505 MODI BY 38130 FOR Z10-09060900001 11.3->16.6
+0012 TE012    N    16.6  材积【Volume】                                               材积 //20090505 MODI BY 38130 FOR Z10-09060900001 11.3->16.6
+0013 TE013    N      05  件数【Pieces】                                               件数
+0014 TE014    C      01  审核码【Approval Indicator】                                 本单已否审核的判断码(Y/N)
+0015 TE015    V     255  备注【Remark】                                               备注
+0016 TE016    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0017 TE017    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0018 TE018    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0019 TE019    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0020 TE020    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0021 TE021    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSTF
+文件名:信用证信息单头【信用证信息单头】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TF001
+INDEX01 :TF003+TF001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TF001    C      20  信用证号【L/C No.】                                          信用证号
+0002 TF002    C      04  类别【Category】                                             类别
+0003 TF003    C      10  客户【Customer】                                             客户编号
+0004 TF004    C      06  工厂【Plant】                                                工厂
+0005 TF005    C      10  开状银行编号【L/C Bank】                                     开状银行编号
+0006 TF006    C      10  通知银行编号【Notice Bank No.】                              通知银行编号
+0007 TF007    C      10  押汇银行编号【Negotiating Bank】                             押汇银行编号
+0008 TF008    C      08  开状日【L/C Date】                                           开状日[FORMATE:YMD] //890602 MODI BY 551
+0009 TF009    C      08  收到日【Receive Date】                                       收到日[FORMATE:YMD]
+0010 TF010    C      08  L.装船日【L.Shipping Date】                                  最后装船日[FORMATE:YMD]
+0011 TF011    C      08  L.押汇日【L.Negotiating Date】                               最后押汇日[FORMATE:YMD]
+0012 TF012    C      08  到期日【Due Date】                                           到期日[FORMATE:YMD]
+0013 TF013    C      01  可否分批【Partial Delivery】                                 可否分批的判断码(Y/N)
+0014 TF014    C      01  可否转运【Transport】                                        可否转运的判断码(Y/N)
+0015 TF015    C      20  许可证号【License NO.】                                      许可证号
+0016 TF016    C      04  币种【Currency】                                             币种
+0017 TF017    N    12.7  汇率【Exchange Rate】                                        汇率 //20030324 modi by 29618 7.4->10.7  01228(lijf) for Z30-21121600001 10.7->12.7
+0018 TF018    N    16.2  总金额【Total Amount】                                       总金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0019 TF019    N    16.2  押汇金额【Negotiating Amount】                               押汇金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0020 TF020    N    16.2  通知费用【Notice Expense】                                   通知费用   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0021 TF021    C      01  结束【Close】                                                是否结束的判断码(Y/N)
+0022 TF022    C      01  审核码【Approval Indicator】                                 本单已否审核的判断码(Y/N)
+0023 TF023    V     255  备注【Remark】                                               备注
+0024 TF024    N    16.2  订单金额【Amount】                                           单身加总的订单金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0025 TF025    C      08  审核日期【Approved Date】                                    审核日期[FORMATE:YMD] //89-06-02 ADD BY 551
+0026 TF026    C      10  审核者【Approver】                                           审核者 //89-06-02 ADD BY 551
+0027 TF027    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:"N"]//20080320 modi by 35334  签核状态增加'S.传送中' //900110
+0028 TF028    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0029 TF029    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0030 TF030    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0031 TF031    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0032 TF032    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0033 TF033    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSTG
+文件名:信用证信息单身【信用证信息单身】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TG001+TG002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TG001    C      20  信用证号【L/C No.】                                          信用证号
+0002 TG002    C      03  序号【Sequence Number】                                      序号
+0003 TG003    C      04  订单单别【Order Type】                                       订单单别
+0004 TG004    C      11  订单单号【Sales Order Number】                               订单单号
+0005 TG005    N    16.2  订单金额【Amount】                                           订单金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0006 TG006    C      01  审核码【Approval Indicator】                                 本单已否审核的判断码(Y/N)
+0007 TG007    V     255  备注【Remark】                                               备注
+0008 TG008    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0009 TG009    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0010 TG010    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0011 TG011    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 TG012    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 TG013    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSTH
+文件名:出口费用信息单头档【出口费用信息单头档】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TH001+TH002
+INDEX01 :TH003+TH001+TH002
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TH001    C      04  出口费用单别【Export Expenses Order Type】                   出口费用单别
+0002 TH002    C      11  出口费用单号【Export Expenses Order No.】                    出口费用单号
+0003 TH003    C      08  费用日期【Expense Date】                                     费用日期[FORMATE:YMD] //890602 MODI BY 551
+0004 TH004    C      10  供应商编号【Supplier】                                       供应商编号
+0005 TH005    C      08  发票日期【Invoice Date】                                     发票日期[FORMATE:YMD]
+0006 TH006    C      50  发票号码【Invoice Serial Number】                            发票号码 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0007 TH007    C      06  工厂【Plant】                                                工厂
+0008 TH008    C      04  交易币种【Currency】                                         交易币种
+0009 TH009    N    12.7  汇率【Exchange Rate】                                        汇率 //20030324 modi by 29618 7.4->10.7  01228(lijf) for Z30-21121600001 10.7->12.7
+0010 TH010    C      01  发票种类【Invoice Kind】                                     1.二联式、2.三联式、3.二联式收银机发票、4.三联式收银机发票、5.电子计算机发票、6.免用统一发票、S.可抵扣专用发票、B.普通发票、T.运输发票、N.不可抵扣专用发票 A.农产品收购凭证、G.海关代征完税凭证、W.废旧物资收购凭证、Z.其他 //901025 S06-9009036 MODI A~Z //890623 ADD 'A,B,C' BY 349 FOR 大陆用 //P01-03010016 发票种类增加"普通发票"并调整原发票种类顺序
+0011 TH011    C       1  税种【Tax Type】                                             1.应税内含、2.应税外加、3.零税率、4.免税、9.不计税
+0012 TH012    N    16.2  原币应付金额【Amount Payable of Original Currency】          原币应付金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0013 TH013    N    16.2  原币增值税额【VAT of Original Currency】                     原币增值税额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0014 TH014    C      01  审核码【Approval Indicator】                                 本单已否审核的判断码(Y/N)
+0015 TH015    V     255  备注【Remark】                                               备注
+0016 TH016    N       1  打印次数【Print Times】                                      打印次数 //880817 add by 551
+0017 TH017    C      08  单据日期【Document Date】                                    单据日期[FORMATE:YMD] //89-06-02 ADD BY 551
+0018 TH018    C      10  审核者【Approver】                                           审核者 //89-06-02 ADD BY 551
+0019 TH019    N    05.4  税率【Tax Rate】                                             税率(%)[DEF:9.9999] //89-06-12 ADD BY 551 //20030701 5.0 P00-03040007 增值税率=>税率
+0020 TH020    N    16.2  本币应付金额【Amount Payable of Base Currency】              本币应付金额 //89-06-12 ADD BY 551   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0021 TH021    N    16.2  本币增值税额【VAT of Base Currency】                         本币增值税额 //89-06-12 ADD BY 551   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0022 TH022    C      06  付款条件编号【Payment Term】                                 付款条件编号 //890904 ADD BY 551
+0023 TH023    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:"N"]//20080320 modi by 35334  签核状态增加'S.传送中' //900110
+0024 TH024    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0025 TH025    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0026 TH026    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0027 TH027    V      30  项目编号【Reserved Field】                                   项目编号 //20050606 add by 31380 for 6.0 //20120618 MODI BY 600792 FOR Z01-12061800002 启用预留字段
+0028 TH028    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0029 TH029    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0030 TH030    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:EPSTI
+文件名:出口费用信息单身档【出口费用信息单身档】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TI001+TI002+TI003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TI001    C      04  出口费用单别【Export Expenses Order Type】                   出口费用单别
+0002 TI002    C      11  出口费用单号【Export Expenses Order No.】                    出口费用单号
+0003 TI003    C      04  出口费用序号【Export Expenses Sequence Number】              出口费用序号
+0004 TI004    C      20  INVOICE_NO【Invoice No.】                                    INVOICE_NO
+0005 TI005    C      10  费用编号【Expense Number】                                   费用编号
+0006 TI006    N    16.2  费用金额【Expense Amount】                                   费用金额   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0007 TI007    C      20  会计科目【Account Code】                                     会计科目
+0008 TI008    C      20  大提单单号【Main Bill of Lading Number】                     大提单单号
+0009 TI009    C      20  小提单单号【Small B/L No.】                                  小提单单号
+0010 TI010    C       4  采购发票单别【Order Payable Type】                           应付凭单别 //20070312 MODI BY 38073 OLD:应付凭单单别
+0011 TI011    C      11  采购发票单号【Order Payable No.】                            应付凭单号 //20070312 MODI BY 38073 OLD:应付凭单单号
+0012 TI012    C       4  采购发票序号【Order Payable Sequence】                       应付凭序号 //20070312 MODI BY 38073 OLD:应付凭单序号
+0013 TI013    C      01  开票码【Code bill】                                          Y/N 更新采购发票码 //20061120 6.5 P00-06110004 MODI 结账->开票 BY 28975
+0014 TI014    C      01  审核码【Approval Indicator】                                 本单已否审核的判断码(Y/N)
+0015 TI015    V     255  备注【Remark】                                               备注
+0016 TI016    N    16.2  原币税前金额【Amount Un-include Tax of Original Currency】   原币税前金额 //89-06-12 ADD BY 551   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0017 TI017    N    16.2  原币税额【Tax of Original Currency】                         原币税额 //89-06-12 ADD BY 551   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TI018    N    16.2  本币税前金额【Amount Un-include Tax of Base Currency】       本币税前金额 //89-06-12 ADD BY 551   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0019 TI019    N    16.2  本币税额【Tax of Base Currency】                             本币税额 //89-06-12 ADD BY 551   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0020 TI020    C      01  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0021 TI021    C      08  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0022 TI022    V      30  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0
+0023 TI023    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0024 TI024    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0025 TI025    N    16.6  预留字段【Reserved Field】                                   预留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6

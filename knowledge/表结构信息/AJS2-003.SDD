@@ -1,0 +1,260 @@
+文档代码:AJSMA
+文件名:自动分录参数设置档【AJS Parameters】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MA001    C       1  存货科目分类方式【Inventory Account Code Sort Mode】         存货科目分类方式
+0002 MA002    C       1  抛转方式【Auto-build Options】                               1.抛转自动分录底稿 2.抛转自动分录底稿及会计凭证
+0003 MA003    C       1  同底稿科目汇总【Summarize A/C Group by JNLEM】               Y/N[DEF:"N"]//890410ADD
+0004 MA004    C       1  底稿记载原币【Journal Entry Manuscript Records Amount of Original Currency】 Y/N[DEF:"N"]//890614ADD
+0005 MA005    C       1  收入科目分类方式【Revenue Account Code Sort Mode】           [DEF:"1"]//890831 ADD
+0006 MA006    C       1  在产品区分成本项目【WIP Match Cost Item】                    Y/N[DEF:"N"]//20040705 ADD BY 28985 FOR P00-04070004
+0007 MA007    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0008 MA008    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0009 MA009    C      10  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0010 MA010    C      10  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0011 MA011    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0012 MA012    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 MA013    C       1  自动补足空号【Fill up the blank Automatically】              Y/N[DEF:"N"]//20081215 ADD BY 32817 FOR Z11-08121500001
+0014 MA014    C       1  同底稿不同单别汇总生成【Summarize A/C Group by JEM】         Y/N[DEF:"N"]//20081215 ADD BY 32817 FOR Z11-08121500001
+
+文档代码:AJSMB
+文件名:分录性质设置档【JNLEM Properties】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MB002+MB020+MB001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MB001    C       2  单据性质【Document Category】                                单据性质
+0002 MB002    C       4  单别【Order Type】                                           单别
+0003 MB003    C       4  凭证单别【Voucher Type】                                     凭证单别
+0004 MB004    C       1  底稿开立方式【Journal Entry Manuscript Build Mode】          1.逐张 2.汇总
+0005 MB005    C       1  部门管理/科目顺序【Analyse Department/Account Code Sequence】 部门管理/科目顺序
+0006 MB006    C      20  借方会计科目-1【Debit Account Code-1】                       分录的借方会计科目-1
+0007 MB007    C      20  借方会计科目-2【Debit Account Code-2】                       分录的借方会计科目-2
+0008 MB008    C      20  借方会计科目-3【Debit Account Code-3】                       分录的借方会计科目-3
+0009 MB009    C      20  借方会计科目-4【Debit Account Code-4】                       分录的借方会计科目-4
+0010 MB010    C      20  借方会计科目-5【Debit Account Code-5】                       分录的借方会计科目-5
+0011 MB011    C      20  借方会计科目-6【Debit Account Code-6】                       分录的借方会计科目-6
+0012 MB012    C      20  贷方会计科目-1【Credit Account Code-1】                      分录的贷方会计科目-1
+0013 MB013    C      20  贷方会计科目-2【Credit Account Code-2】                      分录的贷方会计科目-2
+0014 MB014    C      20  贷方会计科目-3【Credit Account Code-3】                      分录的贷方会计科目-3
+0015 MB015    C      20  贷方会计科目-4【Credit Account Code-4】                      分录的贷方会计科目-4
+0016 MB016    C      20  贷方会计科目-5【Credit Account Code-5】                      分录的贷方会计科目-5
+0017 MB017    C      20  贷方会计科目-6【Credit Account Code-6】                      分录的贷方会计科目-6
+0018 MB018    C       7  借方摘要来源【Source of Dr. Abstract】                       借方摘要来源 //EDIT BY GAOXT 
+0019 MB019    V     255  备注【Remark】                                               备注
+0020 MB020    C       1  分录类别【Journal Entry Category】                           1.原单据分录(生产入库单分录)2.成本分录(委外进货费用分录)3.委外进成本分录4.委外退费用分录5.委外退成本分录[DEF:"1"]//890410ADD //20091204 MODI BY 35594 FOR B00-091204001 修正分录类别意义与单据写入字段意义一致，主要是生产模块部分的区分
+0021 MB021    C       1  同单号科目汇总【Summarize A/C Group by Order No.】           Y/N[DEF:"Y"]//890410ADD
+0022 MB022    C       7  贷方摘要来源【Source of Cr. Abstract】                       贷方摘要来源//900315ADD //EDIT BY GAOXT 
+0023 MB023    C      20  借方会计科目-7【Debit Account Code-7】                       分录的借方会计科目-7 //20030807 ADD BY 28985 FOR 发出商品处理
+0024 MB024    C      20  贷方会计科目-7【Credit Account Code-7】                      分录的贷方会计科目-7
+0025 MB025    C       7  借方摘要来源【Source of Dr. Abstract】                       借方摘要来源 //EDIT BY GAOXT 
+0026 MB026    C       7  贷方摘要来源【Source of Cr. Abstract】                       贷方摘要来源 //20030807 ADD BY 28985 FOR 发出商品处理 //EDIT BY GAOXT 
+0027 MB027    C       1  发出商品处理【Goods Send Out】                               Y/N[DEF:"N"] //20030807 ADD BY 28985 FOR 发出商品处理
+0028 MB028    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0029 MB029    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0030 MB030    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0031 MB031    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0032 MB032    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0033 MB033    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0034 MB034    C       1  科目来源-1【Subject Source-1】                               科目来源-1 //20061213 add by 31433 for AJS6.5 P00-06120006 ↓
+0035 MB035    C       1  科目来源-2【Subject Source-2】                               科目来源-2
+0036 MB036    C       1  科目来源-3【Subject Source-3】                               科目来源-3
+0037 MB037    C       1  科目来源-4【Subject Source-4】                               科目来源-4
+0038 MB038    C       1  科目来源-5【Subject Source-5】                               科目来源-5
+0039 MB039    C       1  科目来源-6【Subject Source-6】                               科目来源-6
+0040 MB040    C       1  科目来源-7【Subject Source-7】                               科目来源-7
+0041 MB041    C       1  科目来源-8【Subject Source-8】                               科目来源-8
+0042 MB042    C       1  科目来源-9【Subject Source-9】                               科目来源-9
+0043 MB043    C       1  科目来源-10【Subject Source-10】                             科目来源-10
+0044 MB044    C       1  科目来源-11【Subject Source-11】                             科目来源-11
+0045 MB045    C       1  科目来源-12【Subject Source-12】                             科目来源-12
+0046 MB046    C       1  科目来源-13【Subject Source-13】                             科目来源-13
+0047 MB047    C       1  科目来源-14【Subject Source-14】                             科目来源-14
+0048 MB048    C       1  凭证生成方式【Generate Voucher Mode】                        1.逐张 2.汇总 //20061213 add by 31433 for AJS6.5 P00-06120006 ↑
+0049 MB049    C       1  赠品计入发出商品【Largess 】                                 Y/N[DEF:"N"] //20080828 ADD BY 32817 FOR Z11-08082200001
+0050 MB050    C       1  备品计入发出商品【Standbyt】                                 Y/N[DEF:"N"] //20080828 ADD BY 32817 FOR Z11-08082200001
+
+
+文档代码:AJSMC
+文件名:分录性质设置单身档【JNLEM Properties Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6 月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MC001+MC002+MC003+MC007	//20121011 MODI BY 601503 FOR B32-121010003 ADD:MC007
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MC001    C       2  单据性质【Document Category】                                单据性质
+0002 MC002    C       4  单别【Order Type】                                           单别//890217 MODI C3->C4
+0003 MC003    C      10  部门编号/成本要素编号【Department/Cost Elements】            部门/成本要素编号  //EDIT BY GAOXT
+0004 MC004    C      20  借方会计科目【Debit Account Code】                           存货的对方会计科目(借方) //20041124 B02-041123001 5.0 MODI C10->C20 BY 28975
+0005 MC005    V     255  备注【Remark】                                               备注
+0006 MC006    C      20  贷方会计科目【Credit Account Code】                          存货的对方会计科目(贷方)//900611 ADD //20041124 B02-041123001 5.0 MODI C10->C20 BY 28975
+0007 MC007    C      01  分录类别【Journal Entry Category】                           1.原单据分录(生产入库单分录)2.成本分录(委外进货费用分录)3.委外进成本分录4.委外退费用分录5.委外退成本分录[DEF:"1"] //20050606 add by 31380 for 6.0	//20121011 MODI BY 601503 FOR B32-121010003 预留字段->分录类别
+0008 MC008    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0009 MC009    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0010 MC010    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 MC011    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 MC012    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:AJSTA
+文件名:分录底稿单头档【JNLEM Headers】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TA001+TA002
+INDEX01 :TA001+TA015
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TA001    C      11  底稿批号【Journal Entry Manuscript Batch Number】            底稿批号
+0002 TA002    C       4  底稿序号【Journal Entry Manuscript Sequence Number】         底稿序号
+0003 TA003    C       5  生成时间【Build Time】                                       生成时间
+0004 TA004    C       4  凭证单别【Voucher Type】                                     凭证单别
+0005 TA005    C      11  凭证单号【Voucher No.】                                      凭证单号
+0006 TA006    C       8  凭证日期【Voucher Date】                                     凭证日期[FORMATE:YMD]
+0007 TA007    N    16.6  保留字段【Reserved Field】                                   保留字段 //20061213 modi by 31433 for AJS6.0 P00-06120006 凭证金额 change to 保留字段 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0008 TA008    N    16.2  本币借方总金额【Total Debit Amount(B/C)】                    本币借方总金额 //890614 MODI BY 514  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0009 TA009    N    16.2  本币贷方总金额【Total Credit Amount(B/C)】                   本币贷方总金额 //890614 MODI BY 514  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 TA010    V     255  备注【Remark】                                               备注
+0011 TA011    C      10  抛转人员【User(Build Vou.)】                                 抛转人员
+0012 TA012    C       8  抛转日期【Date(Build Vou.)】                                 抛转日期[FORMATE:YMD]
+0013 TA013    C       5  抛转时间【Time(Build Vou.)】                                 抛转时间
+0014 TA014    C       1  抛转码【Builded Voucher Code】                               Y/N/V //20061213 modi by 31433 for AJS6.0 P00-06120006 add V.抛转失败 （Y.已抛转，N.未抛转）
+0015 TA015    C       2  单据性质【Document Category】                                单据性质
+0016 TA016    C       1  分录类别【Journal Entry Category】                           1.原单据分录(生产入库单分录)2.成本分录(委外进货费用分录)3.委外进成本分录4.委外退费用分录5.委外退成本分录[DEF:"1"]//890410ADD //20091204 MODI BY 35594 FOR B00-091204001 修正分录类别意义与单据写入字段意义一致，主要是生产模块部分的区分
+0017 TA017    C       6  复制分类码【Copy-classifying Code】                          复制分类码//890614ADD
+0018 TA018    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0019 TA019    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0020 TA020    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0021 TA021    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0022 TA022    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0023 TA023    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0024 TA034    V     255  抛转异常信息【Builded Voucher Exception Data】               生成会计凭证异常信息 //20061213 add by 31433 for AJS6.5 P00-06120006
+
+文档代码:AJSTB
+文件名:分录底稿单身档【JNLEM Lines】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TB001+TB002+TB003
+INDEX01 :TB013+TB014
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TB001    C      11  底稿批号【Journal Entry Manuscript Batch Number】            底稿批号
+0002 TB002    C       4  底稿序号【Journal Entry Manuscript Sequence Number】         底稿序号
+0003 TB003    C       4  序号【Sequence】                                             序号
+0004 TB004    N       1  借贷类型【Debit/Credit】                                     1.借,-1.贷
+0005 TB005    C      20  科目编号【Account Code】                                     科目编号
+0006 TB006    C       6  部门【Department】                                           部门
+0007 TB007    N    16.2  本币金额【Amount(B/C)】                                      本币金额 //890614 MODI BY 514  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0008 TB008    C      20  核算项目(一)【Analysis Item(1)】                             核算项目编号(一) //20040908 6.0 P01-03080006 MODI C10->C20 BY 28975
+0009 TB009    C      20  核算项目(二)【Analysis Item(2)】                             核算项目编号(二) //20040908 6.0 P01-03080006 MODI C10->C20 BY 28975
+0010 TB010    V     255  摘要【Abstract】                                             摘要 //20040908 6.0 P00-04100022 MODI C40->V255 BY 28975
+0011 TB011    C      20  项目编号【Project No.】                                      项目编号
+0012 TB012    V     255  备注【Remark】                                               备注
+0013 TB013    C       4  单别【Order Type】                                           单别//880807ADD
+0014 TB014    C      20  单号【Order No.】                                            单号//880807ADD //20061213 modi by 31433 for AJS6.5 P00-06120006 加长到20码
+0015 TB015    C       4  币种【Currency】                                             币种 //890614 ADD BY 514
+0016 TB016    N    12.7  汇率【Exchange Rate】                                        汇率[DEF:1] //890614 ADD BY 514 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0017 TB017    N    16.2  原币金额【Amount(O/C)】                                      原币金额 //890614 ADD BY 514  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TB018    C      50  票号【Bill No.】                                             票号 //890614 ADD BY 514//20220304 MODI BY  00968(hejj) for 发票号、票号字段长度调整为50码
+0019 TB019    C      60  保留字段【Reserved Field】                                   保留字段 //20061213 modi by 31433 for AJS6.0 P00-06120006 核算项目一名称 change to 保留字段
+0020 TB020    C      60  保留字段【Reserved Field】                                   保留字段 //20061213 modi by 31433 for AJS6.0 P00-06120006 核算项目二名称 change to 保留字段
+0021 TB021    C      06  现金流量表项目【Cash Flow Item】                             现金流量表项目 //20030611 5.0 ADD BY 28975
+0022 TB022    C       4  结算方式【Settlement Method】                                结算方式编号 //20040908 P00-04090006 6.0 add by 28975
+0023 TB023    C      50  结算单号【Settlement Order No.】                             结算单号 //20040908 P00-04090006 6.0 add by 28975  //20220304 MODI BY  00968(hejj) for 发票号、票号字段长度调整为50码
+0024 TB024    C       8  结算日期【Settlement Date】                                  结算日期[FORMATE:YMD] //20040908 P00-04090006 6.0 add by 28975
+0025 TB025    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0026 TB026    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0027 TB027    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0028 TB028    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0029 TB029    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0030 TB030    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0031 TB031    C      10  客户【Customer】                                             客户编号 //20061213 add by 31433 for AJS6.5 P00-06120006 ↓
+0032 TB032    C      10  供应商【Supplier】                                           供应商编号
+0033 TB033    C      10  人员【Staff】                                                人员编号
+0034 TB034    V     255  生成分录底稿异常信息【Journal Entry Manuscripts Exception Data】 生成分录底稿异常信息 //20061213 add by 31433 for AJS6.5 P00-06120006 ↑
+0035 TB035    C       4  来源单据单身序号【Source Order Lines Sequence】              来源单据单身序号 //EDIT BY GAOXT 
+
+文档代码:AJSLA
+文件名:来源单据记录档【Source Documents】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :LA001+LA002+LA003+LA004+LA006+LA007
+INDEX01 :LA003+LA004+LA006
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 LA001    C      11  底稿批号【Journal Entry Manuscript Batch Number】            底稿批号
+0002 LA002    C       4  底稿序号【Journal Entry Manuscript Sequence Number】         底稿序号
+0003 LA003    C       4  单别【Order Type】                                           单别
+0004 LA004    C      20  单号【Order No.】                                            单号 //20061213 modi by 31433 for AJS6.5 P00-06120006 加长到20码
+0005 LA005    C       8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0006 LA006    C       4  序号【Sequence】                                             序号
+0007 LA007    C      50  票号【Bill No.】                                             票号 //890614 ADD BY 514 //20220304 MODI BY  00968(hejj) for 发票号票号字段长度调整为50码
+0008 LA008    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0009 LA009    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0010 LA010    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0011 LA011    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 LA012    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 LA013    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+
+文档代码:AJSLB
+文件名:暂估回冲记录档【Indicatively backout records】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :LB001+LB002+LB003+LB004+LB005
+INDEX01 :LB003+LB004+LB005
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 LB001    C      11  底稿批号【Journal Entry Manuscript Batch Number】            底稿批号//20061213 add by 31433 for AJS6.5 P00-06120006 ↓仅记录单到回冲和单到补差时的回冲信息，以便还原分录底稿时还原暂估核算单上的回冲信息
+0002 LB002    C       4  底稿序号【Journal Entry Manuscript Sequence Number】         底稿序号
+0003 LB003    C       4  暂估核算单别【Estimation Analysis Order Type】               暂估核算单别
+0004 LB004    C      11  暂估核算单号【Estimation Analysis Order No.】                暂估核算单号
+0005 LB005    C       4  暂估核算序号【Estimation Analysis Order Sequence】           暂估核算序号
+0006 LB006    N    17.6  暂估回冲数量【Indicatively Returned Quantity】               暂估回冲数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0007 LB007    N    16.2  暂估回冲原币金额【Indicatively Returned Amount(O/C)】        暂估回冲原币金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0008 LB008    N    16.2  暂估回冲本币金额【Indicatively Returned Amount(B/C)】        暂估回冲本币金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0009 LB009    C       4  发票单别【Invoice Type】                                     发票单别
+0010 LB010    C      11  发票单号【Invoice Code】                                     发票单号
+0011 LB011    C       4  发票序号【Invoice Seq.】                                     发票序号 //20061213 add by 31433 for AJS6.5 P00-06120006 ↑
+0012 LB012    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0013 LB013    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0014 LB014    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0015 LB015    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0016 LB016    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+0017 LB017    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001 增加保留字段
+
+文档代码:AJSLC                                                                                                                                                                        
+文件名:发出商品记录档【Goods Send Out records】                                                                                                                                 
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)                                                                                       
+转档完成:N                                                                                                                                                                            
+PRIMARY :LC001+LC002+LC003+LC004+LC005                                                                                                                                                
+INDEX01 :LC003+LC004+LC005                                                                                                                                                            
+===============================================================================================                                                                                       
+序号 字段编号 TYPE 长度  字段名称                                                     备注                                                                                            
+===============================================================================================                                                                                       
+0001 LC001    C      11  底稿批号【Journal Entry Manuscript Batch Number】            底稿批号                                                                                        
+0002 LC002    C       4  底稿序号【Journal Entry Manuscript Sequence Number】         底稿序号                                                                                        
+0003 LC003    C       4  发票单别【Invoice Type】                                     发票单别                                                                                     
+0004 LC004    C      11  发票单号【Invoice Code】                                     发票单号                                                                                     
+0005 LC005    C       4  发票序号【Invoice Seq.】                                     发票序号                                                                                     
+0006 LC006    C       4  销货/退单单别【Sales Delivery Order Type】                   销货/退单单别                                                                                                                                                                      
+0007 LC007    C      11  销货/退单单号【Sales Delivery Order No.】                    销货/退单单号                                                                                      
+0008 LC008    C       4  销货/退单序号【Sales Delivery Order Sequence】               销货/退单序号                                                                                 
+0009 LC009    C      20  品号【Item】                                                 品号                                                                         
+0010 LC010    N    17.6  发票数量【Returned Quantity】                                发票数量                                                                                       
+0011 LC011    N    16.2  发出商品本币金额【Returned Amount(B/C)】                     发出商品本币金额                                                                                 
+0012 LC012    C       1  来源【Source】                                               1.销货、2.销退                                                                                        
+0013 LC013    C      01  保留字段【Reserved Field】                                   保留字段                                                                                         
+0014 LC014    C      08  保留字段【Reserved Field】                                   保留字段                                                                                         
+0015 LC015    V      30  保留字段【Reserved Field】                                   保留字段                                                                                         
+0016 LC016    N    16.6  保留字段【Reserved Field】                                   保留字段             
+0017 LC017    N    16.6  保留字段【Reserved Field】                                   保留字段            
+0018 LC018    N    16.6  保留字段【Reserved Field】                                   保留字段 

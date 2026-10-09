@@ -1,0 +1,1420 @@
+﻿doc_code,file_name_cn,file_name_en,doc_type_code,doc_type_cn,transfer_done,primary_keys,index_count,field_count,source_file
+ACMMA,"成本参数设置档","Costs Parameters",1,主档单头,Y,"",0,20,ACM2-003.SDD
+ACMMD,"成本要素信息档","Costs Elements",1,主档单头,Y,"MD001",0,13,ACM2-003.SDD
+ACMMJ,"品号成本要素信息档","Item Costs Elements",1,主档单头,Y,"MJ001+MJ002+MJ003",0,14,ACM2-003.SDD
+ACMML,"成本分配依据单头档","Costs Distribution Basis Headers",1,主档单头,Y,"ML001",0,11,ACM2-003.SDD
+ACMMM,"成本分配依据单身档","Costs Distribution Basis Lines",1,主档单头,Y,"MM001+MM002",0,14,ACM2-003.SDD
+ACMMN,"成本分配依据计算因子档","Costs Distribution Basis Formula",1,主档单头,Y,"MN001",0,12,ACM2-003.SDD
+ACMMO,"成本分配依据条件因子档","Costs Distribution Basis Condition",1,主档单头,Y,"MO001",0,11,ACM2-003.SDD
+ACMMP,"部门成本要素信息档","Department Costs Element",1,主档单头,Y,"MP001+MP002",0,14,ACM2-003.SDD
+ACMMQ,"品号分类成本要素设定档","Item Costs Element",1,主档单头,N,"MQ001+MQ002+MQ003",0,10,ACM2-003.SDD
+ACMTC,"工单成本分配依据单头档","MO Costs Distribution Basis Headers",6,月档/统计,Y,"TC001+TC002+TC003+TC004+TC005+TC006+TC007+TC008+TC009+TC010+TC013",0,19,ACM2-003.SDD
+ACMTD,"工单成本分配依据单身档","MO Costs Distribution Basis Lines",6,月档/统计,Y,"TD001+TD002+TD003+TD004+TD005+TD006+TD007+TD008+TD009+TD010+TD011+TD012",0,21,ACM2-003.SDD
+ACMTE,"部门成本分配率单头档","Department Costs Distribution Ratio Headers",6,月档/统计,Y,"TE001+TE002",0,10,ACM2-003.SDD
+ACMTF,"部门成本分配率单身档","Department Costs Distribution Rate Lines",6,月档/统计,Y,"TF001+TF002+TF003",0,17,ACM2-003.SDD
+ACMTI,"成本计算单头档","Costs Calculation Headers",6,月档/统计,Y,"TI001+TI002",3,26,ACM2-003.SDD
+ACMTJ,"成本计算单身档","Costs Calculation Lines",6,月档/统计,Y,"TJ001+TJ002+TJ003",0,32,ACM2-003.SDD
+ACMTK,"成本计算单身工单明细档","Costs Calculation Lines - MO Details",6,月档/统计,Y,"TK001+TK002+TK003+TK004+TK005+TK006+TK007",2,13,ACM2-003.SDD
+ACMTL,"产品成本单头月档","Product Costs Headers",6,月档/统计,Y,"TL001+TL002+TL003",1,18,ACM2-003.SDD
+ACMTM,"完工率单头档","Completion Ratio Headers",6,月档/统计,Y,"TN001+TN002+TN003+TN004+TN005",4,27,ACM2-003.SDD
+ACMTO,"完工率单身档","Completion Ratio Lines",6,月档/统计,Y,"TO001+TO002+TO003+TO004+TO005+TO006",3,15,ACM2-003.SDD
+ACMTP,"成本计算单部门成本明细档","Costs Calculation - Department Cost Lines",6,月档/统计,Y,"TP001+TP002+TP006+TP007",1,16,ACM2-003.SDD
+ACMTQ,"成本计算单产出数量明细档","Costs Calculation - Output Quantity Lines",6,月档/统计,Y,"TQ001+TQ002+TQ008+TQ009+TQ010",2,22,ACM2-003.SDD
+ACMLC,"成本低阶码档","Costs Low-level Codes",1,主档单头,Y,"LC001+LC002",0,11,ACM2-003.SDD
+ACPMA,"应付参数设置档","A/P Parameters",1,主档单头,Y,"",0,32,ACP2-003.SDD
+ACPTA,"采购发票单头档","Purchase Invoices Headers",3,交易单头,Y,"TA001+TA002",2,69,ACP2-003.SDD
+ACPTB,"采购发票单身档","Purchase Invoices Lines",4,交易单身,Y,"TB001+TB002+TB003",1,49,ACP2-003.SDD
+ACPTI,"其他应付单头档","Other Payables Headers",3,交易单头,Y,"TI001+TI002",2,49,ACP2-003.SDD
+ACPTJ,"其他应付单单身档","Other Payables Lines",4,交易单身,Y,"TJ001+TJ002+TJ003",1,23,ACP2-003.SDD
+ACPTK,"付款单单头档","Payments Headers",3,交易单头,N,"TK001+TK002",3,53,ACP2-003.SDD
+ACPTL,"付款实时核销单身档","Payment Write-off Instant Lines",4,交易单身,Y,"TL001+TL002+TL003",2,39,ACP2-003.SDD
+ACPTM,"费用结算单头档","Expense Settlements Headers",1,主档单头,Y,"TM001+TM002",2,17,ACP2-003.SDD
+ACPTN,"费用结算进货单身档","Expense Settlements Lines",2,主档单身,Y,"TN001+TN002+TN003",0,23,ACP2-003.SDD
+ACPTO,"费用结算发票单身档","Expense Invoices Lines",2,主档单身,Y,"TO001+TO002+TO003",0,20,ACP2-003.SDD
+ACPTP,"暂估成本核算单头档","Interim Estimate Cost Order Headers",1,主档单头,Y,"TP001+TP002",2,21,ACP2-003.SDD
+ACPTQ,"暂估成本核算单身档","Interim Estimate Cost Order Lines",2,主档单身,Y,"TQ001+TQ002+TQ003",0,38,ACP2-003.SDD
+ACPTE,"应付对象每月统计单头","Payables Statistic Monthly - Partner Payable Headers",6,月档/统计,Y,"TE019+TE001+TE002+TE013+TE014+TE015",0,19,ACP2-003.SDD
+ACPTF,"应付对象每月统计单身","Payables Statistic Monthly - Partner Payable Lines",6,月档/统计,Y,"TF020+TF001+TF002+TF003+TF004+TF005+TF018+TF019",0,20,ACP2-003.SDD
+ACPLB,"应付账款异动明细档","A/P Transaction Details",5,交易记录,N,"LB001+LB002+LB003+LB004+LB009+LB010",2,34,ACP2-003.SDD
+ACPLC,"核销记录档","Write-off Records",5,交易记录,N,"LC001+LC002+LC003+LC004+LC005",3,41,ACP2-003.SDD
+ACPLD,"应付调汇单头档","A/P Exchange Adjustment Headers",5,交易记录,Y,"LD001+LD002",0,22,ACP2-003.SDD
+ACPLE,"应付调汇单身档","A/P Exchange Adjustment Lines",5,交易记录,Y,"LE001+LE002+LE003",0,25,ACP2-003.SDD
+ACPTR,"应付对象项目号每月统计单头","Payables Statistic Monthly - Partner Payable Headers",6,月档/统计,Y,"TR019+TR001+TR002+TR013+TR014+TR015+TR020",0,20,ACP2-003.SDD
+ACPTS,"应付对象项目号每月统计单身","Payables Statistic Monthly - Partner Payable Lines",6,月档/统计,Y,"TS020+TS001+TS002+TS003+TS004+TS005+TS018+TS019+TS021",0,21,ACP2-003.SDD
+ACRMA,"应收参数设置档","A/R Parameters",1,主档单头,Y,"",0,38,ACR2-003.SDD
+ACRMB,"客户供应商信息档","Customers/Suppliers",2,主档单身,N,"MB001",0,9,ACR2-003.SDD
+ACRMC,"账龄区间单头档","Range of A/R Aging Headers",1,主档单头,N,"MC001",0,9,ACR2-003.SDD
+ACRMD,"账龄区间单身档","Range of A/R Aging Lines",2,主档单身,N,"MD001+MD002",0,12,ACR2-003.SDD
+ACRME,"其他收支类型信息档","Other Revenue and Expenditure Types",1,主档单头,N,"ME001",0,11,ACR2-003.SDD
+ACRTA,"销售发票单头档","Sales Invoices Headers",3,交易单头,Y,"TA001+TA002",4,93,ACR2-003.SDD
+ACRTB,"销售发票单身档","Sales Invoices Lines",4,交易单身,Y,"TB001+TB002+TB003",1,44,ACR2-003.SDD
+ACRTQ,"发票信息档","Invoices",4,交易单身,Y,"TQ001+TQ002+TQ003",0,15,ACR2-003.SDD
+ACRTI,"其他应收单头档","Other Receivables Headers",3,交易单头,Y,"TI001+TI002",2,40,ACR2-003.SDD
+ACRTJ,"其他应收单单身档","Other Receivables Lines",4,交易单身,Y,"TJ001+TJ002+TJ003",1,23,ACR2-003.SDD
+ACRTK,"收款单单头档","Collection Order Headers",3,交易单头,N,"TK001+TK002",3,51,ACR2-003.SDD
+ACRTL,"收款实时核销单身档","Collection Write-off Instant Lines",4,交易单身,Y,"TL001+TL002+TL003",2,37,ACR2-003.SDD
+ACRTM,"坏账准备单据档","Provision for Bad Debts Orders",3,交易单头,N,"TM001+TM002",1,21,ACR2-003.SDD
+ACRTN,"坏账处理单据档","Disposition of Bad Debts Orders",3,交易单头,N,"TN001+TN002",1,33,ACR2-003.SDD
+ACRTE,"客户账款统计月档","eceivables Statistic Monthly - Customer",6,月档/统计,Y,"TE001+TE002+TE013+TE014+TE015",0,18,ACR2-003.SDD
+ACRTF,"客户账款分类统计月档","Receivables Classified Statistic Monthly - Customer",6,月档/统计,Y,"TF001+TF002+TF003+TF004+TF005+TF018+TF019",0,19,ACR2-003.SDD
+ACRLB,"应收账款异动明细档","A/R Transaction Details",5,交易记录,N,"LB001+LB002+LB003+LB004+LB009+LB010",2,33,ACR2-003.SDD
+ACRLC,"核销记录档","Write-off Records",5,交易记录,N,"LC001+LC002+LC003+LC004+LC005",3,41,ACR2-003.SDD
+ACRLD,"应收调汇单头档","A/R Exchange Adjustment Headers",5,交易记录,Y,"LD001+LD002",0,22,ACR2-003.SDD
+ACRLE,"应收调汇单身档","A/R Exchange Adjustment Lines",5,交易记录,Y,"LE001+LE002+LE003",0,23,ACR2-003.SDD
+ACRIA,"收款单子单身档","Sales Invoices Subelement Lines",4,交易单身,Y,"IA001+IA002+IA003+IA004+IA005+IA006",1,24,ACR2-003.SDD
+ACRIB,"应收账款分期异动明细档","A/R Installment Transaction Details",5,交易记录,N,"IB002+IB003+IB009+IB010+IB022+IB023+IB024",2,33,ACR2-003.SDD
+ACRIC,"核销分期记录档","Write-off Installment Records",5,交易记录,N,"IC001+IC002+IC003+IC004+IC005+IC021+IC022+IC023",3,29,ACR2-003.SDD
+ACRID,"分期收款分期金额明细档","Instalment Amount Lines",4,交易单身,Y,"ID001+ID002+ID003+ID006+ID015+ID016",1,22,ACR2-003.SDD
+ACRIE,"调汇单子单身档","Exchange Adjustments Subelement Lines",4,交易单身,Y,"IE001+IE002+IE003+IE005+IE006+IE007+IE008+IE009",1,24,ACR2-003.SDD
+ACTMA,"会计科目信息档","Account Codes",1,主档单头,Y,"MA001",2,46,ACT2-003.SDD
+ACTMC,"会计系统参数档","Accounting Parameters",1,主档单头,Y,"",0,34,ACT2-003.SDD
+ACTME,"科目部门设限档","Deparment Limited by A/C",2,主档单身,Y,"ME001+ME005",0,11,ACT2-003.SDD
+ACTMF,"核算项目名称档","User-defined Analysis Items Inquiry",1,主档单头,Y,"MF002",0,17,ACT2-003.SDD
+ACTMG,"会计期间设置单头档","Accounting Period Headers",1,主档单头,Y,"MG001",0,9,ACT2-003.SDD
+ACTMH,"会计期间设置单身档","Accounting Period Lines",2,主档单身,Y,"MH001+MH002",1,11,ACT2-003.SDD
+ACTMI,"预算编号名称档","Budget Codes",1,主档单头,Y,"MI001",0,9,ACT2-003.SDD
+ACTMJ,"科目/部门预算单头档","Budget Headers by A/C and Department",1,主档单头,Y,"MJ001+MJ002+MJ003+MJ005",0,24,ACT2-003.SDD
+ACTMK,"科目/部门预算单身档","Budget Lines by A/C and Department",2,主档单身,Y,"MK001+MK002+MK003+MK004+MK005",1,20,ACT2-003.SDD
+ACTMO,"分摊比率单头档","Apportionment Rate Headers",1,主档单头,Y,"MO001",0,22,ACT2-003.SDD
+ACTMP,"分摊比率单身档","Apportionment Rate Lines",2,主档单身,Y,"MP001+MP002",0,24,ACT2-003.SDD
+ACTMQ,"比率分摊金额来源档","Amount Source For Apportionment Rate",1,主档单头,Y,"MQ001+MQ002",0,10,ACT2-003.SDD
+ACTMR,"部门级次信息档","Department Levels",1,主档单头,N,"MR002",0,8,ACT2-003.SDD
+ACTMS,"现金流量表项目单头档","Cash Flow Statement Item Headers",1,主档单头,Y,"MS001",0,8,ACT2-003.SDD
+ACTMT,"现金流量表项目单身档","Cash Flow Statement Item Lines",2,主档单身,Y,"MT001+MT002",0,9,ACT2-003.SDD
+ACTMU,"自定义账册设置单头档","User Defined Accounting Book Headers",1,主档单头,Y,"MU001",0,12,ACT2-003.SDD
+ACTMV,"自定义账册设置单身档","User Defined Accounting Book Lines",2,主档单身,Y,"MV001+MV002",0,11,ACT2-003.SDD
+ACTMY,"预算追加/挪用资料档","Budget Diversions/Additions",2,主档单身,Y,"MY001+MY002+MY003+MY004+MY005+MY006+MY007",0,28,ACT2-003.SDD
+ACTMW,"销货-制造成本表设置单头档","Sales Manufacture Cost Setting Headers",1,主档单头,Y,"MW001",0,11,ACT2-003.SDD
+ACTMX,"销货-制造成本表设置单身档","Sales Manufacture Cost Setting Lines",2,主档单身,Y,"MX001+MX002+MX003+MX004",0,10,ACT2-003.SDD
+ACTMZ,"销货-制造成本表设置类别档","Sales Manufacture Cost Setting Type",1,主档单头,Y,"MZ001+MZ003",0,9,ACT2-003.SDD
+ACTTA,"会计凭证单头档","Account Voucher Headers",3,交易单头,Y,"TA001+TA002",1,32,ACT2-003.SDD
+ACTTB,"会计凭证单身档","Account Voucher Lines",4,交易单身,Y,"TB001+TB002+TB003",0,33,ACT2-003.SDD
+ACTTC,"常用凭证单头档","Standard Voucher Headers",3,交易单头,Y,"TC001+TC002",0,17,ACT2-003.SDD
+ACTTD,"常用凭证单身档","Standard Voucher Lines",4,交易单身,Y,"TD001+TD002+TD003",0,32,ACT2-003.SDD
+ACTTE,"报表结构单头档","Structure Headers of Report",3,交易单头,Y,"TE001",0,10,ACT2-003.SDD
+ACTTF,"报表结构单身档","Structure Lines Report",4,交易单身,Y,"TF001+TF002",0,29,ACT2-003.SDD
+ACTTG,"现金流量表格式单头档","Structure Headers of Cash Flow Statement",1,主档单头,Y,"TG001",0,8,ACT2-003.SDD
+ACTTH,"现金流量表格式单身档","Structure Lines of Cash Flow Statement",2,主档单身,Y,"TH001+TH002",1,13,ACT2-003.SDD
+ACTTI,"现金流量表格式单身科目明细档","A/C by Structure Lines of Cash Flow Statement",2,主档单身,Y,"TI001+TI002+TI003",0,12,ACT2-003.SDD
+ACTTJ,"现金流量调整金额单头档","Amount Adjustment Headers of Cash Flow Statement",1,主档单头,Y,"TJ001+TJ002+TJ003",0,10,ACT2-003.SDD
+ACTTK,"现金流量调整金额单身档","Amount Adjustment Lines of Cash Flow Statement",2,主档单身,Y,"TK001+TK002+TK003+TK004",0,13,ACT2-003.SDD
+ACTTL,"自定义报表结构单头档","Structure Headers of UDF Report",3,交易单头,N,"TL001",0,11,ACT2-003.SDD
+ACTTM,"自定义报表结构单身档","Structure Liness of UDF Report",4,交易单身,N,"TM001+TM002+TM003",0,11,ACT2-003.SDD
+ACTLA,"公司凭证复制记录档","Voucher Copies by Company",5,交易记录,N,"LA001+LA002+LA003",0,13,ACT2-003.SDD
+ACTLB,"现金流量表项目维护档","Cash Flow Statement Items",5,交易记录,Y,"LB001+LB002+LB004",0,26,ACT2-003.SDD
+ACTLC,"期初开账单头档","Opening Account Order Headers",6,月档/统计,Y,"LC002+LC003",0,24,ACT2-003.SDD
+ACTLD,"期初开账单身档","Opening Account Order Headers",6,月档/统计,Y,"LD001+LD002+LD003",0,28,ACT2-003.SDD
+ACTLE,"会计科目各期汇总档","Periodical Summaries of Account Code",6,月档/统计,Y,"LE001+LE002+LE003+LE004+LE005+LE006+LE007+LE008+LE009+LE010+LE011+LE034",0,34,ACT2-003.SDD
+ACTLF,"自动转账单头档","Automatic Transfer Order Headers",1,主档单头,Y,"LF001",0,14,ACT2-003.SDD
+ACTLG,"自动转账单身档","Automatic Transfer Order Lines",2,主档单身,Y,"LG001+LG002",0,24,ACT2-003.SDD
+AJSMA,"自动分录参数设置档","AJS Parameters",1,主档单头,N,"",0,14,AJS2-003.SDD
+AJSMB,"分录性质设置档","JNLEM Properties",1,主档单头,N,"MB002+MB020+MB001",0,50,AJS2-003.SDD
+AJSMC,"分录性质设置单身档","JNLEM Properties Lines",2,主档单身,N,"MC001+MC002+MC003+MC007	//20121011 MODI BY 601503 FOR B32-121010003 ADD:MC007",0,12,AJS2-003.SDD
+AJSTA,"分录底稿单头档","JNLEM Headers",3,交易单头,N,"TA001+TA002",1,24,AJS2-003.SDD
+AJSTB,"分录底稿单身档","JNLEM Lines",4,交易单身,N,"TB001+TB002+TB003",1,35,AJS2-003.SDD
+AJSLA,"来源单据记录档","Source Documents",6,月档/统计,N,"LA001+LA002+LA003+LA004+LA006+LA007",1,13,AJS2-003.SDD
+AJSLB,"暂估回冲记录档","Indicatively backout records",6,月档/统计,N,"LB001+LB002+LB003+LB004+LB005",1,17,AJS2-003.SDD
+AJSLC,"发出商品记录档","Goods Send Out records",6,月档/统计,N,"LC001+LC002+LC003+LC004+LC005",1,18,AJS2-003.SDD
+ALSME,"","",1,主档单头,Y,"ME001+ME002+ME009+ME012",1,14,ALS2-003.SDD
+ALSMF,"","",1,主档单头,Y,"MF001",1,4,ALS2-003.SDD
+ALSTA,"","",3,交易单头,Y,"TA001+TA002+TA003+TA006+TA007",1,46,ALS2-003.SDD
+ALSMA,"","",3,交易单头,Y,"MA001",0,4,ALS2-003.SDD
+PDATA,"","",3,交易单头,Y,"TA001+TA002",1,36,ALS2-003.SDD
+PDATB,"交易单据申请单身档","Transaction Orders Lines",4,交易单身,Y,"TB001+TB002+TB003",0,38,ALS2-003.SDD
+PDATC,"","",3,交易单头,Y,"TC001+TC002",1,32,ALS2-003.SDD
+PDATD,"","",3,交易单头,Y,"TD001+TD002+TD003+TD004",1,27,ALS2-003.SDD
+PDATE,"","",4,交易单身,Y,"TE001+TE002+TE003",2,41,ALS2-003.SDD
+INVTB,"交易单据单身档","Transaction Orders Lines",4,交易单身,Y,"TB001+TB002+TB003",0,3,ALS2-003.SDD
+MOCTE,"领/退料单身档","Material Issue/Return Lines",4,交易单身,Y,"TE001+TE002+TE003",2,3,ALS2-003.SDD
+ALSTB,"","",3,交易单头,Y,"TB001+TB002+TB003",0,25,ALS2-003.SDD
+ALSMG,"","",3,交易单头,Y,"MG001+MG002",0,24,ALS2-003.SDD
+AMSMA,"刷卡信息定义档","刷卡信息定义档",1,主档单头,N,"",0,33,AMS2-003.SDD
+AMSMB,"员工每日班别档","员工每日班别档",1,主档单头,N,"MB001+MB002",0,70,AMS2-003.SDD
+AMSMC,"刷卡暂存信息档","刷卡暂存信息档",1,主档单头,N,"MC001+MC002+MC003",0,13,AMS2-003.SDD
+AMSMD,"加班尾数设置信息档","加班尾数设置信息档",1,主档单头,N,"",0,18,AMS2-003.SDD
+AMSME,"员工刷卡明细档","员工刷卡明细档",1,主档单头,N,"ME001+ME002",0,39,AMS2-003.SDD
+AMSMF,"临时卡信息档","临时卡信息档",1,主档单头,N,"MF001+MF002",1,10,AMS2-003.SDD
+AQSMA,"","",1,主档单头,Y,"MA001+MA002",0,11,AQS2-003.sdd
+AQSMB,"","",2,主档单身,N,"MB001+MB002+MB003",0,15,AQS2-003.sdd
+ASMMA,"","",1,主档单头,N,"",0,25,ASM2-003.SDD
+ASMMB,"","",2,主档单身,N,"MB001+MB002",0,8,ASM2-003.SDD
+ASMMC,"产品验收项目单头档","Item Accepting item Headers",1,主档单头,N,"MC001+MC002",0,9,ASM2-003.SDD
+ASMMD,"产品验收项目单身档","Item Accepting item Lines",2,主档单身,N,"MD001+MD002+MD003",0,13,ASM2-003.SDD
+ASMMG,"维修零件价格信息档","Maintain Components Price",1,主档单头,N,"MG001+MG002+MG008+MG005",0,16,ASM2-003.SDD
+ASMMH,"服务紧急度信息档","Service Urgency",1,主档单头,N,"MH001",0,10,ASM2-003.SDD
+ASMMI,"问卷信息单头档","Questionnaire Headers",1,主档单头,N,"MI001",0,12,ASM2-003.SDD
+ASMMJ,"问卷信息单身档","Questionnaire item Lines",2,主档单身,N,"MJ001+MJ002",0,21,ASM2-003.SDD
+ASMMK,"","",1,主档单头,N,"MK001",0,12,ASM2-003.SDD
+ASMML,"","",1,主档单头,N,"ML001",0,18,ASM2-003.SDD
+ASMMM,"","",1,主档单头,N,"MM001",0,22,ASM2-003.SDD
+ASMMN,"","",1,主档单头,N,"MN001",0,18,ASM2-003.SDD
+ASMMO,"","",1,主档单头,N,"MO001",0,39,ASM2-003.SDD
+ASMMP,"","",2,主档单身,N,"MP001+MP016",0,19,ASM2-003.SDD
+ASMMQ,"","",2,主档单身,N,"MQ001+MQ002+MQ003",0,19,ASM2-003.SDD
+ASMMR,"","",1,主档单头,N,"MR001+MR002",0,3,ASM2-003.SDD
+ASMMS,"","",2,主档单身,N,"MS001+MS002",0,11,ASM2-003.SDD
+ASMMT,"","",1,主档单头,N,"MT001",0,19,ASM2-003.SDD
+ASMMU,"","",2,主档单身,N,"MU001+MU002",0,11,ASM2-003.SDD
+ASMMV,"","",2,主档单身,N,"MV001+MV002",0,15,ASM2-003.SDD
+ASMLA,"","",5,交易记录,N,"LA004+LA005+LA006+LA003",0,18,ASM2-003.SDD
+ASMTA,"","",3,交易单头,N,"TA001+TA002",0,57,ASM2-003.SDD
+ASMTB,"","",3,交易单头,N,"TB001+TB002",0,52,ASM2-003.SDD
+ASMTC,"","",4,交易单身,N,"TC001+TC002+TC003",0,49,ASM2-003.SDD
+ASMTD,"","",3,交易单头,N,"TD001+TD002",0,77,ASM2-003.SDD
+ASMTE,"","",4,交易单身,N,"TE001+TE002+TE003",0,72,ASM2-003.SDD
+ASMTF,"","",3,交易单头,N,"TF001+TF002",0,26,ASM2-003.SDD
+ASMTG,"","",4,交易单身,N,"TG001+TG002+TG003",0,33,ASM2-003.SDD
+ASMTH,"","",3,交易单头,N,"TH001+TH002",0,22,ASM2-003.SDD
+ASMTI,"","",4,交易单身,N,"TI001+TI002+TI003",0,25,ASM2-003.SDD
+ASMTJ,"","",3,交易单头,N,"TJ001+TJ002",0,68,ASM2-003.SDD
+ASMTK,"","",4,交易单身,N,"TK001+TK002+TK003",0,14,ASM2-003.SDD
+ASMTL,"","",4,交易单身,N,"TL001+TL002+TL003",0,36,ASM2-003.SDD
+ASMTM,"","",3,交易单头,N,"TM001+TM002",0,45,ASM2-003.SDD
+ASMTN,"","",4,交易单身,N,"TN001+TN002+TN003",0,62,ASM2-003.SDD
+ASMTO,"","",4,交易单身,N,"TO001+TO002+TO003",0,15,ASM2-003.SDD
+ASMTP,"","",3,交易单头,N,"TP001+TP002",0,70,ASM2-003.SDD
+ASMTQ,"","",4,交易单身,N,"TQ001+TQ002+TQ003",0,14,ASM2-003.SDD
+ASMTR,"","",4,交易单身,N,"TR001+TR002+TR003",0,70,ASM2-003.SDD
+ASMTS,"投诉处理单信息档","Complaint Handling",1,主档单头,N,"TS001+TS002",0,38,ASM2-003.SDD
+ASMTT,"满意度调查单头档","Satisfaction Survey Headers",1,主档单头,N,"TT001+TT002",0,24,ASM2-003.SDD
+ASMTU,"满意度调查单身档","Satisfaction Survey Lines",2,主档单身,N,"TU001+TU002+TU003",0,17,ASM2-003.SDD
+ASMTV,"服务回访单头档","Return visit Headers",1,主档单头,N,"TV001+TV002",0,29,ASM2-003.SDD
+ASMTW,"服务回访单身档","Return visit Lines",2,主档单身,N,"TW001+TW002+TW003",0,17,ASM2-003.SDD
+ASMTX,"","",4,交易单身,N,"TX001+TX002+TX003",0,13,ASM2-003.SDD
+ASMTY,"","",4,交易单身,N,"TY001+TY002+TY003",0,14,ASM2-003.SDD
+ASMUA,"装配清单单头档","Assembly List  Headers",3,交易单头,N,"UA001+UA002",0,37,ASM2-003.SDD
+ASMUB,"装配清单单身档","Assembly List  Lines",4,交易单身,N,"UB001+UB002+UB003",0,32,ASM2-003.SDD
+ASTMA,"资产类别编号档","Asset Categories",1,主档单头,Y,"MA001",0,19,AST2-003.SDD
+ASTMB,"资产信息单头档","Asset Headers",1,主档单头,Y,"MB001",0,66,AST2-003.SDD
+ASTMC,"资产信息单身档","Asset Lines",2,主档单身,Y,"MC001+MC002+MC003",0,12,AST2-003.SDD
+ASTMD,"资产固定比率分摊档","Depreciation Fixed Apportionment Rate",2,主档单身,Y,"MD001+MD002",0,10,AST2-003.SDD
+ASTME,"固定资产参数设置档","FA Parameters",1,主档单头,N,"",0,19,AST2-003.SDD
+ASTMF,"资产盘点底稿单头","Asset CTMS Headers",1,主档单头,N,"MF001",0,12,AST2-003.SDD
+ASTMG,"资产盘点底稿单身档","Asset CTMS Lines",2,主档单身,N,"MG001+MG002+MG003+MG004",0,15,AST2-003.SDD
+ASTTA,"保险信息单头档","Asset Insurance Headers",1,主档单头,Y,"TA001",0,14,AST2-003.SDD
+ASTTB,"保险信息单身档","Asset Insurance Lines",4,交易单身,Y,"TB001+TB002",0,11,AST2-003.SDD
+ASTTC,"资产交易单头档","Asset Transactions Headers",3,交易单头,Y,"TC001+TC002+TC004",1,73,AST2-003.SDD
+ASTTD,"资产交易单身档","Asset Transactions Lines",4,交易单身,Y,"TD001+TD002+TD010+TD003+TD004",0,26,AST2-003.SDD
+ASTTE,"资产转移外送收回单头档","Asset Transfers/Outwards/Withdrawals Headers",3,交易单头,Y,"TE001+TE002",0,17,AST2-003.SDD
+ASTTF,"资产转移单身档","Asset Transfers Lines",4,交易单身,Y,"TF001+TF002+TF003+TF004+TF005+TF104+TF105",0,19,AST2-003.SDD
+ASTTG,"资产外送单身档","Asset Outwards Lines",4,交易单身,Y,"TG001+TG002+TG003+TG004+TG005",0,18,AST2-003.SDD
+ASTTH,"资产收回单身档","Asset Withdrawals Lines",4,交易单身,Y,"TH001+TH002+TH003+TH004+TH005+TH006+TH007",0,17,AST2-003.SDD
+ASTTI,"资产请购单单头档","Asset P/R Headers",3,交易单头,Y,"TI001+TI002",1,20,AST2-003.SDD
+ASTTJ,"资产请购单单身档","Asset P/R Lines",4,交易单身,Y,"TJ001+TJ002+TJ003",2,30,AST2-003.SDD
+ASTTK,"资产询价单单头档","Asset Inquiries Headers",3,交易单头,Y,"TK001+TK002+TK003",0,10,AST2-003.SDD
+ASTTL,"资产询价单单身档","Asset Inquiries Lines",4,交易单身,Y,"TL001+TL002+TL003+TL004",0,19,AST2-003.SDD
+ASTTM,"资产采购单单头档","Asset PO Headers",3,交易单头,Y,"TM001+TM002",1,32,AST2-003.SDD
+ASTTN,"资产采购单单身档","Asset PO Lines",4,交易单身,Y,"TN001+TN002+TN003",1,26,AST2-003.SDD
+ASTTO,"资产进货单单头档","Asset Receipts Headers",3,交易单头,Y,"TO001+TO002",2,46,AST2-003.SDD
+ASTTP,"资产进货单单身档","Asset Receipts Lines",4,交易单身,Y,"TP001+TP002+TP003",3,47,AST2-003.SDD
+ASTTQ,"资产工作量记录单头档","Asset Workload Headers",1,主档单头,Y,"TQ001+TQ002",0,11,AST2-003.SDD
+ASTTR,"资产工作量记录单身档","Asset Workload Lines",2,主档单身,Y,"TR001+TR002+TR003",0,11,AST2-003.SDD
+ASTLA,"资产信息每月统计单头档","Asset Headers",1,主档单头,Y,"LA001+LA002",0,56,AST2-003.SDD
+ASTLB,"资产信息每月统计单身档","Asset Lines",2,主档单身,Y,"LB001+LB002+LB003+LB004    //20131018 MODI BY 602067 FOR B32-131018002 ADD 'LB004'",0,13,AST2-003.SDD
+ASTLC,"资产固定比率分摊每月统计档","Depreciation Fixed Apportionment Rate",2,主档单身,Y,"LC001+LC002+LC003",0,11,AST2-003.SDD
+ATSMA,"","",1,主档单头,Y,"MA001",0,13,ATS2-003.SDD
+ATSMB,"","",2,主档单身,N,"MB001+MB002",0,21,ATS2-003.SDD
+ATSMC,"","",1,主档单头,N,"",0,21,ATS2-003.SDD
+ATSMD,"","",3,交易单头,N,"MD001+MD002",0,10,ATS2-003.SDD
+ATSME,"","",4,交易单身,N,"ME001+ME002+ME003",0,23,ATS2-003.SDD
+ATSMF,"","",1,主档单头,N,"MF001+MF002",0,8,ATS2-003.SDD
+COPMA,"客户基本信息档","Custerm Archivess",1,主档单头,Y,"MA001",2,1,ATS2-003.SDD
+COPTG,"","",3,交易单头,Y,"TG001+TG002",2,16,ATS2-003.SDD
+COPTH,"","",4,交易单身,Y,"TH001+TH002+TH003",1,5,ATS2-003.SDD
+CMSMQ,"各系统单据设置档","Document Types",1,主档单头,N,"MQ001",0,1,ATS2-003.SDD
+CMSMA,"共用参数设置档","Common Parameters",1,主档单头,Y,"",0,1,BFS2-003.SDD
+ACTFA,"会计开账参数设置档","Accounting Parameters",1,主档单头,Y,"",0,11,BFS2-003.SDD
+ACTLD,"期初开账单身档","Opening Account Order Headers",6,月档/统计,Y,"LD001+LD002+LD003",0,2,BFS2-003.SDD
+DSCMA,"登录者编号信息","Who posted information",7,系统档,N,"MA001",0,1,BFS2-003.SDD
+BMSMA,"","",1,主档单头,Y,"",0,71,BMS2-003.sdd
+BMSMB,"","",1,主档单头,Y,"MB001",0,74,BMS2-003.sdd
+BMSMC,"","",1,主档单头,Y,"MC001+MC002+MC003+MC004+MC005+MC006+MC007",0,15,BMS2-003.sdd
+BMSMD,"","",1,主档单头,N,"MD001+MD002",0,54,BMS2-003.sdd
+BMSME,"","",1,主档单头,N,"ME001+ME002",1,16,BMS2-003.sdd
+BMSMF,"","",2,主档单身,N,"MF001+MF002+MF003",0,21,BMS2-003.sdd
+MOCTE,"领/退料单身档","Material Issue/Return Lines",4,交易单身,Y,"TE001+TE002+TE003",2,1,BMS2-003.sdd
+COPTH,"销货单单身档","Sales Delivery Lines",4,交易单身,Y,"TH001+TH002+TH003",2,1,BMS2-003.sdd
+BMSMG,"","",1,主档单头,N,"MG001",2,30,BMS2-003.sdd
+BMSMH,"","",1,主档单头,N,"MH001",2,31,BMS2-003.sdd
+BMSTA,"","",5,交易记录,Y,"TA001+TA002+TA003+TA004",2,16,BMS2-003.sdd
+BMSMI,"","",1,主档单头,N,"MI001+MI002",0,7,BMS2-003.sdd
+BOMMA,"取替代料单头档","Alternative/Replace Item Headers",2,主档单身,Y,"MA001+MA002+MA003",0,10,BOM2-003.SDD
+BOMMB,"取替代料单身档","Alternative/Replace Item Lines",2,主档单身,Y,"MB001+MB002+MB003+MB009+MB004",0,15,BOM2-003.SDD
+BOMMC,"BOM 用量信息单头档","BOM Headers",1,主档单头,Y,"MC001",0,20,BOM2-003.SDD
+BOMMD,"BOM 用量信息单身档","BOM Lines",2,主档单身,Y,"MD001+MD002",1,37,BOM2-003.SDD
+BOMME,"产品工艺路线单头档","Item Routing Headers",1,主档单头,N,"ME001+ME002",0,10,BOM2-003.SDD
+BOMMF,"产品工艺路线单身档","Item Routing Lines",2,主档单身,N,"MF001+MF002+MF003+MF006",0,38,BOM2-003.SDD
+BOMMG,"标准作业程序档","Standard System Procedures",2,主档单身,N,"MG001+MG002+MG003+MG005+MG006",0,22,BOM2-003.SDD
+BOMMH,"料件认可信息档","Item Certifications",2,主档单身,N,"MH001+MH002+MH003",0,16,BOM2-003.SDD
+BOMMI,"工程品号基本信息档","Engineering Items",1,主档单头,Y,"MI001",0,21,BOM2-003.SDD
+BOMMJ,"E-BOM 用量信息单头档","E-BOM Headers",1,主档单头,Y,"MJ001",0,17,BOM2-003.SDD
+BOMMK,"E-BOM 用量信息单身档","E-BOM Lines",2,主档单身,Y,"MK001+MK002",1,29,BOM2-003.SDD
+BOMML,"E-BOM参数设置档","E-BOM Parameters",1,主档单头,Y,"",0,8,BOM2-003.SDD
+BOMMM,"E-BOM转BOM对照单头档","E-BOM Transfer to BOM Headers",1,主档单头,Y,"MM001",0,14,BOM2-003.SDD
+BOMMN,"E-BOM转BOM对照单身档","E-BOM Transfer to BOM Lines",2,主档单身,Y,"MN001+MN002",0,14,BOM2-003.SDD
+BOMTA,"BOM变更单头档","BOM Change Headers",1,主档单头,Y,"TA001+TA002",1,18,BOM2-003.SDD
+BOMTB,"BOM变更单身档","BOM Change Lines",2,主档单身,Y,"TB001+TB002+TB003",1,41,BOM2-003.SDD
+BOMTC,"BOM 变更子单身档","BOM Change Sub-lines",3,交易单头,Y,"TC001+TC002+TC003+TC004",0,102,BOM2-003.SDD
+BOMTD,"组合单单头信息","Combine Order Headers",3,交易单头,N,"TD001+TD002",1,30,BOM2-003.SDD
+BOMTE,"组合单单身信息","Combine Order Lines",4,交易单身,N,"TE001+TE002+TE003",0,24,BOM2-003.SDD
+BOMTF,"拆解单单头信息","Split Order Headers",3,交易单头,N,"TF001+TF002",1,29,BOM2-003.SDD
+BOMTG,"拆解单单身信息","Split Order Lines",4,交易单身,N,"TG001+TG002+TG003",0,23,BOM2-003.SDD
+BOMTH,"料件认可信息档","Item Certifications",2,主档单身,N,"TH001+TH002+TH003+TH004",0,31,BOM2-003.SDD
+BOMTI,"E-BOM变更单头档","E-BOM Change Headers",1,主档单头,Y,"TI001+TI002",1,18,BOM2-003.SDD
+BOMTJ,"E-BOM变更单身档","E-BOM Change Lines",2,主档单身,Y,"TJ001+TJ002+TJ003",1,33,BOM2-003.SDD
+BOMTK,"E-BOM变更子单身档","E-BOM Change Sub-lines",3,交易单头,Y,"TK001+TK002+TK003+TK004",0,58,BOM2-003.SDD
+BOMMO,"BOM参数设置档","BOM Parameters",7,系统档,N,"",0,11,BOM2-003.SDD
+BOMCA,"BOM 信息单头档","BOM Headers",1,主档单头,Y,"CA001+CA002",0,29,BOM2-003.SDD
+BOMCB,"BOM 信息单身档","BOM Lines",2,主档单身,Y,"CB002+CB003+CB004",1,35,BOM2-003.SDD
+BOMCC,"元件群组单头档","Item Group Headers",1,主档单头,Y,"CC001+CC002",0,9,BOM2-003.SDD
+BOMCD,"元件群组单身档","Item Group Lines",2,主档单身,Y,"CD001+CD002+CD003",0,13,BOM2-003.SDD
+BOMCE,"替代群组单头档","Replace Group Headers",1,主档单头,Y,"CE001+CE002+CE003",0,10,BOM2-003.SDD
+BOMCF,"替代群组单身档","Replace Group Lines",2,主档单身,Y,"CF001+CF002+CF003+CF004",0,15,BOM2-003.SDD
+BOMMP,"BOM子单身明细档","BOM Sub-lines",3,交易单头,Y,"MP001+MP002+MP003+MP004",0,15,BOM2-003.SDD
+BOMMQ,"BOM分量损耗档","BOM Scrap Ratio",3,交易单头,Y,"MQ001+MQ002+MQ003",0,13,BOM2-003.SDD
+BOMTL,"BOM分量损耗变更档","BOM Scrap Ratio Change",1,主档单头,N,"TL001+TL002+TL003+TL004+TL005",0,24,BOM2-003.SDD
+CMSMA,"共用参数设置档","Common Parameters",1,主档单头,Y,"",0,162,CMS2-003.SDD
+CMSMB,"工厂信息档","Plants",1,主档单头,Y,"MB001",0,16,CMS2-003.SDD
+CMSMC,"仓库信息档","Warehouses",1,主档单头,Y,"MC001",0,24,CMS2-003.SDD
+CMSMD,"工作中心信息单头档","Work Center Headers",1,主档单头,Y,"MD001",0,23,CMS2-003.SDD
+CMSME,"部门信息档","Departments Table",1,主档单头,Y,"ME001",0,15,CMS2-003.SDD
+CMSMF,"币种汇率档单头","Currency Exchange Rate Headers",1,主档单头,Y,"MF001",0,16,CMS2-003.SDD
+CMSMG,"币种汇率档单身","Currency Exchange Rate Lines",2,主档单身,Y,"MG001+MG002",0,14,CMS2-003.SDD
+CMSMH,"编码原则信息档","Coding Rules",1,主档单头,N,"MH001+MH002",0,15,CMS2-003.SDD
+CMSMI,"假日表单头档","Plant Calendar Headers",1,主档单头,Y,"MI001+MI002+MI003",0,10,CMS2-003.SDD
+CMSMJ,"职务类别档","Function Categories",1,主档单头,Y,"MJ001",0,10,CMS2-003.SDD
+CMSMK,"职务人员档","Function Staffs",2,主档单身,Y,"MK001+MK002",0,11,CMS2-003.SDD
+CMSML,"公司名称","Company Description",1,主档单头,Y,"ML001",0,45,CMS2-003.SDD
+CMSMP,"假日表单身档","Plant Calendar Lines",2,主档单身,N,"MP001+MP002+MP003+MP004",0,13,CMS2-003.SDD
+CMSMQ,"各系统单据设置档","Document Types",1,主档单头,N,"MQ001",0,95,CMS2-003.SDD
+CMSMR,"交易对象分类方式档","Business Partner Categories",1,主档单头,Y,"MR001+MR002",0,11,CMS2-003.SDD
+CMSMS,"页脚/签核档","Footers/Signs",1,主档单头,N,"MS001+MS002",0,12,CMS2-003.SDD
+CMSMT,"程序页脚/签核档","Footers/Signs by Procedure",1,主档单头,Y,"MT001",0,13,CMS2-003.SDD
+CMSMU,"单别限定输入用户信息档","Authorized Users by Document Type",2,主档单身,N,"MU001+MU002+MU003",0,9,CMS2-003.SDD
+CMSMV,"员工基本信息档","Staffs",1,主档单头,N,"MV001",2,85,CMS2-003.SDD
+CMSMW,"工艺档","Operations",1,主档单头,N,"MW001",0,15,CMS2-003.SDD
+CMSMX,"机器信息档","Machines",1,主档单头,Y,"MX001",1,12,CMS2-003.SDD
+CMSMY,"每日产能单头档","Daily Capacity Headers",1,主档单头,Y,"MY001+MY002",0,13,CMS2-003.SDD
+CMSMZ,"每日产能单身档","Daily Capacity Lines",2,主档单身,Y,"MZ003+MZ002",1,12,CMS2-003.SDD
+CMSNA,"付款条件档","Payment Terms",1,主档单头,Y,"NA001+NA002",0,25,CMS2-003.SDD
+CMSNE,"账号对象信息档","Banks Inquiry",1,主档单头,Y,"NE001+NE002",0,16,CMS2-003.SDD
+CMSNF,"学校名称信息档","School Names",1,主档单头,Y,"NF001",0,11,CMS2-003.SDD
+CMSNG,"科系名称信息档","Department Descriptions",1,主档单头,Y,"NG001",0,11,CMS2-003.SDD
+CMSNH,"语言能力信息档","Language Abilities",1,主档单头,Y,"NH001",0,9,CMS2-003.SDD
+CMSTZ,"双档虚拟信息档","Virtual Data of Double Table",4,交易单身,N,"TZ001+TZ002+TZ003+TZ004",0,12,CMS2-003.SDD
+CMSNI,"仓库库位档","Warehouse Bins",2,主档单身,N,"NI001+NI002",0,13,CMS2-003.SDD
+CMSNJ,"结算方式单头档","Settlement Method Headers",1,主档单头,Y,"NJ001",0,12,CMS2-003.SDD
+CMSNK,"结算方式单身档","Settlement Method Lines",2,主档单身,Y,"NK001+NK002",0,9,CMS2-003.SDD
+CMSNL,"仓库检验点档","Warehouse Inspection Points",2,主档单身,N,"NL001+NL002",0,13,CMS2-003.SDD
+CMSNM,"借款信用额度档","Borrowing Credit",2,主档单身,N,"NM001+NM002+NM003",0,15,CMS2-003.SDD
+CMSNN,"参数表","Common Parameters",1,主档单头,Y,"",0,9,CMS2-003.SDD
+CMSIA,"分期收款条件单头档","Installment Sale Condition Headers",1,主档单头,Y,"IA001",0,10,CMS2-003.SDD
+CMSIB,"分期收款条件单身档","Installment Sale Condition Lines",2,主档单身,Y,"IB001+IB002",0,21,CMS2-003.SDD
+CMSNO,"项目信息档","Project",1,主档单头,Y,"NO001",0,9,CMS2-003.SDD
+COPMA,"客户基本信息档","Customer Archivess",1,主档单头,Y,"MA001",2,116,COP2-003.SDD
+COPMB,"客户商品价格单头信息档","Customer Price Headers",1,主档单头,Y,"MB001+MB002+MB003+MB004+MB017",0,23,COP2-003.SDD
+COPMC,"客户商品价格单身信息档","Customer Price Lines",2,主档单身,Y,"MC001+MC002+MC003+MC004+MC009+MC005",0,16,COP2-003.SDD
+COPMD,"客户地址信息档","Customer Addresses",2,主档单身,Y,"MD001+MD002",0,16,COP2-003.SDD
+COPME,"销售预测单头信息档","Sales Forecast Headers",1,主档单头,Y,"ME001",0,19,COP2-003.SDD
+COPMF,"销售预测单身信息档","Sales Forecast Lines",2,主档单身,Y,"MF001+MF002",1,20,COP2-003.SDD
+COPMG,"客户品号信息档","Customer Items",2,主档单身,N,"MG001+MG002+MG003",0,12,COP2-003.SDD
+COPMH,"信用控制参数设置档","Credit Control Parameters",1,主档单头,N,"",0,15,COP2-003.SDD
+COPMI,"客户赠备品单头信息档","Customer Largess/Standby Headers",1,主档单头,Y,"MI001+MI002+MI003+MI004",1,17,COP2-003.SDD
+COPMJ,"客户品号赠备品率单身档","Customer Item Largess/Standby Rate Lines",2,主档单身,Y,"MJ001+MJ002+MJ003+MJ004+MJ005",0,14,COP2-003.SDD
+COPMK,"客户与仓库对照档","Customer And Warehouse Comparison",1,主档单头,N,"MK001",0,8,COP2-003.SDD
+COPTA,"报价单单头档","Quotation Headers",3,交易单头,Y,"TA001+TA002",2,43,COP2-003.SDD
+COPTB,"报价单单身档","Quotation Lines",4,交易单身,Y,"TB001+TB002+TB003",0,39,COP2-003.SDD
+COPTC,"客户订单单头信息档","SO Headers",3,交易单头,Y,"TC001+TC002",2,81,COP2-003.SDD
+COPTD,"客户订单单身信息档","SO Lines",4,交易单身,Y,"TD001+TD002+TD003",1,70,COP2-003.SDD
+COPTE,"订单变更单头信息档","SO Change Headers",3,交易单头,Y,"TE001+TE002+TE003",1,131,COP2-003.SDD
+COPTF,"订单变更单身信息档","SO Change Lines",4,交易单身,Y,"TF001+TF002+TF003+TF004",0,112,COP2-003.SDD
+COPTG,"销货单单头档","Sales Delivery Headers",3,交易单头,Y,"TG001+TG002",2,77,COP2-003.SDD
+COPTH,"销货单单身档","Sales Delivery Lines",4,交易单身,Y,"TH001+TH002+TH003",2,70,COP2-003.SDD
+COPTI,"销退单单头档","Sales Return Headers",3,交易单头,Y,"TI001+TI002",2,65,COP2-003.SDD
+COPTJ,"销退单单身档","Sales Return Lines",4,交易单身,Y,"TJ001+TJ002+TJ003",1,77,COP2-003.SDD
+COPTK,"报价单单身明细档","Quotation Line Details",4,交易单身,Y,"TK001+TK002+TK003+TK004",0,13,COP2-003.SDD
+COPTM,"订单选配档","Order Configurations",4,交易单身,Y,"",1,17,COP2-003.SDD
+COPTN,"出货通知单头档","Delivery Notice Headers",3,交易单头,N,"TN001+TN002",1,38,COP2-003.SDD
+COPTO,"出货通知单身","Delivery Notice Lines",4,交易单身,N,"TO001+TO002+TO003",0,48,COP2-003.SDD
+COPTP,"订单变更选配档","Order Change Configurations",4,交易单身,Y,"",1,32,COP2-003.SDD
+COPTQ,"产品配置单头档","Product Configuration Headers",3,交易单头,N,"TQ001+TQ002",0,14,COP2-003.SDD
+COPTR,"产品配置单身档","Product Configuration Lines",4,交易单身,N,"TR001+TR002+TR003",0,45,COP2-003.SDD
+COPTS,"客户信息变更单头档","Customer Change Headers",3,交易单头,Y,"TS001+TS004",0,30,COP2-003.SDD
+COPTT,"客户信息变更单身档","Customer Change Lines",4,交易单身,Y,"TT001+TT002+TT003",0,27,COP2-003.SDD
+COPTU,"客户地址变更信息档","Customer Address Change",2,主档单身,Y,"TU001+TU002+TU003",0,32,COP2-003.SDD
+COPAA,"合同单头信息档","Contract  Headers",3,交易单头,N,"AA001+AA002",1,63,COP2-003.SDD
+COPAB,"合同单身信息档","Contract  Lines",4,交易单身,N,"AB001+AB002+AB003",1,35,COP2-003.SDD
+COPAC,"合同变更单单头信息档","Contract Change Headers",3,交易单头,N,"AC001+AC002+AC003",1,90,COP2-003.SDD
+COPAD,"合同变更单单身信息档","Contract Change Lines",4,交易单身,N,"AD001+AD002+AD003+AD004",0,64,COP2-003.SDD
+COPDC,"客户订单子单身信息档","SO  Sub-lines",4,交易单身,Y,"DC001+DC002+DC003+DC004",0,21,COP2-003.SDD
+COPDA,"装配清单单头档","Assembly List  Headers",3,交易单头,N,"DA001+DA002",0,22,COP2-003.SDD
+COPDB,"装配清单单身档","Assembly List  Lines",4,交易单身,N,"DB001+DB002+DB003",0,28,COP2-003.SDD
+COPDD,"零组件发货/退回单单头信息档","Component Order/Return Headers",3,交易单头,Y,"DD001+DD002",0,19,COP2-003.SDD
+COPDE,"零组件发货/退回单单身信息档","Component Order/Return Lines",4,交易单身,Y,"DE001+DE002+DE003",0,24,COP2-003.SDD
+COPDF,"安装调试通知单信息档","Installation Notice",5,交易记录,Y,"DF001+DF002",0,40,COP2-003.SDD
+COPDG,"安装调试单头信息档","Installation Headers",3,交易单头,Y,"DG001+DG002",0,42,COP2-003.SDD
+COPDH,"安装调试单身费用明细信息档","Installation Lines Expense Details",4,交易单身,Y,"DH001+DH002+DH003",0,16,COP2-003.SDD
+COPDI,"安装调试机器信息档","Installation Machine  Lines",4,交易单身,Y,"DI001+DI002+DI003",0,13,COP2-003.SDD
+COPEA,"自动报价参数设置档","Automated Quotation Parameters  Settings",1,主档单头,Y,"",0,33,COP2-003.SDD
+COPEB,"录入报价组成信息","Quotation Composition",1,主档单头,Y,"EB001",1,8,COP2-003.SDD
+COPEC,"自定义报价参数档","UDF Quotation Parameters",1,主档单头,Y,"EC001",1,18,COP2-003.SDD
+COPED,"录入参数值单头档","Parameters Headers",1,主档单头,Y,"ED001+ED003",1,12,COP2-003.SDD
+COPEE,"录入参数值单身档","Parameters Lines",2,主档单身,Y,"EE001+EE002",1,10,COP2-003.SDD
+COPEF,"报价分类单头档","Quotation Category Headers",1,主档单头,Y,"EF001+EF005",1,20,COP2-003.SDD
+COPEG,"报价分类单身档","Quotation Category Lines",2,主档单身,Y,"EG001+EG002+EG003",1,19,COP2-003.SDD
+COPEH,"报价分类子单身档","Quotation Category Sub-lines",4,交易单身,Y,"EH001+EH002+EH003+EH004",1,16,COP2-003.SDD
+COPEI,"报价分类总价折扣规则档","Quotation Category Amount Discount Rules",3,交易单头,Y,"EI001+EI002+EI003",1,11,COP2-003.SDD
+COPEJ,"报价权限单头档","Quotation Authority Headers",1,主档单头,Y,"EJ001",1,10,COP2-003.SDD
+COPEK,"报价权限单身档","Quotation Category Lines",2,主档单身,Y,"EK001+EK002",1,10,COP2-003.SDD
+COPEL,"报价权限子单身档","Quotation Authority Sub-lines",4,交易单身,Y,"EL001+EL002+EL003",1,9,COP2-003.SDD
+COPEM,"录入自动报价单状态","Automated Quotation Status",1,主档单头,Y,"EM001",1,11,COP2-003.SDD
+COPEN,"自动报价单头档","Automated Quotation Headers",1,主档单头,Y,"EN001+EN002+EN003",1,57,COP2-003.SDD
+COPEO,"自动报价单身档","Automated Quotation Lines",2,主档单身,Y,"EO001+EO002+EO003+EO004+EO005",1,23,COP2-003.SDD
+COPEP,"自动报价子单身档","Automated Quotation Sub-lines",4,交易单身,Y,"EP001+EP002+EP003+EP004+EP005+EP006",1,14,COP2-003.SDD
+COPEQ,"自动报价子单头档","Automated Quotation Sub-headers",1,主档单头,Y,"EQ001+EQ002+EQ003+EQ004",1,23,COP2-003.SDD
+COPER,"报价分类参数信息子单头档","Quotation Category Parameters Sub-headers",1,主档单头,Y,"ER001+ER002+ER003",1,11,COP2-003.SDD
+COPTV,"产品配置分量损耗档","Product Configuration Loss By Quantity Lines",4,交易单身,N,"TV001+TV002+TV003+TV004",0,13,COP2-003.SDD
+COPML,"预测维护单头档","Forecast Maintenance Headers",1,主档单头,Y,"ML001",0,9,COP2-003.SDD
+COPMM,"预测维护单身档","Forecast Maintenance Lines",2,主档单身,N,"MM001+MM002",0,18,COP2-003.SDD
+COPIA,"分期收款信息单头","Installment Sales Headers",3,交易单头,Y,"IA001+IA002",2,35,COP2-003.SDD
+COPIB,"分期收款信息单身","Installment Sales Headers",4,交易单身,Y,"IB001+IB002+IB003",0,42,COP2-003.SDD
+COPIC,"分期收款变更信息单头","Installment Sales Change Headers",3,交易单头,Y,"IC001+IC002+IC003",2,54,COP2-003.SDD
+COPID,"分期收款变更信息单身","Installment Sales Change Lines",4,交易单身,Y,"ID001+ID002+ID003+ID014",0,70,COP2-003.SDD
+COPMN,"零组件发货清单模版单头","Component Delivery List Templates Headers",1,主档单头,Y,"MN001+MN002",0,8,COP2-003.SDD
+COPMO,"零组件发货清单模版单身","Component Delivery List Templates Lines",2,主档单身,Y,"MO001+MO002+MO003",0,16,COP2-003.SDD
+COPMP,"预测参数档","Forecast Parameters",6,月档/统计,Y,"MP001",0,8,COP2-003.SDD
+CSTMA,"成本参数设置档","Cost Parameters",1,主档单头,Y,"",0,61,CST2-003.SDD
+CSTMB,"工单工时档","MO Man/Machine-hours",1,主档单头,Y,"MB001+MB002+MB003+MB004",0,13,CST2-003.SDD
+CSTMC,"工作中心成本档","Work Center Costs",1,主档单头,Y,"MC001+MC002",0,16,CST2-003.SDD
+CSTME,"产品成本档","Item Costs",1,主档单头,Y,"ME001+ME002",0,20,CST2-003.SDD
+CSTMF,"联产品成本分摊比率档","Cost Apportionment Rates Of Co/By-Product",2,主档单身,N,"MF001+MF002",0,10,CST2-003.SDD
+CSTTA,"工单成本档","MO Costs",6,月档/统计,Y,"TA001+TA002+TA003+TA004",0,46,CST2-003.SDD
+CSTMG,"成本计算条件设定档","Costing-mode Archivess",1,主档单头,Y,"MG001",0,19,CST2-003.SDD
+CSTMH,"本阶标准成本设定单头档","Costing-modes Information",1,主档单头,Y,"MH001",0,7,CST2-003.SDD
+CSTMI,"本阶标准成本设定单身档","Current Level Standard Cost Lines",2,主档单身,Y,"MI001+MI002",0,18,CST2-003.SDD
+CSTMK,"工单工作中心成本档","MO Costs by Work Center",1,主档单头,Y,"MK001+MK002+MK003+MK004",0,12,CST2-003.SDD
+CSTLA,"标准成本月档","Standard Cost Monthly Archives",6,月档/统计,Y,"LA001+LA002+LA003",0,19,CST2-003.SDD
+CSTLB,"标准成本差异重估维护档","Standard Cost Variances Revaluation",6,月档/统计,Y,"LB001+LB002+LB003",0,13,CST2-003.SDD
+CSTTB,"工单成本差异分析档","MO Variance Costs Analysises",6,月档/统计,Y,"TB001+TB002+TB003+TB004",0,75,CST2-003.SDD
+CSTTG,"每月标准单位成本","Std Unit Cost Per Month",6,月档/统计,Y,"TG001+TG002+TG003+TG004",0,14,CST2-003.SDD
+CSTLC,"成本年月低阶码档","Costs Y/M Low level Codes",1,主档单头,Y,"LC001+LC002",0,11,CST2-003.SDD
+CUSMA,"合同品号类别信息档","合同品号类别信息档",1,主档单头,Y,"MA001",0,8,CUS2-003.SDD
+CUSMB,"合同品号信息档","合同品号信息档",1,主档单头,N,"MB001",1,23,CUS2-003.SDD
+CUSMC,"合同品号对照档","合同品号对照档",1,主档单头,Y,"MC001+MC002",1,9,CUS2-003.SDD
+CUSMD,"合同材料用量单头档","合同材料用量单头档",1,主档单头,N,"MD001",0,10,CUS2-003.SDD
+CUSME,"合同材料用量单身档","合同材料用量单身档",2,主档单身,N,"ME001+ME002",0,12,CUS2-003.SDD
+CUSMF,"保税交易代码单头档","保税交易代码单头档",1,主档单头,N,"MF001",0,9,CUS2-003.SDD
+CUSMG,"保税交易代码单身档","保税交易代码单身档",2,主档单身,N,"MG001+MG002",0,8,CUS2-003.SDD
+CUSMH,"征免性质基本信息档","征免性质基本信息档",1,主档单头,N,"MH001",0,9,CUS2-003.SDD
+CUSTA,"合同信息单头档","合同信息单头档",3,交易单头,N,"TA001",1,22,CUS2-003.SDD
+CUSTB,"合同成品信息单身档","合同成品信息单身档",4,交易单身,N,"TB001+TB002",1,31,CUS2-003.SDD
+CUSTC,"合同材料信息单身档","合同材料信息单身档",4,交易单身,N,"TC001+TC002",1,36,CUS2-003.SDD
+CUSTD,"合同信息变更单头档","合同信息变更单头档",1,主档单头,N,"TD001+TD002",0,19,CUS2-003.SDD
+CUSTE,"合同成品信息变更单身档","合同成品信息变更单身档",4,交易单身,N,"TE001+TE002+TE003",0,17,CUS2-003.SDD
+CUSTF,"合同材料信息变更单身档","合同材料信息变更单身档",4,交易单身,N,"TF001+TF002+TF003",0,17,CUS2-003.SDD
+CUSTG,"合同信息结转单头档","合同信息结转单头档",1,主档单头,N,"TG001+TG002",0,17,CUS2-003.SDD
+CUSTH,"合同成品信息结转单身档","合同成品信息结转单身档",4,交易单身,N,"TH001+TH002+TH003",0,18,CUS2-003.SDD
+CUSTI,"合同材料信息结转单身档","合同材料信息结转单身档",4,交易单身,N,"TI001+TI002+TI003",0,19,CUS2-003.SDD
+CUSTJ,"分手册单头档","分手册单头档",3,交易单头,N,"TJ001",1,13,CUS2-003.SDD
+CUSTK,"分手册成品单身档","分手册成品单身档",4,交易单身,N,"TK001+TK002",1,32,CUS2-003.SDD
+CUSTL,"分手册材料单身档","分手册材料单身档",4,交易单身,N,"TL001+TL002",1,37,CUS2-003.SDD
+CUSTM,"交易单据单头档","交易单据单头档",2,主档单身,N,"TM001+TM002",0,20,CUS2-003.SDD
+CUSTN,"交易单据单身档","交易单据单身档",2,主档单身,N,"TN001+TN002+TN003",0,19,CUS2-003.SDD
+CUSTO,"转厂申请单头档","转厂申请单头档",6,月档/统计,N,"TO001+TO002",1,28,CUS2-003.SDD
+CUSTP,"转厂申请单身档","转厂申请单身档",6,月档/统计,N,"TP001+TP002+TP003",0,17,CUS2-003.SDD
+CUSTR,"转厂维护单头档","转厂维护单头档",6,月档/统计,N,"TR001+TR002",1,20,CUS2-003.SDD
+CUSTS,"转厂维护单身档","转厂维护单身档",6,月档/统计,N,"TS001+TS002+TS003",0,16,CUS2-003.SDD
+CUSTU,"设备申请单头档","设备申请单头档",6,月档/统计,N,"TU001+TU002",1,25,CUS2-003.SDD
+CUSTV,"设备申请单身档","设备申请单身档",6,月档/统计,N,"TV001+TV002+TV003",0,28,CUS2-003.SDD
+CUSTW,"设备维护单头档","设备维护单头档",6,月档/统计,N,"TW001+TW002",1,21,CUS2-003.SDD
+CUSTX,"设备维护单身档","设备维护单身档",6,月档/统计,N,"TX001+TX002+TX003",0,21,CUS2-003.SDD
+ADMMM,"","",7,系统档,N,"MM001",0,0,DD2-003.SDD
+ADMMN,"","",7,系统档,N,"MN001+MN002+MN003",0,12,DD2-003.SDD
+ADMMO,"","",7,系统档,N,"MO001+MO002+MO003+MO004",0,6,DD2-003.SDD
+LRPTE,"生产计划每日产量档","Plan Daily Production Quantity",4,交易单身,N,"TE001+TE005+TE009+TE002+TE003+TE004+TE006+TE007+TEP04+TEP08+TEP09//20200617 MODI BY 600900 FOR Z01-20042600001 ADD:TEP04//20200804 MODI BY 600900 FOR Z01-20042600001 ADD:TEP08",1,10,DPP2-003.sdd
+MOCTY,"工单每日产量档","MO Daily Production Quantity",4,交易单身,N,"TY001+TY002+TY003+TYP04+TYP07+TYP08//20200617 MODI BY 600900 FOR Z01-20042600001 ADD:TYP04//20200804 MODI BY 600900 FOR Z01-20042600001 ADD:TYP07",0,9,DPP2-003.sdd
+LRPMA,"批次计划设置档","Batch Plan Settings",7,系统档,N,"",0,1,DPP2-003.sdd
+DPPLA,"采购到/退货明细","TARGET_VALUE",8,其它,N,"LA001+LA002+LA006+LA009",0,16,DPP2-003.sdd
+CMSMA,"共用参数设置档","Common Parameters",1,主档单头,Y,"",0,1,DPP2-003.sdd
+EFSMC,"电子签核传输栏位设置单头档","Documents configuration For easyflow Header",1,主档单头,Y,"MC001+MC002",0,17,EFS2-003.SDD
+EFSMD,"电子签核送签信息记录档","EasyFlow Result Log",8,其它,Y,"ME001+ME002+ME003+ME004+ME005+ME006",0,24,EFS2-003.SDD
+EISLA,"财务信息汇总档","财务信息汇总档",6,月档/统计,N,"LA001+LA002",0,46,EIS2-003.SDD
+EISLB,"存货分析信息汇总档","存货分析信息汇总档",6,月档/统计,N,"",3,29,EIS2-003.SDD
+EISLC,"","",6,月档/统计,N,"",3,29,EIS2-003.SDD
+EISLD,"采购分析信息汇总档","采购分析信息汇总档",6,月档/统计,N,"",4,40,EIS2-003.SDD
+EISLE,"工单分析信息汇总档","工单分析信息汇总档",6,月档/统计,N,"",5,28,EIS2-003.SDD
+EISLF,"工作中心分析信息汇总档","工作中心分析信息汇总档",6,月档/统计,N,"",1,13,EIS2-003.SDD
+EISLG,"产品成本分析信息汇总档","产品成本分析信息汇总档",6,月档/统计,N,"",1,26,EIS2-003.SDD
+EISLH,"委外加工分析信息汇总档","委外加工分析信息汇总档",6,月档/统计,N,"",4,34,EIS2-003.SDD
+EISLI,"应收账款账龄分析汇总档","应收账款账龄分析汇总档",6,月档/统计,N,"",3,35,EIS2-003.SDD
+EISLJ,"人事薪资出勤信息汇总档","人事薪资出勤信息汇总档",6,月档/统计,N,"",1,24,EIS2-003.SDD
+EQTMA,"","",1,主档单头,N,"",0,21,EQT2-003.SDD
+EQTMB,"","",1,主档单头,N,"MB001",0,9,EQT2-003.SDD
+EQTMC,"","",1,主档单头,N,"MC001",0,24,EQT2-003.SDD
+EQTMD,"","",2,主档单身,N,"MD001+MD002",0,14,EQT2-003.SDD
+EQTME,"","",2,主档单身,N,"ME001+ME002",0,13,EQT2-003.SDD
+EQTMF,"","",1,主档单头,N,"MF001",0,15,EQT2-003.SDD
+EQTMG,"","",2,主档单身,N,"MG001+MG002",0,11,EQT2-003.SDD
+EQTMH,"","",1,主档单头,N,"MH001",0,10,EQT2-003.SDD
+EQTMI,"","",1,主档单头,N,"MI001",0,11,EQT2-003.SDD
+EQTMJ,"","",1,主档单头,N,"MJ002",0,55,EQT2-003.SDD
+EQTML,"","",2,主档单身,N,"ML001+ML002",0,36,EQT2-003.SDD
+EQTMM,"","",2,主档单身,N,"MM001+MM002",0,14,EQT2-003.SDD
+EQTMN,"","",1,主档单头,N,"MN001",0,20,EQT2-003.SDD
+EQTMP,"","",2,主档单身,N,"MP001+MP002",0,15,EQT2-003.SDD
+EQTMQ,"","",2,主档单身,N,"MQ001+MQ002",0,16,EQT2-003.SDD
+EQTMR,"","",1,主档单头,N,"MR001",0,9,EQT2-003.SDD
+EQTMS,"","",1,主档单头,N,"MS001",0,11,EQT2-003.SDD
+EQTTA,"","",3,交易单头,N,"TA001+TA002",0,22,EQT2-003.SDD
+EQTTB,"","",4,交易单身,N,"TB001+TB002+TB003",0,35,EQT2-003.SDD
+EQTTC,"","",3,交易单头,N,"TC001+TC002",0,19,EQT2-003.SDD
+EQTTD,"","",4,交易单身,N,"TD001+TD002+TD003",0,45,EQT2-003.SDD
+EQTTE,"","",3,交易单头,N,"TE001+TE002",0,64,EQT2-003.SDD
+EQTTF,"","",4,交易单身,N,"TF001+TF002+TF003",0,18,EQT2-003.SDD
+EQTTG,"","",4,交易单身,N,"TG001+TG002+TG003",0,17,EQT2-003.SDD
+EQTTJ,"","",3,交易单头,N,"TJ001+TJ002",0,38,EQT2-003.SDD
+EQTTK,"","",3,交易单头,N,"TK001+TK002",0,17,EQT2-003.SDD
+EQTTL,"","",4,交易单身,N,"TL001+TL002+TL003",0,27,EQT2-003.SDD
+EQTTM,"","",3,交易单头,N,"TM001+TM002",0,17,EQT2-003.SDD
+EQTTN,"","",4,交易单身,N,"TN001+TN002+TN003",0,28,EQT2-003.SDD
+EQTTO,"","",1,主档单头,N,"TO001",0,10,EQT2-003.SDD
+EQTTP,"","",2,主档单身,N,"TP001+TP002",0,13,EQT2-003.SDD
+EQTTQ,"","",3,交易单头,N,"TQ001+TQ002+TQ003",0,14,EQT2-003.SDD
+EQTTR,"","",4,交易单身,N,"TR001+TR002+TR003",0,16,EQT2-003.SDD
+EQTTS,"","",3,交易单头,N,"TS001+TS002",1,17,EQT2-003.SDD
+EQTTT,"","",4,交易单身,N,"TT001+TT002+TT003",1,23,EQT2-003.SDD
+EQTTU,"","",3,交易单头,N,"TU001+TU002",1,17,EQT2-003.SDD
+EQTTV,"","",4,交易单身,N,"TV001+TV002+TV003",1,23,EQT2-003.SDD
+EQTTW,"","",3,交易单头,N,"TW001+TW002+TW003+TW004",0,15,EQT2-003.SDD
+EQTTX,"","",4,交易单身,N,"TX001+TX002+TX003+TX004",0,17,EQT2-003.SDD
+LRPTA,"生产计划档","Production Plan",4,交易单身,N,"TA001+TA026+TA002+TA003+TA004+TA028",1,3,ETS2-003.SDD
+LRPTB,"相关需求档","Related Requirements",4,交易单身,N,"TB001+TB012+TB002+TB003+TB004+TB013+TB005+TB006+TB014",1,1,ETS2-003.SDD
+LRPTC,"采购计划档","Purchase Plan Tab.",4,交易单身,N,"TC001+TC024+TC002+TC003+TC025",1,2,ETS2-003.SDD
+MOCCA,"","",3,交易单头,N,"CA001+CA002+CA004",3,14,ETS2-003.SDD
+MOCTA,"工单单头档","MO Headers",3,交易单头,N,"TA001+TA002",3,3,ETS2-003.SDD
+MOCTB,"工单单身档","MO Lines",4,交易单身,Y,"TB001+TB002+TB003+TB006",1,4,ETS2-003.SDD
+MOCTC,"领/退料单头档","Material Issue/Return Headers",3,交易单头,Y,"TC001+TC002",1,1,ETS2-003.SDD
+MOCTD,"领/退料工单信息档","Material Issue/Return MO",3,交易单头,Y,"TD001+TD002+TD003+TD004",1,3,ETS2-003.SDD
+MOCTE,"领/退料单身档","Material Issue/Return Lines",4,交易单身,Y,"TE001+TE002+TE003",2,1,ETS2-003.SDD
+MOCTG,"生产入库单身档","MO Receipt Lines",4,交易单身,Y,"TG001+TG002+TG003",1,2,ETS2-003.SDD
+MOCCB,"","",4,交易单身,N,"CB001+CB002+CB003+CB005",3,15,ETS2-003.SDD
+CMSMA,"共用参数设置档","Common Parameters",1,主档单头,Y,"",0,1,ETS2-003.SDD
+CMSMQ,"各系统单据设置档","Document Types",1,主档单头,N,"MQ001",0,5,ETS2-003.SDD
+PURCA,"供应商品号赠备品率单头档","Item by Supplier Headers",1,主档单头,Y,"CA001+CA002+CA004",0,15,ETS2-003.SDD
+PURCB,"供应商品号赠备品率单身档","Item by Supplier Lines",2,主档单身,Y,"CB001+CB002+CB003+CB004",0,12,ETS2-003.SDD
+PURTB,"请购单单身信息档","Purchase Request Lines",4,交易单身,Y,"TB001+TB002+TB003",2,1,ETS2-003.SDD
+PURTD,"采购单单身信息档","PO Lines",4,交易单身,Y,"TD001+TD002+TD003",2,6,ETS2-003.SDD
+PURTF,"采购变更单身信息档","PO Change Lines",4,交易单身,N,"TF001+TF002+TF003+TF004",0,5,ETS2-003.SDD
+PURTH,"进货单单身档","Purchase Receipt Lines",4,交易单身,Y,"TH001+TH002+TH003",3,7,ETS2-003.SDD
+PURCC,"","",3,交易单头,Y,"CC001+CC002",3,25,ETS2-003.SDD
+PURCD,"","",4,交易单身,Y,"CD001+CD002+CD003",1,43,ETS2-003.SDD
+PURCE,"","",3,交易单头,N,"CE001+CE002+CE003+CE005",1,15,ETS2-003.SDD
+PURCF,"","",3,交易单头,N,"CF001+CF002+CF003+CF005",1,15,ETS2-003.SDD
+BOMML,"E-BOM参数设置档","E-BOM Parameters",1,主档单头,Y,"",0,1,ETS2-003.SDD
+BOMMD,"BOM 用量信息单身档","BOM Lines",2,主档单身,Y,"MD001+MD002",1,2,ETS2-003.SDD
+BOMMI,"工程品号基本信息档","Engineering Items",1,主档单头,Y,"MI001",0,2,ETS2-003.SDD
+BOMMK,"E-BOM 用量信息单身档","E-BOM Lines",2,主档单身,Y,"MK001+MK002",1,1,ETS2-003.SDD
+BOMMO,"BOM参数设置档","BOM Parameters",7,系统档,N,"",0,1,ETS2-003.SDD
+BOMTC,"BOM 变更子单身档","BOM Change Sub-lines",3,交易单头,Y,"TC001+TC002+TC003+TC004",0,4,ETS2-003.SDD
+BOMTK,"E-BOM变更子单身档","E-BOM Change Sub-lines",3,交易单头,Y,"TK001+TK002+TK003+TK004",0,2,ETS2-003.SDD
+BOMCA,"BOM 信息单头档(新增)","BOM Headers",1,主档单头,Y,"CA001+CA002",0,28,ETS2-003.SDD
+BOMCB,"BOM 信息单身档(新增)","BOM Lines",2,主档单身,Y,"CB002+CB003+CB004",1,29,ETS2-003.SDD
+BOMCC,"元件群组单头档","Alternative/Replace Item Headers",1,主档单头,Y,"CC001+CC002",0,9,ETS2-003.SDD
+BOMCD,"元件群组单身档","Item Group Lines",2,主档单身,Y,"CD001+CD002+CD003",0,13,ETS2-003.SDD
+BOMCE,"替代群组单头档","Replace Group Headers",1,主档单头,Y,"CE001+CE002+CE003",0,10,ETS2-003.SDD
+BOMCF,"替代群组单身档","Replace Group Lines",2,主档单身,Y,"CF001+CF002+CF003+CF004",0,15,ETS2-003.SDD
+COPCA,"","",3,交易单头,N,"CA001+CA002+CA003+CA005",3,15,ETS2-003.SDD
+COPCB,"","",3,交易单头,N,"CB001+CB002+CB003+CB005",1,15,ETS2-003.SDD
+COPCC,"","",3,交易单头,N,"CC001+CC002+CC003+CC005",1,16,ETS2-003.SDD
+COPCD,"","",3,交易单头,N,"CD001+CD002+CD003+CD004+CD006",3,22,ETS2-003.SDD
+QMSTA,"进货检验单单头档","Purchase Receipt Inspection Headers",3,交易单头,N,"TA001+TA002+TA003+TAC04+TA026",1,4,ETS2-003.SDD
+QMSTB,"进货检验单单身档","Purchase Receipt Inspection Headers",4,交易单身,N,"TB001+TB002+TB003+TBC01+TB014+TB004",0,1,ETS2-003.SDD
+QMSTC,"进货检验单不良原因档","Purchase Receipt Defective Reasons",4,交易单身,N,"TC001+TC002+TC003+TCC01+TC008+TC004+TC005",0,1,ETS2-003.SDD
+QMSTP,"数值型检验项目检测信息档","Inspection Information Of Numerical Inspection Item",3,交易单头,N,"TP001+TP002+TP003+TPC01+TP004+TP005+TP006",0,1,ETS2-003.SDD
+QMSTQ,"数值型检验项目检测单身信息档","Inspection Information Of Numerical Inspection Item Lines",4,交易单身,N,"TQ001+TQ002+TQ003+TQC01+TQ004+TQ005+TQ006+TQ007",0,1,ETS2-003.SDD
+PSMCA,"序号单据参数设定","Item by Supplier Headers",1,主档单头,N,"",0,42,ETS2-003.SDD
+PSMCB,"序号交易明细信息档","Item by Supplier Headers",4,交易单身,N,"CB004+CB005+CB006+CB011+CB003",3,19,ETS2-003.SDD
+PSMCC,"不良原因信息档","Item by Supplier Headers",1,主档单头,N,"CC001",0,9,ETS2-003.SDD
+PSMCD,"工站信息档","Item by Supplier Headers",1,主档单头,N,"CD001",0,11,ETS2-003.SDD
+PSMCE,"工站人员信息档","Item by Supplier Headers",2,主档单身,N,"CE001+CE002",0,9,ETS2-003.SDD
+PSMCF,"","",1,主档单头,N,"CF001",0,9,ETS2-003.SDD
+PSMCG,"","",2,主档单身,N,"CG001+CG002",0,12,ETS2-003.SDD
+PSMCH,"","",2,主档单身,N,"CH001+CH002",0,12,ETS2-003.SDD
+PSMCI,"","",1,主档单头,N,"CI001",0,17,ETS2-003.SDD
+PSMCJ,"","",2,主档单身,N,"CJ001+CJ002",0,12,ETS2-003.SDD
+PSMCK,"","",2,主档单身,N,"CK001+CK002",0,10,ETS2-003.SDD
+PSMCL,"","",2,主档单身,N,"CL001+CL002",0,9,ETS2-003.SDD
+PSMCM,"序号成本开账/调整单头档","Cost Opening/Adjustment Headers",3,交易单头,Y,"CM001+CM002",1,14,ETS2-003.SDD
+PSMCN,"序号成本开账/调整单身档","Cost Opening/Adjustment Lines",4,交易单身,Y,"CN001+CN002+CN003",0,16,ETS2-003.SDD
+PSMCO,"","",4,交易单身,N,"CO001+CO002+CO003+CO005",2,15,ETS2-003.SDD
+PSMCP,"序号子单身导入单头档","Cost Opening/Adjustment Headers",3,交易单头,Y,"CP001+CP002",1,15,ETS2-003.SDD
+PSMCQ,"序号子单身导入单身档","Cost Opening/Adjustment Lines",4,交易单身,Y,"CQ001+CQ002+CQ003",0,18,ETS2-003.SDD
+PSMCR,"","",4,交易单身,N,"CR001+CR002+CR003+CR005",2,15,ETS2-003.SDD
+INVMB,"品号基本信息档","Items",1,主档单头,Y,"MB001",4,2,ETS2-003.SDD
+INVCA,"","",4,交易单身,N,"CA001+CA002+CA003+CA005",2,15,ETS2-003.SDD
+INVCB,"","",3,交易单头,N,"CB001+CB002+CB003+CB005",1,15,ETS2-003.SDD
+INVCC,"","",3,交易单头,N,"CC001+CC002+CC003+CC005",1,15,ETS2-003.SDD
+INVCD,"","",3,交易单头,N,"CD001+CD002+CD003+CD005",1,15,ETS2-003.SDD
+INVCE,"","",3,交易单头,N,"CE001+CE002+CE003+CE005",1,15,ETS2-003.SDD
+PURTJ,"退货单单身档","Purchase Return Lines",4,交易单身,Y,"TJ001+TJ002+TJ003",1,1,ETS2-003.SDD
+MOCTO,"工单变更单头档","MO Change Headers",3,交易单头,N,"TO001+TO002+TO003",0,2,ETS2-003.SDD
+MOCTP,"工单变更单身档","MO Change Lines",4,交易单身,N,"TP001+TP002+TP003+TP004+TP007+TP104+TP107",0,6,ETS2-003.SDD
+MOCTI,"委外进货单身档","Subcontract Receipt Lines",4,交易单身,Y,"TI001+TI002+TI003",3,6,ETS2-003.SDD
+MOCTL,"委外退货单身档","Subcontract Return Lines",3,交易单头,Y,"TL001+TL002+TL003",1,1,ETS2-003.SDD
+MOCCC,"","",3,交易单头,Y,"CC001+CC002",3,21,ETS2-003.SDD
+MOCCD,"","",4,交易单身,Y,"CD001+CD002+CD003",1,36,ETS2-003.SDD
+MOCCE,"","",3,交易单头,N,"CE001+CE002+CE003+CE005",1,15,ETS2-003.SDD
+MOCCF,"","",3,交易单头,N,"CF001+CF002+CF003+CF005",1,15,ETS2-003.SDD
+MOCCG//20091221,"","",3,交易单头,N,"CG001+CG002+CG003+CG005",3,21,ETS2-003.SDD
+GMPTH,"留样单信息档","留样单信息档",3,交易单头,Y,"TH001+TH002",1,2,ETS2-003.SDD
+QMSTD//20091028,"委外进货检验单单头档","Subcontract Receipt Inspection Headers",3,交易单头,N,"TD001+TD002+TD003+TDC01+TD026",1,3,ETS2-003.SDD
+QMSTE,"委外进货检验单单身档","Subcontract Receipt Inspection Headers",4,交易单身,N,"TE001+TE002+TE003+TEC01+TE014+TE004",0,1,ETS2-003.SDD
+QMSTF,"委外进货检验单不良原因档","Subcontract Receipt Inspection Headers",4,交易单身,N,"TF001+TF002+TF003+TFC01+TF008+TF004+TF005",0,1,ETS2-003.SDD
+EPSMA,"出口费用编号信息档","出口费用编号信息档",1,主档单头,N,"MA001",0,11,Eps2-003.sdd
+EPSMB,"商品包装信息单头","商品包装信息单头",1,主档单头,N,"MB001+MB002",0,11,Eps2-003.sdd
+EPSMC,"商品包装信息单身","商品包装信息单身",2,主档单身,N,"MC001+MC002+MC003",0,21,Eps2-003.sdd
+EPSMD,"客户唛头信息","客户唛头信息",1,主档单头,N,"MD001+MD002",0,13,Eps2-003.sdd
+EPSTA,"出货通知单头","出货通知单头",3,交易单头,N,"TA001+TA002",1,85,Eps2-003.sdd
+EPSTB,"出货通知单身","出货通知单身",4,交易单身,N,"TB001+TB002+TB003",1,49,Eps2-003.sdd
+EPSTC,"包装明细信息档","包装明细信息档",4,交易单身,N,"TC001+TC002+TC003",0,43,Eps2-003.sdd
+EPSTD,"货运通知单头","货运通知单头",3,交易单头,N,"TD001+TD002",1,26,Eps2-003.sdd
+EPSTE,"货运通知单身","货运通知单身",4,交易单身,N,"TE001+TE002+TE003",0,21,Eps2-003.sdd
+EPSTF,"信用证信息单头","信用证信息单头",3,交易单头,N,"TF001",1,33,Eps2-003.sdd
+EPSTG,"信用证信息单身","信用证信息单身",4,交易单身,N,"TG001+TG002",0,13,Eps2-003.sdd
+EPSTH,"出口费用信息单头档","出口费用信息单头档",3,交易单头,N,"TH001+TH002",1,30,Eps2-003.sdd
+EPSTI,"出口费用信息单身档","出口费用信息单身档",4,交易单身,N,"TI001+TI002+TI003",0,25,Eps2-003.sdd
+FACMA,"银行对账单引入格式单头档","银行对账单引入格式单头档",1,主档单头,N,"MA001+MA021",0,21,FAC2-003.SDD
+FACMB,"银行对账单引入格式单身档","银行对账单引入格式单身档",2,主档单身,N,"MB001+MB012+MB002+MB003",0,12,FAC2-003.SDD
+FACTA,"银行对账单单头档","银行对账单单头档",3,交易单头,Y,"TA001+TA002+TA003",0,12,FAC2-003.SDD
+FACTB,"银行对账单单身档","银行对账单单身档",4,交易单身,N,"TB001+TB002+TB003+TB004",0,19,FAC2-003.SDD
+FACTC,"银行存款日记账单头档","银行存款日记账单头档",6,月档/统计,Y,"TC001+TC002+TC003",0,14,FAC2-003.SDD
+FACTD,"银行存款日记账单身档","银行存款日记账单身档",5,交易记录,N,"TD001+TD002+TD003+TD004",0,25,FAC2-003.SDD
+FACTE,"银行存款余额调节单头档","银行存款余额调节单头档",3,交易单头,Y,"TE001+TE002+TE003",0,17,FAC2-003.SDD
+FACTF,"银行未达余额调节单身档","银行未达余额调节单身档",4,交易单身,N,"TF001+TF002+TF003+TF004",0,25,FAC2-003.SDD
+FACTG,"企业未达余额调节单身档","企业未达余额调节单身档",4,交易单身,N,"TG001+TG002+TG003+TG004",0,20,FAC2-003.SDD
+FCSMA,"合并报表参数设置档","合并报表参数设置档",1,主档单头,Y,"",0,9,FCS2-003.SDD
+FCSMB,"子公司信息档","子公司信息档",1,主档单头,Y,"MB001",0,12,FCS2-003.SDD
+FCSMC,"合并报表项目单头档","合并报表项目单头档",3,交易单头,Y,"MC001",0,8,FCS2-003.SDD
+FCSMD,"合并报表项目单身档","合并报表项目单身档",3,交易单头,Y,"MD001+MD002",0,12,FCS2-003.SDD
+FCSME,"合并报表项目子单身档","合并报表项目子单身档",3,交易单头,Y,"ME001+ME002+ME003",0,11,FCS2-003.SDD
+FCSMF,"抵销平衡式档","抵销平衡式档",1,主档单头,Y,"MF001",0,10,FCS2-003.SDD
+FCSTA,"合并报表结构单头档","合并报表结构单头档",3,交易单头,Y,"TA001",0,10,FCS2-003.SDD
+FCSTB,"合并报表结构单身档","合并报表结构单身档",4,交易单身,Y,"TB001+TB002",0,25,FCS2-003.SDD
+FCSTC,"公司报表项目数据单头档","公司报表项目数据单头档",3,交易单头,Y,"TC001+TC002+TC003+TC004",0,15,FCS2-003.SDD
+FCSTD,"公司报表项目数据单身档","公司报表项目数据单身档",3,交易单头,Y,"TD001+TD002+TD003+TD004+TD005",0,15,FCS2-003.SDD
+FCSTE,"个别报表项目数据单头档","个别报表项目数据单头档",3,交易单头,Y,"TE001+TE002+TE003+TE004",0,14,FCS2-003.SDD
+FCSTF,"个别报表项目数据单身档","个别报表项目数据单身档",3,交易单头,Y,"TF001+TF002+TF003+TF004+TF005",0,14,FCS2-003.SDD
+FCSTG,"抵销分录单头档","抵销分录单头档",3,交易单头,Y,"TG001+TG002+TG003",0,12,FCS2-003.SDD
+FCSTH,"抵销分录单身档","抵销分录单身档",3,交易单头,Y,"TH001+TH002+TH003+TH004",0,15,FCS2-003.SDD
+FCSTI,"工作底稿档","工作底稿档",3,交易单头,Y,"TI001+TI002+TI003+TI004",0,15,FCS2-003.SDD
+FTSMA,"传输对象信息档","传输对象信息档",1,主档单头,Y,"MA001",0,25,FTS2-003.sdd
+FTSMB,"文档传输设置档","文档传输设置档",1,主档单头,N,"MB001",0,11,FTS2-003.sdd
+FTSLA,"文档传输记录档","文档传输记录档",8,其它,N,"LA001+LA002",0,11,FTS2-003.sdd
+GFCMA,"","",1,主档单头,N,"MA001",0,10,GFC2-003.SDD
+GFCMB,"","",1,主档单头,N,"MB001",0,17,GFC2-003.SDD
+GFCMC,"","",1,主档单头,N,"MC001+MC002+MC006",0,13,GFC2-003.SDD
+GFCMD,"","",1,主档单头,N,"MD001+MD002+MD004+MD006",0,17,GFC2-003.SDD
+GFCME,"","",5,交易记录,N,"ME001",0,14,GFC2-003.SDD
+GFCMK,"","",1,主档单头,Y,"MK001+MK002+MK004+MK006+MK008+MK013+MK015+MK017",0,24,GFC2-003.SDD
+GFCTA,"集团会计凭证单头档","Group Account Voucher Headers",3,交易单头,N,"TA001+TA002+TA003+TA004",0,34,GFC2-003.SDD
+GFCTB,"集团会计凭证单身档","Group Account Voucher Lines",4,交易单身,N,"TB001+TB002+TB003+TB004",0,34,GFC2-003.SDD
+GFCTC,"集团抵销分录单头档","抵销分录单头档",3,交易单头,N,"TC001+TC002+TC003",0,15,GFC2-003.SDD
+GFCTD,"集团抵销分录单身档","抵销分录单身档",4,交易单身,N,"TD001+TD002+TD003+TD004",0,16,GFC2-003.SDD
+GFCTE,"","",1,主档单头,Y,"TE001+TE002+TE003+TE004",0,24,GFC2-003.SDD
+GFCTF,"","",2,主档单身,Y,"TF001+TF002+TF003+TF004",0,17,GFC2-003.SDD
+GFCTG,"","",3,交易单头,Y,"TG001+TG002+TG003+TG004+TG005",0,16,GFC2-003.SDD
+GFCTH,"","",1,主档单头,Y,"TH001+TH002+TH003+TH004",0,24,GFC2-003.SDD
+GFCTI,"","",2,主档单身,Y,"TI001+TI002+TI003+TI004",0,21,GFC2-003.SDD
+GFCTJ,"","",3,交易单头,Y,"TJ001+TJ002+TJ003+TJ004+TJ005",0,19,GFC2-003.SDD
+GFCTN,"","",1,主档单头,Y,"TN001+TN002+TN003+TN004",0,46,GFC2-003.SDD
+GFCTO,"","",2,主档单身,Y,"TO001+TO002+TO003+TO004",0,11,GFC2-003.SDD
+GFCTP,"","",1,主档单头,Y,"TP001+TP002+TP003+TP004",0,31,GFC2-003.SDD
+GFCTQ,"","",2,主档单身,Y,"TQ001+TQ002+TQ003+TQ004",0,21,GFC2-003.SDD
+GFCLA,"集团会计科目各期汇总档","Group Periodical Summaries of Account Code",6,月档/统计,N,"LA001+LA002+LA003+LA004+LA005+LA006+LA007+LA008+LA009+LA010+LA011+LA012+LA024",0,24,GFC2-003.SDD
+GFCLB,"","",6,月档/统计,Y,"LB001+LB002+LB003+LB004+LB005+LB006+LB007+LB008+LB009+LB010",0,27,GFC2-003.SDD
+GMPMA,"设置GMP参数信息档","设置GMP参数信息档",7,系统档,Y,"",0,75,GMP2-003.SDD
+GMPMB,"检验周期单头信息档","检验周期单头信息档",1,主档单头,Y,"MB001",0,13,GMP2-003.SDD
+GMPMC,"检验周期单身信息档","检验周期单身信息档",2,主档单身,Y,"MC001+MC002",0,11,GMP2-003.SDD
+GMPMD,"洁净室等级信息档","洁净室等级信息档",1,主档单头,Y,"MD001",0,11,GMP2-003.SDD
+GMPME,"录入洁净室信息档","录入洁净室信息档",1,主档单头,Y,"ME001",0,21,GMP2-003.SDD
+GMPMF,"工艺用水类别检验项目单头信息档","工艺用水类别检验项目单头",1,主档单头,Y,"MF001",0,15,GMP2-003.SDD
+GMPMG,"工艺用水类别检验项目单身信息档","工艺用水类别检验项目单身",2,主档单身,Y,"MG001+MG002",0,14,GMP2-003.SDD
+GMPTA,"洁净室检验单信息档","洁净室检验单信息档",3,交易单头,Y,"TA001+TA002+TA027",1,38,GMP2-003.SDD
+GMPTB,"工艺用水检验单单头信息档","工艺用水检验单单头信息档",3,交易单头,Y,"TB001+TB002+TB021",1,28,GMP2-003.SDD
+GMPTC,"工艺用水检验单单身信息档","工艺用水检验单单身信息档",4,交易单身,Y,"TC001+TC002+TC003+TC004",1,17,GMP2-003.SDD
+GMPTD,"清场记录单信息档","清场记录单信息档",3,交易单头,Y,"TD001+TD002",1,34,GMP2-003.SDD
+GMPTE,"准产证信息档","准产证信息档",3,交易单头,Y,"TE001+TE002+TE003+TE004",1,27,GMP2-003.SDD
+GMPTF,"批生产记录审核信息单头档","批生产记录审核信息单头档",3,交易单头,Y,"TF001+TF002",0,46,GMP2-003.SDD
+GMPTG,"批生产记录审核信息单身档","批生产记录审核信息单身档",4,交易单身,Y,"TG001+TG002+TG003",0,19,GMP2-003.SDD
+GMPTH,"留样单信息档","留样单信息档",3,交易单头,Y,"TH001+TH002",1,45,GMP2-003.SDD
+GMPTI,"留样检验单头信息档","留样检验单头信息档",3,交易单头,Y,"TI001+TI002+TI003",1,44,GMP2-003.SDD
+GMPTJ,"留样检验单身信息档","留样检验单身信息档",4,交易单身,N,"TJ001+TJ002+TJ003+TJ004",0,28,GMP2-003.SDD
+GMPTK,"留样检验单不良原因档","留样检验单不良原因档",4,交易单身,N,"TK001+TK002+TK003+TK004+TK005",0,13,GMP2-003.SDD
+GMPTL,"养护检验单头信息档","养护检验单头信息档",3,交易单头,Y,"TL001+TL002+TL003",1,46,GMP2-003.SDD
+GMPTM,"养护检验单身信息档","养护检验单身信息档",4,交易单身,N,"TM001+TM002+TM003+TM004",0,28,GMP2-003.SDD
+GMPTN,"养护检验单不良原因档","养护检验单不良原因档",4,交易单身,N,"TN001+TN002+TN003+TN004+TN005",0,13,GMP2-003.SDD
+GSPMA,"GSP系统参数档","GSP系统参数档",1,主档单头,Y,"",0,11,GSP2-003.SDD
+GSPMB,"药检所信息","药检所信息",1,主档单头,Y,"MB001",0,16,GSP2-003.SDD
+GSPMC,"仪器设备信息档","仪器设备信息档",1,主档单头,Y,"MC001",0,22,GSP2-003.SDD
+GSPMD,"审批材料单头档","审批材料单头档",1,主档单头,N,"MD001",0,9,GSP2-003.SDD
+GSPME,"审批材料单身档","审批材料单身档",2,主档单身,N,"ME001+ME002",0,9,GSP2-003.SDD
+GSPTA,"首营企业审批档","首营企业审批档",3,交易单头,N,"TA001",0,26,GSP2-003.SDD
+GSPTB,"首营品种审批档","首营品种审批档",1,主档单头,N,"TB001",0,25,GSP2-003.SDD
+GSPTC,"进货检验信息档","进货检验信息档",1,主档单头,N,"TC001+TC002",0,49,GSP2-003.SDD
+GSPTD,"抽送检单信息档","抽送检单信息档",1,主档单头,N,"TD001+TD002",0,30,GSP2-003.SDD
+GSPTE,"质量复检通知单信息档","质量复检通知单信息档",1,主档单头,N,"TE001+TE002",0,25,GSP2-003.SDD
+GSPTF,"药品停售通知单单头信息档","药品停售通知单单头信息档",3,交易单头,N,"TF001+TF002",0,24,GSP2-003.SDD
+GSPTG,"药品停售通知单单身信息档","药品停售通知单单身信息档",4,交易单身,N,"TG001+TG002+TG003",0,13,GSP2-003.SDD
+GSPTH,"客户限销商品单头信息档","客户限销商品单头信息档",3,交易单头,N,"TH001",0,18,GSP2-003.SDD
+GSPTI,"客户限销商品单身信息档","客户限销商品单身信息档",4,交易单身,N,"TI001+TI002",0,11,GSP2-003.SDD
+GSPTJ,"员工限销商品单头信息档","员工限销商品单头信息档",3,交易单头,N,"TJ001",0,18,GSP2-003.SDD
+GSPTK,"员工限销商品单身信息档","员工限销商品单身信息档",4,交易单身,N,"TK001+TK002",0,11,GSP2-003.SDD
+GSPTL,"药品养护记录单头档","药品养护记录单头档",3,交易单头,N,"TL001+TL002",0,18,GSP2-003.SDD
+GSPTM,"药品养护记录单身档","药品养护记录单身档",4,交易单身,N,"TM001+TM002+TM003",0,36,GSP2-003.SDD
+GSPTN,"仓库温湿度记录档","仓库温湿度记录档",3,交易单头,N,"TN001+TN002",0,29,GSP2-003.SDD
+GSPTO,"设备养护使用记录单头档","设备养护使用记录单头档",3,交易单头,N,"TO001+TO002+TO003",0,10,GSP2-003.SDD
+GSPTP,"设备养护使用记录单身档","设备养护使用记录单身档",4,交易单身,N,"TP001+TP002+TP003+TP004",0,19,GSP2-003.SDD
+GSPTQ,"报损药品销毁单单头档","报损药品销毁单单头档",3,交易单头,N,"TQ001+TQ002",0,20,GSP2-003.SDD
+GSPTR,"报损药品销毁单单身档","报损药品销毁单单身档",4,交易单身,N,"TR001+TR002+TR003",0,21,GSP2-003.SDD
+GSPTS,"商品质量查询反馈档","商品质量查询反馈档",1,主档单头,N,"TS001+TS002",0,30,GSP2-003.SDD
+GSPTT,"用户质量查询/投诉档","用户质量查询/投诉档",1,主档单头,N,"TT001+TT002",0,33,GSP2-003.SDD
+GSPTU,"仓库温湿度记录单身档","仓库温湿度记录单身档",4,交易单身,N,"TU001+TU002+TU003",0,21,GSP2-003.SDD
+HRSMB,"人力资源参数设定档","人力资源参数设定档",1,主档单头,N,"",0,12,HRS2-003.SDD
+HRSMC,"费用信息档","费用信息档",1,主档单头,N,"MC001",0,10,HRS2-003.SDD
+HRSMD,"部门人力预算单头档","部门人力预算单头档",1,主档单头,Y,"MD001+MD002+MD003",0,12,HRS2-003.SDD
+HRSME,"部门人力预算单身档","部门人力预算单身档",2,主档单身,Y,"ME001+ME002+ME003+ME004",0,16,HRS2-003.SDD
+HRSMF,"评价因素资料档","评价因素资料档",1,主档单头,Y,"MF001+MF004",0,12,HRS2-003.SDD
+HRSMG,"部门职务评价因素设定单头","部门职务评价因素设定单头",1,主档单头,Y,"MG001+MG002+MG003",0,11,HRS2-003.SDD
+HRSMH,"部门职务评价因素设定单身","部门职务评价因素设定单身",1,主档单头,Y,"MH001+MH002+MH003+MH004",0,14,HRS2-003.SDD
+HRSMI,"课程分类档","课程分类档",1,主档单头,Y,"MI001",0,9,HRS2-003.SDD
+HRSMJ,"课程信息单头档","课程信息单头档",1,主档单头,Y,"MJ001",0,12,HRS2-003.SDD
+HRSMK,"培训信息档","培训信息档",1,主档单头,Y,"MK001",0,9,HRS2-003.SDD
+HRSML,"场地分类资料档","场地分类资料档",1,主档单头,Y,"ML001",0,9,HRS2-003.SDD
+HRSMM,"场地信息档","场地信息档",1,主档单头,Y,"MM001",0,19,HRS2-003.SDD
+HRSMN,"讲师资料档","讲师资料档",1,主档单头,Y,"MN001",0,28,HRS2-003.SDD
+HRSMO,"年度培训计划单头档","年度培训计划单头档",1,主档单头,Y,"MO001+MO003+MO020",0,26,HRS2-003.SDD
+HRSMP,"年度培训计划单身档","年度培训计划单身档",2,主档单身,Y,"MP001+MP003+MP010+MP005",0,16,HRS2-003.SDD
+HRSMQ,"培训经费预算单头档","培训经费预算单头档",1,主档单头,Y,"MQ001+MQ002+MQ003",0,13,HRS2-003.SDD
+HRSMR,"培训经费预算单身档","培训经费预算单身档",1,主档单头,Y,"MR001+MR002+MR003+MR004",0,14,HRS2-003.SDD
+HRSMS,"课程信息单身档","课程信息单身档",1,主档单头,Y,"MS001+MS002",0,11,HRS2-003.SDD
+HRSMT,"教育培训编码原则资料档","教育培训编码原则资料档",1,主档单头,N,"MT001+MT002",0,11,HRS2-003.SDD
+HRSMV,"","",1,主档单头,Y,"MV001",0,9,HRS2-003.SDD
+HRSMX,"专案信息档","专案信息档",1,主档单头,Y,"MX001",0,9,HRS2-003.SDD
+HRSTA,"人才资料档","人才资料档",1,主档单头,Y,"TA032+TA001",1,54,HRS2-003.SDD
+HRSTB,"人员教育经历档","人员教育经历档",2,主档单身,Y,"TB012+TB001+TB002",0,23,HRS2-003.SDD
+HRSTC,"人员工作经验档","人员工作经验档",1,主档单头,Y,"TC012+TC001+TC002",0,24,HRS2-003.SDD
+HRSTD,"人员特长和技能档","人员特长和技能档",1,主档单头,Y,"TD004+TD001+TD002",0,10,HRS2-003.SDD
+HRSTE,"人员语言能力档","人员语言能力档",1,主档单头,Y,"TE005+TE001+TE002",0,16,HRS2-003.SDD
+HRSTF,"人员证书档","人员证书档",1,主档单头,Y,"TF008+TF001+TF002",0,14,HRS2-003.SDD
+HRSTG,"人力需求申请单单头资料档","人力需求申请单单头资料档",1,主档单头,Y,"TG001+TG002",0,16,HRS2-003.SDD
+HRSTH,"应试记录单头档","应试记录单头档",1,主档单头,Y,"TH001+TH002",1,29,HRS2-003.SDD
+HRSTI,"应试记录单身档","应试记录单身档",2,主档单身,Y,"TI001+TI002+TI003",0,17,HRS2-003.SDD
+HRSTJ,"录用人员资料维护档","录用人员资料维护档",1,主档单头,Y,"TJ001+TJ041",0,67,HRS2-003.SDD
+HRSTK,"培训申请资料单头档","培训申请资料单头档",1,主档单头,Y,"TK048+TK049",0,57,HRS2-003.SDD
+HRSTL,"培训申请资料单身档","培训申请资料单身档",2,主档单身,Y,"TL011+TL012+TL003",0,18,HRS2-003.SDD
+HRSTM,"培训申请子单头档","培训申请子单头档",2,主档单身,Y,"TM009+TM010+TM003",0,16,HRS2-003.SDD
+HRSTN,"培训结果单头档","培训结果单头档",1,主档单头,Y,"TN038+TN039",0,45,HRS2-003.SDD
+HRSTO,"培训结果单身档","培训结果单身档",2,主档单身,Y,"TO019+TO020+TO002",0,29,HRS2-003.SDD
+HRSTP,"培训结果费用分摊单头档","培训结果费用分摊单头档",2,主档单身,Y,"TP001",0,16,HRS2-003.SDD
+HRSTQ,"培训结果费用分摊单身档","培训结果费用分摊单身档",2,主档单身,Y,"TQ001+TQ002",0,14,HRS2-003.SDD
+HRSTR,"家庭成员基本资料档","家庭成员基本资料档",2,主档单身,Y,"TR001+TR002+TR003",0,15,HRS2-003.SDD
+HRSTU,"项目经验档","项目经验档",2,主档单身,Y,"TU001+TU002+TU003",0,14,HRS2-003.SDD
+HRSTV,"人力需求申请单单身资料档","人力需求申请单单身资料档",1,主档单头,Y,"TV001+TV002+TV003",0,33,HRS2-003.SDD
+HRSTW,"人力需求申请变更单单单头资料档","人力需求申请变更单单单头",1,主档单头,Y,"TW001+TW002+TW003",0,30,HRS2-003.SDD
+HRSTX,"人力需求申请单单身资料档","人力需求申请单单身资料档",1,主档单头,Y,"TX001+TX002+TX003+TX004",0,61,HRS2-003.SDD
+INVMA,"品号类别信息档","Inventory Categories",1,主档单头,Y,"MA001+MA002",0,19,INV2-003.SDD
+INVMB,"品号基本信息档","Items",1,主档单头,Y,"MB001",4,260,INV2-003.SDD
+INVMC,"品号仓库档","Items by Warehouse",2,主档单身,Y,"MC001+MC002",0,21,INV2-003.SDD
+INVMD,"品号换算单位档","Item Conversion Unit",2,主档单身,Y,"MD001+MD002",0,13,INV2-003.SDD
+INVME,"品号批号信息单头","Item by Lot Headers",1,主档单头,Y,"ME001+ME002",1,29,INV2-003.SDD
+INVMF,"品号批号信息单身","Item by Lot Lines",2,主档单身,Y,"MF001+MF002+MF003+MF004+MF005+MF006+MF007",0,20,INV2-003.SDD
+INVMG,"NetChange记录档","NetChanges",5,交易记录,Y,"MG001+MG002",0,11,INV2-003.SDD
+INVMH,"商品条码信息档","Item Barcodes",1,主档单头,N,"MH001+MH002",1,8,INV2-003.SDD
+INVMI,"品号属性资料单头档","Item Charactor Headers",1,主档单头,N,"MI001",0,17,INV2-003.SDD
+INVMP,"品号属性资料单身档","Item Character Lines",2,主档单身,N,"MP001+MP002",0,17,INV2-003.SDD
+INVMJ,"品号特征信息单头档","Item Feature Headers",1,主档单头,Y,"MJ001",0,9,INV2-003.SDD
+INVMK,"品号特征对应信息单身档","Item Feature Lines",2,主档单身,Y,"MK001+MK003",0,10,INV2-003.SDD
+INVML,"品号仓库库位档","Item by Warehouse Bins",2,主档单身,Y,"ML001+ML002+ML003+ML004",0,17,INV2-003.SDD
+INVMM,"品号限制存放位置档","Item Limits by Bin",2,主档单身,Y,"MM001+MM002+MM003",0,10,INV2-003.SDD
+INVMN,"品号供应商采购比率信息档","Item Quotas by Supplier",2,主档单身,N,"MN001+MN002",0,13,INV2-003.SDD
+INVTA,"交易单据单头档","Transaction Order Headers",3,交易单头,Y,"TA001+TA002",1,33,INV2-003.SDD
+INVTB,"交易单据单身档","Transaction Orders Lines",4,交易单身,Y,"TB001+TB002+TB003",0,37,INV2-003.SDD
+INVTC,"盘点底稿信息档单身","Cycle Count Manuscript Lines",2,主档单身,Y,"TC001+TC002",0,20,INV2-003.SDD
+INVTD,"盘点信息汇总档","Cycle Count Summaries",8,其它,Y,"TD001+TD003+TD004+TD005+TD017+TD024",0,24,INV2-003.SDD
+INVTE,"盘点底稿信息档单头","Cycle Count Manuscript Headers",1,主档单头,Y,"TE001",0,10,INV2-003.SDD
+INVTF,"借出入调拨单头档","Loan/Borrow Transfer Order Headers",3,交易单头,N,"TF001+TF002",1,37,INV2-003.SDD
+INVTG,"借出入调拨单身档","Loan/Borrow Transfer Order Lines",4,交易单身,N,"TG001+TG002+TG003",0,41,INV2-003.SDD
+INVTH,"借出入归还单头档","Loan/Borrow Return Headers",3,交易单头,N,"TH001+TH002",1,36,INV2-003.SDD
+INVTI,"借出入归还单身档","Borrow/Loan Return Lines",4,交易单身,N,"TI001+TI002+TI003",0,33,INV2-003.SDD
+INVTJ,"成本开账/调整单头档","Cost Opening/Adjustment Headers",3,交易单头,Y,"TJ001+TJ002",1,25,INV2-003.SDD
+INVTK,"成本开账/调整单身档","Cost Opening/Adjustment Lines",4,交易单身,Y,"TK001+TK002+TK003",0,32,INV2-003.SDD
+INVTL,"报废单单头档","Scrap Order Headers",3,交易单头,N,"TL001+TL002",0,33,INV2-003.SDD
+INVTM,"报废单单身档","Scrap Order Lines",4,交易单身,Y,"TM001+TM002+TM003",0,38,INV2-003.SDD
+INVTN,"销毁单单头档","Destroy Order Headers",3,交易单头,N,"TN001+TN002",0,26,INV2-003.SDD
+INVTO,"销毁单单身档","Destroy Order Lines",4,交易单身,Y,"TO001+TO002+TO003",0,32,INV2-003.SDD
+INVTP,"成本开账/调整单子单身档-成本要素","Cost Opening/Adjustment Lines",4,交易单身,Y,"TP001+TP002+TP003+TP004",0,12,INV2-003.SDD
+INVTQ,"品号变更单头档","Item Change Header",3,交易单头,Y,"TQ001+TQ004",0,30,INV2-003.SDD
+INVTR,"品号变更单身档","Item Change Lines",4,交易单身,Y,"TR001+TR002+TR003",0,27,INV2-003.SDD
+INVTS,"品号仓库变更档","Item Warehouse Change",4,交易单身,Y,"TS001+TS002+TS003",0,31,INV2-003.SDD
+INVTT,"品号换算单位变更档","Item Conversion Unit Change",4,交易单身,Y,"TT001+TT002+TT003",0,20,INV2-003.SDD
+INVLA,"交易明细信息档","Transaction Lines",5,交易记录,Y,"LA007+LA006+LA008+LA005",1,28,INV2-003.SDD
+INVLB,"品号每月统计单头","Item Monthly Summary Headers",6,月档/统计,Y,"LB001+LB002",0,21,INV2-003.SDD
+INVLC,"品号每月统计单身","Item Monthly Summary Lines",6,月档/统计,Y,"LC001+LC002+LC003",0,46,INV2-003.SDD
+INVLD,"品号项目管理档","Items by Project",5,交易记录,Y,"LD001+LD002+LD003+LD004+LD005+LD006+LD007",1,20,INV2-003.SDD
+INVLE,"品号每月统计子单身","Item Monthly Summary Sub Lines",6,月档/统计,Y,"LE001+LE002+LE003+LE004+LE005",0,48,INV2-003.SDD
+INVLF,"入库单结存信息档","Receipt Balance",6,月档/统计,Y,"LF001+LF002+LF005",1,29,INV2-003.SDD
+INVLG,"出库核销明细档","Issue Close List",6,月档/统计,Y,"LG001+LG002+LG003+LG009",1,25,INV2-003.SDD
+INVLH,"库存交易成本要素明细档","Inventory transaction  Cost Element Details",5,交易记录,Y,"LH002+LH003+LH004+LH005+LH007",2,15,INV2-003.SDD
+INVLI,"库存交易成本要素结转档(已结存年月的历史档)","Inventory transaction  Cost Element Carry Forward",6,月档/统计,Y,"LI002+LI003+LI004+LI005+LI007",2,15,INV2-003.SDD
+INVLJ,"品号每月统计要素明细档","Item Statistics Element Details Monthly",6,月档/统计,Y,"LJ001+LJ002+LJ003",0,11,INV2-003.SDD
+INVLM,"成本要素出库核销明细档","Issue Close List",6,月档/统计,Y,"LM002+LM003+LM004+LM008+LM010+LM011+LM012",1,19,INV2-003.SDD
+INVLN,"品号批号每月统计档","Item Lot Monthly Summary",6,月档/统计,Y,"LN001+LN002+LN003",0,22,INV2-003.SDD
+INVLP,"品号批号每月统计要素明细档","Item Lot Monthly Summary  Details",6,月档/统计,Y,"LP001+LP002+LP003+LP004",0,12,INV2-003.SDD
+INVMQ,"基本单位信息档","Basic Unit",1,主档单头,Y,"MQ001",0,2,INV2-003.SDD
+IPSMA,"费用编号信息档","费用编号信息档",1,主档单头,Y,"MA001",0,12,IPS2-003.SDD
+IPSTA,"预付购料信息单头","预付购料信息单头",3,交易单头,Y,"TA001+TA002",1,51,IPS2-003.SDD
+IPSTB,"预付购料信息单身","预付购料信息单身",4,交易单身,Y,"TB001+TB002+TB003",0,15,IPS2-003.SDD
+IPSTC,"预付购料信息变更单头","预付购料信息变更单头",3,交易单头,N,"TC001+TC002+TC003",1,55,IPS2-003.SDD
+IPSTD,"预付购料信息变更单身","预付购料信息变更单身",4,交易单身,N,"TD001+TD002+TD003+TD004",0,11,IPS2-003.SDD
+IPSTE,"S/I 信息单头档","S/I 信息单头档",3,交易单头,Y,"TE001",1,11,IPS2-003.SDD
+IPSTF,"S/I 信息单身档","S/I 信息单身档",4,交易单身,Y,"TF001+TF002+TF003+TF004",0,21,IPS2-003.SDD
+IPSTG,"报关/赎单信息单头档","报关/赎单信息单头档",3,交易单头,N,"TG001+TG002",1,55,IPS2-003.SDD
+IPSTH,"报关/赎单费用信息档","报关/赎单费用信息档",3,交易单头,N,"TH001+TH002+TH003",0,22,IPS2-003.SDD
+IPSTI,"报关/赎单信息单身档","报关/赎单信息单身档",4,交易单身,N,"TI001+TI002+TI003",1,39,IPS2-003.SDD
+ACRIA,"收款单子单身档","Sales Invoices Headers",4,交易单身,Y,"IA001+IA002+IA003+IA004+IA005+IA006",1,18,ISS2-003.SDD
+ACRIB,"应收账款分期异动明细档","A/R Transaction DeIAils",5,交易记录,N,"IB002+IB003+IB009+IB010+IB022+IB023+IB024",2,32,ISS2-003.SDD
+ACRIC,"核销分期记录档","Write-off Records",5,交易记录,N,"IC001+IC002+IC003+IC004+IC005+IC021+IC022+IC023",3,29,ISS2-003.SDD
+ACRID,"","",4,交易单身,Y,"ID001+ID002+ID003+ID006+ID015+ID016",1,16,ISS2-003.SDD
+ACRIE,"调汇单子单身档","Sales Invoices Headers",4,交易单身,Y,"IE001+IE002+IE003+IE005+IE006+IE007+IE008+IE009",1,18,ISS2-003.SDD
+COPIA,"","",3,交易单头,Y,"IA001+IA002",2,35,ISS2-003.SDD
+COPIB,"","",4,交易单身,Y,"IB001+IB002+IB003",0,41,ISS2-003.SDD
+COPAA,"","",3,交易单头,N,"AA001+AA002",1,6,ISS2-003.SDD
+COPAB,"","",4,交易单身,N,"AB001+AB002+AB003",1,3,ISS2-003.SDD
+COPAC,"","",3,交易单头,N,"AC001+AC002+AC003",1,12,ISS2-003.SDD
+COPAD,"","",4,交易单身,N,"AD001+AD002+AD003+AD004",0,6,ISS2-003.SDD
+COPIC,"","",3,交易单头,Y,"IC001+IC002+IC003",2,54,ISS2-003.SDD
+COPID,"","",4,交易单身,Y,"ID001+ID002+ID003+ID014",0,68,ISS2-003.SDD
+COPTC,"客户订单单头信息档","SO Headers",3,交易单头,Y,"TC001+TC002",2,4,ISS2-003.SDD
+COPTD,"客户订单单身信息档","SO Lines",4,交易单身,Y,"TD001+TD002+TD003",1,3,ISS2-003.SDD
+COPTE,"订单变更单头信息档","SO Change Headers",3,交易单头,Y,"TE001+TE002+TE003",1,8,ISS2-003.SDD
+COPTF,"订单变更单身信息档","SO Change Lines",4,交易单身,Y,"TF001+TF002+TF003+TF004",0,6,ISS2-003.SDD
+CMSMQ,"各系统单据设置档","Document Types",1,主档单头,N,"MQ001",0,2,ISS2-003.SDD
+CMSMA,"共用参数设置档","Common Parameters",1,主档单头,Y,"",0,1,ISS2-003.SDD
+CMSIA,"","",1,主档单头,Y,"IA001",0,10,ISS2-003.SDD
+CMSIB,"","",2,主档单身,Y,"IB001+IB002",0,19,ISS2-003.SDD
+ACRTA,"销售发票单头档","Sales Invoices Headers",3,交易单头,Y,"TA001+TA002",4,3,ISS2-003.SDD
+ACRTL,"收款实时核销单身档","Collection Write-off Instant Lines",4,交易单身,Y,"TL001+TL002+TL003",2,1,ISS2-003.SDD
+ACRTK,"收款单单头档","Collection Order Headers",3,交易单头,N,"TK001+TK002",3,1,ISS2-003.SDD
+ACRTN,"坏账处理单据档","Disposition of Bad Debts Orders",3,交易单头,N,"TN001+TN002",1,3,ISS2-003.SDD
+ITMTA,"维护函数信息单头档","FUNCTION_INFO",3,交易单头,Y,"TA001",1,19,ITM2-003.SDD
+ITMTB,"维护函数信息参数档","FUNCTION_INFO Parameters",4,交易单身,Y,"TB001+TB002",1,18,ITM2-003.SDD
+ITMTC,"维护函数信息返回值档","FUNCTION_INFO Return",3,交易单头,Y,"TC001+TC002",1,13,ITM2-003.SDD
+ITMTD,"维护议题指标树单头档","ISSUE_TREE",3,交易单头,Y,"TD001",1,17,ITM2-003.SDD
+ITMTE,"维护议题指标树指标明细档","SO Change Headers",3,交易单头,Y,"TE001+TE002",1,31,ITM2-003.SDD
+ITMTF,"维护议题指标树指标参数档","ISSUE_TREE_SD2",4,交易单身,Y,"TF001+TF002+TF003+TF004",1,14,ITM2-003.SDD
+ITMTG,"维护议题指标树指标子明细","ISSUE_TREE_SD",3,交易单头,Y,"TG001+TG002+TG003+TG004",1,14,ITM2-003.SDD
+ITMTH,"维护议题指标树参考值设置","REFERENCE_SET",4,交易单身,Y,"TH001+TH002+TH003",1,12,ITM2-003.SDD
+ITMTI,"议题指标树信息相关作业","ISSUE_TREE_INTERRELATED",3,交易单头,Y,"TI001+TI002+TI003",1,13,ITM2-003.SDD
+ITMTJ,"公版能力信息档","PUBLIC_VERSION_ABILITY",3,交易单头,Y,"TJ001+TJ002",1,11,ITM2-003.SDD
+ITMTK,"公版指标明细档","PUBLIC_VERSION_TARGET",4,交易单身,Y,"TK001",0,21,ITM2-003.SDD
+ITMTL,"周起始日设置档","ISSUE_WEEKSET",3,交易单头,Y,"",0,11,ITM2-003.SDD
+ITMLA,"指标值信息档","TARGET_VALUE",8,其它,Y,"LA001+LA002+LA003",0,11,ITM2-003.SDD
+IWCMA,"公司编号信息","No. information companies",7,系统档,N,"MA001",0,12,IWC2-003.SDD
+IWCTRANSQUEUE,"IWC传输队列信息档","IWC Trans Queue",7,系统档,,"GUID",0,13,IWC2-003.SDD
+KBSMA,"看板系统参数档","看板系统参数档",7,系统档,N,"",0,17,KBS2-003.SDD
+KBSMB,"看板类别设定档","看板类别设定档",1,主档单头,N,"MB001",0,10,KBS2-003.SDD
+KBSMC,"交货时段信息档","交货时段信息档",1,主档单头,,"MC001",0,9,KBS2-003.SDD
+KBSMD,"交货周期日单头档","交货周期日单头档",1,主档单头,,"MD001",0,10,KBS2-003.SDD
+KBSME,"交货周期日单身档","交货周期日单身档",2,主档单身,,"ME001+ME002",0,8,KBS2-003.SDD
+KBSMF,"看板计算公式设定档","看板计算公式设定档",1,主档单头,N,"MF001",0,9,KBS2-003.SDD
+KBSMG,"看板计算公式参数档","看板计算公式参数档",2,主档单身,N,"MG001+MG003",0,15,KBS2-003.SDD
+KBSMH,"生产看板维护单头档","生产看板维护单头档",1,主档单头,,"MH001",0,10,KBS2-003.SDD
+KBSMI,"生产看板维护单身档","生产看板维护单身档",2,主档单身,,"MI001+MI002",0,25,KBS2-003.SDD
+KBSMJ,"采购看板维护单头档","采购看板维护单头档",1,主档单头,,"MJ001",0,10,KBS2-003.SDD
+KBSMK,"采购看板维护单身档","采购看板维护单身档",2,主档单身,,"MK001+MK002",0,27,KBS2-003.SDD
+KBSML,"看板序号维护单头档","看板序号维护单头档",1,主档单头,,"ML001+ML004",0,12,KBS2-003.SDD
+KBSMM,"看板序号维护单身档","看板序号维护单身档",2,主档单身,,"MM001+MM002+MM003",0,25,KBS2-003.SDD
+KBSTA,"刷读产生采购单单头档","刷读产生采购单单头档",3,交易单头,,"TA001+TA002",0,14,KBS2-003.SDD
+KBSTB,"刷读产生采购单单身档","刷读产生采购单单身档",4,交易单身,,"TB001+TB002+TB003",0,25,KBS2-003.SDD
+KBSTC,"","",3,交易单头,,"TC001+TC002",0,15,KBS2-003.SDD
+KBSTD,"刷读产生工单单身档","刷读产生工单单身档",2,主档单身,,"TD001+TD002+TD003",0,25,KBS2-003.SDD
+KBSTE,"刷读产生生产入库单单头档","刷读产生生产入库单单头档",3,交易单头,,"TE001+TE002",0,16,KBS2-003.SDD
+KBSTF,"刷读产生生产入库单单身档","刷读产生生产入库单单身档",4,交易单身,,"TF001+TF002+TF003",0,28,KBS2-003.SDD
+KBSTG,"进货单子单身档","进货单子单身档",4,交易单身,,"TG001+TG002+TG003+TG004",0,12,KBS2-003.SDD
+KBSTH,"刷读产生调拨单单头档","刷读产生调拨单单头档",3,交易单头,,"TH001+TH002",0,15,KBS2-003.SDD
+KBSTI,"刷读产生调拨单单身档","刷读产生调拨单单身档",4,交易单身,,"TI001+TI002+TI003",0,29,KBS2-003.SDD
+KBSTJ,"刷读产生销货单单头档","刷读产生销货单单头档",3,交易单头,,"TJ001+TJ002",0,24,KBS2-003.SDD
+KBSTK,"刷读产生销货单单身档","刷读产生销货单单身档",4,交易单身,,"TK001+TK002+TK003",0,30,KBS2-003.SDD
+KBSTL,"刷读冻结/反冻结看板单头档","刷读冻结/反冻结看板单头",3,交易单头,,"TL001+TL002",0,10,KBS2-003.SDD
+KBSTM,"刷读冻结/反冻结看板单身档","刷读冻结/反冻结看板单身",4,交易单身,,"TM001+TM002+TM003",0,17,KBS2-003.SDD
+LRPMA,"批次计划设置档","Batch Plan Settings",7,系统档,N,"",0,15,LRP2-003.sdd
+LRPMB,"计划颜色设置档","Plan Display Color Settings",1,主档单头,N,"MB001+MB003",0,12,LRP2-003.sdd
+LRPTA,"生产计划档","Production Plan",4,交易单身,N,"TA001+TA026+TA050+TA002+TA003+TA004+TA028",1,64,LRP2-003.sdd
+LRPTB,"相关需求档","Related Requirements",4,交易单身,N,"TB001+TB012+TB029+TB002+TB003+TB004+TB013+TB005+TB006+TB014",1,32,LRP2-003.sdd
+LRPTC,"采购计划档","Purchase Plan Tab.",4,交易单身,N,"TC001+TC024+TC046+TC002+TC003+TC025",1,51,LRP2-003.sdd
+LRPTE,"生产计划每日产量档","Plan Daily Production Quantity",4,交易单身,N,"TE001+TE005+TE009+TE002+TE003+TE004+TE006+TE007",1,17,LRP2-003.sdd
+LRPLA,"计划来源纪录单头档","Plan Source Headers",5,交易记录,N,"LA001+LA005+LA012",0,17,LRP2-003.sdd
+LRPLB,"计划来源纪录单身档","Plan Source Lines",5,交易记录,N,"LB001+LB009+LB002+LB003+LB004+LB017",0,17,LRP2-003.sdd
+LRPLC,"计划工作号记录单头档","Plan Maintenance No.",5,交易记录,N,"LC001",0,21,LRP2-003.sdd
+MESMA,"","",7,系统档,N,"MA001",0,13,MES2-003.SDD
+Fin_arap_fact,"应收应付每月统计表","Fin_arap_fact",6,月档/统计,Y,"Comp_id+yyyymm+cus_id+Dept_id+Sales_id",0,24,MNS2-003.SDD
+Fin_zl_fact,"未收金额帐龄统计表","Fin_zl_fact",6,月档/统计,Y,"Comp_id+Curr_Date",0,6,MNS2-003.SDD
+Fin_bs_fact,"资产负债统计表","Fin_bs_fact",6,月档/统计,Y,"Comp_id+YYYYMM",0,25,MNS2-003.SDD
+Fin_is_fact,"损益统计表","Fin_is_fact",6,月档/统计,Y,"Comp_id+YYYYMM",0,23,MNS2-003.SDD
+Fin_cfs_fact,"现金流量每月统计表","Fin_cfs_fact",6,月档/统计,Y,"Comp_id+YYYYMM",0,7,MNS2-003.SDD
+Man_fund_fact,"资金日报统计表","Man_fund_fact",6,月档/统计,Y,"Comp_id+Date+Act_id",0,9,MNS2-003.SDD
+Fin_exp_fact,"费用每月统计表","Fin_exp_fact",6,月档/统计,Y,"Comp_id+YYYYMM+Dept_id",0,10,MNS2-003.SDD
+MNSMA,"系统参数设置","MNSMA",7,系统档,Y,"",0,7,MNS2-003.SDD
+MNSMB,"帐套资料档","MNSMB",7,系统档,Y,"MB001",0,3,MNS2-003.SDD
+MNSMC,"指标设置档","MNSMC",7,系统档,Y,"MC001+MC003",0,9,MNS2-003.SDD
+MNSTA,"销售日统计档","MNSTA",6,月档/统计,Y,"TA001+TA003+TA006+TA009+TA011+TA013+TA027",0,57,MNS2-003.SDD
+MNSTB,"订单销货明细表","MNSTB",6,月档/统计,Y,"TB001+TB005+TB003+TB004+TB010+TB018+TB020",0,30,MNS2-003.SDD
+MNSTC,"产品销售月统计表","MNSTC",6,月档/统计,Y,"TC001+TC003+TC006",0,68,MNS2-003.SDD
+MNSTD,"客户销售月统计表","MNSTD",6,月档/统计,Y,"TD001+TD003+TD006",0,53,MNS2-003.SDD
+MNSTE,"业务员销售月统计表","MNSTE",6,月档/统计,Y,"TE001+TE003+TE008",0,49,MNS2-003.SDD
+MNSTF,"产品消长等级统计表","MNSTF",6,月档/统计,Y,"TF001+TF003+TF006",0,24,MNS2-003.SDD
+MNSTG,"客户消长等级统计表","MNSTG",6,月档/统计,Y,"TG001+TG003+TG006",0,27,MNS2-003.SDD
+MNSTH,"采购统计表","MNSTH",6,月档/统计,Y,"TH001+TH003+TH006+TH009",0,31,MNS2-003.SDD
+MNSTI,"库存统计表","MNSTI",6,月档/统计,Y,"TI001+TI003+TI006+TI008",0,21,MNS2-003.SDD
+MNSTJ,"生产统计表","MNSTJ",6,月档/统计,Y,"TJ001+TJ003+TJ006+TJ008",0,12,MNS2-003.SDD
+MOCTA,"工单单头档","MO Headers",3,交易单头,N,"TA001+TA002",3,87,MOC2-003.SDD
+MOCTB,"工单单身档","MO Lines",4,交易单身,Y,"TB001+TB002+TB003+TB006",1,44,MOC2-003.SDD
+MOCTC,"领/退料单头档","Material Issue/Return Headers",3,交易单头,Y,"TC001+TC002",1,33,MOC2-003.SDD
+MOCTD,"领/退料工单信息档","Material Issue/Return MO",3,交易单头,Y,"TD001+TD002+TD003+TD004",1,27,MOC2-003.SDD
+MOCTE,"领/退料单身档","Material Issue/Return Lines",4,交易单身,Y,"TE001+TE002+TE003",2,38,MOC2-003.SDD
+MOCTF,"生产入库单头档","MO Receipt Headers",3,交易单头,Y,"TF001+TF002",1,35,MOC2-003.SDD
+MOCTG,"生产入库单身档","MO Receipt Lines",4,交易单身,Y,"TG001+TG002+TG003",1,47,MOC2-003.SDD
+MOCTH,"委外进货单头档","Subcontract Receipt Headers",3,交易单头,Y,"TH001+TH002",2,49,MOC2-003.SDD
+MOCTI,"委外进货单身档","Subcontract Receipt Lines",4,交易单身,Y,"TI001+TI002+TI003",3,77,MOC2-003.SDD
+MOCTJ,"委外验退件退回信息档","Subcontract Inpsection Returns",3,交易单头,Y,"TJ002+TJ003+TJ004+TJ005",0,14,MOC2-003.SDD
+MOCTK,"委外退货单头档","Subcontract Return Headers",3,交易单头,Y,"TK001+TK002",1,44,MOC2-003.SDD
+MOCTL,"委外退货单身档","Subcontract Return Lines",3,交易单头,Y,"TL001+TL002+TL003",1,50,MOC2-003.SDD
+MOCMA,"委外计价档","Prices by Subcontractor",1,主档单头,Y,"MA001+MA002+MA003+MA004+MA010+MA012",0,22,MOC2-003.SDD
+MOCMC,"委外计价单身档","Prices by Subcontractor",1,主档单头,Y,"MC001+MC002+MC003+MC004+MC010+MC012+MC005",0,15,MOC2-003.SDD
+MOCTM,"委外核价单头","Subcontract Price Approval Headers",3,交易单头,Y,"TM001+TM002",2,19,MOC2-003.SDD
+MOCTN,"委外核价单身","Subcontract Price Approval Lines",4,交易单身,Y,"TN001+TN002+TN003",0,24,MOC2-003.SDD
+MOCTO,"工单变更单头档","MO Change Headers",3,交易单头,N,"TO001+TO002+TO003",0,163,MOC2-003.SDD
+MOCTP,"工单变更单身档","MO Change Lines",4,交易单身,N,"TP001+TP002+TP003+TP004+TP007+TP104+TP107",0,69,MOC2-003.SDD
+MOCTQ,"工单联产品成本计算参数档","Cost Distribution Percent Of Work Order Co/By-Product",3,交易单头,N,"TQ001+TQ002+TQ004",0,12,MOC2-003.SDD
+MOCMB,"工单系统参数档","MO Parameters",7,系统档,Y,"",0,12,MOC2-003.SDD
+MOCTR,"挪料单单头档","Material Shift Headers",3,交易单头,N,"TR001+TR002",1,21,MOC2-003.SDD
+MOCTS,"挪料单单身档","Material Shift Lines",4,交易单身,N,"TS001+TS002+TS003",0,27,MOC2-003.SDD
+MOCTT,"挪料工单信息档","Material Shift MO",3,交易单头,N,"TT001+TT002+TT003+TT004",1,15,MOC2-003.SDD
+MOCTU,"工单拆分单头档","MO Splitting Headers",3,交易单头,N,"TU001+TU002",1,86,MOC2-003.SDD
+MOCTV,"工单拆分单身档","MO Splitting Lines",4,交易单身,N,"TV001+TV002+TV008",0,77,MOC2-003.SDD
+MOCCC,"委外到货单单头档","Subcontract Arrival Headers",3,交易单头,Y,"CC001+CC002",3,23,MOC2-003.SDD
+MOCCD,"委外到货单单身档","Subcontract Arrival Lines",4,交易单身,Y,"CD001+CD002+CD003",1,36,MOC2-003.SDD
+MOCTW,"入库转领料单单头档","Receipt Shift To Issue Headers",3,交易单头,N,"TW001+TW002",1,26,MOC2-003.SDD
+MOCTX,"入库转领料单单身档","Receipt Shift To Issue Lines",4,交易单身,N,"TX001+TX002+TX003",0,43,MOC2-003.SDD
+MOCTY,"工单每日产量档","MO Daily Production Quantity",4,交易单身,N,"TY001+TY002+TY003",0,23,MOC2-003.SDD
+MOCTZ,"工单变更单每日产量档","MO Change Daily Production Quantity",4,交易单身,N,"TZ001+TZ002+TZ003+TZ004+TZ104",0,45,MOC2-003.SDD
+MOCUA,"工单拆分子单身档","MO Splitting Sub Lines",4,交易单身,N,"UA001+UA002+UA003+UA004",0,24,MOC2-003.SDD
+MOCUB,"领料通知单单头档","Material Issue/Return Headers",3,交易单头,Y,"UB001+UB002",1,26,MOC2-003.SDD
+MOCUC,"领料通知单单身档","Material Issue/Return Lines",4,交易单身,Y,"UC001+UC002+UC003",2,31,MOC2-003.SDD
+CMSME,"部门信息档","Departments Table",1,主档单头,Y,"ME001",0,1,MODI2-003.SDD
+CMSMV,"员工基本信息档","Staffs",1,主档单头,N,"MV001",2,1,MODI2-003.SDD
+MPSMA,"MPS参数设置档","MPS参数设置档",1,主档单头,N,"",0,14,MPS2-003.SDD
+MPSMB,"","",3,交易单头,N,"MB001",0,13,MPS2-003.SDD
+MPSMC,"","",4,交易单身,N,"MC001+MC002",1,15,MPS2-003.SDD
+MPSTA,"排程来源档","排程来源档",3,交易单头,N,"TA001+TA003+TA018+TA004+TA005",0,26,MPS2-003.SDD
+MPSTB,"排程计划档","排程计划档",4,交易单身,N,"TB001+TB003+TB051+TB004+TB005+TB037",1,59,MPS2-003.SDD
+MPSTC,"每日排程信息档","每日排程信息档",4,交易单身,N,"TC001+TC002+TC009+TC003+TC004+TC005+TC006",1,15,MPS2-003.SDD
+MPSTD,"每日资源产能档","每日资源产能档",5,交易记录,N,"TD001+TD002",0,14,MPS2-003.SDD
+MPSTE,"工单每日产量信息档","工单每日产量信息档",4,交易单身,N,"TE001+TE002+TE003",0,12,MPS2-003.SDD
+MPSTF,"资源耗用明细档","资源耗用明细档",4,交易单身,N,"TF001+TF002+TF003+TF004+TF011+TF005+TF006+TF007",1,17,MPS2-003.SDD
+MRPMA,"MRP参数设置档","MRP Parameters",1,主档单头,N,"",0,13,MRP2-003.SDD
+MRPMB,"间距设置单头档","Interval Setting Headers",1,主档单头,N,"MB001",0,9,MRP2-003.SDD
+MRPMC,"间距设置单身档","Interval Setting Lines",2,主档单身,N,"MC001+MC002",0,11,MRP2-003.SDD
+MRPMD,"MRP计划条件设置档","MRP Conditions",5,交易记录,N,"MD001",0,22,MRP2-003.SDD
+MRPTA,"MRP供需汇总单头档","MRP Supply And Requirement Summary Headers",4,交易单身,N,"TA001+TA002",1,20,MRP2-003.SDD
+MRPTB,"MRP供需汇总单身档","MRP Supply And Requirement Summary Lines",4,交易单身,N,"TB001+TB002+TB003//20160704 MODI BY 600900 FOR B32-160704002 ADD:TB001+TB002+TB003",1,43,MRP2-003.SDD
+MRPTC,"MRP供需明细档","MRP Supply And Requirement Details",4,交易单身,N,"",2,20,MRP2-003.SDD
+MRPLA,"MRP间距档","MRP Intervals",5,交易记录,N,"LA001+LA002+LA010",0,10,MRP2-003.SDD
+MRPME,"间距编号单身档","Interval No. Lines",2,主档单身,N,"ME001+ME002",0,9,MRP2-003.SDD
+COPDA,"装配清单单头档","Product Configuration Headers",3,交易单头,N,"DA001+DA002",0,21,MTS2-003.SDD
+COPDB,"装配清单单身档","Product Configuration Lines",4,交易单身,N,"DB001+DB002+DB003",0,19,MTS2-003.SDD
+MOCTA,"工单单头档","Product Configuration Lines",3,交易单头,N,"TA001+TA002",0,6,MTS2-003.SDD
+CMSMQ,"各系统单据设置档","Document Types",1,主档单头,N,"MQ001",0,6,MTS2-003.SDD
+BOMMG,"标准作业程序档","Standard System Procedures",2,主档单身,N,"MG001+MG002+MG003+MG005+MG006",0,11,MTS2-003.SDD
+SFCDA,"工单工艺子单身信息档","MO Operations",4,交易单身,N,"DA001+DA002+DA003+DA004+DA005",0,22,MTS2-003.SDD
+SFCTC,"转移单单身档","Transfer Orders Lines",4,交易单身,Y,"TC001+TC002+TC003",2,2,MTS2-003.SDD
+SFCDB,"转移单子单身信息档","MO Operations",4,交易单身,N,"DB001+DB002+DB003+DB004",0,28,MTS2-003.SDD
+SFCDC,"报工单子单身信息档","MO Operations",4,交易单身,N,"DC001+DC002+DC003+DC004",0,28,MTS2-003.SDD
+COPTD,"客户订单单身信息档","SO Lines",4,交易单身,Y,"TD001+TD002+TD003",1,5,MTS2-003.SDD
+COPDC,"","",4,交易单身,Y,"DC001+DC002+DC003+DC004",0,15,MTS2-003.SDD
+COPDD,"","",3,交易单头,Y,"DD001+DD002",0,13,MTS2-003.SDD
+COPDE,"","",4,交易单身,Y,"DE001+DE002+DE003",0,19,MTS2-003.SDD
+COPDF,"","",5,交易记录,Y,"DF001+DF002",0,35,MTS2-003.SDD
+COPDG,"","",3,交易单头,Y,"DG001+DG002",0,34,MTS2-003.SDD
+COPDH,"","",4,交易单身,Y,"DH001+DH002+DH003",0,10,MTS2-003.SDD
+COPDI,"","",4,交易单身,Y,"DI001+DI002+DI003",0,7,MTS2-003.SDD
+COPTH,"销货单单身档","Sales Delivery Lines",4,交易单身,Y,"TH001+TH002+TH003",2,1,MTS2-003.SDD
+BOMME,"产品工艺路线单头档","Item Routing Headers",1,主档单头,N,"ME001+ME002",0,1,MTS2-003.SDD
+BOMMF,"产品工艺路线单身档","Item Routing Lines",2,主档单身,N,"MF001+MF002+MF003+MF006",0,2,MTS2-003.SDD
+CMSMW,"工艺档","Operations",1,主档单头,N,"MW001",0,1,MTS2-003.SDD
+MOCTB,"工单单身档","MO Lines",4,交易单身,Y,"TB001+TB002+TB003+TB006",1,1,MTS2-003.SDD
+MOCTO,"工单变更单头档","MO Change Headers",3,交易单头,N,"TO001+TO002+TO003",0,2,MTS2-003.SDD
+MOCTP,"工单变更单身档","MO Change Lines",4,交易单身,N,"TP001+TP002+TP003+TP004+TP007+TP104+TP107",0,2,MTS2-003.SDD
+SFCTA,"工单工艺信息档","MO Operations",3,交易单头,N,"TA001+TA002+TA003+TA006",1,1,MTS2-003.SDD
+LRPTA,"生产计划档","Production Plan",4,交易单身,N,"TA001+TA026+TA002+TA003+TA004+TA028",1,1,MTS2-003.SDD
+SFCMA,"工艺参数设置档","Operation Parameters",7,系统档,N,"",0,2,MTS2-003.SDD
+SFCDD,"","",3,交易单头,N,"DD001+DD002",0,31,MTS2-003.SDD
+PURTC,"采购单单头信息档","PO Headers",3,交易单头,Y,"TC001+TC002",1,1,MTS2-003.SDD
+INVMB,"品号基本信息档","Items",1,主档单头,Y,"MB001",4,1,MTS2-003.SDD
+MTPMA,"多角贸易流程编号单头信息档","多角贸易流程编号单头信息",1,主档单头,N,"MA001",0,14,Mtp2-003.sdd
+MTPMB,"多角贸易流程编号单身信息档","多角贸易流程编号单身信息",2,主档单身,N,"MB001+MB002",0,17,Mtp2-003.sdd
+MTPMC,"多角贸易对照结构单头信息档","多角贸易对照结构单头信息",1,主档单头,N,"MC001+MC002+MC003+MC004+MC005+MC006",0,12,Mtp2-003.sdd
+MTPMD,"多角贸易对照结构单身信息档","多角贸易对照结构单身信息",2,主档单身,N,"MD001+MD002+MD003+MD004+MD005+MD006+MD007+MD008",0,25,Mtp2-003.sdd
+MTPTA,"多角贸易计价及调拨单价单头信息档","多角贸易计价及调拨单价单",3,交易单头,N,"TA001+TA002",0,10,Mtp2-003.sdd
+MTPTB,"多角贸易计价及调拨单价单身信息档","多角贸易计价及调拨单价单",4,交易单身,N,"TB001+TB002+TB003",0,12,Mtp2-003.sdd
+MTPTC,"多角贸易计价及调拨单价子单身信息档","多角贸易计价及调拨单价子",4,交易单身,N,"TC001+TC002+TC003+TC004",0,11,Mtp2-003.sdd
+MTPTD,"多角贸易采购单价维护信息档","多角贸易采购单价维护信息",4,交易单身,N,"TD001+TD002+TD003+TD004",0,13,Mtp2-003.sdd
+MTPTE,"多角贸易抛转纪录档","多角贸易抛转纪录档",5,交易记录,N,"TE001+TE002+TE003+TE004",0,16,Mtp2-003.sdd
+NOTMA,"银行账号信息单头档","银行账号信息单头档",1,主档单头,Y,"MA001",0,24,NOT2-003.SDD
+NOTMB,"银行账号信息单身档","银行账号信息单身档",2,主档单身,Y,"MB001+MB002",0,12,NOT2-003.SDD
+NOTMC,"融资种类档","融资种类档",2,主档单身,N,"MC001",0,9,NOT2-003.SDD
+NOTMD,"票据科目设置档","票据科目设置档",1,主档单头,Y,"",0,82,NOT2-003.SDD
+NOTME,"信贷银行融资额度单头档","信贷银行融资额度单头档",1,主档单头,N,"ME001+ME002",0,14,NOT2-003.SDD
+NOTMF,"信贷银行融资额度单身档","信贷银行融资额度单身档",1,主档单头,N,"MF001+MF002+MF003",0,10,NOT2-003.SDD
+NOTTA,"应付票据单头档","应付票据单头档",3,交易单头,Y,"TA001",2,27,NOT2-003.SDD
+NOTTB,"应付票据单身档","应付票据单身档",4,交易单身,Y,"TB001+TB002",1,15,NOT2-003.SDD
+NOTTC,"应收票据单头档","应收票据单头档",3,交易单头,Y,"TC001",2,34,NOT2-003.SDD
+NOTTD,"应收票据单身档","应收票据单身档",4,交易单身,Y,"TD001+TD002",1,15,NOT2-003.SDD
+NOTTE,"预计收支档","预计收支档",3,交易单头,Y,"TE001",1,15,NOT2-003.SDD
+NOTTF,"银行存款提款单头档","银行存款提款单头档",3,交易单头,Y,"TF001+TF002",1,28,NOT2-003.SDD
+NOTTG,"银行存款提款单身档","银行存款提款单身档",4,交易单身,Y,"TG001+TG002+TG003",0,25,NOT2-003.SDD
+NOTTH,"票据融资单头档","票据融资单头档",3,交易单头,Y,"TH001",1,28,NOT2-003.SDD
+NOTTI,"票据融资单身档","票据融资单身档",4,交易单身,N,"TI001+TI003+TI002",0,9,NOT2-003.SDD
+NOTTJ,"抵押借款单头档","抵押借款单头档",3,交易单头,Y,"TJ001",1,26,NOT2-003.SDD
+NOTTK,"借/还款单头档","借/还款单头档",3,交易单头,Y,"TK001+TK002",1,19,NOT2-003.SDD
+NOTTL,"借/还款单身档","借/还款单身档",4,交易单身,Y,"TL001+TL002+TL003",1,22,NOT2-003.SDD
+NOTTM,"融/撤票单头档","融/撤票单头档",3,交易单头,Y,"TM001+TM002",1,18,NOT2-003.SDD
+NOTTN,"融/撤票单身档","融/撤票单身档",4,交易单身,Y,"TN001+TN002+TN003",0,13,NOT2-003.SDD
+NOTTO,"抵押借款单身档","抵押借款单身档",4,交易单身,Y,"TO001+TO002",0,15,NOT2-003.SDD
+NOTLA,"银行月统计档   //银行存款日记账单头档","银行月统计档",6,月档/统计,Y,"LA001+LA002+LA003",0,12,NOT2-003.SDD
+NOTLB,"银行存款调整汇率档","银行存款调整汇率档",5,交易记录,N,"LB001+LB002+LB003",0,14,NOT2-003.SDD
+NOTMG,"银行对账单引入格式单头档","银行对账单引入格式单头档",1,主档单头,N,"MG001",0,20,NOT2-003.SDD
+NOTMH,"银行对账单引入格式单身档","银行对账单引入格式单身档",2,主档单身,N,"MH001+MH002+MH003",0,11,NOT2-003.SDD
+NOTTP,"银行对账单单头档","银行对账单单头档",3,交易单头,Y,"TP001+TP002+TP003",0,12,NOT2-003.SDD
+NOTTQ,"银行对账单单身档","银行对账单单身档",4,交易单身,N,"TQ001+TQ002+TQ003+TQ004",0,19,NOT2-003.SDD
+NOTTR,"银行存款日记账单头档","银行存款日记账单头档",6,月档/统计,Y,"TR001+TR002+TR003",0,14,NOT2-003.SDD
+NOTTS,"银行存款日记账单身档","银行存款日记账单身档",5,交易记录,N,"TS001+TS002+TS003+TS004",0,25,NOT2-003.SDD
+NOTTT,"银行存款余额调节单头档","银行存款余额调节单头档",3,交易单头,Y,"TT001+TT002+TT003",0,17,NOT2-003.SDD
+NOTTV,"银行未达余额调节单身档","银行未达余额调节单身档",4,交易单身,N,"TV001+TV002+TV003+TV004",0,25,NOT2-003.SDD
+NOTTW,"企业未达余额调节单身档","企业未达余额调节单身档",4,交易单身,N,"TW001+TW002+TW003+TW004",0,20,NOT2-003.SDD
+OMSMA,"费用参数设置档","OMS Parameters",1,主档单头,Y,"",0,9,OMS2-003.SDD
+OMSMB,"费用项目信息档","Outlay Item Codes",1,主档单头,Y,"MB001",0,17,OMS2-003.SDD
+OMSMC,"费用预算项目单头档","Outlay Budget Item Headers",1,主档单头,Y,"MC001",0,19,OMS2-003.SDD
+OMSMD,"费用预算项目单身档","Outlay Budget Item Lines",2,主档单身,Y,"MD001+MD002",0,8,OMS2-003.SDD
+OMSME,"自定义费用单据参数字段单头档","User-defined Reimbursement Type Field Headers",1,主档单头,Y,"ME001",0,9,OMS2-003.SDD
+OMSMF,"自定义费用单据参数字段单身档","User-defined Reimbursement Type Field Lines",1,主档单头,Y,"MF001+MF002",0,18,OMS2-003.SDD
+OMSMG,"费用预算方案单头档","Outlay Budget Plan Headers",1,主档单头,Y,"MG001",0,12,OMS2-003.SDD
+OMSMH,"费用预算方案单身档","Outlay Budget Plan Lines",2,主档单身,Y,"MH001+MH002+MH003+MH004+MH005+MH006+MH007",0,17,OMS2-003.SDD
+OMSMI,"员工借款信用设置单头档","Borrowing Credit Control Headers",1,主档单头,Y,"MI002",0,8,OMS2-003.SDD
+OMSMJ,"员工借款信用设置单身档","Borrowing Credit Control Lines",2,主档单身,Y,"MJ002+MJ004+MJ005",0,13,OMS2-003.SDD
+OMSTA,"费用预算单头档","Outlay Budget Headers",1,主档单头,Y,"TA001+TA002",0,23,OMS2-003.SDD
+OMSTB,"费用预算单身档","Outlay Budget Lines",2,主档单身,Y,"TB001+TB002+TB003",0,16,OMS2-003.SDD
+OMSTC,"费用预算分期明细档","Outlay Budget Line Details",3,交易单头,Y,"TC001+TC002+TC003+TC004",0,15,OMS2-003.SDD
+OMSTD,"费用预算调整单头档","Outlay Budget Adjustment Headers",1,主档单头,Y,"TD001+TD002",0,22,OMS2-003.SDD
+OMSTE,"费用预算调整单身档","Outlay Budget Adjustment Lines",2,主档单身,Y,"TE001+TE002+TE003",0,20,OMS2-003.SDD
+OMSTF,"费用预算调整分期明细档","Outlay Budget Adjustment Line Details",3,交易单头,Y,"TF001+TF002+TF003+TF004",0,18,OMS2-003.SDD
+OMSTG,"费用申请单据档","Application Outlay",1,主档单头,Y,"TG001+TG002",0,37,OMS2-003.SDD
+OMSTH,"费用借款单据档","Borrowing Outlay",1,主档单头,Y,"TH001+TH002",0,46,OMS2-003.SDD
+OMSTI,"费用还款单据档","Refund Outlay",1,主档单头,Y,"TI001+TI002",0,38,OMS2-003.SDD
+OMSTJ,"费用报销单单头档","Reimbursement Outlay Headers",1,主档单头,Y,"TJ001+TJ002",0,45,OMS2-003.SDD
+OMSTK,"费用报销单单身档","Reimbursement Outlay Lines",2,主档单身,Y,"TK001+TK002+TK003",0,10,OMS2-003.SDD
+OMSTL,"费用调整单头档","Adjustment Outlay Headers",1,主档单头,Y,"TL001+TL002",0,29,OMS2-003.SDD
+OMSTM,"费用调整单身档","Adjustment Outlay Lines",2,主档单身,Y,"TM001+TM002+TM003",0,20,OMS2-003.SDD
+OMSTN,"其他费用申请单单头档","Application Outlay",1,主档单头,Y,"TN001+TN002",0,36,OMS2-003.SDD
+OMSTO,"其他费用申请单单身档","Other Payables Lines",4,交易单身,Y,"TO001+TO002+TO003",1,20,OMS2-003.SDD
+OMSTP,"其他费用单头档","Other Payables Headers",3,交易单头,Y,"TP001+TP002",2,45,OMS2-003.SDD
+OMSTQ,"其他费用单单身档","Other Payables Lines",4,交易单身,Y,"TQ001+TQ002+TQ003",1,24,OMS2-003.SDD
+OMSLA,"费用预算数汇总档","Budget Amounts Summary",6,月档/统计,Y,"LA001+LA002+LA003+LA004+LA005+LA006+LA007+LA008+LA009",0,23,OMS2-003.SDD
+OMSLB,"费用项目数汇总档","Budget Item Summary",6,月档/统计,Y,"LB001+LB002+LB003+LB004+LB005+LB006+LB007+LB008+LB009+LB010",0,18,OMS2-003.SDD
+OMSTR,"费用申请单单身档","Application Outlay Lines",2,主档单身,Y,"TR001+TR002+TR003",0,10,OMS2-003.SDD
+PALMA,"基本条件设置档","基本条件设置档",1,主档单头,N,"",0,34,PAL2-003.SDD
+PALMB,"津贴扣款条件设置档","津贴扣款条件设置档",1,主档单头,N,"MB001",0,24,PAL2-003.SDD
+PALMC,"请假扣款条件设置档","请假扣款条件设置档",1,主档单头,N,"MC001",0,16,PAL2-003.SDD
+PALMD,"加班条件设置档","加班条件设置档",1,主档单头,N,"",0,20,PAL2-003.SDD
+PALME,"全勤奖金条件设置","全勤奖金条件设置",1,主档单头,N,"",0,29,PAL2-003.SDD
+PALMF,"员工加扣款设置档","员工加扣款设置档",2,主档单身,N,"MF001+MF002",0,9,PAL2-003.SDD
+PALMG,"所得税条件设置档","所得税条件设置档",1,主档单头,N,"",0,71,PAL2-003.SDD
+PALMH,"职等信息档","职等信息档",1,主档单头,N,"MH001",0,10,PAL2-003.SDD
+PALMI,"学历编号档","学历编号档",1,主档单头,N,"MI001",0,9,PAL2-003.SDD
+PALMJ,"特休天数设置档","特休天数设置档",1,主档单头,N,"MJ001",0,19,PAL2-003.SDD
+PALMK,"班别信息档","班别信息档",1,主档单头,N,"MK001",0,62,PAL2-003.SDD
+PALML,"劳健保补助等级档","劳健保补助等级档",1,主档单头,N,"ML001",0,11,PAL2-003.SDD
+PALMM,"投保身分保费设置档","投保身分保费设置档",1,主档单头,N,"MM001",0,15,PAL2-003.SDD
+PALMN,"劳保投保等级设置档","劳保投保等级设置档",1,主档单头,N,"",0,48,PAL2-003.SDD
+PALMO,"健保投保等级设置档","健保投保等级设置档",1,主档单头,N,"",0,50,PAL2-003.SDD
+PALMP,"金融转存信息档","金融转存信息档",1,主档单头,N,"MP001",0,13,PAL2-003.SDD
+PALMQ,"薪资会计科目设置单头档","薪资会计科目设置单头档",1,主档单头,N,"MQ001+MQ002",0,16,PAL2-003.SDD
+PALMR,"薪资会计科目设置单身档","薪资会计科目设置单身档",2,主档单身,N,"MR001+MR002+MR003",0,10,PAL2-003.SDD
+PALMS,"扣缴税额设置单头档","扣缴税额设置单头档",1,主档单头,N,"MS001",0,11,PAL2-003.SDD
+PALMT,"扣缴税额设置单身档","扣缴税额设置单身档",2,主档单身,N,"MT001+MT002",0,20,PAL2-003.SDD
+PALMU,"事务所信息档","事务所信息档",1,主档单头,Y,"MU001",0,16,PAL2-003.SDD
+PALMW,"税率表设置单头档","税率表设置单头档",1,主档单头,N,"MW001",0,9,PAL2-003.SDD
+PALMX,"税率表设置单身档","税率表设置单身档",2,主档单身,N,"MX001+MX002",1,11,PAL2-003.SDD
+PALNA,"社会褔利金身份类型单头档","社会褔利金身份类型单头档",1,主档单头,N,"NA001",0,9,PAL2-003.SDD
+PALNB,"社会褔利金身份类型单身档","社会褔利金身份类型单身档",2,主档单身,N,"NB001+NB002",0,14,PAL2-003.SDD
+PALNC,"社会褔利金基数设置档","社会褔利金基数设置档",1,主档单头,N,"NC001",0,13,PAL2-003.SDD
+PALND,"员工褔利金基数档","员工褔利金基数档",2,主档单身,N,"ND001+ND002",0,11,PAL2-003.SDD
+PALNE,"员工学历档","员工学历档",2,主档单身,Y,"NE001+NE002",0,22,PAL2-003.SDD
+PALNF,"员工经历档","员工经历档",2,主档单身,Y,"NF001+NF002",0,23,PAL2-003.SDD
+PALNG,"员工专长档","员工专长档",2,主档单身,Y,"NG001+NG002",0,9,PAL2-003.SDD
+PALNH,"员工语言能力档","员工语言能力档",2,主档单身,Y,"NH001+NH002",0,15,PAL2-003.SDD
+PALNI,"员工证书档","员工证书档",2,主档单身,Y,"NI001+NI002",0,13,PAL2-003.SDD
+PALNJ,"纳税公司信息档","纳税公司信息档",1,主档单头,Y,"NJ001",0,15,PAL2-003.SDD
+PALNK,"","",2,主档单身,Y,"NK001+NK002",0,14,PAL2-003.SDD
+PALNL,"","",2,主档单身,Y,"NL001+NL002",0,13,PAL2-003.SDD
+PALNM,"产品计件单价单头档","产品计件单价单头档",1,主档单头,N,"NM001",0,11,PAL2-003.SDD
+PALNN,"产品计件单价单身档","产品计件单价单身档",2,主档单身,N,"NN001+NN002",0,13,PAL2-003.SDD
+PALNO,"班组成员信息单头档","班组成员信息单头档",1,主档单头,N,"NO001",0,9,PAL2-003.SDD
+PALNP,"班组成员信息单身档","班组成员信息单身档",2,主档单身,N,"NP001+NP002",0,10,PAL2-003.SDD
+PALTA,"员工年资增减档","员工年资增减档",1,主档单头,N,"TA001+TA002",0,10,PAL2-003.SDD
+PALTB,"员工每日出勤信息档","员工每日出勤信息档",1,主档单头,N,"TB001+TB002",0,22,PAL2-003.SDD
+PALTC,"员工班别出勤月档","员工班别出勤月档",2,主档单身,N,"TC001+TC002+TC003",0,11,PAL2-003.SDD
+PALTD,"员工薪资异动档","员工薪资异动档",1,主档单头,N,"TD001+TD002+TD003",0,17,PAL2-003.SDD
+PALTE,"员工人事异动档","员工人事异动档",1,主档单头,N,"TE001+TE002+TE003",0,19,PAL2-003.SDD
+PALTF,"请假单信息档","请假单信息档",1,主档单头,N,"TF001+TF002+TF003",0,23,PAL2-003.SDD
+PALTG,"员工加班单档","员工加班单档",1,主档单头,N,"TG001+TG002+TG010",0,25,PAL2-003.SDD
+PALTH,"员工津贴扣款单身档","员工津贴扣款单身档",2,主档单身,N,"TH001+TH002+TH003",0,13,PAL2-003.SDD
+PALTI,"员工发薪记录单头档","员工发薪记录单头档",1,主档单头,N,"TI001+TI002+TI003",1,67,PAL2-003.SDD
+PALTJ,"员工发薪记录单身档","员工发薪记录单身档",2,主档单身,N,"TJ001+TJ002+TJ008+TJ003",0,15,PAL2-003.SDD
+PALTK,"员工请假记录单头档","员工请假记录单头档",1,主档单头,N,"TK001+TK002",0,12,PAL2-003.SDD
+PALTL,"员工请假记录单身档","员工请假记录单身档",2,主档单身,N,"TL001+TL002+TL003+TL004",0,14,PAL2-003.SDD
+PALTM,"劳健保月投保信息单头档","劳健保月投保信息单头档",1,主档单头,N,"TM001+TM002",0,28,PAL2-003.SDD
+PALTN,"劳健保月投保信息单身档","劳健保月投保信息单身档",1,主档单头,N,"TN001+TN002+TN003",0,17,PAL2-003.SDD
+PALTO,"员工劳保异动档","员工劳保异动档",1,主档单头,N,"TO001+TO002",0,11,PAL2-003.SDD
+PALTP,"员工健保异动档","员工健保异动档",1,主档单头,N,"TP001+TP002",0,12,PAL2-003.SDD
+PALTQ,"员工眷保异动档","员工眷保异动档",1,主档单头,N,"TQ001+TQ002+TQ003",0,17,PAL2-003.SDD
+PALTR,"独立发放信息档","独立发放信息档",1,主档单头,N,"TR001+TR002+TR005",0,20,PAL2-003.SDD
+PALTS,"扣缴媒体信息档","扣缴媒体信息档",1,主档单头,N,"TS001+TS002+TS003+TS004+TS007+TS008",0,44,PAL2-003.SDD
+PALTU,"员工津贴扣款单头档","员工津贴扣款单头档",1,主档单头,N,"TU001+TU002",0,9,PAL2-003.SDD
+PALTT,"员工基数异动单头档","员工基数异动单头档",1,主档单头,N,"TT001+TT002",0,12,PAL2-003.SDD
+PALTV,"员工基数异动单身档","员工基数异动单身档",2,主档单身,N,"TV001+TV002+TV003",0,13,PAL2-003.SDD
+PALTW,"计件数量单头档","计件数量单头档",3,交易单头,N,"TW001+TW002+TW003",0,18,PAL2-003.SDD
+PALTX,"计件数量班组成员档","计件数量班组成员档",3,交易单头,N,"TX001+TX002+TX003+TX004",0,13,PAL2-003.SDD
+PALTY,"计件数量单身档","计件数量单身档",4,交易单身,N,"TY001+TY002+TY003+TY004",0,20,PAL2-003.SDD
+PALTZ,"扣缴媒体暂保存","扣缴媒体暂保存",8,其它,N,"",1,39,PAL2-003.SDD
+PALLA,"社会褔利金月缴费单头档","社会褔利金月缴费单头档",1,主档单头,N,"LA001+LA002",0,9,PAL2-003.SDD
+PALLB,"社会褔利金月缴费单身档","社会褔利金月缴费单身档",2,主档单身,N,"LB001+LB002+LB003",1,14,PAL2-003.SDD
+PALLC,"计件工资月档","计件工资月档",6,月档/统计,N,"LC001+LC002+LC003",0,16,PAL2-003.SDD
+PALLD,"计件工资日档","计件工资日档",6,月档/统计,N,"LD001+LD002+LD003+LD004",0,13,PAL2-003.SDD
+TAXMA,"申报公司资料档","申报公司资料档",1,主档单头,N,"MA001",0,23,PAL2-003.SDD
+JHXA,"","",1,主档单头,Y,"JHXA005+ID",0,21,PDA2-003.sdd
+XHXA,"","",1,主档单头,Y,"XHXA005+ID",0,25,PDA2-003.sdd
+LLXA,"","",1,主档单头,Y,"LLXA007+ID",0,26,PDA2-003.sdd
+PDXA,"","",1,主档单头,Y,"PDXA002+ID",0,18,PDA2-003.sdd
+SCXA,"","",1,主档单头,Y,"SCXA005+ID",0,20,PDA2-003.sdd
+WWXA,"","",1,主档单头,Y,"WWXA005+ID",0,20,PDA2-003.sdd
+TBXA,"","",1,主档单头,Y,"TBXA004+ID",0,22,PDA2-003.sdd
+YBXA,"","",1,主档单头,Y,"YBXA006+ID",0,19,PDA2-003.sdd
+XHJH,"","",1,主档单头,Y,"XHJH008+ID",0,10,PDA2-003.sdd
+LLJH,"","",1,主档单头,Y,"LLJH008+ID",0,10,PDA2-003.sdd
+ZXXA,"","",1,主档单头,Y,"ZXXA004+ID",0,16,PDA2-003.sdd
+TLXA,"","",1,主档单头,Y,"TLXA005+ID",0,23,PDA2-003.sdd
+THXA,"","",1,主档单头,Y,"THXA005+ID",0,25,PDA2-003.sdd
+XTXA,"","",1,主档单头,Y,"XTXA005+ID",0,25,PDA2-003.sdd
+WTXA,"","",1,主档单头,Y,"WTXA005+ID",0,25,PDA2-003.sdd
+JCXA,"","",1,主档单头,Y,"JCXA005+ID",0,27,PDA2-003.sdd
+GHXA,"","",1,主档单头,Y,"GHXA005+ID",0,27,PDA2-003.sdd
+ZYXA,"","",1,主档单头,Y,"ZYXA004+ID",0,44,PDA2-003.sdd
+RQXA,"","",1,主档单头,Y,"RQXA004+ID",0,25,PDA2-003.sdd
+PSMTA,"","",5,交易记录,Y,"TA001+TA002+TA003+TA004",2,13,PSM2-003.SDD
+PSMMA,"","",1,主档单头,Y,"MA001",3,33,PSM2-003.SDD
+PSMMB,"","",5,交易记录,Y,"MB001+MB002+MB003+MB004",2,14,PSM2-003.SDD
+PSMMC,"","",5,交易记录,Y,"MC001+MC002+MC003+MC004",2,12,PSM2-003.SDD
+PSMMD,"","",5,交易记录,Y,"MD001+MD002+MD003+MD004+MD005",2,11,PSM2-003.SDD
+PSMME,"","",5,交易记录,Y,"ME001+ME002+ME003+ME004+ME005",2,15,PSM2-003.SDD
+PSMMF,"不良原因信息档","Item by Supplier Headers",1,主档单头,N,"MF001",0,9,PSM2-003.SDD
+PSMMG,"工站信息档","Item by Supplier Headers",1,主档单头,N,"MG001",0,11,PSM2-003.SDD
+PSMMH,"工站人员信息档","Item by Supplier Headers",2,主档单身,N,"MH001+MH002",0,9,PSM2-003.SDD
+PSMMI,"","",1,主档单头,N,"MI001+MI002",0,9,PSM2-003.SDD
+PSMMJ,"","",2,主档单身,N,"MJ001+MJ002+MJ003",1,14,PSM2-003.SDD
+PSMMK,"","",2,主档单身,N,"MK001+MK002+MK003+MK004",1,13,PSM2-003.SDD
+PSMTB,"","",1,主档单头,N,"TB001",0,28,PSM2-003.SDD
+PSMTC,"","",2,主档单身,N,"TC001+TC002",0,22,PSM2-003.SDD
+PSMTD,"","",2,主档单身,N,"TD001+TD002",0,10,PSM2-003.SDD
+PSMTE,"","",2,主档单身,N,"TE001+TE002",0,9,PSM2-003.SDD
+PSMTF,"","",2,主档单身,N,"TF001+TF002+TF003",0,19,PSM2-003.SDD
+PSMTG,"","",3,交易单头,N,"TG001+TG002",1,17,PSM2-003.SDD
+PSMTH,"","",4,交易单身,Y,"TH001+TH002+TH003",0,20,PSM2-003.SDD
+PSMTI,"","",1,主档单头,N,"TI001+TI002",0,25,PSM2-003.SDD
+PSMTJ,"","",2,主档单身,N,"TJ001+TJ002+TJ003",0,22,PSM2-003.SDD
+PURMA,"供应商基本信息档","Suppliers",1,主档单头,Y,"MA001",2,79,PUR2-003.SDD
+PURMB,"品号供应商单头档","Item by Supplier Headers",1,主档单头,Y,"MB001+MB002+MB003+MB004+MB014",0,21,PUR2-003.SDD
+PURMC,"品号供应商单身档","Item by Supplier Lines",2,主档单身,Y,"MC001+MC002+MC003+MC004+MC008+MC005",0,14,PUR2-003.SDD
+PURMD,"供应商品号特殊检验方式档","Supplier Item Special Inspection Methods",2,主档单身,N,"MD001+MD002+MD006",0,12,PUR2-003.SDD
+PURTA,"请购单单头信息档","Purchase Request Headers",3,交易单头,Y,"TA001+TA002",1,25,PUR2-003.SDD
+PURTB,"请购单单身信息档","Purchase Request Lines",4,交易单身,Y,"TB001+TB002+TB003",2,61,PUR2-003.SDD
+PURTC,"采购单单头信息档","PO Headers",3,交易单头,Y,"TC001+TC002",1,48,PUR2-003.SDD
+PURTD,"采购单单身信息档","PO Lines",4,交易单身,Y,"TD001+TD002+TD003",2,57,PUR2-003.SDD
+PURTE,"采购变更单头信息档","PO Change Headers",3,交易单头,Y,"TE001+TE002+TE003",1,65,PUR2-003.SDD
+PURTF,"采购变更单身信息档","PO Change Lines",4,交易单身,N,"TF001+TF002+TF003+TF004",0,79,PUR2-003.SDD
+PURTG,"进货单单头档","Purchase Receipt Headers",3,交易单头,Y,"TG001+TG002",3,59,PUR2-003.SDD
+PURTH,"进货单单身档","Purchase Receipt Lines",4,交易单身,Y,"TH001+TH002+TH003",3,89,PUR2-003.SDD
+PURTI,"退货单单头档","Purchase Return Headers",3,交易单头,Y,"TI001+TI002",2,46,PUR2-003.SDD
+PURTJ,"退货单单身档","Purchase Return Lines",4,交易单身,Y,"TJ001+TJ002+TJ003",1,58,PUR2-003.SDD
+PURTK,"验退件退回信息档","Inspection Rejected Item Return Data",3,交易单头,Y,"TK002+TK003+TK004+TK005",0,17,PUR2-003.SDD
+PURTL,"核价单单头档","Price Approval Order Headers",3,交易单头,Y,"TL001+TL002",2,23,PUR2-003.SDD
+PURTM,"核价单单身档","Price Approval Order Lines",4,交易单身,Y,"TM001+TM002+TM003",0,24,PUR2-003.SDD
+PURTN,"核价单单身明细档","Price Approval Order Line Details",4,交易单身,Y,"TN001+TN002+TN003+TN007",0,12,PUR2-003.SDD
+PURTO,"询价单单头档","Inquiry Headers",3,交易单头,Y,"TO001+TO002",2,19,PUR2-003.SDD
+PURTP,"询价单单身档","Inquiry Lines",4,交易单身,Y,"TP001+TP002+TP003",0,23,PUR2-003.SDD
+PURTQ,"询价单单身明细档","Inquiry Line Details",4,交易单身,Y,"TQ001+TQ002+TQ003+TQ004",0,12,PUR2-003.SDD
+PURTR,"请购单子单身信息档","Purchase Request Sub-lines",4,交易单身,Y,"TR001+TR002+TR003+TR004",0,34,PUR2-003.SDD
+PURTS,"供应商信息变更单头档","Supplier Change Headers",3,交易单头,Y,"TS001+TS004",0,30,PUR2-003.SDD
+PURTT,"供应商信息变更单身档","Supplier Change Lines",4,交易单身,Y,"TT001+TT002+TT003",0,27,PUR2-003.SDD
+PURLB,"品号供应商每月统计维护档","Monthly Summaries by Item/Supplier",6,月档/统计,Y,"LB001+LB002+LB003",0,21,PUR2-003.SDD
+PURLC,"供应商每月统计维护档","Monthly Summaries by Supplier",6,月档/统计,Y,"LC001+LC002",0,21,PUR2-003.SDD
+PURME,"供应商交货时段档","Supplier Delivery Periods",2,主档单身,Y,"ME001+ME002",0,8,PUR2-003.SDD
+PURCA,"供应商品号赠备品率单头档","Item by Supplier Headers",1,主档单头,Y,"CA001+CA002+CA004",0,17,PUR2-003.SDD
+PURCB,"供应商品号赠备品率单身档","Item by Supplier Lines",2,主档单身,Y,"CB001+CB002+CB003+CB004",0,13,PUR2-003.SDD
+PURCC,"到货单单头档","Purchase Arrival Headers",3,交易单头,Y,"CC001+CC002",3,27,PUR2-003.SDD
+PURCD,"到货单单身档","Purchase Arrival Lines",4,交易单身,Y,"CD001+CD002+CD003",1,43,PUR2-003.SDD
+QMSMA,"品管控制参数设置档","Quality Control Parameters",1,主档单头,N,"",0,29,QMS2-003.SDD
+QMSMB,"抽查基础单头信息档","Sampling Basis Headers",1,主档单头,N,"MB001+MB002",0,9,QMS2-003.SDD
+QMSMC,"抽查基础单身信息档","Sampling Basis Lines",2,主档单身,N,"MC001+MC002+MC003+MC004",0,38,QMS2-003.SDD
+QMSMD,"品管类别信息档","Inspection Categories",1,主档单头,N,"MD001",0,13,QMS2-003.SDD
+QMSME,"检验项目信息档","Inspection Items",1,主档单头,N,"ME001",0,17,QMS2-003.SDD
+QMSMF,"品号检验项目单头档","Item Inspection Item Headers",1,主档单头,N,"MF001+MF002+MF008",0,16,QMS2-003.SDD
+QMSMG,"品号检验项目单身档","Item Inspection Item Lines",2,主档单身,N,"MG001+MG002+MG008+MG003",0,23,QMS2-003.SDD
+QMSMH,"不良原因编号档","Defective Reasons",1,主档单头,N,"MH001",0,9,QMS2-003.SDD
+QMSMI,"文字/数值型品号检验项目信息档","Literal/Numerical Inspection Items For Item",4,交易单身,N,"MI001+MI002+MI003+MI004+MI005",0,16,QMS2-003.SDD
+QMSMK,"计量抽查基础单头信息档","Computation Sampling Basis Headers",1,主档单头,N,"MK001",0,8,QMS2-003.SDD
+QMSML,"计量抽查基础单身信息档","Computation Sampling Basis Lines",2,主档单身,N,"ML001+ML002+ML003",0,11,QMS2-003.SDD
+QMSTA,"进货检验单单头档","Purchase Receipt Inspection Headers",3,交易单头,N,"TA001+TA002+TA003+TAC04+TA026      //20101021 MODI BY 38130 FOR Z30-10090200001 ADD:TAC04",1,49,QMS2-003.SDD
+QMSTB,"进货检验单单身档","Purchase Receipt Inspection Headers",4,交易单身,N,"TB001+TB002+TB003+TBC01+TB014+TB004 //20101021 MODI BY 38130 FOR Z30-10090200001 ADD:TBC01",0,30,QMS2-003.SDD
+QMSTC,"进货检验单不良原因档","Purchase Receipt Defective Reasons",4,交易单身,N,"TC001+TC002+TC003+TCC01+TC008+TC004+TC005 //20101021 MODI BY 38130 FOR Z30-10090200001 ADD:TCC01",0,15,QMS2-003.SDD
+QMSTD,"委外进货检验单单头档","Subcontract Receipt Inspection Headers",3,交易单头,N,"TD001+TD002+TD003+TDC01+TD026  //20101021 MODI BY 38130 FOR Z30-10090200001 ADD:TDC01",1,48,QMS2-003.SDD
+QMSTE,"委外进货检验单单身档","Subcontract Receipt Inspection Headers",4,交易单身,N,"TE001+TE002+TE003+TEC01+TE014+TE004 //20101021 MODI BY 38130 FOR Z30-10090200001 ADD:TEC01",0,31,QMS2-003.SDD
+QMSTF,"委外进货检验单不良原因档","Subcontract Receipt Inspection Headers",4,交易单身,N,"TF001+TF002+TF003+TFC01+TF008+TF004+TF005 //20101021 MODI BY 38130 FOR Z30-10090200001 ADD:TFC01",0,15,QMS2-003.SDD
+QMSTG,"生产入库检验单单头档","MO Receipt Inspection Headers",3,交易单头,N,"TG001+TG002+TG003+TG026",1,45,QMS2-003.SDD
+QMSTH,"生产入库检验单单身档","MO Receipt Inspection Headers",4,交易单身,N,"TH001+TH002+TH003+TH014+TH004",0,30,QMS2-003.SDD
+QMSTI,"生产入库检验单不良原因档","MO Receipt Inspection Headers",4,交易单身,N,"TI001+TI002+TI003+TI008+TI004+TI005",0,14,QMS2-003.SDD
+QMSTJ,"转移检验单单头档","Transfer Inspection Headers",3,交易单头,N,"TJ001+TJ002+TJ003+TJ026",1,45,QMS2-003.SDD
+QMSTK,"转移检验单单身档","Transfer Inspection Lines",4,交易单身,N,"TK001+TK002+TK003+TK014+TK004",0,30,QMS2-003.SDD
+QMSTL,"转移检验单不良原因档","Transfer Inspection Defective Reasons",4,交易单身,N,"TL001+TL002+TL003+TL008+TL004+TL005",0,14,QMS2-003.SDD
+QMSTM,"销退检验单单头档","Sales Return Inspection Headers",3,交易单头,N,"TM001+TM002+TM003+TM026",1,45,QMS2-003.SDD
+QMSTN,"销退检验单单身档","Sales Return Inspection Lines",4,交易单身,N,"TN001+TN002+TN003+TN014+TN004",0,30,QMS2-003.SDD
+QMSTO,"销退检验单不良原因档","Sales Return Inspection Defective Reasons",4,交易单身,N,"TO001+TO002+TO003+TO008+TO004+TO005",0,14,QMS2-003.SDD
+QMSTP,"数值型检验项目检测信息档","Inspection Information Of Numerical Inspection Item",3,交易单头,N,"TP001+TP002+TP003+TPC01+TP004+TP005+TP006  //20101021 MODI BY 38130 FOR Z30-10090200001 ADD:TPC01",0,16,QMS2-003.SDD
+QMSTQ,"数值型检验项目检测单身信息档","Inspection Information Of Numerical Inspection Item Lines",4,交易单身,N,"TQ001+TQ002+TQ003+TQC01+TQ004+TQ005+TQ006+TQ007    //20101021 MODI BY 38130 FOR Z30-10090200001 ADD:TQC01",0,16,QMS2-003.SDD
+RGRTA,"报表工具人员权限单头档","报表工具人员权限单头档",1,主档单头,Y,"TA001",0,8,RGR2-003.SDD
+RGRTB,"报表工具人员权限单身档","报表工具人员权限单身档",2,主档单身,Y,"TB001+TB002",0,5,RGR2-003.SDD
+RGRTC,"报表工具角色权限单头档","报表工具角色权限单头档",1,主档单头,Y,"TC001",0,8,RGR2-003.SDD
+RGRTD,"报表工具角色权限单身档","报表工具角色权限单身档",2,主档单身,Y,"TD001+TD002",0,5,RGR2-003.SDD
+RMAMA,"维修服务站信息档","维修服务站信息档",1,主档单头,Y,"MA001",0,22,RMA2-003.SDD
+RMAMB,"维修人员编号信息档","维修人员编号信息档",1,主档单头,Y,"MB001",0,16,RMA2-003.SDD
+RMAMC,"维修问题/解决方法单头档","维修问题/解决方法单头档",1,主档单头,N,"MC001",0,9,RMA2-003.SDD
+RMAMD,"维修问题/解决方法单身档","维修问题/解决方法单身档",2,主档单身,N,"MD001+MD002",0,10,RMA2-003.SDD
+RMAME,"维修项目信息档","维修项目信息档",1,主档单头,N,"ME001",0,9,RMA2-003.SDD
+RMAMF,"维修零件价格信息档","维修零件价格信息档",1,主档单头,N,"MF001+MF002+MF005",0,13,RMA2-003.SDD
+RMAMG,"维修站目标设置档","维修站目标设置档",1,主档单头,N,"MG001+MG002",0,32,RMA2-003.SDD
+RMAMH,"维修品号类别信息档","维修品号类别信息档",1,主档单头,N,"MH001",0,10,RMA2-003.SDD
+RMAMI,"产品序号信息单头","产品序号信息单头",1,主档单头,Y,"MI001+MI002",0,9,RMA2-003.SDD
+RMAMJ,"产品序号信息单身","产品序号信息单身",2,主档单身,Y,"MJ001+MJ002+MJ003+MJ004+MJ005+MJ006",0,17,RMA2-003.SDD
+RMATA,"叫修单单头档","叫修单单头档",3,交易单头,Y,"TA001+TA002",0,46,RMA2-003.SDD
+RMATB,"叫修单单身档","叫修单单身档",4,交易单身,Y,"TB001+TB002+TB003",0,18,RMA2-003.SDD
+RMATC,"维修单单头档","维修单单头档",3,交易单头,Y,"TC001+TC002",0,58,RMA2-003.SDD
+RMATD,"维修单单身档","维修单单身档",4,交易单身,Y,"TD001+TD002+TD003",0,29,RMA2-003.SDD
+RMATE,"维修单单头明细档","维修单单头明细档",4,交易单身,Y,"TE001+TE002+TE003+TE004",0,12,RMA2-003.SDD
+RMATF,"送厂维修单单头档","送厂维修单单头档",3,交易单头,Y,"TF001+TF002",0,20,RMA2-003.SDD
+RMATG,"送厂维修单单身档","送厂维修单单身档",4,交易单身,Y,"TG001+TG002+TG003",0,24,RMA2-003.SDD
+RMATH,"送厂归还单单头档","送厂归还单单头档",3,交易单头,Y,"TH001+TH002",0,24,RMA2-003.SDD
+RMATI,"送厂归还单单身档","送厂归还单单身档",4,交易单身,Y,"TI001+TI002+TI003",0,23,RMA2-003.SDD
+RMATJ,"单据产品序号维护单头档","单据产品序号维护单头档",3,交易单头,Y,"TJ001+TJ002",0,16,RMA2-003.SDD
+RMATK,"单据产品序号维护单身档","单据产品序号维护单身档",4,交易单身,Y,"TK001+TK002+TK003",0,12,RMA2-003.SDD
+RMATL,"单据产品序号维护单身明细档","单据产品序号维护单身明细",4,交易单身,Y,"TL001+TL002+TL003+TL004",0,15,RMA2-003.SDD
+SASMA,"会计科目设置","Account Codes Settings",1,主档单头,N,"",0,26,SAS2-003.sdd
+SASLA,"销售信息汇总档","Sales Summaries",6,月档/统计,N,"",4,49,SAS2-003.sdd
+ADMMA,"系统信息","Systems",7,系统档,N,"MA001",0,7,SYS2-003.SDD
+ADMMB,"程序信息","Procedures",7,系统档,N,"MB001",0,16,SYS2-003.SDD
+ADMMC,"文档信息","Tables",7,系统档,N,"MC001",0,8,SYS2-003.SDD
+ADMMD,"字段信息","Fields",7,系统档,N,"MD001+MD003",0,11,SYS2-003.SDD
+DSCMA,"登录者编号信息","Who posted information",7,系统档,N,"MA001",0,9,SYS2-003.SDD
+DSCMB,"公司编号信息","No. information companies",7,系统档,N,"MB001",0,20,SYS2-003.SDD
+DSCMC,"个案凭证/审核对照档","Cases Print/Approve Control",8,其它,N,"MC001",0,5,SYS2-003.SDD
+ADMMP,"程序信息","Procedures",8,其它,N,"MP001+MP002+MP003+MP005",0,7,SYS2-003.SDD
+CMSMM,"常用语","General Words",1,主档单头,Y,"MM001+MM002",0,3,SYS2-003.SDD
+CMSMN,"地址编号","Address",1,主档单头,Y,"MN001+MN002",0,4,SYS2-003.SDD
+CMSMO,"金融机构信息档","Financial Organizations",1,主档单头,Y,"MO001",1,6,SYS2-003.SDD
+DSPAGERMSGTYPE,"","",7,系统档,,"MSGTYPEID",0,2,SYS2-003.SDD
+DSPAGERMESSAGE,"","",7,系统档,,"MESSAGEID",0,8,SYS2-003.SDD
+MSGCHT,"","",7,系统档,,"TYPE+ID",0,5,SYS2-003.SDD
+MSGENG,"","",7,系统档,,"TYPE+ID",0,5,SYS2-003.SDD
+JOBQUEUE,"","",7,系统档,,"JOBID+SUBID",0,24,SYS2-003.SDD
+RGRMA,"自订报表单头档","User Defined Report Headers",7,系统档,Y,"MA001",0,7,SYS2-003.SDD
+RGRMB,"自订报表单身档","User Defined Report Lines",7,系统档,Y,"MB001+MB002",0,2,SYS2-003.SDD
+ADMMI,"F2开窗","F2 Inquiry",7,系统档,Y,"MI001+MI002",0,5,SYS2-003.SDD
+ADMMJ,"信息检查员","Data Validators",7,系统档,Y,"MJ001+MJ002",0,4,SYS2-003.SDD
+ACTMS205,"现金流量表项目单头档","Cash Flow Statement Item Headers",1,主档单头,Y,"MS001",0,8,SYS2-003.SDD
+ACTMT205,"现金流量表项目单身档","Cash Flow Statement Item Lines",2,主档单身,Y,"MT001+MT002",0,9,SYS2-003.SDD
+ACTTG205,"现金流量表格式单头档","Structure Headers of Cash Flow Statement",1,主档单头,Y,"TG001",0,8,SYS2-003.SDD
+ACTTH205,"现金流量表格式单身档","Structure Lines of Cash Flow Statement",2,主档单身,Y,"TH001+TH002",0,13,SYS2-003.SDD
+ACTTI205,"现金流量表格式单身科目明细档","A/C by Structure Lines of Cash Flow Statement",2,主档单身,Y,"TI001+TI002+TI003",0,12,SYS2-003.SDD
+ADMMR,"程序超链接资料","EasyFlow Relationship Lines",2,主档单身,Y,"MR001+MR002",1,13,SYS2-003.SDD
+EFJOBQUE,"凭证队列信息档","EasyFlow JobQueue",7,系统档,,"EF001+EF002+EF003",0,15,SYS2-003.SDD
+TRANSQUEUE,"传输队列信息档","Trans Queue",7,系统档,,"JOBID",0,12,SYS2-003.SDD
+DHQMM,"","",1,主档单头,Y,"MM001",0,8,SYS2-003.SDD
+GeneSave,"","",7,系统档,,"NCONDITION+CREATOR+PROGRAMME",0,7,SYS2-003.SDD
+DocuSave,"","",7,系统档,,"NCONDITION+CREATOR+PROGRAMME",0,6,SYS2-003.SDD
+FMTOLAP,"","",7,系统档,,"COMPANYID+REPORTSYSID+REPORTID",0,11,SYS2-003.SDD
+SYSOLAP,"","",7,系统档,,"NODEID",0,4,SYS2-003.SDD
+FMTOLAPENG,"","",7,系统档,,"COMPANYID+REPORTSYSID+REPORTID",0,11,SYS2-003.SDD
+SYSOLAPENG,"","",7,系统档,,"NODEID",0,4,SYS2-003.SDD
+FMTRPT,"","",1,主档单头,Y,"RPTNAME+USERID+EXTNAME+FORMATNO",0,30,SYS2-003.SDD
+FMTFIELD,"","",1,主档单头,Y,"RPTNAME+USERID+EXTNAME+FORMATNO+FIELDORDER",0,22,SYS2-003.SDD
+FMTRPTENG,"","",1,主档单头,Y,"RPTNAME+USERID+EXTNAME+FORMATNO",0,30,SYS2-003.SDD
+FMTFIELDENG,"","",1,主档单头,Y,"RPTNAME+USERID+EXTNAME+FORMATNO+FIELDORDER",0,22,SYS2-003.SDD
+RPTGRIDFMT,"直接查询格式","直接查询格式",1,主档单头,Y,"RPTNAME+EXTNAME+FMTNAME+FMTNO",0,10,SYS2-003.SDD
+RPTGRIDFMTENG,"","",1,主档单头,Y,"RPTNAME+EXTNAME+FMTNAME+FMTNO",0,10,SYS2-003.SDD
+WARRANT,"凭证格式","Voucher Formats",7,系统档,N,"NT001+NT002",0,4,SYS2-003.SDD
+MTFMT,"建档格式档","建档格式档",7,系统档,N,"MT001+MT002+MT005",0,7,SYS2-003.SDD
+F2LINK,"","",7,系统档,N,"LKTYPE+TBLNAME+TBLSN",0,6,SYS2-003.SDD
+WORKLOG,"","",7,系统档,N,"",1,9,SYS2-003.SDD
+DMS,"文管记录档","Documents",7,系统档,N,"DocID+Revision",0,9,SYS2-003.SDD
+ATTACH,"附件记录档","Accessories",7,系统档,N,"Parent+KeyValues+CompanyID+UserID+SeqNo",0,12,SYS2-003.SDD
+DSCMD,"用户自定义设置档","User-Defined Settings",7,系统档,N,"MD001+MD002+MD003",0,4,SYS2-003.SDD
+DSCME,"密码安全策略单头档","Password Security Policy Headers",1,主档单头,N,"ME001",0,10,SYS2-003.SDD
+DSCMF,"密码安全策略单身档","Password Security Policy Lines",2,主档单身,N,"MF001+MF002",0,3,SYS2-003.SDD
+DSCMG,"用户历史密码记录","User Password Log",6,月档/统计,N,"MG001+MG002",0,4,SYS2-003.SDD
+ADMMH,"作业扩展权限设置档","Expansion of Authority",2,主档单身,N,"MH001+MH002",0,10,SYS2-003.SDD
+UPDLG,"数据库升级明细档","Update Database Details",2,主档单身,N,"LG001+LG002+LG003+LG004",0,9,SYS2-003.SDD
+UPDMA,"数据库升级设置档","Update Database Parameters",2,主档单身,N,"MA001",0,4,SYS2-003.SDD
+ADMMV,"业务导航地图档","Frame Archives",7,系统档,,"MV001",0,8,SYS2-003.SDD
+ADMMW,"业务导航用户信息档","Frame User Archives",7,系统档,,"MW001+MW002+MW003",0,3,SYS2-003.SDD
+ADMMX,"图片信息档","Picture Content",7,系统档,,"MX001",0,3,SYS2-003.SDD
+ADMMY,"用户自定义菜单","User Defined Menu Archives",7,系统档,,"MY001+MY002+MY003+MY004",0,7,SYS2-003.SDD
+ADMND,"消息生成规则档","Message Create Rule",7,系统档,N,"ND001",0,33,SYS2-003.SDD
+ADMTC,"待发消息档","Preparative Message",5,交易记录,N,"TC001",1,17,SYS2-003.SDD
+ADMTD,"已发消息档","Sended Message",5,交易记录,N,"TD001",1,18,SYS2-003.SDD
+ADMTE,"消息存档","History Message",5,交易记录,N,"TE001+TE003",2,20,SYS2-003.SDD
+ADMTF,"消息草稿档","Draft Message",5,交易记录,N,"TF001",0,17,SYS2-003.SDD
+ADMTG,"垃圾箱","Trash Message",5,交易记录,N,"TG001+TG003+TG010",0,23,SYS2-003.SDD
+DSCTH,"消息规则档","Message Regulation",5,交易记录,N,"TH001",0,9,SYS2-003.SDD
+DSCTK,"日历消息列表档","Message Regulation",5,交易记录,N,"TK001",0,26,SYS2-003.SDD
+FILELIST,"自动更新文件列表","AutoUpdate File List",7,系统档,N,"FILENAME+PATH",0,6,SYS2-003.SDD
+DSCINTMA,"系统参数设定","Systems Parameter Setup",7,系统档,N,"MA001",0,5,SYS2-003.SDD
+ADMTI,"自定义信息参数档","UDF Params",7,系统档,N,"TI001+TI002",0,7,SYS2-003.SDD
+ADMTJ,"自定义信息参数档","UDF Params",7,系统档,N,"TJ001+TJ002+TJ003",0,5,SYS2-003.SDD
+ADMMZ,"自定义F2开窗","F2 Inquiry",7,系统档,Y,"MZ001+MZ002",0,11,SYS2-003.SDD
+IWCMA,"公司编号信息","No. information companies",7,系统档,N,"MA001",0,12,SYS2-003.SDD
+IWCTRANSQUEUE,"IWC传输队列信息档","IWC Trans Queue",7,系统档,,"GUID",0,13,SYS2-003.SDD
+SFCMA,"工艺参数设置档","Operation Parameters",7,系统档,N,"",0,16,Sfc2-003.sdd
+SFCTA,"工单工艺信息档","MO Operations",3,交易单头,N,"TA001+TA002+TA003+TA006",1,63,Sfc2-003.sdd
+SFCTB,"转移单单头档","Transfer Orders Headers",3,交易单头,Y,"TB001+TB002",2,31,Sfc2-003.sdd
+SFCTC,"转移单单身档","Transfer Orders Lines",4,交易单身,Y,"TC001+TC002+TC003",2,71,Sfc2-003.sdd
+SFCTD,"报工单单头档","Operation Report Headers",3,交易单头,Y,"TD001+TD002",1,21,Sfc2-003.sdd
+SFCTE,"报工单单身档","Operation Report Lines",4,交易单身,Y,"TE001+TE002+TE003",2,32,Sfc2-003.sdd
+SFCTF,"报工单班组成员档","Shift Staffs by Operation Report",4,交易单身,N,"TF001+TF002+TF003+TF004",0,13,Sfc2-003.sdd
+SFCDA,"工单工艺子单身信息档","MO Operation Details",4,交易单身,N,"DA001+DA002+DA003+DA004+DA005",0,25,Sfc2-003.sdd
+SFCDB,"转移单子单身信息档","Transfer Orders Sub Lines",4,交易单身,N,"DB001+DB002+DB003+DB004",0,32,Sfc2-003.sdd
+SFCDC,"报工单子单身信息档","Operation Report Sub Lines",4,交易单身,N,"DC001+DC002+DC003+DC004",0,31,Sfc2-003.sdd
+SFCDD,"工艺快速转移信息档","Quick Transfer",3,交易单头,N,"DD001+DD002",0,50,Sfc2-003.sdd
+TISMA,"发票参数档","发票参数档",1,主档单头,Y,"",0,8,TIS2-003.SDD
+TISTA,"销项发票底稿单头档","销项发票底稿单头档",1,主档单头,Y,"TA001",0,41,TIS2-003.SDD
+TISTB,"销项发票底稿单身档","销项发票底稿单身档",2,主档单身,Y,"TB001+TB002",0,36,TIS2-003.SDD
+TISTC,"销项作废发票单头档","销项作废发票单头档",1,主档单头,Y,"TC001+TC002+TC003",0,26,TIS2-003.SDD
+TISTD,"销项作废发票单身档","销项作废发票单身档",2,主档单身,Y,"TD001+TD002+TD003+TD004",0,20,TIS2-003.SDD
+TISTE,"进项发票底稿档","进项发票底稿档",1,主档单头,Y,"TE001",0,29,TIS2-003.SDD
+TMCMA,"业务流程档","Business Flow Headers",1,主档单头,Y,"MA001",0,9,TMC2-003.sdd
+TMCMB,"业务流程图形档","Business Flow Charts",2,主档单身,Y,"MB001",0,8,TMC2-003.sdd
+TMCMC,"业务流程单身档","Business Flow Lines",2,主档单身,Y,"MC001+MC002",0,13,TMC2-003.sdd
+TMCMD,"业务流程条件信息档","Business Flow Conditions",2,主档单身,Y,"MD001+MD002+MD003",0,13,TMC2-003.sdd
+TMCME,"业务流程消息档","Business Flow Messages",2,主档单身,Y,"ME001+ME002+ME003+ME004",0,15,TMC2-003.sdd
+TMCMF,"","",1,主档单头,Y,"MF001+MF002",0,9,TMC2-003.sdd
+TMCMG,"","",2,主档单身,Y,"MG001+MG002+MG003",0,13,TMC2-003.sdd
+TMCMH,"","",1,主档单头,Y,"MH001+MH002",0,14,TMC2-003.sdd
+TMCMI,"","",2,主档单身,Y,"MI001+MI002+MI003",0,12,TMC2-003.sdd
+TMCMJ,"","",2,主档单身,Y,"MJ001+MJ002+MJ003+MJ004",0,13,TMC2-003.sdd
+TYSMA,"","",2,主档单身,Y,"MA001",0,9,TYS2-003.SDD
+TYSMB,"包装物信息单身档","",2,主档单身,Y,"MB001+MB002",0,13,TYS2-003.SDD
+TYSMC,"客户预测周期设定档","",1,主档单头,N,"MC001",0,13,TYS2-003.SDD
+TYSMD,"边角料对应关系档","Quick Transfer",2,主档单身,N,"MD001+MD002",0,9,TYS2-003.SDD
+TYSTA,"","",3,交易单头,N,"TA001+TA002",1,49,TYS2-003.SDD
+TYSTB,"","",4,交易单身,N,"TB001+TB002+TB003",0,61,TYS2-003.SDD
+TYSTC,"","",3,交易单头,N,"TC001+TC002",1,24,TYS2-003.SDD
+TYSTD,"","",4,交易单身,N,"TD001+TD002+TD003",0,31,TYS2-003.SDD
+CMSMQ,"各系统单据设置档","Document Types",1,主档单头,N,"MQ001",0,22,TYS2-003.SDD
+COPTH,"销货单单身档","Sales Delivery Lines",4,交易单身,Y,"TH001+TH002+TH003",2,2,TYS2-003.SDD
+COPTJ,"销退单单身档","Sales Return Lines",4,交易单身,Y,"TJ001+TJ002+TJ003",1,2,TYS2-003.SDD
+INVTB,"交易单据单身档","Transaction Orders Lines",4,交易单身,Y,"TB001+TB002+TB003",0,3,TYS2-003.SDD
+INVTI,"借出入归还单身档","Borrow/Loan Return Lines",4,交易单身,N,"TI001+TI002+TI003",0,3,TYS2-003.SDD
+COPMF,"销售预测单身信息档","Sales Forecast Lines",2,主档单身,Y,"MF001+MF002",1,2,TYS2-003.SDD
+SFCDD,"工艺快速转移信息档","Quick Transfer",3,交易单头,N,"DD001+DD002",0,7,TYS2-003.SDD
+SFCTA,"工单工艺信息档","MO Operations",3,交易单头,N,"TA001+TA002+TA003+TA006",1,1,TYS2-003.SDD
+SFCDA,"工单工艺子单身信息档","MO Operation Details",4,交易单身,N,"DA001+DA002+DA003+DA004+DA005",0,1,TYS2-003.SDD
+TYSTE,"工作票信息档","MO Operation Details",3,交易单头,N,"TE001+TE002",0,50,TYS2-003.SDD
+TYSTF,"工作票班组成员档","Shift Staffs by Operation Report",4,交易单身,N,"TF001+TF002+TF003+TF004",0,14,TYS2-003.SDD
+TYSTT,"工作票班组成员信息变更档","Shift Staffs by Operation Report",4,交易单身,N,"TT001+TT002+TT003+TT004+TT005+TT010+TT011",0,27,TYS2-003.SDD
+SFCMA,"工艺参数设置档","Operation Parameters",7,系统档,N,"",0,8,TYS2-003.SDD
+CMSMV,"员工基本信息档","Staffs",1,主档单头,N,"MV001",2,6,TYS2-003.SDD
+PALNO,"班组成员信息单头档","班组成员信息单头档",1,主档单头,N,"NO001",0,6,TYS2-003.SDD
+SFCTB,"转移单单头档","Transfer Orders Headers",3,交易单头,Y,"TB001+TB002",2,2,TYS2-003.SDD
+SFCTE,"报工单单身档","Operation Report Lines",4,交易单身,Y,"TE001+TE002+TE003",2,5,TYS2-003.SDD
+TYSTG,"工作票报工单信息档","Quick Transfer",3,交易单头,N,"TG001+TG002",0,16,TYS2-003.SDD
+TYSTH,"工作票报工单信息档","Quick Transfer",4,交易单身,N,"TH001+TH002+TH003",0,56,TYS2-003.SDD
+TYSTI,"边角料数量信息档","Scrap Quantity",5,交易记录,N,"TI001",0,26,TYS2-003.SDD
+SFCDC,"报工单子单身信息档","Operation Report Sub Lines",4,交易单身,N,"DC001+DC002+DC003+DC004",0,5,TYS2-003.SDD
+SFCTC,"转移单单身档","Transfer Orders Lines",4,交易单身,Y,"TC001+TC002+TC003",2,6,TYS2-003.SDD
+SFCDB,"转移单子单身信息档","Transfer Orders Sub Lines",4,交易单身,N,"DB001+DB002+DB003+DB004",0,6,TYS2-003.SDD
+TYSTJ,"工作票拆分单头档","MO Operation Splitting Details",3,交易单头,N,"TJ001+TJ002",0,57,TYS2-003.SDD
+TYSTK,"工作票拆分单身档","MO Operation Splitting Lines",3,交易单头,N,"TK001+TK002+TK042",0,50,TYS2-003.SDD
+TYSTL,"工作票拆分子单身档","MO Operation Splitting Sub Lines",4,交易单身,N,"TL021+TL022+TL003+TL004+TL005",0,25,TYS2-003.SDD
+TYSTO,"工作票变更信息档","MO Operation Details",3,交易单头,N,"TO001+TO002+TO003",0,89,TYS2-003.SDD
+TYSTP,"","",3,交易单头,N,"TP001+TP002",0,37,TYS2-003.SDD
+TYSTQ,"","",3,交易单头,N,"TQ001+TQ002+TQ003",0,10,TYS2-003.SDD
+TYSTR,"","",4,交易单身,N,"TR001+TR002+TR003",0,29,TYS2-003.SDD
+TYSTS,"","",3,交易单头,N,"TS001+TS002+TS003",0,11,TYS2-003.SDD
+TYSTW,"工作票班组成员信息变更原信息档","Shift Staffs by Operation Report",4,交易单身,N,"TW001+TW002+TW003+TW004+TW005",0,15,TYS2-003.SDD
+TYSTX,"工作票班组成员信息变更新信息档","Shift Staffs by Operation Report",4,交易单身,N,"TX001+TX002+TX003+TX004+TX005",0,15,TYS2-003.SDD
+COPMM,"预测维护单身档","Forecast Maintenance Lines",2,主档单身,N,"MM001+MM002",0,1,TYS2-003.SDD
+ERPHOST,"","",7,系统档,N,"ERPHOSTNAME",0,4,WRP2-003.SDD
+MENU,"","",7,系统档,N,"USERID+GROUPID+MENUNO+MENUID",0,9,WRP2-003.SDD
+FOLDER,"","",7,系统档,N,"FOLDERID",0,6,WRP2-003.SDD
+PROG,"","",7,系统档,N,"PROGID",0,15,WRP2-003.SDD
+USERFORMAT,"","",7,系统档,,"PROGID+EXTNAME+FORMATID",0,7,WRP2-003.SDD
+SYSWORKLOG,"","",7,系统档,,"",0,7,WRP2-003.SDD
+SYSSQLLOG,"","",7,系统档,,"",0,3,WRP2-003.SDD
+UISTR,"","",7,系统档,N,"CHS",0,6,WRP2-003.SDD
+MSGSTR,"","",7,系统档,N,"TYPE+ID",0,8,WRP2-003.SDD
+COMMPROG,"","",7,系统档,N,"USERID+PROGID",0,3,WRP2-003.SDD
+ADMMI,"F2开窗","F2 Inquiry",7,系统档,Y,"MI001+MI002",0,5,WRP2-003.SDD
+JOBCACHE,"","",7,系统档,,"JOBID+SUBID",0,24,WRP2-003.SDD
+JOBOPTION,"","",7,系统档,,"JOBID+SUBID",0,4,WRP2-003.SDD
+OPTIONXML,"","",7,系统档,,"PROGID",0,3,WRP2-003.SDD
+OPENWINXML,"","",7,系统档,,"PROGID",0,3,WRP2-003.SDD
+DATELIST,"","",7,系统档,,"YYYYMMDD",0,9,WRP2-003.SDD
+GENESAVE,"","",7,系统档,,"NCONDITION+USERID+PROGID",0,6,WRP2-003.SDD
+TCAUTOTEST,"","",7,系统档,,"PROGID+NCONDITION",0,6,WRP2-003.SDD
+WEBMONITOR,"","",7,系统档,,"JOBID+SUBID+USERID",0,4,WRP2-003.SDD
+SAMPLE,"","",7,系统档,,"PROGID",0,3,WRP2-003.SDD
+RPTMONITOR,"","",7,系统档,,"MACHINEIP",0,18,WRP2-003.SDD
+CATEGORY,"","",7,系统档,,"CATEGORYID",0,5,WRP2-003.SDD
+SYSREQUEST,"","",7,系统档,,"REQUESTID",0,7,WRP2-003.SDD
+OPTIONSAVE,"","",7,系统档,,"NCONDITION+USERID+PROGID+CULTURE",0,6,WRP2-003.SDD
+EXNAMEEXPRESS,"","",1,主档单头,N,"PROID+XUHAO+CONTROLID+CONTROLVALUE",0,6,WRP2-003.SDD
+RGRMA,"自订报表单头档","User Defined Report Headers",7,系统档,Y,"MA001",0,6,WRP2-003.SDD
+ADMME,"组信息","Groups",7,系统档,N,"ME001",0,10,adm2-003.SDD
+ADMMF,"用户信息","Users",7,系统档,Y,"MF001+MF004",0,14,adm2-003.SDD
+ADMMG,"用户作业权限档","User Authorities",7,系统档,N,"MG001+MG009+MG002",0,17,adm2-003.SDD
+ADMMQ,"电子表单关联单头档","EasyFlow Relationship Headers",1,主档单头,N,"MQ001+MQ002",0,17,adm2-003.SDD
+ADMMR,"电子表单关联单身档","EasyFlow Relationship Lines",1,主档单头,N,"MR001+MR002+MR003",0,13,adm2-003.SDD
+ADMMS,"OLAP设置档","OLAP Settings",1,主档单头,N,"",0,9,adm2-003.SDD
+ADMMT,"用户限定基础数据档","User Limits",7,系统档,N,"MT001+MT002+MT003",0,10,adm2-003.SDD
+ADMMU,"用户作业扩展权限设置档","User Expansion of authority",2,主档单身,N,"MU001+MU002+MU003+MU004",0,11,adm2-003.SDD
+ADMTA,"传真/Email传送纪录信息档","TAX/Email Transfer Records",5,交易记录,N,"",0,12,adm2-003.SDD
+ADMTB,"数据修改记录档","Data Modification Logs",5,交易记录,N,"",0,13,adm2-003.SDD
+ADMNG,"数据导入规则档","Data Import Rules",1,主档单头,N,"NG001",0,10,adm2-003.SDD
+ADMTG,"用户数据权限信息单头档","Data Authority Headers",1,主档单头,N,"TG001+TG002",0,11,adm2-003.SDD
+ADMTH,"用户数据权限信息单身档","Data Authority Lines",2,主档单身,N,"TH001+TH002+TH003",0,13,adm2-003.SDD
+ADMTK,"自定义信息定义档","UDF Information",7,系统档,N,"TK001",0,9,adm2-003.SDD
+ADMTL,"自定义信息定义档","UDF Information",7,系统档,N,"TL001+TL011",0,19,adm2-003.SDD
+ADMTM,"自定义信息定义档","UDF Information",7,系统档,N,"",0,12,adm2-003.SDD
+ADMTN,"自定义信息定义档","UDF Information",7,系统档,N,"",0,12,adm2-003.SDD
+ADMTO,"上线效益指标档","YIFei Benefit",5,交易记录,N,"TO001",0,16,adm2-003.SDD
+ADMTP,"上线效益结果档","YIFei Benefit  Result",6,月档/统计,N,"TP001+TP002+TP003",0,10,adm2-003.SDD
+ADMNH,"颜色管理规则档","Color management",1,主档单头,N,"NH001",0,11,adm2-003.SDD
+ADMTQ,"上线效益指标权限档","YIFei Benefit  Authorities",2,主档单身,N,"TQ001+TQ002+TQ003",0,9,adm2-003.SDD

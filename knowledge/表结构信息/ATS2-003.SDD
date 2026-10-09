@@ -1,0 +1,216 @@
+文档代码:ATSMA
+文件名:预测维护单头档
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MA001
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                    备注
+===============================================================================================
+0001 MA001    C      20  文件编号【Document Number】                                 指EDI文件名称		
+0002 MA002    C       8  需求日期区间(起始)【Demand  date range(Start)】             生产计划日期，将月总量计划拆分成每日，以适应不同汇总周期的配套厂
+0003 MA003    C       8  需求日期区间(截止)【Demand  date range(End)】               单身最后一个需求日期		
+0004 MA004    C       1  转入状态码【Into Status】                                   由预测资料转入作业更新，1.全部正确转入 2.部份错误		
+0005 MA005    C      10  客户编号【Customer】                                        客户编号 
+0006 MA006    C       6	 工厂【Plant】                                               工厂  
+0007 MA007    C       6  讯息编号【Message Code】                                    取文件名称第4至第9个字段		
+0008 MA008    C      01  预留字段【Reserved Field】                                  预留字段                                                                                                                                                                                
+0009 MA009    C      08  预留字段【Reserved Field】                                  预留字段                                                                                                                                                                                
+0010 MA010    V      30  预留字段【Reserved Field】                                  预留字段                                                                                                                                                                                
+0011 MA011    N    16.6  预留字段【Reserved Field】                                  预留字段                                                                                                                                                                                
+0012 MA012    N    16.6  预留字段【Reserved Field】                                  预留字段                                                                                                                                                                                
+0013 MA013    N    16.6  预留字段【Reserved Field】                                  预留字段                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+文档代码:ATSMB
+文件名:预测维护单身档
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MB001+MB002
+================================================================================================
+序号 字段编号    TYPE  长度    字段名称                                               备注
+================================================================================================
+0001 MB001        C      20    文件编号【Document Number】                            指EDI文件名称
+0002 MB002        C       6    序号【Sequence Number】                                序号
+0003 MB003        C       1    错误码【Error Code】                                   1.品号不存在 2.成车BOM不存在 9.正确，依东南成车计划、旬订单、零件月授权量等资料，关联客户品号及品号基本信息作业，若不存在，则显示错误码为1.。
+0004 MB004        C      20    品号【Item】                                           配套厂件号，依成车计划、旬订单、零件月授权量等资料，关联客户品号及品号基本信息作业写入
+0005 MB005        C      60    品名【Item Description】                               品名
+0006 MB006        C      60    规格【Specification】                                  规格
+0007 MB007        C       4    单位【Unit】                                           预设为库存单位
+0008 MB008        C      20    客户品号【Customer Item】                              EDI文件的机种代号
+0009 MB009        C       1    计划别【Plan Type】                                    1.零件日计划 2.成车日计划 3.成车月计划 A.追加减订单 D.售服预示量;[DEF:"1"]
+0010 MB010        N    16.6    数量【Quantity】                                       每日计划量
+0011 MB011        C       8    需求日期【Required  Date】                             计划需求日
+0012 MB012        C       1    抛转码【Builded Voucher Code】                         Y/N，预设N，由拋转销售预测作业更新
+0013 MB013        C      11    预测编号【Sales Forecast Number】                      系统预设为年＋月＋旬＋版次，销售预测编号
+0014 MB014        C       4    外观色 【appearance  color】                           
+0015 MB015        C       2    EO识别码【EO ID】                                      EO识别码
+0016 MB016        C      01    预留字段【Reserved Field】                             预留字段                                                                                                                                                                                
+0017 MB017        C      08    预留字段【Reserved Field】                             预留字段                                                                                                                                                                                
+0018 MB018        V      30    预留字段【Reserved Field】                             预留字段                                                                                                                                                                                
+0019 MB019        N    16.6    预留字段【Reserved Field】                             预留字段                                                                                                                                                                                
+0020 MB020        N    16.6    预留字段【Reserved Field】                             预留字段                                                                                                                                                                                
+0021 MB021        N    16.6    预留字段【Reserved Field】                             预留字段                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+文档代码:ATSMC
+文件名: EDI信息平台参数设定档
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)					
+转档完成:N
+PRIMARY :
+==========================================================================================================================================================
+序号 字段编号    TYPE   长度   字段名称                                                                                             备注
+==========================================================================================================================================================						
+0001 MC001        V     255    预测旬订单下载目录【Forecast orders Xunyang Download Directory】                                  [DEF:"C:\EDI\RECEIVE\PPA003\"]
+0002 MC002        V     255    预测旬订单历史目录【Forecast orders Xunyang  History Download Directory】                         [DEF:"C:\EDI\HISTORY\PPA003\"]
+0003 MC003        V     255    预测当月及六月生产计划下载目录【forecast Production Plan for the Month to Download Directory】    [DEF:"C:\EDI\RECEIVE\PPA001\"]
+0004 MC004        V     255    预测当月及六月生产计划历史目录【forecast Production Plan for the Month to History  Download Directory】[DEF:"C:\EDI\HISTORY\PPA001\"]
+0005 MC005        V     255    订单件收料单下载目录【Orders Admission Materials Download Directory 】                            [DEF:"C:\EDI\RECEIVE\PPC001\"]
+0006 MC006        V     255    订单件收料单历史目录【Orders Admission Materials History Download Directory 】                    [DEF:"C:\EDI\HISTORY\PPC001\"]
+0007 MC007        V     255    看板件收料单下载目录【Kanban Admission Materials Download Directory 】                            [DEF:"C:\EDI\RECEIVE\PPC002\"]
+0008 MC008        V     255    看板件收料单历史目录【Kanban Admission Materials History Download Directory 】                    [DEF:"C:\EDI\HISTORY\PPC002\"]
+0009 MC009        V     255    车型件号用量资料下载目录【Pieces of Information On Its Esage Model Download Directory】           [DEF:"C:\EDI\RECEIVE\PPG001\"]   
+0010 MC010        V     255    车型件号用量资料历史目录【Pieces of Information On Its Esage Model History Download Directory】   [DEF:"C:\EDI\HISTORY\PPG001\"]   
+0011 MC011        V     255    生产计划下载目录【Reserved Field】                                                                生产计划下载目录 
+0012 MC012        V     255    生产计划历史目录【Reserved Field】                                                                生产计划历史目录 
+0013 MC013        V     255    日计划下载目录【Reserved Field】                                                                  日计划下载目录                                                                                                                                                                                                                                                               
+0014 MC014        V     255    日计划历史目录【Reserved Field】                                                                  日计划历史目录                                                                                                                                                                                                                                                               
+0015 MC015        V     255    发货通知目录  【Reserved Field】                                                                  发货通知目录                                                                                                                                                                                                                                                                                                                                                                                                      
+0016 MC016        C      01    预留字段【Reserved Field】                                                                        预留字段    
+0017 MC017        C      01    预留字段【Reserved Field】                                                                        预留字段    
+0018 MC018        C      10    预留字段【Reserved Field】                                                                        预留字段                                                                                                                                                                                                                                                                
+0019 MC019        C      10    预留字段【Reserved Field】                                                                        预留字段                                                                                                                                                                                                                                                                
+0020 MC020        V      30    预留字段【Reserved Field】                                                                        预留字段                                                                                                                                                                                                                                                                
+0021 MC021        N    16.6    预留字段【Reserved Field】                                                                        预留字段                                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+文档代码:ATSMD
+文件名:车型品号用量维护单头档
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)					
+转档完成:N
+PRIMARY :MD001+MD002
+===============================================================================================
+序号 字段编号  TYPE  长度  字段名称                                                备注
+===============================================================================================
+0001 MD001      C    20    文件编号【Document Number】          
+0002 MD002      C    16    客戶车型【Customer Models】               
+0003 MD003      C    20    內部车型编号【Models Number】        
+0004 MD004      C    10    客戶编号【Customer】            
+0005 MD005      C    1     状态码 【Status】                                        0.未拋转 1.拋转成功 8.已更新存在的BOM 9.BOM已存在
+0006 MD006      C    1     审核码【Approval Indicator】                             Y,N,V
+0007 MD007      C    8     审核日期 【Approval Date】                               FORMATE:YMD
+0008 MD008      C    10    审核者【Approver】                             
+0009 MD009      C    1     经核对差异报表确认后，决定更新BOM【Update BOM Mark】     Y/N,DEFAULT N 
+0010 MD010      C    1     产生客户品号【Customer Item Mark】                       Y/N,DEFAULT N
+                                     
+文档代码:ATSME
+文件名:车型品号用量维护单身档
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)					
+转档完成:N
+PRIMARY :ME001+ME002+ME003
+===============================================================================================
+序号 字段编号     TYPE  长度  字段名称                                                    备注
+===============================================================================================
+0001 ME001         C    20     文件编号【Document Number】        
+0002 ME002         C    16     客戶车型【Customer Models】        
+0003 ME003         C    4      序号【Sequence Number】           
+0004 ME004         C    20     客戶品号【Customer Item】             
+0005 ME005         N    4      用量【Qty Per】            
+0006 ME006         C    1      识别码【ID】          
+0007 ME007         C    8      生效日【Effective Date】                                  FORMATE:YMD
+0008 ME008         C    8      失效日【Expiry Date】                                     FORMATE:YMD	
+0009 ME009         N    3	     承制比例【System Ratio】                                                  
+0010 ME010         C    10	   群组代码【Group Code】                                    
+0011 ME011         C    5	     行号 【Line Number】                                                     
+0012 ME012         C    20     品号  【Item】                                                    
+0013 ME013         C    1      状态码【Status Code】                                     1.品号不存在 9.正确
+0014 ME014         C    4      外观色【Color】                                                    
+0015 ME015         C    1      审核码【Approval Indicator】                              Y,N,V
+0016 ME016         C    1      产生客戶品号【Customer Item Mark】                         Y/N,[DEF:"N"]
+0017 ME017         N    5.4    损耗率% 【Scrap Ratio %】                                 损耗率%
+0018 ME018         C    4      工艺【Operation】                                         工艺
+0019 ME019         C    2      左右边【Around Edge】                                     
+0020 ME020         C    3      站別【Stop】                                              
+0021 ME021         C    10     EO起始号【EO No. Start】                                  EO起始号
+0022 ME022         C    30     客戶品名【Customer Item Description】                                                 
+0023 ME023         C    10     EO截止号【EO No. End】                                     EO截止号
+
+//20090713 ADD BY 44116 FOR Z10-09063000002                                                                                     
+文档代码:ATSMF
+文件名:客户与仓库对照档
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)					
+转档完成:N
+PRIMARY :MF001+MF002
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                    备注     
+===============================================================================================
+0001 MF001       C    10  客戶编号【Customer】                                        客戶编号
+0002 MF002       C    10  仓库编号【Warehouse】                                       仓库编号      
+0003 MF003       C    01  预留字段【Reserved Field】                                  预留字段                
+0004 MF004       C    08  预留字段【Reserved Field】                                  预留字段
+0005 MF005       V    30  预留字段【Reserved Field】                                  预留字段
+0006 MF006       N  16.6  预留字段【Reserved Field】                                  预留字段
+0007 MF007       N  16.6  预留字段【Reserved Field】                                  预留字段
+0008 MF008       N  16.6  预留字段【Reserved Field】                                  预留字段
+
+文档代码:COPMA
+文件名:客户基本信息档【Custerm Archivess】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :MA001
+INDEX01 :MA002
+INDEX02 :MA102
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MAB01    C      01  寄售客户【Consignment Customer】                             Y/N [DEF:"N"]  //20090713 ADD BY 44116 FOR Z10-09063000002
+
+文档代码:COPTG                                                                                                     
+文件名:销货单单头档                                                                                                
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)                    
+转档完成:Y                                                                                                         
+PRIMARY :TG001+TG002                                                                                               
+INDEX01 :TG003+TG001+TG002                                                                                         
+INDEX02 :TG004+TG003                                                                                               
+========================================================================================                           
+序号 字段编号   TYPE 长度  字段名称                               备注                                             
+========================================================================================                           
+0001  TGB01      C    20   数据包号【Data ID】                    数据包号，具唯一性，不可重复性                   
+0002  TGB02      C    13   ASN编号【Shipment ID】                 一年中不可重复。通常使用装箱单号作为ASN号        
+0003  TGB03      C    10   收货工厂【Ship To GSDB Code】                                                           
+0004  TGB04      N    10.2 发货总毛重【Gross Weight】                                                              
+0005  TGB05      N    10.2 发货总净重【Net Weight】                                                                
+0006  TGB06      C    02   毛重和净重的数量单位【UOM】            "KG" 公斤, "LB" 磅                               
+0007  TGB07      C    05   包装类型编码 【Packaging Type Code】   包装类型编码，前3位为包装类型，后2位为包装材质   
+0008  TGB08      N    07   包装个数【Lading Qty】                                                                  
+0009  TGB09      C    04   承运商SCAC编码 【Carrier SCAC Code】                                                    
+0010  TGB10      C    02   运输方式【Transportation Method Code】                                                  
+0011  TGB11      C    07   运载媒介 【Equipment Desc Code】                                                        
+0012  TGB12      C    04   运载媒介的序列号【Equipment Num】  
+0013  TGB13      C    30   提单号【Bill of Lading Num】            提单号                                                 
+0014  TGB14      C    08   文件产生日【File  Creation Date】       系统日期                                        
+0015  TGB15      C    08   文件产生时间【File  Creation Time】     系统时间                                        
+0016  TGB16      C    01   抛转码【Post Status】                   Y/N;[def:"N"]                                   
+                                                                                                                   
+文档代码:COPTH
+文件名:销货单单身档
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TH001+TH002+TH003
+INDEX01 :TH014+TH015+TH016
+===============================================================================================
+序号 字段编号 TYPE 长度   字段名称                                    备注
+===============================================================================================
+0001 THB01      C    10  采购订单号 【Purchase Order Num】             采购订单号
+0002 THB02      N    09  累计发货数量【Cum Shipped Qty】               累计至本次发货的累计发货量
+0003 THB03      N    05  包装个数【Number of Load】                    包装个数
+0004 THB04      N    07  单位包装的零件数【Qty per Load】               单位包装的零件数
+0005 THB05      C    05  包装类型编码 【Packaging Code】               包装类型编码          
+
+文档代码:CMSMQ
+文件名:各系统单据设置档【Document Types】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :MQ001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 MQB01    C    01   启用EDI【ENABLE EDI】                                       Y/N;[def:"N"] //20090825 ADD BY 38130 
+   

@@ -1,0 +1,973 @@
+//-------------------------------------//
+// 生效日:880625 0.00.00  ACP2-003.SDD //
+//-------------------------------------//
+文档代码:ACPMA
+文件名:应付参数设置档【A/P Parameters】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :
+========================================================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                                  备注
+========================================================================================================================
+0001 MA001    C      20  保留【Reserved】                                                          保留 //20040921 MODI BY 32350 FOR P02-03080034 一般->电汇 //20061120 6.5 P00-06110004 MODI 电汇付款科目->保留 BY 28975
+0002 MA002    C      20  应付账款科目【Account Code Payable】                                      应付账款科目 //20061120 6.5 P00-06110004 MODI 保留->应付账款科目 BY 28975  //20080219 modi by 35501 10->20 B31-080128006
+0003 MA003    C      20  保留【Reserved】                                                          保留//20061120 6.5 P00-06110004 MODI 应付票据科目->保留 BY 28975
+0004 MA004    C      20  应交增值税科目【VAT Payable A/C】                                         应交增值税科目//20061120 6.5 P00-06110004 MODI 保留->应交增值税科目 BY 28975 //20080219 modi by 35501 10->20 B31-080128006
+0005 MA005    C      20  保留【Reserved】                                                          保留//20061120 6.5 P00-06110004 MODI 借方差额科目->保留 BY 28975
+0006 MA006    C      20  应交营业税科目【Business Tax Payable A/C】                                应交营业税科目//20061120 6.5 P00-06110004 MODI 保留->应交营业税科目 BY 28975 //20080219 modi by 35501 10->20 B31-080128006
+0007 MA007    C      20  保留【Reserved】                                                          保留//20061120 6.5 P00-06110004 MODI 贷方差额科目->保留 BY 28975
+0008 MA008    C      10  保留【Reserved】                                                          保留
+0009 MA009    C      20  现金折扣科目【Cash Discount A/C】                                         现金折扣科目
+0010 MA010    C      10  保留【Reserved】                                                          保留
+0011 MA011    C      20  预付账款科目【Prepayment Account Code】                                   预付账款科目 //890919 ADD
+0012 MA012    C      20  保留【Reserved】                                                          保留 //890919 ADD//20061120 6.5 P00-06110004 MODI 溢付科目->保留 BY 28975
+0013 MA013    C       4  调汇单别【Adjust Exchange Rate Order Type】                               调汇单别 //20020604 V3.1 ADD
+0014 MA014    C      20  汇兑损失入账科目【Exchange Loss A/C】                                     汇兑损失入账科目 //20020604 V3.1 ADD
+0017 MA017    C      04  保留【Reserved】                                                          保留 //20040921 ADD BY 32350 FOR P02-03080034//20061120 6.5 P00-06110004 MODI 溢付待抵单别->保留 BY 28975
+0018 MA018    C      01  期末调汇【EOP Exchange Adjustment】                                       Y/N [DEF:"Y"]  //20040921 ADD BY 32350 FOR P02-03080034
+0021 MA021    C       1  付款核销方式【Payment Write-off Method】                                  1.按单据、2.按产品 [DEF:"1"] //20050606 add by 31380 for 6.0 //20061120 6.5 P00-06110004 MODI 保留字段->付款核销方式 BY 28975
+0022 MA022    C      01  暂估成本核算管理【Receipt Cost Analysis Management】                      Y/N [DEF:"N"] //20050606 add by 31380 for 6.0//20061120 6.5 P00-06110004 MODI 保留字段->须完成暂估入库成本核算 BY 28975   //20080818 MODI BY 44128 FOR  B00-080818001 DEF Y->N
+0023 MA023    C      10  保留字段【Reserved Field】                                                保留字段 //20050606 add by 31380 for 6.0
+0024 MA024    C      10  保留字段【Reserved Field】                                                保留字段 //20050606 add by 31380 for 6.0
+0025 MA025    V      30  保留字段【Reserved Field】                                                保留字段 //20050606 add by 31380 for 6.0
+0026 MA026    N    16.6  保留字段【Reserved Field】                                                保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0027 MA027    C       4  进货成本调整单别【Purchase Cost Adjustment Order Type】                   进货成本调整单别 //20061120 6.5 P00-06110004 ADD BY 28975↓
+0028 MA028    C       4  退货成本调整单别【Purchase Return Cost Adjustment Order Type】            退货成本调整单别
+0029 MA029    C       4  委外进货成本调整单别【Subcontract Receipt Cost Adjustment Order Type】    委外进货成本调整单别
+0030 MA030    C       4  委外退货成本调整单别【Subcontract Return Cost Adjustment Order Type】     委外退货成本调整单别
+0031 MA031    C       1  暂估方式【Estimation Method】                                             1.单到回冲，2.单到补差 3.月初回冲 [DEF:"3"]  //20080718 MODI BY 44128 FOR B00-080711001  DEF 1->3
+0032 MA032    C      20  暂估账款科目【Indicatively accounts subjects】                            暂估账款科目 //20061120 6.5 P00-06110004 ADD BY 28975↑
+0033 MA033    N    16.6  保留字段【Reserved Field】                                                保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0034 MA034    N    16.6  保留字段【Reserved Field】                                                保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0035 MA035    C      01  不同项目号合并开票【Combined Invoice from different Project No.】         不同项目号合并开票 //20110914 ADD BY 42172 FOR Z01-11091400001  增加保留字段  //20110922 add by 35501 FOR Z30-11083100001不同项目号合并开票->保留字段
+0036 MA036    C      01  保留字段【Reserved Field】                                                保留字段 //20110914 ADD BY 42172 FOR Z01-11091400001  增加保留字段
+
+文档代码:ACPTA
+文件名:采购发票单头档【Purchase Invoices Headers】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TA001+TA002
+INDEX01 :TA003+TA001+TA002
+INDEX02 :TA004+TA003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TA001    C       4  采购发票单别【Purchase Invoice Type】                        采购发票单别
+0002 TA002    C      11  采购发票单号【Purchase Invoice No.】                         采购发票单号
+0003 TA003    C       8  审核日期【Approval Date】                                    账款日期[FORMATE:YMD]//20061120 6.5 P00-06110004 MODI 应付凭单日期->审核日期
+0004 TA004    C      10  供应商【Supplier】                                           供应商编号
+0005 TA005    C       6  保留字段【Reserved Field】                                   保留字段 //20061120 6.5 P00-06110004 MODI 工厂 改为保留字段 BY 28975
+0006 TA006    C      30  税号【Tax Register Number】                                  税号//871006del_ta007 //890623 MODI BY 349 C8->C20   //20160602 MODI BY 600791 FOR Z01-16053100002 MODI 20->30
+0008 TA008    C       4  币种【Currency】                                             币种
+0009 TA009    N    12.7  汇率【Exchange Rate】                                        汇率 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0010 TA010    C       1  发票种类【Invoice Kind】                                     S.可抵扣专用发票、B.普通发票、T.运输发票、N.不可抵扣专用发票 A.农产品收购凭证、G.海关代征完税凭证、W.废旧物资收购凭证、Z.其他 //890623 ADD 'A,B,C' BY 349 FOR 大陆用 //901022 S06-9009036 MODI A~Z //P01-03010016 发票种类增加"普通发票"并调整原发票种类顺序 //20061120 6.5 P00-06110004 MARK 1.二联式、2.三联式、3.二联式收银机发票、4.三联式收银机发票、5.电子计算机发票、6.免用统一发票、
+0011 TA011    C       1  税种【Tax Type】                                             1.应税内含、2.应税外加、3.零税率、4.免税、9.不计税
+0012 TA012    C       1  保留字段【Reserved Field】                                   保留字段 //20061120 6.5 P00-06110004 MODI 扣抵区分 改为保留字段 BY 28975 1.可扣抵进货及费用、2.可扣抵固定资产、3.不可扣抵进货及费用、4.不可扣抵固定资产
+0013 TA013    C       1  保留字段【Reserved Field】                                   Y/N [DEF:"N"] //20061120 6.5 P00-06110004 MODI 烟酒注记 改为保留字段 BY 28975
+0014 TA014    C      50  发票号码【Invoice No.】                                      发票号码 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0015 TA015    C       8  发票日期【Invoice Date】                                     发票日期[FORMATE:YMD]
+0016 TA016    N    16.6  保留字段【Reserved Field】                                   发票货款 //20061120 6.5 P00-06110004 MODI 发票货款 改为保留字段 BY 28975 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0017 TA017    N    16.6  保留字段【Reserved Field】                                   发票税额 //20061120 6.5 P00-06110004 MODI 发票税额 改为保留字段 BY 28975 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 TA018    C       1  保留字段【Reserved Field】                                   Y/N [DEF:"N"] //20061120 6.5 P00-06110004 MODI 发票作废 改为保留字段 BY 28975
+0019 TA019    C       8  预计付款日【Planned Payment Date】                           预计付款日[FORMATE:YMD]
+0020 TA020    C       8  预计兑现日【Planned Cashing Date】                           预计兑现日[FORMATE:YMD]
+0021 TA021    V     255  备注【Remark】                                               备注
+0022 TA022    C       4  保留字段【Reserved Field】                                   采购单别 //20061120 6.5 P00-06110004 MODI 采购单别 改为保留字段 BY 28975
+0023 TA023    C      11  保留字段【Reserved Field】                                   采购单号 //20061120 6.5 P00-06110004 MODI 采购单号 改为保留字段 BY 28975
+0024 TA024    C       1  审核码【Approval Indicator】                                 Y/N/V
+0025 TA025    C       1  更新码【Update Indicator】                                   Y/N
+0026 TA026    C       1  保留字段【Reserved Field】                                   Y/N [DEF:"N"] //20061120 6.5 P00-06110004 MODI 结束 改为保留字段 BY 28975
+0027 TA027    N       1  打印次数【Print Times】                                      打印次数
+0028 TA028    N    16.2  原币税前金额【Amount(Not Including Tax) (O/C)】              原币应付税前金额 //20061120 6.5 P00-06110004 MODI 税前金额 改为无税金额 BY 28975  //20070529 MODI BY 34231 FOR 数值栏位小数拉长//20080104 MODI BY 36982 FOR 无税金额 改为 税前金额 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0029 TA029    N    16.2  增值税额【VAT】                                              原币增值税额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0030 TA030    N    16.2  原币已核销金额【Total Write-off(O/C)】                       原币已核销金额//20061120 6.5 P00-06110004 MODI 已付金额 改为 原币已核销金额 BY 28975  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0031 TA031    C       1  生成分录【Journalized】                                      Y/N [DEF:"N"] //88-06-23
+0032 TA032    C       6  保留字段【Reserved Field】                                   申报年月[FORMATE:YM] //88-06-23 //20061120 6.5 P00-06110004 MODI 申报年月 改为保留字段 BY 28975
+0033 TA033    C      01  冻结付款【Freeze Payment】                                   冻结付款[DEF:"N"]//881119ADD
+0034 TA034    C       8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]//89-05-25ADD
+0035 TA035    C      10  审核者【Approver】                                           审核人员//89-05-25ADD
+0036 TA036    N    05.4  税率【Tax Rate】                                             税率(%)[DEF:9.9999] //89-06-01ADD //20030701 5.0 P00-03040007 增值税率改成税率
+0037 TA037    N    16.2  本币税前金额【Amount(Not Including Tax) (B/C)】              本币应付税前金额//89-06-01ADD //20061120 6.5 P00-06110004 MODI 税前金额 改为无税金额 BY 28975  //20070529 MODI BY 34231 FOR 数值栏位小数拉长//20080104 MODI BY 36982 FOR 无税金额 改为 税前金额 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0038 TA038    N    16.2  本币增值税额【VAT(B/C)】                                     本币增值税额//89-06-01ADD  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0039 TA039    C      06  付款条件编号【Payment Term No.】                             付款条件编号 //890828 ADD BY 560
+0040 TA040    C      08  取得折扣付款日【Payment Date for Discount】                  取得折扣付款日[FORMATE:YMD] //890901 ADD BY 560
+0041 TA041    C      08  取得折扣兑现日【Cashing Date for Discount】                  取得折扣兑现日[FORMATE:YMD] //890901 ADD BY 560
+0042 TA042    N     5.4  折扣(%)【Discount(%)】                                       折扣(%) //890901 ADD BY 560
+0043 TA043    N    16.2  已冲税额【OffSeted Tax】                                     已冲税额[DEF:0] //890918ADD  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0044 TA044    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:'N'] //900131ADD //20080320 ADD S.传送中、BY 36982 FOR B31-080319001 
+0045 TA045    C       2  保留字段【Reserved Field】                                   流程编号(多角贸易)//900306 ADD //900614 MARK
+0046 TA046    C       1  保留字段【Reserved Field】                                   抛转编号//900614 MARK
+0049 TA049    C      12  发票代码【Invoice Code】                                     发票代码 //901022 2.4 ADD S06-9009036(大陆版用) //901022 2.4 ADD S06-9009036(大陆版用) //20020610 3.0 B00-020610011 MODI BY 28985 OLD:发票代码 //20050927 P00-05090012 6.0 MODI BY 28975 长度10=>12 //20100805 MODI BY 600144 FOR B32-100804001 启用此字段 '保留字段【Reserved Field】'--> '发票代码【Invoice Code】' (为配合税控系统的使用) 
+0050 TA050    N    12.7  上次重估汇率【Previous Revaluation Exchange Rate】           重估汇率 //20020604 V3.1 ADD //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0051 TA051    N    16.2  累计调汇金额【Total Adjust Exchange Rate Amount】            累计调汇金额 //20020604 V3.1 ADD  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0060 TA060    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+0070 TA070    C      06  部门【Department】                                           部门 //20040921 ADD BY 32350 FOR P02-03080034
+0073 TA073    C      01  EBC汇出码【EBCExport Indicator】                             Y/M/N [DEF:"N"] //20050606 add by 31380 for 6.0 //20060610 MODI BY 29618 FOR P00-06060010 保留字段->EBC汇出码
+0074 TA074    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0075 TA075    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0076 TA076    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0077 TA077    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0078 TA078    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0079 TA079    C       1  单据类型【Order Type】                                       1.蓝字、2.红字[DEF:"1"] //20061120 6.5 P00-06110004 ADD BY 28975↓
+0080 TA080    C       1  红冲【Reverse】                                              Y/N[DEF:"N"]
+0081 TA081    C       4  红冲发票单别【Reverse Invoice Type】                         红冲发票单别
+0082 TA082    C      11  红冲发票单号【Reverse Invoice No.】                          红冲发票单号
+0083 TA083    C       1  来源【Source】                                               1.进退货/委外进退货、2.报关/赎单费用、3.出口费用、4.固定资产、5.维修、6.采购单、7.CRM维修、9.其他[DEF:"1"]  //20091026 modi by 35501 for Z30-09102300001 add 7.CRM维修
+0084 TA084    C      10  进货供应商编号【Supplier No.】                               供应商编号
+0085 TA085    N    16.2  本币已核销金额【Total Write-off(B/C)】                       本币已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0086 TA086    N    16.2  原币已冲减金额【Total Offset Amount(O/C)】                   原币冲减金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0087 TA087    C       1  核销状态【Write-off Stauts】                                 1.未核销、2.部分核销、3.已核销[DEF:"1"]
+0088 TA088    C       1  费用结算码【Expense Settlement Indicator】                   进货费用分摊结算码 Y/N [DEF:"N"]
+0089 TA089    C      10  人员【Staff】                                                人员 //20061120 6.5 P00-06110004 ADD BY 28975↑
+0090 TA090    C      20  项目编号【Project No.】                                      项目编号    //20110317 ADD BY 39057 FOR Z10-11031500001
+0091 TA091    N    16.6  开票数量【Invoice Quantity】                                 开票数量 //20230223 9.2 ADD BY 01289
+
+文档代码:ACPTB
+文件名:采购发票单身档【Purchase Invoices Lines】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TB001+TB002+TB003
+INDEX01 :TB005+TB006
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TB001    C       4  采购发票单别【Purchase Invoice Type】                        采购发票单别
+0002 TB002    C      11  采购发票单号【Purchase Invoice No.】                         采购发票单号
+0003 TB003    C       4  采购发票序号【Purchase Invoice Sequence】                    采购发票序号
+0004 TB004    C       1  来源【Source】                                               1.进货、2.退货、3.委外进货、4.委外退货、5.报关/赎单费用、6.出口费用、7.取得资产、8.资产改良、E.资产进货 A.冲减预开发票 B.采购单  G.CRM维修 9.其他 //20061120 6.5 P00-06110004 modi A.预收待抵->A.冲减预开发票 BY 28975   //20091026 modi by 35501 for Z30-09102300001 add 7.CRM维修
+0005 TB005    C       4  来源单别【Source Order Type】                                来源单别 //20020617 MODI BY 28985 FOR B00-020614002 凭证单别=>来源单别
+0006 TB006    C      11  来源单号【Source Order No.】                                 来源单号 //20020617 MODI BY 28985 FOR B00-020614002 凭证单号=>来源单号
+0007 TB007    C       4  来源序号【Source Sequence】                                  来源序号 //20020617 MODI BY 28985 FOR B00-020614002 凭证序号=>来源序号
+0008 TB008    C       8  单据日期【Order Date】                                       单据日期[FORMATE:YMD] //20061120 6.5 P00-06110004 modi 凭证日期->单据日期 by 28975
+0009 TB009    N    16.2  应付金额【Amount Payable】                                   原币应付金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 TB010    N    16.6  保留字段【Reserved Field】                                   保留字段//20061120 6.5 P00-06110004 MODI 原币差额 改为保留(60版之前用于处理商业折扣，尾差) BY 28975 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 TB011    V     255  备注【Remark】                                               备注
+0012 TB012    C       1  审核码【Approval Indicator】                                 Y/N/V
+0013 TB013    C      20  科目编号【Account Code】                                     科目编号
+0014 TB014    C       6  费用部门【Expense Department】                               费用部门 //88-07-02
+0015 TB015    N    16.2  原币税前金额【Amount(Not Including Tax) (O/C)】              原币税前金额//89-06-01ADD //20061120 6.5 P00-06110004 MODI 税前金额 改为无税金额 BY 28975  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长//20080104 MODI BY 36982 FOR 无税金额 改为 税前金额 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0016 TB016    N    16.2  原币税额【Tax(O/C)】                                         原币税额//89-06-01ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0017 TB017    N    16.2  本币税前金额【Amount(Not Including Tax) (B/C)】              本币税前金额//89-06-01ADD //20061120 6.5 P00-06110004 MODI 税前金额 改为无税金额 BY 28975  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长//20080104 MODI BY 36982 FOR 无税金额 改为 税前金额 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TB018    N    16.2  本币税额【Tax(B/C)】                                         本币税额//89-06-01ADD  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0019 TB019    N    16.6  开票数量【Invoice Quantity】                                 开票数量 //20020722 3.1 ADD BY 28986  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0020 TB020    N    17.8  开票单价【Invoice Price】                                    开票单价 //20020722 3.1 ADD BY 28986  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0021 TB021    N    16.2  原币扣款金额【Detain Amount (O/C)】                          原币扣款金额 //20020722 3.1 ADD BY 28986  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0031 TB031    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0032 TB032    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0033 TB033    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0034 TB034    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0035 TB035    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0036 TB036    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0037 TB037    C      20  品号【Item】                                                 品号 //20061120 6.5 P00-06110004 ADD BY 28975↓
+0038 TB038    V      255  品名【Item Description】                                     品名 //20211209 MODI BY  01228(lijf) for Z30-21120900001 品名长度调整为60->255
+0039 TB039    V      255  规格【Spec】                                                 规格 //20211209 MODI BY  01228(lijf) for Z30-21120900001 规格长度调整为60->255
+0040 TB040    C      04  单位【Unit】                                                 单位
+0041 TB041    N    17.8  进货单价【Purchase Receipt Price】                           进货单价  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0042 TB042    N    16.2  原币已核销金额【Total Write-off(O/C)】                       原币已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0043 TB043    N    16.2  本币已核销金额【Total Write-off(B/C)】                       本币已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0044 TB044    N    16.2  原币已冲减金额【Total Offset Amount(O/C)】                   原币已冲减金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0045 TB045    N    16.2  原币已冲减税额【Total Offseted TAX (B/C)】                   原币已冲减税额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2   //20090331 modi by 35501 for Z11-09033100001 本币已冲减税额->原币已冲减税额
+0046 TB046    C      20  项目编号【Project No.】                                      项目编号
+0047 TB047    C       1  核销状态【Write-off Stauts】                                 1.未核销、2.部分核销、3.已核销[DEF:"1"]
+0048 TB048    N    16.2  累计调汇金额【Total Adjust Exchange Rate Amount】            累计调汇金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0049 TB049    N    16.2  本次开票原币税前金额【Amount Un-include Tax(O/C) In Current Invoice】 本次开票原币税前金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长//20080104 MODI BY 36982 FOR 无税金额 改为 税前金额 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0050 TB050    N    16.2  本次开票本币税前金额【Amount Un-include Tax(B/C) In Current Invoice】 本次开票本币税前金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长//20080104 MODI BY 36982 FOR 无税金额 改为 税前金额 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0051 TB051    C       1  费用结算码【Expense Settlement Indicator】                   进货费用分摊结算码 Y/N [DEF:"N"]
+0052 TB052    N    05.4  税率【Tax Rate】                                             费用发票税率(%)[DEF:9.9999]
+0053 TB053    C       1  归属存货成本【Attach To Inventory Cost】                     归属存货成本
+0054 TB054    N    16.2  原币差额【Variance (O/C)】                                   进货价差调整金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0055 TB055    N    16.2  本币差额【Difference(B/C)】                                  本币进货价差调整金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0056 TB056    C       4  调整单别【Adjustment Order Type】                            进货价差调整单别
+0057 TB057    C      11  调整单号【Adjustment Order No.】                             进货价差调整单号
+0058 TB058    C      11  调整序号【Adjustment Order Sequence】                        进货价差调整序号 //20061120 6.5 P00-06110004 ADD BY 28975↑
+
+
+//20061120 6.5 P00-06110004 ADD BY 28975
+文档代码:ACPTI
+文件名:其他应付单头档【Other Payables Headers】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TI001+TI002
+INDEX01 :TI003+TI001+TI002
+INDEX02 :TI004+TI003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TI001    C       4  其他应付单单别【Other Order Payable Type】                   其他应付单单别
+0002 TI002    C      11  其他应付单单号【Other Order Payable No.】                    其他应付单单号
+0003 TI003    C       8  审核日期【Approval Date】                                    账款日期[FORMATI:YMD]
+0004 TI004    C      10  应付对象编号【Partner Payable No.】                          应付对象编号 //20061120 6.5 P00-06110004 MODI 供应商编号->应付对象编号 BY 28975
+0005 TI005    C      10  人员【Staff】                                                人员
+0006 TI006    C       6  部门【Department】                                           部门
+0007 TI007    C       4  币种【Currency】                                             币种
+0008 TI008    N    12.7  汇率【Exchange Rate】                                        汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0009 TI009    C       1  生成分录【Journalized】                                      生成分录 [DEF:"N"]
+0010 TI010    C       8  预计付款日【Planned Payment Date】                           预计付款日[FORMATE:YMD]
+0011 TI011    C       8  预计兑现日【Planned Cashing Date】                           预计兑现日[FORMATE:YMD]
+0012 TI012    V     255  备注【Remark】                                               备注
+0013 TI013    C       1  审核码【Approval Indicator】                                 Y/N/V
+0014 TI014    N       1  打印次数【Print Times】                                      打印次数
+0015 TI015    N    16.2  原币应付金额【Amount Payable(O/C)】                          原币应付金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0016 TI016    N    16.2  本币应付金额【Amount Payable(B/C)】                          本币应付金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0017 TI017    N    16.2  已核销金额【Write-off】                                      已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TI018    N    16.2  本币已核销金额【Total Write-off(B/C)】                       本币已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0019 TI019    C       8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0020 TI020    C      10  审核者【Approver】                                           审核人员
+0021 TI021    C      06  付款条件编号【Payment Term No.】                             付款条件编号
+0022 TI022    C      08  取得折扣付款日【Payment Date for Discount】                  取得折扣付款日[FORMATE:YMD]
+0023 TI023    C      08  取得折扣兑现日【Cashing Date for Discount】                  取得折扣兑现日[V:YMD]
+0024 TI024    N     5.4  折扣(%)【Discount(%)】                                       折扣(%)
+0025 TI025    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:'N']  //20080320 ADD S.传送中、BY 36982 FOR B31-080319001
+0026 TI026    N    12.7  上次重估汇率【Previous Revaluation Exchange Rate】           重估汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0027 TI027    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0]
+0028 TI028    C      20  账款科目【Account Code】                                     账款科目
+0029 TI029    C       1  核销状态【Write-off Stauts】                                 1.未核销、2.部分核销、3.已核销[DEF:"1"]
+0030 TI030    C       1  更新码【Update Indicator】                                   Y/N [DEF:"N"]
+0031 TI031    C       1  单据类型【Order Type】                                       1.蓝字、2.红字[DEF:"1"]
+0032 TI032    N    16.2  累计调汇金额【Total Adjust Exchange Rate Amount】            累计调汇金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0033 TI033    C      01  EBC汇出码【EBCExport Indicator】                             Y/M/N [DEF:"N"]
+0034 TI034    C      01  EBC汇出码【EBCExport Indicator】                             Y/M/N [DEF:"N"]
+0035 TI035    C      01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它
+0036 TI036    C      20  应付对象简称【Partner Payable Description】                  应付对象简称:供应商简称或人员简称或其它简称
+0037 TI037    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0038 TI038    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0039 TI039    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0040 TI040    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0041 TI041    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0042 TI042    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0043 TI043    C      01  冻结付款【Freeze Payment】                                   冻结付款[DEF:"N"]   //20090204 ADD BY 35501 FOR Z11-08102300001 增加冻结付款功能
+0044 TI044    C      20  项目编号【Project No.】                                      项目编号    //20110317 ADD BY 39057 FOR Z10-11031500001
+0045 TI045    C      10  费用承担公司【Outlay Company】                               费用承担公司 //20120530 ADD BY 35501 FOR Z11-12052400001 
+0046 TI046    C       1  费用承担中心类型【Outlay Center Category】                   1.部门、2.员工、3.核算项目[DEF:"1"] //20120530 ADD BY 35501 FOR Z11-12052400001 
+0047 TI047    C      20  费用承担中心【Outlay Center】                                费用承担中心 //20120530 ADD BY 35501 FOR Z11-12052400001 
+0048 TI048    C       4  其他费用单别【Other Order Payable Type】                     其他费用单别 //20120530 ADD BY 35501 FOR Z11-12052400001 
+0049 TI049    C      11  其他费用单号【Other Order Payable No.】                      其他费用单号 //20120530 ADD BY 35501 FOR Z11-12052400001 
+
+
+//20061120 6.5 P00-06110004 ADD BY 28975
+文档代码:ACPTJ
+文件名:其他应付单单身档【Other Payables Lines】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TJ001+TJ002+TJ003
+INDEX01 :TJ005+TJ006
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TJ001    C       4  其他应付单单别【Other Order Payable Type】                   其他应付单单别
+0002 TJ002    C      11  其他应付单单号【Other Order Payable No.】                    其他应付单单号
+0003 TJ003    C       4  序号【Sequence】                                             其他应付单序号
+0004 TJ004    C      10  支出类型【Payout Type】                                      支出类型
+0005 TJ005    V      60  支出项目名称【Payout Subject Descrption】                    支出项目名称
+0006 TJ006    C      20  对方科目【Opposite Account Code】                            对方科目
+0007 TJ007    C       6  部门【Department】                                           部门
+0008 TJ008    C      10  人员【Staff】                                                人员
+0009 TJ009    N    16.2  原币金额【Amount(O/C)】                                      原币金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 TJ010    N    16.2  本币金额【Amount(B/C)】                                      本币金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0011 TJ011    V     255  备注【Remark】                                               备注
+0012 TJ012    C      20  项目编号【Project No.】                                      项目编号
+0013 TJ013    N    16.2  原币已核销金额【Total Write-off(O/C)】                       原币已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0014 TJ014    N    16.2  本币已核销金额【Total Write-off(B/C)】                       本币已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0015 TJ015    N    16.2  累计调汇金额【Total Adjust Exchange Rate Amount】            累计调汇金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0016 TJ016    C       1  审核码【Approval Indicator】                                 Y/N/V
+0017 TJ017    C       1  核销状态【Write-off Stauts】                                 1.未核销、2.部分核销、3.已核销[DEF:"1"]
+0018 TJ018    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0019 TJ019    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0020 TJ020    V      30  费用项目编号【Outlay Item No.】                              费用项目编号 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段//20120530 modi BY 35501 FOR Z11-12052400001  保留字段->费用项目编号
+0021 TJ021    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0022 TJ022    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0023 TJ023    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+
+
+//20061120 6.5 P00-06110004 ADD BY 28975
+文档代码:ACPTK
+文件名:付款单单头档【Payments Headers】
+类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :TK001+TK002
+INDEX01 :TK003+TK001+TK002
+INDEX02 :TK043+TK004+TK003
+INDEX03 :TK017+TK018
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                     备注
+===============================================================================================
+0001 TK001    C        4  付款单别【Payment Order Type】                               付款单别
+0002 TK002    C       11  付款单号【Payment Order No.】                                付款单号
+0003 TK003    C        8  付款日期【Payment Date】                                     付款日期[FORMATE:YMD]
+0004 TK004    C       10  应付对象编号【Partner Payable No.】                          应付对象编号
+0005 TK005    C       10  人员【Staff】                                                人员
+0006 TK006    C        6  部门【Department】                                           部门
+0007 TK007    C        4  币种【Currency】                                             币种
+0008 TK008    N     12.7  汇率【Exchange Rate】                                        汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0009 TK009    V      255  备注【Remark】                                               备注
+0010 TK010    C        4  结算方式编号【Settlement Method No.】                        结算方式编号
+0011 TK011    C       10  付款银行【Payment Bank】                                     付款银行
+0012 TK012    C       30  付款账号【Accounts of the Payment】                          付款账号
+0013 TK013    C       20  结算科目【Settlement A/C】                                   结算科目
+0014 TK014    C       50  结算号【Settlement No.】                                     结算号  //20220304 MODI BY  00968(hejj) for 结算号字段长度调整为50码
+0015 TK015    C       08  到期日【Due Date】                                           到期日[FORMATE:YMD]
+0016 TK016    C       20  账款科目【Account Code】                                     账款科目
+0017 TK017    C        4  采购单单别【Purchase Order Type】                            采购单单别
+0018 TK018    C       11  采购单单号【Purchase Order No.】                             采购单单号
+0019 TK019    N        1  打印次数【Print Times】                                      打印次数
+0020 TK020    C        1  审核码【Approval Indicator】                                 Y/N/V
+0021 TK021    C        1  生成分录【Journalized】                                      生成分录(Y/N/V) [DEF:"N"]
+0022 TK022    C        8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0023 TK023    C       10  审核者【Approver】                                           审核人员
+0024 TK024    C        1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:'N'] //900131ADD  //20080320 ADD S.传送中、BY 36982 FOR B31-080319001
+0025 TK025    N       01  传送次数【Transfer Times】                                   传送次数[DEF:0]
+0026 TK026    C        1  更新码【Update Indicator】                                   Y/N [DEF:"N"]
+0027 TK027    C       20  项目编号【Project No.】                                      项目编号
+0028 TK028    C        1  核销状态【Write-off Stauts】                                 1.未核销、2.部分核销、3.已核销[DEF:"1"]
+0029 TK029    C        1  异币种付款核销【Write-off for Non Base Currency】            Y/N
+0030 TK030    N     16.2  原币实付金额【Actual Paid Amount(O/C)】                      原币实付金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0031 TK031    N     16.2  本币实付金额【Actual Paid Amount(B/C)】                      本币实付金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0032 TK032    N     16.2  原币折扣金额【Discount(O/C)】                                原币折扣金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2   
+0033 TK033    N     16.2  本币折扣金额【Discount(B/C)】                                本币折扣金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2   
+0034 TK034    N     16.2  本币汇兑损失金额【Exchange Loss(B/C)】                       本币汇兑损失金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0035 TK035    N     16.2  原币已核销金额【Total Write-off(O/C)】                       原币已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0036 TK036    N     16.2  本币已核销金额【Total Write-off(B/C)】                       本币已核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0037 TK037    N     12.7  上次重估汇率【Previous Revaluation Exchange Rate】           上次重估汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0038 TK038    C        1  退款来源【Refund Source】                                    1.应付单据、2.付款单
+0039 TK039    N     16.2  累计调汇金额【Total Exchange Rate Adjustment Amount】        累计调汇金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0040 TK040    C       01  保留字段【Reserved Field】                                   EBC汇出码保留 Y/M/N [DEF:"N"]
+0041 TK041    C        4  保留字段【Reserved Field】                                   应收应付冲账单别 //20070124 改为保留字段 BY 28975
+0042 TK042    C       11  保留字段【Reserved Field】                                   应收应付冲账单号
+0043 TK043    C       01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它
+0044 TK044    C       20  应付对象简称【Partner Payable Short Description】            应付对象简称:供应商简称或人员简称或其它简称
+0045 TK045    V       30  收入科目【Reserved Field】                                   收入科目 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段   //20131220 MODI BY 602067 FOR Z01-13120200001 启用预留字段
+0046 TK046    N     16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0047 TK047    N     16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0048 TK048    N     16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0049 TK049    C       08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0050 TK050    N     16.2  原币收入金额【Income Amount(O/C)】                           原币收入金额 //20081111 ADD BY 35501 FOR Z11-08102200001 原币费用金额
+0051 TK051    N     16.2  本币收入金额【Income Amount(B/C)】                           本币收入金额 //20081111 ADD BY 35501 FOR Z11-08102200001 本币费用金额 
+0052 TK052    C        4  借款单单别【Borrowing Order Type】                           借款单单别  //20110128 ADD BY 35501 FOR Z30-10122000001
+0053 TK053    C       11  借款单单号【Borrowing Order No.】                            借款单单号  //20110128 ADD BY 35501 FOR Z30-10122000001
+
+
+//20061120 6.5 P00-06110004 ADD BY 28975
+文档代码:ACPTL
+文件名:付款实时核销单身档【Payment Write-off Instant Lines】
+类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TL001+TL002+TL003
+INDEX01 :TL005+TL006+TL007
+INDEX02 :TL015
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TL001    C      04  付款单别【Payment Order Type】                               付款单别
+0002 TL002    C      11  付款单号【Payment Order No.】                                付款单号
+0003 TL003    C      04  序号【Sequence】                                             序号
+0004 TL004    C      01  款项类别【Transaction Category】                             1:发票、2:其他应付、3:退款、4:冲减预付款、5：付款、9.其他收入 A.费用报销 //20081111 modi by 35501 for Z11-08102200001 add ,9.其他收入
+0005 TL005    C      04  来源单别【Source Order Type】                                来源单别
+0006 TL006    C      11  来源单号【Source Order No.】                                 来源单号
+0007 TL007    C      04  来源序号【Source Sequence】                                  来源序号
+0008 TL008    C      50  发票号【Invoice No.】                                        发票号码 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0009 TL009    C       8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0010 TL010    C      20  应付科目【Account Code Payable】                             应付科目
+0011 TL011    C      10  人员【Staff】                                                人员
+0012 TL012    C       6  部门【Department】                                           部门
+0013 TL013    C       4  币种【Currency】                                             币种
+0014 TL014    N    12.7  汇率【Exchange Rate】                                        汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0015 TL015    C      20  品号【Item】                                                 应付品项      //20070717 MODI BY 33504 FOR P00-07060006 应付品项-->品号
+0016 TL016    V      255  品名【Description】                                          品项名称      //20070717 MODI BY 33504 FOR P00-07060006 品项名称-->品名 //20211209 MODI BY  01228(lijf) for Z30-21120900001 品名长度调整为60->255
+0017 TL017    N    16.2  原币应付金额【Amount Payable(O/C)】                          原币应付金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TL018    N    16.2  原币应付余额【Payable Balance (O/C)】                        原币应付余额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0019 TL019    N    16.2  原币本次核销金额【Write-off(O/C)】                           原币本次核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0020 TL020    N    16.2  本币本次核销金额【Write-off(B/C)】                           本币本次核销金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0021 TL021    N    16.2  原币折扣金额【Discount(O/C)】                                原币折扣金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0022 TL022    N    16.2  本币折扣金额【Discount(B/C)】                                本币折扣金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0023 TL023    V     255  备注【Remark】                                               备注
+0024 TL024    C      20  项目编号【Project No.】                                      项目编号
+0025 TL025    V      20  核销批号【Write-off Batch No.】                              核销批号
+0026 TL026    C       8  核销日期【Write-off Date】                                   单据日期[FORMATE:YMD]
+0027 TL027    C       1  审核码【Approval Indicator】                                 Y/N/V
+0028 TL028    V      255  规格【Specification】                                        规格 //20070717 MODI BY 33504 FOR P00-07060006 品项规格-->规格 //20211209 MODI BY  01228(lijf) for Z30-21120900001 规格长度调整为60->255
+0029 TL029    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0030 TL030    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0031 TL031    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0032 TL032    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0033 TL033    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0034 TL034    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0035 TL035    N     5.4  折扣率(%)【Discount(%)】                                     折扣率(%)                    //20080820 ADD BY 35501 FOR Z11-08081400001 新增字段
+0036 TL036    N    16.2  原币收入金额【Income Amount(O/C)】                           原币收入金额 //20081111 ADD BY 35501 FOR Z11-08102200001 原币费用金额
+0037 TL037    N    16.2  本币收入金额【Income Amount(B/C)】                           本币收入金额 //20081111 ADD BY 35501 FOR Z11-08102200001 本币费用金额 
+0038 TL038    C      04  借/还款单别【Borrowing/Refund Order Type】                   借/还款单别
+0039 TL039    C      11  借/还款单号【Borrowing/Refund Order No.】                    借/还款单号
+
+
+//20070116 7.0 P00-06110004 ADD BY 28985
+文档代码:ACPTM
+文件名:费用结算单头档【Expense Settlements Headers】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TM001+TM002
+INDEX01 :TM003+TM001+TM002
+INDEX02 :TM004+TM001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TM001    C       4  结算单别【Settlement Order Type】                            结算单别
+0002 TM002    C      11  结算单号【Settlement Order No.】                             结算单号
+0003 TM003    C       8  结算日期【Settlement Date】                                  结算日期[FORMATE:YMD]
+0004 TM004    C      10  供应商【Supplier】                                           供应商
+0005 TM005    C       8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0006 TM006    C      10  审核者【Approver】                                           审核者
+0007 TM007    C       1  审核码【Approval Indicator】                                 Y/N/V
+0008 TM008    C       1  费用分摊方式【Expense Allocation Method】                    1.按金额 2.按数量[DEF "1"]
+0009 TM009    N    16.2  分摊费用合计【Total Allocated Expense】                      分摊费用合计  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 TM010    V     255  备注【Remark】                                               备注
+0011 TM011    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0012 TM012    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0013 TM013    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0014 TM014    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0015 TM015    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0016 TM016    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0017 TM017    C      20  项目编号【Project No.】                                      项目编号 //20110317 ADD BY 39057 FOR Z10-11031500001
+
+
+//20070116 7.0 P00-06110004 ADD BY 28985
+文档代码:ACPTN
+文件名:费用结算进货单身档【Expense Settlements Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TN001+TN002+TN003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TN001    C       4  结算单别【Settlement Order Type】                            结算单别
+0002 TN002    C      11  结算单号【Settlement Order No.】                             结算单号
+0003 TN003    C       4  结算序号【Settlement Sequence】                              结算序号
+0004 TN004    C       1  来源【Source】                                               1.进货、2.委外进货 [DEF:"1"]
+0005 TN005    C       4  单别【Order Type】                                           单别
+0006 TN006    C      11  单号【Order No.】                                            单号
+0007 TN007    C       4  序号【Sequence】                                             序号
+0008 TN008    C       8  日期【Date】                                                 日期
+0009 TN009    C      20  品号【Item】                                                 品号
+0010 TN010    N    16.6  数量【Quantity】                                             数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0011 TN011    N    16.2  金额【Amount】                                               金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0012 TN012    N    16.2  本次分摊费用【Current Allocated Expense】                    本次分摊费用   //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0013 TN013    C       1  审核码【Approval Indicator】                                 Y/N/V
+0014 TN014    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0015 TN015    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0016 TN016    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0017 TN017    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0018 TN018    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0019 TN019    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0020 TN020    C       4  调整单别【Adjustment Order Type】                            费用分摊调整单别 //20080812 8.0 Z11-08081200001 ADD BY 35501
+0021 TN021    C      11  调整单号【Adjustment Order No.】                             费用分摊调整单号 //20080812 8.0 Z11-08081200001 ADD BY 35501
+0022 TN022    C       4  调整序号【Adjustment Order Sequence】                        费用分摊调整序号 //20080812 8.0 Z11-08081200001 ADD BY 35501
+0023 TN023    C      20  项目编号【Project No.】                                      项目编号 //20110317 ADD BY 39057 FOR Z10-11031500001
+
+
+//20070116 7.0 P00-06110004 ADD BY 28985
+文档代码:ACPTO
+文件名:费用结算发票单身档【Expense Invoices Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TO001+TO002+TO003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TO001    C       4  结算单别【Settlement Order Type】                            结算单别
+0002 TO002    C      11  结算单号【Settlement Order No.】                             结算单号
+0003 TO003    C       4  结算序号【Settlement Sequence】                              结算序号
+0004 TO004    C       1  来源【Source】                                               1.费用发票、2.其他 [DEF:"1"]
+0005 TO005    C      50  发票号码【Invoice No.】                                      发票号码 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0006 TO006    C       4  单别【Order Type】                                           单别
+0007 TO007    C      11  单号【Order No.】                                            单号
+0008 TO008    C       4  序号【Sequence】                                             序号
+0009 TO009    C       8  日期【Date】                                                 日期
+0010 TO010    C      10  费用编号【Expense No.】                                      费用编号
+0011 TO011    C      20  费用名称【Expense Description】                              费用名称
+0012 TO012    N    16.2  不可抵扣金额【the Amount that is not allowed to be Offseted】 不可抵扣金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0013 TO013    V     255  备注【Remark】                                               备注
+0014 TO014    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0015 TO015    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0016 TO016    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0017 TO017    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0018 TO018    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0019 TO019    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0020 TO020    C      20  项目编号【Project No.】                                      项目编号    //20110317 ADD BY 39057 FOR Z10-11031500001
+
+
+//20061120 6.5 P00-06110004 ADD BY 28975
+文档代码:ACPTP
+文件名:暂估成本核算单头档【Interim Estimate Cost Order Headers】
+类    型:1 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TP001+TP002
+INDEX01 :TP003+TP001+TP002
+INDEX02 :TP004+TP001
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TP001    C       4  暂估核算单别【Estimation Analysis Order Type】               暂估成本核算单别
+0002 TP002    C      11  暂估核算单号【Estimation Analysis Order No.】                暂估成本核算单号
+0003 TP003    C       8  审核日期【Approval Date】                                    审核日期[FORMATE:YMD]
+0004 TP004    C       8  核算年月【Accounting Year/Month】                            核算年月
+0005 TP005    C       8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0006 TP006    C      10  审核者【Approver】                                           审核者
+0007 TP007    C       1  审核码【Approval Indicator】                                 Y/N/V
+0008 TP008    V     255  备注【Remark】                                               备注
+0009 TP009    N       1  打印次数【Print Times】                                      打印次数
+0010 TP010    C       1  生成分录【Journalized】                                      生成分录(Y/N) [DEF:"N"]
+0011 TP011    C       1  签核状态码【E-Approval Status】                              0.待处理、S.传送中、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:'N'] //20080320 ADD S.传送中、BY 36982 FOR B31-080319001
+0012 TP012    N      01  传送次数【Transfer Times】                                   传送次数[DEF:0]
+0013 TP013    N    16.6  总数量【Total Quantity】                                     总数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0014 TP014    N    16.2  本月入库暂估成本【Estimation Receipt Cost in Current Month】 本月入库暂估成本  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0015 TP015    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0016 TP016    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0017 TP017    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0018 TP018    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0019 TP019    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0020 TP020    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0021 TP021    C      10  供应商编号【Supplier No.】                                   供应商编号 //20080825 ADD BY 44116 FOR Z11-08082500001
+
+
+//20061120 6.5 P00-06110004 ADD BY 28975
+文档代码:ACPTQ
+文件名:暂估成本核算单身档【Interim Estimate Cost Order Lines】
+类    型:2 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TQ001+TQ002+TQ003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TQ001    C       4  暂估核算单别【Estimation Analysis Order Type】               暂估核算单别
+0002 TQ002    C      11  暂估核算单号【Estimation Analysis Order No.】                暂估核算单号
+0003 TQ003    C       4  暂估核算序号【Estimation Analysis Order Sequence】           暂估核算序号
+0004 TQ004    C       1  来源【Source】                                               1.进货 2.退货 3.委外进货 4.委外退货
+0005 TQ005    C      10  供应商编号【Supplier No.】                                   供应商编号
+0006 TQ006    C      06  部门【Department】                                           部门
+0007 TQ007    C      20  品号【Item】                                                 品号
+0008 TQ008    V      255  品名【Item Description】                                     品名 //20211209 MODI BY  01228(lijf) for Z30-21120900001 品名长度调整为60->255
+0009 TQ009    V      255  规格【Spec】                                                 规格 //20211209 MODI BY  01228(lijf) for Z30-21120900001 规格长度调整为60->255
+0010 TQ010    C      04  入库单别【Receipt Type】                                     入库单别
+0011 TQ011    C      11  入库单号【Receipt Order No.】                                入库单号
+0012 TQ012    C      04  入库序号【Receipt Sequence】                                 入库序号
+0013 TQ013    C      08  入库日期【Receipt Date】                                     验收入库日期[FORMATE:YMD]
+0014 TQ014    C      04  计价单位【Pricing Unit】                                     计价单位
+0015 TQ015    N    16.6  计价数量【Pricing Quantity】                                 计价数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0016 TQ016    N    16.6  已开票数量【Has argued that the number of】                  已开票数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.6->16.6
+0017 TQ017    C      10  仓库【Warehouse】                                            仓库
+0018 TQ018    C      20  批号【Lot】                                                  批号
+0019 TQ019    C      10  库位【Bin】                                                  库位
+0020 TQ020    C       4  币种【Currency】                                             币种
+0021 TQ021    N    12.7  汇率【Exchange Rate】                                        汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0022 TQ022    N    17.8  暂估单位进价【Estimation Unit Price】                        原币暂估单位进价  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0023 TQ023    N    16.2  原币税前金额【Amount Un-include Tax(O/C)】                   原币税前金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0024 TQ024    N    16.2  原币税额【Tax(O/C)】                                         原币税额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0025 TQ025    N    16.2  本币税前金额【Amount Un-include Tax(B/C)】                   本币税前金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0026 TQ026    N    16.2  本币税额【Tax(B/C)】                                         本币税额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0027 TQ027    C      01  审核码【Approval Indicator】                                 Y/N/V
+0028 TQ028    V     255  备注【Remark】                                               备注
+0029 TQ029    N    17.6  暂估已回冲数量【Indicatively Returned Quantity】             暂估已回冲数量  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长
+0030 TQ030    N    16.2  暂估已回冲原币金额【Indicatively Returned Amount(O/C)】      暂估已回冲原币金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0031 TQ031    N    16.2  暂估已回冲本币金额【Indicatively Returned Amount(B/C)】      暂估已回冲本币金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0032 TQ032    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0033 TQ033    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0034 TQ034    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0035 TQ035    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0036 TQ036    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0037 TQ037    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0038 TQ038    C      20  项目编号【Project No.】                                      项目编号    //20110317 ADD BY 39057 FOR Z10-11031500001
+
+
+文档代码:ACPTE
+文件名:应付对象每月统计单头【Payables Statistic Monthly - Partner Payable Headers】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TE019+TE001+TE002+TE013+TE014+TE015
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TE001    C      10  应付对象编号【Partner Payable No.】                          应付对象编号 //20061120 6.5 P00-06110004 MODI 供应商编号->应付对象编号 BY 28975
+0002 TE002    C       6  统计年月【Summary Year and Month】                           统计年月[FORMATE:YM]
+0003 TE003    N    16.2  本币期初总金额【Total Beginning Amount(B/C)】                本币期初总金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0004 TE004    N    16.2  本币借方总金额【Total Debit Amount(B/C)】                    本币本期借方总金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0005 TE005    N    16.2  本币贷方总金额【Total Credit Amount(B/C)】                   本币本期贷方总金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0006 TE006    V     255  备注【Remark】                                               备注
+0007 TE007    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0008 TE008    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0009 TE009    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0010 TE010    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0011 TE011    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0012 TE012    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0013 TE013    C       4  币种【Currency】                                             币种 //20061120 6.5 P00-06110004 add BY 28975↓
+0014 TE014    C      10  人员【Staff】                                                人员
+0015 TE015    C       6  部门【Department】                                           部门
+0016 TE016    N    16.2  原币期初总金额【Total Beginning Amount(O/C)】                原币期初总金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0017 TE017    N    16.2  原币借方总金额【Total Debit Amount(O/C)】                    原币本期借方总金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0018 TE018    N    16.2  原币贷方总金额【Total Credit Amount(O/C)】                   原币本期贷方总金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0019 TE019    C      01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它 //20061120 6.5 P00-06110004 add BY 28975↑
+
+
+文档代码:ACPTF
+文件名:应付对象每月统计单身【Payables Statistic Monthly - Partner Payable Lines】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TF020+TF001+TF002+TF003+TF004+TF005+TF018+TF019
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TF001    C      10  应付对象编号【Partner Payable No.】                          应付对象编号 //20061120 6.5 P00-06110004 MODI 供应商编号->应付对象编号 BY 28975
+0002 TF002    C       6  统计年月【Summary Year and Month】                           统计年月[FORMATE:YM]
+0003 TF003    C       1  类别【Type】                                                 1.应付 2.预付 4.付款 //20061120 6.5 P00-06110004 mark 3.溢付 add 4.付款 BY 28975
+0004 TF004    C       4  保留字段【Reserved Field】                                   保留字段 //20061120 6.5 P00-06110004 MODI 单别->保留字段 BY 28975
+0005 TF005    C       4  币种【Currency】                                             币种
+0006 TF006    N    16.2  原币期初金额【Beginning Amount(O/C)】                        原币期初金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0007 TF007    N    16.2  原币本期借方金额【Debit Amount in Current Period(O/C)】      原币本期借方金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0008 TF008    N    16.2  原币本期贷方金额【Credit Amount in Current Period (O/C)】    原币本期贷方金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0009 TF009    N    16.2  本币期初金额【Beginning Amount(B/C)】                        本币期初金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0010 TF010    N    16.2  本币本期借方金额【Debit Amount in Current Period (B/C)】     本币本期借方金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0011 TF011    N    16.2  本币本期贷方金额【Credit Amount in Current Period (B/C)】    本币本期贷方金额  //20070529 MODI BY 34231 FOR P00-07050010 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0012 TF012    C      01  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0013 TF013    C      08  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0014 TF014    V      30  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0
+0015 TF015    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0016 TF016    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0017 TF017    N    16.6  保留字段【Reserved Field】                                   保留字段 //20050606 add by 31380 for 6.0 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0018 TF018    C      10  人员【Staff】                                                人员 //20061120 6.5 P00-06110004 add BY 28975
+0019 TF019    C       6  部门【Department】                                           部门 //20061120 6.5 P00-06110004 add BY 28975
+0020 TF020    C      01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它 //20061120 6.5 P00-06110004 add BY 28975
+
+
+//20061120 6.5 P00-06110004 ADD BY 28975
+文档代码:ACPLB
+文件名:应付账款异动明细档【A/P Transaction Details】
+类    型:5 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :LB001+LB002+LB003+LB004+LB009+LB010
+INDEX01 :LB027+LB005+LB020+LB001
+INDEX02 :LB027+LB005+LB009+LB010
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                     备注
+===============================================================================================
+0001 LB001    C        1  类别【Type】                                                 0.预开发票，1.发票，2.其他应付，3.付款，4.预付款，5.退款 C.期末调汇
+0002 LB002    C        4  交易单别【Transaction Order Type】                           交易单别
+0003 LB003    C       20  交易单号【Transaction Order No.】                            交易单号 或 核销批号
+0004 LB004    C        8  交易日期【Transaction Date】                                 交易日期[FORMATE:YMD]
+0005 LB005    C       10  应付对象编号【Partner Payable No.】                          应付对象编号
+0006 LB006    C        8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0007 LB007    C        4  币种【Currency】                                             币种
+0008 LB008    N     12.7  汇率【Exchange Rate】                                        汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0009 LB009    C        4  影响单别【Affected Order Type】                              影响单别
+0010 LB010    C       11  影响单号【Affected Order No.】                               影响单号
+0011 LB011    N        1  方向【Debit/Credit】                                         -1.借、1.贷 [DEF:1]
+0012 LB012    C       50  发票号【Invoice No.】                                        发票号码 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0013 LB013    N     16.2  原币金额【Amount(O/C)】                                      原币金额 //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0014 LB014    N     16.2  本币金额【Balance(O/C)】                                     本币金额 //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0015 LB015    N     16.6  原币本次核销金额【Write-off(O/C)】                           原币已核销金额 //保留 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0016 LB016    N     16.6  本币本次核销金额【Write-off(B/C)】                           本币已核销金额 //保留 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6
+0017 LB017    N     16.6  原币差异金额【Discount(O/C)】                                原币差异金额 //保留 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6  //20081111 modi by 35501 for Z11-08102200001 折扣->差异
+0018 LB018    N     16.6  本币差异金额【Discount(B/C)】                                本币差异金额 //保留 //20080718 MODI BY 38130 FOR Z10-08071600001 13.2->16.6  //20081111 modi by 35501 for Z11-08102200001 折扣->差异
+0019 LB019    N     16.2  本币汇兑费用【Exchange Expense (B/C)】                       本币汇兑费用 //只有期末调汇写入//20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0020 LB020    C        8  审核日期【Approval Date】                                    审核日期[FORMATE:YMD]
+0021 LB021    C        1  核销状态【Write-off Stauts】                                 1.未核销、2.部分核销、3.已核销 //保留
+0022 LB022    C        1  保留字段【Reserved Field】                                   保留字段
+0023 LB023    C        1  生成分录-成本【Journalized-Cost】                            生成分录(Y/N/V) [DEF:"N"]
+0024 LB024    V      255  备注【Remark】                                               备注
+0025 LB025    C       10  人员【Staff】                                                人员
+0026 LB026    C        6  部门【Department】                                           部门
+0027 LB027    C       01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它
+0028 LB028    C       20  应付对象简称【Partner Payable Description】                  应付对象简称:供应商简称或人员简称或其它简称
+0029 LB029    C       08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0030 LB030    V       30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0031 LB031    C       20  项目编号【Project No.】                                      项目编号   //20110317 ADD BY 35501 FOR Z10-11031500001
+0032 LB032    N     16.6  保留字段【Reserved Field】                                   保留字段 //20110914 ADD BY 42172 FOR Z01-11091400001  增加保留字段
+0033 LB033    N     16.6  保留字段【Reserved Field】                                   保留字段 //20110914 ADD BY 42172 FOR Z01-11091400001  增加保留字段
+0034 LB034    N     16.6  保留字段【Reserved Field】                                   保留字段 //20110914 ADD BY 42172 FOR Z01-11091400001  增加保留字段 
+
+
+//20061120 6.5 P00-06110004 ADD BY 28975
+文档代码:ACPLC
+文件名:核销记录档【Write-off Records】
+类    型:5 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:N
+PRIMARY :LC001+LC002+LC003+LC004+LC005
+INDEX01 :LC036+LC006+LC003+LC004+LC005
+INDEX02 :LC036+LC006+LC007
+INDEX03 :LC030+LC002
+===============================================================================================
+序号 字段编号 TYPE  长度  字段名称                                                     备注
+===============================================================================================
+0001 LC001    C        1  类别【Type】                                                 6.付款核销 7.应收冲应付 8.预收冲预付 9.应付款转销 A.预付款转销 D.退款核销 E.红字冲销 //20080808 MODI by 35501 ADD E.红字冲销
+0002 LC002    V       20  核销批号【Write-off Batch No.】                              核销批号
+0003 LC003    C        4  交易单别【Transaction Order Type】                           交易单别
+0004 LC004    C       11  交易单号【Transaction Order No.】                            交易单号
+0005 LC005    C        4  交易序号【Transaction Sequence】                             交易序号
+0006 LC006    C       10  应付对象编号【Partner Payable No.】                          应付对象编号
+0007 LC007    C        8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0008 LC008    C        4  币种【Currency】                                             币种
+0009 LC009    N     12.7  汇率【Exchange Rate】                                        汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0010 LC010    C       10  人员【Staff】                                                人员
+0011 LC011    C        6  部门【Department】                                           部门
+0012 LC012    C       50  发票号【Invoice No.】                                        发票号码 //20220304 MODI BY  00968(hejj) for 发票号字段长度调整为50码
+0013 LC013    N     16.2  原币金额【Amount(O/C)】                                      原币金额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0014 LC014    N     16.2  原币余额【Balance(O/C)】                                     原币余额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0015 LC015    N     16.2  原币本次核销金额【Write-off(O/C)】                           原币已核销金额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0016 LC016    N     16.2  本币本次核销金额【Write-off(B/C)】                           本币已核销金额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0017 LC017    N     16.2  原币差异金额【Discount(O/C)】                                原币差异金额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2  //20081111 modi by 35501 for Z11-08102200001 折扣->差异
+0018 LC018    N     16.2  本币差异金额【Discount(B/C)】                                本币差异金额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2  //20081111 modi by 35501 for Z11-08102200001 折扣->差异
+0019 LC019    N     16.2  本币汇兑费用【Exchange Expense (B/C)】                       本币汇兑费用  //记录付款单单头的汇兑费用//20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0020 LC020    C        4  结算方式编号【Settlement Method No.】                        结算方式编号
+0021 LC021    C       50  结算号【Settlement No.】                                     结算号    //20220304 MODI BY  00968(hejja) for TAPD-ID1001058 结算号字段长度调整为50码
+0022 LC022    C       20  品号【Item】                                                 品号//20070717 MODI BY 33504 FOR P00-07060006 应付品项-->品号
+0023 LC023    C        4  采购单单别【Purchase Order Type】                            采购单单别
+0024 LC024    C       11  采购单单号【Purchase Order No.】                             采购单单号
+0025 LC025    C       10  保留字段【Reserved Field】                                   审核人员
+0026 LC026    C        1  保留字段【Reserved Field】                                   Y/N/V
+0027 LC027    C        8  保留字段【Reserved Field】                                   审核日期[FORMATE:YMD]
+0028 LC028    C        1  核销状态【Write-off Stauts】                                 1.未核销、2.部分核销、3.已核销
+0029 LC029    C        8  核销日期【Write-off Date】                                   核销日期[FORMATE:YMD]
+0030 LC030    C       10  核销人【Write-off Man】                                      人员
+0031 LC031    C        1  生成分录【Journalized】                                      生成分录(Y/N/V) [DEF:"N"]
+0032 LC032    C        4  保留字段【Reserved Field】                                   保留字段
+0033 LC033    C       11  保留字段【Reserved Field】                                   保留字段
+0034 LC034    V      255  备注【Remark】                                               备注
+0035 LC035    C       20  项目编号【Project No.】                                      项目编号
+0036 LC036    C       01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它
+0037 LC037    C       20  应付对象简称【Partner Payable Description】                  应付对象简称:供应商简称或人员简称或其它简称
+0038 LC038    V       30  保留字段【Reserved Field】                                   保留字段  //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0039 LC039    N     16.6  保留字段【Reserved Field】                                   保留字段  //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0040 LC040    N     16.6  保留字段【Reserved Field】                                   保留字段  //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0041 LC041    N     16.6  保留字段【Reserved Field】                                   保留字段  //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+
+
+文档代码:ACPLD
+文件名:应付调汇单头档【A/P Exchange Adjustment Headers】
+类    型:5 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :LD001+LD002
+===============================================================================================
+序号 字段编号 TYPE   长度  字段名称                                                     备注
+===============================================================================================
+0001 LD001    C         4  调汇单别【Adjust Exchange Rate Order Type】                  调汇单别
+0002 LD002    C        11  调汇单号【Adjust Exchange Rate Order No.】                   调汇单号
+0003 LD003    C         8  调汇日期【Adjust Exchange Rate Date】                        调汇日期[FORMATE:YMD]
+0004 LD004    C         4  币种【Currency】                                             币种
+0005 LD005    N         1  汇兑损益方向【Debit/Credit】                                 -1.损失 ,1.收益
+0006 LD006    N      16.2  调汇金额【Exchange Adjustments】                             调汇金额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0007 LD007    C        20  调汇入账科目【A/C of Exchange Adjustment】                   调汇入账科目
+0008 LD008    C         1  生成分录【Journalized】                                      生成分录 [DEF:"N"]
+0009 LD009    N      12.7  调整汇率【Adjust Exchange Rate】                             调整汇率[DEF:1] //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0010 LD010    C         8  单据日期【Order Date】                                       单据日期[FORMATE:YMD]
+0011 LD011    N         1  打印次数【Print Times】                                      打印次数
+0012 LD012    C         1  审核码【Approval Indicator】                                 Y/N/V [DEF:"N"]
+0013 LD013    C        10  审核者【Approver】                                           审核人员
+0014 LD014    N        01  传送次数【Transfer Times】                                   传送次数[DEF:0]
+0015 LD015    V       255  备注【Remark】                                               备注
+0016 LD016    C         1  更新码【Update Indicator】                                   Y/N [DEF:"N"]
+0017 LD017    C        01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0018 LD018    C        08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0019 LD019    V        30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0020 LD020    N      16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0021 LD021    N      16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0022 LD022    N      16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+
+文档代码:ACPLE
+文件名:应付调汇单身档【A/P Exchange Adjustment Lines】
+类    型:5 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :LE001+LE002+LE003
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 LE001    C       4  调汇单别【Adjust Exchange Rate Order Type】                  调汇单别
+0002 LE002    C      11  调汇单号【Adjust Exchange Rate Order No.】                   调汇单号
+0003 LE003    C      05  调汇序号【Adjust Exchange Rate Sequence】                    调汇序号
+0004 LE004    C       1  账款类别【Transaction Category】                             1.应付款 2.其他应付款 3.预付款 [DEF:"1"]
+0005 LE005    C      10  应付对象编号【Partner Payable No.】                          应付对象编号
+0006 LE006    C       4  交易单别【Transaction Order Type】                           交易单别
+0007 LE007    C      11  交易单号【Transaction Order No.】                            交易单号
+0008 LE008    C      04  交易序号【Transaction Sequence】                             交易序号
+0009 LE009    N    12.7  上次重估汇率【Previous Revaluation Exchange Rate】           上次重估汇率 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+0010 LE010    N    16.2  原币余额【Balance(O/C)】                                     原币余额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0011 LE011    N    16.2  本币余额【Balance(B/C)】                                     本币余额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0012 LE012    N    16.2  调整后本币余额【Adjusted Balance(B/C)】                      调整后本币余额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0013 LE013    N       1  汇兑损益方向【Debit/Credit】                                 -1.损失 ,1.收益
+0014 LE014    N    16.2  调汇金额【Exchange Adjustments】                             调汇金额  //20070529 MODI BY 34231 FOR 数值栏位小数拉长 //20080718 MODI BY 38130 FOR Z10-08071600001 15.2->16.2
+0015 LE015    C       1  审核码【Approval Indicator】                                 Y/N/V [DEF:"N"]
+0016 LE016    V     255  备注【Remark】                                               备注
+0017 LE017    C      01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它
+0018 LE018    C      20  应付对象简称【Partner Payable Description】                  应付对象简称:供应商简称或人员简称或其它简称
+0019 LE019    C      01  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0020 LE020    C      08  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0021 LE021    V      30  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0022 LE022    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段
+0023 LE023    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0024 LE024    N    16.6  保留字段【Reserved Field】                                   保留字段 //20080718 ADD BY 38130 FOR Z10-08071600001  增加保留字段 
+0025 LE025    C      20  项目编号【Project No.】                                      项目编号   //20110317 ADD BY 35501 FOR Z10-11031500001
+
+
+//20110831 ADD BY 35501 FOR Z30-11083100001
+文档代码:ACPTR
+文件名:应付对象项目号每月统计单头【Payables Statistic Monthly - Partner Payable Headers】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TR019+TR001+TR002+TR013+TR014+TR015+TR020
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TR001    C      10  应付对象编号【Partner Payable No.】                          应付对象编号 
+0002 TR002    C       6  统计年月【Summary Year and Month】                           统计年月[FORMATR:YM]
+0003 TR003    N    16.2  本币期初总金额【Total Beginning Amount(B/C)】                本币期初总金额  
+0004 TR004    N    16.2  本币借方总金额【Total Debit Amount(B/C)】                    本币本期借方总金额 
+0005 TR005    N    16.2  本币贷方总金额【Total Credit Amount(B/C)】                   本币本期贷方总金额 
+0006 TR006    V     255  备注【Remark】                                               备注
+0007 TR007    C      01  保留字段【Reserved Field】                                   保留字段 
+0008 TR008    C      08  保留字段【Reserved Field】                                   保留字段 
+0009 TR009    V      30  保留字段【Reserved Field】                                   保留字段 
+0010 TR010    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0011 TR011    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0012 TR012    N    16.6  保留字段【Reserved Field】                                   保留字段 
+0013 TR013    C       4  币种【Currency】                                             币种 
+0014 TR014    C      10  人员【Staff】                                                人员
+0015 TR015    C       6  部门【Department】                                           部门
+0016 TR016    N    16.2  原币期初总金额【Total Beginning Amount(O/C)】                原币期初总金额  
+0017 TR017    N    16.2  原币借方总金额【Total Debit Amount(O/C)】                    原币本期借方总金额 
+0018 TR018    N    16.2  原币贷方总金额【Total Credit Amount(O/C)】                   原币本期贷方总金额 
+0019 TR019    C      01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它 
+0020 TR020    C      20  项目编号【Project No.】                                      项目编号
+
+
+//20110831 ADD BY 35501 FOR Z30-11083100001
+文档代码:ACPTS
+文件名:应付对象项目号每月统计单身【Payables Statistic Monthly - Partner Payable Lines】
+类    型:6 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+转档完成:Y
+PRIMARY :TS020+TS001+TS002+TS003+TS004+TS005+TS018+TS019+TS021
+===============================================================================================
+序号 字段编号 TYPE 长度  字段名称                                                     备注
+===============================================================================================
+0001 TS001    C      10  应付对象编号【Partner Payable No.】                          应付对象编号 
+0002 TS002    C       6  统计年月【Summary Year and Month】                           统计年月[FORMATE:YM]
+0003 TS003    C       1  类别【Type】                                                 1.应付 2.预付 4.付款 
+0004 TS004    C       4  保留字段【Reserved Field】                                   保留字段 
+0005 TS005    C       4  币种【Currency】                                             币种
+0006 TS006    N    16.2  原币期初金额【Beginning Amount(O/C)】                        原币期初金额  
+0007 TS007    N    16.2  原币本期借方金额【Debit Amount(O/C) in Current Period】      原币本期借方金额
+0008 TS008    N    16.2  原币本期贷方金额【Credit Amount(O/C) in Current Period】     原币本期贷方金额
+0009 TS009    N    16.2  本币期初金额【Beginning Amount(B/C)】                        本币期初金额  
+0010 TS010    N    16.2  本币本期借方金额【Debit Amount(B/C) in Current Period】      本币本期借方金额
+0011 TS011    N    16.2  本币本期贷方金额【Credit Amount(B/C) in Current Period】     本币本期贷方金额
+0012 TS012    C      01  保留字段【Reserved Field】                                   保留字段
+0013 TS013    C      08  保留字段【Reserved Field】                                   保留字段
+0014 TS014    V      30  保留字段【Reserved Field】                                   保留字段
+0015 TS015    N    16.6  保留字段【Reserved Field】                                   保留字段
+0016 TS016    N    16.6  保留字段【Reserved Field】                                   保留字段
+0017 TS017    N    16.6  保留字段【Reserved Field】                                   保留字段
+0018 TS018    C      10  人员【Staff】                                                人员 
+0019 TS019    C       6  部门【Department】                                           部门 
+0020 TS020    C      01  应付对象【Partner Payable】                                  1.供应商,2.人员,9.其它 
+0021 TS021    C      20  项目编号【Project No.】                                      项目编号
+
+
+//20061120 6.5 P00-06110004 废弃 BY 28975
+//文档代码:ACPTC
+//文件名:付款单单头档【】
+//类    型:3 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+//转档完成:Y
+//PRIMARY :TC001+TC002
+//INDEX01 :TC003+TC001+TC002
+//INDEX02 :TC004+TC003
+//===============================================================================================
+//序号 字段编号 TYPE 长度  字段名称                                                     备注
+//===============================================================================================
+//0001 TC001    C       4  付款单别【】                                                 付款单别
+//0002 TC002    C      11  付款单号【】                                                 付款单号
+//0003 TC003    C       8  付款日期【】                                                 付款日期[FORMATE:YMD]
+//0004 TC004    C      10  供应商编号【】                                               供应商编号
+//0005 TC005    C       4  币种【】                                                     币种
+//0006 TC006    N       1  打印次数【】                                                 打印次数
+//0007 TC007    V     255  备注【】                                                     备注
+//0008 TC008    C       1  审核码【】                                                   Y:已审核、N:未审核、V:作废
+//0009 TC009    C       1  更新码【】                                                   Y/N
+//0010 TC010    C       6  工厂【】                                                     工厂
+//0011 TC011    N    13.2  原币借方金额【】                                             原币借方金额
+//0012 TC012    N    13.2  原币贷方金额【】                                             原币贷方金额
+//0013 TC013    N    13.2  本币借方金额【】                                             本币借方金额
+//0014 TC014    N    13.2  本币贷方金额【】                                             本币贷方金额
+//0015 TC015    C       1  生成分录【】                                                 生成分录 //88-06-23
+//0016 TC016    C       8  单据日期【】                                                 单据日期[FORMATE:YMD]//89-05-25ADD
+//0017 TC017    C      10  审核者【】                                                   审核人员//89-05-25ADD
+//0018 TC018    C       1  签核状态码【】                                               0.待处理、1.签核中、2.退件、3.已核准、4.撤销审核中、5.作废中、6.取消作废中、N.不运行电子签核[DEF:'N'] //900131ADD
+//0019 TC019    C       4  冲账单别【】                                                 冲账单别 //20020730 3.1add by 28986
+//0020 TC020    C      11  冲账单号【】                                                 冲账单号 //20020730 3.1add by 28986
+//0021 TC021    N      01  传送次数【】                                                 传送次数[DEF:0] //20030424 ADD BY 28985 FOR P00-03040011
+//0022 TC022    C      01  EBC汇出码【】                                                Y/M/N [DEF:"N"] //20050606 add by 31380 for 6.0 //20060610 MODI BY 29618 FOR P00-06060010 保留字段->EBC汇出码
+//0023 TC023    C      08  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0024 TC024    V      30  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0025 TC025    N    13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0026 TC026    N    13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0027 TC027    N    13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+
+////20061120 6.5 P00-06110004 废弃 BY 28975
+//文档代码:ACPTD
+//文件名:付款单单身档【】
+//类    型:4 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+//转档完成:N
+//PRIMARY :TD001+TD002+TD003
+//INDEX01 :TD006+TD007
+//===============================================================================================
+//序号 字段编号 TYPE 长度  字段名称                                                     备注
+//===============================================================================================
+//0001 TD001    C      04  付款单别【】                                                 付款单别
+//0002 TD002    C      11  付款单号【】                                                 付款单号
+//0003 TD003    C      04  序号【】                                                     序号
+//0004 TD004    N       1  借/贷【】                                                    1:借、-1:贷
+//0005 TD005    C      01  类别【】                                                     C:现金、1:一般、2:票据、7:折让、Z:其他、3:待抵、4:冲账、5:溢收、6:差额、8:应收票据转付、9:应收应付对冲
+//0006 TD006    C      04  来源单别【】                                                 来源单别
+//0007 TD007    C      11  来源单号【】                                                 来源单号
+//0008 TD008    C      20  会计科目【】                                                 会计科目
+//0009 TD009    C      08  到期日【】                                                   到期日[FORMATE:YMD]//881119MODI
+//0010 TD010    C      04  币种【】                                                     币种
+//0011 TD011    N    12.7  汇率【】                                                     汇率 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+//0012 TD012    N    13.2  立账金额【】                                                 应付金额
+//0013 TD013    N    13.2  立账余额【】                                                 未付金额
+//0014 TD014    N    13.2  原币金额【】                                                 付款原币金额
+//0015 TD015    N    13.2  本国币金额【】                                               付款本国币金额
+//0016 TD016    C      20  参考单号【】                                                 参考单号
+//0017 TD017    V     255  备注【】                                                     备注
+//0018 TD018    C      04  采购单单别【】                                               采购单单别
+//0019 TD019    C      11  采购单单号【】                                               采购单单号
+//0020 TD020    C       1  审核码【】                                                   Y:已审核、N:未审核、V:作废
+//0021 TD021    C       1  更新码【】                                                   Y/N //87-10-14ADD
+//0022 TD022    C       6  部门【】                                                     部门 //890918 ADD
+//0023 TD023    C      04  结算方式【】                                                 结算方式 //20040921 ADD BY 32350↓ FOR P02-03080034
+//0024 TD024    C      10  银行编号【】                                                 银行编号 //20040921 ADD BY 32350↑
+//0025 TD025    C      01  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0026 TD026    C      08  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0027 TD027    V      30  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0028 TD028    N    13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0029 TD029    N    13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0030 TD030    N    13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+
+
+////20061120 6.5 P00-06110004 废弃 BY 28975
+//文档代码:ACPLA
+//文件名:应付调整汇率档【】
+//类    型:5 (1.主档单头 2.主档单身 3.交易单头 4.交易单身 5.交易记录 6.月档/统计 7.系统档 8.其它)
+//转档完成:N
+//PRIMARY :LA001+LA002+LA003
+//===============================================================================================
+//序号 字段编号 TYPE  长度  字段名称                                                     备注
+//===============================================================================================
+//0001 LA001    C        4  凭单单别【】                                                 凭单单别
+//0002 LA002    C       11  凭单单号【】                                                 凭单单号
+//0003 LA003    C        6  调汇年月【】                                                 调汇年月[FORMATE:YM]
+//0004 LA004    C        4  币种【】                                                     币种
+//0005 LA005    N     12.7  上月汇率【】                                                 上月汇率 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+//0006 LA006    N     12.7  重估汇率【】                                                 重估汇率 //20030324 MODI BY 29618 7.4->10.7 //20211216 MODI BY  01228(lijf) for Z30-21121600001 10.7->12.7
+//0007 LA007    N     13.2  调汇金额【】                                                 调汇金额
+//0008 LA008    C        4  调汇单别【】                                                 调汇单别
+//0009 LA009    C       11  调汇单号【】                                                 调汇单号
+//0010 LA010    C       01  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0011 LA011    C       08  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0012 LA012    V       30  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0013 LA013    N     13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0014 LA014    N     13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
+//0015 LA015    N     13.2  保留字段【】                                                 保留字段 //20050606 add by 31380 for 6.0
