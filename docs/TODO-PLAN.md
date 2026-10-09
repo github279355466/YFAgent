@@ -15,34 +15,80 @@
 | 真机验证 | 15/15 PASS（连通性 / 四头/ conditions / 复合主键 / 枚举 / 错误结构） |
 | 门禁 | `scan:secrets` 263 文件 PASS；`check:all` 4/4 PASS |
 | 远程同步 | 已推送 `origin/main`（https://github.com/github279355466/YFAgent） |
+| **数据库直连** | **2026-10-09 实测可达**：SQL Server 2014 / `SDDEMO93` / 1211 张表，库表名与字典 100% 一致 |
 
-**唯一已知阻塞**：`--verify-stats` 未反向读真实产物，存在「改产物不改自报数」的绕过路径。
+---
+
+## 一之二、架构裁决（2026-10-09）
+
+**结论：YFAgent 应与 YZCLI 保持同一双通道架构。**
+
+| 通道 | 走法 | YZCLI 现状 | YFAgent 现状 |
+|---|---|---|---|
+| CRUD 增删改查 | ERP OpenAPI | `yzcli-sdk/client.ts` | ✅ 9 模块已建，未接真机 |
+| 分析聚合 | 数据库直连 + 只读视图 | `yzcli-analysis` + 9 个 `vw_ai_*` | ❌ **缺失（T-13）** |
+
+**视图方案**：易飞库无 `vw_ai_*` 分析视图（实测仅 4 个：`MoJu` / `VCMSMQZ` / `VCOPTH` / `VMOCTE`）。照易助视图定义改写为易飞表名，**由客户侧 DBA 手动执行建库脚本**（T-14）。
+
+**视图设计裁决**：视图**不带 `COMPANY` 过滤** —— `COMPANY` 为预留管理字段（无业务含义），易飞架构为「独立公司账套」，不存在一表多账套。
+
+**库表名一致性（已验证）**：3 位前缀交叉比对 52 组，**52 组一致 / 0 组不同**。字典表名与库表名同名，**无需映射层**。
+
+**其余基线阻塞**：`--verify-stats` 未反向读真实产物，存在「改产物不改自报数」的绕过路径（已降级为 T-01/P2）。
 
 ---
 
 ## 二、任务拆解
 
-### P0 —阻塞 Phase 1 收尾
+### P1 — 架构补全（2026-10-09 架构裁决后新增）
 
-#### T-01 产物↔自报数勾稽（补门禁盲区）
+#### T-13 建易飞 analysis 层（照YZCLI 架构）
+
+| 项 | 内容 |
+|---|---|
+| **目标** | 补上 YZCLI 有、YFAgent 缺失的 analysis 层，走数据库直连 +只读视图 |
+| **架构依据** | YZCLI 双通道：CRUD 走 OpenAPI + 分析走 `yzcli-analysis` 直连。YFAgent 现仅有 CRUD 侧的 9 个 SDK 模块 |
+| **涉及文件** | 新建 `packages/yfcli-analysis/src/runtime/sql/`（`config.ts` / `template.ts` / `templates.ts` / `executor.ts`）、`packages/yfcli-sdk/src/analysis/` |
+| **依赖** | 视图需先建（依赖客户侧 DBA 执行） |
+| **工作量** | **L**（3~5 天，含模板设计与验证） |
+| **验收** | ① SQL 参数化绑定，模板注册制+ 白名单（照 `executor.ts` L2 四层防护）<br>② 凭据从环境变量取，配置文件不进仓库（照 `config.ts` 3 条红线）<br>③ 至少 3 个模板实测通过 |
+
+**前置：视图**。易飞库无 `vw_ai_*` 分析视图（实测仅 4 个视图：`MoJu` / `VCMSMQZ` / `VCOPTH` / `VMOCTE`）。需照易助 9 个 `vw_ai_*` 的 SELECT 定义改写为易飞表名，由**客户侧 DBA 手动执行**。
+
+**视图设计裁决（2026-10-09，用户裁定）**：视图**不带 `COMPANY` 过滤**。`COMPANY` 是预留管理字段（无业务含义），易飞架构为「独立公司账套」，不存在一表多账套。
+
+---
+
+#### T-14 视图建库脚本（易飞版）
+
+| 项 | 内容 |
+|---|---|
+| **目标** | 产出 `vw_ai_*` 建视图 DDL 脚本，供客户 DBA 手动执行 |
+| **涉及文件** | 新建 `sql/views/`（如 `vw_ai_sales_margin.sql`） |
+| **依赖** | T-13 |
+| **工作量** | **M**（1~2 天） |
+| **验收** | 每个视图：① DDL 可重复执行幂等（`IF NOT EXISTS` / `CREATE OR ALTER`）<br>② 字段名与易助模板一一对应<br>③ 附字段映射说明（易飞库表名 ↔ 字典表名） |
+
+**已验证前提**：库表名与字典表名 **100% 一致**（52 组 3 位前缀交叉全部一致，0 组不同）。例：`ACMLC` / `ACMMA` / `ACMMO` 两边同名，**无需映射层**。
+
+---
+
+### P2 — 原 P0 降级
+
+#### T-01 产物↔自报数勾稽（补门禁盲区）—— **降级为 P2**
 
 | 项 | 内容 |
 |---|---|
 | **目标** | `--verify-stats` 反向读取真实 CSV，使「改产物不改自报数」与「改自报数不改产物」两条路径都能被拦截 |
 | **涉及文件** | `scripts/gen_data_dictionary.py`（`--verify-stats` 分支） |
 | **依赖** | 无（可立即开始） |
-| **工作量** | **S**（约 2 小时） |
+| **工作量** | **XS**（约 2 小时） |
 | **验收** | QA 重跑 12 项篡改测试，**12/12 拦截**（当前 4/12） |
-| **参考实现** | 在 `--verify-stats` 块内用 `csv.reader` 逐个数行：<br>`actual = sum(1 for _ in csv.reader(fh)) - 1`<br>分别校验 `csv.field-index.csv` / `table-index.csv` / `format-mask-map.csv` 行数，以及 `nonstandard_names` / `unknown_type` / `no_cn_fields` / `orphan_tables` / `oapi.exact` |
+| **参考实现** | 在 `--verify-stats` 块内用 `csv.reader` 逐个数行：<br>`actual = sum(1 for _ in csv.reader(fh)) - 1`<br>分别校验 `csv.field-index.csv` / `table-index.csv` / `format-mask-map.csv` 行数|
 
-**必须纳入冻结的项**（当前无人看管）：
+**降级原因（2026-10-09）**：架构裁决确认 analysis 层走数据库直连，CSV 字典定位从「运行时唯一数据源」降为「离线缓存快照」。库内元数据是权威源，缓存失守可随时重生成，**不再阻塞 SDK 开发**。
 
-```
-nonstd_name 421 · unknown_type 23 · no_cn_fields 2
-orphan_tables 4 · oapi.exact 106 · nonstd_name（长度口径）
-```
-
-⚠️ **归属**：脚本 owner 独占修改，其他人只提 issue。
+**保留价值**：① 防止重新生成时口径漂移（客户升级易飞版本，XML 字段变化需立刻报警）；② `node-table-map.csv` / `ER-relations.csv` 当前**不在自报口径内，属无主产物**，删了无人管——本任务一并纳入登记。
 
 ---
 
