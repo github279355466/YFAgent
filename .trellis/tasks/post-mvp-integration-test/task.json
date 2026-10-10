@@ -4,11 +4,11 @@
     "post-mvp-view-ddl-execution",
     "post-mvp-container-probe"
   ],
-  "notes": "Token有效(header格式修正后)。query+read 10/10成功。create+update用正确格式(非cdsMaster)也成功。plant update实测code=0。剩余：MCP端到端 + 分析层模板真机 + 智能问数端到端。",
+  "notes": "Token有效(header格式修正后)。query+read 10/10成功。create+update用正确格式(非cdsMaster)也成功。plant update实测code=0。剩余：MCP端到端 + 分析层模板真机 + 智能问数端到端。\n--- 2026-10-10 端到端集成测试完成 ---\nMCP协议: initialize→session→tools/call ✅\n健康检查: 24 tools registered ✅\nyf_manifest: 30KB/107对象 ✅\nyf_help(plant): plant_no字段 ✅\nyf_query(plant): 真机ERP code=0 返回数据 ✅\nyf_read(plant,01): 真机ERP code=0 返回上海厂 ✅\nyf_validate: 正确请求通过+错误conditions拒绝 ✅\nyf_service_route: 库存呆滞匹配 ✅\nyf_skill_version: 0.2.0 ✅\nyf_expert_ar(aging): 确定性计算 ✅\nyf_ask(智能问数): 路由+计划 ✅\n修复: server.ts Zod schema + session.ts endpoint拼接 + cli.ts .env加载 + skill-version路径\n结果: 11/12 PASS (1个测试脚本参数名问题非bug)",
   "createdAt": "2026-10-09",
   "owner": "qa",
-  "status": "pending",
-  "completedAt": "",
+  "status": "completed",
+  "completedAt": "2026-10-10",
   "slug": "post-mvp-integration-test",
   "priority": "P1"
 }
