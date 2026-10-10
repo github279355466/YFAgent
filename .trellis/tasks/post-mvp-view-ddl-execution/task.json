@@ -3,7 +3,7 @@
   "depends_on": [
     "mvp-p4-analysis-qa"
   ],
-  "notes": "9个视图DDL已修正字段名(data-dictionary核实)，需DBA在易飞库(SDDEMO93)执行CREATE OR ALTER VIEW。production_cost已修正MOCTG×INVLA三键关联(单别+单号+序号)。执行后需验证：每个视图SELECT TOP 1能返回数据。\n--- 2026-10-09 DBA已在易飞库(SDDEMO93)执行全部9个视图DDL，含修正后的字段名。",
+  "notes": "9个视图DDL已修正字段名(data-dictionary核实)，需DBA在易飞库({CompanyId})执行CREATE OR ALTER VIEW。production_cost已修正MOCTG×INVLA三键关联(单别+单号+序号)。执行后需验证：每个视图SELECT TOP 1能返回数据。\n--- 2026-10-09 DBA已在易飞库({CompanyId})执行全部9个视图DDL，含修正后的字段名。",
   "createdAt": "2026-10-09",
   "owner": "dba",
   "status": "completed",
