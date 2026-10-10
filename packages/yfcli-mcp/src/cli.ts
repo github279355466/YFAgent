@@ -16,7 +16,7 @@ import { startServer } from './server.js';
 function loadEnv(): void {
   const candidates = [
     resolve(process.cwd(), '.env'),
-    resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '.env'),
+    resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '.env'),
   ];
   for (const envPath of candidates) {
     if (existsSync(envPath)) {
@@ -56,3 +56,4 @@ startServer({ port }).catch((err) => {
   console.error('[yfcli-mcp] Fatal:', err);
   process.exit(1);
 });
+

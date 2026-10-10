@@ -81,7 +81,9 @@ export function createToolContext(
   auth?: AuthProvider,
 ): ToolContext {
   const baseUrl = (process.env['YF_BASE_URL'] ?? '').replace(/\/+$/, '');
-  const endpoint = baseUrl + '/YFOAP/openapi.dll/datasnap/rest/TServerMethods1/ATNPost';
+  // YF_BASE_URL 只存 IP 或 http://IP，路径由代码拼接（客户部署时只需改 IP）
+  const YF_API_PATH = '/YFOAP/openapi.dll/datasnap/rest/TServerMethods1/ATNPost';
+  const endpoint = baseUrl.includes('/YFOAP/') ? baseUrl : baseUrl + YF_API_PATH;
 
   const runtimeConfig: ResolvedRuntimeConfig = {
     baseUrl,
@@ -107,3 +109,5 @@ export const SESSION_TTL_MS = 30 * 60 * 1000;
 
 /** 会话清理间隔（毫秒）：5 分钟。 */
 export const SESSION_CLEANUP_INTERVAL_MS = 5 * 60_000;
+
+
