@@ -144,7 +144,9 @@ async function handleRun(
 
     switch (op) {
       case 'query':
-        result = await context.client.query(typeKey, input as never);
+        // 易飞 query 必须带 conditions，缺省时自动补空对象
+        const qInput = (input && typeof input === 'object' && !('conditions' in (input as Record<string, unknown>))) ? { ...(input as Record<string, unknown>), conditions: {} } : input;
+        result = await context.client.query(typeKey, qInput as never);
         break;
       case 'read':
         result = await context.client.action(typeKey, 'read', input as never);

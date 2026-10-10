@@ -81,7 +81,7 @@ async function handleAnalysisPrompt(
     };
   }
 
-  const assistant = routes.find((a) => a.id === typed.assistant_id);
+  const assistant = routes.find((a) => a.id === typed.assistant_id || a.id.startsWith(typed.assistant_id! + '-'));
   if (!assistant) {
     return {
       error: `Unknown assistant_id: '${typed.assistant_id}'`,
