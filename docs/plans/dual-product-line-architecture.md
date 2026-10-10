@@ -117,7 +117,7 @@
 
 ```json
 {
-  "server": "172.16.2.86", "port": 1433, "database": "{CompanyId}",
+  "server": "{内网IP}", "port": 1433, "database": "{CompanyId}",
   "user_env": "YF_SQL_USER", "password_env": "YF_SQL_PASSWORD",
   "options": { "trustServerCertificate": true, "readOnlyIntent": true }
 }

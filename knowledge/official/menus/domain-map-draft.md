@@ -112,7 +112,7 @@
 | type_key | 中文名 | 操作集 | 复合主键 | 单身表 | 置信度 |
 |---|---|---|---|---|---|
 | `op.stockin` | 工艺入库单 | 8 | 是 | 0 | 高 |
-| `operation` | 工艺 | 4 | — | 0 | ⚠️ 中 |
+| `operation` | 工艺 | 4 | 是 | 0 | ⚠️ 中 |
 | `wo` | 工单 | 8 | 是 | 0 | 高 |
 | `wo.change` | 工单变更单 | 8 | 是 | 0 | 高 |
 | `wo.commence` | 投产单 | 8 | 是 | 0 | 高 |
@@ -149,13 +149,13 @@
 | type_key | 中文名 | 操作集 | 复合主键 | 单身表 | 置信度 |
 |---|---|---|---|---|---|
 | `calendar` | 假日表 | 2 | 是 | 0 | 高 |
-| `company.detail` | 公司 | 1 | — | 0 | 高 |
+| `company.detail` | 公司 | 1 | 是 | 0 | 高 |
 | `currency` | 币种 | 2 | 是 | 0 | 高 |
 | `customer` | 客户 | 5 | 是 | 0 | 高 |
 | `customer.item` | 客户品号 | 5 | 是 | 0 | 高 |
 | `department` | 部门 | 2 | 是 | 0 | 高 |
-| `document.type.general` | 单据性质 | 1 | — | 0 | 高 |
-| `employee` | 员工 | 1 | — | 0 | 高 |
+| `document.type.general` | 单据性质 | 1 | 是 | 0 | 高 |
+| `employee` | 员工 | 1 | 是 | 0 | 高 |
 | `financial.institution` | 金融机构 | 5 | 是 | 0 | 高 |
 | `function.category` | 职务类别 | 2 | 是 | 0 | 高 |
 | `item` | 品号信息 | 5 | 是 | 0 | 高 |

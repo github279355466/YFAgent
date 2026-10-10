@@ -9,7 +9,7 @@ on:
 
 jobs:
   verify:
-    runs-on: windows-latest   # 与本地开发环境一致（行尾策略：CRLF）
+    runs-on: windows-latest   # 与本地开发环境一致
 
     steps:
       - uses: actions/checkout@v4
@@ -24,48 +24,41 @@ jobs:
         run: npm ci
 
       # ── 门禁 1：敏感信息扫描（最高优先级）──
+      # 7 类规则扫全仓：内网/公网 IP、digi-user-token、账套名、RSA 私钥、
+      # Bearer 令牌、明文 password 键。
+      # 必要性：源文件 docs/易飞OpenAPI.json（48 MiB，含内网 IP 与 token 明文）
+      # 被 gitignore，此扫描是那条红线的唯一技术兜底 —— 已实际拦下过真实问题
+      # （新增测试误用真实账套号）。
       - name: 敏感信息扫描
         run: npm run scan:secrets
 
-      # ── 门禁 2：知识产物一致性 ──
-      # 校验三类产物（typekey / 字段对照表 / 域归属草案）的内容指纹，
-      # 检出「产物过期 / 被篡改 / 缺失」三类问题。
-      # 注意：CI 环境缺少源文件 docs/易飞OpenAPI.json（50,401,916 字节 ≈ 48 MiB，不入库），
-      #      故跳过 check:all，仅在 PR 中人工确认产物与脚本变更同步。
-      - name: 校验知识产物
-        run: |
-          if (Test-Path "docs/易飞OpenAPI.json") {
-            npm run check:all
-          } else {
-            Write-Host "::notice::源文件 docs/易飞OpenAPI.json 不在仓库（设计如此），跳过产物指纹校验"
-            Write-Host "::notice::请人工确认 PR 中的 knowledge/ 产物与 scripts/ 变更同步"
-          }
+      # ── 门禁 2：业务域草案一致性 ──
+      # 校验 knowledge/official/menus/domain-map-draft.{md,csv} 是否为最新。
+      # 必要性：**不依赖任何 gitignore 源文件**（只读已入库的
+      # knowledge/typekey/typekey_map.yaml），因此 CI 中无条件可执行。
+      #
+      # 历史教训：本检查曾因 parseTypekeyMap 只认「顶格 + 流式」写法，
+      # 读不懂入库产物的「缩进 + 块状」格式，静默解析出 0 个对象，
+      # 以「产物已过期」的形式误报。现解析器已兼容两种写法，
+      # 且 scripts/__tests__/ 下有回归测试守护。
+      - name: 校验业务域草案
+        run: npm run check:domain
 
       # ── 门禁 3：数据字典冻结口径 ──
       # 字典口径数字（26798 / 26087 / 711 / 6）此前改了 5 轮，根因是判据不统一。
       # 本门禁只读 knowledge/data-dictionary/_gen-stats.json（已入库）并断言冻结计数，
-      # **不重新生成产物**，因此不受上一步「源文件缺失」的影响，可无条件执行。
+      # **不重新生成产物**，因此不依赖源文件，可无条件执行。
       # 口径若被改动，此处直接 FAIL，而不是静默产出错误数字。
-      #
-      # 关于与门禁 2 的重复：check:dictionary 确实是 check:all 的子集，此处看似冗余，
-      # 但**必须保留、不可删除**。原因是两者覆盖面不同——
-      #   门禁 2（check:all）：需要 50,401,916 字节源文件，CI 中恒被 if 跳过；
-      #   门禁 3（本步）  ：只依赖已入库的 _gen-stats.json，CI 中恒执行。
-      # 因此门禁 3 是 CI 上唯一真正生效的口径校验，是门禁 2 被跳过后的兜底；
-      # 若删掉它，CI 将完全失去冻结口径校验（本地通过 ≠ CI 通过）。
-      # 二者关系是「覆盖广但常跳过」与「覆盖窄但必执行」的互补，不是重复劳动。
       - name: 校验数据字典冻结口径
         run: npm run check:dictionary
 
-      # ── 行尾与编码一致性 ──
-      - name: 校验行尾与编码
-        shell: bash
-        run: |
-          fail=0
-          while IFS= read -r -d '' f; do
-            if file "$f" | grep -q 'CRLF'; then continue; fi
-            if echo "$f" | grep -qE '\.(png|jpg|zip|pdf|xlsx)$'; then continue; fi
-            echo "::error file=$f::非 CRLF 行尾"
-            fail=1
-          done < <(find . -type f -not -path './.git/*' -not -path './node_modules/*' -print0)
-          exit $fail
+      # ── 关于已移除的两类门禁（勿盲目加回）──
+      # ① check:typekey / check:fields：依赖 docs/易飞OpenAPI.json（48 MiB，gitignore）
+      #    才能自证，在 CI 中结构上不可能执行。且实测其要防的「源文件替换」
+      #    场景从未发生 —— 该文件从未进 git，而 typekey_map.yaml 在 2 天内变更 6 次，
+      #    驱动因素全是脚本逻辑变更 / 真机探测 / 域规则调整，无一次由源文件驱动。
+      #    生成入口 gen:typekey / gen:fields 保留，供本地使用。
+      # ② 行尾与编码检查：与 .gitattributes 的 `* text=auto eol=crlf` 职责重叠。
+      #    后者在**提交时**规范化，git 层面已保证入库 CRLF；而该检查比对的是
+      #    磁盘原始字节，与 git 视图不一致，曾误报 16 个合规已入库文件。
+      #    行尾一致性由 .gitattributes 独立保障，无需 CI 重复检查。

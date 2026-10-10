@@ -108,24 +108,85 @@ const DOMAINS = [
 ];
 
 /** 极简 YAML 解析：只取 type_key / title / operations（避免引入 yaml 依赖） */
-function parseTypekeyMap(text) {
+/**
+ * 读取一个 YAML 键的值，**同时兼容流式与块状两种写法**。
+ *
+ *   流式：  operations: [query, read]
+ *   块状：  operations:
+ *             - query
+ *             - read
+ *
+ * 之所以要兼容两种：上游 typekey_map.yaml 是**机械产物**，其排版风格随
+ * extract-typekey-map.mjs 的版本而变（历史上切换过）。解析器若只认其中一种，
+ * 一旦上游换风格就会静默解析出 0 个对象 —— 门禁会以「产物已过期」的形式误报，
+ * 而真实原因是「解析器读不懂」。故此处按语义取值，不绑定排版。
+ *
+ * @param {string} block 单个 type_key 块（不含前导的 `- type_key:` 行）
+ * @param {string} key   键名，如 operations / primary_key
+ * @returns {string[]} 值列表；键不存在时返回 []
+ */
+export function readYamlList(block, key) {
+  // 流式：[a, b, c]
+  const flow = block.match(new RegExp(`^\\s*${key}:\\s*\\[([\\s\\S]*?)\\]\\s*$`, 'm'));
+  if (flow) {
+    return flow[1].split(',').map((s) => s.trim()).filter(Boolean);
+  }
+  // 块状：键独占一行，后续若干行以 `- ` 开头（缩进需深于键本身）
+  const blockRe = new RegExp(`^(\\s*)${key}:\\s*$`, 'm');
+  const m = blockRe.exec(block);
+  if (!m) return [];
+  const indent = m[1].length;
+  const rest = block.slice(m.index + m[0].length).split('\n').slice(1);
+  const items = [];
+  for (const line of rest) {
+    const item = line.match(/^(\s*)-\s+(.*)$/);
+    if (!item) {
+      if (line.trim() === '') continue;
+      break;
+    }
+    if (item[1].length <= indent) break;
+    items.push(item[2].trim());
+  }
+  return items;
+}
+
+/**
+ * 读取 YAML 标量键（如 title）。
+ * @param {string} block 单个 type_key 块
+ * @param {string} key
+ * @returns {string|null}
+ */
+export function readYamlScalar(block, key) {
+  const m = block.match(new RegExp(`^\\s*${key}:\\s*(.+)$`, 'm'));
+  if (!m) return null;
+  return m[1].trim().replace(/^["']|["']$/g, '');
+}
+
+export function parseTypekeyMap(text) {
   const out = [];
-  const blocks = text.split(/^- type_key: /m).slice(1);
+  // 容忍任意缩进：入库产物可能是顶格（`- type_key: x`）或 2 空格缩进（`  - type_key: x`）
+  const blocks = text.split(/^\s*- type_key:\s*/m).slice(1);
   for (const b of blocks) {
-    const tk = b.split('\n')[0].trim();
-    const title = (b.match(/^ {2}title: (.+)$/m) ?? [])[1]?.trim() ?? tk;
-    const ops = (b.match(/^ {2}operations: \[(.*?)\]$/m) ?? [])[1] ?? '';
-    const pk = (b.match(/^ {2}primary_key: \[(.*?)\]$/m) ?? [])[1] ?? '';
-    const detail = [...b.matchAll(/^ {2}detail: \{ node: (\S+?), fields: (\d+) \}$/gm)].map(
+    const tk = b.split('\n')[0].trim().replace(/^["']|["']$/g, '');
+    if (!tk) continue;
+    const title = readYamlScalar(b, 'title') ?? tk;
+    const operations = readYamlList(b, 'operations');
+    const primaryKey = readYamlList(b, 'primary_key');
+    const detail = [...b.matchAll(/^\s*detail: \{ node: (\S+?), fields: (\d+) \}$/gm)].map(
       (m) => ({ node: m[1], fields: Number(m[2]) }),
     );
-    out.push({ type_key: tk, title, operations: ops.split(',').map((s) => s.trim()).filter(Boolean), primary_key: pk, detail_tables: detail });
+    out.push({
+      type_key: tk,
+      title,
+      operations,
+      primary_key: primaryKey.join(', '),
+      detail_tables: detail,
+    });
   }
   return out;
 }
-
 /** 判定业务域：返回 { code, name, confidence, reason } */
-function classify(tk) {
+export function classify(tk) {
   const first = tk.split('.')[0];
   // 1) 首段精确匹配（高置信）
   for (const d of DOMAINS) {
@@ -144,7 +205,7 @@ function classify(tk) {
   return { code: 'UNASSIGNED', name: '待人工确认', confidence: 'none', reason: '无规则命中，需实施顾问确认' };
 }
 
-function main() {
+export function main() {
   if (!fs.existsSync(SRC)) {
     console.error(`[FATAL] 源文件不存在：${path.relative(ROOT, SRC)}`);
     console.error('请先运行：node scripts/extract-typekey-map.mjs');
@@ -328,4 +389,10 @@ function main() {
   }
 }
 
-main();
+// 仅在作为脚本直接执行时运行 main；
+// 被 __tests__ 以 import 方式加载时只暴露纯函数，不产生副作用。
+const isDirectRun =
+  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isDirectRun) {
+  main();
+}

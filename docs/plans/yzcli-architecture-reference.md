@@ -44,7 +44,7 @@
 | SDK | `packages/yzcli-sdk/src/config.ts`（67 行）/ `client.ts`（201 行） | token 存实例字段；**`loadConfig()` 只映射 baseUrl / timeout / fieldMode，从不读 token** → 走 `config.yaml` 拿不到 token，必须由调用方注入 |
 | MCP | `packages/yzcli-mcp/src/erp-client.ts`（21 行） | 注释明确「Token **ALWAYS** passed from caller — **NEVER** from config」；`http-server.ts:21-27` 的校验仅「非空 + 长度 ≥ 8」 |
 | Gateway | `auth/token-map.ts`（40 行）+ `auth/jwt.ts`（67 行） | 双 Token 映射（Token A = 网关身份 / Token B = ERP 身份），`POST /api/v1/token/issue` 签发，默认 8 小时过期 |
-| Python | `src/yzcli/core/config.py`（173 行） | 默认 `base_url` 为 `172.16.6.22:8103`，与 TS 侧 `localhost:8103` **不一致** |
+| Python | `src/yzcli/core/config.py`（173 行） | 默认 `base_url` 为 `{内网IP}:8103`，与 TS 侧 `localhost:8103` **不一致** |
 
 **缺失能力清单**（无OAuth / 无 refresh / 无 token 缓存 / 无重试 / 无 ERP 连通性健康检查）。
 ERP token 是人工从 **TPASC19 作业**取出的静态字符串，靠 header 透传。

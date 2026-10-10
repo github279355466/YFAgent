@@ -4,9 +4,23 @@
 
 | 类别 | 数量 | 能否离线重跑 | 产物去向 | 是否进 CI 门禁 |
 |---|---|---|---|---|
-| **产物生成脚本** | 6 | ✅ 可离线重跑 | 入库（`knowledge/`） | ✅ 进 `check:all` |
+| **产物生成脚本** | 6 | ✅ 可离线重跑 | 入库（`knowledge/`） | ⚠️ **部分**（见下） |
 | **真机探测脚本** | 4 | ❌ 需内网真机环境 | `runs/`（已 gitignored） | ❌ 不进 CI |
 | **敏感信息门禁** | 1 | ✅ 全仓扫描 | — | ✅ 进 `verify` |
+| **门禁脚本自测** | — | ✅ | — | ✅ `npm test` |
+
+**CI 门禁只在「不依赖 gitignore 源文件」的前提下才可能生效**。当前 3 道门禁全部满足该前提，故 CI 中**无条件执行、无一被跳过**：
+
+| # | 门禁 | 命令 | 依赖源文件 |
+|---|---|---|---|
+| 1 | 敏感信息扫描 | `npm run scan:secrets` | 否 |
+| 2 | 业务域草案一致性 | `npm run check:domain` | 否 |
+| 3 | 数据字典冻结口径 | `npm run check:dictionary` | 否 |
+
+**已移出 CI 的两项**（原因见「四、用法」末尾）：
+
+- `check:typekey` / `check:fields` —— 必须读 `docs/易飞OpenAPI.json` 才能自证，而该文件不入库，CI 中**结构上不可能执行**。曾长期以 `if (Test-Path ...)` 包裹，导致整个 `check:all` 在 CI 中被恒跳过。生成入口 `gen:typekey` / `gen:fields` **保留**，供本地使用。
+- 行尾与编码检查 —— 与 `.gitattributes` 的 `* text=auto eol=crlf` 职责重叠；后者在提交时规范化，git 层面已保证入库 CRLF，而该检查比对磁盘原始字节，曾误报 16 个合规文件。
 
 **运行环境**：Node 20+，**零第三方依赖**（仅用 Node 内置模块；`gen_data_dictionary.py` 需 Python 3）。
 
@@ -16,12 +30,12 @@
 
 ## 一、产物生成脚本（6 个）
 
-可离线重跑，产物入库，**改动会被 `npm run check:all` 拦住**。
+可离线重跑，产物入库。**注意**：其中只有 `gen-domain-map.mjs` 的 `--check` 能在 CI 中生效——`extract-typekey-map.mjs` 与 `extract-field-metadata.mjs` 必须读 gitignore 的源文件才能自证，其 `--check` **仅限本地**（见「四、用法」末尾说明）。
 
 | 脚本 | 一句话用途 | 产出物 | npm script 引用 |
 |---|---|---|---|
-| `extract-typekey-map.mjs` | 从OpenAPI JSON 抽取业务对象 → 服务名映射 | `knowledge/typekey/typekey_map.yaml`（106 对象 / 595 服务名） | ✅ `gen:typekey` / `check:typekey` |
-| `extract-field-metadata.mjs` | 抽取各对象的字段清单与必填三态 | `knowledge/typekey-mapping/*.md`（106 份 / 12,893 字段） | ✅ `gen:fields` / `check:fields` |
+| `extract-typekey-map.mjs` | 从OpenAPI JSON 抽取业务对象 → 服务名映射 | `knowledge/typekey/typekey_map.yaml`（106 对象 / 595 服务名） | ✅ `gen:typekey`（`--check` 仅本地） |
+| `extract-field-metadata.mjs` | 抽取各对象的字段清单与必填三态 | `knowledge/typekey-mapping/*.md`（106 份 / 12,893 字段） | ✅ `gen:fields`（`--check` 仅本地） |
 | `gen_data_dictionary.py` | 生成 78 个模块级字典 + 3 份 CSV（**最大脚本**，约 115 KB） | `knowledge/data-dictionary/modules/*.md` + `field-index` / `table-index` / `format-mask-map` CSV（另**读取** `node-table-map.csv` / `sdd-*.csv` 作高置信证据） | ✅ `gen:dictionary` / `check:dictionary` |
 | `gen-domain-map.mjs` | 由typekey_map 推断业务域归属草案 | `knowledge/official/menus/domain-map-draft.{md,csv}` + `_report.json` | ✅ `gen:domain` / `check:domain` |
 | `extract-sdd-metadata.mjs` | 从 GBK 编码 `.SDD` 规格文件抽取主键与索引 | `sdd-table-meta.csv`（每表一行）/ `sdd-index.csv`（每索引一行） | ❌ **无入口，见下方缺口** |
@@ -71,16 +85,20 @@
 npm run gen:all      # = gen:typekey + gen:fields + gen:domain + gen:dictionary
 
 # 校验产物是否为最新（CI 门禁，比对内容指纹）
-npm run check:all    # = check:typekey + check:fields + check:domain + check:dictionary
+npm run check:all    # = check:domain + check:dictionary
 
 # 提交前必跑
 npm run verify       # = scan:secrets + check:all
 
+# 门禁脚本自身的回归测试
+npm test             # vitest，覆盖 scan-secrets 规则表 + gen-domain-map 解析器
+
 # 调试：只处理指定对象
 node scripts/extract-field-metadata.mjs --only sales.order,purchase.order,wo
 
-# 单独校验某脚本（需已生成过产物）
+# 单独校验某脚本（需已生成过产物）—— 以下两条需源文件，仅限本地
 node scripts/extract-typekey-map.mjs --check
+node scripts/extract-field-metadata.mjs --check
 
 # 无 npm 入口的两个脚本：只能手动跑，无 --check 守护
 python scripts/gen_data_dictionary.py --verify-stats   # 这个有接check:dictionary
@@ -104,9 +122,18 @@ python scripts/gen-er-overview.py                      # ⚠️ 无 --check
 
 ---
 
-## 六、`--check` 门禁能力
+## 六、`--check` 门禁能力与范围
 
-适用于已接入 npm 的 4 个产物生成脚本：
+**当前进 CI 的只有 2 个**（`check:domain` / `check:dictionary`）；`extract-typekey-map.mjs` 与 `extract-field-metadata.mjs` 的 `--check` 需源文件，仅限本地。
+
+| 脚本 | `--check` 是否进 CI | 原因 |
+|---|---|---|
+| `gen-domain-map.mjs` | ✅ | 只读已入库的 `typekey_map.yaml` |
+| `gen_data_dictionary.py` | ✅ | 只读已入库的 `_gen-stats.json` |
+| `extract-typekey-map.mjs` | ❌ 仅本地 | 需 `docs/易飞OpenAPI.json`（gitignore） |
+| `extract-field-metadata.mjs` | ❌ 仅本地 | 同上 |
+
+通用判定语义（以已接入 npm 的产物生成脚本为准）：
 
 | 场景 | 结果 |
 |---|---|
@@ -116,6 +143,11 @@ python scripts/gen-er-overview.py                      # ⚠️ 无 --check
 | 产物缺失 | FAIL + 列出文件名 |
 
 实现：FNV-1a32 内容指纹覆盖**索引 + 全部 md**，比对前过滤 `generated_at` 行以避免时间戳造成假失败。
+
+> ⚠️ **指纹是「整份文本规范化后逐字比对」，不区分「排版变了」与「内容变了」。**
+> 因此上游产物一旦换排版风格（例如 `typekey_map.yaml` 由「顶格 + 流式」改为
+> 「缩进 + 块状」），门禁会以「产物已过期」的形式 FAIL —— 而文件内容其实是对的。
+> 排查这类 FAIL 时，**先确认是格式差异还是语义差异**，不要直接重新生成覆盖。
 
 > ⚠️ **盲区**：`extract-sdd-metadata.mjs` / `gen-er-overview.py` 的产物**不在指纹覆盖范围内** —— 见第一节「已知缺口」。
 

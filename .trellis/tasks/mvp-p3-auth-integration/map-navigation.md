@@ -159,7 +159,7 @@ D:/AIProject/claude/YFAgent/
 | 1 | **端到端取数链路被 token 阻塞**（`analysis/src/__tests__/end-to-end.test.ts:22` 自述被 `user_token` 阻塞） | **P3 必须先打通鉴权**，否则 P4 会重复这个失败。这是 P3 不可后置的根本原因 |
 | 2 | **MCP 弱校验**：`http-server.ts:21-27` 仅校验「非空 + 长度 ≥ 8」 | 长度检查**不是鉴权**。必须做有效性验证 + 过期检测 + 错误分级 |
 | 3 | **认证逻辑分散 4 处**，无独立 auth 包（SDK `config.ts` 67 行且 `loadConfig()` 从不读 token / MCP `erp-client.ts` 21 行 / Gateway 40+67 / Python 173 行） | **单一入口**，鉴权包装集中在注册表层 |
-| 4 | **Python 与 TS 配置不一致**（`config.py:173` 默认 `172.16.6.22:8103` vs TS 侧 `localhost:8103`） | 配置**单一来源**，禁止多语言各持一份 |
+| 4 | **Python 与 TS 配置不一致**（`config.py:173` 默认 `{内网IP}:8103` vs TS 侧 `localhost:8103`） | 配置**单一来源**，禁止多语言各持一份 |
 | 5 | **无健康检查**：无法区分「token 坏了」与「网络不通」与「账套号错」 | 健康检查须输出**结构化**结论，能定位到具体故障原因 |
 | 6 | **无错误分类**：所有失败都是同一种错，用户话术无法分级 | `token_expired` / `token_invalid` / `datakey_invalid` / `permission_denied` **四码分离** |
 | 7 | **双Token 映射 + 8 小时过期**（`auth/token-map.ts` 40 行 + `auth/jwt.ts` 67 行，`POST /api/v1/token/issue` 签发） | **多租户专属，MVP 砍掉**。不做 Gateway 签发端点 |

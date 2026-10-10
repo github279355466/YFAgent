@@ -34,7 +34,12 @@
  * 用法：
  *   node scripts/extract-field-metadata.mjs            # 全量生成
  *   node scripts/extract-field-metadata.mjs --only sales.order,purchase.order,wo
- *   node scripts/extract-field-metadata.mjs --check     # CI 门禁：内容指纹比对
+ *   node scripts/extract-field-metadata.mjs --check     # 内容指纹比对
+ *
+ * ⚠️ 本脚本的 --check 依赖 docs/易飞OpenAPI.json 才能自证，而该文件
+ *    （48 MiB，含内网 IP 与 token 明文）被 gitignore，**CI 中不可用**。
+ *    故已于 2026-10-09 从 CI 门禁与 check:all 中移除，仅限本地使用。
+ *    依据与裁决见 docs/decisions/OPEN-DECISIONS.md。
  */
 
 import fs from 'node:fs';

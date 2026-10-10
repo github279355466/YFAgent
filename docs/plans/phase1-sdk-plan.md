@@ -443,7 +443,7 @@ packages/yfcli-sdk/
 > **现状态**：用户裁定采用与 YZCLI 相同的双通道架构 —— CRUD 走 OpenAPI，分析聚合走数据库直连。
 > 完整实测记录见 `docs/plans/yf-db-direct-connect-probe.md`。
 
-**已验证前提**（实测 `172.16.2.86 / {CompanyId}`）：
+**已验证前提**（实测 `{内网IP} / {CompanyId}`）：
 
 - 连通可达：SQL Server 2014 (SP2)，1211 张表，仅 `dbo` 单 schema
 - **库表名与数据字典 100% 一致**（52 组 3 位前缀交叉比对全部一致），无需映射层

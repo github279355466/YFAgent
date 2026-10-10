@@ -164,7 +164,7 @@ config/
 | 1 | **授权逻辑分散 4 处，无独立 auth 包**：SDK `config.ts` 67 行（`loadConfig()` **从不读 token**）/ MCP `erp-client.ts` 21 行 / Gateway `auth/token-map.ts` 40 + `auth/jwt.ts` 67 / Python `core/config.py` 173 行（与 TS 侧 `base_url` **不一致**） | **抽出独立包 `yfcli-auth`**，token 注入**单一入口**，不散落 |
 | 2 | **授权完整性缺失**：无 OAuth / 无 refresh / 无 token 缓存 / 无重试 / 无 ERP 连通性健康检查 | 本阶段一次性补齐边界，**只沿用「token 必须由调用方显式注入」这一条约束** |
 | 3 | **MCP 弱校验**：`http-server.ts:21-27` 仅校验「非空 + 长度 ≥ 8」 | 过期检测 + 有效性验证 + 错误分类，**长度检查不是鉴权** |
-| 4 | **Python 与 TS 配置不一致**（`config.py:173` 默认 `172.16.6.22:8103` vs TS 侧 `localhost:8103`） | 配置**单一来源**，禁止多语言各持一份 |
+| 4 | **Python 与 TS 配置不一致**（`config.py:173` 默认 `{内网IP}:8103` vs TS 侧 `localhost:8103`） | 配置**单一来源**，禁止多语言各持一份 |
 | 5 | **ERP token 是人工从 TPASC19 作业取的静态串**，靠 header 透传 | 本工程 MVP沿用同样获取方式（易飞侧 TPASC19 待确认），但**必须在文档中标注为已知约束**，不得写成「已支持自动获取」 |
 | 6 | **设计四层防护，代码只有两层**：L1 模板注册制（`runtime/sql/template.ts:62-84`）+ L2 执行器约束（`executor.ts` 全文）已落地；**L3 部署约束 / L4 治理无任何代码** | 引用防护能力时不要沿用「四层已落地」的错误表述；须标注每层落地状态 |
 | 7 | **无生产 mssql driver**：`SqlDriver` 只是接口（`runtime/sql/executor.ts:24-37`），唯一真实 driver 在 `scripts/verify-ai-views.mjs:33`（验证脚本，非生产代码）；集成测试用 `fakeDriver()`（`__tests__/sql-executor.test.ts:40`） | 生产 driver 与真实库集成测试是**必做项**（落在 P4） |
