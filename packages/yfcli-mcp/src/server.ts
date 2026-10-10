@@ -23,6 +23,7 @@ import { z } from 'zod';
 
 import { ToolRegistry } from './registry.js';
 import { registerAllTools, EXPECTED_TOOLS } from './tools/index.js';
+import { loadRoutes } from './tools/route-loader.js';
 import {
   loadCatalog,
   createToolContext,

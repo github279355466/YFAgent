@@ -1,7 +1,7 @@
 ---
 name: yfcli-erp
 version: 0.2.0
-description: 易飞 ERP AI 助手 - 通过 MCP 工具操作 ERP 系统，支持 107 个 TypeKey 的查询、创建、审核等操作；22 个智能分析助手 + 1 个智能问数助手
+description: 易飞 ERP AI 助手 - 通过 MCP 工具操作 ERP 系统，支持 107 个 TypeKey 的查询、创建、审核等操作；31 个智能分析助手 + 1 个智能问数助手
 ---
 
 # 易飞 ERP AI 助手
@@ -44,9 +44,9 @@ description: 易飞 ERP AI 助手 - 通过 MCP 工具操作 ERP 系统，支持 
 | `yf_analysis_plan` | 创建/验证业务分析计划 | WHY/根因/异常/贡献度分析 |
 | `yf_analysis_step` | 执行分析步骤（比较/贡献/下钻） | 按计划逐步分析 |
 | `yf_analysis_meta` | 查询数据源语义视图 | 了解可用字段和数据源 |
-| `yf_analysis_prompt` | 获取助手 Prompt 片段 | 构建分析报告时 |
+| `yf_analysis_prompt` | 获取助手完整 prompt（从本地文件读取） | 命中助手后加载工作流/规格文档 |
 | `yf_analysis_spec` | 获取分析方法论规范 | 构建分析计划时 |
-| `yf_service_route` | 关键词→AI 助手路由 | 匹配 22 个分析助手 |
+| `yf_service_route` | 关键词→AI 助手路由 | 匹配 31 个业务助手 |
 
 ### 专家工具
 
@@ -80,6 +80,7 @@ description: 易飞 ERP AI 助手 - 通过 MCP 工具操作 ERP 系统，支持 
 |------|------|----------|
 | `references/typekey-index.md` | 107 个 TypeKey 精简索引（主键、容器名、操作、服务名形状） | 不确定 type_key 或容器名时 |
 | `references/json-construction-examples.md` | JSON 组装示例（易飞版，含 conditions/create/update 完整示例） | 组装请求体时 |
+| `references/assistants-index.md` | 31 个 AI 助手精简索引（编号、名称、关键词、服务名、状态） | 需要了解助手全貌时 |
 | `references/assistants/*.md` | 助手详细 Prompt | 命中分诊表时 |
 
 ---

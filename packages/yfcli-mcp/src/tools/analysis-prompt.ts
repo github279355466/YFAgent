@@ -2,11 +2,15 @@
  * yf_analysis_prompt —— 获取助手 prompt 分片。
  *
  * 按 assistant_id × kind 二维寻址下发 prompt 分片。
- * 易飞侧当前支持 22 个分析助手。
+ * 数据从 _routes.yaml 加载，prompt 内容从 knowledge/official/ai-assistants/ 读取。
  */
 
+import { readFileSync, readdirSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { ToolDefinition } from '../registry.js';
 import type { ToolContext } from '../session.js';
+import { loadRoutes, getRoutes, type AssistantRoute } from './route-loader.js';
 
 interface AnalysisPromptParams {
   assistant_id?: string;
@@ -16,31 +20,38 @@ interface AnalysisPromptParams {
   list?: boolean;
 }
 
-/** 易飞分析助手列表（与 AGENTS.md 中 22 个助手对齐） */
-const ASSISTANTS = [
-  { id: '01', name: '库存呆滞查询', kinds: ['extract', 'report'] },
-  { id: '02', name: '供应商采购报告', kinds: ['extract', 'report'] },
-  { id: '03', name: '客户销售报告', kinds: ['extract', 'report'] },
-  { id: '04', name: '生产报告', kinds: ['extract', 'report'] },
-  { id: '05', name: '采购业务异常查询', kinds: ['extract', 'report', 'attribution'] },
-  { id: '06', name: '采购订单跟单', kinds: ['extract', 'report'] },
-  { id: '07', name: '采购订单合规检查', kinds: ['extract', 'report'] },
-  { id: '08', name: '采购订单摘要', kinds: ['extract', 'report'] },
-  { id: '09', name: '工单呆滞查询', kinds: ['extract', 'report'] },
-  { id: '10', name: '盘点分析报告', kinds: ['extract', 'report'] },
-  { id: '11', name: '品号查重', kinds: ['extract', 'report'] },
-  { id: '12', name: '生产进度延迟', kinds: ['extract', 'report'] },
-  { id: '13', name: '销售订单跟单', kinds: ['extract', 'report'] },
-  { id: '14', name: '销售订单合规检查', kinds: ['extract', 'report'] },
-  { id: '15', name: '销售订单摘要', kinds: ['extract', 'report'] },
-  { id: '16', name: '销售业务异常查询', kinds: ['extract', 'report', 'attribution'] },
-  { id: '17', name: '会计凭证操作', kinds: ['extract', 'report'] },
-  { id: '18', name: '科目余额查询', kinds: ['extract', 'report'] },
-  { id: '19', name: '财务报表', kinds: ['extract', 'report'] },
-  { id: '20', name: '应收账龄分析', kinds: ['extract', 'report', 'attribution'] },
-  { id: '21', name: '应付账龄分析', kinds: ['extract', 'report', 'attribution'] },
-  { id: '22', name: '成本分析', kinds: ['extract', 'report', 'attribution'] },
-];
+/** kind → 文件名映射 */
+const KIND_FILE_MAP: Record<string, string> = {
+  workflow: '_workflow.md',
+  spec: '_spec.md',
+};
+
+/** 解析 knowledge/official/ai-assistants/ 基础路径 */
+function resolveAssistantsBase(): string | null {
+  const candidates = [
+    resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'knowledge', 'official', 'ai-assistants'),
+    resolve(process.cwd(), 'knowledge', 'official', 'ai-assistants'),
+  ];
+  for (const p of candidates) {
+    try {
+      readdirSync(p);
+      return p;
+    } catch { /* try next */ }
+  }
+  return null;
+}
+
+/** 根据 assistant_id 查找对应目录 */
+function findAssistantDir(base: string, assistantId: string): string | null {
+  try {
+    const entries = readdirSync(base);
+    // 匹配以 assistant_id 开头的目录（如 "02-item-check-duplicate-agent"）
+    const prefix = assistantId.padStart(2, '0');
+    const match = entries.find((e) => e.startsWith(prefix));
+    if (match) return resolve(base, match);
+  } catch { /* ignore */ }
+  return null;
+}
 
 async function handleAnalysisPrompt(
   params: Record<string, unknown>,
@@ -48,24 +59,29 @@ async function handleAnalysisPrompt(
 ): Promise<unknown> {
   const typed = params as unknown as AnalysisPromptParams;
 
+  // 确保路由表已加载
+  const routes = getRoutes().length > 0 ? getRoutes() : await loadRoutes();
+
   if (typed.list) {
     return {
-      assistants: ASSISTANTS.map((a) => ({
+      assistants: routes.map((a) => ({
         id: a.id,
         name: a.name,
-        kinds: a.kinds,
+        keywords: a.keywords,
+        kinds: ['workflow', 'spec'],
+        status: a.status,
       })),
-      hint: "传入 assistant_id + kind 获取分片",
+      hint: '传入 assistant_id + kind(workflow|spec) 获取完整文档',
     };
   }
 
   if (!typed.assistant_id || !typed.kind) {
     return {
-      hint: "需要同时传入 assistant_id 和 kind。使用 list:true 查看所有助手及其可用 kind。",
+      hint: '需要同时传入 assistant_id 和 kind(workflow|spec)。使用 list:true 查看所有助手。',
     };
   }
 
-  const assistant = ASSISTANTS.find((a) => a.id === typed.assistant_id);
+  const assistant = routes.find((a) => a.id === typed.assistant_id);
   if (!assistant) {
     return {
       error: `Unknown assistant_id: '${typed.assistant_id}'`,
@@ -73,39 +89,66 @@ async function handleAnalysisPrompt(
     };
   }
 
-  if (!assistant.kinds.includes(typed.kind!)) {
+  const fileName = KIND_FILE_MAP[typed.kind];
+  if (!fileName) {
     return {
-      error: `Kind '${typed.kind}' not available for assistant '${typed.assistant_id}'`,
-      available_kinds: assistant.kinds,
+      error: `Kind '${typed.kind}' not supported`,
+      available_kinds: Object.keys(KIND_FILE_MAP),
     };
   }
 
-  // MVP：返回占位符，后续接入实际 prompt 内容
-  return {
-    assistant_id: typed.assistant_id,
-    kind: typed.kind,
-    version: typed.version ?? '1.0.0',
-    cached: false,
-    content: `[${assistant.name}] ${typed.kind} prompt — 待接入实际内容`,
-  };
+  // 从本地文件系统读取 prompt 内容
+  const basePath = resolveAssistantsBase();
+  if (!basePath) {
+    return {
+      error: 'prompt not found',
+      hint: 'knowledge/official/ai-assistants/ directory not accessible',
+    };
+  }
+
+  const assistantDir = findAssistantDir(basePath, typed.assistant_id);
+  if (!assistantDir) {
+    return {
+      error: 'prompt not found',
+      hint: `No directory found for assistant_id '${typed.assistant_id}' under ${basePath}`,
+    };
+  }
+
+  const filePath = resolve(assistantDir, fileName);
+  try {
+    const content = readFileSync(filePath, 'utf8');
+    return {
+      assistant_id: typed.assistant_id,
+      name: assistant.name,
+      kind: typed.kind,
+      version: typed.version ?? '1.0.0',
+      cached: false,
+      content,
+    };
+  } catch {
+    return {
+      error: 'prompt not found',
+      hint: `File not found: ${filePath}`,
+    };
+  }
 }
 
 export const analysisPromptTool: ToolDefinition = {
   name: 'yf_analysis_prompt',
   description:
-    'Fetch an assistant prompt shard by assistant_id and kind.\n' +
-    'Supports 22 YF assistants with varying kind sets.\n' +
+    '获取助手完整 prompt（从本地文件读取）。\n' +
+    '支持 31 个 YF 助手，kind 为 workflow 或 spec。\n' +
     'Shards are independently usable.',
   inputSchema: {
     type: 'object',
     properties: {
       assistant_id: {
         type: 'string',
-        description: 'assistant number: 01-22',
+        description: 'assistant id, e.g. 02-item-check-duplicate',
       },
       kind: {
         type: 'string',
-        description: 'prompt kind: extract/report/attribution',
+        description: 'prompt kind: workflow / spec',
       },
       analysis_type: {
         type: 'string',
