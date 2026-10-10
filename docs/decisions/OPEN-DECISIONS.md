@@ -575,14 +575,15 @@
 | **编号** | OPEN-T1 |
 | **发现日期** | 2026-10-10 |
 | **状态** | 🔴 OPEN |
-| **现象** | 所有 create 操作（含 plant/supplier/accounting.voucher 等已知对象）均返回 `code=-1, description="DoAction Exception:没有活动事务。"` |
-| **影响** | SDK 的 create/update/delete 操作全部不可用，仅 query/read 正常 |
-| **已排除** | ① Token 有效（query 返回 code=0）；② header 格式正确（digi-service/digi-datakey 为 JSON 字符串）；③ 非容器名问题（两种容器名返回相同错误） |
-| **对比** | YZCLI（易助）的 create 操作正常成功，说明这是易飞特有问题 |
-| **文档** | 易飞 OpenAPI 文档中**无任何事务管理说明**（无 BeginTrans/CommitTrans/AutoCommit） |
-| **待确认** | ① 易飞 create 是否需要先调用某个事务开启接口？② 是否有 autocommit 参数？③ 是否需要特定的 digi-service 值来开启事务？ |
+| **现象** | 所有 create/update 操作均返回 `code=-1, description="DoAction Exception:没有活动事务。"` |
+| **影响** | SDK 的 create/update/delete/approve/disapprove/invalid 操作全部不可用，仅 query/read 正常 |
+| **实测范围** | 2026-10-10 对 10 个对象真机探测（plant/customer/supplier/sales.order/purchase.order/ap.refund.doc/op.stockin/prepayment.doc/transfer/wo.commence），query+read 全部 code=0 成功，create+update 全部 code=-1 失败 |
+| **已排除** | ① Token 有效（query 返回 code=0，之前报 token 无效是 header 格式错误）；② header 格式正确（digi-service/digi-datakey 为 JSON.stringify）；③ 非容器名问题（多种容器名返回相同错误）；④ 非特定对象问题（10 个对象全部复现） |
+| **对比** | YZCLI（易助）的 create 操作正常成功（`yz.oapi.sales.order.create` 返回「部分执行成功」），说明这是**易飞特有问题** |
+| **文档** | 易飞 OpenAPI 文档中**无任何事务管理说明**（无 BeginTrans/CommitTrans/AutoCommit/transaction） |
+| **待确认** | ① 易飞 create 是否需要先调用某个事务开启接口？② 是否有 autocommit 参数或 header？③ 是否需要特定的 digi-service 值来开启事务？④ 易飞 OpenAPI 的写操作是否根本不支持外部调用？ |
 | **临时方案** | MVP 阶段写操作引导用户通过 ERP 界面操作，SDK 仅支持 query/read |
-| **关联** | 5 个容器名探测被此问题阻塞（无法通过 create 探测容器名） |
+| **关联** | 5 个容器名探测被此问题阻塞（无法通过 create 探测容器名）；P2 CRUD 五操作中 create/update/delete 三个不可用 |
 
 ### 同时修正：之前 token 失效的根因
 
@@ -594,4 +595,5 @@
 
 SDK 的 `headers.ts` 已正确使用 `JSON.stringify()`，问题仅在手动探测脚本中。
 Token `1D2EF4C5A41714E446615799EACA7211F9497CB81E156C99` 确认有效。
+
 
