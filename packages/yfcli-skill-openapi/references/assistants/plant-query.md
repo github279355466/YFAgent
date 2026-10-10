@@ -62,7 +62,7 @@ yfcli_query({ type_key: "plant", conditions: {...}, page_size: 50 })
      "operation": "query",
      "input": {
        "conditions": {
-         "operator": "AND",
+         "operator": "and",
          "fields": [
            { "field_name": "plant_name", "operator": "LIKE", "value": "%苏州%" }
          ]

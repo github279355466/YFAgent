@@ -55,6 +55,54 @@ const PROBED_PRIMARY_KEYS = {
   'document.type.general': ['doc_type_no'],
   // item.inventory.qty：服务端 OAPComF2.exe Access violation 崩溃，无法探测
 };
+/**
+ * 审核类操作（approve / disapprove）所需**额外键值**的**判别规则**（真机实测 2026-10-10）。
+ *
+ * 背景：
+ * read.get 的 datakeys 只有业务主键（如 doc_type_no + doc_no），
+ * 但 approve / disapprove 走**另一条**键值通道，服务端要求额外提供单据日期与审核日期。
+ *
+ * 真机原文（缺键时）：
+ *   取得傳入鍵值資料失敗，找不到:std_data.parameter.datakeys[0].docdate
+ *
+ * === 判别规则（15 个对象实测一致，0 例外）===
+ *   主键**含 doc_no**（即「单别 + 单号」式单据） → approve / disapprove
+ *     需额外提供 docdate + approvedate
+ *   主键**不含 doc_no**（如 bom 用 master_item_no） → **不需要**额外键
+ *
+ * 实测证据（仅传主键 → 补 docdate/approvedate 后的 code）：
+ *   purchase.order      -1 → 0 ✓   inventory.transaction -1 → 0 ✓
+ *   wo                  -1 → 0 ✓   ap.refund.doc         -1 → 0 ✓
+ *   ar.refund.doc       -1 → 0 ✓   collection.doc        -1 → 0 ✓
+ *   inquiry             -1 → 0 ✓   ecn                   -1 → 0 ✓
+ *   other.payable.doc   -1 → 0 ✓   expense.invoice       -1 → 0 ✓
+ *   op.stockin          -1 → 0 ✓   picking.receipt       -1 → 0 ✓
+ *   accounting.voucher  -1 → 0 ✓   approve.price         -1 → 0 ✓
+ *   sales.order         -1 → 0 ✓
+ *   bom（主键 master_item_no，不含 doc_no）-1 → -1 ✓（不需要，也不接受该键）
+ *
+ * ⚠️ 本规则是**行为实测**得出的充分条件，非厂商文档口径。
+ *    新增单据类对象时仍应按该规则先验证一次；若发现例外，登记到下面的覆盖表。
+ */
+
+/** 显式覆盖表：仅用于规则的**例外**。留空表示全部走下面的规则。 */
+const EXTRA_OPERATION_KEYS_OVERRIDES = {};
+
+/** 该主键是否属于「单别 + 单号」式单据（需额外 docdate / approvedate）。 */
+function primaryKeyNeedsAuditDates(primaryKey) {
+  return Array.isArray(primaryKey) && primaryKey.includes('doc_no');
+}
+
+/** 依据主键推导 approve / disapprove 的额外键要求。 */
+function resolveExtraOperationKeys(typeKey, primaryKey) {
+  const override = EXTRA_OPERATION_KEYS_OVERRIDES[typeKey];
+  if (override) return override;
+  if (primaryKeyNeedsAuditDates(primaryKey)) {
+    return { approve: ['docdate', 'approvedate'], disapprove: ['docdate', 'approvedate'] };
+  }
+  return undefined;
+}
+
 const SERVICE_PREFIX = 'yf.';
 
 // ---------------------------------------------------------------- 工具
@@ -552,6 +600,14 @@ function buildYaml(objs, report, doc) {
     }
     if (pkOut.length && !o.primary_key.length) {
       push(`  primary_key_source: live_probe   # 依据 scripts/probe-unknown-pk.mjs，待规格文档复核`);
+    }
+    // 审核类操作的额外界值要求（真机实测；目前仅 sales.order）
+    const extra = resolveExtraOperationKeys(o.type_key, o.primary_key);
+    if (extra) {
+      push(`  operation_extra_keys:   # approve/disapprove 除主键外还需的键值，缺则报「找不到:...datakeys[0].xxx」`);
+      for (const [op, keys] of Object.entries(extra)) {
+        push(`    ${op}: [${keys.map(yScalar).join(', ')}]`);
+      }
     }
     if (pkOut.length > 1) push(`  composite_key: true`);
     if (o.detail_nodes.size) {

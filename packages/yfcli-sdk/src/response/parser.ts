@@ -134,6 +134,16 @@ function classifyBusinessError(message: string): YfError['kind'] {
   if (normalized.includes('没有权限') || normalized.includes('沒有權限')) {
     return 'permission_denied';
   }
+  // 业务字段校验失败（真机 2026-10-10：create 返回 code=0 但 error[] 有此文案）
+  if (normalized.includes('字段不可空白') || normalized.includes('欄位不可空白')) {
+    return 'silent_business_error';
+  }
+  if (normalized.includes('输入的信息不符合范围') || normalized.includes('輸入的資訊不符合範圍')) {
+    return 'silent_business_error';
+  }
+  if (normalized.includes('输入的data并不存在') || normalized.includes('輸入的data並不存在')) {
+    return 'silent_business_error';
+  }
   if (normalized.includes('ExecSQLError') || normalized.includes('PRIMARYKEY')) {
     return 'exec_sql_error';
   }
@@ -222,6 +232,32 @@ export function buildBusinessError(
     rawData: details.length > 0 ? details : undefined,
     ...(context ? { context } : {}),
   });
+}
+
+/**
+ * 统计 rror[] 中的条目数（不做结构校验，只数长度）。
+ *
+ * 用途：code=0 时判断服务端是否其实报了错。
+ * 与 `parseErrorEntries` 的区别：本函数**不抛错**，
+ * 因为它的调用场景正是「需要知道有没有错」，不能因为结构异常反而中断。
+ */
+export function countRawErrorEntries(parameter: YfResponseParameter | undefined): number {
+  const raw = parameter?.result?.error;
+  return Array.isArray(raw) ? raw.length : 0;
+}
+
+/**
+ * 判定是否为「静默失败」：code=0 但 rror[] 非空。
+ *
+ * 真机实测（2026-10-10）：customer/supplier/item/warehouse 的 create 返回
+ * ``code="0"`` + ``description="执行成功"``，却同时带 ``error[]``（如「字段不可空白!」），
+ * 且 `parameter.result.success` 为空 —— 记录**未落库**。
+ * 仅看 `code` 会把这当成成功，故此处必须显式识别。
+ */
+export function isSilentFailure(envelope: YfResponseEnvelope): boolean {
+  const { execution, parameter } = envelope.std_data;
+  if (!isSuccessCode(execution.code)) return false;
+  return countRawErrorEntries(parameter) > 0;
 }
 
 // ------------------------------------------------------------------ 数据通道

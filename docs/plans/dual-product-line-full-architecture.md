@@ -1,4 +1,4 @@
-# 双产品线整体架构图（2026-10-09）
+# 双产品线整体架构图（2026-10-10）
 
 > 本文档描述易助(YZCLI)与易飞(YFAgent)两条产品线的代码归属、共享边界与部署拓扑。
 
@@ -44,7 +44,7 @@ D:\AIProject\claude\
         ├── yfcli-auth/         独立授权模块 ✅已完成
         ├── yfcli-mcp/          MCP Server + 集中式注册表 ✅已完成
         ├── yfcli-analysis/     分析层(模板+视图+L3白名单) ✅已完成
-        ├── yfcli-experts/      → 将改为引用 erp-experts
+        ├── yfcli-experts/      → 引用 @digiwin/erp-experts ✅已完成
         └── yfcli-skill-openapi/ SKILL.md + 助手文档 ✅已完成
 ```
 
@@ -67,7 +67,7 @@ D:\AIProject\claude\
 │  └──────┬──────┘  └──────────────┘  └───────────────────┘  │
 │         │                                                    │
 │  ┌──────┴──────────────────────────────────────────────┐    │
-│  │ Tools: manifest / query / read / help / ask / ...   │    │
+│  │ Tools: 24 个（基础4 + CRUD4 + 分析7 + 专家8 + 辅助1）│    │
 │  └──────┬──────────────────────────────────────────────┘    │
 └─────────┼───────────────────────────────────────────────────┘
           │
@@ -133,7 +133,7 @@ D:\AIProject\claude\
 │  Agent Client (Codex)                         │
 │       │                                       │
 │       ▼                                       │
-│  yfcli-mcp (localhost:3100)                   │
+│  yfcli-mcp (localhost:4001, Servy 服务)        │
 │       │                                       │
 │       ├──→ 易飞ERP OpenAPI (内网IP)            │
 │       ├──→ 易飞SQL Server (内网IP)             │
@@ -149,7 +149,7 @@ D:\AIProject\claude\
 ```
 ┌─ 客户服务器 ─────────────────────────────────┐
 │                                               │
-│  yfcli-mcp (Docker/PM2)                       │
+│  yfcli-mcp (Servy Windows 服务)                │
 │       │                                       │
 │       ├──→ 易飞ERP OpenAPI                     │
 │       ├──→ 易飞SQL Server                      │
@@ -200,7 +200,7 @@ D:\AIProject\claude\
 
 | 阶段 | 动作 | 影响 |
 |------|------|------|
-| **现在** | erp-license 已抽取; erp-experts 待抽取; 7个助手复制到易飞 | 零回归风险 |
-| **MVP完成后** | 抽取 erp-experts; YZCLI/YFAgent 改 file: 引用 | YZCLI 需改 import 路径 |
+| **现在** | erp-license 已抽取; erp-experts 已抽取; 31 个助手就绪; MVP P0-P5 + 16 Post-MVP 完成; 431 tests; 20/20 E2E PASS | 零回归风险 |
+| **下一步** | YZCLI 改 file: 引用 erp-experts; detail-node-and-metric-verify 完成; yzcli-migration 启动 | YZCLI 需改 import 路径 |
 | **商业化时** | 抽取 erp-analysis-core; License Server 加 product_line | 需数据库迁移 |
 | **多客户部署时** | 上 npm registry 替代 file:; CI 配 registry 认证 | 需 .npmrc + CI secrets |

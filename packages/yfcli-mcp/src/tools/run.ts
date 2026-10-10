@@ -10,7 +10,8 @@
 
 import type { ToolDefinition } from '../registry.js';
 import type { ToolContext } from '../session.js';
-import type { YfOperation } from 'yfcli-sdk';
+import type { YfOperation, ResolvedRuntimeConfig } from 'yfcli-sdk';
+import { buildHeaders } from 'yfcli-sdk';
 
 const VALID_OPERATIONS = [
   'query', 'read', 'create', 'update', 'delete',
@@ -24,6 +25,37 @@ interface RunParams {
     service?: string;
     input?: Record<string, unknown>;
   };
+}
+
+/**
+ * 把异常收敛为可诊断的错误对象。
+ *
+ * 背景（2026-10-10 真机事故）：yf_run 此前只回 `api_error.message`，
+ * 把 ERP 响应信封整个丢掉 —— 调用方看不到 `error[].information[].data`
+ * 里「哪个字段不可空白」的关键线索，只看到一句笼统的失败文案。
+ * 本函数把 SDK YfError 的结构化字段（kind / description / details）摊平出来。
+ */
+function describeRunError(err: unknown): Record<string, unknown> {
+  const message = err instanceof Error ? err.message : String(err);
+  const base: Record<string, unknown> = { type: 'api_error', message };
+
+  // SDK 的 YfError 带结构化字段；非 YfError 时退化为纯 message。
+  const yfErr = err as {
+    kind?: unknown;
+    layer?: unknown;
+    description?: unknown;
+    details?: unknown;
+  };
+  if (typeof yfErr?.kind === 'string') base['kind'] = yfErr.kind;
+  if (typeof yfErr?.layer === 'string') base['layer'] = yfErr.layer;
+  // ERP 原文 description 保留：失败归类允许看文案（成功判定则只看 code）。
+  if (typeof yfErr?.description === 'string' && yfErr.description !== '') {
+    base['erp_description'] = yfErr.description;
+  }
+  if (Array.isArray(yfErr?.details) && yfErr.details.length > 0) {
+    base['erp_errors'] = yfErr.details;
+  }
+  return base;
 }
 
 async function handleRun(
@@ -50,35 +82,41 @@ async function handleRun(
 
       // 访问 client 内部 config 和 transport（SDK 未暴露 public API）
       const clientAny = context.client as unknown as {
-        config: { endpoint: string; token: string; companyId: string; servicePrefix: string };
+        config: ResolvedRuntimeConfig;
         transport: { post: (...args: unknown[]) => Promise<{ status: number; bodyText: string }> };
       };
 
       const config = clientAny.config;
       const endpoint = config.endpoint;
 
-      // 构建 headers
-      const headers: Record<string, string> = {
-        'Content-Type': 'application/json',
-        'digi-service': serviceName,
-        'digi-user-token': config.token,
-        'digi-datakey': config.companyId,
-      };
+      // 用 SDK 的 buildHeaders 构造四头 —— 绝不手写。
+      // 手写踩过的坑（2026-10-10 实测）：
+      //   digi-service 必须是 JSON `{"name":"<svc>"}`，传裸串会被服务端判为
+      //   「无效的身份令牌，请联系管理员分配身份令牌！」（误导性报错）；
+      //   digi-datakey 必须是 JSON `{"CompanyId":"<账套>"}`，传裸串报 `digi-datakey is not valid.`
+      const headers = buildHeaders(config, serviceName);
 
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers,
+        headers: { ...headers },
         body: JSON.stringify(envelope),
       });
 
-      if (!response.ok) {
+      // 必须先判 HTTP 状态码：错误 token 返 500 + HTML 错误页，
+      // 尝试 JSON.parse 会抛未捕获异常（易飞硬约束）。
+      if (response.status !== 200) {
+        const isHtml = response.headers.get('content-type')?.includes('html') ?? false;
         return {
           success: false,
           service: serviceName,
           error: {
             type: 'http_error',
             status: response.status,
-            message: `HTTP ${response.status}`,
+            message:
+              `HTTP ${response.status}。` +
+              (isHtml
+                ? '响应体为 HTML 错误页（易飞对无效 token 返回 500 + HTML），请重新获取身份令牌。'
+                : '响应体非 JSON，未尝试解析。'),
           },
         };
       }
@@ -179,12 +217,11 @@ async function handleRun(
       result,
     };
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : String(err);
     return {
       success: false,
       type_key: typeKey,
       operation,
-      error: { type: 'api_error', message },
+      error: describeRunError(err),
     };
   }
 }

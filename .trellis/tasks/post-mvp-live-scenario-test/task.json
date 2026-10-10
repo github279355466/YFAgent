@@ -1,0 +1,13 @@
+{
+  "title": "真机 CRUD + 问数 + 归因 场景测试",
+  "depends_on": [
+    "post-mvp-integration-test"
+  ],
+  "notes": "2026-10-10 首轮完成。52 场景 / 9 对象 / ✅37 ⚠️15 ❌0，登记缺陷 6 条，残留 2 笔。\n计划文档：docs/plans/yf-live-scenario-test-plan.md\n执行入口：npm run test:live（= node scripts/run-live-e2e.mjs），需 YF_LIVE=1\n报告：runs/e2e-<date>.md（gitignore）\n\n--- 已确认的关键真机事实 ---\n1. sales.order approve/disapprove 的 datakeys 需 4 键：doc_type_no+doc_no+docdate+approvedate（typekey_map 仅登记 2 键）\n2. 写操作容器值必须是数组；传单对象报「没有活动事务」（误导性）\n3. create 失败时 code 仍为 0「执行成功」，真实原因在 error[].information[].message+data → 静默失败\n4. yf_run 丢弃 ERP 信封，只回 items/empty → 失败原因不可经 MCP 取回\n5. customer 容器名是 customer_basic_data_file_data（非 customer_data）\n6. 主键列宽：plant char(6)/customer char(10)/supplier char(10)/item char(20)/warehouse char(10)；销单单别 char(4)/单号 char(11)\n7. 主键全错时 yf_read 返「外层 1 元素 + 内层空数组」，item_count/empty 不可信，必须下钻判断\n\n--- 已知限制 ---\n- 单身 *_detail_data 存在性未验证（取样单别无单身数据）\n- customer/supplier/item/warehouse 的 create 必填字段不全，只验证了「静默失败」缺陷\n- 问数/归因数字未与 ERP 报表核对\n- 未覆盖 wo 工单与财务域\n\n--- 待办 ---\n- [ ] 缺陷转修复排期（6 条，其中 5 条 blocker）\n- [ ] 有单身的单别复验 read 单身节点\n- [ ] 补全主数据 create 必填字段后重跑\n- [ ] 数值口径与 ERP 报表比对\n\n=== 2026-10-10 规则沉淀（本任务的核心产出之一）===\n\n本任务的价值不只在「跑通 52 个场景」，更在于把过程中反复踩到的坑固化成**可复用规则**，\n供后续 Agent 避免重犯。落点与内容：\n\n【落点 1】packages/yfcli-skill-openapi/SKILL.md\n  新增章节「反复发规则（2026-10-10 真机场景测试沉淀）」R1–R8：\n    R1 「没报错」不等于「做对了」——静默失败是本系统主要失效模式（5/8 条缺陷属静默型）\n    R2 数字必须带口径标签，且口径要能被复算\n    R3 结论必须可复现——低基数取样是错误结论的主要来源（必用哨兵值双向对照）\n    R4 写探测必须可回滚，且探测前先取基线\n    R5 诊断信息不得丢失——报错必须能回答「哪个字段」\n    R6 契约以「官方样本」为准，不以猜测的字段名（docs/易飞OpenAPI.json raw 样本）\n    R7 改产物后必跑门禁，且门禁要覆盖「防复发」（每缺陷补离线回归测试）\n    R8 凭证与统计口径是红线（含「任务笔记也要脱敏」这一新教训）\n  另在「硬性约束」节补第 12 条，指向 R1。\n  版本：0.4.0 → 0.5.0；已重新打包 dist/yfcli-skill-openapi-v0.5.0.zip（9 文件 / 26.1 KB）。\n\n【落点 2】AGENTS.md「工程纪律」表\n  由 4 条扩到 10 条，新增第 5–10 条（成功判据 / 诊断通道优先 / 过滤结论双向对照 /\n  任务笔记脱敏 / 契约以官方样本为准 / 缺陷必补离线回归测试）。\n\n【为何这些规则值得沉淀】\n  8 条真机缺陷中 5 条是「静默型」（不报错但结果错）：\n    大写 AND 致条件静默失效 / 枚举结论取样偏差 / total_result 语义 /\n    create 假成功 / yf_run 丢信封。\n  这类缺陷读文档发现不了、跑冒烟测试也发现不了，只能靠上述工作方法拦住。\n\n【配套交付（同批完成）】\n  - total_result 语义缺陷**已修**：query.ts 新增 page_hint + total_result_semantics，\n    工具 description 同步说明；__tests__/query-contract.test.ts 补 3 例回归（mcp 61 → 64）。\n    已用生产 createToolContext 直连真机验证：page_size=[1,5,50,1000] → total_result=[2,6,51,928]。\n  - 任务 post-mvp-query-total-result-semantics 更新为「已修」，保留 2 项待办故不关闭。\n",
+  "createdAt": "2026-10-10",
+  "owner": "qa",
+  "status": "completed",
+  "completedAt": "2026-10-10",
+  "slug": "post-mvp-live-scenario-test",
+  "priority": "P1"
+}

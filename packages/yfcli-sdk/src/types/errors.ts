@@ -58,7 +58,16 @@ export type YfErrorKind =
   /** 枚举值形态可疑（传入 `编码.中文` 形态）。 */
   | 'enum_code_suspect'
   /** 命中未识别的 `error[]` 结构。 */
-  | 'unknown_error_item';
+  | 'unknown_error_item'
+  /**
+   * `code=0` 但 `error[]` 非空 —— 服务端「假成功」。
+   *
+   * 真机实测（2026-10-10，customer/supplier/item/warehouse create）：
+   * ``execution.code="0"``、``description="执行成功"``，但 ``parameter.result.success``
+   * 为空数组，真实原因在 `error[].information[].message`（如「字段不可空白!」）。
+   * 仅按 `code` 判成功会**静默吞掉**这条错误，调用方误判为写入成功。
+   */
+  | 'silent_business_error';
 
 /**
  * SDK 统一错误。

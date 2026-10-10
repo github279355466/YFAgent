@@ -33,6 +33,7 @@ interface RawTypeKeyItem {
   readonly services?: unknown;
   readonly primary_key?: unknown;
   readonly detail_nodes?: unknown;
+  readonly operation_extra_keys?: unknown;
   readonly unavailable?: unknown;
   readonly unavailable_reason?: unknown;
 }
@@ -106,6 +107,27 @@ export class TypeKeyCatalog implements YfServiceNameResolver {
   }
 
   /** 统计已登记的服务名总数，用于与 YAML 头部 services_unique 交叉校验。 */
+  /**
+   * 返回该对象该操作所需的**全部**键值字段（业务主键 + 操作额外键）。
+   *
+   * 真机实测（2026-10-10）：sales.order 的 approve 需要 4 个键
+   * （doc_type_no + doc_no + docdate + approvedate），而 `primaryKey` 只登记前 2 个。
+   * 调用方构造 datakeys 时应使用本方法，而非直接用 primaryKey。
+   *
+   * @returns 主键优先、其后追加该操作的额外键（去重、保序）
+   */
+  public requiredDataKeys(typeKey: string, operation: YfOperation): readonly string[] {
+    const entry = this.entries.get(typeKey);
+    if (entry === undefined) return [];
+    const extra = entry.operationExtraKeys?.[operation] ?? [];
+    const seen = new Set<string>(entry.primaryKey);
+    const out: string[] = [...entry.primaryKey];
+    for (const key of extra) {
+      if (!seen.has(key)) { seen.add(key); out.push(key); }
+    }
+    return out;
+  }
+
   public countServices(): number {
     const set = new Set<string>();
     for (const entry of this.entries.values()) {
@@ -167,12 +189,35 @@ function readEntry(rawItem: unknown): YfTypeKeyEntry {
     services: readServices(item['services']),
     primaryKey: readStringArray(item['primary_key']),
     detailNodes: readStringArray(item['detail_nodes']),
+    operationExtraKeys: readOperationExtraKeys(item['operation_extra_keys']),
     unavailable,
     conflictCandidates: conflictCandidates.length > 0 ? conflictCandidates : undefined,
   };
   return unavailable && typeof reasonRaw === 'string'
     ? { ...base, unavailableReason: reasonRaw }
     : base;
+}
+
+/**
+ * 收敛 `operation_extra_keys`（审核类操作除主键外还需的键）。
+ *
+ * YAML 形态：`{ approve: [docdate, approvedate], disapprove: [...] }`。
+ * 只接受 YfOperation 键且值为非空字符串数组；其余一律忽略（宁可少报也不误导）。
+ */
+function readOperationExtraKeys(
+  raw: unknown,
+): Readonly<Partial<Record<YfOperation, readonly string[]>>> | undefined {
+  if (typeof raw !== 'object' || raw === null) return undefined;
+  const out: Partial<Record<YfOperation, readonly string[]>> = {};
+  let count = 0;
+  for (const [key, value] of Object.entries(raw as Record<string, unknown>)) {
+    if (!(YF_OPERATIONS as readonly string[]).includes(key)) continue;
+    const keys = readStringArray(value);
+    if (keys.length === 0) continue;
+    out[key as YfOperation] = keys;
+    count += 1;
+  }
+  return count > 0 ? out : undefined;
 }
 
 /** 收敛 services 字段，只接受 YfOperation 键且值非空字符串。 */

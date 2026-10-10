@@ -26,12 +26,13 @@ import { registerAllTools, EXPECTED_TOOLS } from './tools/index.js';
 import { loadRoutes } from './tools/route-loader.js';
 import {
   loadCatalog,
+  loadEnumSpecs,
   createToolContext,
   SESSION_TTL_MS,
   SESSION_CLEANUP_INTERVAL_MS,
 } from './session.js';
 import type { ToolContext } from './session.js';
-import type { TypeKeyCatalog } from 'yfcli-sdk';
+import type { TypeKeyCatalog, YfEnumFieldSpec } from 'yfcli-sdk';
 import {
   createAuth,
   TokenExpiredError,
@@ -160,6 +161,7 @@ async function handleRequest(
   registry: ToolRegistry,
   catalog: TypeKeyCatalog,
   auth: AuthProvider,
+  enumSpecs: Record<string, YfEnumFieldSpec>,
 ): Promise<void> {
   setCorsHeaders(res);
 
@@ -224,7 +226,7 @@ async function handleRequest(
     }
 
     const tokenHash = hashToken(token);
-    const toolContext = createToolContext(token, catalog, auth);
+    const toolContext = createToolContext(token, catalog, auth, enumSpecs);
     const sessionId = randomUUID();
     const mcpServer = createMcpServer(registry, toolContext);
     const transport = new StreamableHTTPServerTransport({
@@ -292,7 +294,7 @@ async function handleRequest(
       }
 
       const tokenHash = hashToken(token);
-      const toolContext = createToolContext(token, catalog, auth);
+      const toolContext = createToolContext(token, catalog, auth, enumSpecs);
       const sessionId = randomUUID();
       const mcpServer = createMcpServer(registry, toolContext);
       const transport = new StreamableHTTPServerTransport({
@@ -432,6 +434,9 @@ export async function startServer(options?: StartServerOptions): Promise<void> {
   console.error('[yfcli-mcp] Loading TypeKeyCatalog...');
   const catalog = await loadCatalog();
 
+  // 3b. 加载枚举规格 —— 用于清洗 Agent 误传的回参形态（如 "Y." / "Y.已审核"）
+  const enumSpecs = await loadEnumSpecs();
+
   // 4. 创建 registry + 注册工具
   const registry = new ToolRegistry();
   registerAllTools(registry);
@@ -456,7 +461,7 @@ export async function startServer(options?: StartServerOptions): Promise<void> {
 
   // 7. 创建 HTTP 服务器
   const httpServer = createServer((req, res) => {
-    handleRequest(req, res, sessions, registry, catalog, auth).catch((err: unknown) => {
+    handleRequest(req, res, sessions, registry, catalog, auth, enumSpecs).catch((err: unknown) => {
       const message = err instanceof Error ? err.message : String(err);
       console.error(`[yfcli-mcp] error: ${message}`);
       if (!res.headersSent) {

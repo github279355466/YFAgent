@@ -47,7 +47,7 @@ interface RouteParams {
   intent_type: string;
   business_object: string;
   has_doc_no?: boolean;
-  conditions?: Array<{ field: string; value: string; operator?: string }>;
+  conditions?: Array<{ field_name: string; value: string; operator?: string }>;
 }
 
 async function handleRoute(
@@ -120,11 +120,11 @@ export const routeTool: ToolDefinition = {
         items: {
           type: 'object',
           properties: {
-            field: { type: 'string' },
+            field_name: { type: 'string' },
             value: { type: 'string' },
             operator: { type: 'string' },
           },
-          required: ['field', 'value'],
+          required: ['field_name', 'value'],
         },
       },
     },

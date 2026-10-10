@@ -225,6 +225,79 @@ describe('YfClient.query', () => {
     expect(enumWarnings.length).toBeGreaterThanOrEqual(1);
   });
 
+
+  it('枚举尾点形态 "Y." → 自动修正为 "Y"（2026-10-10 新增形态）', async () => {
+    const { transport, captured } = captureTransport();
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([{ typeKey: 'sales.order', services: { query: 'yf.oapi.sales.order.data.query.get' } }]),
+      transport,
+      enumSpecs: {
+        approve_status: { fieldName: 'approve_status', codedText: true, codes: new Set(['Y', 'N', 'U', 'V']) },
+      },
+    });
+
+    const param: YfQueryParameter = queryParameter({
+      conditions: allOf([field('approve_status', '=', 'Y.')]),
+      page: pagination(1, 20),
+    });
+    await client.query('sales.order', param);
+
+    const sentParam = captured[0]!.std_data.parameter as YfQueryParameter;
+    const sentField = sentParam.conditions.fields.find(
+      (f) => 'field_name' in f && f.field_name === 'approve_status',
+    ) as { field_name: string; value: string } | undefined;
+    expect(sentField?.value).toBe('Y');
+  });
+
+  it('数值小数「2.65」绝不被当作枚举剥离（关键回归）', async () => {
+    const { transport, captured } = captureTransport();
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([{ typeKey: 'sales.order', services: { query: 'yf.oapi.sales.order.data.query.get' } }]),
+      transport,
+      enumSpecs: {
+        tax_type: { fieldName: 'tax_type', codedText: true, codes: new Set(['1', '2', '3']) },
+      },
+    });
+
+    // order_amount 不在枚举规格中；即便误登记，2 也不是其合法编码
+    const param: YfQueryParameter = queryParameter({
+      conditions: allOf([field('order_amount', '=', '2.65')]),
+      page: pagination(1, 20),
+    });
+    await client.query('sales.order', param);
+
+    const sentParam = captured[0]!.std_data.parameter as YfQueryParameter;
+    const sentField = sentParam.conditions.fields.find(
+      (f) => 'field_name' in f && f.field_name === 'order_amount',
+    ) as { field_name: string; value: string } | undefined;
+    expect(sentField?.value).toBe('2.65');
+  });
+
+  it('枚举「1.内含」用字典编码集剥离为「1」', async () => {
+    const { transport, captured } = captureTransport();
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([{ typeKey: 'sales.order', services: { query: 'yf.oapi.sales.order.data.query.get' } }]),
+      transport,
+      enumSpecs: {
+        tax_type: { fieldName: 'tax_type', codedText: true, codes: new Set(['1', '2', '3', '4']) },
+      },
+    });
+
+    const param: YfQueryParameter = queryParameter({
+      conditions: allOf([field('tax_type', '=', '1.内含')]),
+      page: pagination(1, 20),
+    });
+    await client.query('sales.order', param);
+
+    const sentParam = captured[0]!.std_data.parameter as YfQueryParameter;
+    const sentField = sentParam.conditions.fields.find(
+      (f) => 'field_name' in f && f.field_name === 'tax_type',
+    ) as { field_name: string; value: string } | undefined;
+    expect(sentField?.value).toBe('1');
+  });
   it('未知 type_key → 抛 YfError(service_not_registered)', async () => {
     const client = new YfClient({
       config: makeConfig(),
@@ -685,3 +758,231 @@ describe('反向用例：易飞 9 条硬约束', () => {
 
 
 
+
+// ================================================================== 假成功防线
+// 2026-10-10 真机事故：写操作被业务校验拒绝时，服务端返回 code=0「执行成功」，
+// 但 error[] 非空、result.success 为空 —— 记录未落库。
+// 仅按 code 判成功会静默吞掉错误，调用方误判为写入成功。
+
+/** 构造「假成功」响应体：code=0 + error[] 非空（真机结构 B）。 */
+function silentFailureResponse(message: string, offendingFields: Record<string, string> = {}) {
+  return JSON.stringify({
+    std_data: {
+      execution: { code: '0', sql_code: '', description: '执行成功' },
+      parameter: {
+        result: {
+          success: [],
+          error: [
+            {
+              data: { warehouse_data: { warehouse_no: 'W1' } },
+              information: [{ message, data: offendingFields }],
+            },
+          ],
+        },
+      },
+    },
+  });
+}
+
+describe('假成功防线（code=0 但 error[] 非空）', () => {
+  it('create 遇假成功必须抛 silent_business_error，而不是返回空 items', async () => {
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([{ typeKey: 'warehouse', services: { create: 'yf.oapi.warehouse.create' } }]),
+      transport: makeMockTransport(
+        silentFailureResponse('字段不可空白!', { plant_no: '' }),
+      ),
+    });
+
+    await expect(client.create('warehouse', { warehouse_data: [{}] })).rejects.toThrow(YfError);
+
+    try {
+      await client.create('warehouse', { warehouse_data: [{}] });
+      expect.fail('should have thrown');
+    } catch (err) {
+      const yfErr = err as YfError;
+      expect(yfErr.kind).toBe('silent_business_error');
+      // 真实原因必须从 error[].information[] 中解析出来（结构 B）
+      expect(yfErr.message).toContain('字段不可空白');
+      expect(yfErr.details[0]!.message).toBe('字段不可空白!');
+      // 缺失字段清单原样保留，Agent 才能据此补字段
+      expect(yfErr.details[0]!.data).toEqual({ plant_no: '' });
+    }
+  });
+
+  it('update 同样受假成功防线约束', async () => {
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([{ typeKey: 'warehouse', services: { update: 'yf.oapi.warehouse.update' } }]),
+      transport: makeMockTransport(silentFailureResponse('输入的信息不符合范围!')),
+    });
+
+    await expect(client.update('warehouse', { warehouse_data: [{}] })).rejects.toThrow(
+      /silent|假成功|不符合范围/,
+    );
+  });
+
+  it('action 类（approve）同样受假成功防线约束', async () => {
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([
+        { typeKey: 'warehouse', services: { approve: 'yf.oapi.warehouse.approve' }, primaryKey: ['warehouse_no'] },
+      ]),
+      transport: makeMockTransport(silentFailureResponse('单据状态不允许审核')),
+    });
+
+    await expect(
+      client.action('warehouse', 'approve', { datakeys: [{ warehouse_no: 'W1' }] }),
+    ).rejects.toThrow(YfError);
+  });
+
+  it('query 不受该防线影响：code=0 + error[] 非空仍按成功返回（避免误伤读取）', async () => {
+    const body = JSON.stringify({
+      std_data: {
+        execution: { code: '0', sql_code: '', description: '查詢成功' },
+        parameter: {
+          total_result: 1,
+          has_next: false,
+          result: { cnt: 1, rows: [{ warehouse_no: 'W1' }], error: [{ message: '某节点无资料' }] },
+        },
+      },
+    });
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([{ typeKey: 'warehouse', services: { query: 'yf.oapi.warehouse.query.get' } }]),
+      transport: makeMockTransport(body),
+    });
+
+    const result = await client.query('warehouse', { page_no: 1, page_size: 10, use_has_next: true, conditions: { operator: 'and', fields: [] } });
+    expect(result.rows).toHaveLength(1);
+  });
+
+  it('read 不受该防线影响（读取合法性优先）', async () => {
+    const body = JSON.stringify({
+      std_data: {
+        execution: { code: '0', sql_code: '', description: '执行成功' },
+        parameter: { result: { success: [{ warehouse_data: [] }], error: [{ message: '节点无资料' }] } },
+      },
+    });
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([{ typeKey: 'warehouse', services: { read: 'yf.oapi.warehouse.read.get' }, primaryKey: ['warehouse_no'] }]),
+      transport: makeMockTransport(body),
+    });
+
+    const result = await client.action('warehouse', 'read', { datakeys: [{ warehouse_no: 'ZZZ' }] });
+    // 不抛错即达标 —— read 允许 code=0 + error[] 共存。
+    // 注意：success 含 1 个「节点壳」元素，故 empty=false；判定「是否查到」
+    // 须下钻内层数组（真机 2026-10-10 确认，见 yf-live-scenario-test-plan §5.1）。
+    expect(result.empty).toBe(false);
+    expect(result.items).toHaveLength(1);
+  });
+
+  it('正常成功（code=0 且 error[] 为空）不受影响', async () => {
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeCatalog([{ typeKey: 'warehouse', services: { create: 'yf.oapi.warehouse.create' } }]),
+      transport: makeMockTransport(actionResponse([{ warehouse_no: 'W9' }])),
+    });
+
+    const result = await client.create('warehouse', { warehouse_data: [{ warehouse_no: 'W9' }] });
+    expect(result.empty).toBe(false);
+    expect(result.items).toHaveLength(1);
+  });
+});
+// ================================================================== 审核类额外键本地拦截
+// 真机 2026-10-10：sales.order 的 approve 只传 2 键 → 服务端报
+// 「取得傳入鍵值資料失敗，找不到:...datakeys[0].docdate」。
+// SDK 现据 operation_extra_keys 在本地提前拦截，并明确指认缺哪个键。
+
+describe('审核类额外键本地拦截', () => {
+  /** catalog 带 operation_extra_keys 的 mock。 */
+  function makeExtraKeysCatalog() {
+    const map = new Map<string, YfTypeKeyEntry>();
+    map.set('sales.order', {
+      typeKey: 'sales.order',
+      title: '销售订单',
+      services: {
+        approve: 'yf.oapi.sales.order.data.approve',
+        disapprove: 'yf.oapi.sales.order.data.disapprove',
+        read: 'yf.oapi.sales.order.data.read.get',
+      },
+      primaryKey: ['doc_type_no', 'doc_no'],
+      detailNodes: ['sales_order_data'],
+      unavailable: false,
+      operationExtraKeys: {
+        approve: ['docdate', 'approvedate'],
+        disapprove: ['docdate', 'approvedate'],
+      },
+    });
+    return {
+      resolveServiceName(typeKey: string, operation: string): string {
+        const e = map.get(typeKey);
+        const name = e?.services[operation as keyof typeof e.services];
+        if (typeof name !== 'string') throw new Error(`no service ${typeKey}/${operation}`);
+        return name;
+      },
+      findEntry(typeKey: string) {
+        return map.get(typeKey);
+      },
+      listTypeKeys() {
+        return [...map.keys()];
+      },
+    };
+  }
+
+  it('approve 缺 docdate/approvedate 时本地拦截并指认缺失字段', async () => {
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeExtraKeysCatalog(),
+      transport: makeMockTransport(actionResponse([{ doc_no: 'X' }])),
+    });
+
+    try {
+      await client.action('sales.order', 'approve', {
+        datakeys: [{ doc_type_no: '0221', doc_no: '20240703001' }],
+      });
+      expect.fail('should have thrown');
+    } catch (err) {
+      const e = err as YfError;
+      expect(e.kind).toBe('primary_key_missing');
+      expect(e.message).toContain('docdate');
+      expect(e.message).toContain('approvedate');
+      // 明确说明该操作需要哪 4 个键
+      expect(e.message).toContain('doc_type_no + doc_no + docdate + approvedate');
+    }
+  });
+
+  it('补齐 4 键后放行，不再抛错', async () => {
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeExtraKeysCatalog(),
+      transport: makeMockTransport(actionResponse([{ doc_no: 'X' }])),
+    });
+
+    const result = await client.action('sales.order', 'approve', {
+      datakeys: [
+        {
+          doc_type_no: '0221',
+          doc_no: '20240703001',
+          docdate: '20240703',
+          approvedate: '20240703',
+        },
+      ],
+    });
+    expect(result.items).toHaveLength(1);
+  });
+
+  it('read 无额外键要求，2 键即可', async () => {
+    const client = new YfClient({
+      config: makeConfig(),
+      catalog: makeExtraKeysCatalog(),
+      transport: makeMockTransport(actionResponse([{ doc_no: 'X' }])),
+    });
+
+    const result = await client.action('sales.order', 'read', {
+      datakeys: [{ doc_type_no: '0221', doc_no: '20240703001' }],
+    });
+    expect(result.items).toHaveLength(1);
+  });
+});

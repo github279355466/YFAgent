@@ -615,11 +615,43 @@
 之前真机探测报「无效的身份令牌」的根因是 **header 格式错误**，不是 token 过期：
 - ❌ 错误：`"digi-service": "yf.oapi.plant.data.query.get"` （纯文本）
 - ✅ 正确：`"digi-service": "{\"name\":\"yf.oapi.plant.data.query.get\"}"` （JSON 字符串）
-- ❌ 错误：`"digi-datakey": "SDDEMO93"` （纯文本）
-- ✅ 正确：`"digi-datakey": "{\"CompanyId\":\"SDDEMO93\"}"` （JSON 字符串）
+- ❌ 错误：`"digi-datakey": "{账套编号}"` （纯文本）
+- ✅ 正确：`"digi-datakey": "{\"CompanyId\":\"{账套编号}\"}"` （JSON 字符串）
 
 SDK 的 `headers.ts` 已正确使用 `JSON.stringify()`，问题仅在手动探测脚本中。
-Token `1D2EF4C5A41714E446615799EACA7211F9497CB81E156C99` 确认有效。
+Token `{用户令牌}` 确认有效（48 位大写 HEX）。
 
+---
 
+### OPEN-F9 ｜`total_result` 实现偏离官方文档（「总笔数」vs 分页哨兵）
+
+**状态**：已定位（RESOLVED — 我方侧已防御；厂商侧待确认）
+
+**官方口径**（`docs/易飞OpenAPI.json` 检索 `total_result`）：
+```
+"key": "std_data.parameter.total_result"   description = 「总笔数」
+```
+同文档另有「总页数」用于分页字段。
+
+**实现实测**（账套 {账套编号}，销单表；同一请求只改 `page_size`）：
+
+| `page_size` | `total_result` | 说明 |
+|---|---|---|
+| 1 | 2 | |
+| 5 | 6 | |
+| 50 | 51 | |
+| 1000（一次取完） | **938** | 仅此情形才等于真实总笔数 |
+
+**结论**：官方说「总笔数」，实现返回「本页行数 + 1」的分页哨兵 —— **文档与实现不一致**。
+佐证：官方另有 `std_data.parameter.result.cnt`，实测即为本页行数，与 `total_result` 恒差 1。
+
+**我方处置**（已完成）：
+- `yf_query` 保留 `total_result` 字段（不破坏既有调用方），但新增
+  `page_hint`（同值）与 `total_result_semantics`（明确写「分页哨兵，非总行数」），
+  并在工具 description 中告知正确取数方式（`page_size` 放大一次取完，或翻页累加 `count`）。
+- 防复发：`packages/yfcli-mcp/__tests__/query-contract.test.ts` 3 例。
+- AGENTS.md §1b 与 SKILL.md 硬性约束 1b 均标注该陷阱。
+
+**待厂商确认**：`total_result` 究竟应返回总笔数（按文档）还是分页哨兵（按实现）。
+若厂商修正为总笔数，我方 `page_hint` 语义需同步复核。
 

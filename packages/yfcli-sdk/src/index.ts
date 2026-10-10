@@ -103,6 +103,7 @@ export {
 export {
   correctEnumFields,
   extractCode,
+  extractCodeAgainstSet,
   guardEnumConditionValue,
   looksLikeCodeText,
 } from './conditions/enum-guard.js';

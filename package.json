@@ -21,11 +21,12 @@
     "check": "npm run check:all",
     "scan:secrets": "node scripts/scan-secrets.mjs",
     "scan:secrets:staged": "node scripts/scan-secrets.mjs --staged",
-    "build": "cd packages/yfcli-sdk && npx tsc -p tsconfig.build.json && cd ../yfcli-auth && npx tsc -p tsconfig.build.json && cd ../yfcli-analysis && npx tsc -p tsconfig.build.json && cd ../yfcli-experts && npx tsc -p tsconfig.build.json && cd ../yfcli-mcp && npx tsc -p tsconfig.build.json", "verify": "npm run scan:secrets && npm run check:all",
-    "gen:enums": "python scripts/gen_enums_from_oapmb.py"
+    "build": "cd packages/yfcli-sdk && npx tsc -p tsconfig.build.json && cd ../yfcli-auth && npx tsc -p tsconfig.build.json && cd ../yfcli-analysis && npx tsc -p tsconfig.build.json && cd ../yfcli-experts && npx tsc -p tsconfig.build.json && cd ../yfcli-mcp && npx tsc -p tsconfig.build.json",
+    "verify": "npm run scan:secrets && npm run check:all",
+    "gen:enums": "python scripts/gen_enums_from_oapmb.py",
+    "test:live": "node scripts/run-live-e2e.mjs"
   },
   "workspaces": [
     "packages/*"
   ]
 }
-

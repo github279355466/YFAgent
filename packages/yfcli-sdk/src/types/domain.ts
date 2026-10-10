@@ -55,6 +55,17 @@ export interface YfTypeKeyEntry {
   readonly unavailableReason?: string;
   /** 同操作多服务名冲突记录（OPEN-F8）。来自 YAML service_conflicts 字段。 */
   readonly conflictCandidates?: readonly YfServiceConflictCandidate[];
+  /**
+   * 审核类操作的**额外**键值要求（除 primaryKey 外还需提供的键）。
+   *
+   * 真机实测（2026-10-10）：sales.order 的 approve/disapprove 除 doc_type_no + doc_no 外，
+   * 还需 docdate + approvedate —— 只传业务主键报
+   * ``取得傳入鍵值資料失敗，找不到:std_data.parameter.datakeys[0].docdate``。
+   *
+   * 来源：typekey_map.yaml 的 `operation_extra_keys`（脚本从真机结论登记）。
+   * 缺省 undefined 表示无额外要求。
+   */
+  readonly operationExtraKeys?: Readonly<Partial<Record<YfOperation, readonly string[]>>>;
 }
 
 /** 服务名冲突候选（同一操作对应多个服务名时的记录）。 */
@@ -121,8 +132,18 @@ export interface YfActionResult {
 export interface YfEnumFieldSpec {
   /** 字段名，如 `approve_status`。 */
   readonly fieldName: string;
-  /** 该字段是否为「编码.中文」形态的文本型枚举。 */
+  /** 该字段是否为需要剥离「.描述」后缀的文本型枚举。 */
   readonly codedText: boolean;
+  /**
+   * 该字段的合法编码集合（来自枚举字典）。
+   *
+   * 提供后，守卫只对「点前部分是合法编码」的值做剥离，从而把
+   * `tax_type = "1.内含"`（需剥离）与 `order_amount = "2.65"`（数值，绝不可剥离）
+   * 区分开 —— 二者形态相同，仅凭长相无法判断。
+   *
+   * 缺省时退化为纯形态判定（点后为空或含中文即剥离）。
+   */
+  readonly codes?: ReadonlySet<string>;
 }
 
 /** 判定为「编码.中文」形态的最小正则锚点：首段非空 + 点 + 非空中文。 */

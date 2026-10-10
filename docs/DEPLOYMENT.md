@@ -1,7 +1,7 @@
 # YFCLI 部署指南
 
 > 适用环境：Windows Server + PowerShell  
-> 最后更新：2026-10-09  
+> 最后更新：2026-10-10  
 > **部署模型：预构建包部署**——知识产物、视图 DDL、SQL 模板均在开发环境预生成，  
 > 每家客户的数据库结构和 OpenAPI 接口一致，部署时直接复制即可。
 
@@ -14,12 +14,12 @@
 ```
 yfcli-deploy-v{version}/
 ├── packages/                    # 6 个包的源码（Node.js >= 20 直接运行）
-│   ├── yfcli-sdk/               # CRUD SDK（122 tests）
-│   ├── yfcli-auth/              # 授权模块（64 tests）
-│   ├── yfcli-mcp/               # MCP Server（41 tests）
-│   ├── yfcli-analysis/          # 分析层 + 20 个 SQL 模板（49 tests）
+│   ├── yfcli-sdk/               # CRUD SDK（166 tests）
+│   ├── yfcli-auth/              # 授权模块（68 tests）
+│   ├── yfcli-mcp/               # MCP Server（64 tests）
+│   ├── yfcli-analysis/          # 分析层 + 20 个 SQL 模板（105 tests）
 │   │   └── sql/views/           # 9 个 vw_ai_* 视图 DDL（预生成）
-│   ├── yfcli-experts/           # 专家模块（18 tests）
+│   ├── yfcli-experts/           # 专家模块（28 tests）
 │   └── yfcli-skill-openapi/     # Skill 包 + 31 个助手文档
 ├── knowledge/                   # 知识产物（预生成，不需重新生成）
 │   ├── typekey/typekey_map.yaml # 106 对象 / 595 服务名
@@ -36,7 +36,7 @@ yfcli-deploy-v{version}/
 **不需要在客户现场执行的步骤**：
 - ❌ `npm run gen:all`（知识产物已预生成）
 - ❌ `npm run check:all`（已在开发环境验证）
-- ❌ `npm test`（294 tests 已在开发环境通过）
+- ❌ `npm test`（431 tests 已在开发环境通过）
 - ❌ 编写或调整 SQL 模板（20 个模板已预生成）
 
 ---
@@ -91,7 +91,7 @@ notepad .env
 
 | 变量 | 必填 | 说明 |
 |------|------|------|
-| `YF_BASE_URL` | ✅ | 易飞 OpenAPI 入口（含完整路径） |
+| `YF_BASE_URL` | ✅ | 易飞 ERP 内网 IP（**只填 IP**，路径代码自动拼接） |
 | `YF_COMPANY_ID` | ✅ | 账套编号 |
 | `YF_USER_TOKEN` | ✅ | 身份令牌（TPASC19 获取） |
 | `YF_SQL_SERVER` | 分析层 | SQL Server 地址 |
@@ -99,7 +99,7 @@ notepad .env
 | `YF_SQL_DATABASE` | 分析层 | 数据库名 |
 | `YF_SQL_USER_ENV` | 分析层 | 用户名环境变量名 |
 | `YF_SQL_PASSWORD_ENV` | 分析层 | 密码环境变量名 |
-| `YF_MCP_PORT` | 否 | 默认 3100 |
+| `YF_MCP_PORT` | 否 | 默认 4001 |
 
 然后设置数据库凭据的环境变量：
 
@@ -195,7 +195,7 @@ services.msc                   # GUI 管理
 node -v   # 应 >= v20.0.0
 
 # ✅ 2. MCP Server 健康检查
-Invoke-RestMethod -Uri "http://localhost:3100/health"
+Invoke-RestMethod -Uri "http://localhost:4001/health"
 # 期望: { status: "ok", auth: "configured", erp: "reachable" }
 
 # ✅ 3. OpenAPI 连通性
@@ -215,7 +215,7 @@ sqlcmd -S $env:YF_SQL_SERVER -d $env:YF_SQL_DATABASE -Q "SELECT TOP 1 * FROM dbo
 
 # ✅ 5. MCP 工具调用
 $mcpBody = '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"yf_manifest","arguments":{}}}'
-Invoke-RestMethod -Uri "http://localhost:3100/mcp" -Method Post `
+Invoke-RestMethod -Uri "http://localhost:4001/mcp" -Method Post `
     -ContentType "application/json" `
     -Headers @{ Accept = "application/json, text/event-stream" } `
     -Body $mcpBody
@@ -231,7 +231,7 @@ Invoke-RestMethod -Uri "http://localhost:3100/mcp" -Method Post `
 | MCP 返回 406 | 缺少 Accept 头 | 添加 `Accept: application/json, text/event-stream` |
 | OpenAPI 返回 500+HTML | Token 无效/过期 | TPASC19 重新获取，更新 `.env` |
 | 查询返回空数组 code=0 | 主键全错不报错 | 检查 datakeys 是否含全部主键字段 |
-| 枚举条件查不到数据 | 传了 `Y.已审核` 而非 `Y` | 只传编码部分 |
+| 枚举条件查不到数据 | 枚举按前缀匹配，`Y` / `Y.` / `Y.已审核` 等价 | 旧结论已推翻，无需特殊处理 |
 | conditions not found | 用了易助数组形态 | 改用易飞对象嵌套格式 |
 | npm install 失败 | erp-experts/erp-license 路径不存在 | 确保三个仓库同级目录，或将 node_modules 一并打包 |
 | SQL Server 连接失败 | TCP/IP 未启用/防火墙 | 启用 TCP/IP + 放行 1433 端口 |
@@ -256,10 +256,10 @@ Get-ChildItem packages\yfcli-analysis\sql\views\*.sql | ForEach-Object {
 }
 
 # 4. 重启 MCP Server
-pm2 restart yfcli-mcp
+servy-cli restart yfcli-mcp
 
 # 5. 验证
-Invoke-RestMethod -Uri "http://localhost:3100/health"
+Invoke-RestMethod -Uri "http://localhost:4001/health"
 ```
 
 ---

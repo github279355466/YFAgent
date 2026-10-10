@@ -1,0 +1,11 @@
+{
+  "title": "scan:secrets 在 OPEN-DECISIONS.md 的 3 处既有命中处置",
+  "depends_on": [],
+  "notes": "2026-10-10 已完成（本会话）。\n\n=== 处置结果：采用方案 B（占位符化）===\n扫描共发现 5 处命中（最初报 3 处，随后检出 5 处），全部按占位符替换：\n\n1. .env.example\n   YF_BASE_URL=http://{内网IP}  →  http://{内网IP}\n\n2. docs/decisions/OPEN-DECISIONS.md（2 处）\n   \"digi-datakey\": \"{账套编号}\"                        →  \"{账套编号}\"\n   \"{\\\"CompanyId\\\":\\\"{账套编号}\\\"}\"                    →  \"{\\\"CompanyId\\\":\\\"{账套编号}\\\"}\"\n   Token `{用户令牌}` 确认有效。\n                                                     →  Token `{用户令牌}` 确认有效（48 位大写 HEX）。\n\n3. .trellis/tasks/post-mvp-conditions-operator-case/task.json（2 处）\n   http://{公网中转}:4100/mcp  →  http://{公网中转}:4100/mcp\n   {账套A} 与 {账套编号}          →  {账套A} 与 {账套B}\n\n选择方案 B 而非白名单的理由：\n  - .env.example 是模板文件，本就该用占位符（同文件其他项已是空值模板风格）；\n  - OPEN-DECISIONS.md 中的令牌值未核实是否仍有效，稳妥起见一律脱敏；\n  - 占位符化后不影响文档的可读性与示例价值。\n\n=== 验证 ===\nnpm run scan:secrets  →  [PASS] 未发现敏感信息。（扫描 523 个文件）\nnpm run verify        →  通过（scan:secrets + check:all 全绿）",
+  "createdAt": "2026-10-10",
+  "owner": "director",
+  "status": "completed",
+  "completedAt": "2026-10-10",
+  "slug": "post-mvp-secret-scan-hits",
+  "priority": "P0"
+}

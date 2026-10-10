@@ -34,8 +34,9 @@ import {
   parseActionResult,
   parseEnvelope,
   parseQueryResult,
+  isSilentFailure,
 } from '../response/parser.js';
-import { extractCode, looksLikeCodeText } from '../conditions/enum-guard.js';
+import { extractCode, extractCodeAgainstSet, looksLikeCodeText } from '../conditions/enum-guard.js';
 import { redact } from '../logging/redact.js';
 
 /** 可注入的日志出口，便于 CLI / MCP / 测试分别接管。 */
@@ -44,6 +45,21 @@ export interface YfLogger {
   info(message: string, fields?: Record<string, unknown>): void;
   warn(message: string, fields?: Record<string, unknown>): void;
 }
+
+/**
+ * 写操作集合 —— 「假成功」检查只对这些操作启用。
+ *
+ * 查询类（query/read）合法地可能同时返回数据与 error[]（如单别下某节点无资料），
+ * 收紧会误伤正常读取；写入类被业务校验拒绝时才属于「本该失败却报成功」。
+ */
+const WRITE_OPERATIONS: ReadonlySet<string> = new Set([
+  'create',
+  'update',
+  'delete',
+  'approve',
+  'disapprove',
+  'invalid',
+]);
 
 /** 丢弃全部日志的默认实现。 */
 export const NOOP_LOGGER: YfLogger = {
@@ -263,7 +279,7 @@ export class YfClient {
     parameter: YfDataKeysParameter,
   ): Promise<YfActionResult> {
     const serviceName = this.catalog.resolveServiceName(typeKey, operation);
-    this.assertDataKeysCoverPrimary(typeKey, parameter);
+    this.assertDataKeysCoverPrimary(typeKey, operation, parameter);
 
     const envelope = wrap(parameter);
     const context = this.contextFor(serviceName, typeKey, operation);
@@ -300,8 +316,35 @@ export class YfClient {
     context: YfErrorContext,
   ): void {
     const { execution } = envelope.std_data;
-    if (isSuccessCode(execution.code)) return;
-    throw buildBusinessError(envelope, context);
+    if (!isSuccessCode(execution.code)) {
+      throw buildBusinessError(envelope, context);
+    }
+
+    // ── 假成功防线（2026-10-10 真机事故）──────────────────────────────
+    // 服务端对「写操作被业务校验拒绝」会返回 code=0 + description=执行成功，
+    // 但同时在 error[] 里给出真实原因（如「字段不可空白!」），且 result.success 为空。
+    // 仅按 code 判成功会静默吞掉该错误，调用方误判为「写入成功」。
+    //
+    // 只对**写操作**启用该检查：查询类（query/read）合法地可能同时携带
+    // error[] 与数据（例如单别下某节点无资料），收紧会误伤正常读取。
+    if (!WRITE_OPERATIONS.has(context.operation ?? '')) return;
+    if (!isSilentFailure(envelope)) return;
+
+    // 用 buildBusinessError 复用双结构 error[] 解析与语义化提示，
+    // 但把 kind 明确覆盖为 silent_business_error，使上层可精确识别。
+    const error = buildBusinessError(envelope, context);
+    throw new YfError({
+      layer: 'business',
+      kind: 'silent_business_error',
+      message:
+        `服务端返回 code=${execution.code}「${execution.description}」，` +
+        '但 error[] 非空 —— 属**假成功**（写入很可能未生效）。' +
+        `真实原因：${error.message}`,
+      description: execution.description,
+      details: error.details,
+      rawData: error.rawData,
+      ...(context ? { context } : {}),
+    });
   }
 
   /**
@@ -312,6 +355,7 @@ export class YfClient {
    */
   private assertDataKeysCoverPrimary(
     typeKey: string,
+    operation: Exclude<YfOperation, 'query' | 'create' | 'update'>,
     parameter: YfDataKeysParameter,
   ): void {
     const entry = this.catalog.findEntry(typeKey);
@@ -327,21 +371,41 @@ export class YfClient {
     const first = parameter.datakeys[0];
     if (first === undefined) return;
 
-    const missing = entry.primaryKey.filter(
+    // 校验「业务主键」是否齐全。
+    const missingPrimary = entry.primaryKey.filter(
       (pk) => first[pk] === undefined || first[pk] === null || first[pk] === '',
     );
-    if (missing.length === 0) return;
+    if (missingPrimary.length > 0) {
+      throw new YfError({
+        layer: 'business',
+        kind: 'primary_key_missing',
+        message:
+          `${typeKey} 的 datakeys 缺少主键字段：${missingPrimary.join(', ')}。` +
+          `该对象主键为 ${entry.primaryKey.join(' + ')}，` +
+          '复合主键须全部提供，缺一个服务端即报「缺少[x]的鍵值參數」。',
+      });
+    }
 
-    throw new YfError({
-      layer: 'business',
-      kind: 'primary_key_missing',
-      message:
-        `${typeKey} 的 datakeys 缺少主键字段：${missing.join(', ')}。` +
-        `该对象主键为 ${entry.primaryKey.join(' + ')}，` +
-        '复合主键须全部提供，缺一个服务端即报「缺少[x]的鍵值參數」。',
-    });
+    // 校验「操作额外键」是否齐全（真机 2026-10-10：sales.order 的 approve/disapprove
+    // 除 doc_type_no + doc_no 外还需 docdate + approvedate，否则服务端报
+    // 「取得傳入鍵值資料失敗，找不到:...datakeys[0].docdate」）。
+    // 本地拦截的价值：把这条容易误判为「单号写错」的服务端报错，提前变成
+    // 明确指认缺哪个键的本地错误。未登记额外键的对象不受影响。
+    const extraKeys = entry.operationExtraKeys?.[operation] ?? [];
+    const missingExtra = extraKeys.filter(
+      (k) => first[k] === undefined || first[k] === null || first[k] === '',
+    );
+    if (missingExtra.length > 0) {
+      throw new YfError({
+        layer: 'business',
+        kind: 'primary_key_missing',
+        message:
+          `${typeKey} 的 ${operation} 操作缺少额外键值字段：${missingExtra.join(', ')}。` +
+          `该操作需要 ${[...entry.primaryKey, ...extraKeys].join(' + ')}，` +
+          `仅传业务主键会被服务端拒绝（报「找不到:...datakeys[0].${missingExtra[0]}」）。`,
+      });
+    }
   }
-
   /**
    * 清洗 query conditions 中的枚举字段值。
    *
@@ -361,11 +425,20 @@ export class YfClient {
       if (!isConditionField(f)) return f;
       const spec = this.enumSpecs[f.field_name];
       if (spec === undefined || !spec.codedText) return f;
-      if (!looksLikeCodeText(f.value)) return f;
 
-      const corrected = extractCode(f.value);
+      // 优先用字典编码集判定 —— 只有「点前部分是合法编码」才剥离，
+      // 从而把枚举 `1.内含`（剥）与数值 `2.65`（不剥）区分开。
+      // 无 codes 元数据时退化为纯形态判定。
+      const hasCodes = spec.codes !== undefined && spec.codes.size > 0;
+      const corrected = hasCodes
+        ? extractCodeAgainstSet(f.value, spec.codes!)
+        : looksLikeCodeText(f.value)
+          ? extractCode(f.value)
+          : undefined;
+      if (corrected === undefined || corrected === f.value) return f;
+
       this.logger.warn(
-        `枚举清洗：${f.field_name} 的值 "${f.value}" 含中文后缀，已自动修正为 "${corrected}"。` +
+        `枚举清洗：${f.field_name} 的值 "${f.value}" 是回参形态，已自动修正为 "${corrected}"。` +
         '易飞文本型枚举作为查询条件只认纯编码，传完整串会返回 code=0 + 0 条。',
         { fieldName: f.field_name, originalValue: f.value, correctedValue: corrected },
       );

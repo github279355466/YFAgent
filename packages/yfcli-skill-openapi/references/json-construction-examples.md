@@ -7,7 +7,7 @@
 
 | 维度 | 易飞 (YF) ✅ | 易助 (YZ) ❌ |
 |------|-------------|-------------|
-| conditions 结构 | **对象** `{ operator: "AND", fields: [...] }` | 嵌套数组 `[{ groups: [{ fields }] }]` |
+| conditions 结构 | **对象** `{ operator: "and", fields: [...] }` | 嵌套数组 `[{ groups: [{ fields }] }]` |
 | 写操作容器 | **容器名直接作为 parameter 子节点** `{ plant_data: [...] }` | `cdsMaster` 包裹 |
 | 字段命名 | **语义名** `plant_no` / `doc_type_no` | 编号 `IBA001` / `IBB003` |
 | 枚举传值 | **只传编码** `Y` | 可传 `Y.已审核` |
@@ -43,7 +43,7 @@
     "page_no": 1,
     "page_size": 20,
     "conditions": {
-      "operator": "AND",
+      "operator": "and",
       "fields": [
         { "field_name": "customer_no", "operator": "=", "value": "C0092" }
       ]
@@ -62,7 +62,7 @@
     "page_no": 1,
     "page_size": 50,
     "conditions": {
-      "operator": "AND",
+      "operator": "and",
       "fields": [
         { "field_name": "doc_date", "operator": "BETWEEN", "value": "'20260101' AND '20260331'" },
         { "field_name": "approve_status", "operator": "=", "value": "Y" }
@@ -84,7 +84,7 @@
     "page_no": 1,
     "page_size": 10,
     "conditions": {
-      "operator": "AND",
+      "operator": "and",
       "fields": [
         { "field_name": "item_name", "operator": "LIKE", "value": "%电阻%" }
       ]
@@ -104,7 +104,7 @@
     "page_no": 1,
     "page_size": 20,
     "conditions": {
-      "operator": "AND",
+      "operator": "and",
       "fields": [
         { "field_name": "supplier_no", "operator": "IN", "value": "(N'SUP001',N'SUP002',N'SUP003')" }
       ]
@@ -118,7 +118,7 @@
 ```json
 {
   "conditions": {
-    "operator": "AND",
+    "operator": "and",
     "fields": [
       { "field_name": "doc_type_no+doc_no", "operator": "=", "value": "5301SO20260001" }
     ]
@@ -393,6 +393,13 @@ Step 3: 构造 update 请求体（传入完整字段，修改目标字段）
 
 ## 审核 / 撤审 / 作废
 
+> ⚠️ **审核类操作的 `datakeys` 除业务主键外，还需额外的日期键**（真机实测 2026-10-10）。
+> 以 `sales.order` 为例，需要 **4 个键**：`doc_type_no + doc_no + docdate + approvedate`。
+> 只传前 2 个会报 `取得傳入鍵值資料失敗，找不到:...datakeys[0].docdate`。
+>
+> 各对象的额外键要求见 `typekey_map.yaml` 的 `operation_extra_keys` 字段；
+> 未登记该字段的对象无额外要求。
+
 ### 审核 (approve)
 
 ```json
@@ -401,7 +408,12 @@ Step 3: 构造 update 请求体（传入完整字段，修改目标字段）
   "operation": "approve",
   "input": {
     "datakeys": [
-      { "doc_type_no": "5301", "doc_no": "SO20260001" }
+      {
+        "doc_type_no": "0221",
+        "doc_no": "20240703001",
+        "docdate": "20240703",
+        "approvedate": "20240703"
+      }
     ]
   }
 }
@@ -415,7 +427,12 @@ Step 3: 构造 update 请求体（传入完整字段，修改目标字段）
   "operation": "disapprove",
   "input": {
     "datakeys": [
-      { "doc_type_no": "5301", "doc_no": "SO20260001" }
+      {
+        "doc_type_no": "0221",
+        "doc_no": "20240703001",
+        "docdate": "20240703",
+        "approvedate": "20240703"
+      }
     ]
   }
 }
@@ -435,8 +452,6 @@ Step 3: 构造 update 请求体（传入完整字段，修改目标字段）
 }
 ```
 
----
-
 ## 智能问数 (yf_ask)
 
 自然语言提问，Agent 自动转换为聚合查询：
@@ -453,7 +468,11 @@ Step 3: 构造 update 请求体（传入完整字段，修改目标字段）
 
 ## 自检清单（组装 JSON 后必检）
 
-- [ ] **conditions 是对象形态** `{ operator, fields }`，不是数组
+- [ ] **conditions 是对象形态** `{ operator: "and", fields }`，不是数组
+- [ ] **逻辑操作符小写**（`"and"` / `"or"`，不是 `"AND"` / `"OR"`）—— 大写会导致条件被静默丢弃、返回全量数据
+- [ ] **审核/撤审的 datakeys 含额外日期键**（如 sales.order 需 docdate + approvedate）
+- [ ] **写操作容器值是数组** `{ "<container>": [ {...} ] }`，不是单对象
+- [ ] **写操作不用 code 判成功** —— 检查 error[] 是否为空，或 read 复核是否落库
 - [ ] **枚举只传编码**（`Y` 不是 `Y.已审核`）
 - [ ] **容器名从 typekey_map 查表**，不是硬编码或拼接
 - [ ] **写操作用 `{ containerName: [...] }`**，不是 `{ cdsMaster: [...] }`
