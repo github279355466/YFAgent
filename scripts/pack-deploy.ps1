@@ -30,7 +30,7 @@ New-Item -ItemType Directory -Path $targetDir -Force | Out-Null
 New-Item -ItemType Directory -Path $outputPath -Force | Out-Null
 
 # 排除规则
-$excludeDirs = @("node_modules", ".git", ".trellis", "__tests__", ".omc", ".workbuddy", "runs")
+$excludeDirs = @(".git", ".trellis", "__tests__", ".omc", ".workbuddy", "runs")
 $excludeFiles = @("*.test.ts", "*.spec.ts", ".env", "*.local.yaml", "*.zip", ".gitignore", "_fix*.mjs")
 
 function Copy-Filtered {
@@ -142,5 +142,6 @@ Write-Host "  6. Start MCP Server"
 
 # 清理临时目录
 Remove-Item $tempDir -Recurse -Force -ErrorAction SilentlyContinue
+
 
 
