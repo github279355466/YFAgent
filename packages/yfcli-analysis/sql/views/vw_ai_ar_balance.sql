@@ -3,6 +3,9 @@
 -- 字段：LB005 客户编号 / LB004 交易日期 / LB011 方向(1=借/-1=贷) / LB014 本币金额 / LB016 本币已核销金额
 -- 不带 COMPANY 过滤
 
+IF OBJECT_ID('dbo.vw_ai_ar_balance', 'V') IS NOT NULL DROP VIEW dbo.vw_ai_ar_balance;
+GO
+
 CREATE VIEW dbo.vw_ai_ar_balance AS
 SELECT
   lb.LB005 AS customer_code,   -- 客户编号
@@ -13,5 +16,7 @@ SELECT
 FROM dbo.ACRLB lb;
 GO
 
-GRANT SELECT ON dbo.vw_ai_ar_balance TO PUBLIC;
+-- ⚠ 授权主体由客户 DBA 按环境指定，**默认不授权给 PUBLIC**。
+--    分析层只读账号（本项目实测环境为 `ai`）建成后，取消下一行注释并执行：
+-- GRANT SELECT ON dbo.vw_ai_ar_balance TO ai;
 GO

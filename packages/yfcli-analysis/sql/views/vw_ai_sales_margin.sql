@@ -7,6 +7,9 @@
 -- ⚠ DBA 确认项：LA005=-1 是否覆盖所有销货出库场景（交易别 LA014=2 可能更精确）
 -- 不带 COMPANY 过滤；审核码只筛 Y（已审核，V=作废）
 
+IF OBJECT_ID('dbo.vw_ai_sales_margin', 'V') IS NOT NULL DROP VIEW dbo.vw_ai_sales_margin;
+GO
+
 CREATE VIEW dbo.vw_ai_sales_margin AS
 SELECT
   g.TG001 AS doc_type,         -- 销货单别
@@ -31,5 +34,7 @@ OUTER APPLY (
 ) c;
 GO
 
-GRANT SELECT ON dbo.vw_ai_sales_margin TO PUBLIC;
+-- ⚠ 授权主体由客户 DBA 按环境指定，**默认不授权给 PUBLIC**。
+--    分析层只读账号（本项目实测环境为 `ai`）建成后，取消下一行注释并执行：
+-- GRANT SELECT ON dbo.vw_ai_sales_margin TO ai;
 GO

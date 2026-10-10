@@ -4,6 +4,9 @@
 -- ⚠ 注意：应付方向与应收相反（-1=借方减项，1=贷方增项）
 -- 不带 COMPANY 过滤
 
+IF OBJECT_ID('dbo.vw_ai_ap_balance', 'V') IS NOT NULL DROP VIEW dbo.vw_ai_ap_balance;
+GO
+
 CREATE VIEW dbo.vw_ai_ap_balance AS
 SELECT
   lb.LB005 AS supplier_code,   -- 应付对象编号
@@ -14,5 +17,7 @@ SELECT
 FROM dbo.ACPLB lb;
 GO
 
-GRANT SELECT ON dbo.vw_ai_ap_balance TO PUBLIC;
+-- ⚠ 授权主体由客户 DBA 按环境指定，**默认不授权给 PUBLIC**。
+--    分析层只读账号（本项目实测环境为 `ai`）建成后，取消下一行注释并执行：
+-- GRANT SELECT ON dbo.vw_ai_ap_balance TO ai;
 GO

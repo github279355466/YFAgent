@@ -5,6 +5,9 @@
 -- JOIN：PURTD.TD001=PURTC.TC001 AND PURTD.TD002=PURTC.TC002
 -- 不带 COMPANY 过滤
 
+IF OBJECT_ID('dbo.vw_ai_purchase_summary', 'V') IS NOT NULL DROP VIEW dbo.vw_ai_purchase_summary;
+GO
+
 CREATE VIEW dbo.vw_ai_purchase_summary AS
 SELECT
   h.TC001 AS doc_type,         -- 采购单别
@@ -19,5 +22,7 @@ FROM dbo.PURTC h
 JOIN dbo.PURTD b ON b.TD001 = h.TC001 AND b.TD002 = h.TC002;
 GO
 
-GRANT SELECT ON dbo.vw_ai_purchase_summary TO PUBLIC;
+-- ⚠ 授权主体由客户 DBA 按环境指定，**默认不授权给 PUBLIC**。
+--    分析层只读账号（本项目实测环境为 `ai`）建成后，取消下一行注释并执行：
+-- GRANT SELECT ON dbo.vw_ai_purchase_summary TO ai;
 GO

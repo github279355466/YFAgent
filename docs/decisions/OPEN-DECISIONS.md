@@ -521,3 +521,48 @@
 
 **教训**：门禁脚本本身也必须有测试。本次 3 个缺陷（2 个规则段数 + 1 个解析器）
 全部是**静默失效**——门禁不报错、只是悄悄不再拦截。
+
+---
+
+## OPEN-G2 裁决（2026-10-10）：视图授权收口
+
+| 项 | 内容 |
+|---|---|
+| **编号** | OPEN-G2 |
+| **日期** | 2026-10-10 |
+| **状态** | ✅ 已裁决（脚本已改；真机 REVOKE 待 DBA 执行） |
+| **问题** | 9 个 `vw_ai_*` 只读视图的 DDL 使用 `GRANT SELECT ... TO PUBLIC`，等于把应收/应付/总账/毛利开放给库内任意登录账号 |
+| **来源** | 代码审查第一轮 P1-1 / P1-2 |
+
+### 裁决依据
+
+1. **YZCLI 交付范式为 `TO yzai`**（专用只读账号），本项目应照搬形态
+2. **本项目只读账号实测为 `ai`**（见 `docs/plans/yf-db-direct-connect-probe.md`），
+   **不可照抄 YZCLI 的 `yzai`**
+3. `PUBLIC` 是 SQL Server 所有登录的隐含角色，`TO PUBLIC` 与「分析层只读」意图相悖
+4. 9 个视图 DDL **已于 2026-10-09 由 DBA 在真机执行**（旧版，
+   含 `TO PUBLIC`）—— 故仅改脚本不够，需配套 REVOKE 补救
+
+### 实施结果
+
+| 变更 | 内容 |
+|---|---|
+| 改脚本 | 9 个 `sql/views/*.sql`：`GRANT ... TO PUBLIC` 改为**注释化的 `TO ai`** |
+| 补幂等 | 9 个视图补 `IF OBJECT_ID(...) IS NOT NULL DROP VIEW ...; GO`（原为裸 `CREATE VIEW`，不可重复执行） |
+| 新增补救 | `sql/views/revoke-public-grants.sql`：对已执行旧版 DDL 的环境 `REVOKE ... FROM PUBLIC` + 验证查询 |
+
+### 待办（外部依赖）
+
+- [ ] 客户 DBA 执行 `revoke-public-grants.sql`（撤销 PUBLIC）
+- [ ] 对 9 个视图 `GRANT SELECT ... TO ai`
+- [ ] 用只读账号验证 9 个视图均能取数（`SELECT TOP 1`）
+
+> ⚠️ 未完成前，真机上这 9 个视图仍对 `PUBLIC` 开放 —— 脚本已正确，
+> 但**真机权限状态尚未收口**。本项在 DBA 执行前保持 OPEN。
+
+### 附带修正
+
+`docs/plans/architecture-decision-ledger.md` 有 4 处将视图 DDL 落地位置写作
+`scripts/create-ai-views.sql` —— 该文件在本仓**不存在**（那是 YZCLI 的单文件形态）。
+本仓实际为 9 个独立文件 `packages/yfcli-analysis/sql/views/*.sql`，
+已按实际布局修正（README / DEPLOYMENT.md 一直是正确的）。

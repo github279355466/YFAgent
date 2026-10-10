@@ -4,6 +4,9 @@
 -- ✅ 字段名和含义已确认正确
 -- 不带 COMPANY 过滤
 
+IF OBJECT_ID('dbo.vw_ai_inventory_cost', 'V') IS NOT NULL DROP VIEW dbo.vw_ai_inventory_cost;
+GO
+
 CREATE VIEW dbo.vw_ai_inventory_cost AS
 SELECT
   mc.MC001 AS item_no,         -- 品号
@@ -13,5 +16,7 @@ SELECT
 FROM dbo.INVMC mc;
 GO
 
-GRANT SELECT ON dbo.vw_ai_inventory_cost TO PUBLIC;
+-- ⚠ 授权主体由客户 DBA 按环境指定，**默认不授权给 PUBLIC**。
+--    分析层只读账号（本项目实测环境为 `ai`）建成后，取消下一行注释并执行：
+-- GRANT SELECT ON dbo.vw_ai_inventory_cost TO ai;
 GO

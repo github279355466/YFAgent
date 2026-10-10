@@ -33,7 +33,7 @@
 | **依据文档** | `docs/plans/mvp-development-plan.md` §1.2-P4「架构依据（最大架构风险所在）」 |
 | **裁决内容** | `yfcli-analysis` 的 20 个 SQL 模板**全部只查 `vw_ai_*` 视图**，不允许出现物理表名。执行器防护须校验 FROM 子句只含视图名。 |
 | **理由** | YZCLI 的 `templates.ts` 591 行依赖 16 张表 / 85 个字段引用，易飞库同名命中 0 张。若允许直查物理表，将导致两套产品线模板完全不可维护。视图作为唯一抽象层，保证模板可跨版本、跨客户部署。 |
-| **落地位置** | `packages/yfcli-analysis/src/runtime/sql/executor.ts`（FROM 校验）+ `scripts/create-ai-views.sql`（9 视图 DDL） |
+| **落地位置** | `packages/yfcli-analysis/src/runtime/sql/executor.ts`（FROM 校验）+ `packages/yfcli-analysis/sql/views/*.sql`（9 视图 DDL） |
 | **关联** | AD-07（视图策略）、AD-10（L2 模板注册制） |
 
 ---
@@ -177,7 +177,7 @@
 | **依据文档** | `docs/plans/mvp-development-plan.md` §1.2-P4「视图设计裁决」· `docs/plans/dual-product-line-architecture.md` §3.5 |
 | **裁决内容** | 9 个 `vw_ai_*` 视图 DDL **不带 `COMPANY` 字段过滤**。`COMPANY` 为预留管理字段（无业务含义），易飞架构为「独立公司账套」，不存在一表多账套场景。 |
 | **理由** | 易助需要 `COMPANY` 过滤是因为多账套共用一套数据库；易飞每个账套独立数据库实例，加 `WHERE COMPANY=` 反而引入不必要的性能开销和维护负担。 |
-| **落地位置** | `scripts/create-ai-views.sql`（9 视图 DDL，幂等 DROP/CREATE） |
+| **落地位置** | `packages/yfcli-analysis/sql/views/*.sql`（9 视图 DDL，幂等 DROP/CREATE） |
 | **关联** | AD-07（库表名一致性）、AD-02（只查视图） |
 
 ### AD-07 ｜库表名 100% 一致，无需映射层
@@ -190,8 +190,21 @@
 | **依据文档** | `docs/plans/mvp-development-plan.md` §1.2-P4「视图设计裁决」· `docs/plans/analysis-table-mapping.xlsx` |
 | **裁决内容** | 易飞与易助的库表名经 52 组 3 位前缀交叉比对，**100% 一致（0 组不同）**。因此 `yfcli-analysis` 不需要「易助表名 → 易飞表名」映射层，视图 DDL 直接使用易飞物理表名。 |
 | **理由** | 映射层增加维护成本和出错概率。既然表名完全一致，直接复用即可。注意：**表名一致不等于字段名一致**——易助用 `JSK*` 系列字段编号（如 `LOA001`），易飞用大写物理列名（如 `MB001`），字段级仍需逐个改写。 |
-| **落地位置** | `scripts/create-ai-views.sql` + `packages/yfcli-analysis/src/templates.ts` |
+| **落地位置** | `packages/yfcli-analysis/sql/views/*.sql` + `packages/yfcli-analysis/src/templates.ts` |
 | **关联** | AD-06（COMPANY 过滤）、AD-02（只查视图） |
+
+### AD-15 ｜视图授权不得给 PUBLIC，改授专用只读账号
+
+| 项 | 内容 |
+|---|---|
+| **编号** | AD-15 |
+| **裁决日期** | 2026-10-10 |
+| **状态** | ✅ RESOLVED（脚本已改；真机 REVOKE 待 DBA 执行） |
+| **依据文档** | `docs/reviews/2026-10-09-代码审查报告.md` P1-1/P1-2 · `docs/plans/yzcli-architecture-reference.md`（YZCLI 范式） |
+| **裁决内容** | 9 个 `vw_ai_*` 视图 DDL **不得** `GRANT SELECT ... TO PUBLIC`，改为授权给专用只读账号（本项目实测环境为 `ai`）。DDL 中 GRANT 语句**默认注释掉**，由客户 DBA 按环境指定主体后执行。 |
+| **理由** | `PUBLIC` 是所有登录的隐含角色，`TO PUBLIC` 等于把应收/应付/总账/毛利数据开放给库内任意账号，与「分析层只读」的设计意图相悖。YZCLI 交付范式亦为 `TO yzai`（专用账号），本项目照搬。**注意**：本项目只读账号为 `ai` 而非 YZCLI 的 `yzai`，不可照抄账号名。 |
+| **落地位置** | `packages/yfcli-analysis/sql/views/*.sql`（9 个，GRANT 注释化 + 补幂等 DROP/CREATE）· `packages/yfcli-analysis/sql/views/revoke-public-grants.sql`（已在真机执行过旧 DDL 的环境做补救） |
+| **关联** | AD-02（只查视图）、AD-06（COMPANY 过滤）、OPEN-G2 |
 
 ---
 
@@ -256,7 +269,7 @@
 | **状态** | ✅ RESOLVED |
 | **依据文档** | `docs/plans/mvp-development-plan.md` §1.2-P4「审核码口径陷阱」· `AGENTS.md` 真机实测硬约束 §1 |
 | **裁决内容** | 易飞 `approve_status` 有三值：`Y`（已审核）/ `N`（未审核）/ `V`（作废）。**统计分析只筛 `Y`**。不筛审核码会导致数据污染达 12 倍 `[口径：同一单据集合含税金额合计，未按审核码过滤 vs 过滤后对比]`。注意：易助用 `'T'`，**不可沿用**。 |
-| **落地位置** | `scripts/create-ai-views.sql`（视图 WHERE 子句）+ `packages/yfcli-analysis/src/templates.ts`（模板参数默认值） |
+| **落地位置** | `packages/yfcli-analysis/sql/views/*.sql`（视图 WHERE 子句）+ `packages/yfcli-analysis/src/templates.ts`（模板参数默认值） |
 | **关联** | OPEN-E1（枚举回参陷阱） |
 
 ### AD-11 ｜枚举查询只传编码部分
@@ -327,8 +340,9 @@
 | AD-12 | node_name 使用逻辑节点名 | ✅ RESOLVED | 2026-10-09 |
 | AD-13 | 服务名只能查表禁止拼接 | ✅ RESOLVED | 2026-10-09 |
 | AD-14 | 错误处理兼容双结构 | ✅ RESOLVED | 2026-10-09 |
+| AD-15 | 视图授权不得给 PUBLIC | ✅ RESOLVED | 2026-10-10 |
 
-**统计**：共 14 条 → RESOLVED 14 ｜ OPEN 0 `[口径：本台账创建时的裁决总数]`
+**统计**：共 15 条 → RESOLVED 15 ｜ OPEN 0 `[口径：本台账创建时的裁决总数]`
 
 ---
 

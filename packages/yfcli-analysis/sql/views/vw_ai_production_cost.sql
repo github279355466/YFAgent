@@ -6,6 +6,9 @@
 -- 审核码：MOCTG.TG022 (Y/N/V)
 -- 不带 COMPANY 过滤
 
+IF OBJECT_ID('dbo.vw_ai_production_cost', 'V') IS NOT NULL DROP VIEW dbo.vw_ai_production_cost;
+GO
+
 CREATE VIEW dbo.vw_ai_production_cost AS
 SELECT
   tg.TG014 AS wo_doc_type,     -- 工单单别
@@ -25,5 +28,7 @@ FROM dbo.MOCTG tg
 LEFT JOIN dbo.INVLA la ON la.LA006 = tg.TG001 AND la.LA007 = tg.TG002 AND la.LA008 = tg.TG003;
 GO
 
-GRANT SELECT ON dbo.vw_ai_production_cost TO PUBLIC;
+-- ⚠ 授权主体由客户 DBA 按环境指定，**默认不授权给 PUBLIC**。
+--    分析层只读账号（本项目实测环境为 `ai`）建成后，取消下一行注释并执行：
+-- GRANT SELECT ON dbo.vw_ai_production_cost TO ai;
 GO

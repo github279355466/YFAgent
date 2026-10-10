@@ -3,6 +3,9 @@
 -- 字段：TK001 单别 / TK002 单号 / TK003 日期 / TK004 客户 / TK033 本币实收金额 / TK020 审核码
 -- 不带 COMPANY 过滤
 
+IF OBJECT_ID('dbo.vw_ai_collection', 'V') IS NOT NULL DROP VIEW dbo.vw_ai_collection;
+GO
+
 CREATE VIEW dbo.vw_ai_collection AS
 SELECT
   tk.TK001 AS doc_type,        -- 收款单别
@@ -14,5 +17,7 @@ SELECT
 FROM dbo.ACRTK tk;
 GO
 
-GRANT SELECT ON dbo.vw_ai_collection TO PUBLIC;
+-- ⚠ 授权主体由客户 DBA 按环境指定，**默认不授权给 PUBLIC**。
+--    分析层只读账号（本项目实测环境为 `ai`）建成后，取消下一行注释并执行：
+-- GRANT SELECT ON dbo.vw_ai_collection TO ai;
 GO
