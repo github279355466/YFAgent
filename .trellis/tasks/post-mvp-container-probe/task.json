@@ -1,7 +1,7 @@
 {
   "title": "5个容器名真机探测（待token恢复）",
   "depends_on": [],
-  "notes": "延迟处理。当前token已失效(无效的身份令牌)。待token恢复后对ap.refund.doc/op.stockin/prepayment.doc/transfer/wo.commence各发空create请求，分别用文档标注容器名和规则推测容器名，看哪种报缺字段(=容器名对了)。脚本已就绪:.workbuddy/tmp/probe-container-names.mjs",
+  "notes": "延迟处理。原因已修正：不是 token 失效（token 有效，之前是 header 格式错误），而是易飞 create API 报「没有活动事务」（OPEN-T1）。所有 create 操作均不可用，无法通过空 create 探测容器名。待 OPEN-T1 解决后再探测。SDK headers.ts 已正确使用 JSON.stringify()，问题仅在手动探测脚本。",
   "createdAt": "2026-10-09",
   "owner": "backend",
   "status": "blocked",

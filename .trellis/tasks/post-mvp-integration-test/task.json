@@ -4,10 +4,10 @@
     "post-mvp-view-ddl-execution",
     "post-mvp-container-probe"
   ],
-  "notes": "token恢复后执行：1.SDK query/read真机验证 2.MCP端到端(Agent→MCP→SDK→ERP) 3.分析层模板真机执行(至少3个) 4.智能问数端到端LLM→路由→取数→计算→输出",
+  "notes": "Token 已确认有效（之前是 header 格式错误，非 token 过期）。query/read 可正常真机测试。create/update/delete 被 OPEN-T1（没有活动事务）阻塞。可先做 query/read 真机验证 + MCP 端到端 + 分析层模板真机。",
   "createdAt": "2026-10-09",
   "owner": "qa",
-  "status": "blocked",
+  "status": "pending",
   "completedAt": "",
   "slug": "post-mvp-integration-test",
   "priority": "P1"
