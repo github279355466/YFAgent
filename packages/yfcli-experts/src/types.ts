@@ -54,8 +54,20 @@ export interface FormulaDefinition {
    * 纯函数计算逻辑。
    * 接收模板查询返回的行数组，输出聚合结果。
    * 错误时抛 ExpertError，不静默返回 0。
+   *
+   * ⚠️ 返回类型固定为 FormulaResult（不随输入变化）。
+   *    需按 groupBy 维度拆分时，请使用 `computeGrouped`，不要把 compute 做成
+   *    「有时返回结果、有时返回结果字典」的联合类型——那会让调用方无法静态判断。
    */
   compute: (rows: FormulaInputRow[]) => FormulaResult;
+  /**
+   * 按 `scope.groupBy[0]` 分组后的聚合结果（键为分组值）。
+   *
+   * 与 compute 的关系：compute 是「全部行并成一个总额」，
+   * computeGrouped 是「每个分组各算一次」。两者都是显式 API，互不隐式改变。
+   * 当 groupBy 声明的字段在行内不存在时，抛 ExpertError（不静默退化）。
+   */
+  computeGrouped?: (rows: FormulaInputRow[]) => Record<string, FormulaResult>;
 }
 
 /** 专家定义 */

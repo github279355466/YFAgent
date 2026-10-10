@@ -49,6 +49,11 @@ export async function checkErpConnectivity(
   token: string,
   timeoutMs: number,
 ): Promise<HealthCheckResult> {
+  // P0-8: 空 token 短路，不发网络请求
+  if (!token) {
+    return { ok: false, latencyMs: 0, error: "缺少用户令牌（token 为空）" };
+  }
+
   const url = baseUrl.replace(/\/+$/, '') + YF_ENDPOINT_PATH;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -71,7 +76,24 @@ export async function checkErpConnectivity(
     const latencyMs = Date.now() - start;
 
     if (response.ok) {
-      return { ok: true, latencyMs, error: undefined };
+      // P0-7: HTTP 200 不等于业务成功，需解析 execution.code
+      try {
+        const body = await response.text();
+        const parsed = JSON.parse(body);
+        const execCode = parsed?.std_data?.execution?.code;
+        if (execCode !== undefined && String(execCode) !== "0" && String(execCode) !== "-0") {
+          const desc = parsed?.std_data?.execution?.description ?? "";
+          return {
+            ok: false,
+            latencyMs,
+            error: `ERP 业务错误 (code=${execCode}): ${desc}`,
+          };
+        }
+        return { ok: true, latencyMs, error: undefined };
+      } catch {
+        // body 解析失败但 HTTP 200 —— 至少网络通了，视为连通
+        return { ok: true, latencyMs, error: undefined };
+      }
     }
 
     // 非 200 但不一定是连接问题 —— 至少网络通了

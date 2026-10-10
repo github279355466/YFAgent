@@ -42,13 +42,8 @@ describe("库存成本专家 - 期末成本公式", () => {
     expect(result.breakdown!["adjust_out_cost"]).toBe(20);
   });
 
-  it("空集 → 返回 0 + 口径标签", () => {
-    const result = formula.compute([]);
-
-    expect(result.value).toBe(0);
-    expect(result.caliber).toBe(INVENTORY_COST_CALIBER);
-    expect(result.breakdown).toBeDefined();
-    expect(result.breakdown!["opening_cost"]).toBe(0);
+  it("空集 → 抛 ExpertError（P0-10 修复：不再静默返回 0）", () => {
+    expect(() => formula.compute([])).toThrow(ExpertError);
   });
 
   it("零值 → 返回 0", () => {

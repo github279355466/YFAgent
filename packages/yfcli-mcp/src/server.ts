@@ -401,7 +401,7 @@ export interface StartServerOptions {
  * 6. 启动 HTTP 服务器
  */
 export async function startServer(options?: StartServerOptions): Promise<void> {
-  const port = options?.port ?? parseInt(process.env['YF_MCP_PORT'] ?? '3100', 10);
+  const port = options?.port ?? parseInt(process.env['YF_MCP_PORT'] ?? '4001', 10);
 
   // 1. 初始化 AuthProvider
   console.error('[yfcli-mcp] Initializing auth provider...');

@@ -5,7 +5,7 @@
  *
  * 用法：
  *   import { startServer } from 'yfcli-mcp';
- *   await startServer({ port: 3100 });
+ *   await startServer({ port: 4001 });
  */
 
 export { startServer } from './server.js';

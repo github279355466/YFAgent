@@ -57,7 +57,6 @@ export {
 export {
   type MssqlDriverOptions,
   MssqlDriver,
-  createMssqlDriverFromEnv,
   convertPlaceholders,
 } from "./runtime/sql/driver.js";
 

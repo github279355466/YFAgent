@@ -50,18 +50,198 @@ const FORBIDDEN = [
   "exec", "execute", "merge", "grant", "revoke", "sp_", "xp_",
 ];
 
+/** 词法单元：标识符 / 字符串字面量 / 标点 */
+type SqlToken =
+  | { kind: "ident"; value: string }
+  | { kind: "punct"; value: string }
+  | { kind: "other"; value: string };
+
 /**
- * ★ vw_ai_* 白名单门禁：
- * 提取 FROM / JOIN 后的标识符，检查是否全部以 vw_ai_ 开头。
- * 允许的上下文：FROM vw_ai_xxx / JOIN vw_ai_xxx / WITH ... AS (SELECT ... FROM vw_ai_xxx)
+ * 词法扫描：把 SQL 拆成 token 流。
+ *
+ * 为什么不用正则截取表名（历史缺陷 P0-1 / P0-B）：
+ *   正则只能覆盖「想得到」的写法；T-SQL 的标识符引用与连接语法是开放的
+ *   （`[t]`、`"t"`、`dbo.t`、`t1, t2`、子查询……），漏掉任意一种即等于门禁失效。
+ *   词法扫描把「识别」与「判定」分开：先得到结构化 token，再在 token 流上判定，
+ *   且判定默认动作是**拒绝**（fail-closed）。
+ *
+ * 处理内容：
+ *   - 单引号字符串字面量整段跳过（含 '' 转义），不参与表名判定
+ *   - `--` 行注释与 块注释（斜杠-星号 … 星号-斜杠） 块注释整段跳过
+ *   - `[]` 与 `""` 标识符引号剥离，内容作为 ident 返回
+ *   - `schema.table` 按段落返回多个 ident，调用方取最后一段
+ */
+function tokenizeSql(sql: string): SqlToken[] {
+  const tokens: SqlToken[] = [];
+  const n = sql.length;
+  let i = 0;
+
+  while (i < n) {
+    const ch = sql[i]!;
+
+    if (/\s/.test(ch)) { i++; continue; }
+
+    // 行注释 -- ...
+    if (ch === "-" && sql[i + 1] === "-") {
+      const nl = sql.indexOf("\n", i);
+      i = nl === -1 ? n : nl + 1;
+      continue;
+    }
+
+    // 块注释 /* ... */
+    if (ch === "/" && sql[i + 1] === "*") {
+      const end = sql.indexOf("*/", i + 2);
+      i = end === -1 ? n : end + 2;
+      continue;
+    }
+
+    // 字符串字面量 '...'（'' 表示一个单引号）
+    if (ch === "'") {
+      i++;
+      while (i < n) {
+        if (sql[i] === "'") {
+          if (sql[i + 1] === "'") { i += 2; continue; }
+          i++;
+          break;
+        }
+        i++;
+      }
+      tokens.push({ kind: "other", value: "" });
+      continue;
+    }
+
+    // 方括号标识符 [ ... ]（]] 表示一个 ]）
+    if (ch === "[") {
+      let value = "";
+      i++;
+      while (i < n) {
+        if (sql[i] === "]") {
+          if (sql[i + 1] === "]") { value += "]"; i += 2; continue; }
+          i++;
+          break;
+        }
+        value += sql[i];
+        i++;
+      }
+      tokens.push({ kind: "ident", value });
+      continue;
+    }
+
+    // 双引号标识符 " ... "（"" 表示一个 "）
+    if (ch === '"') {
+      let value = "";
+      i++;
+      while (i < n) {
+        if (sql[i] === '"') {
+          if (sql[i + 1] === '"') { value += '"'; i += 2; continue; }
+          i++;
+          break;
+        }
+        value += sql[i];
+        i++;
+      }
+      tokens.push({ kind: "ident", value });
+      continue;
+    }
+
+    // 裸标识符
+    if (/[A-Za-z_@#]/.test(ch)) {
+      let value = "";
+      while (i < n && /[A-Za-z0-9_@#$]/.test(sql[i]!)) {
+        value += sql[i];
+        i++;
+      }
+      tokens.push({ kind: "ident", value });
+      continue;
+    }
+
+    // 标点
+    tokens.push({ kind: "punct", value: ch });
+    i++;
+  }
+
+  return tokens;
+}
+
+/** 表引用引出词 */
+const TABLE_INTRODUCERS = new Set(["from", "join", "into", "apply"]);
+
+/** 终止逗号连接判定的子句关键字 */
+const CLAUSE_ENDERS = /^(where|group|having|order|union|on|select|by)$/i;
+
+/**
+ * ★ vw_ai_* 白名单门禁（fail-closed）：
+ *
+ * 在 token 流上找出所有「表引用引出位置」，取其后标识符链的**最后一段**
+ * （`dbo.vw_ai_x` → `vw_ai_x`），要求以 `vw_ai_` 开头或为已声明的 CTE 名。
+ *
+ * 与旧实现的关键差异：
+ *   1. 逗号连接（`FROM a, b`）同样被扫描 —— 旧实现只看紧跟 FROM/JOIN 的一个名字
+ *   2. `[t]` / `"t"` / `[dbo].[t]` 统一按标识符处理 —— 不再依赖正则分支
+ *   3. `FROM` 后直接跟 `(`（派生表）或字符串 → 交由调用方按「无法识别」拒绝
  */
 function extractTableRefs(sql: string): string[] {
-  // 匹配 FROM/JOIN 后面的标识符（支持 schema.table 格式）
-  const re = /\b(?:FROM|JOIN)\s+(?:dbo\.)?([A-Za-z_][A-Za-z0-9_]*)/gi;
+  const tokens = tokenizeSql(sql);
   const refs: string[] = [];
-  for (const m of sql.matchAll(re)) {
-    refs.push(m[1]!);
+
+  /** 读标识符链（a.b.c），返回最后一段与下一位置 */
+  const readIdentChain = (start: number): { name: string; next: number } | null => {
+    let j = start;
+    let last: string | null = null;
+    while (j < tokens.length) {
+      const tk = tokens[j]!;
+      if (tk.kind !== "ident") break;
+      last = tk.value;
+      j++;
+      if (tokens[j]?.kind === "punct" && tokens[j]!.value === ".") { j++; continue; }
+      break;
+    }
+    return last === null ? null : { name: last, next: j };
+  };
+
+  for (let k = 0; k < tokens.length; k++) {
+    const tk = tokens[k]!;
+    if (!(tk.kind === "ident" && TABLE_INTRODUCERS.has(tk.value.toLowerCase()))) continue;
+
+    // 引出词之后：跳过可能出现的括号（派生表）与字符串（非法表名）
+    let j = k + 1;
+    while (j < tokens.length) {
+      const t2 = tokens[j]!;
+      if (t2.kind === "punct" && t2.value === "(") { j++; continue; }
+      if (t2.kind === "other") { j++; continue; }
+      break;
+    }
+
+    const first = readIdentChain(j);
+    if (first) {
+      refs.push(first.name);
+      j = first.next;
+    } else if (j < tokens.length) {
+      // 无法识别表名（如 FROM 后直接是 SELECT）→ 记空串，由调用方判为非法
+      refs.push("");
+      continue;
+    }
+
+    // 吃同一子句内的逗号连接
+    while (true) {
+      if (!(tokens[j]?.kind === "punct" && tokens[j]!.value === ",")) break;
+      // 若逗号属于 SELECT 列表或函数参数，则不是表连接 → 停止
+      let isClauseEnd = false;
+      for (let b = j - 1; b >= 0; b--) {
+        const tb = tokens[b]!;
+        if (tb.kind === "punct" && (tb.value === "(" || tb.value === ")")) { isClauseEnd = true; break; }
+        if (tb.kind === "ident" && CLAUSE_ENDERS.test(tb.value)) { isClauseEnd = true; break; }
+        if (tb.kind === "ident" && TABLE_INTRODUCERS.has(tb.value.toLowerCase())) break;
+      }
+      if (isClauseEnd) break;
+
+      const nxt = readIdentChain(j + 1);
+      if (!nxt) break;
+      refs.push(nxt.name);
+      j = nxt.next;
+    }
   }
+
   return refs;
 }
 
@@ -80,7 +260,7 @@ export function validateTemplate(t: SqlTemplate): void {
     );
   }
   for (const kw of FORBIDDEN) {
-    const re = new RegExp(`\\b${kw.replace("_", "[_]?")}`, "i");
+    const re = new RegExp(`\\b${kw.replace("_", "[_]")}\\b`, "i");
     if (re.test(sql)) {
       throw new AnalysisError(
         ErrorCode.VALIDATION_ERROR,
@@ -107,13 +287,26 @@ export function validateTemplate(t: SqlTemplate): void {
     );
   }
 
-  // ★ vw_ai_* 白名单门禁
+  // ★ 提取 CTE 名称（WITH xxx AS ...），CTE 名允许出现在 FROM/JOIN 中
+  const cteNames = new Set<string>();
+  const cteRe = /\bWITH\s+([A-Za-z_][A-Za-z0-9_]*)\s+AS\s*\(/gi;
+  for (const m of sql.matchAll(cteRe)) {
+    cteNames.add(m[1]!.toLowerCase());
+  }
+  const cteChainRe = /,\s*([A-Za-z_][A-Za-z0-9_]*)\s+AS\s*\(/gi;
+  for (const m of sql.matchAll(cteChainRe)) {
+    cteNames.add(m[1]!.toLowerCase());
+  }
+
+  // ★ vw_ai_* 白名单门禁（fail-closed）
   const tableRefs = extractTableRefs(sql);
   for (const ref of tableRefs) {
-    if (!ref.toLowerCase().startsWith("vw_ai_")) {
+    const name = ref.toLowerCase();
+    if (!name.startsWith("vw_ai_") && !cteNames.has(name)) {
+      const shown = ref === "" ? "(无法识别的表引用)" : ref;
       throw new AnalysisError(
         ErrorCode.POLICY_VIOLATION,
-        `SQL 模板 ${t.id} 引用了非 vw_ai_* 视图/表「${ref}」——只允许查询 vw_ai_* 视图`,
+        `SQL 模板 ${t.id} 引用了非 vw_ai_* 视图/表「${shown}」——只允许查询 vw_ai_* 视图`,
       );
     }
   }
@@ -178,6 +371,13 @@ export function renderSql(
     if (!p.required && filled[p.name] === undefined && p.default !== undefined) {
       filled[p.name] = p.default;
     }
+  }
+  // P1-A：必须是「有限的正整数」——仅 > 0 会放过 1.5（小数进入 TOP()）与 Infinity
+  if (requestedMaxRows !== undefined && !(Number.isInteger(requestedMaxRows) && requestedMaxRows > 0)) {
+    throw new AnalysisError(
+      ErrorCode.VALIDATION_ERROR,
+      `SQL 模板 ${t.id} 的 requestedMaxRows 必须为正整数（收到 ${requestedMaxRows}）`,
+    );
   }
   const maxRows = Math.min(requestedMaxRows ?? t.max_rows, t.max_rows);
   return {
