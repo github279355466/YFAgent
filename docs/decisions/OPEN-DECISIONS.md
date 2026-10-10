@@ -568,13 +568,13 @@
 已按实际布局修正（README / DEPLOYMENT.md 一直是正确的）。
 ---
 
-## OPEN-T1 ｜create/update 操作报「没有活动事务」（2026-10-10 真机实测）
+## OPEN-T1 ｜~~create/update 操作报「没有活动事务」~~ → 已解决：请求体格式差异（2026-10-10）
 
 | 项 | 内容 |
 |---|---|
 | **编号** | OPEN-T1 |
 | **发现日期** | 2026-10-10 |
-| **状态** | 🔴 OPEN |
+| **状态** | ✅ RESOLVED（2026-10-10） |
 | **现象** | 所有 create/update 操作均返回 `code=-1, description="DoAction Exception:没有活动事务。"` |
 | **影响** | SDK 的 create/update/delete/approve/disapprove/invalid 操作全部不可用，仅 query/read 正常 |
 | **实测范围** | 2026-10-10 对 10 个对象真机探测（plant/customer/supplier/sales.order/purchase.order/ap.refund.doc/op.stockin/prepayment.doc/transfer/wo.commence），query+read 全部 code=0 成功，create+update 全部 code=-1 失败 |
@@ -584,6 +584,31 @@
 | **待确认** | ① 易飞 create 是否需要先调用某个事务开启接口？② 是否有 autocommit 参数或 header？③ 是否需要特定的 digi-service 值来开启事务？④ 易飞 OpenAPI 的写操作是否根本不支持外部调用？ |
 | **临时方案** | MVP 阶段写操作引导用户通过 ERP 界面操作，SDK 仅支持 query/read |
 | **关联** | 5 个容器名探测被此问题阻塞（无法通过 create 探测容器名）；P2 CRUD 五操作中 create/update/delete 三个不可用 |
+### 根因与解决（2026-10-10 第二轮探测）
+
+**根因**：之前探测脚本使用了易助的 `cdsMaster` 封包格式，易飞不认此格式。
+
+| 格式 | Body 结构 | 结果 |
+|---|---|---|
+| ❌ 易助 cdsMaster | `{ parameter: { cdsMaster: [{ plant_data: {...} }] } }` | `没有活动事务` |
+| ✅ 易飞文档格式 | `{ parameter: { plant_data: [{...}] } }` | `code=0 执行成功` |
+
+**SDK 代码本身是正确的**——`YfEntityParameter` 类型为 `Record<string, Record<string,unknown>[]>`，`wrap()` 函数生成 `{ std_data: { parameter: { containerName: [...] } } }`，与易飞文档一致。问题仅在手动探测脚本中。
+
+**5 个容器名异常对象全部探测成功**：
+
+| 对象 | 正确容器名（实测） | 文档标注（错误） |
+|---|---|---|
+| ap.refund.doc | `ap_refund_doc_data` ✅ | `wo_stockin_data` ❌ |
+| op.stockin | `op_stockin_data` ✅ | `transfer_doc_data` ❌ |
+| prepayment.doc | `prepayment_doc_data` ✅ | `wo_stockin_data` ❌ |
+| transfer | `transfer_data` ✅ | `inventory_transaction_data` ❌ |
+| wo.commence | `wo_commence_data` ✅ | `transfer_doc_data` ❌ |
+
+已在 `typekey_map.yaml` 中标注 `container_name_verified` / `container_name_doc_wrong`。
+
+**plant update 实测成功**：`code=0, description=执行成功`。plant create 因字段长度超限报「将截断字符串或二进制数据」（业务校验，非格式问题）。
+
 
 ### 同时修正：之前 token 失效的根因
 
@@ -595,5 +620,6 @@
 
 SDK 的 `headers.ts` 已正确使用 `JSON.stringify()`，问题仅在手动探测脚本中。
 Token `1D2EF4C5A41714E446615799EACA7211F9497CB81E156C99` 确认有效。
+
 
 

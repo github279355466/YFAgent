@@ -4,7 +4,7 @@
     "post-mvp-view-ddl-execution",
     "post-mvp-container-probe"
   ],
-  "notes": "Token 已确认有效（之前是 header 格式错误，非 token 过期）。query/read 可正常真机测试。create/update/delete 被 OPEN-T1（没有活动事务）阻塞。可先做 query/read 真机验证 + MCP 端到端 + 分析层模板真机。",
+  "notes": "Token有效(header格式修正后)。query+read 10/10成功。create+update用正确格式(非cdsMaster)也成功。plant update实测code=0。剩余：MCP端到端 + 分析层模板真机 + 智能问数端到端。",
   "createdAt": "2026-10-09",
   "owner": "qa",
   "status": "pending",

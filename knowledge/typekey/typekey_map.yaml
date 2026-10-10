@@ -130,6 +130,9 @@ typekeys:
       - wo_stockin_data
       - wo_stockin_detail_data
     service_name_shape: standard
+    container_name_verified: ap_refund_doc_data
+    container_name_doc_wrong: wo_stockin_data
+    container_name_note: 2026-10-10真机实测确认：文档标注容器名错误(复制粘贴)，按规则推测的容器名正确
   - type_key: approve.price
     title: 核价单
     aliases:
@@ -1445,6 +1448,9 @@ typekeys:
       - transfer_doc_detail_data
       - transfer_doc_sub_detai_data
     service_name_shape: standard
+    container_name_verified: op_stockin_data
+    container_name_doc_wrong: transfer_doc_data
+    container_name_note: 2026-10-10真机实测确认：文档标注容器名错误(复制粘贴)，按规则推测的容器名正确
   - type_key: operation
     title: 工艺
     aliases:
@@ -2251,6 +2257,9 @@ typekeys:
       - wo_stockin_data
       - wo_stockin_detail_data
     service_name_shape: standard
+    container_name_verified: prepayment_doc_data
+    container_name_doc_wrong: wo_stockin_data
+    container_name_note: 2026-10-10真机实测确认：文档标注容器名错误(复制粘贴)，按规则推测的容器名正确
   - type_key: product.process
     title: 产品工艺路线
     aliases:
@@ -3570,6 +3579,9 @@ typekeys:
       - transfer_data
       - transfer_detail_data
     service_name_shape: standard
+    container_name_verified: transfer_data
+    container_name_doc_wrong: inventory_transaction_data
+    container_name_note: 2026-10-10真机实测确认：文档标注容器名错误(复制粘贴)，按规则推测的容器名正确
   - type_key: transfer.doc
     title: 转移单
     aliases:
@@ -3848,6 +3860,9 @@ typekeys:
       - transfer_doc_detail_data
       - transfer_doc_sub_detai_data
     service_name_shape: standard
+    container_name_verified: wo_commence_data
+    container_name_doc_wrong: transfer_doc_data
+    container_name_note: 2026-10-10真机实测确认：文档标注容器名错误(复制粘贴)，按规则推测的容器名正确
   - type_key: wo.routing
     title: 工单工艺
     aliases:
