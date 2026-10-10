@@ -19,6 +19,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'node:ht
 import { randomUUID, createHash } from 'node:crypto';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
+import { z } from 'zod';
 
 import { ToolRegistry } from './registry.js';
 import { registerAllTools, EXPECTED_TOOLS } from './tools/index.js';
@@ -125,13 +126,18 @@ function createMcpServer(
   });
 
   // 将 registry 中的工具逐个注册到 McpServer
-  // MCP SDK server.tool() 第三个参数是 ZodRawShape（普通对象），不是 z.object()
+  // MCP SDK server.tool() 第三个参数需要 ZodRawShape（Zod 类型对象）
+  // 将 JSON Schema properties 转换为 Zod schema，具体校验由 handler 内部负责
   for (const tool of registry.list()) {
-    const shape = (tool.inputSchema.properties ?? {}) as Record<string, never>;
+    const jsonProps = tool.inputSchema.properties ?? {};
+    const zodShape: Record<string, z.ZodTypeAny> = {};
+    for (const key of Object.keys(jsonProps)) {
+      zodShape[key] = z.any().optional();
+    }
     server.tool(
       tool.name,
       tool.description,
-      shape,
+      zodShape,
       async (params) => {
         const result = await tool.handler(params as Record<string, unknown>, toolContext);
         return {
