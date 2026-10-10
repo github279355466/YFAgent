@@ -77,9 +77,9 @@ $stderrLog = Join-Path $logDir 'mcp.err.log'
 & $servy install --name=$serviceName `
     --displayName="YFCLI MCP Server" `
     --description="易飞 AI 助手 MCP Server — CRUD + 分析 + 专家引擎 (port $Port)" `
-    --path=$NodePath `
-    --startupDir=$mcpDir `
-    --params="dist/index.js --http --port $Port" `
+    --path=($NodePath) `
+    --startupDir=$ProjectRoot `
+    --params="packages/yfcli-mcp/dist/cli.js --http --port $Port" `
     --startupType=Automatic `
     --envVars="NODE_ENV=production" `
     --stdout=$stdoutLog `
@@ -131,3 +131,6 @@ Write-Host "  stdout: $stdoutLog"
 Write-Host "  stderr: $stderrLog"
 Write-Host ""
 Write-Host "Servy GUI 导入模板: docs\yfcli-mcp.json" -ForegroundColor Cyan
+
+
+

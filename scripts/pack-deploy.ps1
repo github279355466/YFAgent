@@ -30,7 +30,7 @@ New-Item -ItemType Directory -Path $targetDir -Force | Out-Null
 New-Item -ItemType Directory -Path $outputPath -Force | Out-Null
 
 # 排除规则
-$excludeDirs = @("node_modules", ".git", ".trellis", "__tests__", "dist", ".omc", ".workbuddy", "runs")
+$excludeDirs = @("node_modules", ".git", ".trellis", "__tests__", ".omc", ".workbuddy", "runs")
 $excludeFiles = @("*.test.ts", "*.spec.ts", ".env", "*.local.yaml", "*.zip", ".gitignore", "_fix*.mjs")
 
 function Copy-Filtered {
@@ -62,7 +62,19 @@ function Copy-Filtered {
     }
 }
 
-# 1. 复制 packages/（排除测试和 node_modules）
+# 0. 构建全部包（生成 dist/）
+Write-Host "[0/5] Building all packages..." -ForegroundColor Yellow
+$buildOrder = @("yfcli-sdk", "yfcli-auth", "yfcli-analysis", "yfcli-experts", "yfcli-mcp")
+foreach ($pkg in $buildOrder) {
+    $pkgDir = Join-Path $projectRoot "packages\$pkg"
+    Push-Location $pkgDir
+    npx tsc -p tsconfig.build.json 2>&1 | Out-Null
+    if ($LASTEXITCODE -ne 0) { Write-Host "  BUILD FAILED: $pkg" -ForegroundColor Red; Pop-Location; exit 1 }
+    Pop-Location
+    Write-Host "  Built: $pkg"
+}
+
+# 1. 复制 packages/（排除测试和 node_modules，保留 dist/）
 Write-Host "[1/5] Copying packages/..." -ForegroundColor Yellow
 Copy-Filtered -Source (Join-Path $projectRoot "packages") -Dest (Join-Path $targetDir "packages") `
     -ExcludeDirNames $excludeDirs -ExcludeFilePatterns $excludeFiles
@@ -130,4 +142,5 @@ Write-Host "  6. Start MCP Server"
 
 # 清理临时目录
 Remove-Item $tempDir -Recurse -Force -ErrorAction SilentlyContinue
+
 

@@ -62,13 +62,25 @@ Copy-Item -Path "\\dev-server\share\yfcli-deploy-v0.1.0" -Destination "D:\YFCLI"
 cd D:\YFCLI
 ```
 
-### 第 2 步：安装依赖
+### 第 2 步：安装依赖并构建
 
 ```powershell
 npm install
+
+# 构建全部包（按依赖顺序：sdk → auth → analysis → experts → mcp）
+cd packages\yfcli-sdk;      npx tsc -p tsconfig.build.json
+cd ..\yfcli-auth;           npx tsc -p tsconfig.build.json
+cd ..\yfcli-analysis;       npx tsc -p tsconfig.build.json
+cd ..\yfcli-experts;        npx tsc -p tsconfig.build.json
+cd ..\yfcli-mcp;            npx tsc -p tsconfig.build.json
+cd ..\..
+
+# 验证构建产物
+Test-Path packages\yfcli-mcp\dist\cli.js   # 应为 True
 ```
 
-> 如果客户服务器无法访问外网，在开发环境执行 `npm install` 后将 `node_modules/` 一并打包。
+> 如果客户服务器无法访问外网，在开发环境执行 `npm install` + 构建后将 `node_modules/` 和各包 `dist/` 一并打包。  
+> 构建后的 `dist/` 目录是纯 JS，运行时只需 `node`，不需要 `tsx` 或 `typescript`。
 
 ### 第 3 步：配置环境变量
 
@@ -263,4 +275,5 @@ Invoke-RestMethod -Uri "http://localhost:3100/health"
 # 打包完整部署包（待实现 scripts/pack-deploy.ps1）
 # .\scripts\pack-deploy.ps1 -Version "0.1.0" -OutputDir "dist"
 ```
+
 
